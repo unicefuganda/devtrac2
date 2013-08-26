@@ -3,7 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     {% block head %}
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+    <!--[if lte IE 8]>
+    	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+ 	<![endif]-->
+ 	
     <title>{% block title %}{% endblock %} - My Webpage</title>
     {% endblock %}
 </head>
