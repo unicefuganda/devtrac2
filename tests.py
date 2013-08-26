@@ -6,14 +6,18 @@ import tempfile
 class ApplicationTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.db_fd, flaskr.app.config['DATABASE'] = tempfile.mkstemp()
-        flaskr.app.config['TESTING'] = True
-        self.app = flaskr.app.test_client()
-        flaskr.init_db()
+        self.db_fd, application.app.config['DATABASE'] = tempfile.mkstemp()
+        application.app.config['TESTING'] = True
+        self.app = application.app.test_client()
+        # application.app.init_db()
 
-    def tearDown(self):
-        os.close(self.db_fd)
-        os.unlink(flaskr.app.config['DATABASE'])
+    # def tearDown(self):
+        # os.close(self.db_fd)
+        # os.unlink(application.app.config['DATABASE'])
+
+    def test_root(self):
+        rv = self.app.get('/')
+        assert 'DevTrac2' in rv.data
 
 if __name__ == '__main__':
     unittest.main()
