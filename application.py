@@ -4,6 +4,8 @@ import json
 from flask import jsonify
 import urllib2
 import urllib
+from lib import excel_reader as xls
+import settings as config
 
 
 app = Flask(__name__)
@@ -14,19 +16,26 @@ def index():
 
 @app.route('/json')
 def  spit_json():
-	data = {'Uganda CKAN API URL : ' : 'http://data.ug/api/3/action/package_search?q=health','Country ' :'Uganda'}
+	data = {'Uganda CKAN API SEARCH URL : ' : config.CKAN_PACKAGE_SEARCH_URL,'Country ' :'Uganda'}
 	return jsonify(data)
 
 @app.route('/ugdata/<query>')
 def  get_dataset(query):
-	url = 'http://data.ug/api/3/action/package_search'
+	url = config.CKAN_PACKAGE_SEARCH_URL
 	params = {'q': query}
 
 	return contact_ckan_instance(url,params)
 
-@app.route("/health")
+@app.route('/health')
 def health():
 	return render_template('health.html')
+
+@app.route('/excel')
+def read_excel_file():
+	file_path = config.TMP_DIRECTORY+'/healthunits.xls'
+	excel = xls.get_worksheet_names(file_path)
+	return 'excel workbook tabs : '+str(excel)
+
 
 
 def contact_ckan_instance(url,params):
