@@ -13,16 +13,20 @@ def index():
 	return render_template('index.html')
 
 @app.route('/json')
-def  Spitjson():
-	data = {}
-	return jsonify({'Uganda CKAN API URL : ' : 'http://data.ug/api/3/action/package_search?q=health','Country ' :'Uganda'})
+def  spit_json():
+	data = {'Uganda CKAN API URL : ' : 'http://data.ug/api/3/action/package_search?q=health','Country ' :'Uganda'}
+	return jsonify(data)
 
-@app.route('/ugdata')
-def  getDataSet():
+@app.route('/ugdata/<query>')
+def  get_dataset(query):
 	url = 'http://data.ug/api/3/action/package_search'
-	params = {'q': 'health'}
+	params = {'q': query}
 
 	return contact_ckan_instance(url,params)
+
+@app.route("/health")
+def health():
+	return render_template('health.html')
 
 
 def contact_ckan_instance(url,params):
@@ -32,8 +36,8 @@ def contact_ckan_instance(url,params):
 	assert response_dict['success'] is True
 
 	result = response_dict['result']
-	return str(result)
-	
+	return jsonify(result)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
