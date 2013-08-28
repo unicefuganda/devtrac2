@@ -27,6 +27,7 @@ def deploy(char):
         run("git fetch origin")
         run("git reset --hard %s" % char)
         run("touch .wsgi")
+        run("echo \"{env:'%s', commit:'%s'}\" > static/version.json" % (env.environment, char[:6]))
 
 def bootstrap_chef():
     run("curl -L https://get.rvm.io | bash")

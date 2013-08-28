@@ -4,6 +4,7 @@
 <head>
     {% block head %}
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+    <link rel="stylesheet" href="static/application.css" />
     <!--[if lte IE 8]>
     	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
  	<![endif]-->
@@ -13,4 +14,17 @@
 </head>
 <body>
     <div id="content">{% block content %}{% endblock %}</div>
+
+    <footer id="footer">
+    	<div>
+	  		<label>env:</label><span id="environment"></span>
+	  		<label>revision:</label><span id="sha"></span>
+	  		<time pubdate datetime="2012-03-01"></time>
+  		</div>
+	</footer>
+
+	<script type="text/javascript" src="/static/application.js"></script>
 </body>
+
+
+

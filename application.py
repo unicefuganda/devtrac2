@@ -11,8 +11,9 @@ import settings as config
 app = Flask(__name__)
 
 @app.route("/")
+@app.route("/leaflet")
 def index():
-	return render_template('index.html')
+	return render_template('leaflet.html')
 
 @app.route('/json')
 def  spit_json():
