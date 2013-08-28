@@ -15,8 +15,7 @@ ckan.packageSearch = function(){
         type: "GET",
      data: {},
         success: function(dataSet){
-          $("#resultMessage").append('<h3>'+dataSet.count+'  records marched health search query</h3>');
-          console.log(dataSet.results);
+          $("#resultMessage").append('<h3>'+dataSet.count+'  records marched health search query</h3>');          
           $.each(dataSet.results,function(index,data){
 
             $("#packageList").append(constructTable(data));
@@ -30,16 +29,6 @@ ckan.packageSearch = function(){
     });
 
   }
-
-this.get_group_lists =function(){
-$.getJSON(ckan.group_list_url, function(groups) {  
-console.log(groups);
-});
-
-this.show_group_dataset =function(){
-$.getJSON(ckan.group_show_url, function(groups) {  
-console.log(groups);
-});
 
 }
 
@@ -60,14 +49,11 @@ console.log(groups);
     table += "</table>";
     return table;
 
-  }
-
 }
 
 $(function(){
 
 var healthSector = new ckan.packageSearch();
-  healthSector.start();
-  healthSector.get_group_lists();
+  healthSector.start();  
 
 });
