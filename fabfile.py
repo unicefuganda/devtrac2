@@ -3,7 +3,7 @@ from fabric.api import *
 from fabric.contrib.console import confirm
 
 env.user = 'root'
-env.password = "hrFtFi9pP7iF"
+env.password = os.environ['DEVTRAC2_QA_PASSWORD']
 env.hosts = ['192.237.187.62']
 
 def deploy(char):
