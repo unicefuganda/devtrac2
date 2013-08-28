@@ -1,14 +1,24 @@
 from __future__ import with_statement
 from fabric.api import *
 from fabric.contrib.console import confirm
+import os
 
-# env.user = 'root'
-# env.password = os.environ['DEVTRAC2_QA_PASSWORD']
-# env.hosts = ['192.237.187.62']
+environments = {
+        "QA": {
+            "hosts": ['192.237.187.62'],
+            "password": os.environ['DEVTRAC2_QA_PASSWORD'],
+            "user": 'root'
+            },
+        "UAT": {
+            "hosts": ['192.237.180.109'],
+            "password": os.environ['DEVTRAC2_UAT_PASSWORD'],
+            "user": 'root'
+            }
+        }
 
-env.user = 'root'
-env.password = os.environ['DEVTRAC2_UAT_PASSWORD']
-env.hosts = ['192.237.180.109']
+def e(name):
+    env.update(environments[name])
+    env.environment = name
 
 def deploy(char):
     print "deploying char #%s" % char
@@ -23,7 +33,7 @@ def bootstrap_chef():
     run("source /etc/profile.d/rvm.sh")
     run("rvm install 1.9.3")
     run("gem install chef ruby-shadow --no-ri --no-rdoc")
-    run("sudo apt-get install git")
+    run("sudo apt-get -y install git")
     run("cd ~/; git clone https://github.com/unicefuganda/devtrac2-provisioning.git")
 
 def provision():
