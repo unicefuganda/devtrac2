@@ -21,7 +21,7 @@ def e(name):
     env.environment = name
 
 def deploy(char):
-    print "deploying char #%s" % char
+    print "deploying char %s to %s" % (char, env.environment)
     code_dir = '/var/www/devtrac2'
     with cd(code_dir):
         run("git fetch origin")
