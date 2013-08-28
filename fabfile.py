@@ -21,13 +21,13 @@ def e(name):
     env.environment = name
 
 def deploy(char):
-    print "deploying char %s to %s" % (char, env.environment)
+    print "deploying %s to %s" % (char, env.environment)
     code_dir = '/var/www/devtrac2'
     with cd(code_dir):
         run("git fetch origin")
         run("git reset --hard %s" % char)
         run("touch .wsgi")
-        run("echo \"{ \"environment\":\"%s\", \"sha\":\"%s\", \"time\":\"%s\" }\" > static/version.json" % (env.environment, char[:6], ""))
+        run("echo \"{ \\\"environment\\\":\\\"%s\\\", \\\"sha\\\":\\\"%s\\\", \\\"time\\\":\\\"%s\\\" }\" > static/version.json" % (env.environment, char[:6], ""))
 
 def bootstrap_chef():
     run("curl -L https://get.rvm.io | bash")
