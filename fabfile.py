@@ -10,6 +10,6 @@ def deploy(char):
     print "deploying char #%s" % char
     code_dir = '/var/www/devtrac2'
     with cd(code_dir):
-        run("git fetch origin %s" % char)
-        run("git reset --hard FETCH_HEAD")
+        run("git fetch origin")
+        run("git reset --hard %s" % char)
         run("touch .wsgi")
