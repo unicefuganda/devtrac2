@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block title %}Map{% endblock %}
+{% block content %}
+	<h1>DevTrac2 Spikes</h1>
+	<ul>
+		<li><a href="{{url_for('leaflet')}}">Leaflet</a></li>
+		<li><a href="{{url_for('health')}}">CKAN</a></li>
+	</ul>
+{% endblock %}

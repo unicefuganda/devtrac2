@@ -1,5 +1,5 @@
 $(function(){
-	$.getJSON("/static/districts.json", function(districts) {  
+	$.getJSON("/static/javascript/districts.json", function(districts) {  
 
 		var map = L.map('map');
 		var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
