@@ -1,6 +1,8 @@
 from __future__ import with_statement
 from fabric.api import *
 from fabric.contrib.console import confirm
+from fabric.contrib.files import upload_template
+from time import localtime, strftime
 import os
 
 environments = {
@@ -20,14 +22,19 @@ def e(name):
     env.update(environments[name])
     env.environment = name
 
-def deploy(char):
-    print "deploying %s to %s" % (char, env.environment)
+def deploy(sha):
+    print "deploying %s to %s" % (sha, env.environment)
     code_dir = '/var/www/devtrac2'
+
+
     with cd(code_dir):
         run("git fetch origin")
-        run("git reset --hard %s" % char)
+        run("git reset --hard %s" % sha)
         run("touch .wsgi")
-        run("echo \"{ \\\"environment\\\":\\\"%s\\\", \\\"sha\\\":\\\"%s\\\", \\\"time\\\":\\\"%s\\\" }\" > static/version.json" % (env.environment, char[:6], ""))
+
+        upload_template("version.template", "static/version.json", { "environment": env.environment, "sha": sha[:6], "time": strftime("%d %b %Y %X", localtime()) })
+
+        # run("echo \"{ \\\"environment\\\":\\\"%s\\\", \\\"sha\\\":\\\"%s\\\", \\\"time\\\":\\\"%s\\\" }\" > static/version.json" % (env.environment, char[:6], ""))
 
 def bootstrap_chef():
     run("curl -L https://get.rvm.io | bash")
