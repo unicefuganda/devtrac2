@@ -2,9 +2,6 @@ var ckan = {};
 
 ckan.SearchURL = '/ugdata/';
 ckan.SearchTerm = 'health';
-ckan.group_list_url = 'http://data.ug/api/3/action/group_list?id=data-explorer';
-ckan.group_show_url = 'http://data.ug/api/3/action/group_show?id=opendev';
-
 
 ckan.packageSearch = function(){
 
@@ -13,9 +10,9 @@ ckan.packageSearch = function(){
    $.ajax({
         url: ckan.SearchURL+ckan.SearchTerm,
         type: "GET",
-     data: {},
+        data: {},
         success: function(dataSet){
-          $("#resultMessage").append('<h3>'+dataSet.count+'  records marched health search query</h3>');          
+          $("#resultMessage").append('<h3>'+dataSet.count+'  records marched search query</h3>');          
           $.each(dataSet.results,function(index,data){
 
             $("#packageList").append(constructTable(data));
@@ -52,8 +49,6 @@ ckan.packageSearch = function(){
 }
 
 $(function(){
-
-var healthSector = new ckan.packageSearch();
-  healthSector.start();  
-
+var ckan_search = new ckan.packageSearch();
+  ckan_search.start();
 });
