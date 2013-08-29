@@ -19,6 +19,10 @@ def index():
 def leaflet():
 	return render_template('leaflet.html')
 
+@app.route("/geonode_embedded/")
+def geonode_embedded():
+	return render_template('geonode_embedded.html')
+
 @app.route('/json')
 def spit_json():
 	data = {'Uganda CKAN API SEARCH URL : ' : config.CKAN_PACKAGE_SEARCH_URL,'Country ' :'Uganda'}
