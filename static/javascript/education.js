@@ -11,8 +11,24 @@ ckan.packageSearch = function(){
         type: "GET",
         data: {},
         success: function(dataSet){         
-         display_chart();
-         console.log(dataSet);
+         
+         var categories = [], data = [];
+         var index =0;
+
+         $.each(dataSet.results,function(district,schools){
+
+            if(index < 10){
+            categories.push(district);
+            data.push(schools.length); 
+        }
+
+        index++;
+
+         });
+
+         display_chart(categories,data);
+
+         console.log(categories);
          
         },
         error:function(){
@@ -24,19 +40,19 @@ ckan.packageSearch = function(){
 
 }
 
-function display_chart(){
+function display_chart(districts,school_count){
   $('#chart_container').highcharts({
             chart: {
                 type: 'bar'
             },
             title: {
-                text: 'Historic World Population by Region'
+                text: 'Number of schools by district - Uganda'
             },
             subtitle: {
-                text: 'Source: Wikipedia.org'
+                text: 'Source: data.ug'
             },
             xAxis: {
-                categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+                categories: districts,
                 title: {
                     text: null
                 }
@@ -44,7 +60,7 @@ function display_chart(){
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Population (millions)',
+                    text: 'School count ',
                     align: 'high'
                 },
                 labels: {
@@ -52,7 +68,7 @@ function display_chart(){
                 }
             },
             tooltip: {
-                valueSuffix: ' millions'
+                valueSuffix: ''
             },
             plotOptions: {
                 bar: {
@@ -76,14 +92,8 @@ function display_chart(){
                 enabled: false
             },
             series: [{
-                name: 'Year 1800',
-                data: [107, 31, 635, 203, 2]
-            }, {
-                name: 'Year 1900',
-                data: [133, 156, 947, 408, 6]
-            }, {
-                name: 'Year 2008',
-                data: [973, 914, 4054, 732, 34]
+                name: 'Schools by district',
+                data: school_count
             }]
         });
 }
