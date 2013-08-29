@@ -32,9 +32,7 @@ def deploy(sha):
         run("git reset --hard %s" % sha)
         run("touch .wsgi")
 
-        upload_template("version.template", "static/version.json", { "environment": env.environment, "sha": sha[:6], "time": strftime("%d %b %Y %X", localtime()) })
-
-        # run("echo \"{ \\\"environment\\\":\\\"%s\\\", \\\"sha\\\":\\\"%s\\\", \\\"time\\\":\\\"%s\\\" }\" > static/version.json" % (env.environment, char[:6], ""))
+        upload_template("version.template", "static/javascript/version.json", { "environment": env.environment, "sha": sha[:6], "time": strftime("%d %b %Y %X", localtime()) })
 
 def bootstrap_chef():
     run("curl -L https://get.rvm.io | bash")
