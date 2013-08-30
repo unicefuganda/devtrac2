@@ -1,4 +1,7 @@
-
+class District():
+  def __init__(self, name):
+    self.name = name
+    
 class School():
   def __init__(self,id,district,subcounty,name,use_status):
     self.id = id    

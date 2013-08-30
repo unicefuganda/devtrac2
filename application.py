@@ -1,11 +1,12 @@
-from flask import Flask
-from flask import render_template
-from flask import jsonify
+from flask import *
+from lib.services import *
 from lib import excel_reader as xls
 from lib import ckan_api as ckan
 import settings as config
+import sys, os
 
 app = Flask(__name__)
+sys.path.append(os.path.abspath(__file__))
 
 @app.route("/")
 def index():
@@ -13,7 +14,8 @@ def index():
 
 @app.route("/district/<name>")
 def district(name):
-	return render_template('district/show.html')	
+	district = DistrictService().find_by_name(name)
+	return render_template('district/show.html', district=district)
 
 # SPIKES ROUTES
 
