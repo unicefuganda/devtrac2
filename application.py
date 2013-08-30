@@ -5,8 +5,6 @@ from lib import excel_reader as xls
 from lib import ckan_api as ckan
 import settings as config
 
-
-
 app = Flask(__name__)
 
 @app.route("/")
@@ -29,7 +27,6 @@ def geonode_openlayers():
 def spit_json():
 	data = {'Uganda CKAN API SEARCH URL : ' : config.CKAN_PACKAGE_SEARCH_URL,'Country ' :'Uganda'}
 	return jsonify(data)
-
 
 @app.route('/health')
 def health():
