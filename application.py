@@ -29,6 +29,10 @@ def geonode_embedded():
 def geonode_openlayers():
 	return render_template('geonode_openlayers.html')
 
+@app.route("/mapbox/")
+def mapbox():
+	return render_template('mapbox.html')
+
 @app.route('/json')
 def spit_json():
 	data = {'Uganda CKAN API SEARCH URL : ' : config.CKAN_PACKAGE_SEARCH_URL,'Country ' :'Uganda'}
