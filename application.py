@@ -11,6 +11,12 @@ app = Flask(__name__)
 def index():
 	return render_template('index.html')
 
+@app.route("/district/<name>")
+def district(name):
+	return render_template('district/show.html')	
+
+# SPIKES ROUTES
+
 @app.route("/leaflet/")
 def leaflet():
 	return render_template('leaflet.html')
