@@ -29,9 +29,11 @@ def deploy(sha):
     with cd(code_dir):
         run("git fetch origin")
         run("git reset --hard %s" % sha)
-        run("touch .wsgi")
-
+        
+        run("pip install -r requirements.txt --use-mirrors")
+        run("python db/import_districts.py")
         upload_template("version.template", "static/javascript/version.json", { "environment": env.environment, "sha": sha[:6], "time": strftime("%d %b %Y %X", localtime()) })
+        run("touch .wsgi")
 
 def bootstrap_chef():
     run("curl -L https://get.rvm.io | bash")
@@ -42,4 +44,5 @@ def bootstrap_chef():
     run("cd ~/; git clone https://github.com/unicefuganda/devtrac2-provisioning.git")
 
 def provision():
+    run("cd ~/devtrac2-provisioning/; git pull -r")
     run("cd ~/devtrac2-provisioning; chef-solo -c solo.rb")

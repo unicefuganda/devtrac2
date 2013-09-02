@@ -21,7 +21,9 @@ def find_attributes(feature):
     "registration_2011": feature["properties"]["HECTARES"]
   }
 
-districts = map(find_attributes, data["features"])
+features = filter(lambda d:d["properties"]["DNAME_2010"] != None , data["features"])
+districts = map(find_attributes, features)
+
 json_data.close()
 
 client = MongoClient()
