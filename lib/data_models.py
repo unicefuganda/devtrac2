@@ -1,6 +1,8 @@
 class District():
-  def __init__(self, name, json):
+  def __init__(self, name, area, subregion, json):
     self.name = name
+    self.area = area
+    self.subregion = subregion
     self.json = json
     
 class School():

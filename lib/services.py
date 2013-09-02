@@ -8,4 +8,4 @@ class DistrictService(object):
     client = MongoClient()
     db = client['reference']
     district = db.districts.find_one({"name": name.upper()})
-    return District(district["name"], district)
+    return District(district["name"], district["area"], district["subregion"], district)
