@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
+    <!-- <link rel="stylesheet" href="../theme/default/style.css" type="text/css"> -->
+    <link rel="stylesheet" href="/static/css/application.css" type="text/css">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/OpenLayers.js"></script>
+    <script type="text/javascript">
+        var lon = 32.5811;
+        var lat = 0.3136;
+        var zoom = 3;
+        var map, layer;
+
+        function init(){
+            map = new OpenLayers.Map( 'map' );
+            // proj = new OpenLayers.Projection("EPSG:4326"),
+            layer = new OpenLayers.Layer.OSM();
+            map.addLayer(layer);
+             
+             var s = 
+              {
+            'strokeWidth': 5,
+        'strokeColor': '#ff0000'
+             };
+
+
+            var featurecollection = {
+              "type": "FeatureCollection", 
+              "features": [
+                {"geometry": {
+                    "type": "GeometryCollection", 
+                    "geometries": [
+                        {
+                            "type": "Point", 
+                            "coordinates": [32.5811, 0.3136],
+                        },
+                        {
+                            "type": "Point", 
+                            "coordinates": [31.5811, 0.3136],
+                        },
+                        {
+                            "type": "Point", 
+                            "coordinates": [30.5811, 0.3136],
+                        }
+                    ]
+                }, 
+                "type": "Feature", 
+                "properties": {}}
+              ]
+           };
+           var geojson_format = new OpenLayers.Format.GeoJSON({
+                'internalProjection': new OpenLayers.Projection("EPSG:900913"),
+                'externalProjection': new OpenLayers.Projection("EPSG:4326")
+            });
+           var styleMap = new OpenLayers.StyleMap({
+            pointRadius: 20,
+            fillColor: "red",
+            strokeColor: "red",
+            fillOpacity: 0.7,
+            label: "1",
+            fontFamily: "Arial"
+          });
+
+
+           var vector_layer = new OpenLayers.Layer.Vector("Layer", {styleMap: styleMap}); 
+           map.addLayer(vector_layer);
+           vector_layer.addFeatures(geojson_format.read(featurecollection));
+
+           map.setCenter(new OpenLayers.LonLat(lon, lat).transform(
+                    new OpenLayers.Projection("EPSG:4326"),
+                    map.getProjectionObject()
+                ), 10);
+
+        }
+    </script>
+  </head>
+  <body onload="init()">
+    <h1 id="title">GeoJSON Example</h1>
+    
+    <div id="tags">
+       JSON, GeoJSON
+    </div>
+
+      <p id="shortdesc">
+        Demonstrate the use of the GeoJSON format.
+    </p>
+    <div id="map" style="width:800;height:800;"class="smallmap"></div>
+    <div id="docs">
+        <p>This example uses the GeoJSON format.</p>
+    </div>
+  </body>
+</html>

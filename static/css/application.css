@@ -18,3 +18,9 @@ footer label {
   padding: 40px 15px;
   text-align: center;
 }
+
+.smallmap {
+  width: 800px;
+  height: 800px;
+  border: 1px solid #ccc;
+}

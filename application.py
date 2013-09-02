@@ -12,6 +12,10 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 def index():
 	return render_template('index.html', section="spikes")
 
+@app.route("/test_open_layers/")
+def test_open_layers():
+	return render_template('test_openlayers.html', section="spikes")
+
 @app.route("/district/<name>")
 def district(name):
 	district = DistrictService().find_by_name(name)
