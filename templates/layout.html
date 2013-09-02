@@ -44,7 +44,15 @@
         <script type="text/javascript" src="/static/javascript/bootstap.js"></script>
 
         {% block content %}{% endblock %}
-    </div>    
+    </div>   
+
+    <footer id="footer">
+        <div>
+            <label for="environment">environment: </label><span id="environment"></span>
+            <label for="sha">revision: </label><span id="sha"></span>
+            <label for="time">deployed at: </label><time id="time"></time>
+        </div>
+    </footer> 
   </body>
 </html>
 
