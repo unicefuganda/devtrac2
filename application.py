@@ -36,6 +36,10 @@ def geonode_embedded():
 def geonode_openlayers():
 	return render_template('geonode_openlayers.html')
 
+@app.route("/markers_openlayers/")
+def markers_openlayers():
+	return render_template('markers_openlayer.html')
+
 @app.route("/mapbox/")
 def mapbox():
 	return render_template('mapbox.html')
