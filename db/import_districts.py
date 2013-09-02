@@ -11,7 +11,7 @@ def find_attributes(feature):
   return { 
     "D_06_ID": feature["properties"]["D_06_ID"],
     "name_2006": feature["properties"]["DNAME_2006"],
-    "name_2010": feature["properties"]["DNAME_2010"],
+    "name": feature["properties"]["DNAME_2010"],
     "subregion": feature["properties"]["SUBREGION"],
     "unicef": feature["properties"]["UNICEF"],
     "area": feature["properties"]["AREA"],

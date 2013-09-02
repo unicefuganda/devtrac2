@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block title %}Map{% endblock %}
 {% block content %}
-	<h1 class="title">{{district.name}}</h1>
+	<h1 class="title">{{district.name.capitalize()}}</h1>
+  <div>{{district.json}}</div>
 {% endblock %}
