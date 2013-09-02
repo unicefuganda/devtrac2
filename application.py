@@ -6,7 +6,7 @@ import settings as config
 import sys, os
 
 app = Flask(__name__)
-sys.path.append(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 @app.route("/")
 def index():

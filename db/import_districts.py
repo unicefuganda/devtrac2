@@ -2,8 +2,11 @@ import json
 from pprint import pprint
 import pymongo
 from pymongo import MongoClient
+import sys, os
+local_path = os.path.dirname(os.path.abspath(__file__))
+print(local_path)
 
-json_data=open('uganda_districts_2011.json')
+json_data=open("%s/uganda_districts_2011.json" % local_path)
 
 data = json.load(json_data)
 
