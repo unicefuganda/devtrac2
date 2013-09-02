@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 {% block title %}DevTrac2{% endblock %}
 {% block content %}
-	<h1>DevTrac2</h1>
   <h2>Spikes</h2>
 	<ul>
 		<li><a href="{{url_for('leaflet')}}">Geonode Leaflet</a></li>
@@ -10,12 +9,5 @@
 		<li><a href="{{url_for('mapbox')}}">Mapbox</a></li>
 		<li><a href="{{url_for('health')}}">CKAN</a></li>
 	</ul>
-  <h2>District Dashboards</h2>
-  <ul>
-  {% for district in districts %}
-    <li><a href="{{ url_for('district', name=district.name.capitalize()) }}">{{district.name.capitalize()}}</a></li>
-  {% endfor %}
-
-  </ul>
 
 {% endblock %}

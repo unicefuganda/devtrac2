@@ -10,13 +10,17 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 @app.route("/")
 def index():
-	districts = DistrictService().find_all()
-	return render_template('index.html', districts=districts)
+	return render_template('index.html', section="spikes")
 
 @app.route("/district/<name>")
 def district(name):
 	district = DistrictService().find_by_name(name)
-	return render_template('district/show.html', district=district)
+	return render_template('district/show.html', district=district, section="dashboards")
+
+@app.route("/dashboards/")
+def dashboards():
+	districts = DistrictService().find_all()
+	return render_template('dashboard.html', districts=districts, section="dashboards")
 
 # SPIKES ROUTES
 

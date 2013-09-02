@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}DevTrac2{% endblock %}
+{% block content %}
+  <h2>District Dashboards</h2>
+  <ul>
+  {% for district in districts %}
+    <li><a href="{{ url_for('district', name=district.name.capitalize()) }}">{{district.name.capitalize()}}</a></li>
+  {% endfor %}
+
+  </ul>
+
+{% endblock %}
