@@ -31,6 +31,13 @@
         map.addControl(new OpenLayers.Control.LayerSwitcher());
         map.addControl(new OpenLayers.Control.MousePosition());
 
+
+            var geojson_format = new OpenLayers.Format.GeoJSON({
+                'internalProjection': map.baseLayer.projection,
+                'externalProjection': new OpenLayers.Projection("EPSG:4326")
+            });
+            
+
          polyOptions = {sides: 4};
             polygonControl = new OpenLayers.Control.DrawFeature(polygonLayer,
                                             OpenLayers.Handler.RegularPolygon,
@@ -53,6 +60,7 @@
     function setOptions(options) {
             polygonControl.handler.setOptions(options);
         }
+
         function setSize(fraction) {
             var radius = fraction * map.getExtent().getHeight();
             polygonControl.handler.setOptions({radius: radius,
@@ -64,3 +72,44 @@
  });
 
  
+  vectorLayer = new OpenLayers.Layer.Vector("Lines");
+
+
+  function geo_json(){
+ var myGeoJSON = { "type": "FeatureCollection",
+                "features": 
+                [
+
+                    { "type": "Feature", "properties": 
+                    { "LENGTH": 756.304000}, 
+                    "geometry": { "type": "LineString", 
+                    "coordinates": [
+                     [ 18.105018, 59.231027 ], [ 18.104176, 59.230737 ],
+                     [ 18.103928, 59.230415 ], [ 18.103650, 59.230336 ]
+                      
+                      ] } }
+                    ,                   
+            { "type": "Feature", "properties": 
+            { "LENGTH": 1462.390000}, 
+            "geometry": 
+            { "type": "LineString",
+             "coordinates": [ 
+             [ 17.877073, 59.461653 ], 
+             [ 17.877116, 59.461598 ], 
+             [ 17.876936, 59.461507 ], 
+             [ 17.876936, 59.461323 ], 
+             [ 17.876773, 59.461098 ], 
+             [ 17.876430, 59.460885 ], 
+             [ 17.876413, 59.460553 ], 
+             [ 17.876576, 59.460280 ], 
+             [ 17.876575, 59.460078 ]
+
+              ] } }
+
+                ]
+            };
+
+  }
+
+           
+
