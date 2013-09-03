@@ -30,23 +30,23 @@ def dashboards():
 
 @app.route("/leaflet/")
 def leaflet():
-	return render_template('leaflet.html')
+	return render_template('spikes/leaflet.html')
 
 @app.route("/geonode_embedded/")
 def geonode_embedded():
-	return render_template('geonode_embedded.html')
+	return render_template('spikes/geonode_embedded.html')
 
 @app.route("/geonode_openlayers/")
 def geonode_openlayers():
-	return render_template('geonode_openlayers.html')
+	return render_template('spikes/geonode_openlayers.html')
 
 @app.route("/markers_openlayers/")
 def markers_openlayers():
-	return render_template('markers_openlayer.html')
+	return render_template('spikes/markers_openlayer.html')
 
 @app.route("/mapbox/")
 def mapbox():
-	return render_template('mapbox.html')
+	return render_template('spikes/mapbox.html')
 
 @app.route('/json')
 def spit_json():
@@ -55,11 +55,11 @@ def spit_json():
 
 @app.route('/health')
 def health():
-	return render_template('health.html')
+	return render_template('spikes/health.html')
 
 @app.route('/education')
 def education():
-	return render_template('education.html')
+	return render_template('spikes/education.html')
 
 @app.route('/ugdata/<query>')
 def  get_dataset(query):

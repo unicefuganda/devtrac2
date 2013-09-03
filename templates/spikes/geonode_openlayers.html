@@ -1,16 +1,13 @@
-{% extends "layout.html" %}
+{% extends "spikes/layout.html" %}
 {% block title %}Map{% endblock %}
-{% block content %} 
-
-	<h1>Geonode OpenLayers with Markers</h1>
+{% block content %}
+	<h1>Geonode OpenLayers</h1>
 	<div id="map" style="width: 800px; height: 800px;"></div>
-	
-
-	
 {% endblock %}
+
 {% block javascript %}
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/OpenLayers.js"></script>
-  <script type="text/javascript" src="/static/javascript/polygons.js"></script>
+  <script type="text/javascript" src="/static/javascript/openlayers.js"></script>
 {% endblock %}
 
 
