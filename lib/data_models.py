@@ -4,6 +4,14 @@ class District():
     self.area = area
     self.subregion = subregion
     self.json = json
+
+  @property
+  def serialize(self):   
+    return {
+      "name" : self.name,
+      "area" : self.area,
+      "subregion" : self.subregion
+    }
     
 class School():
   def __init__(self,id,district,subcounty,name,use_status):

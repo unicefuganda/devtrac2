@@ -1,0 +1,16 @@
+<table class="table table-condensed table-striped">
+  <thead>
+  <tr>
+    <th>Subregion</th>
+    <th>District</th>
+    <th>Area</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="district in districts | orderBy:'+subregion+name'">
+      <td>{[{district.subregion}]}</td>
+      <td><a href="/district/{[{district.name}]}" >{[{district.name}]}</a></td>
+      <td>{[{district.area}]}</td>
+    </tr>
+  </tbody>
+</table>

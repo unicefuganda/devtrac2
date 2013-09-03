@@ -1,6 +1,6 @@
 {% extends "spikes/layout.html" %}
-{% block title %}{{district.subregion.capitalize()}} - {{district.name.capitalize()}}{% endblock %}
+{% block title %}{{district.subregion}} - {{district.name}}{% endblock %}
 {% block content %}
-	<h1 class="title">{{district.subregion.capitalize()}} - {{district.name.capitalize()}}</h1>
+	<h1 class="title">{{district.subregion}} - {{district.name}}</h1>
   <div>{{district.json}}</div>
 {% endblock %}

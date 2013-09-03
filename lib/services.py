@@ -5,7 +5,7 @@ from pymongo import MongoClient
 class DistrictService(object):  
 
   def convert_json_to_distirct(self, district_json):
-    return District(district_json["name"], district_json["area"], district_json["subregion"], district_json)
+    return District(district_json["name"].capitalize(), district_json["area"], district_json["subregion"].capitalize(), district_json)
 
   def find_by_name(self, name):
     client = MongoClient()

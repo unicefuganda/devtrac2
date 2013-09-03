@@ -1,12 +1,57 @@
-{% extends "spikes/layout.html" %}
-{% block title %}DevTrac2{% endblock %}
-{% block content %}
-  <h2>District Dashboards</h2>
-  <ul>
-  {% for district in districts %}
-    <li><a href="{{ url_for('district', name=district.name.capitalize()) }}">{{district.name.capitalize()}}</a></li>
-  {% endfor %}
+<!DOCTYPE html>
+<html ng-app="dashboard"}>
+  <head>
+    
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 
-  </ul>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/static/css/application.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+  </head>
+  <body>
+    
 
-{% endblock %}
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">DevTrac2</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="{{ "active" if (section == "spikes") else "" }}"><a href="/spikes">Spikes</a></li>
+            <li class="{{ "active" if (section == "dashboard") else "" }}"><a href="/">Dashboards</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    
+
+    <div class="container">
+      <div ng-view></div>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+      <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+      <script type="text/javascript" src="/static/javascript/dashboard.js"></script>
+      <script type="text/javascript" src="/static/javascript/application.js"></script>
+      <script type="text/javascript" src="/static/javascript/bootstrap.js"></script>
+    </div>   
+
+    <footer id="footer">
+        <div>
+            <label for="environment">environment:</label>&nbsp;<span id="environment"></span>
+            <label for="sha">revision:</label>&nbsp;<span id="sha"></span>
+            <label for="time">deployed at:</label>&nbsp;<time id="time"></time>
+        </div>
+    </footer> 
+  </body>
+</html>
+
+
+

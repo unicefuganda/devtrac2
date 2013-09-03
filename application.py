@@ -8,23 +8,24 @@ import sys, os
 app = Flask(__name__)
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-@app.route("/")
-def index():
-	return render_template('index.html', section="spikes")
+@app.route("/spikes/")
+def spikes():
+	return render_template('dashboard.html', section="dashboards")
 
-@app.route("/test_open_layers/")
-def test_open_layers():
-	return render_template('test_openlayers.html', section="spikes")
-
-@app.route("/district/<name>")
+@app.route("/district/<name>/")
 def district(name):
-	district = DistrictService().find_by_name(name)
-	return render_template('district/show.html', district=district, section="dashboards")
+	return render_template('dashboard.html', section="dashboards")
 
-@app.route("/dashboards/")
+@app.route("/")
 def dashboards():
+	return render_template('dashboard.html', section="dashboards")
+
+
+
+@app.route("/districts.json")
+def districts():
 	districts = DistrictService().find_all()
-	return render_template('dashboard.html', districts=districts, section="dashboards")
+	return jsonify(districts=[i.serialize for i in districts])
 
 # SPIKES ROUTES
 
