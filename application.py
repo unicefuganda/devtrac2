@@ -50,7 +50,7 @@ def mapbox():
 
 @app.route("/cluster_openlayers/")
 def cluster_openlayers():
-	return render_template('cluster_openlayers.html')
+	return render_template('spikes/cluster_openlayers.html')
 
 @app.route('/json')
 def spit_json():
