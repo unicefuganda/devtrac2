@@ -2,22 +2,21 @@ import os
 import application
 import unittest
 import tempfile
+from lib.services import *
 
-class ApplicationTestCase(unittest.TestCase):
+class DistrictServiceTestCase(unittest.TestCase):
 
-    def setUp(self):
-        self.db_fd, application.app.config['DATABASE'] = tempfile.mkstemp()
-        application.app.config['TESTING'] = True
-        self.app = application.app.test_client()
-        # application.app.init_db()
+  def test_should_find_by_name(self):
+    service = DistrictService()
+    district = service.find_by_name("gulu")
+    self.assertEquals(district.name, "Gulu")
+    self.assertEquals(district.subregion, "Acholi")
 
-    # def tearDown(self):
-        # os.close(self.db_fd)
-        # os.unlink(application.app.config['DATABASE'])
-
-    def test_root(self):
-        rv = self.app.get('/')
-        assert 'DevTrac2' in rv.data
+  def test_should_find_all(self):
+    service = DistrictService()
+    districts = service.find_all()
+    self.assertGreater(len(districts), 1)
+    self.assertIsNotNone(districts[0].name)
 
 if __name__ == '__main__':
-    unittest.main()
+  unittest.main()
