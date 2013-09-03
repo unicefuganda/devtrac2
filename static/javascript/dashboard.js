@@ -1,11 +1,11 @@
 var dashboard = angular.module('dashboard', []).
   config(function($routeProvider, $interpolateProvider, $locationProvider) {  
-    $locationProvider.html5Mode(true);    
+    // $locationProvider.html5Mode(true);    
     $routeProvider
       .when('/', {controller:ListCtrl, templateUrl:'/static/templates/list.html'})  
       .when('/spikes', {controller:SpikesCtrl, templateUrl:'/static/templates/spikes.html'})  
       .when('/district/:district', { controller:ShowCtrl, templateUrl:'/static/templates/show.html'})
-      .otherwise({redirectTo:'/'});
+      // .otherwise({redirectTo:'/'});
     $interpolateProvider.startSymbol('{[{');
     $interpolateProvider.endSymbol('}]}');
   });

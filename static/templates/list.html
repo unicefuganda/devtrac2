@@ -9,7 +9,7 @@
   <tbody>
     <tr ng-repeat="district in districts | orderBy:'+subregion+name'">
       <td>{[{district.subregion}]}</td>
-      <td><a href="/district/{[{district.name}]}" >{[{district.name}]}</a></td>
+      <td><a href="/#/district/{[{district.name}]}" >{[{district.name}]}</a></td>
       <td>{[{district.area}]}</td>
     </tr>
   </tbody>
