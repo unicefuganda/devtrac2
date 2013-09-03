@@ -48,6 +48,10 @@ def markers_openlayers():
 def mapbox():
 	return render_template('spikes/mapbox.html')
 
+@app.route("/cluster_openlayers/")
+def cluster_openlayers():
+	return render_template('cluster_openlayers.html')
+
 @app.route('/json')
 def spit_json():
 	data = {'Uganda CKAN API SEARCH URL : ' : config.CKAN_PACKAGE_SEARCH_URL,'Country ' :'Uganda'}
