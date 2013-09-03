@@ -9,7 +9,8 @@ cluster.middleRule = null;
 cluster.highRule = null;
 cluster.styles = null;
 cluster.ug_projects_url = '/static/javascript/projects_uganda.json';
-cluster.world_cities_URL = '/static/javascript/world_cities.json';
+cluster.world_cities_url = '/static/javascript/world_cities.json';
+cluster.ug_towns_url = '/static/javascript/ug_towns.json';
 
 cluster.init = function(){
 
@@ -27,7 +28,7 @@ cluster.init = function(){
 
 	}
 
-	this.addVectorLayer = function(vector){		
+	this.addLayer = function(vector){		
      cluster.map.addLayer(vector);
 	}
 }
@@ -41,6 +42,31 @@ var colors = {
             };
 
             return colors;
+}
+
+cluster.tiles = function(){
+
+var map = cluster.map;
+var format = 'image/png';
+
+  var tiles = new OpenLayers.Layer.WMS(
+            "geonode:uganda_districts_2010 - Tiled", "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
+            {
+                LAYERS: 'geonode:uganda_districts_2010',
+                STYLES: '',
+                format: format,
+                tiled: true,
+                tilesOrigin : map.maxExtent.left + ',' + map.maxExtent.bottom
+            },
+            {
+                buffer: 0,
+                displayOutsideMaxExtent: true,
+                isBaseLayer: false,
+                yx : {'EPSG:4326' : true}
+            } 
+        );
+
+  return tiles;
 }
 
 cluster.setRules = function(){
@@ -119,7 +145,7 @@ cluster.vectorLayer = function(){
 
  var vector = new OpenLayers.Layer.Vector("Features", {
                 protocol: new OpenLayers.Protocol.HTTP({
-                    url: cluster.world_cities_URL,
+                    url: cluster.ug_towns_url,
                     format: new OpenLayers.Format.GeoJSON()
                 }),
                 renderers: ['Canvas','SVG'],
@@ -147,7 +173,9 @@ cluster.applyRules = function(){
 $(function(){
 	var clusters = new cluster.init();
 	clusters.load();
-	clusters.addVectorLayer(cluster.vectorLayer())
+    
+    clusters.addLayer(cluster.tiles())
+	clusters.addLayer(cluster.vectorLayer())
 
 });
 
