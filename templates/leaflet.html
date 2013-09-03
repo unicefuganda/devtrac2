@@ -1,9 +1,12 @@
 {% extends "layout.html" %}
 {% block title %}Map{% endblock %}
+
 {% block content %}
 	<h1>Leaflet</h1>
 	<div id="map" style="height:800px;width:800px"></div>
+{% endblock %}
 
-	<script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>	
-	<script type="text/javascript" src="/static/javascript/leaflet.js"></script>
+{% block javascript %}
+  <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script> 
+  <script type="text/javascript" src="/static/javascript/leaflet.js"></script>
 {% endblock %}

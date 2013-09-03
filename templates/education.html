@@ -1,12 +1,15 @@
 {% extends "layout.html" %}
 {% block title %}ckan data.ug{% endblock %}
 {% block content %}
-<h1>DevTrac2 : CKAN data.ug | Education</h1>
-<hr />
-<p id="errorMessage" </p>
-<p id="resultMessage" </p>
+  <h1>DevTrac2 : CKAN data.ug | Education</h1>
+  <hr />
+  <p id="errorMessage" </p>
+  <p id="resultMessage" </p>
   <br />
   <div id="chart_container" style="height:500px;width:80%;overflow-y:auto;"></div>  
+{% endblock %}
+
+{% block javascript %}
   <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
-   <script type="text/javascript" src="/static/javascript/education.js"></script>
-	{% endblock %}
+  <script type="text/javascript" src="/static/javascript/education.js"></script>
+{% endblock %}
