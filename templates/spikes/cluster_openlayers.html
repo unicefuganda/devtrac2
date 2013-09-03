@@ -4,9 +4,11 @@
 
 	<h1>Cluster OpenLayers </h1>
 	<div id="map" style="width: 800px; height: 800px;"></div>
-	
+{% endblock %}
 
-	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/OpenLayers.js"></script>
+{% block javascript %}
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/OpenLayers.js"></script>
+	 <script type="text/javascript" src="/static/javascript/AnimatedCluster.js"></script> 
 	<script type="text/javascript" src="/static/javascript/openlayer_cluster.js"></script>
 {% endblock %}
 
