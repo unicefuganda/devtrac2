@@ -6,9 +6,10 @@ cluster.map = null;
 cluster.baseLayer = null;
 cluster.lowRule = null;
 cluster.middleRule = null;
+cluster.vectorLayer = null;
 cluster.highRule = null;
 cluster.styles = null;
-cluster.ug_projects_url = '/static/javascript/projects_uganda.json';
+cluster.ug_projects_url = '/static/javascript/ug_projects.json';
 cluster.world_cities_url = '/static/javascript/world_cities.json';
 cluster.ug_towns_url = '/static/javascript/ug_towns.json';
 
@@ -19,25 +20,28 @@ cluster.init = function(){
      cluster.baseLayer = new OpenLayers.Layer.OSM();
      cluster.map.addLayer(cluster.baseLayer);
      var initial_location = new OpenLayers.LonLat(cluster.Long, cluster.Lat);
-     
-     initial_location.transform(new OpenLayers.Projection("EPSG:4326"), 
+
+     initial_location.transform(new OpenLayers.Projection("EPSG:4326"),
      	new OpenLayers.Projection("EPSG:900913"));
 
      cluster.map.setCenter(initial_location, cluster.zoom);
-     cluster.map.addControl(new OpenLayers.Control.LayerSwitcher());
+     //cluster.map.addControl(new OpenLayers.Control.LayerSwitcher());
 
 	}
 
-	this.addLayer = function(vector){		
+	this.addLayer = function(vector){
      cluster.map.addLayer(vector);
 	}
+    this.addControl = function(control){
+        cluster.map.addControl(control);
+    }
 }
 
 cluster.getColors = function(){
 
 var colors = {
-                low: "rgb(181, 226, 140)", 
-                middle: "rgb(241, 211, 87)", 
+                low: "rgb(181, 226, 140)",
+                middle: "rgb(241, 211, 87)",
                 high: "rgb(253, 156, 115)"
             };
 
@@ -63,7 +67,7 @@ var format = 'image/png';
                 displayOutsideMaxExtent: true,
                 isBaseLayer: false,
                 yx : {'EPSG:4326' : true}
-            } 
+            }
         );
 
   return tiles;
@@ -80,7 +84,7 @@ cluster.lowRule = new OpenLayers.Rule({
                 }),
                 symbolizer: {
                     fillColor: colors.low,
-                    fillOpacity: 0.9, 
+                    fillOpacity: 0.9,
                     strokeColor: colors.low,
                     strokeOpacity: 0.5,
                     strokeWidth: 12,
@@ -102,7 +106,7 @@ cluster.middleRule = new OpenLayers.Rule({
                 }),
                 symbolizer: {
                     fillColor: colors.middle,
-                    fillOpacity: 0.9, 
+                    fillOpacity: 0.9,
                     strokeColor: colors.middle,
                     strokeOpacity: 0.5,
                     strokeWidth: 12,
@@ -123,7 +127,7 @@ cluster.highRule = new OpenLayers.Rule({
                 }),
                 symbolizer: {
                     fillColor: colors.high,
-                    fillOpacity: 0.9, 
+                    fillOpacity: 0.9,
                     strokeColor: colors.high,
                     strokeOpacity: 0.5,
                     strokeWidth: 12,
@@ -139,13 +143,13 @@ cluster.highRule = new OpenLayers.Rule({
 }
 
 cluster.vectorLayer = function(){
- 
+
  cluster.setRules();
  cluster.applyRules();
 
  var vector = new OpenLayers.Layer.Vector("Features", {
                 protocol: new OpenLayers.Protocol.HTTP({
-                    url: cluster.ug_towns_url,
+                    url: cluster.ug_projects_url,
                     format: new OpenLayers.Format.GeoJSON()
                 }),
                 renderers: ['Canvas','SVG'],
@@ -164,18 +168,50 @@ cluster.vectorLayer = function(){
 
 }
 
+cluster.control = function(layer){
+ var featureControl = new OpenLayers.Control.SelectFeature(layer, {
+                hover: true,
+                highlightOnly: true,
+                eventListeners: {
+                    beforefeaturehighlighted: cluster.featureProperties,
+                }
+            });
+
+return featureControl;
+}
+
+cluster.featureProperties = function(e){
+var el = e.type,feature = e.feature.id;
+cluster.getDescription(e.feature.cluster[0].data);
+
+}
 cluster.applyRules = function(){
 	 cluster.styles = new OpenLayers.Style(null, {
                 rules: [cluster.lowRule, cluster.middleRule, cluster.highRule]
             });
 }
 
+cluster.getDescription = function(data){
+var table = "<table>";
+    table += "<tr><td>"+data.geoname+"</td></tr>";
+    table += "<tr><td>"+data.results+"</td></tr>";
+    table += "<tr><td>"+data.developmen+"</td></tr>";
+    table += "<tr><td>"+data["mjsector 1"] +"</td></tr>";
+    table +="</table>";
+
+ $("#description").html(table);
+}
+
 $(function(){
 	var clusters = new cluster.init();
 	clusters.load();
-    
-    clusters.addLayer(cluster.tiles())
-	clusters.addLayer(cluster.vectorLayer())
+    var layer = cluster.vectorLayer();
+  //clusters.addLayer(cluster.tiles())
+     var ctrl = cluster.control(layer);
+    clusters.addLayer(layer);
+    clusters.addControl(ctrl);
+    ctrl.activate();
+	
 
 });
 

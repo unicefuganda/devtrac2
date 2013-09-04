@@ -1,0 +1,22 @@
+{% extends "spikes/layout.html" %}
+{% block title %}Map{% endblock %}
+{% block content %}
+
+	<h1>Leaflet Cluster  </h1>
+	<div id="map" style="width: 90%; height: 400px;"></div>
+<div id="description" style="width: 90%; height: 200px;border:1px solid;margin-top:10px;"></div>
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet-src.js"></script>	 
+	<script type="text/javascript" src="/static/javascript/leaflet.markercluster-src.js">
+	</script>
+	 
+		
+	<script type="text/javascript" src="/static/javascript/leaflet_cluster.js"></script>
+
+{% endblock %}
+
+
+  
+

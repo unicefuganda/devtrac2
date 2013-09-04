@@ -53,6 +53,10 @@ def mapbox():
 def cluster_openlayers():
 	return render_template('spikes/cluster_openlayers.html')
 
+@app.route("/cluster_leaflets/")
+def cluster_leaflets():
+	return render_template('spikes/cluster_leaflets.html')
+
 @app.route('/json')
 def spit_json():
 	data = {'Uganda CKAN API SEARCH URL : ' : config.CKAN_PACKAGE_SEARCH_URL,'Country ' :'Uganda'}
