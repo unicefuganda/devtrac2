@@ -1,2 +1,4 @@
 <h1 class="title">{[{district.subregion}]} - {[{district.name}]}</h1>
-<div>{[{district.area}]}</div>
+<ul>
+  <li ng-repeat="subcounty in district.subcounties">{[{subcounty.name}]}</li>
+</ul>
