@@ -1,17 +1,20 @@
-class District():
-  def __init__(self, name, area, subregion, json):
-    self.name = name
-    self.area = area
-    self.subregion = subregion
-    self.json = json
+from mongoengine import *
 
-  @property
-  def serialize(self):   
-    return {
-      "name" : self.name,
-      "area" : self.area,
-      "subregion" : self.subregion
-    }
+class District(Document):
+  index_name = StringField()
+  name = StringField()
+  area = StringField()
+  subregion = StringField()
+
+  
+
+  # @property
+  # def serialize(self):   
+  #   return {
+  #     "name" : self.name,
+  #     "area" : self.area,
+  #     "subregion" : self.subregion
+  #   }
     
 class School():
   def __init__(self,id,district,subcounty,name,use_status):

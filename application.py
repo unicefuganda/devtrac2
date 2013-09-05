@@ -6,6 +6,9 @@ import settings as config
 import sys, os
 
 app = Flask(__name__)
+app.config.from_pyfile('application.cfg', silent=True)
+db = MongoEngine(app)
+
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 @app.route("/spikes/")
@@ -20,12 +23,10 @@ def district(name):
 def dashboards():
 	return render_template('dashboard.html', section="dashboards")
 
-
-
 @app.route("/districts.json")
 def districts():
 	districts = DistrictService().find_all()
-	return jsonify(districts=[i.serialize for i in districts])
+	return "{ \"districts\":%s}" % districts.to_json()
 
 # SPIKES ROUTES
 

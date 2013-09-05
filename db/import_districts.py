@@ -16,8 +16,9 @@ with open("%s/uganda_districts_2011.json" % local_path) as districts_data:
       return { 
         "D_06_ID": feature["properties"]["D_06_ID"],
         "name_2006": feature["properties"]["DNAME_2006"],
-        "name": feature["properties"]["DNAME_2010"],
-        "subregion": feature["properties"]["SUBREGION"],
+        "index_name": feature["properties"]["DNAME_2010"],
+        "name": feature["properties"]["DNAME_2010"].capitalize(),
+        "subregion": feature["properties"]["SUBREGION"].capitalize(),
         "unicef": feature["properties"]["UNICEF"],
         "area": feature["properties"]["AREA"],
         "perimeter": feature["properties"]["PERIMETER"],
@@ -28,8 +29,8 @@ with open("%s/uganda_districts_2011.json" % local_path) as districts_data:
     features = filter(lambda d:d["properties"]["DNAME_2010"] != None , districts_json["features"])
     districts = map(find_attributes, features)
 
-db.districts.drop()
-db.districts.insert(districts)
+db.district.drop()
+db.district.insert(districts)
 
 def add_subcounties_to_district(district, village):
   if (not district.has_key("subcounties")):
@@ -50,9 +51,8 @@ with open("%s/uganda_villages.json" % local_path) as villages_data:
   villages_json = json.load(villages_data)
   sorted_villages = sorted(villages_json["rows"], key=itemgetter('District', 'Subcounty', 'Village'))
   for village in sorted_villages:
-    district = db.districts.find_one({"name": village["District"]})
+    district = db.district.find_one({"index_name": village["District"]})
     add_subcounties_to_district(district, village)
-    db.districts.save(district)
+    db.district.save(district)
 
-
-print "inserted %s districts" % db.districts.count()
+print "inserted %s districts" % db.district.count()
