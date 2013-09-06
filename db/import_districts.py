@@ -14,16 +14,12 @@ with open("%s/uganda_districts_2011.json" % local_path) as districts_data:
 
     def find_attributes(feature): 
       return { 
-        "D_06_ID": feature["properties"]["D_06_ID"],
-        "name_2006": feature["properties"]["DNAME_2006"],
         "index_name": feature["properties"]["DNAME_2010"],
         "name": feature["properties"]["DNAME_2010"].capitalize(),
         "subregion": feature["properties"]["SUBREGION"].capitalize(),
         "unicef": feature["properties"]["UNICEF"],
         "area": feature["properties"]["AREA"],
-        "perimeter": feature["properties"]["PERIMETER"],
-        "hectares": feature["properties"]["HECTARES"],
-        "registration_2011": feature["properties"]["HECTARES"]
+        "geometry": feature["geometry"]
       }
 
     features = filter(lambda d:d["properties"]["DNAME_2010"] != None , districts_json["features"])
@@ -31,6 +27,18 @@ with open("%s/uganda_districts_2011.json" % local_path) as districts_data:
 
 db.district.drop()
 db.district.insert(districts)
+
+db.district.create_index("index_name")
+
+with open("%s/uganda_districts_2011_centroids.json" % local_path) as districts_data:
+  districts_centroids_json = json.load(districts_data)
+  features = filter(lambda d:d["properties"]["DNAME_2010"] != None , districts_centroids_json["features"])
+  district_centroids = map(lambda x:{ "centroid": x["geometry"], "index_name": x["properties"]["DNAME_2010"] }, features)
+
+  for district_centroid in district_centroids:
+    district = db.district.find_one({"index_name": district_centroid["index_name"]})
+    district["centroid"] = district_centroid["centroid"]
+    db.district.save(district)
 
 def add_subcounties_to_district(district, village):
   if (not district.has_key("subcounties")):
@@ -45,7 +53,6 @@ def add_subcounties_to_district(district, village):
     village = next((x for x in subcounty["villages"] if (x["name"] == village_name)), None)
     if (village is None):
       subcounty["villages"].append({"name": village_name})
-
 
 with open("%s/uganda_villages.json" % local_path) as villages_data:
   villages_json = json.load(villages_data)

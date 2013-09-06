@@ -36,6 +36,7 @@ var myApp = dashboard.service('districtService', function($http, $filter) {
 function ListCtrl($scope, $http, districtService) {
   districtService.all(function(districts){
     $scope.districts = districts;
+    loadLeafletMap(31.8833, 1.0667, 7)
   });
 }
 
@@ -44,5 +45,8 @@ function SpikesCtrl() {}
 function ShowCtrl($scope, $http, $filter, $routeParams, districtService) {
   districtService.find_by_name($routeParams.district, function(district){
     $scope.district = district;
+    loadLeafletMap(district.centroid.coordinates[0], district.centroid.coordinates[1], 10)
   });
+
+
 }

@@ -5,16 +5,10 @@ class District(Document):
   name = StringField()
   area = StringField()
   subregion = StringField()
+  geometry = DictField()
+  subcounties = ListField()
+  unicef = StringField()
 
-  
-
-  # @property
-  # def serialize(self):   
-  #   return {
-  #     "name" : self.name,
-  #     "area" : self.area,
-  #     "subregion" : self.subregion
-  #   }
     
 class School():
   def __init__(self,id,district,subcounty,name,use_status):

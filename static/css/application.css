@@ -24,3 +24,6 @@ footer label {
   height: 800px;
   border: 1px solid #ccc;
 }
+
+#map { float: left; margin: 20px; height: 600px; width: 600px;}
+#ngview { float: left; height: 800px; overflow: scroll; margin: 20px 0px; }

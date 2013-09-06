@@ -18,5 +18,15 @@ class DistrictServiceTestCase(unittest.TestCase):
     self.assertGreater(len(districts), 1)
     self.assertIsNotNone(districts[0].name)
 
+class WFSServiceTestCase(unittest.TestCase):
+
+  def test_should_find_features(self):
+    url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows"
+    service = WFSService(url, 2)
+    features = service.get_features("uganda_districts_2010")
+    self.assertEqual(len(features), 2)
+    self.assertIsNotNone(features[0]["AREA"])
+
+
 if __name__ == '__main__':
   unittest.main()

@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html ng-app="dashboard"}>
   <head>
-    
-    <title></title>
+    <title>DevTrac2</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-
     <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/static/css/application.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
@@ -35,13 +33,17 @@
     
 
     <div class="container">
-      <div ng-view></div>
-      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+      <div id='map' style="width:600px;height:600px;"></div>
+      <div id='ngview' ng-view></div>
+
+      
+    </div>   
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
       <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+      <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet-src.js"></script>   
       <script type="text/javascript" src="/static/javascript/dashboard.js"></script>
       <script type="text/javascript" src="/static/javascript/application.js"></script>
       <script type="text/javascript" src="/static/javascript/bootstrap.js"></script>
-    </div>   
 
     <footer id="footer">
         <div>
