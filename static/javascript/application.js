@@ -26,5 +26,4 @@ $(function(){
   map.addLayer(osm);
   map.addLayer(uganda_districts);
 
-
 });

@@ -21,6 +21,7 @@ class DistrictServiceTestCase(unittest.TestCase):
 class WFSServiceTestCase(unittest.TestCase):
 
   def test_should_find_features(self):
+    self.skipTest("This hits an actual service. Skip until integration tests setup.")
     url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows"
     service = WFSService(url, 2)
     features = service.get_features("uganda_districts_2010")
