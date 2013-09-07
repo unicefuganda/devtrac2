@@ -4,13 +4,12 @@
     <title>DevTrac2</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/static/css/lib/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/static/css/lib/leaflet.css" rel="stylesheet" media="screen">
     <link href="/static/css/application.css" rel="stylesheet" media="screen">
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+    
   </head>
   <body>
-    
-
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -26,25 +25,14 @@
             <li class="{{ "active" if (section == "spikes") else "" }}"><a href="/#/spikes/">Spikes</a></li>
             <li class="{{ "active" if (section == "dashboard") else "" }}"><a href="/#/">Dashboards</a></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
     </div>
-
-    
 
     <div class="container">
       <div id='map' style="width:600px;height:600px;"></div>
       <div id='ngview' ng-view></div>
-
-      
     </div>   
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-      <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-      <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet-src.js"></script>   
-      <script type="text/javascript" src="/static/javascript/dashboard.js"></script>
-      <script type="text/javascript" src="/static/javascript/application.js"></script>
-      <script type="text/javascript" src="/static/javascript/bootstrap.js"></script>
-
     <footer id="footer">
         <div>
             <label for="environment">environment:</label>&nbsp;<span id="environment"></span>
@@ -52,6 +40,16 @@
             <label for="time">deployed at:</label>&nbsp;<time id="time"></time>
         </div>
     </footer> 
+    <script type="text/javascript" src="/static/javascript/lib/angular.min.js"></script>
+    <script type="text/javascript" src="/static/javascript/lib/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="/static/javascript/lib/leaflet-src.js"></script> 
+    <script type="text/javascript" src="/static/javascript/application.js"></script>
+    
+    <script type="text/javascript" src="/static/javascript/lib/bootstrap.min.js"></script>
+
+    
+
+    <script type="text/javascript" src="/static/javascript/dashboard.js"></script>
   </body>
 </html>
 
