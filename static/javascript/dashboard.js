@@ -5,7 +5,7 @@ function loadLeafletMap(lng, lat, zoom) {
 }
 
 $(function(){
-  map = L.map('map');
+  map = L.map('view-map');
   var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
   var osmAttrib='Map data © OpenStreetMap contributors';
   var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 15, attribution: osmAttrib});   
