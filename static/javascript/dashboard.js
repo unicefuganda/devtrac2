@@ -20,6 +20,13 @@ $(function(){
   map.addLayer(osm);
   map.addLayer(uganda_districts);
 
+  $.getJSON("/static/javascript/geojson/uganda_districts_2011_005.json", function(geojsonFeature, textStatus, jqXHR) {
+    var geoJson = L.geoJson(geojsonFeature, { style: myStyle});
+
+    L.control.layers({simplified: geoJson, tiles: uganda_districts}).addTo(map);
+    map.addLayer(geoJson)
+  });  
+
 });
 
 var dashboard = angular.module('dashboard', []).

@@ -73,5 +73,4 @@ footer label {
   height:100%;
 }
 
-/* hello there!!!  */
-
+#ngview { position: absolute; float: left; height: 800px; overflow: scroll; margin: 20px 0px; z-index: 1; }
