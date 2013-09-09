@@ -4,7 +4,9 @@ from pprint import pprint
 import pymongo
 from pymongo import MongoClient
 import sys, os
+import itertools
 local_path = os.path.dirname(os.path.abspath(__file__))
+
 
 client = MongoClient()
 db = client['reference']
@@ -29,7 +31,6 @@ db.district.drop()
 db.district.insert(districts)
 
 db.district.create_index("index_name")
-
 with open("%s/uganda_districts_2011_centroids.json" % local_path) as districts_data:
   districts_centroids_json = json.load(districts_data)
   features = filter(lambda d:d["properties"]["DNAME_2010"] != None , districts_centroids_json["features"])
@@ -57,9 +58,10 @@ def add_subcounties_to_district(district, village):
 with open("%s/uganda_villages.json" % local_path) as villages_data:
   villages_json = json.load(villages_data)
   sorted_villages = sorted(villages_json["rows"], key=itemgetter('District', 'Subcounty', 'Village'))
-  for village in sorted_villages:
-    district = db.district.find_one({"index_name": village["District"]})
-    add_subcounties_to_district(district, village)
+  for district_name, district_villages in itertools.groupby(sorted_villages, lambda x: x['District']):
+    district = db.district.find_one({"index_name": district_name})
+    for village in district_villages:
+      add_subcounties_to_district(district, village)
     db.district.save(district)
 
 print "inserted %s districts" % db.district.count()
