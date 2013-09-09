@@ -1,0 +1,230 @@
+{
+"type": "FeatureCollection",
+                                                                                
+"features": [
+{ "type": "Feature", "id": 0, "properties": { "D_06_ID": 1.0, "DNAME_2006": "KALANGALA", "AREA": 7745049286.718000411987305, "PERIMETER": 360086.68, "HECTARES": 774504.929, "DNAME_2010": "KALANGALA", "SUBREGION": "CENTRAL 1", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 32.378673144784351, -0.576216804392233 ] } }
+,
+{ "type": "Feature", "id": 1, "properties": { "D_06_ID": 1.0, "DNAME_2006": "KAMPALA", "AREA": 194305275.828, "PERIMETER": 68787.571, "HECTARES": 19430.528, "DNAME_2010": "KAMPALA", "SUBREGION": "CENTRAL 1", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 32.596492373764221, 0.318443344618419 ] } }
+,
+{ "type": "Feature", "id": 2, "properties": { "D_06_ID": 1.0, "DNAME_2006": "KIBOGA", "AREA": 1586179203.788000106811523, "PERIMETER": 217775.316, "HECTARES": 158617.92, "DNAME_2010": "KIBOGA", "SUBREGION": "CENTRAL 2", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 31.95553727981919, 0.843434013755256 ] } }
+,
+{ "type": "Feature", "id": 3, "properties": { "D_06_ID": 1.0, "DNAME_2006": "LUWERO", "AREA": 2215953819.453000068664551, "PERIMETER": 283804.137, "HECTARES": 221595.382, "DNAME_2010": "LUWERO", "SUBREGION": "CENTRAL 2", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 32.582517946856825, 0.831671986513259 ] } }
+,
+{ "type": "Feature", "id": 4, "properties": { "D_06_ID": 1.0, "DNAME_2006": "MASAKA", "AREA": 2306812146.573999881744385, "PERIMETER": 243165.681, "HECTARES": 230681.215, "DNAME_2010": "MASAKA", "SUBREGION": "CENTRAL 1", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 31.844996147679296, -0.481260854466867 ] } }
+,
+{ "type": "Feature", "id": 5, "properties": { "D_06_ID": 1.1, "DNAME_2006": "MUBENDE", "AREA": 4619579563.704000473022461, "PERIMETER": 376629.855, "HECTARES": 461957.956, "DNAME_2010": "MUBENDE", "SUBREGION": "CENTRAL 2", "UNICEF": "Western Zone", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 31.533641625016333, 0.521337717262392 ] } }
+,
+{ "type": "Feature", "id": 6, "properties": { "D_06_ID": 1.1, "DNAME_2006": "MUKONO", "AREA": 4125000626.626999855041504, "PERIMETER": 505713.978, "HECTARES": 412500.063, "DNAME_2010": "MUKONO", "SUBREGION": "CENTRAL 2", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 32.786359285610537, 0.007797858248857 ] } }
+,
+{ "type": "Feature", "id": 7, "properties": { "D_06_ID": 1.1, "DNAME_2006": "NAKASONGOLA", "AREA": 3509373004.928999900817871, "PERIMETER": 313760.456, "HECTARES": 350937.3, "DNAME_2010": "NAKASONGOLA", "SUBREGION": "CENTRAL 2", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 32.424704214848717, 1.354782880755736 ] } }
+,
+{ "type": "Feature", "id": 8, "properties": { "D_06_ID": 1.1, "DNAME_2006": "RAKAI", "AREA": 4040094438.202000141143799, "PERIMETER": 324285.773, "HECTARES": 404009.444, "DNAME_2010": "RAKAI", "SUBREGION": "CENTRAL 1", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 31.519161870670516, -0.764033276226162 ] } }
+,
+{ "type": "Feature", "id": 9, "properties": { "D_06_ID": 1.1, "DNAME_2006": "SSEMBABULE", "AREA": 2318379992.427000045776367, "PERIMETER": 279825.524, "HECTARES": 231837.999, "DNAME_2010": "SSEMBABULE", "SUBREGION": "CENTRAL 1", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 31.339616458483931, -0.023168328365719 ] } }
+,
+{ "type": "Feature", "id": 10, "properties": { "D_06_ID": 1.1, "DNAME_2006": "KAYUNGA", "AREA": 1703035075.404000043869019, "PERIMETER": 269406.42, "HECTARES": 170303.508, "DNAME_2010": "KAYUNGA", "SUBREGION": "CENTRAL 2", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 32.890646656245117, 0.975944718815455 ] } }
+,
+{ "type": "Feature", "id": 11, "properties": { "D_06_ID": 1.1, "DNAME_2006": "WAKISO", "AREA": 2807708870.861999988555908, "PERIMETER": 345792.017, "HECTARES": 280770.887, "DNAME_2010": "WAKISO", "SUBREGION": "CENTRAL 1", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 32.44532403482463, 0.223143877107039 ] } }
+,
+{ "type": "Feature", "id": 12, "properties": { "D_06_ID": 1.1, "DNAME_2006": "LYANTONDE", "AREA": 888300035.789999961853027, "PERIMETER": 155159.618, "HECTARES": 88830.004, "DNAME_2010": "LYANTONDE", "SUBREGION": "CENTRAL 1", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 31.189924147626108, -0.216949914877548 ] } }
+,
+{ "type": "Feature", "id": 13, "properties": { "D_06_ID": 1.1, "DNAME_2006": "MITYANA", "AREA": 1578438259.099999904632568, "PERIMETER": 226642.604, "HECTARES": 157843.826, "DNAME_2010": "MITYANA", "SUBREGION": "CENTRAL 2", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 32.059038946169061, 0.445423733444724 ] } }
+,
+{ "type": "Feature", "id": 14, "properties": { "D_06_ID": 1.2, "DNAME_2006": "NAKASEKE", "AREA": 3475266818.51200008392334, "PERIMETER": 316552.987, "HECTARES": 347526.682, "DNAME_2010": "NAKASEKE", "SUBREGION": "CENTRAL 2", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 32.168517779590935, 1.051446370298987 ] } }
+,
+{ "type": "Feature", "id": 15, "properties": { "D_06_ID": 2.0, "DNAME_2006": "BUGIRI", "AREA": 1054736486.748999953269958, "PERIMETER": 176925.226, "HECTARES": 105473.649, "DNAME_2010": "BUGIRI", "SUBREGION": "EAST CENTRAL", "UNICEF": "Kampala Office", "Reg_2011": "BUSOGA" }, "geometry": { "type": "Point", "coordinates": [ 33.773020283475006, 0.532788896084371 ] } }
+,
+{ "type": "Feature", "id": 16, "properties": { "D_06_ID": 2.0, "DNAME_2006": "BUSIA", "AREA": 761013254.455999970436096, "PERIMETER": 148985.797, "HECTARES": 76101.325, "DNAME_2010": "BUSIA", "SUBREGION": "EAST CENTRAL", "UNICEF": "Kampala Office", "Reg_2011": "BUKEDI" }, "geometry": { "type": "Point", "coordinates": [ 34.004930914426787, 0.414595541741961 ] } }
+,
+{ "type": "Feature", "id": 17, "properties": { "D_06_ID": 2.0, "DNAME_2006": "IGANGA", "AREA": 1018310580.375, "PERIMETER": 171127.498, "HECTARES": 101831.058, "DNAME_2010": "IGANGA", "SUBREGION": "EAST CENTRAL", "UNICEF": "Kampala Office", "Reg_2011": "BUSOGA" }, "geometry": { "type": "Point", "coordinates": [ 33.525323904022741, 0.692368311064835 ] } }
+,
+{ "type": "Feature", "id": 18, "properties": { "D_06_ID": 2.0, "DNAME_2006": "JINJA", "AREA": 730709011.727, "PERIMETER": 135833.19, "HECTARES": 73070.901, "DNAME_2010": "JINJA", "SUBREGION": "EAST CENTRAL", "UNICEF": "Kampala Office", "Reg_2011": "BUSOGA" }, "geometry": { "type": "Point", "coordinates": [ 33.212867571547058, 0.56752882538528 ] } }
+,
+{ "type": "Feature", "id": 19, "properties": { "D_06_ID": 2.1, "DNAME_2006": "KATAKWI", "AREA": 2427654299.564000129699707, "PERIMETER": 279794.829, "HECTARES": 242765.43, "DNAME_2010": "KATAKWI", "SUBREGION": "TESO", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "TESO" }, "geometry": { "type": "Point", "coordinates": [ 34.037421622771902, 1.924822342234998 ] } }
+,
+{ "type": "Feature", "id": 20, "properties": { "D_06_ID": 2.1, "DNAME_2006": "KUMI", "AREA": 1074061183.552000045776367, "PERIMETER": 178872.667, "HECTARES": 107406.118, "DNAME_2010": "KUMI", "SUBREGION": "TESO", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "TESO" }, "geometry": { "type": "Point", "coordinates": [ 33.96070008514053, 1.476289353776333 ] } }
+,
+{ "type": "Feature", "id": 21, "properties": { "D_06_ID": 2.1, "DNAME_2006": "MBALE", "AREA": 518603427.406000018119812, "PERIMETER": 132865.014, "HECTARES": 51860.343, "DNAME_2010": "MBALE", "SUBREGION": "ELGON", "UNICEF": "Kampala Office", "Reg_2011": "ELGON" }, "geometry": { "type": "Point", "coordinates": [ 34.197555650293701, 1.021968813230969 ] } }
+,
+{ "type": "Feature", "id": 22, "properties": { "D_06_ID": 2.1, "DNAME_2006": "PALLISA", "AREA": 1095054875.084000110626221, "PERIMETER": 227463.572, "HECTARES": 109505.488, "DNAME_2010": "PALLISA", "SUBREGION": "TESO", "UNICEF": "Kampala Office", "Reg_2011": "BUKEDI" }, "geometry": { "type": "Point", "coordinates": [ 33.741417355255784, 1.22359929535758 ] } }
+,
+{ "type": "Feature", "id": 23, "properties": { "D_06_ID": 2.1, "DNAME_2006": "SOROTI", "AREA": 1410920308.572000026702881, "PERIMETER": 176854.366, "HECTARES": 141092.031, "DNAME_2010": "SOROTI", "SUBREGION": "TESO", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "TESO" }, "geometry": { "type": "Point", "coordinates": [ 33.590274542393644, 1.774399160648791 ] } }
+,
+{ "type": "Feature", "id": 24, "properties": { "D_06_ID": 2.1, "DNAME_2006": "TORORO", "AREA": 1195892101.405999898910522, "PERIMETER": 179040.446, "HECTARES": 119589.21, "DNAME_2010": "TORORO", "SUBREGION": "ELGON", "UNICEF": "Kampala Office", "Reg_2011": "BUKEDI" }, "geometry": { "type": "Point", "coordinates": [ 34.081320777017531, 0.728194492990484 ] } }
+,
+{ "type": "Feature", "id": 25, "properties": { "D_06_ID": 2.1, "DNAME_2006": "KABERAMAIDO", "AREA": 1623260730.437999963760376, "PERIMETER": 202896.02, "HECTARES": 162326.073, "DNAME_2010": "KABERAMAIDO", "SUBREGION": "TESO", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "TESO" }, "geometry": { "type": "Point", "coordinates": [ 33.222061220893288, 1.76092173819019 ] } }
+,
+{ "type": "Feature", "id": 26, "properties": { "D_06_ID": 2.1, "DNAME_2006": "MAYUGE", "AREA": 3425179650.243000030517578, "PERIMETER": 453155.588, "HECTARES": 342517.965, "DNAME_2010": "MAYUGE", "SUBREGION": "EAST CENTRAL", "UNICEF": "Kampala Office", "Reg_2011": "BUSOGA" }, "geometry": { "type": "Point", "coordinates": [ 33.550875518753855, -0.088234084555049 ] } }
+,
+{ "type": "Feature", "id": 27, "properties": { "D_06_ID": 2.2, "DNAME_2006": "AMURIA", "AREA": 2586608233.617000102996826, "PERIMETER": 351543.956, "HECTARES": 258660.823, "DNAME_2010": "AMURIA", "SUBREGION": "TESO", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "TESO" }, "geometry": { "type": "Point", "coordinates": [ 33.686402436103691, 2.106522866324342 ] } }
+,
+{ "type": "Feature", "id": 28, "properties": { "D_06_ID": 2.2, "DNAME_2006": "BUDAKA", "AREA": 410200327.598, "PERIMETER": 103869.095, "HECTARES": 41020.033, "DNAME_2010": "BUDAKA", "SUBREGION": "TESO", "UNICEF": "Kampala Office", "Reg_2011": "BUKEDI" }, "geometry": { "type": "Point", "coordinates": [ 33.987976188600229, 1.062597441662045 ] } }
+,
+{ "type": "Feature", "id": 29, "properties": { "D_06_ID": 2.2, "DNAME_2006": "BUDUDA", "AREA": 250702261.057000011205673, "PERIMETER": 93939.442, "HECTARES": 25070.226, "DNAME_2010": "BUDUDA", "SUBREGION": "ELGON", "UNICEF": "Kampala Office", "Reg_2011": "ELGON" }, "geometry": { "type": "Point", "coordinates": [ 34.395478909731409, 1.048101230353991 ] } }
+,
+{ "type": "Feature", "id": 30, "properties": { "D_06_ID": 2.2, "DNAME_2006": "BUKEDEA", "AREA": 1051292070.718000054359436, "PERIMETER": 165385.284, "HECTARES": 105129.207, "DNAME_2010": "BUKEDEA", "SUBREGION": "TESO", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "TESO" }, "geometry": { "type": "Point", "coordinates": [ 34.123673707642034, 1.36473051792902 ] } }
+,
+{ "type": "Feature", "id": 31, "properties": { "D_06_ID": 2.2, "DNAME_2006": "BUKWO", "AREA": 524967886.306999981403351, "PERIMETER": 118922.425, "HECTARES": 52496.789, "DNAME_2010": "BUKWO", "SUBREGION": "ELGON", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "ELGON" }, "geometry": { "type": "Point", "coordinates": [ 34.682984917552282, 1.274197864752781 ] } }
+,
+{ "type": "Feature", "id": 32, "properties": { "D_06_ID": 2.2, "DNAME_2006": "BUTALEJA", "AREA": 652771283.962000012397766, "PERIMETER": 142218.061, "HECTARES": 65277.128, "DNAME_2010": "BUTALEJA", "SUBREGION": "ELGON", "UNICEF": "Kampala Office", "Reg_2011": "BUKEDI" }, "geometry": { "type": "Point", "coordinates": [ 33.932013620590936, 0.885594630576694 ] } }
+,
+{ "type": "Feature", "id": 33, "properties": { "D_06_ID": 2.2, "DNAME_2006": "KALIRO", "AREA": 868039622.91700005531311, "PERIMETER": 134028.216, "HECTARES": 86803.962, "DNAME_2010": "KALIRO", "SUBREGION": "EAST CENTRAL", "UNICEF": "Kampala Office", "Reg_2011": "BUSOGA" }, "geometry": { "type": "Point", "coordinates": [ 33.482772685590618, 1.070349801525492 ] } }
+,
+{ "type": "Feature", "id": 34, "properties": { "D_06_ID": 2.2, "DNAME_2006": "MANAFWA", "AREA": 601981139.5, "PERIMETER": 128896.859, "HECTARES": 60198.114, "DNAME_2010": "MANAFWA", "SUBREGION": "ELGON", "UNICEF": "Kampala Office", "Reg_2011": "ELGON" }, "geometry": { "type": "Point", "coordinates": [ 34.340795812238525, 0.890730395344365 ] } }
+,
+{ "type": "Feature", "id": 35, "properties": { "D_06_ID": 2.2, "DNAME_2006": "NAMUTUMBA", "AREA": 813754659.494, "PERIMETER": 135475.248, "HECTARES": 81375.466, "DNAME_2010": "NAMUTUMBA", "SUBREGION": "EAST CENTRAL", "UNICEF": "Kampala Office", "Reg_2011": "BUSOGA" }, "geometry": { "type": "Point", "coordinates": [ 33.680919776172694, 0.871433754107291 ] } }
+,
+{ "type": "Feature", "id": 36, "properties": { "D_06_ID": 3.0, "DNAME_2006": "ADJUMANI", "AREA": 3086385321.639999866485596, "PERIMETER": 284377.737, "HECTARES": 308638.532, "DNAME_2010": "ADJUMANI", "SUBREGION": "WEST NILE", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "WEST NILE" }, "geometry": { "type": "Point", "coordinates": [ 31.768708263025182, 3.228323251019821 ] } }
+,
+{ "type": "Feature", "id": 37, "properties": { "D_06_ID": 3.0, "DNAME_2006": "ARUA", "AREA": 3237360947.617000102996826, "PERIMETER": 374309.184, "HECTARES": 323736.095, "DNAME_2010": "ARUA", "SUBREGION": "WEST NILE", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "WEST NILE" }, "geometry": { "type": "Point", "coordinates": [ 31.125812253652146, 2.877134968943826 ] } }
+,
+{ "type": "Feature", "id": 38, "properties": { "D_06_ID": 3.0, "DNAME_2006": "GULU", "AREA": 3449733846.921, "PERIMETER": 350719.97, "HECTARES": 344973.385, "DNAME_2010": "GULU", "SUBREGION": "ACHOLI", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "ACHOLI" }, "geometry": { "type": "Point", "coordinates": [ 32.429742872960915, 2.836377471066367 ] } }
+,
+{ "type": "Feature", "id": 39, "properties": { "D_06_ID": 3.0, "DNAME_2006": "KITGUM", "AREA": 3956973536.921999931335449, "PERIMETER": 404878.925, "HECTARES": 395697.354, "DNAME_2010": "KITGUM", "SUBREGION": "ACHOLI", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "ACHOLI" }, "geometry": { "type": "Point", "coordinates": [ 33.272423054392597, 3.406850865099583 ] } }
+,
+{ "type": "Feature", "id": 40, "properties": { "D_06_ID": 3.1, "DNAME_2006": "KOTIDO", "AREA": 3700541786.25, "PERIMETER": 349060.701, "HECTARES": 370054.179, "DNAME_2010": "KOTIDO", "SUBREGION": "KARAMOJA", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "KARAMOJA" }, "geometry": { "type": "Point", "coordinates": [ 33.981163371249167, 3.034523578371521 ] } }
+,
+{ "type": "Feature", "id": 41, "properties": { "D_06_ID": 3.1, "DNAME_2006": "MOYO", "AREA": 1856319797.608999967575073, "PERIMETER": 234448.895, "HECTARES": 185631.98, "DNAME_2010": "MOYO", "SUBREGION": "WEST NILE", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "WEST NILE" }, "geometry": { "type": "Point", "coordinates": [ 31.671262151677432, 3.530237787240284 ] } }
+,
+{ "type": "Feature", "id": 42, "properties": { "D_06_ID": 3.1, "DNAME_2006": "NEBBI", "AREA": 1999799363.466000080108643, "PERIMETER": 259428.732, "HECTARES": 199979.936, "DNAME_2010": "NEBBI", "SUBREGION": "WEST NILE", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "WEST NILE" }, "geometry": { "type": "Point", "coordinates": [ 31.275549183066381, 2.461633091916551 ] } }
+,
+{ "type": "Feature", "id": 43, "properties": { "D_06_ID": 3.1, "DNAME_2006": "NAKAPIRIPIRIT", "AREA": 4201466275.303999900817871, "PERIMETER": 346423.584, "HECTARES": 420146.628, "DNAME_2010": "NAKAPIRIPIRIT", "SUBREGION": "KARAMOJA", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "KARAMOJA" }, "geometry": { "type": "Point", "coordinates": [ 34.563194045867995, 1.888381898571633 ] } }
+,
+{ "type": "Feature", "id": 44, "properties": { "D_06_ID": 3.1, "DNAME_2006": "AGAGO", "AREA": 3494150948.296999931335449, "PERIMETER": 346270.175, "HECTARES": 349415.095, "DNAME_2010": "AGAGO", "SUBREGION": "ACHOLI", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "ACHOLI" }, "geometry": { "type": "Point", "coordinates": [ 33.346196060565426, 2.911977988798167 ] } }
+,
+{ "type": "Feature", "id": 45, "properties": { "D_06_ID": 3.1, "DNAME_2006": "YUMBE", "AREA": 2321492458.901999950408936, "PERIMETER": 243538.845, "HECTARES": 232149.246, "DNAME_2010": "YUMBE", "SUBREGION": "WEST NILE", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "WEST NILE" }, "geometry": { "type": "Point", "coordinates": [ 31.287667017550021, 3.523465264865651 ] } }
+,
+{ "type": "Feature", "id": 46, "properties": { "D_06_ID": 3.1, "DNAME_2006": "ABIM", "AREA": 2351845429.35099983215332, "PERIMETER": 264548.059, "HECTARES": 235184.543, "DNAME_2010": "ABIM", "SUBREGION": "KARAMOJA", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "KARAMOJA" }, "geometry": { "type": "Point", "coordinates": [ 33.729964801030178, 2.750350620167799 ] } }
+,
+{ "type": "Feature", "id": 47, "properties": { "D_06_ID": 3.2, "DNAME_2006": "AMURU", "AREA": 3624269881.749000072479248, "PERIMETER": 495600.308, "HECTARES": 362426.988, "DNAME_2010": "AMURU", "SUBREGION": "ACHOLI", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "ACHOLI" }, "geometry": { "type": "Point", "coordinates": [ 31.972343203778191, 3.052712635212997 ] } }
+,
+{ "type": "Feature", "id": 48, "properties": { "D_06_ID": 3.2, "DNAME_2006": "DOKOLO", "AREA": 1071924986.667999982833862, "PERIMETER": 179216.438, "HECTARES": 107192.499, "DNAME_2010": "DOKOLO", "SUBREGION": "LANGO", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "LANGO" }, "geometry": { "type": "Point", "coordinates": [ 33.077636570767837, 1.939511379933069 ] } }
+,
+{ "type": "Feature", "id": 49, "properties": { "D_06_ID": 3.2, "DNAME_2006": "KAABONG", "AREA": 7220019038.593000411987305, "PERIMETER": 461740.223, "HECTARES": 722001.904, "DNAME_2010": "KAABONG", "SUBREGION": "KARAMOJA", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "KARAMOJA" }, "geometry": { "type": "Point", "coordinates": [ 34.030511916998847, 3.612258392616842 ] } }
+,
+{ "type": "Feature", "id": 50, "properties": { "D_06_ID": 3.2, "DNAME_2006": "KOBOKO", "AREA": 760004987.965000033378601, "PERIMETER": 155879.689, "HECTARES": 76000.499, "DNAME_2010": "KOBOKO", "SUBREGION": "WEST NILE", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "WEST NILE" }, "geometry": { "type": "Point", "coordinates": [ 31.007047041802291, 3.528921187947935 ] } }
+,
+{ "type": "Feature", "id": 51, "properties": { "D_06_ID": 3.2, "DNAME_2006": "MARACHA (NYADRI)", "AREA": 1572737846.279999971389771, "PERIMETER": 237550.355, "HECTARES": 157273.785, "DNAME_2010": "MARACHA", "SUBREGION": "WEST NILE", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "WEST NILE" }, "geometry": { "type": "Point", "coordinates": [ 31.098397999368082, 3.195680096313339 ] } }
+,
+{ "type": "Feature", "id": 52, "properties": { "D_06_ID": 3.2, "DNAME_2006": "OYAM", "AREA": 2189279192.173999786376953, "PERIMETER": 238721.515, "HECTARES": 218927.919, "DNAME_2010": "OYAM", "SUBREGION": "LANGO", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "LANGO" }, "geometry": { "type": "Point", "coordinates": [ 32.486580486453157, 2.370687097523904 ] } }
+,
+{ "type": "Feature", "id": 53, "properties": { "D_06_ID": 4.0, "DNAME_2006": "BUNDIBUGYO", "AREA": 849748623.445000052452087, "PERIMETER": 184426.644, "HECTARES": 84974.862, "DNAME_2010": "BUNDIBUGYO", "SUBREGION": "WESTERN", "UNICEF": "Western Zone", "Reg_2011": "TORO" }, "geometry": { "type": "Point", "coordinates": [ 30.055372354694168, 0.698083448029197 ] } }
+,
+{ "type": "Feature", "id": 54, "properties": { "D_06_ID": 4.0, "DNAME_2006": "HOIMA", "AREA": 5640260888.652000427246094, "PERIMETER": 363440.628, "HECTARES": 564026.089, "DNAME_2010": "HOIMA", "SUBREGION": "WESTERN", "UNICEF": "Western Zone", "Reg_2011": "BUNYORO" }, "geometry": { "type": "Point", "coordinates": [ 31.073214434580098, 1.439493657346543 ] } }
+,
+{ "type": "Feature", "id": 55, "properties": { "D_06_ID": 4.0, "DNAME_2006": "KABALE", "AREA": 1731484592.834000110626221, "PERIMETER": 254034.11, "HECTARES": 173148.459, "DNAME_2010": "KABALE", "SUBREGION": "SOUTH WESTERN", "UNICEF": "Kampala Office", "Reg_2011": "KIGEZI" }, "geometry": { "type": "Point", "coordinates": [ 29.975702963101522, -1.220246033079001 ] } }
+,
+{ "type": "Feature", "id": 56, "properties": { "D_06_ID": 4.1, "DNAME_2006": "KABAROLE", "AREA": 1815475587.877000093460083, "PERIMETER": 308495.949, "HECTARES": 181547.559, "DNAME_2010": "KABAROLE", "SUBREGION": "WESTERN", "UNICEF": "Western Zone", "Reg_2011": "TORO" }, "geometry": { "type": "Point", "coordinates": [ 30.289209352558032, 0.600069986322621 ] } }
+,
+{ "type": "Feature", "id": 57, "properties": { "D_06_ID": 4.1, "DNAME_2006": "KASESE", "AREA": 3386142135.73199987411499, "PERIMETER": 284479.227, "HECTARES": 338614.214, "DNAME_2010": "KASESE", "SUBREGION": "WESTERN", "UNICEF": "Western Zone", "Reg_2011": "TORO" }, "geometry": { "type": "Point", "coordinates": [ 30.00100882761356, 0.120671551106364 ] } }
+,
+{ "type": "Feature", "id": 58, "properties": { "D_06_ID": 4.1, "DNAME_2006": "KIBAALE", "AREA": 4386016361.593999862670898, "PERIMETER": 368420.855, "HECTARES": 438601.636, "DNAME_2010": "KIBAALE", "SUBREGION": "WESTERN", "UNICEF": "Western Zone", "Reg_2011": "BUNYORO" }, "geometry": { "type": "Point", "coordinates": [ 31.063789059857847, 0.949856676644166 ] } }
+,
+{ "type": "Feature", "id": 59, "properties": { "D_06_ID": 4.1, "DNAME_2006": "KISORO", "AREA": 729516604.901999950408936, "PERIMETER": 154269.977, "HECTARES": 72951.66, "DNAME_2010": "KISORO", "SUBREGION": "SOUTH WESTERN", "UNICEF": "Western Zone", "Reg_2011": "KIGEZI" }, "geometry": { "type": "Point", "coordinates": [ 29.681076369613862, -1.215189510261522 ] } }
+,
+{ "type": "Feature", "id": 60, "properties": { "D_06_ID": 4.1, "DNAME_2006": "MBARARA", "AREA": 1780207329.221999883651733, "PERIMETER": 251837.146, "HECTARES": 178020.733, "DNAME_2010": "MBARARA", "SUBREGION": "SOUTH WESTERN", "UNICEF": "Kampala Office", "Reg_2011": "ANKOLE" }, "geometry": { "type": "Point", "coordinates": [ 30.568669244387856, -0.566361063795694 ] } }
+,
+{ "type": "Feature", "id": 61, "properties": { "D_06_ID": 4.1, "DNAME_2006": "NTUNGAMO", "AREA": 2051020286.25600004196167, "PERIMETER": 258630.427, "HECTARES": 205102.029, "DNAME_2010": "NTUNGAMO", "SUBREGION": "SOUTH WESTERN", "UNICEF": "Kampala Office", "Reg_2011": "ANKOLE" }, "geometry": { "type": "Point", "coordinates": [ 30.275536985427951, -0.938371299652386 ] } }
+,
+{ "type": "Feature", "id": 62, "properties": { "D_06_ID": 4.1, "DNAME_2006": "RUKUNGIRI", "AREA": 1526991849.075999975204468, "PERIMETER": 295301.141, "HECTARES": 152699.185, "DNAME_2010": "RUKUNGIRI", "SUBREGION": "SOUTH WESTERN", "UNICEF": "Western Zone", "Reg_2011": "KIGEZI" }, "geometry": { "type": "Point", "coordinates": [ 29.888656844289134, -0.702944322556596 ] } }
+,
+{ "type": "Feature", "id": 63, "properties": { "D_06_ID": 4.1, "DNAME_2006": "KAMWENGE", "AREA": 2411073020.028999805450439, "PERIMETER": 352657.052, "HECTARES": 241107.302, "DNAME_2010": "KAMWENGE", "SUBREGION": "WESTERN", "UNICEF": "Western Zone", "Reg_2011": "TORO" }, "geometry": { "type": "Point", "coordinates": [ 30.49311960147292, 0.228334792736921 ] } }
+,
+{ "type": "Feature", "id": 64, "properties": { "D_06_ID": 4.1, "DNAME_2006": "KANUNGU", "AREA": 1329213320.802999973297119, "PERIMETER": 308673.988, "HECTARES": 132921.332, "DNAME_2010": "KANUNGU", "SUBREGION": "SOUTH WESTERN", "UNICEF": "Western Zone", "Reg_2011": "KIGEZI" }, "geometry": { "type": "Point", "coordinates": [ 29.726092443988399, -0.807880954322355 ] } }
+,
+{ "type": "Feature", "id": 65, "properties": { "D_06_ID": 4.2, "DNAME_2006": "KYENJOJO", "AREA": 1747713483.329999923706055, "PERIMETER": 231519.936, "HECTARES": 174771.348, "DNAME_2010": "KYEGEGWA", "SUBREGION": "WESTERN", "UNICEF": "Western Zone", "Reg_2011": "TORO" }, "geometry": { "type": "Point", "coordinates": [ 31.001324715597889, 0.453531198117321 ] } }
+,
+{ "type": "Feature", "id": 66, "properties": { "D_06_ID": 4.2, "DNAME_2006": "IBANDA", "AREA": 965869540.871999979019165, "PERIMETER": 232423.93, "HECTARES": 96586.954, "DNAME_2010": "IBANDA", "SUBREGION": "SOUTH WESTERN", "UNICEF": "Western Zone", "Reg_2011": "ANKOLE" }, "geometry": { "type": "Point", "coordinates": [ 30.488866715768875, -0.076297563956193 ] } }
+,
+{ "type": "Feature", "id": 67, "properties": { "D_06_ID": 4.2, "DNAME_2006": "ISINGIRO", "AREA": 2657211493.517000198364258, "PERIMETER": 284901.477, "HECTARES": 265721.149, "DNAME_2010": "ISINGIRO", "SUBREGION": "SOUTH WESTERN", "UNICEF": "Kampala Office", "Reg_2011": "ANKOLE" }, "geometry": { "type": "Point", "coordinates": [ 30.876423131076159, -0.85017694108235 ] } }
+,
+{ "type": "Feature", "id": 68, "properties": { "D_06_ID": 4.2, "DNAME_2006": "KIRUHURA", "AREA": 4607747861.684000015258789, "PERIMETER": 362498.472, "HECTARES": 460774.786, "DNAME_2010": "KIRUHURA", "SUBREGION": "SOUTH WESTERN", "UNICEF": "Kampala Office", "Reg_2011": "ANKOLE" }, "geometry": { "type": "Point", "coordinates": [ 30.872544681285845, -0.214835657602674 ] } }
+,
+{ "type": "Feature", "id": 69, "properties": { "D_06_ID": 3.1, "DNAME_2006": "AMUDAT", "AREA": 1615882790.989000082015991, "PERIMETER": 299787.411, "HECTARES": 161588.279, "DNAME_2010": "AMUDAT", "SUBREGION": "KARAMOJA", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "KARAMOJA" }, "geometry": { "type": "Point", "coordinates": [ 34.875923961791536, 1.805471565035394 ] } }
+,
+{ "type": "Feature", "id": 70, "properties": { "D_06_ID": 3.0, "DNAME_2006": "LAMWO", "AREA": 5591594883.442999839782715, "PERIMETER": 402706.93, "HECTARES": 559159.488, "DNAME_2010": "LAMWO", "SUBREGION": "ACHOLI", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "ACHOLI" }, "geometry": { "type": "Point", "coordinates": [ 32.728027459762643, 3.547404095210709 ] } }
+,
+{ "type": "Feature", "id": 71, "properties": { "D_06_ID": 3.2, "DNAME_2006": "NWOYA", "AREA": 4771480690.744000434875488, "PERIMETER": 443319.508, "HECTARES": 477148.069, "DNAME_2010": "NWOYA", "SUBREGION": "ACHOLI", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "ACHOLI" }, "geometry": { "type": "Point", "coordinates": [ 31.840941276175947, 2.530191285775635 ] } }
+,
+{ "type": "Feature", "id": 72, "properties": { "D_06_ID": 3.1, "DNAME_2006": "MOROTO", "AREA": 3537705742.52299976348877, "PERIMETER": 332842.948, "HECTARES": 353770.574, "DNAME_2010": "MOROTO", "SUBREGION": "KARAMOJA", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "KARAMOJA" }, "geometry": { "type": "Point", "coordinates": [ 34.63095794114205, 2.651701143747265 ] } }
+,
+{ "type": "Feature", "id": 73, "properties": { "D_06_ID": 3.1, "DNAME_2006": "PADER", "AREA": 3359831729.276999950408936, "PERIMETER": 380948.625, "HECTARES": 335983.173, "DNAME_2010": "PADER", "SUBREGION": "ACHOLI", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "ACHOLI" }, "geometry": { "type": "Point", "coordinates": [ 32.871713860098509, 2.935376506958369 ] } }
+,
+{ "type": "Feature", "id": 74, "properties": { "D_06_ID": 4.0, "DNAME_2006": "BUSHENYI", "AREA": 943882940.056, "PERIMETER": 171744.194, "HECTARES": 94388.294, "DNAME_2010": "BUSHENYI", "SUBREGION": "SOUTH WESTERN", "UNICEF": "Western Zone", "Reg_2011": "ANKOLE" }, "geometry": { "type": "Point", "coordinates": [ 30.132183412948716, -0.47716327241021 ] } }
+,
+{ "type": "Feature", "id": 75, "properties": { "D_06_ID": 4.0, "DNAME_2006": "BUSHENYI", "AREA": 802625598.220000028610229, "PERIMETER": 172232.511, "HECTARES": 80262.56, "DNAME_2010": "BUHWEJU", "SUBREGION": "SOUTH WESTERN", "UNICEF": "Western Zone", "Reg_2011": "ANKOLE" }, "geometry": { "type": "Point", "coordinates": [ 30.326089907016392, -0.327147923092697 ] } }
+,
+{ "type": "Feature", "id": 76, "properties": { "D_06_ID": 4.0, "DNAME_2006": "BUSHENYI", "AREA": 1327366582.04200005531311, "PERIMETER": 228567.416, "HECTARES": 132736.658, "DNAME_2010": "RUBIRIZI", "SUBREGION": "SOUTH WESTERN", "UNICEF": "Western Zone", "Reg_2011": "ANKOLE" }, "geometry": { "type": "Point", "coordinates": [ 29.984997394147094, -0.24671820868443 ] } }
+,
+{ "type": "Feature", "id": 77, "properties": { "D_06_ID": 4.0, "DNAME_2006": "BUSHENYI", "AREA": 543877762.741000056266785, "PERIMETER": 145147.079, "HECTARES": 54387.776, "DNAME_2010": "MITOOMA", "SUBREGION": "SOUTH WESTERN", "UNICEF": "Western Zone", "Reg_2011": "ANKOLE" }, "geometry": { "type": "Point", "coordinates": [ 30.021971952529938, -0.621575193791339 ] } }
+,
+{ "type": "Feature", "id": 78, "properties": { "D_06_ID": 4.0, "DNAME_2006": "BUSHENYI", "AREA": 700101079.551, "PERIMETER": 150452.807, "HECTARES": 70010.108, "DNAME_2010": "SHEEMA", "SUBREGION": "SOUTH WESTERN", "UNICEF": "Western Zone", "Reg_2011": "ANKOLE" }, "geometry": { "type": "Point", "coordinates": [ 30.325905855723537, -0.600905649752417 ] } }
+,
+{ "type": "Feature", "id": 79, "properties": { "D_06_ID": 1.0, "DNAME_2006": "MASAKA", "AREA": 835969927.623999953269958, "PERIMETER": 140061.606, "HECTARES": 83596.993, "DNAME_2010": "KALUNGU", "SUBREGION": "CENTRAL 1", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 31.801931467654029, -0.099208813407652 ] } }
+,
+{ "type": "Feature", "id": 80, "properties": { "D_06_ID": 2.0, "DNAME_2006": "IGANGA", "AREA": 649584032.077000021934509, "PERIMETER": 162331.263, "HECTARES": 64958.403, "DNAME_2010": "LUUKA", "SUBREGION": "EAST CENTRAL", "UNICEF": "Kampala Office", "Reg_2011": "BUSOGA" }, "geometry": { "type": "Point", "coordinates": [ 33.337805679373069, 0.806983451932756 ] } }
+,
+{ "type": "Feature", "id": 81, "properties": { "D_06_ID": 1.0, "DNAME_2006": "MASAKA", "AREA": 600086275.695999979972839, "PERIMETER": 108583.79, "HECTARES": 60008.628, "DNAME_2010": "BUKOMANSIMBI", "SUBREGION": "CENTRAL 1", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 31.627559134329207, -0.127089446195638 ] } }
+,
+{ "type": "Feature", "id": 82, "properties": { "D_06_ID": 1.1, "DNAME_2006": "MUKONO", "AREA": 1449173292.309999942779541, "PERIMETER": 189144.45, "HECTARES": 144917.329, "DNAME_2010": "BUIKWE", "SUBREGION": "CENTRAL 2", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 33.039853671771681, 0.308382237967301 ] } }
+,
+{ "type": "Feature", "id": 83, "properties": { "D_06_ID": 4.2, "DNAME_2006": "KYENJOJO", "AREA": 2352189038.048999786376953, "PERIMETER": 270025.034, "HECTARES": 235218.904, "DNAME_2010": "KYENJOJO", "SUBREGION": "WESTERN", "UNICEF": "Western Zone", "Reg_2011": "TORO" }, "geometry": { "type": "Point", "coordinates": [ 30.662056999787193, 0.659316587560837 ] } }
+,
+{ "type": "Feature", "id": 84, "properties": { "D_06_ID": 3.1, "DNAME_2006": "NAPAK", "AREA": 4976741761.892000198364258, "PERIMETER": 393907.25, "HECTARES": 497674.176, "DNAME_2010": "NAPAK", "SUBREGION": "KARAMOJA", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "KARAMOJA" }, "geometry": { "type": "Point", "coordinates": [ 34.221398478589506, 2.399516956029062 ] } }
+,
+{ "type": "Feature", "id": 85, "properties": { "D_06_ID": 3.1, "DNAME_2006": "LIRA", "AREA": 1526350409.844000101089478, "PERIMETER": 320596.353, "HECTARES": 152635.041, "DNAME_2010": "ALEBTONG", "SUBREGION": "LANGO", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "LANGO" }, "geometry": { "type": "Point", "coordinates": [ 33.256301662499844, 2.269833493558355 ] } }
+,
+{ "type": "Feature", "id": 86, "properties": { "D_06_ID": 3.1, "DNAME_2006": "LIRA", "AREA": 1327880937.177999973297119, "PERIMETER": 286529.545, "HECTARES": 132788.094, "DNAME_2010": "LIRA", "SUBREGION": "LANGO", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "LANGO" }, "geometry": { "type": "Point", "coordinates": [ 32.967696984784808, 2.302483795978446 ] } }
+,
+{ "type": "Feature", "id": 87, "properties": { "D_06_ID": 3.0, "DNAME_2006": "APAC", "AREA": 1072950829.330000042915344, "PERIMETER": 202993.859, "HECTARES": 107295.083, "DNAME_2010": "KOLE", "SUBREGION": "LANGO", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "LANGO" }, "geometry": { "type": "Point", "coordinates": [ 32.766728282094526, 2.295911798613446 ] } }
+,
+{ "type": "Feature", "id": 88, "properties": { "D_06_ID": 3.1, "DNAME_2006": "NEBBI", "AREA": 898062507.554999947547913, "PERIMETER": 168183.905, "HECTARES": 89806.251, "DNAME_2010": "ZOMBO", "SUBREGION": "WEST NILE", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "WEST NILE" }, "geometry": { "type": "Point", "coordinates": [ 30.895569826749487, 2.521703302113539 ] } }
+,
+{ "type": "Feature", "id": 89, "properties": { "D_06_ID": 2.1, "DNAME_2006": "PALLISA", "AREA": 489900073.416, "PERIMETER": 113637.724, "HECTARES": 48990.007, "DNAME_2010": "KIBUKU", "SUBREGION": "TESO", "UNICEF": "Kampala Office", "Reg_2011": "BUKEDI" }, "geometry": { "type": "Point", "coordinates": [ 33.800570688873066, 1.05653341384947 ] } }
+,
+{ "type": "Feature", "id": 90, "properties": { "D_06_ID": 1.0, "DNAME_2006": "KIBOGA", "AREA": 2454741888.059000015258789, "PERIMETER": 253817.669, "HECTARES": 245474.189, "DNAME_2010": "KYANKWANZI", "SUBREGION": "CENTRAL 2", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 31.640153584664329, 1.124421885854415 ] } }
+,
+{ "type": "Feature", "id": 91, "properties": { "D_06_ID": 1.1, "DNAME_2006": "MPIGI", "AREA": 405382007.744000017642975, "PERIMETER": 175431.832, "HECTARES": 40538.201, "DNAME_2010": "BUTAMBALA", "SUBREGION": "CENTRAL 1", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 32.073977043132587, 0.156418394448441 ] } }
+,
+{ "type": "Feature", "id": 92, "properties": { "D_06_ID": 2.1, "DNAME_2006": "SOROTI", "AREA": 1963980399.079999923706055, "PERIMETER": 200285.722, "HECTARES": 196398.04, "DNAME_2010": "SERERE", "SUBREGION": "TESO", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "TESO" }, "geometry": { "type": "Point", "coordinates": [ 33.372045432853454, 1.491061643791248 ] } }
+,
+{ "type": "Feature", "id": 93, "properties": { "D_06_ID": 2.1, "DNAME_2006": "KUMI", "AREA": 720960501.306, "PERIMETER": 138963.943, "HECTARES": 72096.05, "DNAME_2010": "NGORA", "SUBREGION": "TESO", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "TESO" }, "geometry": { "type": "Point", "coordinates": [ 33.75368813002202, 1.499058254184024 ] } }
+,
+{ "type": "Feature", "id": 94, "properties": { "D_06_ID": 2.0, "DNAME_2006": "KAMULI", "AREA": 1555762364.88700008392334, "PERIMETER": 199537.069, "HECTARES": 155576.236, "DNAME_2010": "KAMULI", "SUBREGION": "EAST CENTRAL", "UNICEF": "Kampala Office", "Reg_2011": "BUSOGA" }, "geometry": { "type": "Point", "coordinates": [ 33.103192041131592, 0.942807677390983 ] } }
+,
+{ "type": "Feature", "id": 95, "properties": { "D_06_ID": 2.0, "DNAME_2006": "KAMULI", "AREA": 1879246685.671, "PERIMETER": 219004.607, "HECTARES": 187924.669, "DNAME_2010": "BUYENDE", "SUBREGION": "EAST CENTRAL", "UNICEF": "Kampala Office", "Reg_2011": "BUSOGA" }, "geometry": { "type": "Point", "coordinates": [ 33.140919585325719, 1.264300444293338 ] } }
+,
+{ "type": "Feature", "id": 96, "properties": { "D_06_ID": 2.2, "DNAME_2006": "SIRONKO", "AREA": 651654217.29200005531311, "PERIMETER": 211211.774, "HECTARES": 65165.422, "DNAME_2010": "BULAMBULI", "SUBREGION": "ELGON", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "ELGON" }, "geometry": { "type": "Point", "coordinates": [ 34.352491056759973, 1.380593410466665 ] } }
+,
+{ "type": "Feature", "id": 97, "properties": { "D_06_ID": 2.1, "DNAME_2006": "KAPCHORWA", "AREA": 851372518.023, "PERIMETER": 218459.388, "HECTARES": 85137.252, "DNAME_2010": "KWEEN", "SUBREGION": "ELGON", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "ELGON" }, "geometry": { "type": "Point", "coordinates": [ 34.573295540530779, 1.432641754614992 ] } }
+,
+{ "type": "Feature", "id": 98, "properties": { "D_06_ID": 4.0, "DNAME_2006": "BUNDIBUGYO", "AREA": 1403043067.403000116348267, "PERIMETER": 238477.841, "HECTARES": 140304.307, "DNAME_2010": "NTOROKO", "SUBREGION": "WESTERN", "UNICEF": "Western Zone", "Reg_2011": "TORO" }, "geometry": { "type": "Point", "coordinates": [ 30.362550786330662, 1.013569956184363 ] } }
+,
+{ "type": "Feature", "id": 99, "properties": { "D_06_ID": 2.0, "DNAME_2006": "BUGIRI", "AREA": 4668608090.432000160217285, "PERIMETER": 396922.751, "HECTARES": 466860.809, "DNAME_2010": "NAMAYINGO", "SUBREGION": "EAST CENTRAL", "UNICEF": "Kampala Office", "Reg_2011": "BUSOGA" }, "geometry": { "type": "Point", "coordinates": [ 33.803881037967884, -0.314105700714509 ] } }
+,
+{ "type": "Feature", "id": 100, "properties": { "D_06_ID": 1.1, "DNAME_2006": "MUKONO", "AREA": 9513290392.267999649047852, "PERIMETER": 416776.651, "HECTARES": 951329.039, "DNAME_2010": "BUVUMA", "SUBREGION": "CENTRAL 2", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 33.207625933957502, -0.39260293239551 ] } }
+,
+{ "type": "Feature", "id": 101, "properties": { "D_06_ID": 1.0, "DNAME_2006": "MASAKA", "AREA": 914710244.202000021934509, "PERIMETER": 145979.004, "HECTARES": 91471.024, "DNAME_2010": "LWENGO", "SUBREGION": "CENTRAL 1", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 31.398641569019233, -0.419462048556045 ] } }
+,
+{ "type": "Feature", "id": 102, "properties": { "D_06_ID": 1.1, "DNAME_2006": "MPIGI", "AREA": 1524261153.223000049591064, "PERIMETER": 245084.78, "HECTARES": 152426.115, "DNAME_2010": "MPIGI", "SUBREGION": "CENTRAL 1", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 32.158236678413438, 0.069775585290519 ] } }
+,
+{ "type": "Feature", "id": 103, "properties": { "D_06_ID": 1.1, "DNAME_2006": "MPIGI", "AREA": 1678869277.354000091552734, "PERIMETER": 262267.45, "HECTARES": 167886.928, "DNAME_2010": "GOMBA", "SUBREGION": "CENTRAL 1", "UNICEF": "Kampala Office", "Reg_2011": "BUGANDA" }, "geometry": { "type": "Point", "coordinates": [ 31.702013727469932, 0.198879252548143 ] } }
+,
+{ "type": "Feature", "id": 104, "properties": { "D_06_ID": 3.1, "DNAME_2006": "LIRA", "AREA": 1548614635.000999927520752, "PERIMETER": 286861.0, "HECTARES": 154861.464, "DNAME_2010": "OTUKE", "SUBREGION": "LANGO", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "LANGO" }, "geometry": { "type": "Point", "coordinates": [ 33.36218052419602, 2.480814535873433 ] } }
+,
+{ "type": "Feature", "id": 105, "properties": { "D_06_ID": 3.2, "DNAME_2006": "AMOLATAR", "AREA": 1756650015.056999921798706, "PERIMETER": 214234.918, "HECTARES": 175665.002, "DNAME_2010": "AMOLATAR", "SUBREGION": "LANGO", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "LANGO" }, "geometry": { "type": "Point", "coordinates": [ 32.738272559632279, 1.62201343091472 ] } }
+,
+{ "type": "Feature", "id": 106, "properties": { "D_06_ID": 3.0, "DNAME_2006": "APAC", "AREA": 3253514630.986000061035156, "PERIMETER": 322016.107, "HECTARES": 325351.463, "DNAME_2010": "APAC", "SUBREGION": "LANGO", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "LANGO" }, "geometry": { "type": "Point", "coordinates": [ 32.564919939872993, 1.891699913048456 ] } }
+,
+{ "type": "Feature", "id": 107, "properties": { "D_06_ID": 4.2, "DNAME_2006": "BULIISA", "AREA": 3370479813.296, "PERIMETER": 321003.627, "HECTARES": 337047.981, "DNAME_2010": "BULIISA", "SUBREGION": "WESTERN", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "BUNYORO" }, "geometry": { "type": "Point", "coordinates": [ 31.390892249858464, 1.962604195183965 ] } }
+,
+{ "type": "Feature", "id": 108, "properties": { "D_06_ID": 4.1, "DNAME_2006": "MASINDI", "AREA": 2583709488.479000091552734, "PERIMETER": 309197.969, "HECTARES": 258370.949, "DNAME_2010": "MASINDI", "SUBREGION": "WESTERN", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "BUNYORO" }, "geometry": { "type": "Point", "coordinates": [ 31.711825114033033, 1.746662045437418 ] } }
+,
+{ "type": "Feature", "id": 109, "properties": { "D_06_ID": 4.1, "DNAME_2006": "MASINDI", "AREA": 3622057395.840000152587891, "PERIMETER": 288018.614, "HECTARES": 362205.74, "DNAME_2010": "KIRYANDONGO", "SUBREGION": "WESTERN", "UNICEF": "West Nile\/Northern Region", "Reg_2011": "BUNYORO" }, "geometry": { "type": "Point", "coordinates": [ 32.04084109373116, 2.025625122223031 ] } }
+,
+{ "type": "Feature", "id": 110, "properties": { "D_06_ID": 2.2, "DNAME_2006": "SIRONKO", "AREA": 445941986.037999987602234, "PERIMETER": 129225.605, "HECTARES": 44594.199, "DNAME_2010": "SIRONKO", "SUBREGION": "ELGON", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "ELGON" }, "geometry": { "type": "Point", "coordinates": [ 34.331755388272981, 1.172643136458309 ] } }
+,
+{ "type": "Feature", "id": 111, "properties": { "D_06_ID": 2.1, "DNAME_2006": "KAPCHORWA", "AREA": 354565528.802999973297119, "PERIMETER": 111336.748, "HECTARES": 35456.553, "DNAME_2010": "KAPCHORWA", "SUBREGION": "ELGON", "UNICEF": "NORTH-EAST\/EASTERN ZONE", "Reg_2011": "ELGON" }, "geometry": { "type": "Point", "coordinates": [ 34.422725379808362, 1.351432848156479 ] } }
+
+]
+}
