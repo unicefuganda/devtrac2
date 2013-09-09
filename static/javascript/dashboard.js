@@ -5,7 +5,7 @@ function loadLeafletMap(lng, lat, zoom) {
 }
 
 $(function(){
-  map = L.map('view-map');
+  map = L.map('map');
   var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
   var osmAttrib='Map data © OpenStreetMap contributors';
   var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 15, attribution: osmAttrib});   
@@ -18,9 +18,10 @@ $(function(){
   });
 
   map.addLayer(osm);
-  map.addLayer(uganda_districts);
+  
 
   var simplified_layers = ["01", "005", "001", "0005", "0002", "0001" ]
+  var selected_layer = "001";
 
   var layers = L.control.layers({tiles: uganda_districts})
   layers.addTo(map);
@@ -28,21 +29,23 @@ $(function(){
   $.each(simplified_layers, function(index, tolerence) {
     
     $.getJSON("/static/javascript/geojson/uganda_districts_2011_" + tolerence + ".json", function(geojsonFeature, textStatus, jqXHR) {
-      var geoJson = L.geoJson(geojsonFeature, { style: {
+      var geoJsonLayer = L.geoJson(geojsonFeature, { style: {
         "color": "#ff0000",
         "weight": 1,
         "opacity": 0.65
       }});
 
-      layers.addBaseLayer(geoJson, tolerence);
+      layers.addBaseLayer(geoJsonLayer, tolerence);
 
-      // L.control.layers({simplified: geoJson, tiles: uganda_districts}).addTo(map);
+      if (selected_layer == tolerence) {
+        map.addLayer(geoJsonLayer);
+      }
+
       
     });  
+
+
   });
-
-  
-
 });
 
 var dashboard = angular.module('dashboard', []).
@@ -59,7 +62,9 @@ var dashboard = angular.module('dashboard', []).
 
 var myApp = dashboard.service('districtService', function($http, $filter) {
   var self = this;
+  console.log("create service");
   this.all = function(result) {
+    console.log("find all");
     if (self.districts) {
       result(self.districts);
       return;
@@ -82,6 +87,7 @@ var myApp = dashboard.service('districtService', function($http, $filter) {
 
 function ListCtrl($scope, $http, districtService) {
   districtService.all(function(districts){
+    console.log("loaded maps");
     $scope.districts = districts;
     loadLeafletMap(31.8833, 1.0667, 7)
   });
@@ -94,6 +100,4 @@ function ShowCtrl($scope, $http, $filter, $routeParams, districtService) {
     $scope.district = district;
     loadLeafletMap(district.centroid.coordinates[0], district.centroid.coordinates[1], 10)
   });
-
-
 }

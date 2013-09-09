@@ -31,11 +31,6 @@ footer label {
 }
 
 #map { 
-  width: 600px;
-  height: 600px;
-}
-
-#view-map { 
   position: absolute;
   top: 0px;
   width: 100%;
@@ -44,33 +39,32 @@ footer label {
   z-index: 0;
 }
 
-#view-container {
+#location {
+  position: absolute; 
+  top: 10px;
+  left: 50px;
+  z-index: 1;
+  background-color: white;
+  padding: 5px 10px;
+  /*width: 400px;*/
+}
+
+#location h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+}
+
+#districts {
   position: absolute; 
   height: 400px; 
   width: 400px;
   top: 80px;
   left: 10px;
   overflow: hidden;
-}
-
-#view-background {
   background: white;
-/*  opacity: 0.9; */
   position: absolute;
-  top: 0; left: 0;
-  height: 100%; width:100%;
-}
-
-#ngview { 
-  top: 0px;
-  left: 0px;
-  position: absolute; 
-  overflow: scroll; 
   z-index: 1;
-  border: 1px solid #CCC;
-  padding: 6px;
-  width:100%;
-  height:100%;
+
 }
 
-#ngview { position: absolute; float: left; height: 800px; overflow: scroll; margin: 20px 0px; z-index: 1; }
