@@ -39,6 +39,18 @@ footer label {
   z-index: 0;
 }
 
+#devtrac-map {
+  z-index: 0;
+
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  left: 0px; 
+  height: 100%; 
+  z-index: 0;
+
+}
+
 #location {
   position: absolute; 
   top: 10px;

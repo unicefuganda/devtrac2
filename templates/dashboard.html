@@ -8,11 +8,15 @@
     <link href="/static/css/lib/leaflet.css" rel="stylesheet" media="screen">
     <link href="/static/css/application.css" rel="stylesheet" media="screen">
 
+    <script type="text/javascript" src="/static/javascript/lib/angular.min.js"></script>
+    <script type="text/javascript" src="/static/javascript/lib/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="/static/javascript/dashboard.js"></script>
+
   </head>
   <body>
 
     <div class="container">
-      <div id='map'></div>  
+    <div  map id='devtrac-map'></div>
       <div id='ngview' ng-view>  
         <div id='location'></div>
         <div id='districts'></div>
@@ -26,16 +30,13 @@
             <label for="time">deployed at:</label>&nbsp;<time id="time"></time>
         </div>
     </footer> 
-    <script type="text/javascript" src="/static/javascript/lib/angular.min.js"></script>
-    <script type="text/javascript" src="/static/javascript/lib/jquery-2.0.3.min.js"></script>
+    
+    
     <script type="text/javascript" src="/static/javascript/lib/leaflet-src.js"></script> 
     <script type="text/javascript" src="/static/javascript/application.js"></script>
     
     <script type="text/javascript" src="/static/javascript/lib/bootstrap.min.js"></script>
-
     
-
-    <script type="text/javascript" src="/static/javascript/dashboard.js"></script>
   </body>
 </html>
 

@@ -3,7 +3,7 @@ from splinter import Browser
 
 @before.all
 def setup_all():
-	world.browser = Browser("firefox")
+	world.browser = Browser("phantomjs")
 
 @after.all
 def teardown_all(self):

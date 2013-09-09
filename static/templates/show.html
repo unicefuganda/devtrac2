@@ -1,1 +1,5 @@
-<div id='location'><h2 class="title">Uganda - <span class="district_name">{[{district.name}]}</span></h2></div>
+<div id='location'>
+  <h2 ng-show="level == 'national'">Uganda</h2>
+  <h2 ng-hide="level == 'national'" class="title">Uganda - <span class="district_name">{[{district.name}]}</span></h2>
+
+</div>
