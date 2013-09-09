@@ -13,4 +13,3 @@ def when_i_open_dashboard_for_(step, district):
 @step(u'Then I see (.+) as the title')
 def then_i_see_kamapala_title(step, title):
 	assert_equals(world.page.title(), title)
-  pending()
