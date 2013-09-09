@@ -20,12 +20,28 @@ $(function(){
   map.addLayer(osm);
   map.addLayer(uganda_districts);
 
-  $.getJSON("/static/javascript/geojson/uganda_districts_2011_005.json", function(geojsonFeature, textStatus, jqXHR) {
-    var geoJson = L.geoJson(geojsonFeature, { style: myStyle});
+  var simplified_layers = ["01", "005", "001", "0005", "0002", "0001" ]
 
-    L.control.layers({simplified: geoJson, tiles: uganda_districts}).addTo(map);
-    map.addLayer(geoJson)
-  });  
+  var layers = L.control.layers({tiles: uganda_districts})
+  layers.addTo(map);
+
+  $.each(simplified_layers, function(index, tolerence) {
+    
+    $.getJSON("/static/javascript/geojson/uganda_districts_2011_" + tolerence + ".json", function(geojsonFeature, textStatus, jqXHR) {
+      var geoJson = L.geoJson(geojsonFeature, { style: {
+        "color": "#ff0000",
+        "weight": 1,
+        "opacity": 0.65
+      }});
+
+      layers.addBaseLayer(geoJson, tolerence);
+
+      // L.control.layers({simplified: geoJson, tiles: uganda_districts}).addTo(map);
+      
+    });  
+  });
+
+  
 
 });
 
