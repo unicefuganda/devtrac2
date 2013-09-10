@@ -28,6 +28,11 @@ DevTrac.Map = function(element) {
     },
     setView: function(lat, lng, zoom) {
       map.setView(new L.LatLng(lat, lng), 10);
+    },
+    getCenter: function() {
+      var center = map.getCenter();
+      return [center.lat, center.lng];
     }
   }
 };
+
