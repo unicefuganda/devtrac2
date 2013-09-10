@@ -27,11 +27,14 @@ DevTrac.Map = function(element) {
       layers.addBaseLayer(geoJsonLayer, name);
     },
     setView: function(lat, lng, zoom) {
-      map.setView(new L.LatLng(lat, lng), 10);
+      map.setView(new L.LatLng(lat, lng), zoom);
     },
     getCenter: function() {
       var center = map.getCenter();
       return [center.lat, center.lng];
+    },
+    getZoom: function() {
+      return map.getZoom();
     }
   }
 };

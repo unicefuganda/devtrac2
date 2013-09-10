@@ -19,8 +19,8 @@ angular.module("dashboard").directive('map', function() {
         });
 
         scope.$watch("level", function(){
-          if (scope.level != "national") {            
-            map.setView(0.3136, 32.5811, 7);
+          if (scope.level == "national") {    
+            map.setView(1.0667, 31.8833, 7);
           }
         });
       }

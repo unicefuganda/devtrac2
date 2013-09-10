@@ -19,8 +19,12 @@ class Page:
         self.browser.quit()
 
     def current_position(self):
-        center = self.browser.evaluate_script("window.map.getCenter()");
+        center = self.browser.evaluate_script("window.map.getCenter()")
         return [round(center[0], 4), round(center[1], 4)]
+
+    def current_zoom(self):
+        zoom = self.browser.evaluate_script("window.map.getZoom()")
+        return int(zoom)
 
     def wait_for(self, function):
         for _ in itertools.repeat(None, 10):
