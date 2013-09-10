@@ -26,6 +26,10 @@ class Page:
         zoom = self.browser.evaluate_script("window.map.getZoom()")
         return int(zoom)
 
+    def current_layer(self):
+        layers = self.browser.evaluate_script("window.map.getLayer()")
+        return layers
+
     def wait_for(self, function):
         for _ in itertools.repeat(None, 10):
             if (function()):

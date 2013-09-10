@@ -26,3 +26,8 @@ def then_i_see_map_of(step, title):
 def and_it_is_centered_on(step, lat, lng, zoom):
     assert_equals(world.page.current_position(), [float(lat), float(lng)])
     assert_equals(world.page.current_zoom(), int(zoom))
+
+@step(u'Then I see the layer "([^"]*)" displayed')
+def then_i_see_the_layer_district_displayed(step, layer_name):    
+     assert_equals(world.page.current_layer(), layer_name)
+    
