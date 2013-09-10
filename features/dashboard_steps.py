@@ -21,7 +21,6 @@ def when_i_go_to_the_homepage(step):
 def then_i_see_map_of(step, title):
     assert_equals(world.page.title(), title)
 
-
 @step(u'And It is centered on (.+), (.+) at (.+) zoom')
 def and_it_is_centered_on(step, lat, lng, zoom):
     assert_equals(world.page.current_position(), [float(lat), float(lng)])
