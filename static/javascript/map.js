@@ -27,7 +27,7 @@ DevTrac.Map = function(element) {
       var geoJsonLayer = L.geoJson(geojsonFeature, { 
         style: {
         "color": "#ff0000",
-        "weight": 1,
+        "weight": 1.5,
         "opacity": 0.65        
         }
       });
@@ -38,27 +38,27 @@ DevTrac.Map = function(element) {
     addBaseLayer: function(features, name) {
       var selectedLayer;
       var baseLayer = L.geoJson(features, { 
-        style: { weight: 1, fillOpacity: 0},
+        style: { weight: 1, fillOpacity: 0, color: "#333"},
         onEachFeature: function(data, layer) { 
           layer.properties = data.properties;
 
           layer.on("click", function() { 
             if (selectedLayer != null) {
-              selectedLayer.setStyle({ "fillOpacity": 0 })
+              selectedLayer.setStyle({ "fillOpacity": 0, "color": "#666" })
             }
-            layer.setStyle({ "fillOpacity": 0.7 });
+            layer.setStyle({ "fillOpacity": 0.5, "color": "#ff0000" });
             selectedLayer = layer;
             console.log("selected layer is " + layer.properties["DNAME_2006"])
           });
           layer.on("mouseout", function() { 
             if (selectedLayer != layer) {
-              layer.setStyle({ "fillOpacity": 0 }); 
+              layer.setStyle({ "fillOpacity": 0, "color": "#666" }); 
             } 
           });
 
           layer.on("mouseover", function() { 
             if (selectedLayer != layer) {
-              layer.setStyle({ "fillOpacity": 0.2 });
+              layer.setStyle({ "fillOpacity": 0.2, "color": "#ff0000" });
             } 
           });   
         }
