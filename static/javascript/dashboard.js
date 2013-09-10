@@ -2,8 +2,8 @@ var dashboard = angular.module('dashboard', []).
   config(function($routeProvider, $interpolateProvider, $locationProvider) {  
     $locationProvider.html5Mode(true);
     $routeProvider
-      .when('/', { controller: DashboardCtrl, templateUrl: '/static/templates/show.html' })  
-      .when('/district/:district', { controller: DashboardCtrl, templateUrl: '/static/templates/show.html' })
+      .when('/', { controller: "DashboardCtrl", templateUrl: '/static/templates/show.html' })  
+      .when('/district/:district', { controller: "DashboardCtrl", templateUrl: '/static/templates/show.html' })
     $interpolateProvider.startSymbol('{[{');
     $interpolateProvider.endSymbol('}]}');
   }).
@@ -34,9 +34,7 @@ var dashboard = angular.module('dashboard', []).
         });
       }
     };
-  });
-
-dashboard.service('districtService', function($http, $filter) {
+  }).service('districtService', function($http, $filter) {
   var self = this;
   this.all = function(result) {
     if (self.districts) {
@@ -57,9 +55,7 @@ dashboard.service('districtService', function($http, $filter) {
       result(district);
     });
   };
-});
-
-function DashboardCtrl($rootScope, districtService, $routeParams) {
+}).controller("DashboardCtrl", function($rootScope, districtService, $routeParams) {
   if (!$routeParams.district) {
     $rootScope.level = "national";
   }
@@ -68,7 +64,7 @@ function DashboardCtrl($rootScope, districtService, $routeParams) {
       $rootScope.district = district;
     });
   }
-}
+});
 
 DevTrac = {}
 DevTrac.Map = function(element) {
@@ -102,9 +98,4 @@ DevTrac.Map = function(element) {
       map.setView(new L.LatLng(lat, lng), 10);
     }
   }
-}
-    
-
-
-
-
+};
