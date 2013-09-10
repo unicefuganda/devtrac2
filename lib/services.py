@@ -12,7 +12,6 @@ class DistrictService(object):
 
     def find_by_name(self, name):
         return District.objects(index_name=name.upper()).first()
-    
 
     def find_all(self):
         return District.objects().exclude('geometry', 'unicef', 'subcounties').all().order_by("name")
