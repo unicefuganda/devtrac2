@@ -31,15 +31,36 @@ DevTrac.Map = function(element) {
         "opacity": 0.65        
         }
       });
+
+
       layers.addBaseLayer(geoJsonLayer, name);
     },
     addBaseLayer: function(features, name) {
-
+      var selectedLayer;
       var baseLayer = L.geoJson(features, { 
-        style: {
-        "color": "#0000ff",
-        "weight": 1,
-        "opacity": 0.65        
+        style: { weight: 1, fillOpacity: 0},
+        onEachFeature: function(data, layer) { 
+          layer.properties = data.properties;
+
+          layer.on("click", function() { 
+            if (selectedLayer != null) {
+              selectedLayer.setStyle({ "fillOpacity": 0 })
+            }
+            layer.setStyle({ "fillOpacity": 0.7 });
+            selectedLayer = layer;
+            console.log("selected layer is " + layer.properties["DNAME_2006"])
+          });
+          layer.on("mouseout", function() { 
+            if (selectedLayer != layer) {
+              layer.setStyle({ "fillOpacity": 0 }); 
+            } 
+          });
+
+          layer.on("mouseover", function() { 
+            if (selectedLayer != layer) {
+              layer.setStyle({ "fillOpacity": 0.2 });
+            } 
+          });   
         }
       });
       map.addLayer(baseLayer);
