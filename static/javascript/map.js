@@ -27,7 +27,8 @@ DevTrac.Map = function(element) {
     })
     layer_control.addTo(map);
 
-    self.layers = {}
+    self.layers = {};
+    self.subcountyLayer;
 
     self.clearHighlight = function() {
         $.each(self.layers, function(index, layer) {
@@ -47,7 +48,29 @@ DevTrac.Map = function(element) {
 
             layer_control.addBaseLayer(geoJsonLayer, name);
         },
-        addBaseLayer: function(features, name) {
+
+        addSubcountyLayer: function(features, name) {
+            var baseLayer = L.geoJson(features, {
+                style: {
+                    weight: 2,
+                    fillOpacity: 0,
+                    color: "#ff0000"
+                },
+                onEachFeature: function(data, layer) {
+                    layer.properties = data.properties;
+                    layer.name = data.properties["DNAME_2010"].toLowerCase();
+                    self.layers[layer.name] = layer;
+                }
+            });
+            baseLayer.name = name;
+            if (self.subcountyLayer != null) {
+                map.removeLayer(self.subcountyLayer);
+            }
+            map.addLayer(baseLayer);
+            self.subcountyLayer = baseLayer;
+        },
+
+        addDistrictLayer: function(features, name) {
             var baseLayer = L.geoJson(features, {
                 style: {
                     weight: 1,
@@ -118,8 +141,11 @@ DevTrac.Map = function(element) {
         getZoom: function() {
             return map.getZoom();
         },
-        getLayer: function() {
-            return self.activeLayer.name;
+        getLayers: function() {
+            if (self.subcountyLayer) {
+                return [self.activeLayer.name, self.subcountyLayer.name];
+            } 
+            return [self.activeLayer.name];
         },
         getSelectedDistrict: function() {
             return self.selectedDistrict.name;

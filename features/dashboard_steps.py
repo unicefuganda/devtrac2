@@ -1,6 +1,6 @@
 from lettuce import *
 from page import *
-from nose.tools import assert_equals
+from nose.tools import *
 from time import *
 
 @step(u'Given that I am a regular user')
@@ -28,7 +28,7 @@ def and_it_is_centered_on(step, lat, lng, zoom):
 
 @step(u'Then I see the layer "([^"]*)" displayed')
 def then_i_see_the_layer_district_displayed(step, layer_name):    
-     assert_equals(world.page.current_layer(), layer_name)
+     assert_in(layer_name, world.page.current_layers())
 
 @step(u'When I click on (.+) district')
 @step(u'And I click on (.+) district')

@@ -26,8 +26,8 @@ class Page:
         zoom = self.browser.evaluate_script("window.map.getZoom()")
         return int(zoom)
 
-    def current_layer(self):
-        return self.browser.evaluate_script("window.map.getLayer()")        
+    def current_layers(self):
+        return self.browser.evaluate_script("window.map.getLayers()")        
 
     def selected_district(self):
         return self.browser.evaluate_script("window.map.getSelectedDistrict()")

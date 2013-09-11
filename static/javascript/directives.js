@@ -17,7 +17,7 @@ angular.module("dashboard").directive('map', function() {
 
             scope.$watch("layers", function(layers) {
                 if (layers != undefined) {
-                    map.addBaseLayer(layers[0].features, layers[0].name);
+                    map.addDistrictLayer(layers[0].features, layers[0].name);
                 }
             });
 
@@ -34,9 +34,9 @@ angular.module("dashboard").directive('map', function() {
                 }
             });
 
-            scope.$watch("subcounties", function(features) {
-                if (features  != null) {
-                    map.addGeoJsonLayer(features, "subcounties");
+            scope.$watch("subcounties", function(subcounties) {
+                if (subcounties  != null) {                  
+                    map.addSubcountyLayer(subcounties.features, subcounties.name);
                 }
             });
         }

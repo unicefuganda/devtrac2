@@ -1,5 +1,5 @@
-angular.module("dashboard").controller("DashboardCtrl", function($rootScope, districtService, $routeParams) {
-    
+angular.module("dashboard").controller("DashboardCtrl", function($rootScope, districtService, $routeParams, $scope) {
+
 
     function loadReferenceData() {
         districtService.geojson(function(data) {
@@ -7,7 +7,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
                 features: data,
                 name: "Uganda Districts"
             }];
-        });        
+        });
     }
 
     if ($rootScope.layers == null) {
@@ -21,12 +21,15 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
         districtService.find_by_name($routeParams.district, function(district) {
             $rootScope.district = district;
             $rootScope.location_name = "Uganda - " + $rootScope.district.name;
-        });
 
-        if ($rootScope.subcounties == null) {
             districtService.subcounties_geojson($routeParams.district, function(subcounties_geojson) {
-                $rootScope.subcounties = subcounties_geojson;
+               
+                $rootScope.subcounties = {
+                    features: subcounties_geojson,
+                    name: district.name + " Subcounties"
+                };
+                $rootScope.$apply();
             });
-        }
+        });
     }
 });
