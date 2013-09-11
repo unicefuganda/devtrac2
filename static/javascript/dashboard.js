@@ -11,4 +11,7 @@ var dashboard = angular.module('dashboard', []).config(function($routeProvider, 
         })
     $interpolateProvider.startSymbol('{[{');
     $interpolateProvider.endSymbol('}]}');
+
+
+
 });

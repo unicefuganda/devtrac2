@@ -25,7 +25,7 @@ angular.module("dashboard").service('districtService', function($http, $filter) 
         });
     };
 
-    this.geoJson = function(result) {
+    this.geojson = function(result) {
         $http({
             method: 'GET',
             url: '/static/javascript/geojson/uganda_districts_2011_005.json'
@@ -34,4 +34,14 @@ angular.module("dashboard").service('districtService', function($http, $filter) 
             result(data);
         });
     };
+
+    this.subcounties_geojson = function(district_name, result) {
+        $http({
+            method: 'GET',
+            url: '/static/javascript/geojson/uganda_subcounties_2011_005.json'
+        }).
+        success(function(data, status, headers, config) {
+            result(data);
+        });  
+    }
 });
