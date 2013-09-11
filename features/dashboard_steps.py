@@ -47,3 +47,15 @@ def then_the_district_will_be_selected(step, district):
 @step(u'Then the (.+) district will be highlighted')
 def then_the_district_will_be_highlighted(step, district):
     assert_equals(world.page.highlighted_district(), district.lower())
+
+@step(u'When I click on Gulu from the national dashboard')
+def when_i_click_on_gulu_from_the_national_dashboard(step, district):
+#assert False
+
+@step(u'Then Gulu district will be displayed on the map')
+def then_gulu_district_will_be_displayed_on_the_map(step, district):
+#assert False
+
+@step(u'And The map will be centered to 32.429742872960915, 2.836377471066367')
+def and_the_map_will_be_centered_to_32_429742872960915_2_836377471066367(step, district):
+#assert False
