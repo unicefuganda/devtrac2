@@ -22,10 +22,18 @@ DevTrac.Map = function(element) {
         attribution: "Uganda disctrict data"
     });
 
-    var layers = L.control.layers({
+    var layer_control = L.control.layers({
         tiles: uganda_districts
     })
-    layers.addTo(map);
+    layer_control.addTo(map);
+
+    self.layers = {}
+
+    self.clearHighlight = function() {
+        $.each(self.layers, function(index, layer) {
+            layer.fire("mouseout");
+        });
+    };
 
     return {
         addGeoJsonLayer: function(geojsonFeature, name) {
@@ -37,10 +45,9 @@ DevTrac.Map = function(element) {
                 }
             });
 
-            layers.addBaseLayer(geoJsonLayer, name);
+            layer_control.addBaseLayer(geoJsonLayer, name);
         },
         addBaseLayer: function(features, name) {
-            var selectedLayer;
             var baseLayer = L.geoJson(features, {
                 style: {
                     weight: 1,
@@ -49,10 +56,11 @@ DevTrac.Map = function(element) {
                 },
                 onEachFeature: function(data, layer) {
                     layer.properties = data.properties;
+                    self.layers[data.properties["DNAME_2010"].toLowerCase()] = layer;
 
                     layer.on("click", function() {
-                        if (selectedLayer != null) {
-                            selectedLayer.setStyle({
+                        if (self.selectedDistrict != null) {
+                            self.selectedDistrict.setStyle({
                                 "fillOpacity": 0,
                                 "color": "#666"
                             })
@@ -61,32 +69,37 @@ DevTrac.Map = function(element) {
                             "fillOpacity": 0.5,
                             "color": "#ff0000"
                         });
-                        selectedLayer = layer;
-                        console.log("selected layer is " + layer.properties["DNAME_2006"])
+                        self.selectedDistrict = layer;
                     });
 
                     layer.on("mouseout", function() {
-                        if (selectedLayer != layer) {
+                        if (self.selectedDistrict != layer) {
                             layer.setStyle({
                                 "fillOpacity": 0,
                                 "color": "#666"
                             });
+
+                            self.highlightedDistrict = null;
                         }
                     });
 
                     layer.on("mouseover", function() {
-                        if (selectedLayer != layer) {
+                        if (self.selectedDistrict != layer) {
                             layer.setStyle({
                                 "fillOpacity": 0.2,
                                 "color": "#ff0000"
                             });
+                            self.highlightedDistrict = layer;
                         }
                     });
                 }
             });
+            baseLayer.name = name;
             map.addLayer(baseLayer);
-            layers.addBaseLayer(baseLayer, name);
+            layer_control.addBaseLayer(baseLayer, name);
+
             self.activeLayer = baseLayer;
+            
         },
         setView: function(lat, lng, zoom) {
             map.setView(new L.LatLng(lat, lng), zoom);
@@ -100,6 +113,20 @@ DevTrac.Map = function(element) {
         },
         getLayer: function() {
             return self.activeLayer.name;
+        },
+        getSelectedDistrict: function() {
+            return self.selectedDistrict.properties["DNAME_2010"].toLowerCase();
+        },
+        getHighlightedDistrict: function() {
+            return self.highlightedDistrict.properties["DNAME_2010"].toLowerCase();
+        },
+        selectDistrict: function(district_name) {
+            self.clearHighlight();
+            self.layers[district_name].fire("click");
+        },
+        highlightDistrict: function(district_name) {
+            self.clearHighlight();
+            self.layers[district_name].fire("mouseover");
         }
     }
 };

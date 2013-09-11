@@ -27,8 +27,19 @@ class Page:
         return int(zoom)
 
     def current_layer(self):
-        layers = self.browser.evaluate_script("window.map.getLayer()")
-        return layers
+        return self.browser.evaluate_script("window.map.getLayer()")        
+
+    def selected_district(self):
+        return self.browser.evaluate_script("window.map.getSelectedDistrict()")
+
+    def highlighted_district(self):
+        return self.browser.evaluate_script("window.map.getHighlightedDistrict()")
+
+    def click_on_district(self, district):
+        self.browser.execute_script("window.map.selectDistrict('%s')" % district.lower())
+
+    def hover_over_district(self, district):
+        self.browser.execute_script("window.map.highlightDistrict('%s')" % district.lower())
 
     def wait_for(self, function):
         for _ in itertools.repeat(None, 10):

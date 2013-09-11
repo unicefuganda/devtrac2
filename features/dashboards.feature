@@ -14,10 +14,22 @@ When I open dashboard for Gulu
 Then I see map of Uganda - Gulu
 And It is centered on 2.8364, 32.4297 at 10 zoom
 
-Scenario: Open district dashboard
+Scenario: Display district layer
 Given that I am a regular user
 When I open dashboard for Gulu
 Then I see the layer "Uganda Districts" displayed
+
+Scenario: Select a District
+Given that I am a regular user
+When I go to the homepage
+And I click on Gulu district
+Then the Gulu district will be selected
+
+Scenario: Highlight a District
+Given that I am a regular user
+When I go to the homepage
+And I hover over Lira district
+Then the Lira district will be highlighted
 
 
 
