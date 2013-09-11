@@ -31,5 +31,9 @@ When I go to the homepage
 And I hover over Lira district
 Then the Lira district will be highlighted
 
+Scenario: Navigate to District
+Given that I am a regular user
+When I click on Gulu from the national dashboard
+Then Gulu district will be displayed on the map
 
 
