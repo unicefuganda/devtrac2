@@ -56,20 +56,24 @@ DevTrac.Map = function(element) {
                 },
                 onEachFeature: function(data, layer) {
                     layer.properties = data.properties;
-                    self.layers[data.properties["DNAME_2010"].toLowerCase()] = layer;
+                    layer.name = data.properties["DNAME_2010"].toLowerCase();
+                    self.layers[layer.name] = layer;
 
                     layer.on("click", function() {
                         if (self.selectedDistrict != null) {
                             self.selectedDistrict.setStyle({
                                 "fillOpacity": 0,
-                                "color": "#666"
+                                "color": "#666",
+                                "weight": 1
                             })
                         }
                         layer.setStyle({
-                            "fillOpacity": 0.5,
-                            "color": "#ff0000"
+                            "fillOpacity": 0,
+                            "color": "#ff0000",
+                            "weight": 10
                         });
                         self.selectedDistrict = layer;
+                        self.clickDistrictHandler(layer.name);
                     });
 
                     layer.on("mouseout", function() {
@@ -99,10 +103,13 @@ DevTrac.Map = function(element) {
             layer_control.addBaseLayer(baseLayer, name);
 
             self.activeLayer = baseLayer;
-            
+
         },
         setView: function(lat, lng, zoom) {
             map.setView(new L.LatLng(lat, lng), zoom);
+        },
+        onClickDistrict: function(handler) {
+            self.clickDistrictHandler = handler;
         },
         getCenter: function() {
             var center = map.getCenter();
@@ -115,10 +122,10 @@ DevTrac.Map = function(element) {
             return self.activeLayer.name;
         },
         getSelectedDistrict: function() {
-            return self.selectedDistrict.properties["DNAME_2010"].toLowerCase();
+            return self.selectedDistrict.name;
         },
         getHighlightedDistrict: function() {
-            return self.highlightedDistrict.properties["DNAME_2010"].toLowerCase();
+            return self.highlightedDistrict.name;
         },
         selectDistrict: function(district_name) {
             self.clearHighlight();

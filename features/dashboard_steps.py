@@ -21,7 +21,9 @@ def then_i_see_map_of(step, title):
 
 @step(u'And It is centered on (.+), (.+) at (.+) zoom')
 def and_it_is_centered_on(step, lat, lng, zoom):
-    assert_equals(world.page.current_position(), [float(lat), float(lng)])
+    coordinates = [float(lat), float(lng)]
+    world.page.wait_for(lambda page: page.current_position() == coordinates)
+    assert_equals(world.page.current_position(), coordinates)
     assert_equals(world.page.current_zoom(), int(zoom))
 
 @step(u'Then I see the layer "([^"]*)" displayed')

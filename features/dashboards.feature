@@ -19,12 +19,6 @@ Given that I am a regular user
 When I open dashboard for Gulu
 Then I see the layer "Uganda Districts" displayed
 
-Scenario: Select a District
-Given that I am a regular user
-When I go to the homepage
-And I click on Gulu district
-Then the Gulu district will be selected
-
 Scenario: Highlight a District
 Given that I am a regular user
 When I go to the homepage
@@ -33,6 +27,7 @@ Then the Lira district will be highlighted
 
 Scenario: Navigate to District
 Given that I am a regular user
-When I click on Gulu from the national dashboard
-Then Gulu district will be displayed on the map
-And The map will be centered to 32.429742872960915, 2.836377471066367
+When I go to the homepage
+And I click on Gulu district
+Then the Gulu district will be selected
+And It is centered on 2.8364, 32.4297 at 10 zoom

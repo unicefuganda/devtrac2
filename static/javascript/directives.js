@@ -1,5 +1,12 @@
 angular.module("dashboard").directive('map', function() {
     return {
+
+        controller: function($scope, $location) {
+            $scope.navigateToDistrict = function(districtName) {
+                $location.path("/district/" + districtName);
+                $scope.$apply();
+            }
+        },
         link: function(scope, element, attrs) {
             var map = new DevTrac.Map(element);
             window.map = map;
@@ -10,6 +17,10 @@ angular.module("dashboard").directive('map', function() {
                 $.getJSON("/static/javascript/geojson/uganda_districts_2011_" + tolerence + ".json", function(geojsonFeature, textStatus, jqXHR) {
                     map.addGeoJsonLayer(geojsonFeature, tolerence);
                 });
+            });
+
+            map.onClickDistrict(function(districtName) {
+                scope.navigateToDistrict(districtName);
             });
 
             scope.$watch("layers", function(layers) {

@@ -43,9 +43,8 @@ class Page:
 
     def wait_for(self, function):
         for _ in itertools.repeat(None, 10):
-            if (function()):
+            if (function(self)):
                 break
-            print "wait 2"
-            time.sleep(2)
+            time.sleep(0.2)
 
 
