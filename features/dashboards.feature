@@ -35,5 +35,4 @@ Scenario: Navigate to District
 Given that I am a regular user
 When I click on Gulu from the national dashboard
 Then Gulu district will be displayed on the map
-
-
+And The map will be centered to 32.429742872960915, 2.836377471066367
