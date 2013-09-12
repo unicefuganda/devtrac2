@@ -30,7 +30,7 @@ Given that I am a regular user
 When I go to the homepage
 And I click on Gulu district
 Then the Gulu district will be selected
-And It is centered on 2.8364, 32.4297 at 10 zoom
+And It is centered on 2.8361, 32.4303 at 10 zoom
 
 Scenario: Display subcounty layer
 Given that I am a regular user

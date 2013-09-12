@@ -21,7 +21,7 @@ angular.module("dashboard").directive('map', function() {
                     layer_info = {
                         unselectedStyle: {
                             "fillOpacity": 0,
-                            "color": "#111",
+                            "color": "#333",
                             "weight": 2
                         },
                         selectedStyle: {
@@ -48,6 +48,7 @@ angular.module("dashboard").directive('map', function() {
                 if (scope.district != undefined) {
                     var coords = scope.district.centroid.coordinates
                     map.setView(coords[1], coords[0], 10);
+                    // map.selectDistrict(scope.district.name);
                 }
             });
 

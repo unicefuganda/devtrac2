@@ -11,7 +11,7 @@ DevTrac.Map = function(element) {
     var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     var osm = new L.TileLayer(osmUrl, {
         minZoom: 7,
-        maxZoom: 12
+        maxZoom: 15
     });
     map.addLayer(osm);
 
@@ -64,7 +64,7 @@ DevTrac.Map = function(element) {
                     }
                 });
             };
-            
+
 
             var baseLayer = L.geoJson(features, {
                 style: {
@@ -77,15 +77,15 @@ DevTrac.Map = function(element) {
                     var options = $.extend({}, layer_info, {
                         selectLayerHandler: function(featureProperties, hierarchy) {
                             unselectLayers(hierarchy.length);
-                            
+
                             self.selectedLayer = layer;
                             self.clickDistrictHandler(featureProperties, hierarchy);
                         }
                     });
 
-                    
 
-                    var layer = new DevTrac.Layer(layer, options, data.properties)
+
+                    var layer = new DevTrac.Layer(layer, options, data.properties, map)
                     self.layers.push(layer);
                 }
             });
@@ -113,28 +113,35 @@ DevTrac.Map = function(element) {
             return self.navigation_layers;
         },
         getSelectedDistrict: function() {
-            return self.selectedLayer.hierarchy[self.selectedLayer.hierarchy.length -1];
+            return self.selectedLayer.hierarchy[self.selectedLayer.hierarchy.length - 1];
         },
         getHighlightedDistrict: function() {
-            var highlightedLayer = $.grep(self.layers, function(layer, index) { console.log(layer); return layer.isHighlighted(); })[0];
-            return highlightedLayer.hierarchy[highlightedLayer.hierarchy.length -1 ] ;
+            var highlightedLayer = $.grep(self.layers, function(layer, index) {
+                console.log(layer);
+                return layer.isHighlighted();
+            })[0];
+            return highlightedLayer.hierarchy[highlightedLayer.hierarchy.length - 1];
         },
         selectDistrict: function(district_name) {
             self.clearHighlight();
-            var layers = $.grep(self.layers, function(layer, index) { return layer.name == "districts" && layer.hierarchy[layer.hierarchy.length -1 ] == district_name});
+            var layers = $.grep(self.layers, function(layer, index) {
+                return layer.name == "districts" && layer.hierarchy[layer.hierarchy.length - 1] == district_name
+            });
             layers[0].select();
-            
+
         },
         highlightDistrict: function(district_name) {
             self.clearHighlight();
-            var layers = $.grep(self.layers, function(layer, index) {return layer.name == "districts" && layer.hierarchy[layer.hierarchy.length -1 ] == district_name});
+            var layers = $.grep(self.layers, function(layer, index) {
+                return layer.name == "districts" && layer.hierarchy[layer.hierarchy.length - 1] == district_name
+            });
             layers[0].highlight();
         },
     }
 };
 
 
-DevTrac.Layer = function(leafletLayer, options, featureProperties) { 
+DevTrac.Layer = function(leafletLayer, options, featureProperties, map) {
     var self = this;
     self.options = options;
     self.featureProperties = featureProperties;
@@ -154,6 +161,26 @@ DevTrac.Layer = function(leafletLayer, options, featureProperties) {
         self.highlight();
     });
 
+
+    self.calculateZoomLevel = function(bounds) {
+
+        var zoomLevels = [
+            [0, 14],
+            [0.1, 13],
+            [0.18, 12],
+            [0.35, 11],
+            [0.6, 10]
+        ];
+
+        var height = bounds.getNorth() - bounds.getSouth();
+        var width = bounds.getEast() - bounds.getWest();
+        var longestDimension = width > height ? width : height;
+        var levels = $.grep(zoomLevels, function(zoomLevel, index) {
+            return longestDimension > zoomLevel[0];
+        });
+        return levels[levels.length - 1][1];
+    };
+
     self.unselect = function() {
         leafletLayer.setStyle(options.unselectedStyle);
         self.selected = false;
@@ -161,9 +188,15 @@ DevTrac.Layer = function(leafletLayer, options, featureProperties) {
     self.select = function() {
         leafletLayer.setStyle(options.selectedStyle);
         self.selected = true;
+
+        var center = leafletLayer.getBounds().getCenter();
+        var zoomLevel = self.calculateZoomLevel(leafletLayer.getBounds());
+        map.setView(center, zoomLevel);
+
         if (options.selectLayerHandler) {
             options.selectLayerHandler(featureProperties, self.hierarchy);
         }
+
     };
 
     self.highlight = function() {
@@ -186,6 +219,8 @@ DevTrac.Layer = function(leafletLayer, options, featureProperties) {
         highlight: self.highlight,
         select: self.select,
         name: options.name,
-        isHighlighted: function() { return self.highlighted; }
+        isHighlighted: function() {
+            return self.highlighted;
+        }
     };
 };
