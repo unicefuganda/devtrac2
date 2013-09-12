@@ -27,8 +27,6 @@ ckan.packageSearch = function(){
          });
 
          display_chart(categories,data);
-
-         console.log(categories);
          
         },
         error:function(){

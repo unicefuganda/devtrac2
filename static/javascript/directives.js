@@ -12,16 +12,32 @@ angular.module("dashboard").directive('map', function() {
             window.map = map;
 
             map.onClickDistrict(function(properties, hierarchy) {
-                scope.navigateToDistrict(hierarchy.pop());
+                if (hierarchy.length == 2)
+                    scope.navigateToDistrict(hierarchy[hierarchy.length -1]);
             });
 
             scope.$watch("layers", function(layers) {
                 if (layers != undefined) {
                     layer_info = {
-                        selectedColor: "#ff0000",
-                        unselectedColor: "#666",
-                        hierarchy: ["uganda"],
-                        name: "Districts"
+                        unselectedStyle: {
+                            "fillOpacity": 0,
+                            "color": "#111",
+                            "weight": 2
+                        },
+                        selectedStyle: {
+                            "fillOpacity": 0,
+                            "color": "#ff0000",
+                            "weight": 10
+                        },
+                        highlightedStyle: {
+                            "fillOpacity": 0.2,
+                            "color": "#ff0000",
+                            "weight": 5  
+                        },
+                        getHierarchy: function(properties) {
+                            return ["uganda", properties["DNAME_2010"].toLowerCase()];
+                        },
+                        name: "districts"
                     }
 
                     map.addNavigationLayer(layers[0].features, layer_info);
@@ -44,14 +60,28 @@ angular.module("dashboard").directive('map', function() {
             scope.$watch("subcounties", function(subcounties) {
                 if (subcounties  != null) { 
                     layer_info = {
-                        selectedColor: "#ff0000",
-                        unselectedColor: "#ff0000",
-                        hierarchy: ["uganda", scope.district.name],
-                        name: scope.district.name + " subcounties",
+                        unselectedStyle: {
+                            "fillOpacity": 0,
+                            "color": "#777",
+                            "weight": 2
+                        },
+                        selectedStyle: {
+                            "fillOpacity": 0,
+                            "color": "#0000ff",
+                            "weight": 4
+                        },
+                        highlightedStyle: {
+                            "fillOpacity": 0.2,
+                            "color": "#0000ff",
+                            "weight": 2  
+                        },
+                        getHierarchy: function(properties) {
+                            return ["uganda", properties["DNAME_2010"].toLowerCase(), properties["SNAME_2010"].toLowerCase()];
+                        },
+                        name: scope.district.name.toLowerCase() + " subcounties"
                     }
 
-                    map.addNavigationLayer(subcounties.features, layer_info);                 
-                    // map.addSubcountyLayer(subcounties.features, subcounties.name);
+                    map.addNavigationLayer(subcounties.features, layer_info);
                 }
             });
         }

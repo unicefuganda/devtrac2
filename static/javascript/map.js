@@ -28,13 +28,12 @@ DevTrac.Map = function(element) {
     layer_control.addTo(map);
 
     self.layers = [];
-    self.subcountyLayer;
-    self.selectedLayers = {};
+    self.selectedLayer;
     self.navigation_layers = [];
 
     self.clearHighlight = function() {
         $.each(self.layers, function(index, layer) {
-            layer.fire("mouseout");
+            layer.unhighlight();
         });
     };
 
@@ -55,23 +54,17 @@ DevTrac.Map = function(element) {
             self.navigation_layers.push(layer_info.name);
 
             function unselectLayers(level) {
-
-                $.each(self.selectedLayers, function(index, layer){
-                    layer.unselect();
-                });
+                if (self.selectedLayer != null) {
+                    self.selectedLayer.unselect();
+                }
 
                 $.each(self.layers, function(index, layer) {
                     if (layer.hierarchy.length > 2 && layer.hierarchy.length > level) {
-                        map.removeLayer(layer);
+                        map.removeLayer(layer.leafletLayer);
                     }
                 });
             };
-
-            function removeChildLayer() {
-                $.each(self.selectedLayers, function(index, layer){
-                    layer.unselect();
-                });
-            };
+            
 
             var baseLayer = L.geoJson(features, {
                 style: {
@@ -80,68 +73,31 @@ DevTrac.Map = function(element) {
                     color: layer_info.unselectedColor
                 },
                 onEachFeature: function(data, layer) {
-                    layer.properties = data.properties;
-                    layer.name = data.properties["DNAME_2010"].toLowerCase();
 
-                    layer.layer_info = layer_info;
-                    layer.hierarchy = layer.layer_info.hierarchy.concat([layer.name]);
+                    var options = $.extend({}, layer_info, {
+                        selectLayerHandler: function(featureProperties, hierarchy) {
+                            unselectLayers(hierarchy.length);
+                            
+                            self.selectedLayer = layer;
+                            self.clickDistrictHandler(featureProperties, hierarchy);
+                        }
+                    });
+
+                    
+
+                    var layer = new DevTrac.Layer(layer, options, data.properties)
                     self.layers.push(layer);
-
-                    layer.unselect = function() {
-                        this.setStyle({
-                            "fillOpacity": 0,
-                            "color": this.layer_info.unselectedColor,
-                            "weight": 1
-                        });
-                    };
-
-                    self.layers[layer.name] = layer;
-
-                    layer.on("click", function() {
-                        unselectLayers(layer.hierarchy.length);
-
-                        layer.setStyle({
-                            "fillOpacity": 0,
-                            "color": layer_info.selectedColor,
-                            "weight": 10
-                        });
-                        self.selectedLayers[layer_info.name] = layer;
-                        var hierarchy = layer_info.hierarchy.concat([layer.name])
-                        self.clickDistrictHandler(layer.properties, hierarchy);
-                    });
-
-                    layer.on("mouseout", function() {
-                        if (self.selectedLayers[layer_info.name] != layer) {
-                            layer.setStyle({
-                                "fillOpacity": 0,
-                                "color": layer_info.unselectedColor
-                            });
-
-                            self.highlightedDistrict = null;
-                        }
-                    });
-
-                    layer.on("mouseover", function() {
-                        if (self.selectedLayers[layer_info.name] != layer) {
-                            layer.setStyle({
-                                "fillOpacity": 0.2,
-                                "color": layer_info.selectedColor
-                            });
-                            self.highlightedDistrict = layer;
-                        }
-                    });
                 }
             });
 
-            baseLayer.name = layer_info.name;
             map.addLayer(baseLayer);
 
-            // self.activeLayer = baseLayer;
-
-
-        },        
+        },
         setView: function(lat, lng, zoom) {
             map.setView(new L.LatLng(lat, lng), zoom);
+        },
+        setZoom: function(zoom) {
+            map.setView(map.getCenter(), zoom);
         },
         onClickDistrict: function(handler) {
             self.clickDistrictHandler = handler;
@@ -157,18 +113,79 @@ DevTrac.Map = function(element) {
             return self.navigation_layers;
         },
         getSelectedDistrict: function() {
-            return self.selectedLayers["Districts"].name;
+            return self.selectedLayer.hierarchy[self.selectedLayer.hierarchy.length -1];
         },
         getHighlightedDistrict: function() {
-            return self.highlightedDistrict.name;
+            var highlightedLayer = $.grep(self.layers, function(layer, index) { console.log(layer); return layer.isHighlighted(); })[0];
+            return highlightedLayer.hierarchy[highlightedLayer.hierarchy.length -1 ] ;
         },
         selectDistrict: function(district_name) {
             self.clearHighlight();
-            self.layers[district_name].fire("click");
+            var layers = $.grep(self.layers, function(layer, index) { return layer.name == "districts" && layer.hierarchy[layer.hierarchy.length -1 ] == district_name});
+            layers[0].select();
+            
         },
         highlightDistrict: function(district_name) {
             self.clearHighlight();
-            self.layers[district_name].fire("mouseover");
+            var layers = $.grep(self.layers, function(layer, index) {return layer.name == "districts" && layer.hierarchy[layer.hierarchy.length -1 ] == district_name});
+            layers[0].highlight();
         },
     }
+};
+
+
+DevTrac.Layer = function(leafletLayer, options, featureProperties) { 
+    var self = this;
+    self.options = options;
+    self.featureProperties = featureProperties;
+
+    leafletLayer.setStyle(options.unselectedStyle);
+    self.hierarchy = options.getHierarchy(featureProperties);
+
+    leafletLayer.on("click", function() {
+        self.select();
+    });
+
+    leafletLayer.on("mouseout", function() {
+        self.unhighlight();
+    });
+
+    leafletLayer.on("mouseover", function() {
+        self.highlight();
+    });
+
+    self.unselect = function() {
+        leafletLayer.setStyle(options.unselectedStyle);
+        self.selected = false;
+    };
+    self.select = function() {
+        leafletLayer.setStyle(options.selectedStyle);
+        self.selected = true;
+        if (options.selectLayerHandler) {
+            options.selectLayerHandler(featureProperties, self.hierarchy);
+        }
+    };
+
+    self.highlight = function() {
+        leafletLayer.setStyle(options.highlightedStyle);
+        self.highlighted = true;
+    };
+
+    self.unhighlight = function() {
+        if (!self.selected) {
+            leafletLayer.setStyle(options.unselectedStyle);
+            self.highlighted = false;
+        }
+    };
+
+    return {
+        unselect: self.unselect,
+        leafletLayer: leafletLayer,
+        hierarchy: self.hierarchy,
+        unhighlight: self.unhighlight,
+        highlight: self.highlight,
+        select: self.select,
+        name: options.name,
+        isHighlighted: function() { return self.highlighted; }
+    };
 };
