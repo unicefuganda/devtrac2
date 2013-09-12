@@ -3,7 +3,14 @@ angular.module("dashboard").directive('map', function() {
 
         controller: function($scope, $location) {
             $scope.navigateToDistrict = function(districtName) {
+                console.log("change district")
                 $location.path("/district/" + districtName);
+                $scope.$apply();
+            }
+
+            $scope.navigateToSubcounty = function(districtName,subcountyName) {
+                console.log("change district")
+                $location.path("/district/" + districtName + "/" + subcountyName);
                 $scope.$apply();
             }
         },
@@ -14,6 +21,8 @@ angular.module("dashboard").directive('map', function() {
             map.onClickDistrict(function(properties, hierarchy) {
                 if (hierarchy.length == 2)
                     scope.navigateToDistrict(hierarchy[hierarchy.length -1]);
+                if (hierarchy.length == 3)
+                    scope.navigateToSubcounty(hierarchy[hierarchy.length -2], hierarchy[hierarchy.length -1]);
             });
 
             scope.$watch("layers", function(layers) {
@@ -44,11 +53,19 @@ angular.module("dashboard").directive('map', function() {
                 }
             });
 
+            scope.$watch("subcounty", function() {
+                if (scope.subcounty != undefined)
+                {
+                    console.log(scope.subcounty);
+                    map.selectLayer(scope.district.name .toLowerCase()+ " subcounties", scope.subcounty);    
+                }
+
+            })
+
             scope.$watch("district", function() {
                 if (scope.district != undefined) {
                     var coords = scope.district.centroid.coordinates
-                    map.setView(coords[1], coords[0], 10);
-                    // map.selectDistrict(scope.district.name);
+                    map.selectLayer("districts", scope.district.name.toLowerCase());    
                 }
             });
 

@@ -9,6 +9,11 @@ var dashboard = angular.module('dashboard', []).config(function($routeProvider, 
             controller: "DashboardCtrl",
             templateUrl: '/static/templates/show.html'
         })
+        .when('/district/:district/:subcounty', {
+            controller: "DashboardCtrl",
+            templateUrl: '/static/templates/show.html'
+        })
+        
     $interpolateProvider.startSymbol('{[{');
     $interpolateProvider.endSymbol('}]}');
 

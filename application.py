@@ -15,8 +15,13 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 def spikes():
 	return render_template('dashboard.html', section="dashboards")
 
+
 @app.route("/district/<name>/")
 def district(name):
+	return render_template('dashboard.html', section="dashboards")
+
+@app.route("/district/<name>/<subcounty>")
+def subcounty(name, subcounty):
 	return render_template('dashboard.html', section="dashboards")
 
 @app.route("/")

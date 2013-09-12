@@ -11,7 +11,7 @@ DevTrac.Map = function(element) {
     var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     var osm = new L.TileLayer(osmUrl, {
         minZoom: 7,
-        maxZoom: 15
+        maxZoom: 18
     });
     map.addLayer(osm);
 
@@ -137,6 +137,15 @@ DevTrac.Map = function(element) {
             });
             layers[0].highlight();
         },
+        selectLayer: function(name, location_name) {
+            console.log(name, location_name);
+            var layers = $.grep(self.layers, function(layer, index) {
+                //TODO: refactor
+                console.log(layer.name, layer.hierarchy[layer.hierarchy.length - 1])
+                return layer.name ==  name&& layer.hierarchy[layer.hierarchy.length - 1] == location_name
+            });
+            layers[0].focusLayer();            
+        }
     }
 };
 
@@ -161,7 +170,6 @@ DevTrac.Layer = function(leafletLayer, options, featureProperties, map) {
         self.highlight();
     });
 
-
     self.calculateZoomLevel = function(bounds) {
 
         var zoomLevels = [
@@ -178,6 +186,8 @@ DevTrac.Layer = function(leafletLayer, options, featureProperties, map) {
         var levels = $.grep(zoomLevels, function(zoomLevel, index) {
             return longestDimension > zoomLevel[0];
         });
+
+
         return levels[levels.length - 1][1];
     };
 
@@ -186,16 +196,22 @@ DevTrac.Layer = function(leafletLayer, options, featureProperties, map) {
         self.selected = false;
     };
     self.select = function() {
-        leafletLayer.setStyle(options.selectedStyle);
-        self.selected = true;
-
-        var center = leafletLayer.getBounds().getCenter();
-        var zoomLevel = self.calculateZoomLevel(leafletLayer.getBounds());
-        map.setView(center, zoomLevel);
-
+        // self.focusLayer();
         if (options.selectLayerHandler) {
             options.selectLayerHandler(featureProperties, self.hierarchy);
         }
+
+    };
+
+    self.focusLayer = function() {
+
+        leafletLayer.setStyle(options.selectedStyle);
+        self.selected = true;
+
+        // var center = leafletLayer.getBounds().getCenter();
+        map.fitBounds(leafletLayer.getBounds(), {});
+        // var zoomLevel = self.calculateZoomLevel(leafletLayer.getBounds());
+        // map.setView(center, zoomLevel);
 
     };
 
@@ -219,6 +235,7 @@ DevTrac.Layer = function(leafletLayer, options, featureProperties, map) {
         highlight: self.highlight,
         select: self.select,
         name: options.name,
+        focusLayer: self.focusLayer,
         isHighlighted: function() {
             return self.highlighted;
         }

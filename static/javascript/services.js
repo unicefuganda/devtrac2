@@ -41,7 +41,7 @@ angular.module("dashboard").service('districtService', function($http, $filter) 
         }
 
         var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?"
-        +"service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_subcounties_2011_001"
+        +"service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_subcounties_2011_0005"
         +"&outputFormat=json&format_options=callback:processJSON&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">"
         +"<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district_name.toUpperCase() 
         +"</Literal></PropertyIsEqualTo></Filter>";
@@ -50,7 +50,7 @@ angular.module("dashboard").service('districtService', function($http, $filter) 
             url: url,
             dataType: "jsonp",
             cache:true,
-            jsonpCallback : 'rubbish'
+            jsonpCallback : 'processJSON'
         });
 
     }

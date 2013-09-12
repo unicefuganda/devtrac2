@@ -12,7 +12,7 @@ Scenario: Open district dashboard
 Given that I am a regular user
 When I open dashboard for Gulu
 Then I see map of Uganda - Gulu
-And It is centered on 2.8364, 32.4297 at 10 zoom
+And It is centered on 2.8762, 32.4767 at 8 zoom
 
 Scenario: Display district layer
 Given that I am a regular user
@@ -30,7 +30,7 @@ Given that I am a regular user
 When I go to the homepage
 And I click on Gulu district
 Then the Gulu district will be selected
-And It is centered on 2.8361, 32.4303 at 10 zoom
+And It is centered on 2.8762, 32.4767 at 8 zoom
 
 Scenario: Display subcounty layer
 Given that I am a regular user
