@@ -17,7 +17,7 @@ And It is centered on 2.8364, 32.4297 at 10 zoom
 Scenario: Display district layer
 Given that I am a regular user
 When I open dashboard for Gulu
-Then I see the layer "Uganda Districts" displayed
+Then I see the layer "Districts" displayed
 
 Scenario: Highlight a District
 Given that I am a regular user
@@ -35,4 +35,4 @@ And It is centered on 2.8364, 32.4297 at 10 zoom
 Scenario: Display subcounty layer
 Given that I am a regular user
 When I open dashboard for Gulu
-Then I see the layer "Gulu Subcounties" displayed
+Then I see the layer "Gulu subcounties" displayed
