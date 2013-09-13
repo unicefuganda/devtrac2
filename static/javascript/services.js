@@ -46,12 +46,7 @@ angular.module("dashboard").service('districtService', function($http, $filter) 
         +"<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district_name.toUpperCase() 
         +"</Literal></PropertyIsEqualTo></Filter>";
 
-        $.ajax({
-            url: url,
-            dataType: "jsonp",
-            cache:true,
-            jsonpCallback : 'processJSON'
-        });
+        $http.jsonp(url);
 
     }
 });

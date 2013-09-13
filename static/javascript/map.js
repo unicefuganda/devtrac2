@@ -1,9 +1,10 @@
 var DevTrac = {};
 DevTrac.Map = function(element) {
 
-    var self = this, map = L.map(element.attr("id"));
+    var self = this,
+        map = L.map(element.attr("id"));
 
-    map.on("baselayerchange", function (layer) {
+    map.on("baselayerchange", function(layer) {
         self.activeLayer = layer;
     });
 
@@ -39,16 +40,22 @@ DevTrac.Map = function(element) {
     return {
 
         addNavigationLayer: function(features, layer_info) {
+            
             self.navigation_layers.push(layer_info.name);
 
             function unselectLayers(level) {
-
+               
                 $.each(self.layers, function(index, layer) {
-                    layer.unselect();
+                    // $.each(layer_group, function(index, layer) {
+                        layer.unselect();
 
-                    if (layer.hierarchy.length > 2 && layer.hierarchy.length > level) {
-                        map.removeLayer(layer.leafletLayer);
-                    }
+                        if (layer.hierarchy.length > 2 && layer.hierarchy.length > level) {
+                            map.removeLayer(layer.leafletLayer);
+                        }
+                });
+
+                self.layers = $.grep(self.layers, function(layer, index) {
+                    return layer.hierarchy.length <= level;
                 });
             };
 
@@ -57,27 +64,28 @@ DevTrac.Map = function(element) {
                 style: {
                     weight: 2,
                     fillOpacity: 0,
-                    color: layer_info.unselectedColor
+                    color: "0000ff"
                 },
                 onEachFeature: function(data, layer) {
 
                     var options = $.extend({}, layer_info, {
                         clickLayerHandler: function(featureProperties, hierarchy) {
+                            
                             self.clickDistrictHandler(featureProperties, hierarchy);
                         },
                         selectLayerHandler: function(featureProperties, hierarchy) {
-                            unselectLayers(hierarchy.length);
+                            // unselectLayers(hierarchy.length);
                         }
                     });
 
-
-
                     var layer = new DevTrac.Layer(layer, options, data.properties, map)
                     self.layers.push(layer);
-                }
-            });
+                },
 
+
+            });
             map.addLayer(baseLayer);
+            var date = new Date();
 
         },
         setView: function(lat, lng, zoom) {
@@ -123,13 +131,13 @@ DevTrac.Map = function(element) {
             layers[0].leafletLayer.fire("mouseover");
         },
         clickLayer: function(location_name, layer_name) {
-            var layers = $.grep(self.layers, function(layer, index) {                
+            var layers = $.grep(self.layers, function(layer, index) {
                 return layer.name == layer_name && layer.hierarchy[layer.hierarchy.length - 1] == location_name.toLowerCase()
             });
             layers[0].select();
         },
         selectLayer: function(location_name, name) {
-            var layers = $.grep(self.layers, function(layer, index) {                
+            var layers = $.grep(self.layers, function(layer, index) {
                 return layer.name == name && layer.hierarchy[layer.hierarchy.length - 1] == location_name.toLowerCase()
             });
             layers[0].focusLayer();
@@ -147,6 +155,7 @@ DevTrac.Layer = function(leafletLayer, options, featureProperties, map) {
     self.hierarchy = options.getHierarchy(featureProperties);
 
     leafletLayer.on("click", function() {
+        var date = new Date();
         self.select();
     });
 
@@ -169,18 +178,22 @@ DevTrac.Layer = function(leafletLayer, options, featureProperties, map) {
     };
 
     self.focusLayer = function() {
+
         if (options.selectLayerHandler) {
             options.selectLayerHandler(featureProperties, self.hierarchy);
         }
 
-        leafletLayer.setStyle(options.selectedStyle);
         self.selected = true;
-        map.fitBounds(leafletLayer.getBounds(), {});
+        leafletLayer.setStyle(options.selectedStyle);
+        map.fitBounds(leafletLayer.getBounds());
     };
 
     self.highlight = function() {
-        leafletLayer.setStyle(options.highlightedStyle);
-        self.highlighted = true;
+        
+        if (!self.selected) {
+            leafletLayer.setStyle(options.highlightedStyle);
+            self.highlighted = true;
+        }
     };
 
     self.unhighlight = function() {

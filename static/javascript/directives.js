@@ -23,8 +23,8 @@ angular.module("dashboard").directive('map', function() {
                     scope.navigateToSubcounty(hierarchy[hierarchy.length -2], hierarchy[hierarchy.length -1]);
             });
 
-            scope.$watch("layers", function(layers) {
-                if (layers != undefined) {
+            function addDistrictLayers() {
+                if (scope.layers != undefined) {
                     layer_info = {
                         unselectedStyle: {
                             "fillOpacity": 0,
@@ -47,25 +47,48 @@ angular.module("dashboard").directive('map', function() {
                         name: "districts"
                     }
 
-                    map.addNavigationLayer(layers[0].features, layer_info);
-                }
+                    map.addNavigationLayer(scope.layers[0].features, layer_info);
+                }   
+            }
+
+
+
+            scope.$watch("layers", function(layers) {
+                
             });
 
             scope.$watch("district", function() {
-                if (scope.district != undefined) {
-                    var coords = scope.district.centroid.coordinates
-                    map.selectLayer(scope.district.name.toLowerCase(), "districts");    
-                }
+                
             });
 
-            scope.$watch("level", function() {
-                if (scope.level == "national") {
+            scope.$watch("location", function() {
+
+                var location = scope.location
+                if (location == undefined)
+                    return true;
+
+                addDistrictLayers();
+                addSubCountyLayers();
+
+
+                if (location.district == null) {
                     map.setView(1.0667, 31.8833, 7);
                 }
+                else if (location.district != undefined && location.subcounty == null) {
+                    map.selectLayer(scope.location.district, "districts");    
+                }
+
+                if (scope.location.subcounty != undefined)
+                {
+                    map.selectLayer(scope.location.subcounty, location.district + " subcounties");    
+                }
+
+                var date = new Date();
             });
 
-            scope.$watch("subcounties", function(subcounties) {
-                if (subcounties  != null) { 
+            function addSubCountyLayers() {
+                if (scope.subcounties  != null) { 
+                    var location = scope.location
                     layer_info = {
                         unselectedStyle: {
                             "fillOpacity": 0,
@@ -85,17 +108,12 @@ angular.module("dashboard").directive('map', function() {
                         getHierarchy: function(properties) {
                             return ["uganda", properties["DNAME_2010"].toLowerCase(), properties["SNAME_2010"].toLowerCase()];
                         },
-                        name: scope.district.name.toLowerCase() + " subcounties"
+                        name: scope.location.district + " subcounties"   
                     }
+                    map.addNavigationLayer(scope.subcounties.features, layer_info);                    
 
-                    map.addNavigationLayer(subcounties.features, layer_info);
-
-                    if (scope.subcounty != undefined)
-                    {
-                        map.selectLayer(scope.subcounty, scope.district.name.toLowerCase()+ " subcounties");    
-                    }
                 }
-            });
+            };
         }
     };
 })
