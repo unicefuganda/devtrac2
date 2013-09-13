@@ -7,9 +7,13 @@ from time import *
 def given_that_i_am_a_regular_user(step):
     world.page = Page(world.browser)
 
-@step(u'When I open dashboard for (\w+)')
-def when_i_open_dashboard_for_(step, district):
+@step(u'When I open dashboard for (\w+)$')
+def when_i_open_district_dashboard_for_(step, district):
     world.page.visit_district_dashboard(district)
+
+@step(u'When I open dashboard for (\w+) (\w+)$')
+def when_i_open_subcounty_dashboard_for_(step, district, subcounty):
+    world.page.visit_subcounty_dashboard(district, subcounty)
 
 @step(u'When I go to the homepage')
 def when_i_go_to_the_homepage(step):
@@ -26,30 +30,33 @@ def and_it_is_centered_on(step, lat, lng, zoom):
     assert_equals(world.page.current_position(), coordinates)
     assert_equals(world.page.current_zoom(), int(zoom))
 
+@step(u'And I see the layer "([^"]*)" displayed')
 @step(u'Then I see the layer "([^"]*)" displayed')
 def then_i_see_the_layer_district_displayed(step, layer_name):
-    assert_in(layer_name, world.page.current_layers())
+    def test(page):
+        return layer_name in page.current_layers()
 
-@step(u'When I click on (.+) district')
-@step(u'And I click on (.+) district')
-def when_i_click_on_district(step, district):
-    world.page.click_on_district(district)
+    world.page.wait_for(test)
+    assert_in(layer_name.lower(), world.page.current_layers())
 
-@step(u'When I hover over (.+) district')
-@step(u'And I hover over (.+) district')
-def when_i_hover_over_district(step, district):
-    world.page.hover_over_district(district)
+@step(u'When I click on \"(.+)\" in \"(.+)\"')
+@step(u'And I click on \"(.+)\" in \"(.+)\"')
+def when_i_click_on_layer(step, name, layer_name):
+    world.page.click_on_layer(name, layer_name)
 
-@step(u'Then the (.+) district will be selected')
-def then_the_district_will_be_selected(step, district):
-    world.page.wait_for(lambda page: page.selected_district() == district.lower())
-    assert_equals(world.page.selected_district(), district.lower())
+@step(u'When I hover over \"(.+)\" in \"(.+)\"$')
+@step(u'And I hover over \"(.+)\" in \"(.+)\"$')
+def when_i_hover_over_district(step, district, level):
+    world.page.hover_over(district.lower(), level.lower())
 
-@step(u'Then the (.+) district will be highlighted')
-def then_the_district_will_be_highlighted(step, district):
-    assert_equals(world.page.highlighted_district(), district.lower())
+@step(u'Then \"(.+)\" in \"(.+)\" will be selected')
+def then_the_district_will_be_selected(step, name, level):
+    world.page.wait_for(lambda page: page.selected_layer(level.lower()) == name.lower())
+    assert_equals(world.page.selected_layer(level.lower()), name.lower())
 
-# 
+@step(u'Then \"(.+)\" in \"(.+)\" will be highlighted')
+def then_the_district_will_be_highlighted(step, district, layer_name):
+    assert_equals(world.page.highlighted_layer(layer_name), district.lower())
 
 @step(u'When I go to the home page')
 def when_i_go_to_the_home_page(step):

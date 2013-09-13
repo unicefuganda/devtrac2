@@ -54,7 +54,7 @@ angular.module("dashboard").directive('map', function() {
             scope.$watch("district", function() {
                 if (scope.district != undefined) {
                     var coords = scope.district.centroid.coordinates
-                    map.selectLayer("districts", scope.district.name.toLowerCase());    
+                    map.selectLayer(scope.district.name.toLowerCase(), "districts");    
                 }
             });
 
@@ -92,7 +92,7 @@ angular.module("dashboard").directive('map', function() {
 
                     if (scope.subcounty != undefined)
                     {
-                        map.selectLayer(scope.district.name .toLowerCase()+ " subcounties", scope.subcounty);    
+                        map.selectLayer(scope.subcounty, scope.district.name.toLowerCase()+ " subcounties");    
                     }
                 }
             });

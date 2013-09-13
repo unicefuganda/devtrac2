@@ -99,40 +99,38 @@ DevTrac.Map = function(element) {
         getLayers: function() {
             return self.navigation_layers;
         },
-        getSelectedDistrict: function() {
+        getSelectedLayer: function(layer_name) {
             var layers = $.grep(self.layers, function(layer, index) {
-                return layer.name == "districts" && layer.isSelected() == true
+                return layer.name == layer_name && layer.isSelected() == true
             });
             if (layers.length == 0)
                 return null;
             return layers[0].hierarchy[layers[0].hierarchy.length - 1];
         },
-        getHighlightedDistrict: function() {
+        getHighlightedLayer: function(layer_name) {
             var highlightedLayers = $.grep(self.layers, function(layer, index) {
-                return layer.isHighlighted();
+                return layer.isHighlighted() && layer.name == layer_name;
             });
             if (highlightedLayers.length == 0)
                 return null;
             return highlightedLayers[0].hierarchy[highlightedLayers[0].hierarchy.length - 1];
         },
-        selectDistrict: function(district_name) {
+        highlightLayer: function(name, layer_name) {
             self.clearHighlight();
             var layers = $.grep(self.layers, function(layer, index) {
-                return layer.name == "districts" && layer.hierarchy[layer.hierarchy.length - 1] == district_name
-            });
-            layers[0].leafletLayer.fire("click");
-        },
-        highlightDistrict: function(district_name) {
-            self.clearHighlight();
-            var layers = $.grep(self.layers, function(layer, index) {
-                return layer.name == "districts" && layer.hierarchy[layer.hierarchy.length - 1] == district_name
+                return layer.name == layer_name && layer.hierarchy[layer.hierarchy.length - 1] == name
             });
             layers[0].leafletLayer.fire("mouseover");
         },
-        selectLayer: function(name, location_name) {
-            var layers = $.grep(self.layers, function(layer, index) {
-                //TODO: refactor
-                return layer.name == name && layer.hierarchy[layer.hierarchy.length - 1] == location_name
+        clickLayer: function(location_name, layer_name) {
+            var layers = $.grep(self.layers, function(layer, index) {                
+                return layer.name == layer_name && layer.hierarchy[layer.hierarchy.length - 1] == location_name.toLowerCase()
+            });
+            layers[0].select();
+        },
+        selectLayer: function(location_name, name) {
+            var layers = $.grep(self.layers, function(layer, index) {                
+                return layer.name == name && layer.hierarchy[layer.hierarchy.length - 1] == location_name.toLowerCase()
             });
             layers[0].focusLayer();
         }

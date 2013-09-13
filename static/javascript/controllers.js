@@ -41,8 +41,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
                 };
 
                 $rootScope.subcounty = $routeParams.subcounty;
-
-
                 $rootScope.$apply();
             });
         });

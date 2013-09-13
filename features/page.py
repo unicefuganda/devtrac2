@@ -6,11 +6,14 @@ class Page:
     def __init__(self, browser):
         self.browser = browser
 
+    def visit_national_dashboard(self):
+        self.browser.visit("%s/" % self.base_url)
+
     def visit_district_dashboard(self, district_name):
         self.browser.visit("%s/district/%s" % (self.base_url, district_name))
 
-    def visit_national_dashboard(self):
-        self.browser.visit("%s/" % self.base_url)
+    def visit_subcounty_dashboard(self, district_name, subcounty_name):
+        self.browser.visit("%s/district/%s/%s" % (self.base_url, district_name, subcounty_name))
 
     def title(self):
         return self.browser.find_by_css("#location .title").first.value
@@ -29,22 +32,22 @@ class Page:
     def current_layers(self):
         return self.browser.evaluate_script("window.map.getLayers()")        
 
-    def selected_district(self):
-        return self.browser.evaluate_script("window.map.getSelectedDistrict()")
+    def selected_layer(self, level):
+        return self.browser.evaluate_script("window.map.getSelectedLayer('%s')" % level.lower())
 
-    def highlighted_district(self):
-        return self.browser.evaluate_script("window.map.getHighlightedDistrict()")
+    def highlighted_layer(self, layer_name):
+        return self.browser.evaluate_script("window.map.getHighlightedLayer('%s')" % layer_name.lower())
 
-    def click_on_district(self, district):
-        self.browser.execute_script("window.map.selectDistrict('%s')" % district.lower())
+    def click_on_layer(self, name, layer_name):
+        self.browser.execute_script("window.map.clickLayer('%s', '%s')" % (name.lower(), layer_name.lower()))
 
-    def hover_over_district(self, district):
-        self.browser.execute_script("window.map.highlightDistrict('%s')" % district.lower())
+    def hover_over(self, district, subcounty):
+        self.browser.execute_script("window.map.highlightLayer('%s', '%s')" % (district.lower(), subcounty.lower()))
 
     def wait_for(self, function):
         for _ in itertools.repeat(None, 10):
-            if (function(self)):
+            if (function(self)):    
                 break
-            time.sleep(0.2)
+            time.sleep(0.5)
 
 
