@@ -70,7 +70,7 @@ DevTrac.Map = function(element) {
 
                     var options = $.extend({}, layer_info, {
                         clickLayerHandler: function(featureProperties, hierarchy) {
-                            
+                            unselectLayers(hierarchy.length);
                             self.clickDistrictHandler(featureProperties, hierarchy);
                         },
                         selectLayerHandler: function(featureProperties, hierarchy) {
