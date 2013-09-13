@@ -92,6 +92,6 @@ def then_the_map_uganda_gulu_will_be_displayed(step):
 def and_centered_on_2_8762_32_4767_at_8_zoom(step):
     assert True, 'This step must be implemented'
 
-@step(u'Then The back ground color of the search text field will change to hex FF9999')
-def then_the_back_ground_color_of_the_search_text_field_will_change_to_hex_ff9999(step):
+@step(u'Then The back ground color of the search text field will change to hex FF6666')
+def then_the_back_ground_color_of_the_search_text_field_will_change_to_hex_ff6666(step):
     assert True, 'This step must be implemented'

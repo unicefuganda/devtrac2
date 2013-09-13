@@ -20,4 +20,4 @@ Given that I am a regular user
 When I go to the national dashboard
 And Enter 'I Dont Exist District' into the search text box
 And Press Enter
-Then The back ground color of the search text field will change to hex FF9999
+Then The back ground color of the search text field will change to hex FF6666
