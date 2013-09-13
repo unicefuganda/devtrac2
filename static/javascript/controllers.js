@@ -19,8 +19,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
         loadReferenceData();
     }
 
-
-
     if (!$routeParams.district) {
         $rootScope.level = "national";
         $rootScope.location_name = "Uganda";

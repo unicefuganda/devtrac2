@@ -3,13 +3,11 @@ angular.module("dashboard").directive('map', function() {
 
         controller: function($scope, $location) {
             $scope.navigateToDistrict = function(districtName) {
-                console.log("change district")
                 $location.path("/district/" + districtName);
                 $scope.$apply();
             }
 
             $scope.navigateToSubcounty = function(districtName,subcountyName) {
-                console.log("change district")
                 $location.path("/district/" + districtName + "/" + subcountyName);
                 $scope.$apply();
             }
@@ -53,15 +51,6 @@ angular.module("dashboard").directive('map', function() {
                 }
             });
 
-            scope.$watch("subcounty", function() {
-                if (scope.subcounty != undefined)
-                {
-                    console.log(scope.subcounty);
-                    map.selectLayer(scope.district.name .toLowerCase()+ " subcounties", scope.subcounty);    
-                }
-
-            })
-
             scope.$watch("district", function() {
                 if (scope.district != undefined) {
                     var coords = scope.district.centroid.coordinates
@@ -100,6 +89,11 @@ angular.module("dashboard").directive('map', function() {
                     }
 
                     map.addNavigationLayer(subcounties.features, layer_info);
+
+                    if (scope.subcounty != undefined)
+                    {
+                        map.selectLayer(scope.district.name .toLowerCase()+ " subcounties", scope.subcounty);    
+                    }
                 }
             });
         }

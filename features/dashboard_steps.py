@@ -27,8 +27,8 @@ def and_it_is_centered_on(step, lat, lng, zoom):
     assert_equals(world.page.current_zoom(), int(zoom))
 
 @step(u'Then I see the layer "([^"]*)" displayed')
-def then_i_see_the_layer_district_displayed(step, layer_name):    
-     assert_in(layer_name, world.page.current_layers())
+def then_i_see_the_layer_district_displayed(step, layer_name):
+    assert_in(layer_name, world.page.current_layers())
 
 @step(u'When I click on (.+) district')
 @step(u'And I click on (.+) district')
@@ -42,6 +42,7 @@ def when_i_hover_over_district(step, district):
 
 @step(u'Then the (.+) district will be selected')
 def then_the_district_will_be_selected(step, district):
+    world.page.wait_for(lambda page: page.selected_district() == district.lower())
     assert_equals(world.page.selected_district(), district.lower())
 
 @step(u'Then the (.+) district will be highlighted')
