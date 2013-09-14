@@ -56,7 +56,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
             district: district_name,
             subcounty: subcounty_name
         }
-        setLocationName(location);
+        setLocationName($rootScope.location);
     };
 
     (function loadReferenceData() {
