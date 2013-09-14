@@ -57,8 +57,12 @@ angular.module("dashboard").directive('map', function() {
                 
             });
 
-            scope.$watch("district", function() {
-                
+            scope.$watch("layers", function() {
+                addDistrictLayers();
+            });
+
+            scope.$watch("subcounties", function() {
+                addSubCountyLayers();
             });
 
             scope.$watch("location", function() {
@@ -66,10 +70,6 @@ angular.module("dashboard").directive('map', function() {
                 var location = scope.location
                 if (location == undefined)
                     return true;
-
-                addDistrictLayers();
-                addSubCountyLayers();
-
 
                 if (location.district == null) {
                     map.setView(1.0667, 31.8833, 7);

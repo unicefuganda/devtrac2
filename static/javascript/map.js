@@ -1,4 +1,39 @@
 var DevTrac = {};
+DevTrac.timings = {};
+
+String.prototype.lpad = function(padString, length) {
+    var str = this;
+    while (str.length < length)
+        str = padString + str;
+    return str;
+}
+
+DevTrac.timings.printPeriod = function(date1_ms, date2_ms){
+  var difference_ms = date2_ms - date1_ms;
+  if (isNaN(difference_ms) || difference_ms < 0)
+    return "  -  ";
+  return difference_ms.toString().lpad(" ", 5);
+}
+
+DevTrac.timings.print = function() {
+    var labels = [
+        ["Zoom Start:", "zoomstart"],
+        ["Zoom End:", "zoomend"],
+        ["Move Start:", "movestart"],
+        ["Move End:", "moveend"],
+        ["Url:", "urlchange"],
+        ["Unselect:", "unselectend"],
+
+    ];
+    var output = "";
+    $.each(labels, function(index, element) {
+        output += element[0] + DevTrac.timings.printPeriod(DevTrac.timings["click"], DevTrac.timings[element[1]]) + " ";
+
+    })
+    console.log(output);
+};
+
+
 DevTrac.Map = function(element) {
 
     var self = this,
@@ -6,6 +41,22 @@ DevTrac.Map = function(element) {
 
     map.on("baselayerchange", function(layer) {
         self.activeLayer = layer;
+    });
+
+    map.on("movestart", function(layer) {
+        DevTrac.timings["movestart"] = new Date().getTime();
+    });
+
+    map.on("moveend", function(layer) {
+        DevTrac.timings["moveend"] = new Date().getTime();
+    })
+
+    map.on("zoomstart", function(layer) {
+        DevTrac.timings["zoomstart"] = new Date().getTime();
+    });
+
+    map.on("zoomend", function(layer) {
+        DevTrac.timings["zoomend"] = new Date().getTime();
     });
 
     var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -40,7 +91,6 @@ DevTrac.Map = function(element) {
     return {
 
         addNavigationLayer: function(features, layer_info) {
-            
             self.navigation_layers.push(layer_info.name);
 
             function unselectLayers(level) {
@@ -57,6 +107,7 @@ DevTrac.Map = function(element) {
                 self.layers = $.grep(self.layers, function(layer, index) {
                     return layer.hierarchy.length <= level;
                 });
+                DevTrac.timings["unselectend"] = new Date().getTime();
             };
 
 
@@ -155,7 +206,7 @@ DevTrac.Layer = function(leafletLayer, options, featureProperties, map) {
     self.hierarchy = options.getHierarchy(featureProperties);
 
     leafletLayer.on("click", function() {
-        var date = new Date();
+        DevTrac.timings["click"] = new Date().getTime();
         self.select();
     });
 

@@ -1,4 +1,7 @@
 angular.module("dashboard").controller("DashboardCtrl", function($rootScope, districtService, $routeParams, $scope, $q) {
+
+    DevTrac.timings["urlchange"] = new Date().getTime();
+
     if ($rootScope.location == undefined) {
         $rootScope.location = {};
     }
