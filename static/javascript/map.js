@@ -1,40 +1,6 @@
-var DevTrac = {};
-DevTrac.timings = {};
+var DT = {};
 
-String.prototype.lpad = function(padString, length) {
-    var str = this;
-    while (str.length < length)
-        str = padString + str;
-    return str;
-}
-
-DevTrac.timings.printPeriod = function(date1_ms, date2_ms){
-  var difference_ms = date2_ms - date1_ms;
-  if (isNaN(difference_ms) || difference_ms < 0)
-    return "  -  ";
-  return difference_ms.toString().lpad(" ", 5);
-}
-
-DevTrac.timings.print = function() {
-    var labels = [
-        ["Zoom Start:", "zoomstart"],
-        ["Zoom End:", "zoomend"],
-        ["Move Start:", "movestart"],
-        ["Move End:", "moveend"],
-        ["Url:", "urlchange"],
-        ["Unselect:", "unselectend"],
-
-    ];
-    var output = "";
-    $.each(labels, function(index, element) {
-        output += element[0] + DevTrac.timings.printPeriod(DevTrac.timings["click"], DevTrac.timings[element[1]]) + " ";
-
-    })
-    console.log(output);
-};
-
-
-DevTrac.Map = function(element) {
+DT.Map = function(element) {
 
     var self = this,
         map = L.map(element.attr("id"));
@@ -44,19 +10,19 @@ DevTrac.Map = function(element) {
     });
 
     map.on("movestart", function(layer) {
-        DevTrac.timings["movestart"] = new Date().getTime();
+        DT.timings["movestart"] = new Date().getTime();
     });
 
     map.on("moveend", function(layer) {
-        DevTrac.timings["moveend"] = new Date().getTime();
+        DT.timings["moveend"] = new Date().getTime();
     })
 
     map.on("zoomstart", function(layer) {
-        DevTrac.timings["zoomstart"] = new Date().getTime();
+        DT.timings["zoomstart"] = new Date().getTime();
     });
 
     map.on("zoomend", function(layer) {
-        DevTrac.timings["zoomend"] = new Date().getTime();
+        DT.timings["zoomend"] = new Date().getTime();
     });
 
     var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -88,6 +54,12 @@ DevTrac.Map = function(element) {
         });
     };
 
+    function findLayer(layer_name, location_name) {
+        return DT.first(self.layers, function(layer) {
+            return layer.name == layer_name && layer.location_name == location_name
+        });
+    }
+
     return {
 
         addNavigationLayer: function(features, layer_info) {
@@ -96,20 +68,18 @@ DevTrac.Map = function(element) {
             function unselectLayers(level) {
                
                 $.each(self.layers, function(index, layer) {
-                    // $.each(layer_group, function(index, layer) {
-                        layer.unselect();
+                    layer.unselect();
 
-                        if (layer.hierarchy.length > 2 && layer.hierarchy.length > level) {
-                            map.removeLayer(layer.leafletLayer);
-                        }
+                    if (layer.hierarchy.length > 2 && layer.hierarchy.length > level) {
+                        map.removeLayer(layer.leafletLayer);
+                    }
                 });
 
                 self.layers = $.grep(self.layers, function(layer, index) {
                     return layer.hierarchy.length <= level;
                 });
-                DevTrac.timings["unselectend"] = new Date().getTime();
+                DT.timings["unselectend"] = new Date().getTime();
             };
-
 
             var baseLayer = L.geoJson(features, {
                 style: {
@@ -129,11 +99,9 @@ DevTrac.Map = function(element) {
                         }
                     });
 
-                    var layer = new DevTrac.Layer(layer, options, data.properties, map)
+                    var layer = new DT.Layer(layer, options, data.properties, map)
                     self.layers.push(layer);
                 },
-
-
             });
             map.addLayer(baseLayer);
             var date = new Date();
@@ -159,45 +127,36 @@ DevTrac.Map = function(element) {
             return self.navigation_layers;
         },
         getSelectedLayer: function(layer_name) {
-            var layers = $.grep(self.layers, function(layer, index) {
-                return layer.name == layer_name && layer.isSelected() == true
+            var layer = DT.first(self.layers, function(layer) {
+                return layer.name == layer_name && layer.isSelected();
             });
-            if (layers.length == 0)
+            if (layer == null)
                 return null;
-            return layers[0].hierarchy[layers[0].hierarchy.length - 1];
+            return layer.location_name;
         },
         getHighlightedLayer: function(layer_name) {
-            var highlightedLayers = $.grep(self.layers, function(layer, index) {
-                return layer.isHighlighted() && layer.name == layer_name;
+            var layer = DT.first(self.layers, function(layer) {
+                return layer.name == layer_name && layer.isHighlighted(); 
             });
-            if (highlightedLayers.length == 0)
+            if (layer == null)
                 return null;
-            return highlightedLayers[0].hierarchy[highlightedLayers[0].hierarchy.length - 1];
+            return layer.location_name;
         },
-        highlightLayer: function(name, layer_name) {
+        highlightLayer: function(layer_name, location_name) {
             self.clearHighlight();
-            var layers = $.grep(self.layers, function(layer, index) {
-                return layer.name == layer_name && layer.hierarchy[layer.hierarchy.length - 1] == name
-            });
-            layers[0].leafletLayer.fire("mouseover");
+            findLayer(layer_name, location_name).leafletLayer.fire("mouseover");
         },
-        clickLayer: function(location_name, layer_name) {
-            var layers = $.grep(self.layers, function(layer, index) {
-                return layer.name == layer_name && layer.hierarchy[layer.hierarchy.length - 1] == location_name.toLowerCase()
-            });
-            layers[0].select();
+        clickLayer: function(layer_name, location_name) {
+            findLayer(layer_name, location_name).select();
         },
-        selectLayer: function(location_name, name) {
-            var layers = $.grep(self.layers, function(layer, index) {
-                return layer.name == name && layer.hierarchy[layer.hierarchy.length - 1] == location_name.toLowerCase()
-            });
-            layers[0].focusLayer();
+        selectLayer: function(layer_name, location_name) {
+            findLayer(layer_name, location_name).focusLayer();
         }
     }
 };
 
 
-DevTrac.Layer = function(leafletLayer, options, featureProperties, map) {
+DT.Layer = function(leafletLayer, options, featureProperties, map) {
     var self = this;
     self.options = options;
     self.featureProperties = featureProperties;
@@ -206,7 +165,7 @@ DevTrac.Layer = function(leafletLayer, options, featureProperties, map) {
     self.hierarchy = options.getHierarchy(featureProperties);
 
     leafletLayer.on("click", function() {
-        DevTrac.timings["click"] = new Date().getTime();
+        DT.timings["click"] = new Date().getTime();
         self.select();
     });
 
@@ -229,7 +188,6 @@ DevTrac.Layer = function(leafletLayer, options, featureProperties, map) {
     };
 
     self.focusLayer = function() {
-
         if (options.selectLayerHandler) {
             options.selectLayerHandler(featureProperties, self.hierarchy);
         }
@@ -240,7 +198,6 @@ DevTrac.Layer = function(leafletLayer, options, featureProperties, map) {
     };
 
     self.highlight = function() {
-        
         if (!self.selected) {
             leafletLayer.setStyle(options.highlightedStyle);
             self.highlighted = true;
@@ -255,6 +212,7 @@ DevTrac.Layer = function(leafletLayer, options, featureProperties, map) {
     };
 
     return {
+        location_name: self.hierarchy[self.hierarchy.length - 1],
         unselect: self.unselect,
         leafletLayer: leafletLayer,
         hierarchy: self.hierarchy,

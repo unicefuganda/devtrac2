@@ -13,7 +13,7 @@ angular.module("dashboard").directive('map', function() {
             }
         },
         link: function(scope, element, attrs) {
-            var map = new DevTrac.Map(element);
+            var map = new DT.Map(element);
             window.map = map;
 
             map.onClickDistrict(function(properties, hierarchy) {
@@ -51,12 +51,6 @@ angular.module("dashboard").directive('map', function() {
                 }   
             }
 
-
-
-            scope.$watch("layers", function(layers) {
-                
-            });
-
             scope.$watch("layers", function() {
                 addDistrictLayers();
             });
@@ -75,12 +69,12 @@ angular.module("dashboard").directive('map', function() {
                     map.setView(1.0667, 31.8833, 7);
                 }
                 else if (location.district != undefined && location.subcounty == null) {
-                    map.selectLayer(scope.location.district, "districts");    
+                    map.selectLayer("districts", scope.location.district);    
                 }
 
                 if (scope.location.subcounty != undefined)
                 {
-                    map.selectLayer(scope.location.subcounty, location.district + " subcounties");    
+                    map.selectLayer(location.district + " subcounties", scope.location.subcounty);    
                 }
 
                 var date = new Date();
@@ -108,7 +102,7 @@ angular.module("dashboard").directive('map', function() {
                         getHierarchy: function(properties) {
                             return ["uganda", properties["DNAME_2010"].toLowerCase(), properties["SNAME_2010"].toLowerCase()];
                         },
-                        name: scope.location.district + " subcounties"   
+                        name: scope.subcounties.name  
                     }
                     map.addNavigationLayer(scope.subcounties.features, layer_info);                    
 

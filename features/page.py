@@ -39,10 +39,10 @@ class Page:
         return self.browser.evaluate_script("window.map.getHighlightedLayer('%s')" % layer_name.lower())
 
     def click_on_layer(self, name, layer_name):
-        self.browser.execute_script("window.map.clickLayer('%s', '%s')" % (name.lower(), layer_name.lower()))
+        self.browser.execute_script("window.map.clickLayer('%s', '%s')" % (layer_name.lower(), name.lower()))
 
-    def hover_over(self, district, subcounty):
-        self.browser.execute_script("window.map.highlightLayer('%s', '%s')" % (district.lower(), subcounty.lower()))
+    def hover_over(self, name, layer_name):
+        self.browser.execute_script("window.map.highlightLayer('%s', '%s')" % (layer_name.lower(), name.lower()))
 
     def wait_for(self, function):
         for _ in itertools.repeat(None, 10):

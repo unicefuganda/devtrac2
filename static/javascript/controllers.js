@@ -1,25 +1,17 @@
 angular.module("dashboard").controller("DashboardCtrl", function($rootScope, districtService, $routeParams, $scope, $q) {
+    DT.timings["urlchange"] = new Date().getTime();
+    var location = $rootScope.location == undefined ? {} : $rootScope.location;
 
-    DevTrac.timings["urlchange"] = new Date().getTime();
-
-    if ($rootScope.location == undefined) {
-        $rootScope.location = {};
-    }
-
-    function capitaliseFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
-    function setLocationName() {
+    function setLocationName(location) {
         var locationName = "Uganda"
-        if ($rootScope.location.district)
-            locationName += " - " + capitaliseFirstLetter($rootScope.location.district);
-        if ($rootScope.location.subcounty)
-            locationName += " - " + capitaliseFirstLetter($rootScope.location.subcounty);
+        if (location.district)
+            locationName += " - " + DT.capitalize(location.district);
+        if (location.subcounty)
+            locationName += " - " + DT.capitalize(location.subcounty);
         $rootScope.location_name = locationName;
     }
 
-    function loadDistrictData(onSuccess) {
+    function loadDistrictData() {
         if ($rootScope.layers != null ) {
             return true;
         }
@@ -38,8 +30,8 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
     }
 
 
-    function loadSubcountyData(onSuccess) {
-        if ($rootScope.location != null && $routeParams.district == $rootScope.location.district) {
+    function loadSubcountyData(location) {
+        if ($routeParams.district == location.district) {
             return true;
         }
 
@@ -64,11 +56,11 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
             district: district_name,
             subcounty: subcounty_name
         }
-        setLocationName();
+        setLocationName(location);
     };
 
     (function loadReferenceData() {
-        $q.all([loadSubcountyData(), loadDistrictData()]).then(setLocation);
+        $q.all([loadSubcountyData(location), loadDistrictData()]).then(setLocation);
     })();
 
 });
