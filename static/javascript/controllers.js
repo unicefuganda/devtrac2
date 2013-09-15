@@ -31,9 +31,8 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
 
 
     function loadSubcountyData(location) {
-        if ($routeParams.district == location.district) {
+        if ($routeParams.district == undefined)
             return true;
-        }
 
         var deferred = $q.defer();
 
@@ -59,8 +58,9 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
         setLocationName($rootScope.location);
     };
 
-    (function loadReferenceData() {
-        $q.all([loadSubcountyData(location), loadDistrictData()]).then(setLocation);
-    })();
+    // this uses angular promises to load the reference datasets asynchronsoly then set the locations after
+    // it will ensure there is no race conditions of not having the right layers loaded when setting the map location
+
+    $q.all([loadSubcountyData(location), loadDistrictData()]).then(setLocation);
 
 });

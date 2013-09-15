@@ -32,54 +32,33 @@ DT.Map = function(element) {
     });
     map.addLayer(osm);
 
-    var uganda_districts = L.tileLayer.wms("http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms", {
-        layers: 'geonode:uganda_districts_2010',
-        format: 'image/png',
-        transparent: true,
-        attribution: "Uganda disctrict data"
-    });
-
-    var layer_control = L.control.layers({
-        tiles: uganda_districts
-    })
-    layer_control.addTo(map);
-
     self.layers = [];
     self.selectedLayer;
     self.navigation_layers = [];
-
-    self.clearHighlight = function() {
-        $.each(self.layers, function(index, layer) {
-            layer.unhighlight();
-        });
-    };
 
     function findLayer(layer_name, location_name) {
         return DT.first(self.layers, function(layer) {
             return layer.name == layer_name && layer.location_name == location_name
         });
     }
+    function unselect() {
+        $.each(self.layers, function(index, layer) {
+            layer.unselect();
+            if (layer.hierarchy.length > 2) {
+                map.removeLayer(layer.leafletLayer);
+            }
+            
+        });
+
+        self.layers = $.grep(self.layers, function(layer, index) {
+            return layer.hierarchy.length <= 2;
+        });
+        DT.timings["unselectend"] = new Date().getTime();
+    }
 
     return {
-
         addNavigationLayer: function(features, layer_info) {
             self.navigation_layers.push(layer_info.name);
-
-            function unselectLayers(level) {
-               
-                $.each(self.layers, function(index, layer) {
-                    layer.unselect();
-
-                    if (layer.hierarchy.length > 2 && layer.hierarchy.length > level) {
-                        map.removeLayer(layer.leafletLayer);
-                    }
-                });
-
-                self.layers = $.grep(self.layers, function(layer, index) {
-                    return layer.hierarchy.length <= level;
-                });
-                DT.timings["unselectend"] = new Date().getTime();
-            };
 
             var baseLayer = L.geoJson(features, {
                 style: {
@@ -91,11 +70,7 @@ DT.Map = function(element) {
 
                     var options = $.extend({}, layer_info, {
                         clickLayerHandler: function(featureProperties, hierarchy) {
-                            unselectLayers(hierarchy.length);
                             self.clickDistrictHandler(featureProperties, hierarchy);
-                        },
-                        selectLayerHandler: function(featureProperties, hierarchy) {
-                            // unselectLayers(hierarchy.length);
                         }
                     });
 
@@ -143,11 +118,16 @@ DT.Map = function(element) {
             return layer.location_name;
         },
         highlightLayer: function(layer_name, location_name) {
-            self.clearHighlight();
+            $.each(self.layers, function(index, layer) {
+                layer.unhighlight();
+            });
             findLayer(layer_name, location_name).leafletLayer.fire("mouseover");
         },
         clickLayer: function(layer_name, location_name) {
             findLayer(layer_name, location_name).select();
+        },
+        unselect: function() {
+            unselect();
         },
         selectLayer: function(layer_name, location_name) {
             findLayer(layer_name, location_name).focusLayer();
@@ -188,10 +168,6 @@ DT.Layer = function(leafletLayer, options, featureProperties, map) {
     };
 
     self.focusLayer = function() {
-        if (options.selectLayerHandler) {
-            options.selectLayerHandler(featureProperties, self.hierarchy);
-        }
-
         self.selected = true;
         leafletLayer.setStyle(options.selectedStyle);
         map.fitBounds(leafletLayer.getBounds());

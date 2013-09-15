@@ -30,19 +30,19 @@
             <li class="{{ "active" if (section == "spikes") else "" }}"><a href="/spikes">Spikes</a></li>
             <li class="{{ "active" if (section == "dashboard") else "" }}"><a href="/#/">Dashboards</a></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
     </div>
 
 
     <div class="container">
         {% block content %}{% endblock %}
+
         <script type="text/javascript" src="/static/javascript/lib/bootstrap.js"></script>
         <script type="test/javascript" src="/static/javascript/lib/angular.min.js"></script>
         <script type="text/javascript" src="/static/javascript/lib//jquery-2.0.3.min.js"></script>
-        <script type="text/javascript" src="/static/javascript/application.js"></script>
         
-        </script>
+        <script type="text/javascript" src="/static/javascript/application.js"></script></script>
 
         {% block javascript %}{% endblock %}
     </div>   

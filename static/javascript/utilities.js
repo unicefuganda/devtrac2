@@ -16,7 +16,7 @@ DT.first = function(list, func) {
 
 DT.capitalize = function(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-}
+};
 
 DT.timings.printPeriod = function(date1_ms, date2_ms){
   var difference_ms = date2_ms - date1_ms;
@@ -38,7 +38,6 @@ DT.timings.print = function() {
     var output = "";
     $.each(labels, function(index, element) {
         output += element[0] + DT.timings.printPeriod(DT.timings["click"], DT.timings[element[1]]) + " ";
-
-    })
+    });
     console.log(output);
 };

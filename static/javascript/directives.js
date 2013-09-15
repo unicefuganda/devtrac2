@@ -55,10 +55,6 @@ angular.module("dashboard").directive('map', function() {
                 addDistrictLayers();
             });
 
-            scope.$watch("subcounties", function() {
-                addSubCountyLayers();
-            });
-
             scope.$watch("location", function() {
 
                 var location = scope.location
@@ -66,14 +62,19 @@ angular.module("dashboard").directive('map', function() {
                     return true;
 
                 if (location.district == null) {
+                    map.unselect();
                     map.setView(1.0667, 31.8833, 7);
                 }
                 else if (location.district != undefined && location.subcounty == null) {
+                    map.unselect();
+                    addSubCountyLayers();
                     map.selectLayer("districts", scope.location.district);    
                 }
 
                 if (scope.location.subcounty != undefined)
                 {
+                    map.unselect();
+                    addSubCountyLayers();
                     map.selectLayer(location.district + " subcounties", scope.location.subcounty);    
                 }
 
@@ -105,7 +106,6 @@ angular.module("dashboard").directive('map', function() {
                         name: scope.subcounties.name  
                     }
                     map.addNavigationLayer(scope.subcounties.features, layer_info);                    
-
                 }
             };
         }
