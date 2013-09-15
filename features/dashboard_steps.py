@@ -21,6 +21,7 @@ def when_i_go_to_the_homepage(step):
 
 @step(u'Then I see map of (.+)')
 def then_i_see_map_of(step, title):
+    world.page.wait_for(lambda page: title == page.title())
     assert_equals(world.page.title(), title)
 
 @step(u'And It is centered on (.+), (.+) at (.+) zoom')
@@ -33,10 +34,7 @@ def and_it_is_centered_on(step, lat, lng, zoom):
 @step(u'And I see the layer "([^"]*)" displayed')
 @step(u'Then I see the layer "([^"]*)" displayed')
 def then_i_see_the_layer_district_displayed(step, layer_name):
-    def test(page):
-        return layer_name in page.current_layers()
-
-    world.page.wait_for(test)
+    world.page.wait_for(lambda page: layer_name in page.current_layers())
     assert_in(layer_name.lower(), world.page.current_layers())
 
 @step(u'When I click on \"(.+)\" in \"(.+)\"')
