@@ -61,7 +61,7 @@ DT.Map = function(element) {
 
     return {
         addPointsLayer: function(features, layer_info) {
-            var greenIcon = L.icon({
+            var waterIcon = L.icon({
                 iconUrl: '/static/javascript/lib/images/water-icon.png',
                 shadowUrl: null,
 
@@ -73,9 +73,9 @@ DT.Map = function(element) {
             });
 
             var geojsonMarkerOptions = {
-                radius: 4,
+                radius: 5,
                 fillColor: "#0000ff",
-                color: "#000",
+                color: "#333",
                 weight: 0,
                 opacity: 1,
                 fillOpacity: 0.3
@@ -85,10 +85,38 @@ DT.Map = function(element) {
             var baseLayer = L.geoJson(features, {
                 pointToLayer: function (feature, latlng) {
 
-                    return L.marker(latlng, {icon: greenIcon});
+                    var sourceType = feature.properties.SourceType;
+
+                    switch(sourceType) {
+
+                        // case "Deep borehole":
+                        //     color = "#ff00ff";
+                        //     break;
+                        // case "Rainwater Harvest Tank":
+                        //     color = "#00ffff";
+                        //     break;
+                        // case "Dam":
+                        //     color = "#00ffff";
+                        //     break;
+                        // case "Valley Tank":
+                        //     color = "#ff0000";
+                        //     break;
+                        // case "Shallow well":
+                        //     color = "#00ff00";
+                        //     break;
+                        // case "Protected spring":
+                        //     color = "#0000ff";
+                        //     break;
+                        default: 
+                            color = "#0000ff";
+                    }
+
+                    // return L.marker(latlng, {icon: waterIcon});
+                    return L.circleMarker(latlng, $.extend(geojsonMarkerOptions, {fillColor: color}));
+
+
                 },
                 onEachFeature: function(data, layer) {
-                    console.log(arguments);
                     // var options = $.extend({}, layer_info, {
                     //     clickLayerHandler: function(featureProperties, hierarchy) {
                     //         self.clickDistrictHandler(featureProperties, hierarchy);

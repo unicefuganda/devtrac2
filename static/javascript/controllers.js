@@ -14,55 +14,58 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
     }
 
     function loadDistrictData(location) {
-        if ($rootScope.layers != null) {
-            return true;
-        }
-
         var deferred = $q.defer();
+        if ($rootScope.layers != null) {
+            deferred.resolve();
+            return deferred.promise;
+        }
 
         districtService.geojson(function(data) {
             $rootScope.layers = [{
                 features: data,
                 name: "Uganda Districts"
             }];
-
-            deferred.resolve();
+            deferred.resolve({});
         });
         return deferred.promise;
     }
 
     function loadWaterPoints(location) {
-        if (location.district == undefined || location.subcounty == undefined)
-            return true;
-
-        console.log("loadWaterPoints");
         var deferred = $q.defer();
 
-        return districtService.water_points(location.district, location.subcounty, function(data) { 
+        if (location.district == undefined || location.subcounty == undefined) {
+            deferred.resolve();
+            return deferred.promise;
+        }
+
+        districtService.water_points(location.district, location.subcounty, function(data) {
             $rootScope.water_points = {
                 features: data,
                 name: location.district + " water_points"
             };
-            deferred.resolve();
+            deferred.resolve({});
+
         });
-        return deferred.promise();
+        return deferred.promise;
     }
 
     function loadSubcountyData(location) {
-        if (location.district == undefined)
-            return true;
 
         var deferred = $q.defer();
+
+        if (location.district == undefined) {
+            deferred.resolve();
+            return deferred.promise;
+        }
 
         districtService.subcounties_geojson(location.district, function(subcounties_geojson) {
             $rootScope.subcounties = {
                 features: subcounties_geojson,
                 name: location.district + " subcounties"
             };
-            deferred.resolve();
+            deferred.resolve({});
 
         });
-
         return deferred.promise;
     }
 
@@ -75,28 +78,28 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
         }
     };
 
-    function loadSearcheableDistricts(data){      
+    function loadSearcheableDistricts(data) {
         var districts = [];
 
         districtService.getDistrictNames();
-        
-        angular.forEach(data.features,function(feature,index){
+
+        angular.forEach(data.features, function(feature, index) {
             districts.push(feature.properties['DNAME_2010']);
         });
-        $rootScope.SearcheableDistricts = districts;     
+        $rootScope.SearcheableDistricts = districts;
     };
 
 
-    $rootScope.searchHandler = function(){
-        $rootScope.navigateToDistrict($rootScope.searchText);        
+    $rootScope.searchHandler = function() {
+        $rootScope.navigateToDistrict($rootScope.searchText);
     };
 
     // this uses angular promises to load the reference datasets asynchronsoly then set the locations after
     // it will ensure there is no race conditions of not having the right layers loaded when setting the map location
-
     var newLocation = getLocation();
-    $q.all([loadSubcountyData(newLocation), loadDistrictData(newLocation), loadWaterPoints(newLocation)])
-        .then(function() {
+
+    $q.all([loadDistrictData(newLocation), loadSubcountyData(newLocation), loadWaterPoints(newLocation)])
+        .then(function(value) {
             setLocationName(newLocation);
             $rootScope.location = newLocation;
         });

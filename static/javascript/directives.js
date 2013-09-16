@@ -62,17 +62,11 @@ angular.module("dashboard").directive('map', function() {
 
             };
 
-            scope.$watch("water_points", function() {
-                console.log("water points changed");
-                addWaterPoints();
-            });
-
             scope.$watch("layers", function() {
                 addDistrictLayers();
             });
 
             scope.$watch("location", function() {
-
                 var location = scope.location
                 if (location == undefined)
                     return true;
@@ -91,6 +85,7 @@ angular.module("dashboard").directive('map', function() {
                 {
                     map.unselect();
                     addSubCountyLayers();
+                    addWaterPoints();
                     map.selectLayer(location.district + " subcounties", scope.location.subcounty);    
                 }
 

@@ -62,5 +62,6 @@ angular.module("dashboard").service('districtService', function($http, $filter) 
         +"</Filter>";
 
         $http.jsonp(url);
+        return null;
     };
 });
