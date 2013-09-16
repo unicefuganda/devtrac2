@@ -3,12 +3,12 @@ angular.module("dashboard").directive('map', function() {
 
         controller: function($scope, $location) {
             $scope.navigateToDistrict = function(districtName) {
-                $location.path("/district/" + districtName);
+                $location.path("/district/" + DT.encode(districtName));
                 $scope.$apply();
             }
 
             $scope.navigateToSubcounty = function(districtName,subcountyName) {
-                $location.path("/district/" + districtName + "/" + subcountyName);
+                $location.path("/district/" + DT.encode(districtName) + "/" + DT.encode(subcountyName));
                 $scope.$apply();
             }
         },

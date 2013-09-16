@@ -1,4 +1,6 @@
-DT.timings = {};
+if (typeof DT == "undefined") 
+    DT = {};
+
 
 DT.lpad = function(str, padString, length) {
     while (str.length < length)
@@ -18,12 +20,21 @@ DT.capitalize = function(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
+DT.encode = function(name) {
+    return name.replace('/','_');
+};
+
+DT.decode = function(name) {
+    return name.replace('_','/');
+};
+
+DT.timings = {}; 
 DT.timings.printPeriod = function(date1_ms, date2_ms){
   var difference_ms = date2_ms - date1_ms;
   if (isNaN(difference_ms) || difference_ms < 0)
     return "  -  ";
   return DT.lpad(difference_ms.toString()," ", 5);
-}
+};
 
 DT.timings.print = function() {
     var labels = [

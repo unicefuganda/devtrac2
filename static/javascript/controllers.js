@@ -11,8 +11,8 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
         $rootScope.location_name = locationName;
     }
 
-    function loadDistrictData() {
-        if ($rootScope.layers != null ) {
+    function loadDistrictData(location) {
+        if ($rootScope.layers != null) {
             return true;
         }
 
@@ -24,22 +24,22 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
                 name: "Uganda Districts"
             }];
 
-            deferred.resolve();            
+            deferred.resolve();
         });
         return deferred.promise;
     }
 
 
     function loadSubcountyData(location) {
-        if ($routeParams.district == undefined)
+        if (location.district == undefined)
             return true;
 
         var deferred = $q.defer();
 
-        districtService.subcounties_geojson($routeParams.district, function(subcounties_geojson) {
+        districtService.subcounties_geojson(location.district, function(subcounties_geojson) {
             $rootScope.subcounties = {
                 features: subcounties_geojson,
-                name: $routeParams.district.toLowerCase() + " subcounties"
+                name: location.district + " subcounties"
             };
             deferred.resolve();
 
@@ -48,19 +48,22 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
         return deferred.promise;
     }
 
-    function setLocation() {
-        var district_name = $routeParams.district == null ? null : $routeParams.district.toLowerCase();
-        var subcounty_name = $routeParams.subcounty == null ? null : $routeParams.subcounty.toLowerCase(); 
-        $rootScope.location = {
+    function getLocation() {
+        var district_name = $routeParams.district == null ? null : DT.decode($routeParams.district.toLowerCase());
+        var subcounty_name = $routeParams.subcounty == null ? null : DT.decode($routeParams.subcounty.toLowerCase());
+        return {
             district: district_name,
             subcounty: subcounty_name
         }
-        setLocationName($rootScope.location);
     };
 
     // this uses angular promises to load the reference datasets asynchronsoly then set the locations after
     // it will ensure there is no race conditions of not having the right layers loaded when setting the map location
 
-    $q.all([loadSubcountyData(location), loadDistrictData()]).then(setLocation);
-
+    var newLocation = getLocation();
+    $q.all([loadSubcountyData(newLocation), loadDistrictData(newLocation)])
+        .then(function() {
+            setLocationName(newLocation);
+            $rootScope.location = newLocation;
+        });
 });
