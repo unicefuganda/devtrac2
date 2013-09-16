@@ -13,7 +13,8 @@ assets = Environment(app)
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-js = Bundle('javascript/lib/angular.min.js', 
+js = Bundle(
+	'javascript/lib/angular.min.js', 
 	'javascript/lib/angular-route.min.js', 
 	'javascript/lib/jquery-2.0.3.min.js',
 	'javascript/dashboard.js',
@@ -28,6 +29,14 @@ js = Bundle('javascript/lib/angular.min.js',
      filters='jsmin', output='gen/packed.js')
 
 assets.register('js_all', js)
+
+css = Bundle(
+	'css/lib/bootstrap.min.css', 
+	'css/lib/leaflet.css', 
+	'css/application.css',
+     filters='cssmin', output='gen/packed.css')
+
+assets.register('css_all', css)
 
 @app.route("/spikes/")
 def spikes():
