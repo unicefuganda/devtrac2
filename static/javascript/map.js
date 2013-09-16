@@ -62,13 +62,13 @@ DT.Map = function(element) {
     return {
         addPointsLayer: function(features, layer_info) {
             var greenIcon = L.icon({
-                iconUrl: 'leaf-green.png',
-                shadowUrl: 'leaf-shadow.png',
+                iconUrl: '/static/javascript/lib/images/water-icon.png',
+                shadowUrl: null,
 
-                iconSize:     [38, 95], // size of the icon
-                shadowSize:   [50, 64], // size of the shadow
-                iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-                shadowAnchor: [4, 62],  // the same for the shadow
+                iconSize:     [16, 16], // size of the icon
+                shadowSize:   [0, 0], // size of the shadow
+                iconAnchor:   [16, 16], // point of the icon which will correspond to marker's location
+                shadowAnchor: [0, 0],  // the same for the shadow
                 popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
             });
 
@@ -83,12 +83,9 @@ DT.Map = function(element) {
 
             self.navigation_layers.push(layer_info.name);
             var baseLayer = L.geoJson(features, {
-                icon: greenIcon,
-                style: {
-                    icon: greenIcon
-                },
                 pointToLayer: function (feature, latlng) {
-                    return L.circleMarker(latlng, geojsonMarkerOptions);
+
+                    return L.marker(latlng, {icon: greenIcon});
                 },
                 onEachFeature: function(data, layer) {
                     console.log(arguments);
