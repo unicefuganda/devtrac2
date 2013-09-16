@@ -17,7 +17,7 @@ DT.first = function(list, func) {
 };
 
 DT.capitalize = function(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    return string.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
 };
 
 DT.encode = function(name) {

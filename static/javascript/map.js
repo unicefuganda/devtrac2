@@ -89,24 +89,24 @@ DT.Map = function(element) {
 
                     switch(sourceType) {
 
-                        // case "Deep borehole":
-                        //     color = "#ff00ff";
-                        //     break;
-                        // case "Rainwater Harvest Tank":
-                        //     color = "#00ffff";
-                        //     break;
-                        // case "Dam":
-                        //     color = "#00ffff";
-                        //     break;
-                        // case "Valley Tank":
-                        //     color = "#ff0000";
-                        //     break;
-                        // case "Shallow well":
-                        //     color = "#00ff00";
-                        //     break;
-                        // case "Protected spring":
-                        //     color = "#0000ff";
-                        //     break;
+                        case "Deep borehole":
+                            color = "#ff00ff";
+                            break;
+                        case "Rainwater Harvest Tank":
+                            color = "#00ffff";
+                            break;
+                        case "Dam":
+                            color = "#00ffff";
+                            break;
+                        case "Valley Tank":
+                            color = "#ff0000";
+                            break;
+                        case "Shallow well":
+                            color = "#00ff00";
+                            break;
+                        case "Protected spring":
+                            color = "#0000ff";
+                            break;
                         default: 
                             color = "#0000ff";
                     }

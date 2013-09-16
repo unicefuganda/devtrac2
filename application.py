@@ -16,7 +16,7 @@ def spikes():
 	return render_template('dashboard.html', section="dashboards")
 
 
-@app.route("/district/<name>/")
+@app.route("/district/<name>")
 def district(name):
 	return render_template('dashboard.html', section="dashboards")
 
