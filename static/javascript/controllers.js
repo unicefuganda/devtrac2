@@ -1,6 +1,8 @@
 angular.module("dashboard").controller("DashboardCtrl", function($rootScope, districtService, $routeParams, $scope, $q) {
     DT.timings["urlchange"] = new Date().getTime();
     var location = $rootScope.location == undefined ? {} : $rootScope.location;
+    $rootScope.SearcheableDistricts = [];
+    $rootScope.searchText = null;
 
     function setLocationName(location) {
         var locationName = "Uganda"
@@ -55,6 +57,19 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
             district: district_name,
             subcounty: subcounty_name
         }
+    };
+
+    function loadSearcheableDistricts(data){      
+        var districts = [];
+        angular.forEach(data.features,function(feature,index){
+            districts.push(feature.properties['DNAME_2010']);
+        });
+        $rootScope.SearcheableDistricts = districts;     
+    };
+
+
+    $rootScope.searchHandler = function(){
+        $rootScope.navigateToDistrict($rootScope.searchText);        
     };
 
     // this uses angular promises to load the reference datasets asynchronsoly then set the locations after
