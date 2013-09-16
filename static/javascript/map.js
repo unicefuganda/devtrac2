@@ -42,6 +42,9 @@ DT.Map = function(element) {
         });
     }
     function unselect() {
+        if (self.water_points != null)
+                map.removeLayer(self.water_points);
+
         $.each(self.layers, function(index, layer) {
             layer.unselect();
             if (layer.hierarchy.length > 2) {
@@ -57,6 +60,52 @@ DT.Map = function(element) {
     }
 
     return {
+        addPointsLayer: function(features, layer_info) {
+            var greenIcon = L.icon({
+                iconUrl: 'leaf-green.png',
+                shadowUrl: 'leaf-shadow.png',
+
+                iconSize:     [38, 95], // size of the icon
+                shadowSize:   [50, 64], // size of the shadow
+                iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+                shadowAnchor: [4, 62],  // the same for the shadow
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+
+            var geojsonMarkerOptions = {
+                radius: 4,
+                fillColor: "#0000ff",
+                color: "#000",
+                weight: 0,
+                opacity: 1,
+                fillOpacity: 0.3
+            };
+
+            self.navigation_layers.push(layer_info.name);
+            var baseLayer = L.geoJson(features, {
+                icon: greenIcon,
+                style: {
+                    icon: greenIcon
+                },
+                pointToLayer: function (feature, latlng) {
+                    return L.circleMarker(latlng, geojsonMarkerOptions);
+                },
+                onEachFeature: function(data, layer) {
+                    console.log(arguments);
+                    // var options = $.extend({}, layer_info, {
+                    //     clickLayerHandler: function(featureProperties, hierarchy) {
+                    //         self.clickDistrictHandler(featureProperties, hierarchy);
+                    //     }
+                    // });
+
+                    // var layer = new DT.Layer(layer, options, data.properties, map)
+                    // self.layers.push(layer);
+                },
+            });
+
+            self.water_points = baseLayer;
+            map.addLayer(baseLayer);
+        },
         addNavigationLayer: function(features, layer_info) {
             self.navigation_layers.push(layer_info.name);
 
@@ -79,7 +128,6 @@ DT.Map = function(element) {
                 },
             });
             map.addLayer(baseLayer);
-            var date = new Date();
 
         },
         setView: function(lat, lng, zoom) {

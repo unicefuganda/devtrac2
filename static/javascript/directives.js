@@ -51,6 +51,22 @@ angular.module("dashboard").directive('map', function() {
                 }   
             }
 
+            function addWaterPoints() {
+                if (scope.water_points != undefined) {
+                    layer_info = {
+                        name: scope.water_points.name
+                    }
+
+                    map.addPointsLayer(scope.water_points.features, layer_info);
+                }   
+
+            };
+
+            scope.$watch("water_points", function() {
+                console.log("water points changed");
+                addWaterPoints();
+            });
+
             scope.$watch("layers", function() {
                 addDistrictLayers();
             });

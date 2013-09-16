@@ -31,6 +31,22 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
         return deferred.promise;
     }
 
+    function loadWaterPoints(location) {
+        if (location.district == undefined || location.subcounty == undefined)
+            return true;
+
+        console.log("loadWaterPoints");
+        var deferred = $q.defer();
+
+        return districtService.water_points(location.district, location.subcounty, function(data) { 
+            $rootScope.water_points = {
+                features: data,
+                name: location.district + " water_points"
+            };
+            deferred.resolve();
+        });
+        return deferred.promise();
+    }
 
     function loadSubcountyData(location) {
         if (location.district == undefined)
@@ -61,6 +77,9 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
 
     function loadSearcheableDistricts(data){      
         var districts = [];
+
+        districtService.getDistrictNames();
+        
         angular.forEach(data.features,function(feature,index){
             districts.push(feature.properties['DNAME_2010']);
         });
@@ -76,7 +95,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
     // it will ensure there is no race conditions of not having the right layers loaded when setting the map location
 
     var newLocation = getLocation();
-    $q.all([loadSubcountyData(newLocation), loadDistrictData(newLocation)])
+    $q.all([loadSubcountyData(newLocation), loadDistrictData(newLocation), loadWaterPoints(newLocation)])
         .then(function() {
             setLocationName(newLocation);
             $rootScope.location = newLocation;
