@@ -4,12 +4,30 @@ from lib import excel_reader as xls
 from lib import ckan_api as ckan
 import settings as config
 import sys, os
+from flask.ext.assets import Environment, Bundle
 
 app = Flask(__name__)
 app.config.from_pyfile('application.cfg', silent=True)
 db = MongoEngine(app)
+assets = Environment(app)
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+js = Bundle('javascript/lib/angular.min.js', 
+	'javascript/lib/angular-route.min.js', 
+	'javascript/lib/jquery-2.0.3.min.js',
+	'javascript/dashboard.js',
+	'javascript/controllers.js',
+	'javascript/services.js',
+	'javascript/directives.js',
+	'javascript/map.js',
+	'javascript/utilities.js',
+	'javascript/lib/leaflet.js',
+	'javascript/application.js',
+	'javascript/lib/bootstrap.min.js',
+     filters='jsmin', output='gen/packed.js')
+
+assets.register('js_all', js)
 
 @app.route("/spikes/")
 def spikes():
