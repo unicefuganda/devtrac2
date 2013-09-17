@@ -8,6 +8,7 @@ before_script:
   - sleep 3 
   - "python application.py &"
   - sleep 3 
+  - mkdir ".webassets-cache"
 
 install: "pip install -r requirements.txt --use-mirrors"
 
