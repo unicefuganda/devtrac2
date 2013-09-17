@@ -26,6 +26,7 @@ js = Bundle(
 	'javascript/lib/leaflet.js',
 	'javascript/application.js',
 	'javascript/lib/bootstrap.min.js',
+	'javascript/lib/leaflet.markercluster.js',
      filters='jsmin', output='gen/packed.js')
 
 assets.register('js_all', js)
@@ -34,6 +35,8 @@ css = Bundle(
 	'css/lib/bootstrap.min.css', 
 	'css/lib/leaflet.css', 
 	'css/application.css',
+	'css/lib/MarkerCluster.css',
+	'css/lib/MarkerCluster.Default.css',
      filters='cssmin', output='gen/packed.css')
 
 assets.register('css_all', css)

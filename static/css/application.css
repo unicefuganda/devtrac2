@@ -79,3 +79,14 @@ footer label {
   position: absolute;
   z-index: 1;
 }
+
+.cluster-icon
+{
+  background-color: rgba(116, 223, 252, 0.6);
+  overflow: hidden;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  padding: 6px 0 0 0;
+  text-align: center;
+}

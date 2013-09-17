@@ -33,7 +33,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
     function loadWaterPoints(location) {
         var deferred = $q.defer();
 
-        if (location.district == undefined || location.subcounty == undefined) {
+        if (location.district == undefined) {
             deferred.resolve();
             return deferred.promise;
         }

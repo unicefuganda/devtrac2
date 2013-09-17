@@ -78,6 +78,7 @@ angular.module("dashboard").directive('map', function() {
                 else if (location.district != undefined && location.subcounty == null) {
                     map.unselect();
                     addSubCountyLayers();
+                    addWaterPoints();
                     map.selectLayer("districts", scope.location.district);    
                 }
 

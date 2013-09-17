@@ -46,7 +46,7 @@ class Page:
         self.browser.execute_script("window.map.highlightLayer('%s', '%s')" % (layer_name.lower(), name.lower()))
 
     def wait_for(self, function):
-        for _ in itertools.repeat(None, 6):
+        for _ in itertools.repeat(None, 10):
             if (function(self)):    
                 break
             time.sleep(0.5)

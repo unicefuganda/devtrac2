@@ -41,16 +41,17 @@ DT.Map = function(element) {
             return layer.name == layer_name && layer.location_name == location_name
         });
     }
+
     function unselect() {
         if (self.water_points != null)
-                map.removeLayer(self.water_points);
+            map.removeLayer(self.water_points);
 
         $.each(self.layers, function(index, layer) {
             layer.unselect();
             if (layer.hierarchy.length > 2) {
                 map.removeLayer(layer.leafletLayer);
             }
-            
+
         });
 
         self.layers = $.grep(self.layers, function(layer, index) {
@@ -65,11 +66,11 @@ DT.Map = function(element) {
                 iconUrl: '/static/javascript/lib/images/water-icon.png',
                 shadowUrl: null,
 
-                iconSize:     [16, 16], // size of the icon
-                shadowSize:   [0, 0], // size of the shadow
-                iconAnchor:   [16, 16], // point of the icon which will correspond to marker's location
-                shadowAnchor: [0, 0],  // the same for the shadow
-                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+                iconSize: [16, 16], // size of the icon
+                shadowSize: [0, 0], // size of the shadow
+                iconAnchor: [16, 16], // point of the icon which will correspond to marker's location
+                shadowAnchor: [0, 0], // the same for the shadow
+                popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
             });
 
             var geojsonMarkerOptions = {
@@ -82,54 +83,83 @@ DT.Map = function(element) {
             };
 
             self.navigation_layers.push(layer_info.name);
-            var baseLayer = L.geoJson(features, {
-                pointToLayer: function (feature, latlng) {
 
-                    var sourceType = feature.properties.SourceType;
+            var markers = L.markerClusterGroup({
+                showCoverageOnHover: false,
+                zoomToBoundsOnClick: false,
+                spiderfyOnMaxZoom: false,
+                removeOutsideVisibleBounds: false,
 
-                    switch(sourceType) {
-
-                        case "Deep borehole":
-                            color = "#ff00ff";
-                            break;
-                        case "Rainwater Harvest Tank":
-                            color = "#00ffff";
-                            break;
-                        case "Dam":
-                            color = "#00ffff";
-                            break;
-                        case "Valley Tank":
-                            color = "#ff0000";
-                            break;
-                        case "Shallow well":
-                            color = "#00ff00";
-                            break;
-                        case "Protected spring":
-                            color = "#0000ff";
-                            break;
-                        default: 
-                            color = "#0000ff";
-                    }
-
-                    // return L.marker(latlng, {icon: waterIcon});
-                    return L.circleMarker(latlng, $.extend(geojsonMarkerOptions, {fillColor: color}));
-
-
-                },
-                onEachFeature: function(data, layer) {
-                    // var options = $.extend({}, layer_info, {
-                    //     clickLayerHandler: function(featureProperties, hierarchy) {
-                    //         self.clickDistrictHandler(featureProperties, hierarchy);
-                    //     }
-                    // });
-
-                    // var layer = new DT.Layer(layer, options, data.properties, map)
-                    // self.layers.push(layer);
-                },
+                iconCreateFunction: function(cluster) {
+                    return new L.DivIcon({iconSize: new L.Point([20, 20]), className: "cluster-icon" , html: '<b>' + cluster.getChildCount() + '</b>' });
+                }
             });
 
-            self.water_points = baseLayer;
-            map.addLayer(baseLayer);
+            L.Icon.Default.imagePath = '/static/javascript/lib/images/';
+
+            $.each(features.features, function(index, feature) {
+                var coordinates = feature.geometry.coordinates;
+                var marker = L.circleMarker(new L.LatLng(coordinates[1], coordinates[0]), geojsonMarkerOptions);
+                markers.addLayer(marker);
+            });
+
+            map.addLayer(markers);
+
+
+            // var baseLayer = L.geoJson(features, {
+            //     pointToLayer: function (feature, latlng) {
+
+            //         var sourceType = feature.properties.SourceType;
+
+            //         switch(sourceType) {
+
+            //             case "Deep borehole":
+            //                 color = "#ff00ff";
+            //                 break;
+            //             case "Rainwater Harvest Tank":
+            //                 color = "#00ffff";
+            //                 break;
+            //             case "Dam":
+            //                 color = "#00ffff";
+            //                 break;
+            //             case "Valley Tank":
+            //                 color = "#ff0000";
+            //                 break;
+            //             case "Shallow well":
+            //                 color = "#00ff00";
+            //                 break;
+            //             case "Protected spring":
+            //                 color = "#0000ff";
+            //                 break;
+            //             default: 
+            //                 color = "#0000ff";
+            //         }
+
+            //         // return L.marker(latlng, {icon: waterIcon});
+
+
+            //         var circleMarker = L.circleMarker(latlng, $.extend(geojsonMarkerOptions, {fillColor: color}));
+
+
+
+            //         map.addLayer(circleMarker);
+
+
+            //     },
+            //     onEachFeature: function(data, layer) {
+            //         // var options = $.extend({}, layer_info, {
+            //         //     clickLayerHandler: function(featureProperties, hierarchy) {
+            //         //         self.clickDistrictHandler(featureProperties, hierarchy);
+            //         //     }
+            //         // });
+
+            //         // var layer = new DT.Layer(layer, options, data.properties, map)
+            //         // self.layers.push(layer);
+            //     },
+            // });
+
+            self.water_points = markers;
+            // map.addLayer(baseLayer);
         },
         addNavigationLayer: function(features, layer_info) {
             self.navigation_layers.push(layer_info.name);
@@ -184,7 +214,7 @@ DT.Map = function(element) {
         },
         getHighlightedLayer: function(layer_name) {
             var layer = DT.first(self.layers, function(layer) {
-                return layer.name == layer_name && layer.isHighlighted(); 
+                return layer.name == layer_name && layer.isHighlighted();
             });
             if (layer == null)
                 return null;
