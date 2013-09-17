@@ -21,8 +21,8 @@ def when_i_go_to_the_homepage(step):
 
 @step(u'Then I see map of (.+)')
 def then_i_see_map_of(step, title):
-    world.page.wait_for(lambda page: title == page.title())
-    assert_equals(world.page.title(), title)
+    world.page.wait_for(lambda page: title == page.breadcrumbs())
+    assert_equals(world.page.breadcrumbs(), title)
 
 @step(u'And It is centered on (.+), (.+) at (.+) zoom')
 def and_it_is_centered_on(step, lat, lng, zoom):

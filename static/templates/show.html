@@ -1,11 +1,12 @@
 <div id='location'>
-  <h2 class="title">{[{ location_name }]}</h2>
-  <div id="breadcrumb2">  
-    <ul class="crumbs2">  
-    <li class="first"><a href='/'><span></span>Uganda</a></li>  
-    <li><a href='/district/{[{ location.district }]}'>{[{ location.district }]}</a></li>  
-    <li><a href='/district/{[{ location.district }]}/{[{ location.subcounty }]}'>{[{ location.subcounty }]}</a></li>          
-    </ul>  
-</div> 
+<!--   <h2 class="title">{[{ location_name }]}</h2> -->
+  <div >  
+    <ul class="breadcrumb">  
+      <li class="active"><a href='/'>Uganda</a></li>  
 
+
+      <li ng-show="location.district != null"><a href='/district/{[{ location.district }]}'>{[{ location.district }]}</a></li>  
+      <li ng-show="location.subcounty != null"><a href='/district/{[{ location.district }]}/{[{ location.subcounty }]}'>{[{ location.subcounty }]}</a></li>          
+    </ul>  
+  </div> 
 </div>

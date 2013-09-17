@@ -15,8 +15,9 @@ class Page:
     def visit_subcounty_dashboard(self, district_name, subcounty_name):
         self.browser.visit("%s/district/%s/%s" % (self.base_url, district_name, subcounty_name))
 
-    def title(self):
-        return self.browser.find_by_css("#location .title").first.value
+    def breadcrumbs(self):
+        crumbs = map(lambda crumb:crumb.value, self.browser.find_by_css("#location .breadcrumb a"))
+        return " - ".join([crumb for crumb in crumbs if crumb != ""])
 
     def quit(self):
         self.browser.quit()
@@ -45,7 +46,7 @@ class Page:
         self.browser.execute_script("window.map.highlightLayer('%s', '%s')" % (layer_name.lower(), name.lower()))
 
     def wait_for(self, function):
-        for _ in itertools.repeat(None, 10):
+        for _ in itertools.repeat(None, 6):
             if (function(self)):    
                 break
             time.sleep(0.5)
