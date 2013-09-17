@@ -3,3 +3,5 @@
 *.xls
 ghostdriver.log
 static/.webassets-cache
+devtrac2.sublime-project
+devtrac2.sublime-workspace

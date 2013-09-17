@@ -105,63 +105,10 @@ DT.Map = function(element) {
 
             map.addLayer(markers);
 
-
-            // var baseLayer = L.geoJson(features, {
-            //     pointToLayer: function (feature, latlng) {
-
-            //         var sourceType = feature.properties.SourceType;
-
-            //         switch(sourceType) {
-
-            //             case "Deep borehole":
-            //                 color = "#ff00ff";
-            //                 break;
-            //             case "Rainwater Harvest Tank":
-            //                 color = "#00ffff";
-            //                 break;
-            //             case "Dam":
-            //                 color = "#00ffff";
-            //                 break;
-            //             case "Valley Tank":
-            //                 color = "#ff0000";
-            //                 break;
-            //             case "Shallow well":
-            //                 color = "#00ff00";
-            //                 break;
-            //             case "Protected spring":
-            //                 color = "#0000ff";
-            //                 break;
-            //             default: 
-            //                 color = "#0000ff";
-            //         }
-
-            //         // return L.marker(latlng, {icon: waterIcon});
-
-
-            //         var circleMarker = L.circleMarker(latlng, $.extend(geojsonMarkerOptions, {fillColor: color}));
-
-
-
-            //         map.addLayer(circleMarker);
-
-
-            //     },
-            //     onEachFeature: function(data, layer) {
-            //         // var options = $.extend({}, layer_info, {
-            //         //     clickLayerHandler: function(featureProperties, hierarchy) {
-            //         //         self.clickDistrictHandler(featureProperties, hierarchy);
-            //         //     }
-            //         // });
-
-            //         // var layer = new DT.Layer(layer, options, data.properties, map)
-            //         // self.layers.push(layer);
-            //     },
-            // });
-
             self.water_points = markers;
-            // map.addLayer(baseLayer);
         },
         addNavigationLayer: function(features, layer_info) {
+            console.log(layer_info);
             self.navigation_layers.push(layer_info.name);
 
             var baseLayer = L.geoJson(features, {
@@ -177,7 +124,6 @@ DT.Map = function(element) {
                             self.clickDistrictHandler(featureProperties, hierarchy);
                         }
                     });
-
                     var layer = new DT.Layer(layer, options, data.properties, map)
                     self.layers.push(layer);
                 },

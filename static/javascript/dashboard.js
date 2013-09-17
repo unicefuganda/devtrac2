@@ -13,6 +13,10 @@ var dashboard = angular.module('dashboard', ['ngRoute']).config(function($routeP
             controller: "DashboardCtrl",
             templateUrl: '/static/templates/show.html'
         })
+        .when('/district/:district/:subcounty/:parish', {
+            controller: "DashboardCtrl",
+            templateUrl: '/static/templates/show.html'
+        })
         
     $interpolateProvider.startSymbol('{[{');
     $interpolateProvider.endSymbol('}]}');

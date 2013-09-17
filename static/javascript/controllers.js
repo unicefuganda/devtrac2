@@ -30,6 +30,25 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
         return deferred.promise;
     }
 
+    function loadParishData(location) {
+        var deferred = $q.defer();
+        if (location.subcounty == null) {
+            deferred.resolve();
+            return deferred.promise;
+        }
+
+        districtService.parishes_geojson(location.subcounty, function(data) {   
+            $rootScope.parishes = [{
+                features: data,
+                name: location.subcounty + " parishes"
+                // name: "Uganda Districts"
+            }];
+            deferred.resolve({});
+        });
+        return deferred.promise;
+
+    }
+
     function loadWaterPoints(location) {
         var deferred = $q.defer();
 
@@ -72,9 +91,11 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
     function getLocation() {
         var district_name = $routeParams.district == null ? null : DT.decode($routeParams.district.toLowerCase());
         var subcounty_name = $routeParams.subcounty == null ? null : DT.decode($routeParams.subcounty.toLowerCase());
+        var parish_name = $routeParams.parish == null ? null : DT.decode($routeParams.parish.toLowerCase());
         return {
             district: district_name,
-            subcounty: subcounty_name
+            subcounty: subcounty_name,
+            parish: parish_name
         }
     };
 
@@ -98,7 +119,9 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
     // it will ensure there is no race conditions of not having the right layers loaded when setting the map location
     var newLocation = getLocation();
 
-    $q.all([loadDistrictData(newLocation), loadSubcountyData(newLocation), loadWaterPoints(newLocation)])
+    
+
+    $q.all([loadDistrictData(newLocation), loadSubcountyData(newLocation), loadParishData(newLocation), loadWaterPoints(newLocation)])
         .then(function(value) {
             setLocationName(newLocation);
             $rootScope.location = newLocation;

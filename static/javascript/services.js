@@ -48,6 +48,19 @@ angular.module("dashboard").service('districtService', function($http, $filter) 
         $http.jsonp(url);
     };
 
+    this.parishes_geojson = function(subcounty_name, result) {
+        processJSON3 = function(data) {          
+            result(data);
+        }
+        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?"
+        +"service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_parish_2011"
+        +"&outputFormat=json&format_options=callback:processJSON3&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">"
+        +"<PropertyIsEqualTo><PropertyName>SNAME_2010</PropertyName><Literal>" + subcounty_name.toUpperCase() 
+        +"</Literal></PropertyIsEqualTo></Filter>";
+
+        $http.jsonp(url);
+    };
+
 
     this.water_points = function(district_name, subcounty_name, result){
 
