@@ -43,3 +43,11 @@ And I hover over "Patiko" in "Gulu Subcounties"
 Then "Patiko" in "Gulu Subcounties" will be highlighted
 And I click on "Patiko" in "Gulu Subcounties"
 Then "Patiko" in "Gulu Subcounties" will be selected
+
+Scenario: Navigate by breadcrumb
+Given that I am a regular user
+When I open dashboard for Gulu Patiko
+And I click on the district breadcrumb link
+Then I see map of Uganda - Gulu
+And I click on the national breadcrumb link
+Then I see map of Uganda

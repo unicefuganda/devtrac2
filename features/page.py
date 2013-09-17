@@ -45,6 +45,12 @@ class Page:
     def hover_over(self, name, layer_name):
         self.browser.execute_script("window.map.highlightLayer('%s', '%s')" % (layer_name.lower(), name.lower()))
 
+    def click_district_breadcrumb(self):
+        self.browser.find_by_css("#location .breadcrumb .district-crumb").first.click()
+
+    def click_national_breadcrumb(self):
+        self.browser.find_by_css("#location .breadcrumb .national-crumb").first.click()
+
     def wait_for(self, function):
         for _ in itertools.repeat(None, 10):
             if (function(self)):    

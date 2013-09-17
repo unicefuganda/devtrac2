@@ -56,6 +56,15 @@ def then_the_district_will_be_selected(step, name, level):
 def then_the_district_will_be_highlighted(step, district, layer_name):
     assert_equals(world.page.highlighted_layer(layer_name), district.lower())
 
+@step(u'And I click on the district breadcrumb link')
+def and_i_click_on_the_district_breadcrumb_link(step):
+    world.page.click_district_breadcrumb()
+
+@step(u'And I click on the national breadcrumb link')
+def and_i_click_on_the_national_breadcrumb_link(step):
+    world.page.click_national_breadcrumb()
+
+
 @step(u'When I go to the home page')
 def when_i_go_to_the_home_page(step):
     assert True, 'This step must be implemented'
@@ -71,8 +80,6 @@ def and_it_will_be_of_height_150px(step):
 @step(u'Then A header \'([^\']*)\' will be displayed on the left side of the header bar')
 def then_a_header_group1_will_be_displayed_on_the_left_side_of_the_header_bar(step, group1):
     assert True, 'This step must be implemented'
-
-#
 
 @step(u'When I go to the national dashboard')
 def when_i_go_to_the_national_dashboard(step):
