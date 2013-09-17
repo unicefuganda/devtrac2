@@ -31,9 +31,9 @@ var url="http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geo
 +"&outputFormat=json&format_options=callback:processJSON&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">"
 +"<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>"+district_name.toUpperCase()
 +"</Literal></PropertyIsEqualTo></Filter>";$http.jsonp(url);};this.water_points=function(district_name,subcounty_name,result){processJSON2=function(data){result(data);}
-var url="http://map.u-map.it//geoserver/geonode/ows?"
+var url="http://map.u-map.it/geoserver/geonode/ows?"
 +"service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:waterpoints_wgs84"
-+"&outputFormat=json&format_options=callback:processJSON2&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">"
++"&outputFormat=json&propertyName=the_geom,District&format_options=callback:processJSON2&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">"
 +"<PropertyIsEqualTo><PropertyName>District</PropertyName><Literal>"+district_name.toUpperCase()+"</Literal></PropertyIsEqualTo>"
 +"</Filter>";$http.jsonp(url);return null;};});angular.module("dashboard").directive('map',function(){return{controller:function($scope,$location){$scope.navigateToDistrict=function(districtName){$location.path("/district/"+DT.encode(districtName));$scope.$apply();}
 $scope.navigateToSubcounty=function(districtName,subcountyName){$location.path("/district/"+DT.encode(districtName)+"/"+DT.encode(subcountyName));$scope.$apply();}},link:function(scope,element,attrs){var map=new DT.Map(element);window.map=map;map.onClickDistrict(function(properties,hierarchy){if(hierarchy.length==2)
