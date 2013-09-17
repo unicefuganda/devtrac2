@@ -51,3 +51,18 @@ And I click on the district breadcrumb link
 Then I see map of Uganda - Gulu
 And I click on the national breadcrumb link
 Then I see map of Uganda
+
+Scenario: Navigate to Parish
+Given that I am a regular user
+When I go to the homepage
+And I click on "Gulu" in "Districts"
+Then I see the layer "gulu subcounties" displayed
+And I hover over "Patiko" in "Gulu Subcounties"
+Then "Patiko" in "Gulu Subcounties" will be highlighted
+And I click on "Patiko" in "Gulu Subcounties"
+Then I see the layer "Patiko Parishes" displayed
+And I hover over "" in "Patiko Parishes"
+Then "" in "Patiko Parishes" is highlighted
+And I click on "" in "Patiko Parishes" 
+Then "" in "Patiko Parishes" is selected
+
