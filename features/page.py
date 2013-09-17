@@ -7,13 +7,13 @@ class Page:
         self.browser = browser
 
     def visit_national_dashboard(self):
-        self.browser.visit("%s/" % self.base_url)
+        self.browser.visit("%s/?test=true" % self.base_url)
 
     def visit_district_dashboard(self, district_name):
-        self.browser.visit("%s/district/%s" % (self.base_url, district_name))
+        self.browser.visit("%s/district/%s?test=true" % (self.base_url, district_name))
 
     def visit_subcounty_dashboard(self, district_name, subcounty_name):
-        self.browser.visit("%s/district/%s/%s" % (self.base_url, district_name, subcounty_name))
+        self.browser.visit("%s/district/%s/%s?test=true" % (self.base_url, district_name, subcounty_name))
 
     def breadcrumbs(self):
         crumbs = map(lambda crumb:crumb.value, self.browser.find_by_css("#location .breadcrumb a"))

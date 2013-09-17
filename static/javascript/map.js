@@ -1,4 +1,5 @@
 var DT = {};
+DT.testing = false;
 
 DT.Map = function(element) {
 
@@ -26,7 +27,10 @@ DT.Map = function(element) {
     });
 
     var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    var osm = new L.TileLayer(osmUrl, {
+    var testingUrl = 'http://localhost:5000/stub_tiles/{s}/{z}/{x}/{y}.png';
+
+    var tileServerUrl = DT.testing ? testingUrl : osmUrl;
+    var osm = new L.TileLayer(tileServerUrl, {
         minZoom: 7,
         maxZoom: 18
     });
@@ -108,7 +112,6 @@ DT.Map = function(element) {
             self.water_points = markers;
         },
         addNavigationLayer: function(features, layer_info) {
-            console.log(layer_info);
             self.navigation_layers.push(layer_info.name);
 
             var baseLayer = L.geoJson(features, {

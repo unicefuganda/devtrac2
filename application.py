@@ -40,30 +40,21 @@ css = Bundle(
      filters='cssmin', output='gen/packed.css')
 
 assets.register('css_all', css)
-
-@app.route("/spikes/")
-def spikes():
-	return render_template('dashboard.html', section="dashboards")
-
-
-@app.route("/district/<name>")
-def district(name):
-	return render_template('dashboard.html', section="dashboards")
-
-@app.route("/district/<name>/<subcounty>")
-def subcounty(name, subcounty):
-	return render_template('dashboard.html', section="dashboards")
+test = "kevin"
 
 @app.route("/")
-def dashboards():
-	return render_template('dashboard.html', section="dashboards")
-
-@app.route("/districts.json")
-def districts():
-	districts = DistrictService().find_all()
-	return "{ \"districts\":%s}" % districts.to_json()
+@app.route("/district/<district>")
+@app.route("/district/<district>/<subcounty>")
+@app.route("/district/<district>/<subcounty>/<parish>")
+def dashboards(district="", subcounty="", parish=""):
+	test = request.args.get("test") == "true"
+	return render_template('dashboard.html', test=test)
 
 # SPIKES ROUTES
+
+@app.route("/stub_tiles/<s>/<x>/<y>/<z>.png")
+def stub_tiles(s,x,y,z):
+	return send_file("static/javascript/lib/images/test_tile.png")
 
 @app.route("/leaflet/")
 def leaflet():

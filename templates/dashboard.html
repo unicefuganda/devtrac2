@@ -10,6 +10,7 @@
 
   </head>
   <body>
+
 <!-- <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <!-- <div class="navbar-header">
@@ -42,6 +43,9 @@
 
     <footer id="footer">
         <div>
+            {% if test %}
+              <label>TESTING</label>
+            {% endif %}
             <label for="environment">environment:</label>&nbsp;<span id="environment"></span>
             <label for="sha">revision:</label>&nbsp;<span id="sha"></span>
             <label for="time">deployed at:</label>&nbsp;<time id="time"></time>
@@ -51,6 +55,10 @@
     {% assets "js_all" %}
         <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
+
+    {% if test %}
+      <script type="text/javascript"> DT.testing = true;</script>
+    {% endif %}
     
   </body>
 </html>
