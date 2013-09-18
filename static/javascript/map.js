@@ -16,7 +16,7 @@ DT.Map = function(element) {
 
     map.on("moveend", function(layer) {
         DT.timings["moveend"] = new Date().getTime();
-    })
+    });
 
     map.on("zoomstart", function(layer) {
         DT.timings["zoomstart"] = new Date().getTime();
@@ -40,9 +40,12 @@ DT.Map = function(element) {
     self.selectedLayer;
     self.navigation_layers = [];
 
-    self.popupMarkerMessage = function(feature){
-                var message = '<h3>'+feature.properties.District+'</h3>';
-                    message += feature.id;                     
+    self.markerPopupMessage = function(property){
+                var message = '<p> Water point at parish <b>'+property.ParishName+'</b>';
+                    message += ' of type  <b>'+property.SourceType+'.</b> ';                    
+                    message += ' Functional status : <b>'+property.Functional+'</b>';
+                    message += ' Management :  <b>'+property.Management+'</b> </p>' ;                   
+                                         
                 return message;
        };
 
@@ -110,9 +113,14 @@ DT.Map = function(element) {
             $.each(features.features, function(index, feature) {
                 var coordinates = feature.geometry.coordinates;
                 var marker = L.circleMarker(new L.LatLng(coordinates[1], coordinates[0]), geojsonMarkerOptions);
-                marker.bindPopup(self.popupMarkerMessage(feature));
+                marker.bindPopup(self.markerPopupMessage(feature.properties))
+                .on('mouseover',function(){
+                    marker.openPopup();
+                }).on('mouseout',function(){
+                    marker.closePopup();
+                });                                
                 markers.addLayer(marker);
-            });
+            });            
 
             map.addLayer(markers);
 

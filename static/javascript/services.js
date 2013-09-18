@@ -69,7 +69,8 @@ angular.module("dashboard").service('districtService', function($http, $filter) 
         }
          var url = "http://map.u-map.it/geoserver/geonode/ows?"
         +"service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:waterpoints_wgs84"
-        +"&outputFormat=json&propertyName=the_geom,District&format_options=callback:processJSON2&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">"
+        +"&outputFormat=json&propertyName=the_geom,District,SubcountyN,ParishName,SourceType,"
+        +"Management,Functional&format_options=callback:processJSON2&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">"
         +"<PropertyIsEqualTo><PropertyName>District</PropertyName><Literal>" + district_name.toUpperCase() + "</Literal></PropertyIsEqualTo>"
         // +"<PropertyIsEqualTo><PropertyName>SubcountyN</PropertyName><Literal>" + subcounty_name.toUpperCase() + "</Literal></PropertyIsEqualTo>"
         +"</Filter>";
