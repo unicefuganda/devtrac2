@@ -44,8 +44,6 @@ DT.Map = function(element) {
         var message = '<h4>' + property.SourceType +'</h4>';
         message += '<label>Functional status:</label> ' + property.Functional + '</br>';
         message += '<label>Management:</label> ' + property.Management + '</br>';
-
-        return message;
     };
 
     function findLayer(location) {
@@ -227,7 +225,7 @@ DT.Layer = function(leafletLayer, options, featureProperties, map) {
     });
 
     self.unselect = function() {
-        
+
 
         leafletLayer.setStyle(options.unselectedStyle);
         self.selected = false;
