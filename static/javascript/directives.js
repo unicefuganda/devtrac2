@@ -94,16 +94,12 @@ angular.module("dashboard").directive('map', function() {
 
             }
 
-            function addWaterPoints() {
-                if (scope.water_points != undefined) {
-                    layer_info = {
-                        name: scope.water_points.name,
-
-                    }
-
-                    map.addPointsLayer(scope.water_points.features, layer_info);
+            function addWaterPoints(water_points) {               
+                layer_info = {
+                    name: "water points"
                 }
 
+                map.addPointsLayer(water_points, layer_info);
             };
 
             scope.$watch("layers", function() {
@@ -120,8 +116,11 @@ angular.module("dashboard").directive('map', function() {
                 }
 
                 scope.getDistrictData(newLocation.district).then(function(data){
-                    if (oldLocation == null || newLocation.district != oldLocation.district)
+                    if (oldLocation == null || newLocation.district != oldLocation.district) {
+                        addWaterPoints(data.water_points);
                         addSubCountyLayers(data.subcounties);
+
+                    }
 
                     if (newLocation.subcounty != null && (oldLocation == null || oldLocation.subcounty == null || newLocation.subcounty != oldLocation.subcounty))
                         addParishLayers(data.parishes);

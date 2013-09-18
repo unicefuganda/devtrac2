@@ -53,8 +53,7 @@ DT.Map = function(element) {
     }
 
     function unselect() {
-        if (self.water_points != null)
-            map.removeLayer(self.water_points);
+        
 
         $.each(self.layers, function(index, layer) {
             layer.unselect();
