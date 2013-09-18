@@ -40,6 +40,12 @@ DT.Map = function(element) {
     self.selectedLayer;
     self.navigation_layers = [];
 
+    self.popupMarkerMessage = function(feature){
+                var message = '<h3>'+feature.properties.District+'</h3>';
+                    message += feature.id;                     
+                return message;
+       };
+
     function findLayer(layer_name, location_name) {
         return DT.first(self.layers, function(layer) {
             return layer.name == layer_name && layer.location_name == location_name
@@ -104,6 +110,7 @@ DT.Map = function(element) {
             $.each(features.features, function(index, feature) {
                 var coordinates = feature.geometry.coordinates;
                 var marker = L.circleMarker(new L.LatLng(coordinates[1], coordinates[0]), geojsonMarkerOptions);
+                marker.bindPopup(self.popupMarkerMessage(feature));
                 markers.addLayer(marker);
             });
 
