@@ -6,7 +6,11 @@
 
 
       <li ng-show="location.district != null"><a class="district-crumb" href='/district/{[{ location.district }]}'>{[{ location.district }]}</a></li>  
-      <li ng-show="location.subcounty != null"><a class="subcounty-crumb" href='/district/{[{ location.district }]}/{[{ location.subcounty }]}'>{[{ location.subcounty }]}</a></li>          
+      <li ng-show="location.subcounty != null"><a class="subcounty-crumb" href='/district/{[{ location.district }]}/{[{ location.subcounty }]}'>{[{ location.subcounty }]}</a></li>
+      <li ng-show="location.parish != null"><a class="parish-crumb" 
+      	href='/district/{{ location.district }]}/{[{ location.subcounty }]}/
+      	{[{ location.parish }]}'>{[{ location.parish }]}</a>
+      </li>           
     </ul>  
   </div> 
 </div>
