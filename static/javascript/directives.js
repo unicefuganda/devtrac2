@@ -118,16 +118,18 @@ angular.module("dashboard").directive('map', function() {
                     map.setView(1.0667, 31.8833, 7);
                     return;
                 }
-                scope.getDistrictData(newLocation.district).then(function(data){
 
+                scope.getDistrictData(newLocation.district).then(function(data){
                     if (oldLocation == null || newLocation.district != oldLocation.district)
                         addSubCountyLayers(data.subcounties);
 
-                    if (newLocation.subcounty != null && (oldLocation.subcounty == null || newLocation.subcounty != oldLocation.subcounty))
+                    if (newLocation.subcounty != null && (oldLocation == null || oldLocation.subcounty == null || newLocation.subcounty != oldLocation.subcounty))
                         addParishLayers(data.parishes);
-                });;
 
-                map.selectLayer(newLocation);   
+                    map.selectLayer(newLocation);       
+                });
+                
+                
             });
 
             function addSubCountyLayers(subcounties) {

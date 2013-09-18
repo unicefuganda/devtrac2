@@ -17,7 +17,10 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
                     if (location == null)
                         return;
 
-                    if (location.subcounty != null) {
+                    if (location.parish != null) {
+                        $location.path("/district/" + location.district + "/" + location.subcounty + "/" + location.parish);
+                    }
+                    else if (location.subcounty != null) {
                         $location.path("/district/" + location.district + "/" + location.subcounty);
                     } else if (location.district != null) {
                         $location.path("/district/" + location.district);
