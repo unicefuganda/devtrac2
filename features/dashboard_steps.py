@@ -125,3 +125,13 @@ def when_i_navigate_to_group1_district(step, group1):
 @step(u'Then Then marker clusters of water points will be displayed')
 def then_then_marker_clusters_of_water_points_will_be_displayed(step):
     assert True, 'This step must be implemented'
+
+@step(u'And I navigate to "([^"]*)"')
+def and_i_navigate_to_group1(step, group1):
+    assert True, 'This step must be implemented'
+@step(u'Then a page with an error message is displayed')
+def then_a_page_with_an_error_message_is_displayed(step):
+    assert True, 'This step must be implemented'
+@step(u'And the page has a link to the homepage')
+def and_the_page_has_a_link_to_the_homepage(step):
+    assert True, 'This step must be implemented'

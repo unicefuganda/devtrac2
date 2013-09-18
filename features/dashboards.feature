@@ -60,3 +60,9 @@ Then "Pawel" in "Patiko Parishes" will be highlighted
 And I click on "Pawel" in "Patiko Parishes" 
 Then "Pawel" in "Patiko Parishes" will be selected
 
+Scenario: Navigate to Incorrect URL
+Given that I am a regular user
+When I go to the home page
+And I navigate to "../district/hulu" 
+Then a page with an error message is displayed 
+And the page has a link to the homepage
