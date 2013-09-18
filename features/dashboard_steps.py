@@ -44,7 +44,7 @@ def when_i_click_on_layer(step, name, layer_name):
 
 @step(u'When I hover over \"(.+)\" in \"(.+)\"$')
 @step(u'And I hover over \"(.+)\" in \"(.+)\"$')
-def when_i_hover_over_district(step, district, level):
+def when_i_hover_ove(step, district, level):
     world.page.hover_over(district.lower(), level.lower())
 
 @step(u'Then \"(.+)\" in \"(.+)\" will be selected')
@@ -64,6 +64,7 @@ def and_i_click_on_the_district_breadcrumb_link(step):
 def and_i_click_on_the_national_breadcrumb_link(step):
     world.page.click_national_breadcrumb()
 
+# STEPS to be implemented
 
 @step(u'When I go to the home page')
 def when_i_go_to_the_home_page(step):
@@ -107,4 +108,20 @@ def and_centered_on_2_8762_32_4767_at_8_zoom(step):
 
 @step(u'Then The back ground color of the search text field will change to hex FF6666')
 def then_the_back_ground_color_of_the_search_text_field_will_change_to_hex_ff6666(step):
+    assert True, 'This step must be implemented'
+
+@step(u'Given that I am a user')
+def given_that_i_am_a_user(step):
+    assert True, 'This step must be implemented'
+@step(u'When I navigate to the \'([^\']*)\' sub county')
+def when_i_navigate_to_the_group1_sub_county(step, group1):
+    assert True, 'This step must be implemented'
+@step(u'Then \'([^\']*)\' water point circle markers will be displayed on the map')
+def then_group1_water_point_circle_markers_will_be_displayed_on_the_map(step, group1):
+    assert True, 'This step must be implemented'
+@step(u'When I navigate to \'([^\']*)\' District')
+def when_i_navigate_to_group1_district(step, group1):
+    assert True, 'This step must be implemented'
+@step(u'Then Then marker clusters of water points will be displayed')
+def then_then_marker_clusters_of_water_points_will_be_displayed(step):
     assert True, 'This step must be implemented'
