@@ -48,7 +48,6 @@ DT.Map = function(element) {
 
     function findLayer(location) {
         return DT.first(self.layers, function(layer) {
-            console.log("findLayer", location, layer.location);
             return angular.equals(layer.location, location);
         });
     }

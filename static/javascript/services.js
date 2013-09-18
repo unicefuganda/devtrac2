@@ -1,29 +1,38 @@
-angular.module("dashboard").service('districtService', function($http, $filter) {
+angular.module("dashboard").service('districtService', function($http, $filter, $rootScope, $q) {
     var self = this;
-    
-    this.all = function(result) {
-        if (self.districts) {
-            result(self.districts);
-            return;
-        }
-        $http({
-            method: 'GET',
-            url: '/districts.json'
-        }).
-        success(function(data, status, headers, config) {
-            self.districts = data.districts;
-            result(data.districts);
-        });
-    };
 
-    this.find_by_name = function(name, result) {
-        self.all(function(districts) {
-            var district = $filter('filter')(districts, function(district) {
-                return district.name.toLowerCase() == name.toLowerCase();
-            })[0];
-            result(district);
-        });
-    };
+    this.fetchDistrictData = function(district_name) {
+        var deffered = $q.defer();
+
+        if ($rootScope.district_data != null && $rootScope.district_data.name == district_name) {
+            deffered.resolve($rootScope.district_data.data);
+            return deffered.promise
+        }
+
+        var district_data = {};
+        var subcounties_promise = self.subcounties_geojson(district_name)
+            .then(function(data) {
+                district_data.subcounties = data
+            });
+
+        var parishes_promise = self.parishes_geojson(district_name)
+            .then(function(data) {
+                district_data.parishes = data
+            });
+
+        var water_points_promise = self.water_points(district_name)
+            .then(function(data) {
+                district_data.water_points = data
+            });
+
+        $q.all([subcounties_promise, parishes_promise, water_points_promise])
+            .then(function() {
+                $rootScope.district_data = { name: district_name, data: district_data };
+                deffered.resolve(district_data);
+            });
+
+        return deffered.promise;
+    },
 
     this.geojson = function(result) {
         $http({
@@ -35,47 +44,44 @@ angular.module("dashboard").service('districtService', function($http, $filter) 
         });
     };
 
-    this.subcounties_geojson = function(district_name, result) {
-        processJSON = function(data) {          
-            result(data);
-        }
-        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?"
-        +"service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_subcounties_2011_0005"
-        +"&outputFormat=json&format_options=callback:processJSON&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">"
-        +"<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district_name.toUpperCase() 
-        +"</Literal></PropertyIsEqualTo></Filter>";
+    this.subcounties_geojson = function(district_name) {
+        var deffered = $q.defer();
 
+        subcountiesCallback = function(data) {
+            deffered.resolve(data);
+        }
+        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_subcounties_2011_0005" + "&outputFormat=json&format_options=callback:subcountiesCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district_name.toUpperCase() + "</Literal></PropertyIsEqualTo></Filter>";
         $http.jsonp(url);
+        return deffered.promise;
     };
 
-    this.parishes_geojson = function(district_name, result) {
-        processJSON3 = function(data) {          
-            result(data);
+    this.parishes_geojson = function(district_name) {
+        var deffered = $q.defer();
+
+        parishesCallback = function(data) {
+            deffered.resolve(data);
         }
-        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?"
-        +"service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_parish_2011_50"
-        +"&outputFormat=json&propertyName=the_geom&format_options=callback:processJSON3&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">"
-        +"<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district_name.toUpperCase() 
-        +"</Literal></PropertyIsEqualTo></Filter>";
+        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_parish_2011_50" + "&outputFormat=json&propertyName=the_geom,DNAME_2010,SNAME_2010,PNAME_2006&format_options=callback:parishesCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district_name.toUpperCase() + "</Literal></PropertyIsEqualTo></Filter>";
 
         $http.jsonp(url);
+        return deffered.promise;
     };
 
 
-    this.water_points = function(district_name, subcounty_name, result){
+    this.water_points = function(district_name) {
+        var deffered = $q.defer();
 
-        processJSON2 = function(data) {          
-            result(data);
+        water_pointsCallback = function(data) {
+            deffered.resolve(data);
         }
          var url = "http://map.u-map.it/geoserver/geonode/ows?"
         +"service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:waterpoints_wgs84"
         +"&outputFormat=json&propertyName=the_geom,District,SubcountyN,ParishName,SourceType,"
-        +"Management,Functional&format_options=callback:processJSON2&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">"
+        +"Management,Functional&format_options=callback:water_pointsCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">"
         +"<PropertyIsEqualTo><PropertyName>District</PropertyName><Literal>" + district_name.toUpperCase() + "</Literal></PropertyIsEqualTo>"
-        // +"<PropertyIsEqualTo><PropertyName>SubcountyN</PropertyName><Literal>" + subcounty_name.toUpperCase() + "</Literal></PropertyIsEqualTo>"
-        +"</Filter>";
+        + "</Filter>";
 
         $http.jsonp(url);
-        return null;
+        return deffered.promise;
     };
 });
