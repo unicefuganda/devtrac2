@@ -50,4 +50,5 @@ DT.timings.print = function() {
     $.each(labels, function(index, element) {
         output += element[0] + DT.timings.printPeriod(DT.timings["click"], DT.timings[element[1]]) + " ";
     });
+    console.log(output);
 };

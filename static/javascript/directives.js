@@ -7,12 +7,12 @@ angular.module("dashboard").directive('map', function() {
                 $scope.$apply();
             }
 
-            $scope.navigateToSubcounty = function(districtName,subcountyName) {
+            $scope.navigateToSubcounty = function(districtName, subcountyName) {
                 $location.path("/district/" + DT.encode(districtName) + "/" + DT.encode(subcountyName));
                 $scope.$apply();
             }
 
-            $scope.navigateToParish = function(districtName,subcountyName, parishName) {
+            $scope.navigateToParish = function(districtName, subcountyName, parishName) {
                 $location.path("/district/" + DT.encode(districtName) + "/" + DT.encode(subcountyName) + "/" + DT.encode(parishName));
                 $scope.$apply();
             }
@@ -21,17 +21,14 @@ angular.module("dashboard").directive('map', function() {
             var map = new DT.Map(element);
             window.map = map;
 
-            map.onClickDistrict(function(properties, hierarchy) {
-                if (hierarchy.length == 2)
-                    scope.navigateToDistrict(hierarchy[hierarchy.length -1]);
-                if (hierarchy.length == 3)
-                    scope.navigateToSubcounty(hierarchy[hierarchy.length -2], hierarchy[hierarchy.length -1]);
-                if (hierarchy.length == 4)
-                    scope.navigateToParish(hierarchy[hierarchy.length - 3], hierarchy[hierarchy.length -2], hierarchy[hierarchy.length -1]);
+            map.onClickDistrict(function(newLocation) {
+                scope.location = newLocation;
+                scope.$apply();
             });
 
             function addDistrictLayers() {
                 if (scope.layers != undefined) {
+                    console.log("load layers");
                     layer_info = {
                         unselectedStyle: {
                             "fillOpacity": 0,
@@ -46,16 +43,19 @@ angular.module("dashboard").directive('map', function() {
                         highlightedStyle: {
                             "fillOpacity": 0.2,
                             "color": "#ff0000",
-                            "weight": 5  
+                            "weight": 5
                         },
-                        getHierarchy: function(properties) {
-                            return ["uganda", properties["DNAME_2010"].toLowerCase()];
-                        },
-                        name: "districts",
+                        getLocation: function(feature) {
+                            return {
+                                district: feature.properties["DNAME_2010"].toLowerCase(),
+                                subcounty: null,
+                                parish: null
+                            };
+                        }
                     }
 
                     map.addNavigationLayer(scope.layers[0].features, layer_info);
-                }   
+                }
             }
 
             function addParishLayers() {
@@ -74,15 +74,18 @@ angular.module("dashboard").directive('map', function() {
                         highlightedStyle: {
                             "fillOpacity": 0.2,
                             "color": "#00ff00",
-                            "weight": 2 
+                            "weight": 2
                         },
-                        getHierarchy: function(properties) {
-                            return ["uganda", properties["DNAME_2010"].toLowerCase(), properties["SNAME_2010"].toLowerCase(),properties["PNAME_2006"].toLowerCase()];
-                        },
-                        name: scope.parishes[0].name,
+                        getLocation: function() {
+                            return {
+                                district: feature.properties["DNAME_2010"].toLowerCase(),
+                                subcounty: feature.properties["SNAME_2010"].toLowerCase(),
+                                parish: feature.properties["PNAME_2006"].toLowerCase()
+                            };
+                        }
                     }
                     map.addNavigationLayer(scope.parishes[0].features, layer_info);
-                }   
+                }
 
             }
 
@@ -94,50 +97,46 @@ angular.module("dashboard").directive('map', function() {
                     }
 
                     map.addPointsLayer(scope.water_points.features, layer_info);
-                }   
+                }
 
             };
 
             scope.$watch("layers", function() {
+
                 addDistrictLayers();
             });
 
-            scope.$watch("location", function() {
-                var location = scope.location
+            scope.$watch("subcounties", function() {
+                addSubCountyLayers();
+            });
+
+            scope.$watch("location", function(location) {
+                console.log("location", location);
                 if (location == undefined)
                     return true;
 
-                map.unselect();
-
                 if (location.district == null) {
                     map.setView(1.0667, 31.8833, 7);
-                }
-                else if (location.district != undefined && location.subcounty == null) {
+                } else if (location.district != undefined && location.subcounty == null) {
+                    map.selectLayer(location);
                     addSubCountyLayers();
                     addWaterPoints();
-                    map.selectLayer("districts", scope.location.district);    
-                }
-                else if (scope.location.subcounty != undefined && location.parish == null)
-                {
-                    addSubCountyLayers();
-                    addWaterPoints();
-                    addParishLayers();
-                    map.selectLayer(location.district + " subcounties", scope.location.subcounty);    
-                }
-                else if (scope.location.parish != undefined)
-                {
+
+                } else if (scope.location.subcounty != undefined && location.parish == null) {
                     addSubCountyLayers();
                     addWaterPoints();
                     addParishLayers();
-                    map.selectLayer(location.subcounty + " parishes", scope.location.parish);    
+                } else if (scope.location.parish != undefined) {
+                    addSubCountyLayers();
+                    addWaterPoints();
+                    addParishLayers();
                 }
 
                 var date = new Date();
             });
 
             function addSubCountyLayers() {
-                if (scope.subcounties  != null) { 
-                    var location = scope.location
+                if (scope.subcounties != null) {
                     layer_info = {
                         unselectedStyle: {
                             "fillOpacity": 0,
@@ -152,14 +151,17 @@ angular.module("dashboard").directive('map', function() {
                         highlightedStyle: {
                             "fillOpacity": 0.2,
                             "color": "#0000ff",
-                            "weight": 2  
+                            "weight": 2
                         },
-                        getHierarchy: function(properties) {
-                            return ["uganda", properties["DNAME_2010"].toLowerCase(), properties["SNAME_2010"].toLowerCase()];
-                        },
-                        name: scope.subcounties.name,
+                        getLocation: function(feature) {
+                            return $.extend({}, scope.subcounties.location, {
+                                district: feature.properties["DNAME_2010"].toLowerCase(),
+                                subcounty: feature.properties["SNAME_2010"].toLowerCase(),
+                                parish: null
+                            });
+                        }
                     }
-                    map.addNavigationLayer(scope.subcounties.features, layer_info);                    
+                    map.addNavigationLayer(scope.subcounties.features, layer_info);
                 }
             };
         }

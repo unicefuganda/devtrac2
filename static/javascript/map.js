@@ -48,9 +48,10 @@ DT.Map = function(element) {
         return message;
     };
 
-    function findLayer(layer_name, location_name) {
+    function findLayer(location) {
         return DT.first(self.layers, function(layer) {
-            return layer.name == layer_name && layer.location_name == location_name
+            console.log("findLayer", location, layer.location);
+            return angular.equals(layer.location, location);
         });
     }
 
@@ -60,15 +61,15 @@ DT.Map = function(element) {
 
         $.each(self.layers, function(index, layer) {
             layer.unselect();
-            if (layer.hierarchy.length > 2) {
-                map.removeLayer(layer.leafletLayer);
-            }
+            // if (layer.hierarchy.length > 2) {
+            //     map.removeLayer(layer.leafletLayer);
+            // }
 
         });
 
-        self.layers = $.grep(self.layers, function(layer, index) {
-            return layer.hierarchy.length <= 2;
-        });
+        // self.layers = $.grep(self.layers, function(layer, index) {
+        //     return layer.hierarchy.length <= 2;
+        // });
         DT.timings["unselectend"] = new Date().getTime();
     }
 
@@ -121,9 +122,6 @@ DT.Map = function(element) {
             });
 
             map.addLayer(markers);
-
-
-
             self.water_points = markers;
         },
         addNavigationLayer: function(features, layer_info) {
@@ -137,9 +135,12 @@ DT.Map = function(element) {
                 onEachFeature: function(data, layer) {
 
                     var options = $.extend({}, layer_info, {
-                        clickLayerHandler: function(featureProperties, hierarchy) {
-                            self.clickDistrictHandler(featureProperties, hierarchy);
-                        }
+                        clickLayerHandler: function(layer) {
+                            unselect();
+                            self.clickDistrictHandler(layer.location);
+
+                        },
+                        location: layer_info.getLocation(data),
                     });
                     var layer = new DT.Layer(layer, options, data.properties, map)
                     self.layers.push(layer);
@@ -197,10 +198,9 @@ DT.Map = function(element) {
         unselect: function() {
             unselect();
         },
-        selectLayer: function(layer_name, location_name) {
-            findLayer(layer_name, location_name).focusLayer();
-        },
-        map: map
+        selectLayer: function(location) {
+            findLayer(location).focusLayer();
+        }
     }
 };
 
@@ -211,7 +211,7 @@ DT.Layer = function(leafletLayer, options, featureProperties, map) {
     self.featureProperties = featureProperties;
 
     leafletLayer.setStyle(options.unselectedStyle);
-    self.hierarchy = options.getHierarchy(featureProperties);
+    // self.hierarchy = options.getHierarchy(featureProperties);
 
     leafletLayer.on("click", function() {
         DT.timings["click"] = new Date().getTime();
@@ -227,16 +227,22 @@ DT.Layer = function(leafletLayer, options, featureProperties, map) {
     });
 
     self.unselect = function() {
+        
+
         leafletLayer.setStyle(options.unselectedStyle);
         self.selected = false;
     };
     self.select = function() {
         if (options.clickLayerHandler) {
-            options.clickLayerHandler(featureProperties, self.hierarchy);
+            options.clickLayerHandler(self);
         }
+        self.focusLayer();
     };
 
     self.focusLayer = function() {
+        if (self.selected)
+            return;
+
         self.selected = true;
         leafletLayer.setStyle(options.selectedStyle);
         map.fitBounds(leafletLayer.getBounds());
@@ -255,16 +261,18 @@ DT.Layer = function(leafletLayer, options, featureProperties, map) {
             self.highlighted = false;
         }
     };
+    self.location = options.location;
 
     return {
-        location_name: self.hierarchy[self.hierarchy.length - 1],
+        // location_name: self.hierarchy[self.hierarchy.length - 1],
         unselect: self.unselect,
         leafletLayer: leafletLayer,
         hierarchy: self.hierarchy,
         unhighlight: self.unhighlight,
         highlight: self.highlight,
         select: self.select,
-        name: options.name,
+        // name: options.name,
+        location: options.location,
         isSelected: function() {
             return self.selected;
         },

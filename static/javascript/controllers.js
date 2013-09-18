@@ -1,20 +1,35 @@
-angular.module("dashboard").controller("DashboardCtrl", function($rootScope, districtService, $routeParams, $scope, $q) {
+angular.module("dashboard").controller("DashboardCtrl", function($rootScope, districtService, $routeParams, $scope, $q, $location) {
     DT.timings["urlchange"] = new Date().getTime();
     var location = $rootScope.location == undefined ? {} : $rootScope.location;
-    $rootScope.SearcheableDistricts = [];
-    $rootScope.searchText = null;
+    // $rootScope.SearcheableDistricts = [];
+    // $rootScope.searchText = null;
 
-    function setLocationName(location) {
-        var locationName = "Uganda"
-        if (location.district)
-            locationName += " - " + DT.capitalize(location.district);
-        if (location.subcounty)
-            locationName += " - " + DT.capitalize(location.subcounty);
-        $rootScope.location_name = locationName;
+
+    if ($rootScope.location == undefined) {
+
+        initialPageLoad();
+    }
+
+    function initialPageLoad() {
+        var newLocation = getLocation(); 
+
+        $q.all([loadDistrictData(newLocation)])
+            .then(function(value) {
+                $rootScope.location = newLocation;
+            })
+            .then(function() {
+                $rootScope.$watch("location", function(location) {
+                    if (location != null && location.district != null) {
+                        $location.path("/district/" + location.district);
+                        loadSubcountyData(location);
+                    }
+                });
+            });
     }
 
     function loadDistrictData(location) {
         var deferred = $q.defer();
+
         if ($rootScope.layers != null) {
             deferred.resolve();
             return deferred.promise;
@@ -23,7 +38,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
         districtService.geojson(function(data) {
             $rootScope.layers = [{
                 features: data,
-                name: "Uganda Districts"
             }];
             deferred.resolve({});
         });
@@ -32,16 +46,14 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
 
     function loadParishData(location) {
         var deferred = $q.defer();
-        if (location.subcounty == null) {
+        if (location.district == undefined) {
             deferred.resolve();
             return deferred.promise;
         }
 
-        districtService.parishes_geojson(location.subcounty, function(data) {   
+        districtService.parishes_geojson(location.district, function(data) {
             $rootScope.parishes = [{
-                features: data,
-                name: location.subcounty + " parishes"
-                // name: "Uganda Districts"
+                features: data
             }];
             deferred.resolve({});
         });
@@ -60,7 +72,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
         districtService.water_points(location.district, location.subcounty, function(data) {
             $rootScope.water_points = {
                 features: data,
-                name: location.district + " water_points"
             };
             deferred.resolve({});
 
@@ -79,13 +90,12 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
 
         districtService.subcounties_geojson(location.district, function(subcounties_geojson) {
             $rootScope.subcounties = {
-                features: subcounties_geojson,
-                name: location.district + " subcounties"
+                features: subcounties_geojson
             };
             deferred.resolve({});
 
         });
-        return deferred.promise;
+        return $q.all(deferred.promise, loadParishData(location));
     }
 
     function getLocation() {
@@ -117,13 +127,8 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
 
     // this uses angular promises to load the reference datasets asynchronsoly then set the locations after
     // it will ensure there is no race conditions of not having the right layers loaded when setting the map location
-    var newLocation = getLocation();
-
     
 
-    $q.all([loadDistrictData(newLocation), loadSubcountyData(newLocation), loadParishData(newLocation), loadWaterPoints(newLocation)])
-        .then(function(value) {
-            setLocationName(newLocation);
-            $rootScope.location = newLocation;
-        });
+
+
 });
