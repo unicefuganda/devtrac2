@@ -35,7 +35,7 @@ describe("Location", function() {
     it("should show layer subcounties, water_points and parishes for parish", function(){
         var location1 = new DT.Location({ district: "gulu", subcounty: "patiko", parish: "a_parish"});
 
-        expect(location1.layersToShow()).toEqual([["subcounty", "gulu"], ["water_point", "hulu"], ["parish", "patiko"]]);
+        expect(location1.layersToShow()).toEqual([["subcounty", "gulu"], ["water_point", "gulu"], ["parish", "patiko"]]);
     });
 
 });
