@@ -80,6 +80,20 @@ footer label {
   z-index: 1;
 }
 
+.marker-popup label{
+  width: 100px;
+  font-style: italic;
+  font-weight: normal;
+  margin-bottom: 2px;
+}
+.marker-popup h4 {
+  font-size: 14px;
+}
+
+.marker-popup .leaflet-popup-content{
+  margin: 10px 15px;
+}
+
 .cluster-icon
 {
   background-color: rgba(116, 223, 252, 0.6);
@@ -89,4 +103,12 @@ footer label {
   border-radius: 15px;
   padding: 6px 0 0 0;
   text-align: center;
+}
+
+.water-icon
+{
+  background-color: rgba(0, 0, 255, 0.6);
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
 }

@@ -51,7 +51,7 @@ angular.module("dashboard").directive('map', function() {
                         getHierarchy: function(properties) {
                             return ["uganda", properties["DNAME_2010"].toLowerCase()];
                         },
-                        name: "districts"
+                        name: "districts",
                     }
 
                     map.addNavigationLayer(scope.layers[0].features, layer_info);
@@ -79,7 +79,7 @@ angular.module("dashboard").directive('map', function() {
                         getHierarchy: function(properties) {
                             return ["uganda", properties["DNAME_2010"].toLowerCase(), properties["SNAME_2010"].toLowerCase(),properties["PNAME_2006"].toLowerCase()];
                         },
-                        name: scope.parishes[0].name  
+                        name: scope.parishes[0].name,
                     }
                     map.addNavigationLayer(scope.parishes[0].features, layer_info);
                 }   
@@ -89,7 +89,8 @@ angular.module("dashboard").directive('map', function() {
             function addWaterPoints() {
                 if (scope.water_points != undefined) {
                     layer_info = {
-                        name: scope.water_points.name
+                        name: scope.water_points.name,
+
                     }
 
                     map.addPointsLayer(scope.water_points.features, layer_info);
@@ -156,7 +157,7 @@ angular.module("dashboard").directive('map', function() {
                         getHierarchy: function(properties) {
                             return ["uganda", properties["DNAME_2010"].toLowerCase(), properties["SNAME_2010"].toLowerCase()];
                         },
-                        name: scope.subcounties.name  
+                        name: scope.subcounties.name,
                     }
                     map.addNavigationLayer(scope.subcounties.features, layer_info);                    
                 }

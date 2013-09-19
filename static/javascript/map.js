@@ -40,14 +40,13 @@ DT.Map = function(element) {
     self.selectedLayer;
     self.navigation_layers = [];
 
-    self.markerPopupMessage = function(property){
-                var message = '<p> Water point at parish <b>'+property.ParishName+'</b>';
-                    message += ' of type  <b>'+property.SourceType+'.</b> ';                    
-                    message += ' Functional status : <b>'+property.Functional+'</b>';
-                    message += ' Management :  <b>'+property.Management+'</b> </p>' ;                   
-                                         
-                return message;
-       };
+    self.markerPopupMessage = function(property) {
+        var message = '<h4>' + property.SourceType +'</h4>';
+        message += '<label>Functional status:</label> ' + property.Functional + '</br>';
+        message += '<label>Management:</label> ' + property.Management + '</br>';
+
+        return message;
+    };
 
     function findLayer(layer_name, location_name) {
         return DT.first(self.layers, function(layer) {
@@ -75,24 +74,15 @@ DT.Map = function(element) {
 
     return {
         addPointsLayer: function(features, layer_info) {
-            var waterIcon = L.icon({
-                iconUrl: '/static/javascript/lib/images/water-icon.png',
-                shadowUrl: null,
-
-                iconSize: [16, 16], // size of the icon
-                shadowSize: [0, 0], // size of the shadow
-                iconAnchor: [16, 16], // point of the icon which will correspond to marker's location
-                shadowAnchor: [0, 0], // the same for the shadow
-                popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-            });
-
+            var circleIcon = new L.DivIcon({
+                        iconSize: new L.Point([10, 10]),
+                        className: "water-icon",
+                        html: "",
+                        popupAnchor: [5, -10]
+                    });
             var geojsonMarkerOptions = {
-                radius: 5,
-                fillColor: "#0000ff",
-                color: "#333",
-                weight: 0,
-                opacity: 1,
-                fillOpacity: 0.3
+                zIndexOffset: 10000,
+                icon: circleIcon
             };
 
             self.navigation_layers.push(layer_info.name);
@@ -104,7 +94,11 @@ DT.Map = function(element) {
                 removeOutsideVisibleBounds: false,
 
                 iconCreateFunction: function(cluster) {
-                    return new L.DivIcon({iconSize: new L.Point([20, 20]), className: "cluster-icon" , html: '<b>' + cluster.getChildCount() + '</b>' });
+                    return new L.DivIcon({
+                        iconSize: new L.Point([20, 20]),
+                        className: "cluster-icon",
+                        html: '<b>' + cluster.getChildCount() + '</b>'
+                    });
                 }
             });
 
@@ -112,23 +106,28 @@ DT.Map = function(element) {
 
             $.each(features.features, function(index, feature) {
                 var coordinates = feature.geometry.coordinates;
-                var marker = L.circleMarker(new L.LatLng(coordinates[1], coordinates[0]), geojsonMarkerOptions);
-                marker.bindPopup(self.markerPopupMessage(feature.properties))
-                .on('mouseover',function(){
-                    marker.openPopup();
-                }).on('mouseout',function(){
-                    marker.closePopup();
-                });                                
+                var marker = new L.Marker(new L.LatLng(coordinates[1], coordinates[0]), geojsonMarkerOptions);
+                var popup = L.popup({className: "marker-popup", closeButton: false}).setContent(self.markerPopupMessage(feature.properties));
+
+                marker.bindPopup(popup)
+                    .on('mouseover', function() {
+                        marker.openPopup();
+                    })
+                    .on('mouseout', function() {
+                        marker.closePopup();
+                    })
                 markers.addLayer(marker);
-            });            
+
+            });
 
             map.addLayer(markers);
+
+
 
             self.water_points = markers;
         },
         addNavigationLayer: function(features, layer_info) {
             self.navigation_layers.push(layer_info.name);
-
             var baseLayer = L.geoJson(features, {
                 style: {
                     weight: 2,
@@ -146,7 +145,9 @@ DT.Map = function(element) {
                     self.layers.push(layer);
                 },
             });
-            map.addLayer(baseLayer);
+            map.addLayer(baseLayer, true);
+            if (self.water_points != null)
+                self.water_points.bringToFront();
 
         },
         setView: function(lat, lng, zoom) {
@@ -198,7 +199,8 @@ DT.Map = function(element) {
         },
         selectLayer: function(layer_name, location_name) {
             findLayer(layer_name, location_name).focusLayer();
-        }
+        },
+        map: map
     }
 };
 
