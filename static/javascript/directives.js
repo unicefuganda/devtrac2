@@ -17,6 +17,18 @@ angular.module("dashboard").directive('map', function() {
                 $scope.$apply();
             }
 
+            $scope.navigateToLocation= function(location) {
+                if (location.parish != null) {
+                    $location.path("/district/" + DT.encode(location.district) + "/" + DT.encode(location.subcounty) + "/" + DT.encode(location.parish));
+                } else if (location.subcounty != null) {
+                    $location.path("/district/" + DT.encode(location.district) + "/" + DT.encode(location.subcounty));
+                } else if (location.district != null) {
+                    $location.path("/district/" + DT.encode(location.district));
+                } else {
+                    $location.path("/");
+                }
+            }
+
             $scope.getDistrictData = function(district) {
                 var deffered = $q.defer();
                 districtService.fetchDistrictData(district).then(function(data) {
@@ -30,7 +42,8 @@ angular.module("dashboard").directive('map', function() {
             window.map = map;
 
             map.onClickDistrict(function(newLocation) {
-                scope.location = newLocation;
+
+                scope.navigateToLocation(newLocation);
                 scope.$apply();
             });
 
@@ -58,8 +71,10 @@ angular.module("dashboard").directive('map', function() {
                                 subcounty: null,
                                 parish: null
                             };
-                        }
+                        },
+                        name: "districts"
                     }
+
 
                     map.addNavigationLayer(scope.layers[0].features, layer_info);
                 }
@@ -88,13 +103,14 @@ angular.module("dashboard").directive('map', function() {
                             subcounty: feature.properties["SNAME_2010"].toLowerCase(),
                             parish: feature.properties["PNAME_2006"].toLowerCase()
                         };
-                    }
+                    },
+                    name: "parishes"
                 }
                 map.addNavigationLayer(parishes.features, layer_info);
 
             }
 
-            function addWaterPoints(water_points) {               
+            function addWaterPoints(water_points) {
                 layer_info = {
                     name: "water points"
                 }
@@ -115,20 +131,25 @@ angular.module("dashboard").directive('map', function() {
                     return;
                 }
 
-                scope.getDistrictData(newLocation.district).then(function(data){
+                map.unselect(newLocation);
+
+                scope.getDistrictData(newLocation.district).then(function(data) {
                     if (oldLocation == null || newLocation.district != oldLocation.district) {
                         addWaterPoints(data.water_points);
                         addSubCountyLayers(data.subcounties);
-
                     }
 
-                    if (newLocation.subcounty != null && (oldLocation == null || oldLocation.subcounty == null || newLocation.subcounty != oldLocation.subcounty))
-                        addParishLayers(data.parishes);
+                    //TODO: Refactor this mess
+                    if (newLocation.subcounty != null && (oldLocation == null || oldLocation.subcounty == null || newLocation.subcounty != oldLocation.subcounty)) {
+                        var parishes = $.grep(data.parishes.features, function(feature, index) { return feature.properties["SNAME_2010"].toLowerCase() == newLocation.subcounty; });
 
-                    map.selectLayer(newLocation);       
+                        addParishLayers({type: "FeatureCollection", features: parishes});
+                    }
+
+                    map.selectLayer(newLocation);
                 });
-                
-                
+
+
             });
 
             function addSubCountyLayers(subcounties) {
@@ -154,7 +175,8 @@ angular.module("dashboard").directive('map', function() {
                             subcounty: feature.properties["SNAME_2010"].toLowerCase(),
                             parish: null
                         };
-                    }
+                    },
+                    name: "subcounties"
                 }
                 map.addNavigationLayer(subcounties, layer_info);
             };

@@ -3,30 +3,17 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, dis
     var location = $rootScope.location == undefined ? {} : $rootScope.location;
 
 
+    var newLocation = getLocation();
+
     if ($rootScope.location == undefined) {
-        initialPageLoad();
-    }
+        initialPageLoad(newLocation);
+        
+    } 
 
-    function initialPageLoad() {
-        var newLocation = getLocation();
+    $rootScope.location = newLocation;
 
+    function initialPageLoad(newLocation) {
         loadDistrictData(newLocation)
-            .then(function() {
-                $rootScope.location = newLocation;
-                $rootScope.$watch("location", function(location) {
-                    if (location == null)
-                        return;
-
-                    if (location.parish != null) {
-                        $location.path("/district/" + location.district + "/" + location.subcounty + "/" + location.parish);
-                    }
-                    else if (location.subcounty != null) {
-                        $location.path("/district/" + location.district + "/" + location.subcounty);
-                    } else if (location.district != null) {
-                        $location.path("/district/" + location.district);
-                    }
-                });
-            });
     }
 
     function loadDistrictData(location) {

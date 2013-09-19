@@ -4,10 +4,10 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
     this.fetchDistrictData = function(district_name) {
         var deffered = $q.defer();
 
-        if ($rootScope.district_data != null && $rootScope.district_data.name == district_name) {
-            deffered.resolve($rootScope.district_data.data);
-            return deffered.promise
-        }
+        // if ($rootScope.district_data != null && $rootScope.district_data.name == district_name) {
+        //     deffered.resolve($rootScope.district_data.data);
+        //     return deffered.promise
+        // }
 
         var district_data = {};
         var subcounties_promise = self.subcounties_geojson(district_name)
@@ -51,7 +51,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
             deffered.resolve(data);
         }
         var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_subcounties_2011_0005" + "&outputFormat=json&format_options=callback:subcountiesCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district_name.toUpperCase() + "</Literal></PropertyIsEqualTo></Filter>";
-        $http.jsonp(url);
+        $http.jsonp(url, { cache: true});
         return deffered.promise;
     };
 
@@ -63,7 +63,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         }
         var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_parish_2011_50" + "&outputFormat=json&propertyName=the_geom,DNAME_2010,SNAME_2010,PNAME_2006&format_options=callback:parishesCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district_name.toUpperCase() + "</Literal></PropertyIsEqualTo></Filter>";
 
-        $http.jsonp(url);
+        $http.jsonp(url, { cache: true});
         return deffered.promise;
     };
 
@@ -74,14 +74,14 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         water_pointsCallback = function(data) {
             deffered.resolve(data);
         }
-         var url = "http://map.u-map.it/geoserver/geonode/ows?"
+         var url = "http://92.237.187.62:6081/geoserver/geonode/ows?"
         +"service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:waterpoints_wgs84"
         +"&outputFormat=json&propertyName=the_geom,District,SubcountyN,ParishName,SourceType,"
         +"Management,Functional&format_options=callback:water_pointsCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">"
         +"<PropertyIsEqualTo><PropertyName>District</PropertyName><Literal>" + district_name.toUpperCase() + "</Literal></PropertyIsEqualTo>"
         + "</Filter>";
 
-        $http.jsonp(url);
+        $http.jsonp(url, { cache: true});
         return deffered.promise;
     };
 });

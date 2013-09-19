@@ -4,7 +4,10 @@ DT.testing = false;
 DT.Map = function(element) {
 
     var self = this,
-        map = L.map(element.attr("id"));
+        map = L.map(element.attr("id"), {
+            zoomControl: true
+        });
+
 
     map.on("baselayerchange", function(layer) {
         self.activeLayer = layer;
@@ -36,9 +39,7 @@ DT.Map = function(element) {
     });
     map.addLayer(osm);
 
-    self.layers = [];
-    self.selectedLayer;
-    self.navigation_layers = [];
+    self.layers = {};
 
     self.markerPopupMessage = function(property) {
         var message = '<h4>' + property.SourceType +'</h4>';
@@ -47,25 +48,48 @@ DT.Map = function(element) {
     };
 
     function findLayer(location) {
-        return DT.first(self.layers, function(layer) {
-            return angular.equals(layer.location, location);
-        });
+        console.log(location)
+        for (var key in self.layers) {
+            var layer_group = self.layers[key];
+            var layer = DT.first(layer_group, function(layer) {
+                // console.log(layer.location)
+                return angular.equals(layer.location, location);
+            });
+
+            if (layer != null)
+                return layer;
+        }
+
+        return null;
     }
 
-    function unselect() {
-        
+    function unselect(newLocation) {
+        //TODO: Refactor this mess
+        $.each(self.layers, function(index, layer_group) {
+            $.each(layer_group, function(index, layer) {
+                layer.unselect();
 
-        $.each(self.layers, function(index, layer) {
-            layer.unselect();
-            // if (layer.hierarchy.length > 2) {
-            //     map.removeLayer(layer.leafletLayer);
-            // }
+                if (newLocation.subcounty == null ) {
+                    if (layer.location.subcounty != null && layer.location.district != newLocation.district ) {
+                        map.removeLayer(layer.leafletLayer);
+                    }
+                } 
+                if (newLocation.parish == null) {
+                    if (layer.location.parish != null)
+                        map.removeLayer(layer.leafletLayer);
+                }
 
+            });
         });
 
-        // self.layers = $.grep(self.layers, function(layer, index) {
-        //     return layer.hierarchy.length <= 2;
-        // });
+        if (newLocation.subcounty == null && self.water_points != null)
+            map.removeLayer(self.water_points);
+
+        if (newLocation.subcounty == null)
+            self.layers["subcounties"] = [];
+        if (newLocation.parish == null)
+            self.layers["parish"] = [];
+
         DT.timings["unselectend"] = new Date().getTime();
     }
 
@@ -81,8 +105,6 @@ DT.Map = function(element) {
                 zIndexOffset: 10000,
                 icon: circleIcon
             };
-
-            self.navigation_layers.push(layer_info.name);
 
             var markers = L.markerClusterGroup({
                 showCoverageOnHover: false,
@@ -121,7 +143,6 @@ DT.Map = function(element) {
             self.water_points = markers;
         },
         addNavigationLayer: function(features, layer_info) {
-            self.navigation_layers.push(layer_info.name);
             var baseLayer = L.geoJson(features, {
                 style: {
                     weight: 2,
@@ -132,14 +153,15 @@ DT.Map = function(element) {
 
                     var options = $.extend({}, layer_info, {
                         clickLayerHandler: function(layer) {
-                            unselect();
                             self.clickDistrictHandler(layer.location);
 
                         },
                         location: layer_info.getLocation(data),
                     });
                     var layer = new DT.Layer(layer, options, data.properties, map)
-                    self.layers.push(layer);
+                    if (self.layers[layer_info.name] == null)
+                        self.layers[layer_info.name] = []
+                    self.layers[layer_info.name].push(layer);
                 },
             });
             map.addLayer(baseLayer, true);
@@ -167,12 +189,15 @@ DT.Map = function(element) {
             return self.navigation_layers;
         },
         getSelectedLayer: function(layer_name) {
-            var layer = DT.first(self.layers, function(layer) {
-                return layer.name == layer_name && layer.isSelected();
-            });
-            if (layer == null)
-                return null;
-            return layer.location_name;
+            for (var key in self.layers) {
+                var layer_group = self.layers[key];
+                var layer = DT.first(layer_group, function(layer) {
+                    return layer.name == layer_name && layer.isSelected();
+                });
+                if (layer != null)
+                    return layer.location;
+            }
+            return null;
         },
         getHighlightedLayer: function(layer_name) {
             var layer = DT.first(self.layers, function(layer) {
@@ -191,10 +216,11 @@ DT.Map = function(element) {
         clickLayer: function(layer_name, location_name) {
             findLayer(layer_name, location_name).select();
         },
-        unselect: function() {
-            unselect();
+        unselect: function(location){
+            unselect(location);
         },
         selectLayer: function(location) {
+            // unselect(location);
             findLayer(location).focusLayer();
         }
     }
@@ -223,8 +249,6 @@ DT.Layer = function(leafletLayer, options, featureProperties, map) {
     });
 
     self.unselect = function() {
-
-
         leafletLayer.setStyle(options.unselectedStyle);
         self.selected = false;
     };
