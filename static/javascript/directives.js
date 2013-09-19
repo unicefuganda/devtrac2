@@ -134,15 +134,14 @@ angular.module("dashboard").directive('map', function() {
                 map.unselect(newLocation);
 
                 scope.getDistrictData(newLocation.district).then(function(data) {
-                    if (oldLocation == null || newLocation.district != oldLocation.district) {
+                    
+                    if (newLocation.district != null) {
                         addWaterPoints(data.water_points);
-                        addSubCountyLayers(data.subcounties);
+                        addSubCountyLayers(data.subcounties);   
                     }
-
                     //TODO: Refactor this mess
-                    if (newLocation.subcounty != null && (oldLocation == null || oldLocation.subcounty == null || newLocation.subcounty != oldLocation.subcounty)) {
+                    if (newLocation.subcounty != null) {
                         var parishes = $.grep(data.parishes.features, function(feature, index) { return feature.properties["SNAME_2010"].toLowerCase() == newLocation.subcounty; });
-
                         addParishLayers({type: "FeatureCollection", features: parishes});
                     }
 

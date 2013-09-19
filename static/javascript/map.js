@@ -69,21 +69,16 @@ DT.Map = function(element) {
             $.each(layer_group, function(index, layer) {
                 layer.unselect();
 
-                if (newLocation.subcounty == null ) {
-                    if (layer.location.subcounty != null && layer.location.district != newLocation.district ) {
-                        map.removeLayer(layer.leafletLayer);
-                    }
-                } 
-                if (newLocation.parish == null) {
-                    if (layer.location.parish != null)
-                        map.removeLayer(layer.leafletLayer);
+                if (layer.location.subcounty != null ) {
+                    map.removeLayer(layer.leafletLayer);
                 }
-
             });
         });
 
-        if (newLocation.subcounty == null && self.water_points != null)
+        if (self.water_points != null) {
             map.removeLayer(self.water_points);
+            self.water_points = null;
+        }
 
         if (newLocation.subcounty == null)
             self.layers["subcounties"] = [];
