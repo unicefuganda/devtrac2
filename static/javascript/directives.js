@@ -17,7 +17,7 @@ angular.module("dashboard").directive('map', function() {
                 $scope.$apply();
             }
 
-            $scope.navigateToLocation= function(location) {
+            $scope.navigateToLocation = function(location) {
                 if (location.parish != null) {
                     $location.path("/district/" + DT.encode(location.district) + "/" + DT.encode(location.subcounty) + "/" + DT.encode(location.parish));
                 } else if (location.subcounty != null) {
@@ -90,7 +90,7 @@ angular.module("dashboard").directive('map', function() {
                     selectedStyle: {
                         "fillOpacity": 0,
                         "color": "#00ff00",
-                        "weight": 3
+                        "weight": 8
                     },
                     highlightedStyle: {
                         "fillOpacity": 0.2,
@@ -134,15 +134,21 @@ angular.module("dashboard").directive('map', function() {
                 map.unselect(newLocation);
 
                 scope.getDistrictData(newLocation.district).then(function(data) {
-                    
-                    if (newLocation.district != null) {
+                    if (oldLocation == null || newLocation.district != oldLocation.district) {
                         addWaterPoints(data.water_points);
-                        addSubCountyLayers(data.subcounties);   
+                        addSubCountyLayers(data.subcounties);
                     }
+
                     //TODO: Refactor this mess
-                    if (newLocation.subcounty != null) {
-                        var parishes = $.grep(data.parishes.features, function(feature, index) { return feature.properties["SNAME_2010"].toLowerCase() == newLocation.subcounty; });
-                        addParishLayers({type: "FeatureCollection", features: parishes});
+                    if (newLocation.subcounty != null && (oldLocation == null || oldLocation.subcounty == null || newLocation.subcounty != oldLocation.subcounty)) {
+                        var parishes = $.grep(data.parishes.features, function(feature, index) {
+                            return feature.properties["SNAME_2010"].toLowerCase() == newLocation.subcounty;
+                        });
+
+                        addParishLayers({
+                            type: "FeatureCollection",
+                            features: parishes
+                        });
                     }
 
                     map.selectLayer(newLocation);
@@ -161,7 +167,7 @@ angular.module("dashboard").directive('map', function() {
                     selectedStyle: {
                         "fillOpacity": 0,
                         "color": "#0000ff",
-                        "weight": 4
+                        "weight": 8
                     },
                     highlightedStyle: {
                         "fillOpacity": 0.2,

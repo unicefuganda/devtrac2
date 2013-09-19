@@ -1,7 +1,7 @@
 DT.Location = function(location_hash) {
-    this.district = location_hash.district;
-    this.subcounty = location_hash.subcounty;
-    this.parish = location_hash.parish;
+    this.district = location_hash.district ? location_hash.district : null  ;
+    this.subcounty = location_hash.subcounty ? location_hash.subcounty : null;
+    this.parish = location_hash.parish ? location_hash.parish : null;
 
 };
 
@@ -14,16 +14,20 @@ DT.Location.prototype.equals = function(otherLocation) {
 
 DT.Location.prototype.layersToShow = function() {
     var layers = []
+
+
     if (this.district != null)
     {
-        layers.push(["subcounty", this.district])
-        layers.push(["water_point", this.district])
+        var districtLocation = new DT.Location({district: this.district});
+        layers.push(["subcounty", districtLocation])
+        layers.push(["water_point", districtLocation])
 
     }
 
     if (this.subcounty != null)
     {
-        layers.push(["parish", this.subcounty])
+        var subcountyLocation = new DT.Location({district: this.district, subcounty: this.subcounty});
+        layers.push(["parish", subcountyLocation])
     }
     return layers;
 

@@ -42,7 +42,7 @@ DT.Map = function(element) {
     self.layers = {};
 
     self.markerPopupMessage = function(property) {
-        var message = '<h4>' + property.SourceType +'</h4>';
+        var message = '<h4>' + property.SourceType + '</h4>';
         message += '<label>Functional status:</label> ' + property.Functional + '</br>';
         message += '<label>Management:</label> ' + property.Management + '</br>';
         return message;
@@ -69,19 +69,26 @@ DT.Map = function(element) {
             $.each(layer_group, function(index, layer) {
                 layer.unselect();
 
-                if (layer.location.subcounty != null ) {
-                    map.removeLayer(layer.leafletLayer);
+                if (newLocation.subcounty == null ) {
+                    if (layer.location.subcounty != null && layer.location.district != newLocation.district ) {
+                        map.removeLayer(layer.leafletLayer);
+                    }
+                } 
+                if (newLocation.parish == null) {
+                    if (layer.location.parish != null)
+                        map.removeLayer(layer.leafletLayer);
                 }
+
             });
         });
 
-        if (self.water_points != null) {
+        if (newLocation.subcounty == null && self.water_points != null)
             map.removeLayer(self.water_points);
-            self.water_points = null;
-        }
 
         if (newLocation.subcounty == null)
             self.layers["subcounties"] = [];
+
+
         if (newLocation.parish == null)
             self.layers["parishes"] = [];
 
@@ -99,7 +106,7 @@ DT.Map = function(element) {
 
     function allLayers() {
         var allLayers = [];
-        for(var key in self.layers) {
+        for (var key in self.layers) {
             allLayers = allLayers.concat(self.layers[key]);
         }
         return allLayers;
@@ -108,11 +115,11 @@ DT.Map = function(element) {
     return {
         addPointsLayer: function(features, layer_info) {
             var circleIcon = new L.DivIcon({
-                        iconSize: new L.Point([10, 10]),
-                        className: "water-icon",
-                        html: "",
-                        popupAnchor: [5, -10]
-                    });
+                iconSize: new L.Point([10, 10]),
+                className: "water-icon",
+                html: "",
+                popupAnchor: [5, -10]
+            });
             var geojsonMarkerOptions = {
                 zIndexOffset: 10000,
                 icon: circleIcon
@@ -123,6 +130,7 @@ DT.Map = function(element) {
                 zoomToBoundsOnClick: false,
                 spiderfyOnMaxZoom: false,
                 removeOutsideVisibleBounds: false,
+                disableClusteringAtZoom: 13,
 
                 iconCreateFunction: function(cluster) {
                     return new L.DivIcon({
@@ -138,7 +146,10 @@ DT.Map = function(element) {
             $.each(features.features, function(index, feature) {
                 var coordinates = feature.geometry.coordinates;
                 var marker = new L.Marker(new L.LatLng(coordinates[1], coordinates[0]), geojsonMarkerOptions);
-                var popup = L.popup({className: "marker-popup", closeButton: false}).setContent(self.markerPopupMessage(feature.properties));
+                var popup = L.popup({
+                    className: "marker-popup",
+                    closeButton: false
+                }).setContent(self.markerPopupMessage(feature.properties));
 
                 marker.bindPopup(popup)
                     .on('mouseover', function() {
@@ -197,9 +208,6 @@ DT.Map = function(element) {
         getZoom: function() {
             return map.getZoom();
         },
-        getLayers: function() {
-            return self.navigation_layers;
-        },
         getSelectedLayer: function() {
             var layer = DT.first(allLayers(), function(layer) {
                 return layer.isSelected();
@@ -223,15 +231,14 @@ DT.Map = function(element) {
         clickLayer: function(location) {
             findLayer(location).select();
         },
-        unselect: function(location){
+        unselect: function(location) {
             unselect(location);
         },
         selectLayer: function(location) {
-            // unselect(location);
             findLayer(location).focusLayer();
         },
         isDisplayed: function(location) {
-          return findLayer(location) != null;  
+            return findLayer(location) != null;
         }
     }
 };
