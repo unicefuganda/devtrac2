@@ -66,66 +66,6 @@ def and_i_click_on_the_national_breadcrumb_link(step):
 
 # STEPS to be implemented
 
-@step(u'When I go to the home page')
-def when_i_go_to_the_home_page(step):
-    assert True, 'This step must be implemented'
-
-@step(u'Then A white Div html element will be displayed at the top of the page')
-def then_a_white_div_html_element_will_be_displayed_at_the_top_of_the_page(step):
-    assert True, 'This step must be implemented'
-
-@step(u'And It will be of Height 150px')
-def and_it_will_be_of_height_150px(step):
-    assert True, 'This step must be implemented'
-
-@step(u'Then A header \'([^\']*)\' will be displayed on the left side of the header bar')
-def then_a_header_group1_will_be_displayed_on_the_left_side_of_the_header_bar(step, group1):
-    assert True, 'This step must be implemented'
-
-@step(u'When I go to the national dashboard')
-def when_i_go_to_the_national_dashboard(step):
-    assert True, 'This step must be implemented'
-
-@step(u'Then A search text box, with watermarked text \'([^\']*)\' in it, will be displayed next to the header \'([^\']*)\'')
-def then_a_search_text_box_with_watermarked_text_group1_in_it_will_be_displayed_next_to_the_header_group2(step, group1, group2):
-    assert True, 'This step must be implemented'
-
-@step(u'And Enter \'([^\']*)\' into the search text box')
-def and_enter_group1_into_the_search_text_box(step, group1):
-    assert True, 'This step must be implemented'
-
-@step(u'And Press Enter')
-def and_press_enter(step):
-    assert True, 'This step must be implemented'
-
-@step(u'Then the map Uganda - Gulu will be displayed')
-def then_the_map_uganda_gulu_will_be_displayed(step):
-    assert True, 'This step must be implemented'
-
-@step(u'And  Centered on 2.8762, 32.4767 at 8 zoom')
-def and_centered_on_2_8762_32_4767_at_8_zoom(step):
-    assert True, 'This step must be implemented'
-
-@step(u'Then The back ground color of the search text field will change to hex FF6666')
-def then_the_back_ground_color_of_the_search_text_field_will_change_to_hex_ff6666(step):
-    assert True, 'This step must be implemented'
-
-@step(u'Given that I am a user')
-def given_that_i_am_a_user(step):
-    assert True, 'This step must be implemented'
-@step(u'When I navigate to the \'([^\']*)\' sub county')
-def when_i_navigate_to_the_group1_sub_county(step, group1):
-    assert True, 'This step must be implemented'
-@step(u'Then \'([^\']*)\' water point circle markers will be displayed on the map')
-def then_group1_water_point_circle_markers_will_be_displayed_on_the_map(step, group1):
-    assert True, 'This step must be implemented'
-@step(u'When I navigate to \'([^\']*)\' District')
-def when_i_navigate_to_group1_district(step, group1):
-    assert True, 'This step must be implemented'
-@step(u'Then Then marker clusters of water points will be displayed')
-def then_then_marker_clusters_of_water_points_will_be_displayed(step):
-    assert True, 'This step must be implemented'
-
 @step(u'And I navigate to "([^"]*)"')
 def and_i_navigate_to_group1(step, group1):
     assert True, 'This step must be implemented'
