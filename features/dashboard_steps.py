@@ -37,24 +37,25 @@ def then_i_see_the_layer_district_displayed(step, layer_name):
     world.page.wait_for(lambda page: layer_name in page.current_layers())
     assert_in(layer_name.lower(), world.page.current_layers())
 
-@step(u'When I click on \"(.+)\" in \"(.+)\"')
-@step(u'And I click on \"(.+)\" in \"(.+)\"')
-def when_i_click_on_layer(step, name, layer_name):
-    world.page.click_on_layer(name, layer_name)
+@step(u'When I click on \"(.+)\"')
+@step(u'And I click on \"(.+)\"')
+def when_i_click_on_layer(step, location_name):
+    world.page.click_on_layer(location_name)
 
-@step(u'When I hover over \"(.+)\" in \"(.+)\"$')
-@step(u'And I hover over \"(.+)\" in \"(.+)\"$')
-def when_i_hover_ove(step, district, level):
-    world.page.hover_over(district.lower(), level.lower())
+@step(u'When I hover over \"(.+)\"$')
+@step(u'And I hover over \"(.+)\"$')
+def when_i_hover_over(step, location_name):
+    world.page.hover_over(location_name)
 
-@step(u'Then \"(.+)\" in \"(.+)\" will be selected')
-def then_the_district_will_be_selected(step, name, level):
-    world.page.wait_for(lambda page: page.selected_layer(level.lower()) == name.lower())
-    assert_equals(world.page.selected_layer(level.lower()), name.lower())
+@step(u'Then \"(.+)\" will be selected')
+def then_the_district_will_be_selected(step, location_name):
+    world.page.wait_for(lambda page: page.selected_layer() == location_name.lower())
+    assert_equals(world.page.selected_layer(), location_name.lower())
 
-@step(u'Then \"(.+)\" in \"(.+)\" will be highlighted')
-def then_the_district_will_be_highlighted(step, district, layer_name):
-    assert_equals(world.page.highlighted_layer(layer_name), district.lower())
+@step(u'Then \"(.+)\" will be highlighted')
+def then_the_district_will_be_highlighted(step, location_name):
+    world.page.wait_for(lambda page: page.highlighted_layer() == location_name.lower())
+    assert_equals(world.page.highlighted_layer(), location_name.lower())
 
 @step(u'And I click on the district breadcrumb link')
 def and_i_click_on_the_district_breadcrumb_link(step):

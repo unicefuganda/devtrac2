@@ -33,17 +33,34 @@ class Page:
     def current_layers(self):
         return self.browser.evaluate_script("window.map.getLayers()")        
 
-    def selected_layer(self, level):
-        return self.browser.evaluate_script("window.map.getSelectedLayer('%s')" % level.lower())
+    def selected_layer(self):
+        return self.browser.evaluate_script("window.map.getSelectedLayer()")
 
-    def highlighted_layer(self, layer_name):
-        return self.browser.evaluate_script("window.map.getHighlightedLayer('%s')" % layer_name.lower())
+    def hash_location(self, location_name):
+        locations = location_name.lower().split(", ")
+        district_name = ("'%s'" % locations[0]) if len(locations) > 0 else "null"
+        subcounty_name = ("'%s'" % locations[1]) if len(locations) > 1 else "null"
+        parish_name = ("'%s'" % locations[2]) if len(locations) > 2 else "null"
+        return "{ district: %s, subcounty: %s, parish: %s}" % (district_name, subcounty_name, parish_name)
 
-    def click_on_layer(self, name, layer_name):
-        self.browser.execute_script("window.map.clickLayer('%s', '%s')" % (layer_name.lower(), name.lower()))
+    def take_screenshot(self):
+        self.browser.driver.save_screenshot('screenshot_%s.png' % time.strftime("%m-%d-%I-%H:%I:%M:%S"))
 
-    def hover_over(self, name, layer_name):
-        self.browser.execute_script("window.map.highlightLayer('%s', '%s')" % (layer_name.lower(), name.lower()))
+    def highlighted_layer(self):
+        return self.browser.evaluate_script("window.map.getHighlightedLayer();")
+
+    def click_on_layer(self, location_name):
+        location_hash = self.hash_location(location_name)
+        self.browser.execute_script("window.map.clickLayer(%s)" % location_hash)
+
+    def is_displayed(self, location_name):
+        location_hash = self.hash_location(location_name)
+        self.browser.evaluate_script("window.map.isDisplayed(%s)" % location_hash)
+
+    def hover_over(self, location_name):
+        self.wait_for(lambda page: page.is_displayed(location_name))
+        location_hash = self.hash_location(location_name)
+        self.browser.execute_script("window.map.highlightLayer(%s)" % location_hash)
 
     def click_district_breadcrumb(self):
         self.browser.find_by_css("#location .breadcrumb .district-crumb").first.click()

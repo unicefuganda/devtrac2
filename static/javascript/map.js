@@ -42,7 +42,6 @@ DT.Map = function(element) {
     self.layers = {};
 
     self.markerPopupMessage = function(property) {
-        console.log(property);
         var message = '<h4>' + property.SourceType +'</h4>';
         message += '<label>Functional status:</label> ' + property.Functional + '</br>';
         message += '<label>Management:</label> ' + property.Management + '</br>';
@@ -50,16 +49,15 @@ DT.Map = function(element) {
     };
 
     function findLayer(location) {
-        console.log(location)
         for (var key in self.layers) {
             var layer_group = self.layers[key];
-            var layer = DT.first(layer_group, function(layer) {
-                // console.log(layer.location)
-                return angular.equals(layer.location, location);
+            var found_layer = DT.first(layer_group, function(layer) {
+                return locationName(layer.location) == locationName(location);
+                // return angular.equals(layer.location, location);
             });
 
-            if (layer != null)
-                return layer;
+            if (found_layer != null)
+                return found_layer;
         }
 
         return null;
@@ -90,9 +88,26 @@ DT.Map = function(element) {
         if (newLocation.subcounty == null)
             self.layers["subcounties"] = [];
         if (newLocation.parish == null)
-            self.layers["parish"] = [];
+            self.layers["parishes"] = [];
 
         DT.timings["unselectend"] = new Date().getTime();
+    }
+
+    function locationName(location) {
+        if (location.parish)
+            return location.district + ", " + location.subcounty + ", " + location.parish;
+        if (location.subcounty)
+            return location.district + ", " + location.subcounty;
+        if (location.district)
+            return location.district;
+    }
+
+    function allLayers() {
+        var allLayers = [];
+        for(var key in self.layers) {
+            allLayers = allLayers.concat(self.layers[key]);
+        }
+        return allLayers;
     }
 
     return {
@@ -190,33 +205,28 @@ DT.Map = function(element) {
         getLayers: function() {
             return self.navigation_layers;
         },
-        getSelectedLayer: function(layer_name) {
-            for (var key in self.layers) {
-                var layer_group = self.layers[key];
-                var layer = DT.first(layer_group, function(layer) {
-                    return layer.name == layer_name && layer.isSelected();
-                });
-                if (layer != null)
-                    return layer.location;
-            }
-            return null;
+        getSelectedLayer: function() {
+            var layer = DT.first(allLayers(), function(layer) {
+                return layer.isSelected();
+            });
+            return locationName(layer.location);
         },
         getHighlightedLayer: function(layer_name) {
-            var layer = DT.first(self.layers, function(layer) {
-                return layer.name == layer_name && layer.isHighlighted();
+            var layer = DT.first(allLayers(), function(layer) {
+                return layer.isHighlighted();
             });
             if (layer == null)
                 return null;
-            return layer.location_name;
+            return locationName(layer.location);
         },
-        highlightLayer: function(layer_name, location_name) {
-            $.each(self.layers, function(index, layer) {
+        highlightLayer: function(location) {
+            $.each(allLayers(), function(index, layer) {
                 layer.unhighlight();
             });
-            findLayer(layer_name, location_name).leafletLayer.fire("mouseover");
+            findLayer(location).highlight();
         },
-        clickLayer: function(layer_name, location_name) {
-            findLayer(layer_name, location_name).select();
+        clickLayer: function(location) {
+            findLayer(location).select();
         },
         unselect: function(location){
             unselect(location);
@@ -224,6 +234,9 @@ DT.Map = function(element) {
         selectLayer: function(location) {
             // unselect(location);
             findLayer(location).focusLayer();
+        },
+        isDisplayed: function(location) {
+          return findLayer(location) != null;  
         }
     }
 };
@@ -253,6 +266,7 @@ DT.Layer = function(leafletLayer, options, featureProperties, map) {
     self.unselect = function() {
         leafletLayer.setStyle(options.unselectedStyle);
         self.selected = false;
+        self.highlighted = false;
     };
     self.select = function() {
         if (options.clickLayerHandler) {
