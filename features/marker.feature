@@ -10,4 +10,5 @@ Then 'blue' water point circle markers will be displayed on the map
 Scenario: Marker Clustering
 Given that I am a user
 When I navigate to 'Kisoro' District
-Then Then marker clusters of water points will be displayed
+And Markers are displayed on top of each other
+Then Then marker clusters of water points will be displayed instead

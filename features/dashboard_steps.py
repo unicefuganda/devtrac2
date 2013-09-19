@@ -69,9 +69,11 @@ def and_i_click_on_the_national_breadcrumb_link(step):
 @step(u'And I navigate to "([^"]*)"')
 def and_i_navigate_to_group1(step, group1):
     assert True, 'This step must be implemented'
+
 @step(u'Then a page with an error message is displayed')
 def then_a_page_with_an_error_message_is_displayed(step):
     assert True, 'This step must be implemented'
+    
 @step(u'And the page has a link to the homepage')
 def and_the_page_has_a_link_to_the_homepage(step):
     assert True, 'This step must be implemented'
