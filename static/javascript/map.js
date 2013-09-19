@@ -42,9 +42,11 @@ DT.Map = function(element) {
     self.layers = {};
 
     self.markerPopupMessage = function(property) {
+        console.log(property);
         var message = '<h4>' + property.SourceType +'</h4>';
         message += '<label>Functional status:</label> ' + property.Functional + '</br>';
         message += '<label>Management:</label> ' + property.Management + '</br>';
+        return message;
     };
 
     function findLayer(location) {

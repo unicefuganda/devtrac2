@@ -74,7 +74,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         water_pointsCallback = function(data) {
             deffered.resolve(data);
         }
-         var url = "http://92.237.187.62:6081/geoserver/geonode/ows?"
+         var url = "http://192.237.187.62:6081/geoserver/geonode/ows?"
         +"service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:waterpoints_wgs84"
         +"&outputFormat=json&propertyName=the_geom,District,SubcountyN,ParishName,SourceType,"
         +"Management,Functional&format_options=callback:water_pointsCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">"
