@@ -1,13 +1,12 @@
-var DT = {};
+if (typeof DT == "undefined")
+    DT = {};
 DT.testing = false;
 
-DT.Map = function(element) {
-
+DT.LeafletMap = function(element) {
     var self = this,
         map = L.map(element.attr("id"), {
             zoomControl: true
         });
-
 
     map.on("baselayerchange", function(layer) {
         self.activeLayer = layer;
@@ -38,8 +37,15 @@ DT.Map = function(element) {
         maxZoom: 18
     });
     map.addLayer(osm);
+    return map;
+}
 
+DT.Map = function(element) {
+
+    var map = DT.LeafletMap(element);
     self.layers = {};
+    window.layerMap = new DT.LayerMap();
+    window.mapmap = map;
 
     self.markerPopupMessage = function(property) {
         var message = '<h4>' + property.SourceType + '</h4>';
@@ -52,8 +58,7 @@ DT.Map = function(element) {
         for (var key in self.layers) {
             var layer_group = self.layers[key];
             var found_layer = DT.first(layer_group, function(layer) {
-                return locationName(layer.location) == locationName(location);
-                // return angular.equals(layer.location, location);
+                return angular.equals(layer.location, location);
             });
 
             if (found_layer != null)
@@ -63,45 +68,15 @@ DT.Map = function(element) {
         return null;
     }
 
-    function unselect(newLocation) {
+    function unselect() {
         //TODO: Refactor this mess
         $.each(self.layers, function(index, layer_group) {
             $.each(layer_group, function(index, layer) {
                 layer.unselect();
-
-                if (newLocation.subcounty == null ) {
-                    if (layer.location.subcounty != null && layer.location.district != newLocation.district ) {
-                        map.removeLayer(layer.leafletLayer);
-                    }
-                } 
-                if (newLocation.parish == null) {
-                    if (layer.location.parish != null)
-                        map.removeLayer(layer.leafletLayer);
-                }
-
             });
         });
 
-        if (newLocation.subcounty == null && self.water_points != null)
-            map.removeLayer(self.water_points);
-
-        if (newLocation.subcounty == null)
-            self.layers["subcounties"] = [];
-
-
-        if (newLocation.parish == null)
-            self.layers["parishes"] = [];
-
         DT.timings["unselectend"] = new Date().getTime();
-    }
-
-    function locationName(location) {
-        if (location.parish)
-            return location.district + ", " + location.subcounty + ", " + location.parish;
-        if (location.subcounty)
-            return location.district + ", " + location.subcounty;
-        if (location.district)
-            return location.district;
     }
 
     function allLayers() {
@@ -112,85 +87,92 @@ DT.Map = function(element) {
         return allLayers;
     }
 
+    function addBoundaryLayer(name, location, features, layer_info) {
+        var baseLayer = L.geoJson(features, {
+            style: {
+                weight: 2,
+                fillOpacity: 0,
+                color: "0000ff"
+            },
+            onEachFeature: function(data, layer) {
+
+                var options = $.extend({}, layer_info, {
+                    clickLayerHandler: function(layer) {
+                        self.clickDistrictHandler(layer.location);
+                    },
+                    location: layer_info.getLocation(data),
+                });
+                var layer = new DT.Layer(layer, options, data.properties, map)
+                if (self.layers[layer_info.name] == null)
+                    self.layers[layer_info.name] = []
+                self.layers[layer_info.name].push(layer);
+            },
+        });
+        self.layerMap.addLayer(name, location, baseLayer);
+        map.addLayer(baseLayer, true);
+    }
+
+    function addPointsLayer(name, location, features, layer_info) {
+        var circleIcon = new L.DivIcon({
+            iconSize: new L.Point([10, 10]),
+            className: "water-icon",
+            html: "",
+            popupAnchor: [5, -10]
+        });
+        var geojsonMarkerOptions = {
+            zIndexOffset: 10000,
+            icon: circleIcon
+        };
+
+        var markers = L.markerClusterGroup({
+            showCoverageOnHover: false,
+            zoomToBoundsOnClick: false,
+            spiderfyOnMaxZoom: false,
+            removeOutsideVisibleBounds: false,
+            disableClusteringAtZoom: 13,
+
+            iconCreateFunction: function(cluster) {
+                return new L.DivIcon({
+                    iconSize: new L.Point([20, 20]),
+                    className: "cluster-icon",
+                    html: '<b>' + cluster.getChildCount() + '</b>'
+                });
+            }
+        });
+
+        L.Icon.Default.imagePath = '/static/javascript/lib/images/';
+
+        $.each(features.features, function(index, feature) {
+            var coordinates = feature.geometry.coordinates;
+            var marker = new L.Marker(new L.LatLng(coordinates[1], coordinates[0]), geojsonMarkerOptions);
+            var popup = L.popup({
+                className: "marker-popup",
+                closeButton: false
+            }).setContent(self.markerPopupMessage(feature.properties));
+
+            marker.bindPopup(popup)
+                .on('mouseover', function() {
+                    marker.openPopup();
+                })
+                .on('mouseout', function() {
+                    marker.closePopup();
+                })
+            markers.addLayer(marker);
+
+        });
+
+        self.layerMap.addLayer(name, location, markers);
+        map.addLayer(markers);
+        self.water_points = markers;
+    }
+
     return {
-        addPointsLayer: function(features, layer_info) {
-            var circleIcon = new L.DivIcon({
-                iconSize: new L.Point([10, 10]),
-                className: "water-icon",
-                html: "",
-                popupAnchor: [5, -10]
-            });
-            var geojsonMarkerOptions = {
-                zIndexOffset: 10000,
-                icon: circleIcon
-            };
-
-            var markers = L.markerClusterGroup({
-                showCoverageOnHover: false,
-                zoomToBoundsOnClick: false,
-                spiderfyOnMaxZoom: false,
-                removeOutsideVisibleBounds: false,
-                disableClusteringAtZoom: 13,
-
-                iconCreateFunction: function(cluster) {
-                    return new L.DivIcon({
-                        iconSize: new L.Point([20, 20]),
-                        className: "cluster-icon",
-                        html: '<b>' + cluster.getChildCount() + '</b>'
-                    });
-                }
-            });
-
-            L.Icon.Default.imagePath = '/static/javascript/lib/images/';
-
-            $.each(features.features, function(index, feature) {
-                var coordinates = feature.geometry.coordinates;
-                var marker = new L.Marker(new L.LatLng(coordinates[1], coordinates[0]), geojsonMarkerOptions);
-                var popup = L.popup({
-                    className: "marker-popup",
-                    closeButton: false
-                }).setContent(self.markerPopupMessage(feature.properties));
-
-                marker.bindPopup(popup)
-                    .on('mouseover', function() {
-                        marker.openPopup();
-                    })
-                    .on('mouseout', function() {
-                        marker.closePopup();
-                    })
-                markers.addLayer(marker);
-
-            });
-
-            map.addLayer(markers);
-            self.water_points = markers;
-        },
-        addNavigationLayer: function(features, layer_info) {
-            var baseLayer = L.geoJson(features, {
-                style: {
-                    weight: 2,
-                    fillOpacity: 0,
-                    color: "0000ff"
-                },
-                onEachFeature: function(data, layer) {
-
-                    var options = $.extend({}, layer_info, {
-                        clickLayerHandler: function(layer) {
-                            self.clickDistrictHandler(layer.location);
-
-                        },
-                        location: layer_info.getLocation(data),
-                    });
-                    var layer = new DT.Layer(layer, options, data.properties, map)
-                    if (self.layers[layer_info.name] == null)
-                        self.layers[layer_info.name] = []
-                    self.layers[layer_info.name].push(layer);
-                },
-            });
-            map.addLayer(baseLayer, true);
-            if (self.water_points != null)
-                self.water_points.bringToFront();
-
+        addLayer: function(name, location, features, layer_info) {
+            if (layer_info.type == "boundary") {
+                addBoundaryLayer(name, location, features, layer_info);
+            } else {
+                addPointsLayer(name, location, features, layer_info);
+            }
         },
         setView: function(lat, lng, zoom) {
             map.setView(new L.LatLng(lat, lng), zoom);
@@ -212,7 +194,7 @@ DT.Map = function(element) {
             var layer = DT.first(allLayers(), function(layer) {
                 return layer.isSelected();
             });
-            return locationName(layer.location);
+            return layer.location.getName();
         },
         getHighlightedLayer: function(layer_name) {
             var layer = DT.first(allLayers(), function(layer) {
@@ -220,7 +202,7 @@ DT.Map = function(element) {
             });
             if (layer == null)
                 return null;
-            return locationName(layer.location);
+            return layer.location.getName();
         },
         highlightLayer: function(location) {
             $.each(allLayers(), function(index, layer) {
@@ -239,6 +221,13 @@ DT.Map = function(element) {
         },
         isDisplayed: function(location) {
             return findLayer(location) != null;
+        },
+        displayedLayers: function() {
+            return self.layerMap.displayedLayerKeys();
+        },
+        removeLayer: function(key) {
+            var layer = self.layerMap.removeLayer(key);
+            map.removeLayer(layer);
         }
     }
 };
@@ -302,14 +291,12 @@ DT.Layer = function(leafletLayer, options, featureProperties, map) {
     self.location = options.location;
 
     return {
-        // location_name: self.hierarchy[self.hierarchy.length - 1],
         unselect: self.unselect,
         leafletLayer: leafletLayer,
         hierarchy: self.hierarchy,
         unhighlight: self.unhighlight,
         highlight: self.highlight,
         select: self.select,
-        // name: options.name,
         location: options.location,
         isSelected: function() {
             return self.selected;

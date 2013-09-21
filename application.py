@@ -27,6 +27,7 @@ js = Bundle(
 	'javascript/application.js',
 	'javascript/lib/bootstrap.min.js',
 	'javascript/lib/leaflet.markercluster.js',
+	'javascript/location.js',
      filters='jsmin', output='gen/packed.js')
 
 assets.register('js_all', js)
