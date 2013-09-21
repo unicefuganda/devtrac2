@@ -1,9 +1,6 @@
-
 angular.module("dashboard").directive('map', function() {
     return {
-
         controller: function($scope, $location, districtService) {
-
             $scope.navigateToLocation = function(location) {
                 $location.path(location.toUrl());
             }
@@ -28,7 +25,6 @@ angular.module("dashboard").directive('map', function() {
                     return true;
 
                 map.unselect(newLocation);
-
                 var layerChanges = DT.Location.compareLayerKeys(map.displayedLayers(), scope.location.layersToShow());
 
                 $.each(layerChanges.toRemove, function(index, locationKey) {
@@ -40,12 +36,7 @@ angular.module("dashboard").directive('map', function() {
                         map.addLayer(locationKey[0], locationKey[1], allData[locationKey], DT.LayerOptions[locationKey[0]]);
                     });
 
-                    if (newLocation.district == null) {
-                        map.setView(1.0667, 31.8833, 7);
-                        return;
-                    } else {
-                        map.selectLayer(newLocation);
-                    }
+                    map.selectLayer(newLocation);
                 });
             });
         }

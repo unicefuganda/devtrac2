@@ -32,4 +32,21 @@ describe("LayerMap", function() {
             ["water_points", location1]
         ]);
     });
+
+    it("should find layer from map", function() {
+        var map = new DT.LayerMap("someid");
+        var location1 = new DT.Location({
+            district: "Gulu"
+        });
+        var location2 = new DT.Location({
+            district: "Kampala"
+        });
+
+        map.addLayer("water_points", location1, "some data1");
+        map.addLayer("districts", location2, "some data2");
+
+        expect(map.findLayer("districts", location2)).toEqual("some data2");
+
+        expect(map.findLayer("districts", location1)).toBeNull();
+    });
 });

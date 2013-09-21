@@ -17,6 +17,13 @@ DT.LayerMap.prototype.removeLayer = function(key) {
     return element.layer;
 };
 
+DT.LayerMap.prototype.findLayer = function(key, location) {
+    var element = this.layers[key];
+    if (element.location.equals(location))
+        return element.layer;
+    return null;
+};
+
 DT.LayerMap.prototype.displayedLayerKeys = function() {
     return $.map(this.layers, function(layer, key) {
         return [[key, layer.location]];

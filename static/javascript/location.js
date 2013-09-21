@@ -34,9 +34,11 @@ DT.Location.prototype.layersToShow = function() {
         });
         layers.push(["parish", subcountyLocation])
     }
-
     return layers;
+}
 
+DT.Location.prototype.isNational = function () {
+    return this.district == null && this.subcounty == null && this.parish == null;
 }
 
 DT.Location.prototype.getName = function(location) {

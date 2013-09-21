@@ -33,7 +33,7 @@ DT.LeafletMap = function(element) {
 
     var tileServerUrl = DT.testing ? testingUrl : osmUrl;
     var osm = new L.TileLayer(tileServerUrl, {
-        minZoom: 7,
+        minZoom: 6,
         maxZoom: 18
     });
     map.addLayer(osm);
@@ -55,6 +55,9 @@ DT.Map = function(element) {
     };
 
     function findLayer(location) {
+        if (location.isNational())
+            return self.layerMap.findLayer("district", location);
+
         for (var key in self.layers) {
             var layer_group = self.layers[key];
             var found_layer = DT.first(layer_group, function(layer) {
@@ -208,19 +211,24 @@ DT.Map = function(element) {
             $.each(allLayers(), function(index, layer) {
                 layer.unhighlight();
             });
-            findLayer(location).highlight();
+            findLayer(new DT.Location(location)).highlight();
         },
         clickLayer: function(location) {
-            findLayer(location).select();
+            findLayer(new DT.Location(location)).select();
         },
-        unselect: function(location) {
-            unselect(location);
+        unselect: function() {
+            unselect();
         },
         selectLayer: function(location) {
-            findLayer(location).focusLayer();
+            var layer = findLayer(new DT.Location(location))
+            if (location.isNational()) {
+                map.fitBounds(layer);
+            } else {
+                layer.focusLayer();
+            }
         },
         isDisplayed: function(location) {
-            return findLayer(location) != null;
+            return findLayer(new DT.Location(location)) != null;
         },
         displayedLayers: function() {
             return self.layerMap.displayedLayerKeys();
