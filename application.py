@@ -28,6 +28,8 @@ js = Bundle(
 	'javascript/lib/bootstrap.min.js',
 	'javascript/lib/leaflet.markercluster.js',
 	'javascript/location.js',
+	'javascript/layer-map.js',
+	'javascript/layer-options.js',
      filters='jsmin', output='gen/packed.js')
 
 assets.register('js_all', js)
