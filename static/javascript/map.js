@@ -165,11 +165,11 @@ DT.Map = function(element) {
             unselect();
         },
         selectLayer: function(location) {
-            if (new DT.Location(location.isNational())) {
+            if (location.isNational()) {
                 var layer = self.layerMap.findLayer("district", location);
                 map.fitBounds(layer);
             } else {
-                self.layerMap.findChildLayer(new DT.Location(location)).focusLayer();
+                self.layerMap.findChildLayer(location).focusLayer();
             }
         },
         isDisplayed: function(location) {
