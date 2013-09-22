@@ -63,7 +63,6 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
             cache: true
         }).
         success(function(data, status, headers, config) {
-            console.log("success!");
             deffered.resolve(data);
         });
         return deffered.promise;

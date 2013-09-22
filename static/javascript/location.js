@@ -4,18 +4,15 @@ DT.Location = function(location_hash) {
     this.parish = location_hash.parish ? location_hash.parish.toLowerCase() : null;
 
 };
-
 DT.Location.prototype.equals = function(otherLocation) {
     return this.district == otherLocation.district &&
         this.subcounty == otherLocation.subcounty &&
         this.parish == otherLocation.parish;
 
 };
-
 DT.Location.prototype.toString = function(){
     return this.getName();
-}
-
+};
 DT.Location.prototype.layersToShow = function() {
     var layers = [["district", new DT.Location({})]];
 
@@ -23,8 +20,8 @@ DT.Location.prototype.layersToShow = function() {
         var districtLocation = new DT.Location({
             district: this.district
         });
-        layers.push(["subcounty", districtLocation])
-        layers.push(["water_point", districtLocation])
+        layers.push(["subcounty", districtLocation]);
+        layers.push(["water_point", districtLocation]);
     }
 
     if (this.subcounty != null) {
@@ -32,15 +29,13 @@ DT.Location.prototype.layersToShow = function() {
             district: this.district,
             subcounty: this.subcounty
         });
-        layers.push(["parish", subcountyLocation])
+        layers.push(["parish", subcountyLocation]);
     }
     return layers;
-}
-
+};
 DT.Location.prototype.isNational = function () {
     return this.district == null && this.subcounty == null && this.parish == null;
-}
-
+};
 DT.Location.prototype.getName = function(location) {
     if (this.parish)
         return this.district + ", " + this.subcounty + ", " + this.parish;
@@ -49,7 +44,6 @@ DT.Location.prototype.getName = function(location) {
     if (this.district)
         return this.district;
 };
-
 DT.Location.compareLayerKeys = function(layerKeys, otherlayerKeys) {
 
     var keyExists = function(key, keys) {
@@ -63,16 +57,15 @@ DT.Location.compareLayerKeys = function(layerKeys, otherlayerKeys) {
         toAdd: keysToAdd,
         toRemove: keysToRemove
     }
-}
-
+};
 DT.Location.prototype.toUrl = function() {
     if (this.parish != null) {
         return "/district/" + DT.encode(this.district) + "/" + DT.encode(this.subcounty) + "/" + DT.encode(this.parish);
     } else if (this.subcounty != null) {
         return "/district/" + DT.encode(this.district) + "/" + DT.encode(this.subcounty);
     } else if (this.district != null) {
-        return "/district/" + DT.encode(this.district)
+        return "/district/" + DT.encode(this.district);
     } else {
         return "/";
     }
-}
+};

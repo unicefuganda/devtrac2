@@ -1,12 +1,12 @@
 if (typeof DT == "undefined")
     DT = {};
 DT.testing = false;
+DT.Map = function(element) {
 
-DT.LeafletMap = function(element) {
-    var self = this,
-        map = L.map(element.attr("id"), {
-            zoomControl: true
-        });
+    var self = this;
+    var map = L.map(element.attr("id"), {
+        zoomControl: true
+    });
 
     map.on("baselayerchange", function(layer) {
         self.activeLayer = layer;
@@ -37,66 +37,19 @@ DT.LeafletMap = function(element) {
         maxZoom: 18
     });
     map.addLayer(osm);
-    return map;
-}
-
-DT.Map = function(element) {
-
-    var map = DT.LeafletMap(element);
-    self.layers = {};
-    window.layerMap = new DT.LayerMap();
+    self.layerMap = new DT.LayerMap();
     window.mapmap = map;
 
-    self.markerPopupMessage = function(property) {
-        var message = '<h4>' + property.SourceType + '</h4>';
-        message += '<label>Functional status:</label> ' + property.Functional + '</br>';
-        message += '<label>Management:</label> ' + property.Management + '</br>';
-        return message;
-    };
-
-    function findLayer(location) {
-        if (location.isNational())
-            return self.layerMap.findLayer("district", location);
-
-        for (var key in self.layers) {
-            var layer_group = self.layers[key];
-            var found_layer = DT.first(layer_group, function(layer) {
-                return angular.equals(layer.location, location);
-            });
-
-            if (found_layer != null)
-                return found_layer;
-        }
-
-        return null;
-    }
-
     function unselect() {
-        //TODO: Refactor this mess
-        $.each(self.layers, function(index, layer_group) {
-            $.each(layer_group, function(index, layer) {
-                layer.unselect();
-            });
+        $.each(self.layerMap.allChildLayers(), function(index, layer) {
+            layer.unselect();
         });
 
         DT.timings["unselectend"] = new Date().getTime();
     }
 
-    function allLayers() {
-        var allLayers = [];
-        for (var key in self.layers) {
-            allLayers = allLayers.concat(self.layers[key]);
-        }
-        return allLayers;
-    }
-
     function addBoundaryLayer(name, location, features, layer_info) {
         var baseLayer = L.geoJson(features, {
-            style: {
-                weight: 2,
-                fillOpacity: 0,
-                color: "0000ff"
-            },
             onEachFeature: function(data, layer) {
 
                 var options = $.extend({}, layer_info, {
@@ -106,9 +59,7 @@ DT.Map = function(element) {
                     location: layer_info.getLocation(data),
                 });
                 var layer = new DT.Layer(layer, options, data.properties, map)
-                if (self.layers[layer_info.name] == null)
-                    self.layers[layer_info.name] = []
-                self.layers[layer_info.name].push(layer);
+                self.layerMap.addChildLayer(name, location, options.location, layer);
             },
         });
         self.layerMap.addLayer(name, location, baseLayer);
@@ -116,6 +67,13 @@ DT.Map = function(element) {
     }
 
     function addPointsLayer(name, location, features, layer_info) {
+        // TODO: refactor
+        var markerPopupMessage = function(property) {
+            var message = '<h4>' + property.SourceType + '</h4>';
+            message += '<label>Functional status:</label> ' + property.Functional + '</br>';
+            message += '<label>Management:</label> ' + property.Management + '</br>';
+            return message;
+        };
         var circleIcon = new L.DivIcon({
             iconSize: new L.Point([10, 10]),
             className: "water-icon",
@@ -151,7 +109,7 @@ DT.Map = function(element) {
             var popup = L.popup({
                 className: "marker-popup",
                 closeButton: false
-            }).setContent(self.markerPopupMessage(feature.properties));
+            }).setContent(markerPopupMessage(feature.properties));
 
             marker.bindPopup(popup)
                 .on('mouseover', function() {
@@ -162,11 +120,11 @@ DT.Map = function(element) {
                 })
             markers.addLayer(marker);
 
+
         });
 
         self.layerMap.addLayer(name, location, markers);
         map.addLayer(markers);
-        self.water_points = markers;
     }
 
     return {
@@ -177,30 +135,17 @@ DT.Map = function(element) {
                 addPointsLayer(name, location, features, layer_info);
             }
         },
-        setView: function(lat, lng, zoom) {
-            map.setView(new L.LatLng(lat, lng), zoom);
-        },
-        setZoom: function(zoom) {
-            map.setView(map.getCenter(), zoom);
-        },
         onClickDistrict: function(handler) {
             self.clickDistrictHandler = handler;
         },
-        getCenter: function() {
-            var center = map.getCenter();
-            return [center.lat, center.lng];
-        },
-        getZoom: function() {
-            return map.getZoom();
-        },
         getSelectedLayer: function() {
-            var layer = DT.first(allLayers(), function(layer) {
+            var layer = DT.first(self.layerMap.allChildLayers(), function(layer) {
                 return layer.isSelected();
             });
             return layer.location.getName();
         },
         getHighlightedLayer: function(layer_name) {
-            var layer = DT.first(allLayers(), function(layer) {
+            var layer = DT.first(self.layerMap.allChildLayers(), function(layer) {
                 return layer.isHighlighted();
             });
             if (layer == null)
@@ -208,27 +153,27 @@ DT.Map = function(element) {
             return layer.location.getName();
         },
         highlightLayer: function(location) {
-            $.each(allLayers(), function(index, layer) {
+            $.each(self.layerMap.allChildLayers(), function(index, layer) {
                 layer.unhighlight();
             });
-            findLayer(new DT.Location(location)).highlight();
+            self.layerMap.findChildLayer(new DT.Location(location)).highlight();
         },
         clickLayer: function(location) {
-            findLayer(new DT.Location(location)).select();
+            self.layerMap.findChildLayer(new DT.Location(location)).select();
         },
         unselect: function() {
             unselect();
         },
         selectLayer: function(location) {
-            var layer = findLayer(new DT.Location(location))
             if (location.isNational()) {
+                var layer = self.layerMap.findLayer("district", location);
                 map.fitBounds(layer);
             } else {
-                layer.focusLayer();
+                self.layerMap.findChildLayer(new DT.Location(location)).focusLayer();
             }
         },
         isDisplayed: function(location) {
-            return findLayer(new DT.Location(location)) != null;
+            return self.layerMap.findChildLayer(new DT.Location(location)) != null;
         },
         displayedLayers: function() {
             return self.layerMap.displayedLayerKeys();
@@ -245,9 +190,7 @@ DT.Layer = function(leafletLayer, options, featureProperties, map) {
     var self = this;
     self.options = options;
     self.featureProperties = featureProperties;
-
     leafletLayer.setStyle(options.unselectedStyle);
-    // self.hierarchy = options.getHierarchy(featureProperties);
 
     leafletLayer.on("click", function() {
         DT.timings["click"] = new Date().getTime();

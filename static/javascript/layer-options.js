@@ -28,7 +28,6 @@ DT.LayerOptions = {
         key: "parish",
         type: "boundary"
     },
-
     "district": {
         unselectedStyle: {
             "fillOpacity": 0,

@@ -58,12 +58,25 @@ footer label {
 
 #location .breadcrumb{
   background-color: white;
-  font-size: 16px;
+  font-size: 14px;
   text-transform: capitalize;
   border-radius: 0;
   border: 1px solid #CCCCCC;
   padding: 5px 11px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.65);
+}
+
+/*#location .breadcrumb li a{
+  vertical-align: middle;
+}
+
+#location .breadcrumb li:last-child {
+  margin-bottom: 0px;
+}*/
+#location .breadcrumb li:last-child a{
+  color: black;
+  font-size: 22px;
+  /*vertical-align: middle;*/
 }
 
 #location h2 {

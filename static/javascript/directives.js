@@ -9,7 +9,6 @@ angular.module("dashboard").directive('map', function() {
                 return districtService.getData(locationKeys);
             };
         },
-
         link: function(scope, element, attrs) {
             var map = new DT.Map(element);
             window.map = map;
