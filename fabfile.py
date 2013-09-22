@@ -32,7 +32,6 @@ def deploy(sha):
         run("git reset --hard %s" % sha)
         
         run("pip install -r requirements.txt --use-mirrors")
-        run("python db/import_districts.py")
         
     with cd(code_dir):
         upload_template("version.template", "static/javascript/version.json", { "environment": env.environment, "sha": sha[:6], "time": strftime("%d %b %Y %X", localtime()) })

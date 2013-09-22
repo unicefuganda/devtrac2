@@ -165,7 +165,7 @@ DT.Map = function(element) {
             unselect();
         },
         selectLayer: function(location) {
-            if (location.isNational()) {
+            if (new DT.Location(location.isNational())) {
                 var layer = self.layerMap.findLayer("district", location);
                 map.fitBounds(layer);
             } else {
