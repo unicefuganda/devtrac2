@@ -65,3 +65,7 @@ def when_i_navigate_to_the_home_page(step):
 @step(u'Then the \'([^\']*)\' filter will be displayed on the filter panel')
 def then_the_group1_filter_will_be_displayed_on_the_filter_panel(step, group1):
     assert True, 'This step must be implemented'
+    
+@step(u'When I hover away from a "([^"]*)" marker at "([^"]*)"')
+def when_i_hover_away_from_a_group1_marker_at_group2(step, group1, group2):
+    assert True, 'This step must be implemented'

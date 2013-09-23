@@ -13,17 +13,6 @@ When I navigate to 'Kisoro' District
 And Markers are displayed on top of each other
 Then Then marker clusters of water points will be displayed instead
 
-Scenario: Show Marker Summary Info
-Given that I am a regular user
-When I hover over the water point maker at 23.0000, 11.0000
-Then a summary of information about the marker is displayed
-
-Scenario: Hide Marker Summary Info
-Given that I am a regular user
-And the summary information about the water point marker at ... is displayed
-When I hover away from a marker
-Then the summary information is removed
-
 Scenario: Add health centre markers to map
 Given that I am a user
 When I navigate to 'Ssisa' sub county
@@ -59,7 +48,21 @@ Then the popup should have content:
     Functional status: Functional (in use)
     Management: Communal
     """
-    
+
+Scenario: Hide Marker Summary Info
+Given that I am a regular user
+When I open dashboard for Gulu Palaro
+And I hover over a "water_point" marker at "3.1917, 32.3581" 
+Then the popup should have content: 
+    """
+    Deep borehole
+    Functional status: Functional (in use)
+    Management: Communal
+    """
+When I hover away from a "water_point" marker at "3.1917, 32.3581"
+Then the summary information is removed
+
+
 Scenario: Add water point markers
 Given that I am a regular user
 When I open dashboard for Gulu Palaro
