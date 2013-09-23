@@ -13,7 +13,6 @@ before_script:
 install: "pip install -r requirements.txt --use-mirrors"
 
 script: 
-  - "python db/import_districts.py"
   - "python tests.py"
   - "phantomjs jasmine_runner.js http://localhost:5000/static/SpecRunner.html"
   - "lettuce"

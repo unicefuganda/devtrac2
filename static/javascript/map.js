@@ -96,7 +96,7 @@ DT.Map = function(element) {
                 var latlng = cluster.getLatLng()
                 return new L.DivIcon({
                     iconSize: new L.Point([20, 20]),
-                    className: "cluster-icon",
+                    className: layer_info.name +"-cluster-icon",
                     html: "<div data-lat='"+ latlng.lat.toFixed(4) +"' data-lng='" + latlng.lng.toFixed(4) + "'>" 
                         + '<b>' + cluster.getChildCount() + '</b>'
                         + '</div>'
@@ -112,7 +112,7 @@ DT.Map = function(element) {
 
             var circleIcon = new L.DivIcon({
                 iconSize: new L.Point([10, 10]),
-                className: "water-icon",
+                className: layer_info.name + "-icon",
                 html: "<div data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'></div>",
                 // html:"",
                 popupAnchor: [5, -10]

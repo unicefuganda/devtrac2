@@ -38,8 +38,14 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                         deffered2.resolve();
                     });
                 // }
-            } else if (key == "water_point") {
+            } else if (key == "water-point") {
                 self.water_points(location.district)
+                    .then(function(data) {
+                        allData[locationkey] = data;
+                        deffered2.resolve();
+                    });
+            } else if (key == "health-center") {
+                self.health_centers(location.district)
                     .then(function(data) {
                         allData[locationkey] = data;
                         deffered2.resolve();
@@ -103,6 +109,20 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
             deffered.resolve(data);
         }
         var url = "http://192.237.187.62:6081/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:waterpoints_wgs84" + "&outputFormat=json&propertyName=the_geom,District,SubcountyN,ParishName,SourceType," + "Management,Functional&format_options=callback:water_pointsCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>District</PropertyName><Literal>" + district_name.toUpperCase() + "</Literal></PropertyIsEqualTo>" + "</Filter>";
+
+        $http.jsonp(url, {
+            cache: true
+        });
+        return deffered.promise;
+    };
+
+     this.health_centers = function(district_name) {
+        var deffered = $q.defer();
+
+        health_centersCallback = function(data) {
+            deffered.resolve(data);
+        }
+        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_health_centers" + "&outputFormat=json" + "&format_options=callback:health_centersCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district_name.toUpperCase() + "</Literal></PropertyIsEqualTo>" + "</Filter>";
 
         $http.jsonp(url, {
             cache: true

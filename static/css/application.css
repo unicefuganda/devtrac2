@@ -138,7 +138,7 @@ footer label {
   margin: 6px 10px;
 }
 
-.cluster-icon
+.water-point-cluster-icon
 {
   background-color: rgba(116, 223, 252, 0.6);
   overflow: hidden;
@@ -150,9 +150,30 @@ footer label {
   box-shadow: 0 1px 4px rgba(0,0,0,0.65);
 }
 
-.water-icon
+.water-point-icon
 {
   background-color: rgba(0, 0, 255, 0.6);
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.65);
+}
+
+.health-center-cluster-icon
+{
+  background-color: rgba(153, 51, 102, 0.65);
+  overflow: hidden;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  padding: 6px 0 0 0;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.65);
+}
+
+.health-center-icon
+{
+  background-color: rgba(153, 51, 102, 0.65);
   width: 10px;
   height: 10px;
   border-radius: 2px;

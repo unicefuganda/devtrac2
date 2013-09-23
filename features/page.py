@@ -72,8 +72,7 @@ class Page:
         self.browser.execute_script("window.map.openPopupForMarkerAt('%s', '%s', '%s');" % (layer, lat, lng))
 
     def cluster_count(self, layer, lat, lng):
-        time.sleep(2)
-        content = self.browser.find_by_css(".cluster-icon [data-lat='%s'][data-lng='%s']" % (lat, lng)).text
+        content = self.browser.find_by_css(".water-point-cluster-icon [data-lat='%s'][data-lng='%s']" % (lat, lng)).text
         return int(content)
 
     def popup_content(self):

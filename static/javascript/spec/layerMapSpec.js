@@ -6,10 +6,10 @@ describe("LayerMap", function() {
         });
         var map = new DT.LayerMap("someid");
 
-        map.addLayer("water_points", location, []);
+        map.addLayer("water-points", location, []);
 
         expect(map.displayedLayerKeys()).toEqual([
-            ["water_points", location]
+            ["water-points", location]
         ]);
     });
 
@@ -22,14 +22,14 @@ describe("LayerMap", function() {
             district: "Gulu"
         });
 
-        map.addLayer("water_points", location1, ["some data"]);
+        map.addLayer("water-points", location1, ["some data"]);
         map.addLayer("districts", location2, ["some data"]);
 
         var removedLayer = map.removeLayer("districts", location2);
         expect(removedLayer).toEqual(["some data"]);
 
         expect(map.displayedLayerKeys()).toEqual([
-            ["water_points", location1]
+            ["water-points", location1]
         ]);
     });
 
@@ -42,7 +42,7 @@ describe("LayerMap", function() {
             district: "Kampala"
         });
 
-        map.addLayer("water_points", location1, "some data1");
+        map.addLayer("water-points", location1, "some data1");
         map.addLayer("districts", location2, "some data2");
 
         expect(map.findLayer("districts", location2)).toEqual("some data2");
@@ -61,7 +61,7 @@ describe("LayerMap", function() {
         });
 
         map.addLayer("other_layer", patikoLocation, "some data");
-        map.addChildLayer("water_points", guluLocation, patikoLocation, "some data1");
+        map.addChildLayer("water-points", guluLocation, patikoLocation, "some data1");
 
         expect(map.findChildLayer(patikoLocation)).toEqual("some data1")
     })
@@ -82,9 +82,9 @@ describe("LayerMap", function() {
         });
 
 
-        map.addChildLayer("water_points", guluLocation, patikoLocation, "some data1");
-        map.addChildLayer("water_points", guluLocation, awachLocation, "some data2");
-        expect(map.findChildLayers("water_points", guluLocation)).toEqual(["some data1", "some data2"])
+        map.addChildLayer("water-points", guluLocation, patikoLocation, "some data1");
+        map.addChildLayer("water-points", guluLocation, awachLocation, "some data2");
+        expect(map.findChildLayers("water-points", guluLocation)).toEqual(["some data1", "some data2"])
     })
 
     it("should list all child layers", function() {
@@ -112,9 +112,9 @@ describe("LayerMap", function() {
         });
 
         map.addLayer("other_layer", guluLocation, "some data4");
-        map.addChildLayer("water_points", guluLocation, patikoLocation, "some data1");
-        map.addChildLayer("water_points", guluLocation, awachLocation, "some data2");
-        map.addChildLayer("water_points", kampalaLocation, makindyeLocation, "some data3");
+        map.addChildLayer("water-points", guluLocation, patikoLocation, "some data1");
+        map.addChildLayer("water-points", guluLocation, awachLocation, "some data2");
+        map.addChildLayer("water-points", kampalaLocation, makindyeLocation, "some data3");
 
         expect(map.allChildLayers()).toEqual(["some data1", "some data2", "some data3"]);
 

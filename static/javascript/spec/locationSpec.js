@@ -39,7 +39,7 @@ describe("Location", function() {
         expect(location1.layersToShow()).toEqual([["district", uganda_location]]);
     });
 
-    it("should show layer subcounties and water_points for district", function() {
+    it("should show layer subcounties and water-points for district", function() {
         var location1 = new DT.Location({
             district: "gulu",
             subcounty: null,
@@ -52,11 +52,12 @@ describe("Location", function() {
         expect(location1.layersToShow()).toEqual([
             ["district", uganda_location],
             ["subcounty", gulu_location],
-            ["water_point", gulu_location]
+            ["water-point", gulu_location],
+            ["health-center", gulu_location]
         ]);
     });
 
-    it("should show layer subcounties, water_points and parishes for subcounty", function() {
+    it("should show layer subcounties, water-points and parishes for subcounty", function() {
         var location1 = new DT.Location({
             district: "gulu",
             subcounty: "patiko",
@@ -69,12 +70,13 @@ describe("Location", function() {
         expect(location1.layersToShow()).toEqual([
             ["district", uganda_location],
             ["subcounty", gulu_location],
-            ["water_point", gulu_location],
+            ["water-point", gulu_location],
+            ["health-center", gulu_location],
             ["parish", patiko_location]
         ]);
     });
 
-    it("should show layer subcounties, water_points and parishes for parish", function() {
+    it("should show layer subcounties, water-points and parishes for parish", function() {
         var location1 = new DT.Location({
             district: "gulu",
             subcounty: "patiko",
@@ -87,7 +89,8 @@ describe("Location", function() {
         expect(location1.layersToShow()).toEqual([
             ["district", uganda_location],
             ["subcounty", gulu_location],
-            ["water_point", gulu_location],
+            ["water-point", gulu_location],
+            ["health-center", gulu_location],
             ["parish", patiko_location]
         ]);
     });

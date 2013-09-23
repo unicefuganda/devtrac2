@@ -21,7 +21,8 @@ DT.Location.prototype.layersToShow = function() {
             district: this.district
         });
         layers.push(["subcounty", districtLocation]);
-        layers.push(["water_point", districtLocation]);
+        layers.push(["water-point", districtLocation]);
+        layers.push(["health-center", districtLocation]);
     }
 
     if (this.subcounty != null) {

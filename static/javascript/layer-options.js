@@ -78,8 +78,14 @@ DT.LayerOptions = {
         name: "subcounty",
         type: "boundary"
     },
-    "water_point": {
-        name: "water_point",
-        type: "points"
+    "water-point": {
+        name: "water-point",
+        type: "points",
+        color: "#0000ff"
+    },
+     "health-center": {
+        name: "health-center",
+        type: "points",
+        color: "#ff0000"
     }
 }
