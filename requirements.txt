@@ -8,3 +8,5 @@ flask-mongoengine==0.7.0
 Flask-Assets==0.8
 jsmin==2.0.4
 cssmin==0.1.4
+Fiona==1.0.2
+Shapely==1.2.18
