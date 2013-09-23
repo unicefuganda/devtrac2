@@ -5,22 +5,22 @@ from time import *
 
 # Steps to be implemented
 
+@step(u'And I hover over a "(.*)" marker at "([^"]*), ([^"]*)"')
+def and_i_hover_over_a_marker_at_lnglat(step, layer, lat, lng):
+    world.page.hover_over_popup(layer, lat, lng)
 
-@step(u'Given that I am a user')
-def given_that_i_am_a_user(step):
-    assert True, 'This step must be implemented'
+@step(u'Then the popup should have content:')
+def then_the_pop_should_have_content(step):
+    assert_equals(world.page.popup_content(), step.multiline);
 
-@step(u'When I navigate to the \'([^\']*)\' sub county')
-def when_i_navigate_to_the_group1_sub_county(step, group1):
-    assert True, 'This step must be implemented'
+@step(u'Then the "([^"]*)" cluster marker at "([^"]*), ([^"]*)" is for "([^"]*)" points')
+def then_the_cluster_marker_at_latlng_is_for_num_points(step, layer, lat, lng, num_points):
+    assert_equals(world.page.cluster_count(layer, lat, lng), int(num_points));
 
 @step(u'Then \'([^\']*)\' water point circle markers will be displayed on the map')
 def then_group1_water_point_circle_markers_will_be_displayed_on_the_map(step, group1):
     assert True, 'This step must be implemented'
 
-@step(u'When I navigate to \'([^\']*)\' District')
-def when_i_navigate_to_group1_district(step, group1):
-    assert True, 'This step must be implemented'
 
 #is this step possible?
 @step(u'And Markers are displayed on top of each other')

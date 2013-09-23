@@ -93,19 +93,40 @@ DT.Map = function(element) {
             disableClusteringAtZoom: 13,
 
             iconCreateFunction: function(cluster) {
+                var latlng = cluster.getLatLng()
                 return new L.DivIcon({
                     iconSize: new L.Point([20, 20]),
                     className: "cluster-icon",
-                    html: '<b>' + cluster.getChildCount() + '</b>'
+                    html: "<div data-lat='"+ latlng.lat.toFixed(4) +"' data-lng='" + latlng.lng.toFixed(4) + "'>" 
+                        + '<b>' + cluster.getChildCount() + '</b>'
+                        + '</div>'
                 });
             }
         });
 
         L.Icon.Default.imagePath = '/static/javascript/lib/images/';
+        window.markers = []
 
         $.each(features.features, function(index, feature) {
             var coordinates = feature.geometry.coordinates;
+
+            var circleIcon = new L.DivIcon({
+                iconSize: new L.Point([10, 10]),
+                className: "water-icon",
+                html: "<div data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'></div>",
+                // html:"",
+                popupAnchor: [5, -10]
+            });
+            var geojsonMarkerOptions = {
+                zIndexOffset: 10000,
+                icon: circleIcon
+            };
+
+            
             var marker = new L.Marker(new L.LatLng(coordinates[1], coordinates[0]), geojsonMarkerOptions);
+
+            window.markers.push(marker);
+            // window.marker = marker;
             var popup = L.popup({
                 className: "marker-popup",
                 closeButton: false
@@ -118,6 +139,7 @@ DT.Map = function(element) {
                 .on('mouseout', function() {
                     marker.closePopup();
                 })
+            window.basemarkers = markers;
             markers.addLayer(marker);
 
 
@@ -181,6 +203,30 @@ DT.Map = function(element) {
         removeLayer: function(key) {
             var layer = self.layerMap.removeLayer(key);
             map.removeLayer(layer);
+        },
+        openPopupForMarkerAt: function(layer, lat, lng) {
+            var markerLayer = self.layerMap.findLayerByKey(layer);
+            for(var layerKey in markerLayer._featureGroup._layers) {
+                var layer = markerLayer._featureGroup._layers[layerKey];
+                var markerlat = layer.getLatLng().lat.toFixed(4).toString();
+                var markerlng = layer.getLatLng().lng.toFixed(4).toString();
+                if (markerlat == lat && markerlng == lng) {
+                    layer.openPopup();  
+                    return;
+                }
+            }
+        },
+
+        getMarker: function(layer, lat, lng) {
+            var markerLayer = self.layerMap.findLayerByKey(layer);
+            for(var layerKey in markerLayer._featureGroup._layers) {
+                var layer = markerLayer._featureGroup._layers[layerKey];
+                var markerlat = layer.getLatLng().lat.toFixed(4).toString();
+                var markerlng = layer.getLatLng().lng.toFixed(4).toString();
+                if (markerlat == lat && markerlng == lng) {
+                    // return layer._icon.text();
+                }
+            }
         }
     }
 };

@@ -68,6 +68,17 @@ class Page:
     def click_national_breadcrumb(self):
         self.browser.find_by_css("#location .breadcrumb .national-crumb").first.click()
 
+    def hover_over_popup(self, layer, lat, lng):
+        self.browser.execute_script("window.map.openPopupForMarkerAt('%s', '%s', '%s');" % (layer, lat, lng))
+
+    def cluster_count(self, layer, lat, lng):
+        time.sleep(2)
+        content = self.browser.find_by_css(".cluster-icon [data-lat='%s'][data-lng='%s']" % (lat, lng)).text
+        return int(content)
+
+    def popup_content(self):
+        return self.browser.find_by_css(".marker-popup").text
+
     def wait_for(self, function):
         for _ in itertools.repeat(None, 10):
             if (function(self)):    

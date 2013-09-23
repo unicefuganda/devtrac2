@@ -23,7 +23,7 @@ angular.module("dashboard").directive('map', function() {
                 if (newLocation == undefined)
                     return true;
 
-                map.unselect(newLocation);
+                map.unselect();
                 var layerChanges = DT.Location.compareLayerKeys(map.displayedLayers(), scope.location.layersToShow());
 
                 $.each(layerChanges.toRemove, function(index, locationKey) {
