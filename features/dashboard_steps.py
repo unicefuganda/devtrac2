@@ -111,22 +111,6 @@ def and_centered_on_2_8762_32_4767_at_8_zoom(step):
 def then_the_back_ground_color_of_the_search_text_field_will_change_to_hex_ff6666(step):
     assert True, 'This step must be implemented'
 
-@step(u'Given that I am a user')
-def given_that_i_am_a_user(step):
-    assert True, 'This step must be implemented'
-@step(u'When I navigate to the \'([^\']*)\' sub county')
-def when_i_navigate_to_the_group1_sub_county(step, group1):
-    assert True, 'This step must be implemented'
-@step(u'Then \'([^\']*)\' water point circle markers will be displayed on the map')
-def then_group1_water_point_circle_markers_will_be_displayed_on_the_map(step, group1):
-    assert True, 'This step must be implemented'
-@step(u'When I navigate to \'([^\']*)\' District')
-def when_i_navigate_to_group1_district(step, group1):
-    assert True, 'This step must be implemented'
-@step(u'Then Then marker clusters of water points will be displayed')
-def then_then_marker_clusters_of_water_points_will_be_displayed(step):
-    assert True, 'This step must be implemented'
-
 @step(u'And I navigate to "([^"]*)"')
 def and_i_navigate_to_group1(step, group1):
     assert True, 'This step must be implemented'
