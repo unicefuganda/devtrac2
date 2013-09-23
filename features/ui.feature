@@ -17,3 +17,8 @@ Scenario: Display filter panel
 Given that I am a regular user
 When I go to the home page
 Then A filter panel with the header 'Filter By' will be displayed
+
+Scenario: Display indicator panel
+Given that I am a regular user
+When I got to the home page
+Then an indicator panel will be displayed in the bottom middle section of the map

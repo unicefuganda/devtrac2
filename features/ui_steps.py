@@ -24,3 +24,10 @@ def then_a_header_group1_will_be_displayed_on_the_left_side_of_the_header_bar(st
 @step(u'Then A filter panel with the header \'([^\']*)\' will be displayed')
 def then_a_filter_panel_with_the_header_group1_will_be_displayed(step, group1):
     assert True, 'This step must be implemented'
+
+@step(u'When I got to the home page')
+def when_i_got_to_the_home_page(step):
+    assert True, 'This step must be implemented'
+@step(u'Then an indicator panel will be displayed in the bottom middle section of the map')
+def then_an_indicator_panel_will_be_displayed_in_the_bottom_middle_section_of_the_map(step):
+    assert True, 'This step must be implemented'
