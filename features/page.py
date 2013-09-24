@@ -9,11 +9,19 @@ class Page:
     def visit_national_dashboard(self):
         self.browser.visit("%s/?test=true" % self.base_url)
 
-    def visit_district_dashboard(self, district_name):
-        self.browser.visit("%s/district/%s?test=true" % (self.base_url, district_name))
+    def visit_dashboard(self, location_name):
+        locations = location_name.lower().split(", ")
+        url = ""
+        if (len(locations) > 0):
+            url += ("/%s" % locations[0]) 
 
-    def visit_subcounty_dashboard(self, district_name, subcounty_name):
-        self.browser.visit("%s/district/%s/%s?test=true" % (self.base_url, district_name, subcounty_name))
+        if (len(locations) > 1):
+            url += ("/%s" % locations[1]) 
+
+        if (len(locations) > 2):
+            url += ("/%s" % locations[2]) 
+
+        self.browser.visit("%s/district%s?test=true" % (self.base_url, url))
 
     def breadcrumbs(self):
         crumbs = map(lambda crumb:crumb.text, self.browser.find_by_css("#location .breadcrumb li"))
@@ -30,8 +38,8 @@ class Page:
         zoom = self.browser.evaluate_script("window.map.getZoom()")
         return int(zoom)
 
-    def current_layers(self):
-        return self.browser.evaluate_script("window.map.getLayers()")        
+    def displayedLayerNames(self):
+        return self.browser.evaluate_script("window.map.displayedLayerNames()")        
 
     def selected_layer(self):
         return self.browser.evaluate_script("window.map.getSelectedLayer()")
@@ -72,7 +80,7 @@ class Page:
         self.browser.execute_script("window.map.openPopupForMarkerAt('%s', '%s', '%s');" % (layer, lat, lng))
 
     def cluster_count(self, layer, lat, lng):
-        content = self.browser.find_by_css(".water-point-cluster-icon [data-lat='%s'][data-lng='%s']" % (lat, lng)).text
+        content = self.browser.find_by_css(".%s-cluster-icon [data-lat='%s'][data-lng='%s']" % (layer, lat, lng)).text
         return int(content)
 
     def popup_content(self):

@@ -45,6 +45,7 @@ DT.Location.prototype.getName = function(location) {
         return this.district + ", " + this.subcounty;
     if (this.district)
         return this.district;
+    return "";
 };
 DT.Location.compareLayerKeys = function(layerKeys, otherlayerKeys) {
 

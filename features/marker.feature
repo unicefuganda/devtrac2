@@ -1,26 +1,54 @@
-# Feature file for markers on a map
-
 Feature: Map Markers
 
-Scenario: Add water point markers to map
-Given that I am a user
-When I navigate to the 'Palaro' sub county
-Then 'blue' water point circle markers will be displayed on the map
+Scenario: Show Water point Marker Summary Info
+Given that I am a regular user
+When I open dashboard for "Gulu, Palaro"
+Then the "water-point" layer for "Gulu" is displayed
+And I hover over a "water-point" marker at "3.1917, 32.3581" 
+Then the popup should have content: 
+    """
+    Deep Borehole Water Point
+    Functional: Functional (in use)
+    Management: Communal
+    """
+    
+Scenario: Cluster Water Point markers
+Given that I am a regular user
+When I open dashboard for "Gulu, Palaro"
+Then the "water-point" cluster marker at "3.2713, 32.3560" is for "6" points
 
-Scenario: Marker Clustering
-Given that I am a user
-When I navigate to 'Kisoro' District
-And Markers are displayed on top of each other
-Then Then marker clusters of water points will be displayed instead
-Scenario: Add health centre markers to map
-Given that I am a user
-When I navigate to 'Ssisa' sub county
-Then health centre marker icons will be displayed on the map
+Scenario: Show Heath Center Marker Summary Info
+Given that I am a regular user
+When I open dashboard for "Gulu, Odek"
+Then the "health-center" layer for "Gulu" is displayed
+And I hover over a "health-center" marker at "2.6618, 32.6234" 
+Then the popup should have content: 
+    """
+    Acet Heath Center
+    Unit Type: HC 4
+    """
 
-Scenario: Add school markers to map
-Given that I am a user
-When I navigate to 'Odek' sub county
-Then school marker icons will be displayed on the map
+Scenario: Cluster health center markers
+Given that I am a regular user
+When I open dashboard for "Gulu, Odek"
+Then the "health-center" cluster marker at "2.7492, 32.6948" is for "2" points
+
+Scenario: Show School Marker Summary Info
+Given that I am a regular user
+When I open dashboard for "Gulu, Odek, Lamola"
+Then the "school" layer for "Gulu" is displayed
+And I hover over a "school" marker at "2.5885, 32.7447" 
+Then the popup should have content: 
+    """
+    Abella P.S School
+    Owner: Government
+    Type: Primary
+    """
+
+Scenario: Cluster school markers
+Given that I am a regular user
+When I open dashboard for "Gulu, Odek, Lukwor"
+Then the "school" cluster marker at "2.6878, 32.6592" is for "6" points
 
 Scenario: Add waterpoint filter to filter panel
 Given that I am a user
@@ -36,32 +64,3 @@ Scenario: Add School filter to filter panel
 Given that I am a user
 When I navigate to the home page
 Then the 'Schools' filter will be displayed on the filter panel
-
-Scenario: Hover over a marker
-Given that I am a regular user
-When I open dashboard for Gulu Palaro
-And I hover over a "water-point" marker at "3.1917, 32.3581" 
-Then the popup should have content: 
-    """
-    Deep borehole
-    Functional status: Functional (in use)
-    Management: Communal
-    """
-
-Scenario: Hide Marker Summary Info
-Given that I am a regular user
-When I open dashboard for Gulu Palaro
-And I hover over a "water-point" marker at "3.1917, 32.3581" 
-Then the popup should have content: 
-    """
-    Deep borehole
-    Functional status: Functional (in use)
-    Management: Communal
-    """
-When I hover away from a "water_point" marker at "3.1917, 32.3581"
-Then the summary information is removed
-    
-Scenario: Add water point markers
-Given that I am a regular user
-When I open dashboard for Gulu Palaro
-Then the "water-point" cluster marker at "3.2713, 32.3560" is for "6" points

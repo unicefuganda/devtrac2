@@ -81,16 +81,45 @@ DT.LayerOptions = {
     "water-point": {
         name: "water-point",
         type: "points",
-        color: "#0000ff"
+        color: "#0000ff",
+        summaryInformation: function(properties) {
+            return {
+                title: properties.SourceType + " Water Point",
+                lines: [
+                    ["Functional", properties.Functional],
+                    ["Management", properties.Management],
+                ]
+            }
+        }   
     },
     "health-center": {
         name: "health-center",
         type: "points",
-        color: "#ff0000"
+        color: "#ff0000", 
+        summaryInformation: function(properties) { 
+            if (!properties.Name)
+                return { title: "Heath Center", lines: []};
+
+            return {
+                title: properties.Name.toLowerCase() + " Heath Center",
+                lines: [
+                    ["Unit Type", "HC " + properties.UnitType]
+                ]
+            }
+        }
     },
     "school": {
         name: "school",
         type: "points",
-        color: "#ff0000"
+        color: "#ff0000",
+        summaryInformation: function(properties) { 
+            return {
+                title: properties.SCHOOLNAME + " School",
+                lines: [
+                    ["Owner", properties.MAPSCHLOWN],
+                    ["Type", properties.SCHOOLTYPE],
+                ]
+            }
+        }
     }
 }

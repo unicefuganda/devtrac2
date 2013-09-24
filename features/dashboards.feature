@@ -9,7 +9,7 @@ Then I see map of Uganda
 
 Scenario: Open district dashboard
 Given that I am a regular user
-When I open dashboard for Gulu
+When I open dashboard for "Gulu"
 Then I see map of Uganda - Gulu District
 Then "Gulu" will be selected
 
@@ -27,7 +27,7 @@ Then "Gulu" will be selected
 
 Scenario: Open subcountry dashboard
 Given that I am a regular user
-When I open dashboard for Gulu Patiko
+When I open dashboard for "Gulu, Patiko"
 Then I see map of Uganda - Gulu - Patiko Subcounty
 Then "Gulu, Patiko" will be selected
 
@@ -43,7 +43,7 @@ Then "Gulu, Patiko" will be selected
 
 Scenario: Navigate by breadcrumb
 Given that I am a regular user
-When I open dashboard for Gulu Patiko
+When I open dashboard for "Gulu, Patiko"
 And I click on the district breadcrumb link
 Then I see map of Uganda - Gulu District
 And I click on the national breadcrumb link
@@ -51,7 +51,7 @@ Then I see map of Uganda
 
 Scenario: Navigate to Parish
 Given that I am a regular user
-When I open dashboard for Gulu Patiko
+When I open dashboard for "Gulu, Patiko"
 And I hover over "Gulu, Patiko, Pawel"
 Then "Gulu, Patiko, Pawel" will be highlighted
 And I click on "Gulu, Patiko, Pawel" 

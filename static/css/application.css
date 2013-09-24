@@ -6,9 +6,9 @@ footer {
   border-top: 1px solid #CCC; 
   text-align: right;
   font-size: 11px;
-  padding: 0px 10px;
+  padding: 0 10px;
   position: fixed;
-  bottom: 0px;
+  bottom: 0;
   z-index: 2;
   width: 100%;
   background-color: white;
@@ -16,7 +16,7 @@ footer {
 
 footer label {
   font-weight: bold;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .starter-template {
@@ -46,7 +46,6 @@ footer label {
   width: 100%;
   left: 0px; 
   height: 100%; 
-  z-index: 0;
 }
 
 #location {
@@ -65,18 +64,9 @@ footer label {
   padding: 5px 11px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.65);
 }
-
-/*#location .breadcrumb li a{
-  vertical-align: middle;
-}
-
-#location .breadcrumb li:last-child {
-  margin-bottom: 0px;
-}*/
 #location .breadcrumb li:last-child span{
   color: black;
   font-size: 22px;
-  /*vertical-align: middle;*/
 }
 
 #location h2 {
@@ -117,8 +107,9 @@ footer label {
   z-index: 1;
 }
 
+.marker-popup
 .marker-popup label{
-  width: 100px;
+  width: 80px;
   font-style: italic;
   font-weight: normal;
   margin-bottom: 2px;
@@ -127,6 +118,7 @@ footer label {
   font-size: 14px;
   margin-bottom: 4px;
   margin-top: 4px;
+  text-transform: capitalize;
 }
 
 .marker-popup .leaflet-popup-content-wrapper {
@@ -138,14 +130,11 @@ footer label {
   margin: 6px 10px;
 }
 
-.water-point-cluster-icon
-{
-  background-color: rgba(116, 223, 252, 0.6);
+.cluster-icon {
   overflow: hidden;
   padding: 6px 0 0 0;
   width: 32px;
   height: 32px;
-  padding: 6px 0 0 0;
   text-align: center;
   color: #444;
   box-shadow: 0 2px 6px rgba(0,0,0,0.65);
@@ -154,37 +143,43 @@ footer label {
   border-radius: 16px;
 }
 
-.water-point-icon
-{
-  background-color: rgba(0, 0, 255, 0.6);
+.marker-icon {
   width: 10px;
   height: 10px;
   border-radius: 2px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.65);
 }
 
-.water-point-cluster-icon.small {
+.water-point-cluster-icon {
+  background-color: rgba(116, 223, 252, 0.6);
+}
+
+.water-point-icon {
+  background-color: rgba(0, 0, 255, 0.6); 
+}
+
+.cluster-icon.small {
   width: 24px;
   height: 24px;
   padding: 3px 0 0 0;
   border-radius: 12px;
 }
 
-.water-point-cluster-icon.medium {
+.cluster-icon.medium {
   width: 32px;
   height: 32px;
   padding: 6px 0 0 0;
   border-radius: 16px;  
 }
 
-.water-point-cluster-icon.large {
+.cluster-icon.large {
   width: 38px;
   height: 38px;
   padding: 9px 0 0 0;
   border-radius: 19px;   
 }
 
-.water-point-cluster-icon.extra-large {
+.cluster-icon.extra-large {
   width: 46px;
   height: 46px;
   padding: 13px 0 0 0;
@@ -194,46 +189,20 @@ footer label {
 .health-center-cluster-icon
 {
   background-color: rgba(153, 51, 102, 0.65);
-  overflow: hidden;
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  padding: 6px 0 0 0;
-  font-size: 13px;
-  font-weight: 500;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.65);
 }
 
 .health-center-icon
 {
   background-color: rgba(153, 51, 102, 0.5);
-  width: 10px;
-  height: 10px;
-  border-radius: 2px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.65);
 }
 
 .school-cluster-icon
 {
   background-color: rgba(211, 242, 53, 0.65);
-  overflow: hidden;
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  padding: 6px 0 0 0;
-  font-size: 13px;
-  font-weight: 500;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.65);
 }
 
 .school-icon
 {
   background-color: rgba(211, 242, 53, 0.9);
-  width: 10px;
-  height: 10px;
-  border-radius: 2px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.65);
 }
 

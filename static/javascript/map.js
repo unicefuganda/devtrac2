@@ -68,21 +68,15 @@ DT.Map = function(element) {
 
     function addPointsLayer(name, location, features, layer_info) {
         // TODO: refactor
-        var markerPopupMessage = function(property) {
-            var message = '<h4>' + property.SourceType + '</h4>';
-            message += '<label>Functional status:</label> ' + property.Functional + '</br>';
-            message += '<label>Management:</label> ' + property.Management + '</br>';
+        var markerPopupMessage = function(summaryInformation) {
+
+            var message = '<h4>' + summaryInformation.title + '</h4>';
+            $.each(summaryInformation.lines, function(index, line) {
+                message += '<label>' + line[0] + ':</label> ' + line[1] + '</br>';    
+            })
+            
+            // message += '<label>Management:</label> ' + property.Management + '</br>';
             return message;
-        };
-        var circleIcon = new L.DivIcon({
-            iconSize: new L.Point([10, 10]),
-            className: "water-icon",
-            html: "",
-            popupAnchor: [5, -10]
-        });
-        var geojsonMarkerOptions = {
-            zIndexOffset: 10000,
-            icon: circleIcon
         };
 
         var markers = L.markerClusterGroup({
@@ -95,18 +89,9 @@ DT.Map = function(element) {
             iconCreateFunction: function(cluster) {
                 var latlng = cluster.getLatLng()
                 var childCount = cluster.getChildCount();
-                var className = "";
-                // if (childCount > 10)
-                //     className = "medium";
-                // if (childCount > 25)
-                //     className = "large";
-                // if (childCount > 50)
-                //     className = "extra-large";
-
-
                 return new L.DivIcon({
                     iconSize: new L.Point([20, 20]),
-                    className: layer_info.name +"-cluster-icon " + className,
+                    className: layer_info.name +"-cluster-icon cluster-icon ",
 
                     html: "<div data-lat='"+ latlng.lat.toFixed(4) +"' data-lng='" + latlng.lng.toFixed(4) + "'>" 
                         + cluster.getChildCount()
@@ -123,7 +108,7 @@ DT.Map = function(element) {
 
             var circleIcon = new L.DivIcon({
                 iconSize: new L.Point([10, 10]),
-                className: layer_info.name + "-icon",
+                className: layer_info.name + "-icon marker-icon",
                 html: "<div data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'></div>",
                 // html:"",
                 popupAnchor: [5, -10]
@@ -141,7 +126,7 @@ DT.Map = function(element) {
             var popup = L.popup({
                 className: "marker-popup",
                 closeButton: false
-            }).setContent(markerPopupMessage(feature.properties));
+            }).setContent(markerPopupMessage(layer_info.summaryInformation(feature.properties)));
 
             marker.bindPopup(popup)
                 .on('mouseover', function() {
@@ -210,6 +195,11 @@ DT.Map = function(element) {
         },
         displayedLayers: function() {
             return self.layerMap.displayedLayerKeys();
+        },
+        displayedLayerNames: function() {
+            return $.map(self.layerMap.displayedLayerKeys(), function(locationKey) {
+                return locationKey[0] + " - " + locationKey[1].getName();
+            });
         },
         removeLayer: function(key) {
             var layer = self.layerMap.removeLayer(key);
