@@ -31,11 +31,14 @@ angular.module("dashboard").directive('map', function() {
                 });
 
                 scope.getData(layerChanges.toAdd).then(function(allData) {
-                    $.each(layerChanges.toAdd, function(index, locationKey) {
-                        map.addLayer(locationKey[0], locationKey[1], allData[locationKey], DT.LayerOptions[locationKey[0]]);
-                    });
+                    if (newLocation.equals(scope.location))
+                    {
+                        $.each(layerChanges.toAdd, function(index, locationKey) {
+                            map.addLayer(locationKey[0], locationKey[1], allData[locationKey], DT.LayerOptions[locationKey[0]]);
+                        });
 
-                    map.selectLayer(newLocation);
+                        map.selectLayer(newLocation);
+                    }
                 });
             });
         }

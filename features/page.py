@@ -16,7 +16,7 @@ class Page:
         self.browser.visit("%s/district/%s/%s?test=true" % (self.base_url, district_name, subcounty_name))
 
     def breadcrumbs(self):
-        crumbs = map(lambda crumb:crumb.value, self.browser.find_by_css("#location .breadcrumb a"))
+        crumbs = map(lambda crumb:crumb.text, self.browser.find_by_css("#location .breadcrumb li"))
         return " - ".join([crumb for crumb in crumbs if crumb != ""])
 
     def quit(self):

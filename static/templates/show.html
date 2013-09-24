@@ -2,16 +2,22 @@
 <!--   <h2 class="title">{[{ location_name }]}</h2> -->
   <div >  
     <ul class="breadcrumb">  
-      <li class="active"><a class="national-crumb" href='/'>Uganda</a></li>  
-
-
-      <li ng-if="location.district != null"><a class="district-crumb" href='/district/{[{ location.district }]}'>{[{ location.district }]}{[{ location.subcounty == null ? " District" : ""}]}</a></li>  
+      <li>
+        <a ng-if="location.district != null" class="national-crumb" href='/'>Uganda</a>
+        <span ng-if="location.district == null" >Uganda</span>
+      </li>  
+      <li ng-if="location.district != null">
+        <a ng-if="location.subcounty != null" class="district-crumb" href='/district/{[{ location.district }]}'>{[{ location.district }]}</a>
+        <span ng-if="location.subcounty == null" >{[{ location.district }]} District</span>
+      </li>  
       
-      <li ng-if="location.subcounty != null"><a class="subcounty-crumb" href='/district/{[{ location.district }]}/{[{ location.subcounty }]}'>{[{ location.subcounty }]}{[{ location.parish == null ? " Subcounty" : ""}]}</a></li>
+      <li ng-if="location.subcounty != null">
+        <a ng-if="location.parish != null" class="subcounty-crumb" href='/district/{[{ location.district }]}/{[{ location.subcounty }]}'>{[{ location.subcounty }]}</a>
+        <span ng-if="location.parish == null" >{[{ location.subcounty }]} Subcounty</span>
+      </li>
 
-      <li ng-if="location.parish != null"><a class="parish-crumb" 
-      	href='/district/{{ location.district }]}/{[{ location.subcounty }]}/
-      	{[{ location.parish }]}'>{[{ location.parish }]} Parish</a>
+      <li ng-if="location.parish != null">
+        <span>{[{ location.parish }]} Parish</span>
       </li>           
     </ul>  
   </div> 

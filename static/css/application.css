@@ -73,7 +73,7 @@ footer label {
 #location .breadcrumb li:last-child {
   margin-bottom: 0px;
 }*/
-#location .breadcrumb li:last-child a{
+#location .breadcrumb li:last-child span{
   color: black;
   font-size: 22px;
   /*vertical-align: middle;*/
