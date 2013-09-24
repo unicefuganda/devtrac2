@@ -53,7 +53,8 @@ describe("Location", function() {
             ["district", uganda_location],
             ["subcounty", gulu_location],
             ["water-point", gulu_location],
-            ["health-center", gulu_location]
+            ["health-center", gulu_location],
+            ["school", gulu_location]
         ]);
     });
 
@@ -72,7 +73,9 @@ describe("Location", function() {
             ["subcounty", gulu_location],
             ["water-point", gulu_location],
             ["health-center", gulu_location],
+            ["school", gulu_location],
             ["parish", patiko_location]
+
         ]);
     });
 
@@ -91,6 +94,7 @@ describe("Location", function() {
             ["subcounty", gulu_location],
             ["water-point", gulu_location],
             ["health-center", gulu_location],
+            ["school", gulu_location],
             ["parish", patiko_location]
         ]);
     });
