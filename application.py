@@ -30,6 +30,7 @@ js = Bundle(
 	'javascript/location.js',
 	'javascript/layer-map.js',
 	'javascript/layer-options.js',
+	'javascript/filterPanel.js',
      filters='jsmin', output='gen/packed.js')
 
 assets.register('js_all', js)

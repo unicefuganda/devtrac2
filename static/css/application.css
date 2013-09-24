@@ -205,3 +205,51 @@ footer label {
   background-color: rgba(211, 242, 53, 0.9);
 }
 
+#content {
+    margin-left: 5px;
+}
+
+
+.accordion-heading .accordion-toggle-small {
+    display: block;
+    padding: 4px 8px; /*8px 15px;*/
+}
+
+.accordion-inner-small {
+    padding: 4px 8px;  /*9px 15px;*/
+    border-top: 1px solid #e5e5e5;
+}
+
+.no-sidebar {
+    margin-left:0 !important;
+}
+
+#sidebar {
+    /*background: white; */
+    background-color: rgba(255, 255, 255, 0.9);
+    position: fixed;
+    top: 80px;
+    left: -33%;
+    width: 35%;
+    height: 60%;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.65);
+    border: 1px solid #CCCCCC;
+}
+
+#sidebar-content {
+    width: 80%;
+    float: left;
+    background-color: white;
+}
+
+#toggleSidebar {
+    /*float: right;*/
+    position: absolute;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.65);
+    background-color: #000000;
+    color: white;
+    height: 20px;
+    width: 20px;
+    right: -25px;
+    top: 0px;
+}
