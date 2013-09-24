@@ -94,11 +94,22 @@ DT.Map = function(element) {
 
             iconCreateFunction: function(cluster) {
                 var latlng = cluster.getLatLng()
+                var childCount = cluster.getChildCount();
+                var className = "";
+                // if (childCount > 10)
+                //     className = "medium";
+                // if (childCount > 25)
+                //     className = "large";
+                // if (childCount > 50)
+                //     className = "extra-large";
+
+
                 return new L.DivIcon({
                     iconSize: new L.Point([20, 20]),
-                    className: layer_info.name +"-cluster-icon",
+                    className: layer_info.name +"-cluster-icon " + className,
+
                     html: "<div data-lat='"+ latlng.lat.toFixed(4) +"' data-lng='" + latlng.lng.toFixed(4) + "'>" 
-                        + '<b>' + cluster.getChildCount() + '</b>'
+                        + cluster.getChildCount()
                         + '</div>'
                 });
             }
