@@ -107,9 +107,8 @@ footer label {
   z-index: 1;
 }
 
-.marker-popup
-.marker-popup label{
-  width: 80px;
+.marker-popup label {
+  width: 74px;
   font-style: italic;
   font-weight: normal;
   margin-bottom: 2px;
