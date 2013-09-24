@@ -23,6 +23,7 @@ DT.Location.prototype.layersToShow = function() {
         layers.push(["subcounty", districtLocation]);
         layers.push(["water-point", districtLocation]);
         layers.push(["health-center", districtLocation]);
+        layers.push(["school", districtLocation]);
     }
 
     if (this.subcounty != null) {

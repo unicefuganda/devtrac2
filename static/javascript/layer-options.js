@@ -83,8 +83,13 @@ DT.LayerOptions = {
         type: "points",
         color: "#0000ff"
     },
-     "health-center": {
+    "health-center": {
         name: "health-center",
+        type: "points",
+        color: "#ff0000"
+    },
+    "school": {
+        name: "school",
         type: "points",
         color: "#ff0000"
     }

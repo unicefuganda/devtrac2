@@ -50,6 +50,12 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                         allData[locationkey] = data;
                         deffered2.resolve();
                     });
+            } else if (key == "school") {
+                self.schools(location.district)
+                    .then(function(data) {
+                        allData[locationkey] = data;
+                        deffered2.resolve();
+                    });
             }
             return deffered2.promise;
         });
@@ -123,6 +129,20 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
             deffered.resolve(data);
         }
         var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_health_centers" + "&outputFormat=json" + "&format_options=callback:health_centersCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district_name.toUpperCase() + "</Literal></PropertyIsEqualTo>" + "</Filter>";
+
+        $http.jsonp(url, {
+            cache: true
+        });
+        return deffered.promise;
+    };
+
+    this.schools = function(district_name) {
+        var deffered = $q.defer();
+
+        schoolsCallback = function(data) {
+            deffered.resolve(data);
+        }
+        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_schools" + "&outputFormat=json" + "&format_options=callback:schoolsCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district_name.toUpperCase() + "</Literal></PropertyIsEqualTo>" + "</Filter>";
 
         $http.jsonp(url, {
             cache: true
