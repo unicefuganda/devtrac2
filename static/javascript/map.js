@@ -89,9 +89,19 @@ DT.Map = function(element) {
             iconCreateFunction: function(cluster) {
                 var latlng = cluster.getLatLng()
                 var childCount = cluster.getChildCount();
+
+                var childCount = cluster.getChildCount();
+
+                var className = "small";
+                   if (childCount > 10)
+                       className = "medium";
+                   if (childCount > 25)
+                       className = "large";
+                   if (childCount > 50)
+                       className = "extra-large";
                 return new L.DivIcon({
                     iconSize: new L.Point([20, 20]),
-                    className: layer_info.name +"-cluster-icon cluster-icon ",
+                    className: layer_info.name +"-cluster-icon cluster-icon " + className,
 
                     html: "<div data-lat='"+ latlng.lat.toFixed(4) +"' data-lng='" + latlng.lng.toFixed(4) + "'>" 
                         + cluster.getChildCount()
@@ -106,9 +116,10 @@ DT.Map = function(element) {
         $.each(features.features, function(index, feature) {
             var coordinates = feature.geometry.coordinates;
 
+
             var circleIcon = new L.DivIcon({
                 iconSize: new L.Point([10, 10]),
-                className: layer_info.name + "-icon marker-icon",
+                className: layer_info.name + "-icon marker-icon ",
                 html: "<div data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'></div>",
                 // html:"",
                 popupAnchor: [5, -10]
@@ -118,13 +129,15 @@ DT.Map = function(element) {
                 icon: circleIcon
             };
 
-            
+
+             
+          
             var marker = new L.Marker(new L.LatLng(coordinates[1], coordinates[0]), geojsonMarkerOptions);
 
             window.markers.push(marker);
             // window.marker = marker;
             var popup = L.popup({
-                className: "marker-popup",
+                className: "marker-popup" ,
                 closeButton: false
             }).setContent(markerPopupMessage(layer_info.summaryInformation(feature.properties)));
 
