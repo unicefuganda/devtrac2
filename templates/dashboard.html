@@ -27,9 +27,23 @@
           <div class='sector'>Filter By</div>
           <div class='sector-content'>
             <ul class="nav nav-list">
-              <li><label><input type="checkbox" ng-model="filter.school" class='school-checkbox'/>Schools</label></li>   
-              <li><label><input type="checkbox" ng-model="filter.health_center" class='health-center-checkbox'/>Health Centers</label></li>   
-              <li><label><input type="checkbox" ng-model="filter.water_point" class='water-point-checkbox'/>Water Points</label></li>                
+              <li>
+                <span class="school-checkbox-icon checkbox-icon"></span>
+                <input type="checkbox" ng-model="filter.school" class='school-checkbox' id='school-checkbox'/>
+                <label for="school-checkbox">Schools</label>
+                
+              </li>   
+              <li>
+                <span class="health-center-checkbox-icon checkbox-icon"></span>
+                <input type="checkbox" ng-model="filter.health_center" class='health-center-checkbox' id="health-center-checkbox"/>
+                <label for="health-center-checkbox">Health Centers</label>
+                
+              </li> 
+              <li>
+                <span class="water-point-checkbox-icon checkbox-icon"></span>
+                <input type="checkbox" ng-model="filter.water_point" class='water-point-checkbox' id="water-point-checkbox"/>
+                <label for="water-point-checkbox">Water Points</label>
+              </li>
             </ul>
           </div> 
         </div>

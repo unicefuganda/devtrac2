@@ -65,6 +65,7 @@ Given that I am a regular user
 When I navigate to the home page
 Then the 'Schools' filter will be displayed on the filter panel
 
+
 Scenario: Filter water points
 Given that I am a regular user
 When I open dashboard for "Gulu, Odek"

@@ -8,7 +8,7 @@ $(function () {
 
     function collapseSidebar() {
         filterPanelElement.animate({           
-            left: '-14%',
+            left: '-200px',
         });
         filterPanelElement.removeClass("expanded");
         toggleIcon.removeClass("glyphicon-chevron-left");
