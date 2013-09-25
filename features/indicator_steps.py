@@ -11,9 +11,6 @@ def then_the_indicator_tag_drop_down_box_will_be_displayed_on_the_indicator_pane
 def then_the_indicator_drop_down_list_will_be_displayed_on_the_indicator_panel(step):
     assert True, 'This step must be implemented'
 
-@step(u'Given that I am a user')
-def given_that_i_am_a_user(step):
-    assert True, 'This step must be implemented'
 @step(u'When I navigate to the \'([^\']*)\' sub county')
 def when_i_navigate_to_the_group1_sub_county(step, group1):
     assert True, 'This step must be implemented'

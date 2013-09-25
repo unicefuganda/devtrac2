@@ -52,6 +52,7 @@ class Page:
         return "{ district: %s, subcounty: %s, parish: %s}" % (district_name, subcounty_name, parish_name)
 
     def take_screenshot(self):
+
         self.browser.driver.save_screenshot('screenshot_%s.png' % time.strftime("%m-%d-%I-%H:%I:%M:%S"))
 
     def highlighted_layer(self):
@@ -80,8 +81,8 @@ class Page:
         self.browser.execute_script("window.map.openPopupForMarkerAt('%s', '%s', '%s');" % (layer, lat, lng))
 
     def cluster_count(self, layer, lat, lng):
-        content = self.browser.find_by_css(".%s-cluster-icon [data-lat='%s'][data-lng='%s']" % (layer, lat, lng)).text
-        return int(content)
+        content = self.browser.find_by_css(".%s-cluster-icon [data-lat='%s'][data-lng='%s']" % (layer, lat, lng))
+        return int(content.text)
 
     def popup_content(self):
         return self.browser.find_by_css(".marker-popup").text

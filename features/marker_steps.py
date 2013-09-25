@@ -69,3 +69,18 @@ def then_the_group1_filter_will_be_displayed_on_the_filter_panel(step, group1):
 @step(u'When I hover away from a "([^"]*)" marker at "([^"]*)"')
 def when_i_hover_away_from_a_group1_marker_at_group2(step, group1, group2):
     assert True, 'This step must be implemented'
+
+# Toggle on off scenarios for toggle on/off filters for schools, waterpoints, healthcentres
+
+@step(u'When I check the \'([^\']*)\' checkbox')
+def when_i_check_the_group1_checkbox(step, group1):
+    assert True, 'This step must be implemented'
+@step(u'And I open the dashboard for  "([^"]*)"')
+def and_i_open_the_dashboard_for_group1(step, group1):
+    assert True, 'This step must be implemented'
+@step(u'When I uncheck the \'([^\']*)\' checkbox')
+def when_i_uncheck_the_group1_checkbox(step, group1):
+    assert True, 'This step must be implemented'
+@step(u'Then the "([^"]*)" cluster marker at "([^"]*)" will be removed from the map')
+def then_the_group1_cluster_marker_at_group2_will_be_removed_from_the_map(step, group1, group2):
+    assert True, 'This step must be implemented'    
