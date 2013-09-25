@@ -41,31 +41,35 @@
       </div>
     </div>   
 
-<div id="sidebar">
+<div class='filterPanel'>
     <!--Sidebar content-->
-    <div id="sidebar-content">
+    <div class='content'>
+      <div class='container'>
+         <div class='header' ng-if="location.district == null">Uganda </div>
+      <div class='header' ng-if="location.district != null && location.subcounty ==null && location.parish ==null">{[{ location.district }]} - District </div>
 
-<div class="tab-pane" id="pills-basic">
-<div class="tabbable">
-<ul class="nav nav-pills">
-<li class="active">
-<a href="#tab-pane1-1" data-toggle="tab">Sectors</a>
-</li>
-<li><a href="#tab-panel-2" data-toggle="tab">Partners</a></li>
-</ul>
-<div class="tab-content">
-<div id="tab-pane1-1" class="tab-pane active">
+      <div class='header' ng-if="location.district != null && location.subcounty !=null && location.parish ==null">{[{ location.subcounty }]} - Subcounty </div>
 
-</div>
+      <div class='header' ng-if="location.district != null && location.subcounty !=null && location.parish !=null">{[{ location.parish }]} - Parish </div>
 
-<div id="tab-panel-2" class="tab-pane">
+      <div class='sector'>sector</div>
+      <div class='sector-content'> 
 
-</div>
-</div><!-- /.tab-content -->
-</div><!-- /.tabbable -->
-</div>       
+<ul class="nav nav-list">
+      <li class="nav-header"><span class="glyphicon glyphicon-star"></span>Education</li>
+      <li><label><input type="checkbox" />  Schools</label></li>   
+      <li class="nav-header"><span class="glyphicon glyphicon-star"></span>Health</li>
+      <li><label><input type="checkbox" />Health Centers</label></li>       
+      <li class="nav-header"><span class="glyphicon glyphicon-star"></span>Water</li>
+      <li><label><input type="checkbox" />  Water Points</label></li>                
+      </ul>
+
+       </div> 
+
+       
+    </div>
     </div>     
-   <a id="toggleSidebar" href="#" ><i> + </i></a>  
+   <a href="#" class ='toggleSidebar'> >> </a>  
 </div>
 
     <footer id="footer">

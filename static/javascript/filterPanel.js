@@ -6,26 +6,25 @@ filterPanel.panels = 1;
 
 function sidebar(panels) {
     filterPanel.panels = panels;
-    if (panels === 1) {         
-        $('#sidebar').animate({           
-            left: '-33%',
+    if (panels === 1) {     
+        $('.filterPanel').animate({           
+            left: '-26%',
         });
-    } else if (panels === 2) { 
-        $('#sidebar').animate({
+    } else if (panels === 2) {        
+        $('.filterPanel').animate({
             left: 20,
         });
        
     }
 }
 
-$('#toggleSidebar').click(function () {   
+sidebar(2);
+$('.toggleSidebar').click(function () {   
     if (filterPanel.panels === 1) {        
-        //$('#toggleSidebar').addClass('icon-chevron-left');
-        //$('#toggleSidebar').removeClass('icon-chevron-right');
+        $('.toggleSidebar').text('<<');        
         sidebar(2);
     } else {
-        //$('#toggleSidebar').removeClass('icon-chevron-left');
-        //$('#toggleSidebar').addClass('icon-chevron-right');
+        $('.toggleSidebar').text('>>');        
          sidebar(1);
     }
 

@@ -205,51 +205,134 @@ footer label {
   background-color: rgba(211, 242, 53, 0.9);
 }
 
-#content {
-    margin-left: 5px;
-}
 
-
-.accordion-heading .accordion-toggle-small {
-    display: block;
-    padding: 4px 8px; /*8px 15px;*/
-}
-
-.accordion-inner-small {
-    padding: 4px 8px;  /*9px 15px;*/
-    border-top: 1px solid #e5e5e5;
-}
-
-.no-sidebar {
-    margin-left:0 !important;
-}
-
-#sidebar {
+.filterPanel {
     /*background: white; */
     background-color: rgba(255, 255, 255, 0.9);
     position: fixed;
     top: 80px;
-    left: -33%;
-    width: 35%;
+    left: -26%;
+    width: 27%;
     height: 60%;
     box-shadow: 0 1px 4px rgba(0,0,0,0.65);
     border: 1px solid #CCCCCC;
 }
 
-#sidebar-content {
+.filterPanel .content {
     width: 80%;
     float: left;
     background-color: white;
 }
 
-#toggleSidebar {
-    /*float: right;*/
+.filterPanel .content .container .header {
+  position: absolute;
+  left:0px;
+  font-size:18px;
+  width: 100%;
+  border: 1px solid #CCCCCC;
+  padding-left: 5px;
+}
+
+.filterPanel .content .container .sector {
+  position: absolute;
+  left:0px;
+  top:5%;
+  font-size:15px;
+  width: 100%;
+  padding-top: 5px;
+  padding-left: 5px;
+  
+}
+
+.filterPanel .content .container .sector-content{ 
+  position: absolute;
+  left:0px;
+  top:12%;    
+  width: 100%;
+  padding-top: 5px;
+  padding-left: 5px;
+  
+}
+
+
+.filterPanel .toggleSidebar {    
     position: absolute;
+    text-decoration: none;
     box-shadow: 0 1px 4px rgba(0,0,0,0.65);
-    background-color: #000000;
-    color: white;
-    height: 20px;
-    width: 20px;
-    right: -25px;
+    background-color: white;
+    text-align: center;
+    display:inline-block;
+    vertical-align:middle;    
+    height: 30px;
+    width: 30px;
+    right: -30px;
     top: 0px;
+}
+
+/* Relevant to the plugin. */
+.listTree {
+    margin-bottom: 18px;
+}
+
+.listTree ul {
+    margin: 0;
+}
+
+.listTree li {
+    list-style-type: none;
+}
+
+.listTree > ul > li {
+    background-color: #eee;
+    border-width: 1px 1px 0 1px;
+    border-style: solid;
+    border-color: #ddd;
+}
+
+.listTree > ul > li:first-child {
+    border-width: 1px 1px 0 1px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.listTree > ul > li:last-child {
+    border-width: 1px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.listTree > ul > li:last-child > ul > li:last-child {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.listTree span {
+    display: inline-block;
+    width: 100%;
+    padding: 5px;
+}
+
+.listTree > ul > li > span {
+    font-weight: bold;
+}
+
+.listTree > ul > li > ul > li {
+    background-color: #fff;
+    border-width: 1px 0 0 0;
+    border-style: solid;
+    border-color: #ddd;
+    padding-left: 10px;
+}
+
+.listTree > ul > li > ul > li:first-child {
+    border-width: 1px 0 0 0;
+}
+
+.listTree > ul > li > ul > li:last-child {
+    border-width: 1px 0 0 0;
+}
+
+.listTree i {
+    float: right;
+    margin-right: 15px;
 }
