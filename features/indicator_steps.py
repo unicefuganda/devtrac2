@@ -23,3 +23,12 @@ def when_i_navigate_to_group1_district(step, group1):
 @step(u'When I hover over the water point maker at 23.0000, 11.0000')
 def when_i_hover_over_the_water_point_maker_at_23_0000_11_0000(step):
     assert True, 'This step must be implemented'
+
+ #Scenario for show indicator heat map
+
+@step(u'When I navigate to the national dashboard')
+def when_i_navigate_to_the_national_dashboard(step):
+    assert True, 'This step must be implemented'
+@step(u'Then The \'([^\']*)\' indicator heap map will be displayed')
+def then_the_group1_indicator_heap_map_will_be_displayed(step, group1):
+    assert True, 'This step must be implemented'
