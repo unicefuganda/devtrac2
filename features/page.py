@@ -93,6 +93,10 @@ class Page:
     def filter_panel_expanded(self):
         return len(self.browser.find_by_css(".filterPanel.expanded")) > 0
 
+    def toggle_checkbox(self, checkboxkey):
+
+        self.browser.find_by_css(".%s-checkbox" % checkboxkey).click()
+
     def wait_for(self, function):
         for _ in itertools.repeat(None, 10):
             if (function(self)):    

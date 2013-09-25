@@ -11,28 +11,6 @@
   </head>
   <body>
 
-<!-- <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <!-- <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">DevTrac Global</a>
-        </div>
-         <form class="navbar-form navbar-left" role="search" 
-         ng-submit="searchHandler()">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Find district" 
-              ng-model="searchText">
-            </div>
-            <button type="submit" class="btn btn-default">
-              find</button>
-          </form> -->
-
-      <!-- </nav> -->
     <div class="container">
       <div map id='devtrac-map'></div>
       <div id='ngview' ng-view>  
@@ -49,11 +27,10 @@
           <div class='sector'>Filter By</div>
           <div class='sector-content'>
             <ul class="nav nav-list">
-              <li><label><input type="checkbox" />Schools</label></li>   
-              <li><label><input type="checkbox" />Health Centers</label></li>       
-              <li><label><input type="checkbox" />Water Points</label></li>                
+              <li><label><input type="checkbox" ng-model="filter.school" class='school-checkbox'/>Schools</label></li>   
+              <li><label><input type="checkbox" ng-model="filter.health_center" class='health-center-checkbox'/>Health Centers</label></li>   
+              <li><label><input type="checkbox" ng-model="filter.water_point" class='water-point-checkbox'/>Water Points</label></li>                
             </ul>
-
           </div> 
         </div>
       </div>     

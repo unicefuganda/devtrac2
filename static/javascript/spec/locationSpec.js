@@ -36,7 +36,7 @@ describe("Location", function() {
 
         var uganda_location = new DT.Location({});
 
-        expect(location1.layersToShow()).toEqual([["district", uganda_location]]);
+        expect(location1.layersToShow([])).toEqual([["district", uganda_location]]);
     });
 
     it("should show layer subcounties and water-points for district", function() {
@@ -49,10 +49,27 @@ describe("Location", function() {
         var gulu_location = new DT.Location({ district: "gulu" });
         var uganda_location = new DT.Location({});
 
-        expect(location1.layersToShow()).toEqual([
+        expect(location1.layersToShow([])).toEqual([
             ["district", uganda_location],
             ["subcounty", gulu_location],
             ["water-point", gulu_location],
+            ["health-center", gulu_location],
+            ["school", gulu_location]
+        ]);
+    });
+
+    it("should show filter keys have been toggled off", function() {
+        var location1 = new DT.Location({
+            district: "gulu",
+            subcounty: null,
+            parish: null
+        });
+
+        var gulu_location = new DT.Location({ district: "gulu" });
+        var uganda_location = new DT.Location({});
+
+        expect(location1.layersToShow(["water-point", "district"])).toEqual([
+            ["subcounty", gulu_location],
             ["health-center", gulu_location],
             ["school", gulu_location]
         ]);
@@ -68,7 +85,7 @@ describe("Location", function() {
         var gulu_location = new DT.Location({ district: "gulu" });
         var patiko_location = new DT.Location({ district: "gulu", subcounty: "patiko" });
 
-        expect(location1.layersToShow()).toEqual([
+        expect(location1.layersToShow([])).toEqual([
             ["district", uganda_location],
             ["subcounty", gulu_location],
             ["water-point", gulu_location],
@@ -89,7 +106,7 @@ describe("Location", function() {
         var gulu_location = new DT.Location({ district: "gulu" });
         var patiko_location = new DT.Location({ district: "gulu", subcounty: "patiko" });
 
-        expect(location1.layersToShow()).toEqual([
+        expect(location1.layersToShow([])).toEqual([
             ["district", uganda_location],
             ["subcounty", gulu_location],
             ["water-point", gulu_location],
