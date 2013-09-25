@@ -86,6 +86,12 @@ class Page:
     def popup_content(self):
         return self.browser.find_by_css(".marker-popup").text
 
+    def toggle_filter(self):
+        self.browser.find_by_css(".toggleSidebar").click()
+
+    def filter_panel_expanded(self):
+        return len(self.browser.find_by_css(".filterPanel.expanded")) > 0
+
     def wait_for(self, function):
         for _ in itertools.repeat(None, 10):
             if (function(self)):    
