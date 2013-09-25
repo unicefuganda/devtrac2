@@ -24,13 +24,14 @@ $(function () {
         toggleIcon.addClass("glyphicon-chevron-left");
     }
 
-    toggleElement.click(function () {   
+    toggleElement.click(function (event) {   
         if (filterPanelElement.hasClass("expanded"))
         {
             collapseSidebar();
         } else {
             expandSidebar();
         }
+        event.preventDefault();
         return false;
     });
 
