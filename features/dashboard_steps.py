@@ -109,3 +109,22 @@ def then_a_page_with_an_error_message_is_displayed(step):
 @step(u'And the page has a link to the homepage')
 def and_the_page_has_a_link_to_the_homepage(step):
     assert True, 'This step must be implemented'
+
+@step(u'When I open dashboard for region "([^"]*)"')
+def when_i_open_dashboard_for_region_group1(step, group1):
+    assert True, 'This step must be implemented'
+@step(u'Then region "([^"]*)" will be selected')
+def then_region_group1_will_be_selected(step, group1):
+    assert True, 'This step must be implemented'
+@step(u'And I hover over region "([^"]*)"')
+def and_i_hover_over_region_group1(step, group1):
+    assert True, 'This step must be implemented'
+@step(u'Then region "([^"]*)" will be highlighted')
+def then_region_group1_will_be_highlighted(step, group1):
+    assert True, 'This step must be implemented'
+@step(u'And I click on region "([^"]*)"')
+def and_i_click_on_region_group1(step, group1):
+    assert True, 'This step must be implemented'
+@step(u'Then I see Uganda map with region acholi displayed')
+def then_i_see_uganda_map_with_region_acholi_displayed(step):
+    assert True, 'This step must be implemented'
