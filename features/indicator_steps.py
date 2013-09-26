@@ -29,3 +29,9 @@ def when_i_navigate_to_the_national_dashboard(step):
 @step(u'Then The \'([^\']*)\' indicator heap map will be displayed')
 def then_the_group1_indicator_heap_map_will_be_displayed(step, group1):
     assert True, 'This step must be implemented'
+
+ #Scenario for show heat map legend
+
+@step(u'Then the \'([^\']*)\' heat map will be shown with the content:')
+def then_the_group1_heat_map_will_be_shown_with_the_content(step, group1):
+    assert True, 'This step must be implemented'
