@@ -17,14 +17,10 @@ angular.module("dashboard").directive('map', function() {
                 scope.$apply(function (){
                     scope.navigateToLocation(newLocation);    
                 });
-            });
+            });            
 
-            scope.$watch("location", function(newLocation, oldLocation) {
-                if (newLocation == undefined)
-                    return true;
-
-                map.unselect();
-                var layerChanges = DT.Location.compareLayerKeys(map.displayedLayers(), scope.location.layersToShow());
+            var applyLocationAndFilter = function(newLocation, newFilter) {
+                var layerChanges = DT.Location.compareLayerKeys(map.displayedLayers(), newLocation.layersToShow(newFilter.dataToggledOff()));
 
                 $.each(layerChanges.toRemove, function(index, locationKey) {
                     map.removeLayer(locationKey[0]);
@@ -40,7 +36,50 @@ angular.module("dashboard").directive('map', function() {
                         map.selectLayer(newLocation);
                     }
                 });
+
+            }
+
+            scope.$watch("filter", function(newFilter, oldFilter) { 
+                if (newFilter == undefined)
+                    return true;
+                applyLocationAndFilter(scope.location, newFilter);
+            }, true);
+
+            scope.$watch("location", function(newLocation, oldLocation) {
+                map.unselect();
+
+                if (newLocation == undefined)
+                    return true;
+                applyLocationAndFilter(newLocation, scope.filter);
             });
+        }
+    };
+}).directive('panel', function() {
+    return {
+        scope: true,
+        controller: function($scope, $location, districtService) {
+           
+        },
+        link: function(scope, element, attrs) {
+            scope.expanded = true;
+            
+            var expandAnimation = JSON.parse(attrs.panelExpand);
+            var collapseAnimation = JSON.parse(attrs.panelCollapse);
+            var panel = $(element);
+
+            scope.togglePanel = function() {
+                if (scope.expanded)
+                {   
+                    panel.removeClass("expanded");
+                    panel.animate(collapseAnimation);;
+                    scope.expanded = false;
+                } else {
+                    panel.addClass("expanded");
+                    panel.animate(expandAnimation);
+                    scope.expanded = true;
+                }
+                return false;
+            }
         }
     };
 })

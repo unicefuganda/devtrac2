@@ -8,6 +8,15 @@ DT.Map = function(element) {
         zoomControl: true
     });
 
+
+    var heatlayer = L.tileLayer.wms("http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms", {
+        layers: "geonode:uganda_district_indicators_2",
+        format: 'image/png',
+        transparent: true
+    });
+
+
+
     map.on("baselayerchange", function(layer) {
         self.activeLayer = layer;
     });
@@ -37,6 +46,7 @@ DT.Map = function(element) {
         maxZoom: 18
     });
     map.addLayer(osm);
+    map.addLayer(heatlayer);    
     self.layerMap = new DT.LayerMap();
     window.mapmap = map;
 

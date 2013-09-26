@@ -13,7 +13,7 @@ DT.Location.prototype.equals = function(otherLocation) {
 DT.Location.prototype.toString = function(){
     return this.getName();
 };
-DT.Location.prototype.layersToShow = function() {
+DT.Location.prototype.layersToShow = function(filteredKeys) {
     var layers = [["district", new DT.Location({})]];
 
     if (this.district != null) {
@@ -33,7 +33,10 @@ DT.Location.prototype.layersToShow = function() {
         });
         layers.push(["parish", subcountyLocation]);
     }
-    return layers;
+
+    return $.grep(layers, function(locationKey) { 
+        return $.inArray(locationKey[0], filteredKeys) == -1;
+    });
 };
 DT.Location.prototype.isNational = function () {
     return this.district == null && this.subcounty == null && this.parish == null;
@@ -54,8 +57,22 @@ DT.Location.compareLayerKeys = function(layerKeys, otherlayerKeys) {
             return k[0] == key[0] && k[1].equals(key[1])
         }) != null;
     };
-    var keysToRemove = $.grep(layerKeys, function(key, index){ return !keyExists(key, otherlayerKeys) });
-    var keysToAdd = $.grep(otherlayerKeys, function(key, index){ return !keyExists(key, layerKeys) });
+
+    // var filteredKeys = $.grep(filter, function(toggle, filter) { return toggle; }
+
+
+    var keysToRemove = $.grep(layerKeys, function(key, index){ 
+        return !keyExists(key, otherlayerKeys) 
+    });
+    var keysToAdd = $.grep(otherlayerKeys, function(key, index){ 
+        // if (key[0])
+        //     return false;
+        return !keyExists(key, layerKeys) 
+    });
+    
+
+
+
     return {
         toAdd: keysToAdd,
         toRemove: keysToRemove
@@ -71,4 +88,17 @@ DT.Location.prototype.toUrl = function() {
     } else {
         return "/";
     }
+};
+
+DT.Filter = function(toggles) { 
+    $.extend(this, toggles);
+};
+
+DT.Filter.prototype.dataToggledOff = function() {
+    var keysToggledOff = [];
+    $.each(this, function(key, toggle) {
+        if (toggle == false)
+            keysToggledOff.push(key)
+    });
+    return $.map(keysToggledOff, function(key) { return key.replace("_", "-") });
 };

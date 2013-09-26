@@ -15,4 +15,4 @@ Then The indicator drop down list will be displayed on the indicator panel
 Scenario: Display Indicator Heat map layer
 Given that I am a regular user
 When I navigate to the national dashboard
-Then The 'Number of children not starting school at age 6' indicator heap map will be displayed
+Then The 'Percentage of children completing Primary School' indicator heap map will be displayed

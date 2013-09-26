@@ -26,6 +26,12 @@ def then_i_see_the_layer__displayed(step, layer_name, location_name):
     world.page.wait_for(lambda page: name in page.displayedLayerNames())
     assert_in(name, world.page.displayedLayerNames())
 
+@step(u'Then the "([^"]*)" layer for "([^"]*)" is not displayed')
+def then_i_see_layer_for_checkboxkey_is_not_displayed(step, layer_name, location_name):
+     name = "%s - %s" % (layer_name.lower(), location_name.lower())
+     world.page.wait_for(lambda page: not (name in page.displayedLayerNames()))
+     assert_not_in(name, world.page.displayedLayerNames())
+
 @step(u'When I click on \"(.+)\"')
 @step(u'And I click on \"(.+)\"')
 def when_i_click_on_layer(step, location_name):

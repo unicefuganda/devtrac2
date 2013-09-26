@@ -17,6 +17,12 @@ def then_the_pop_should_have_content(step):
 def then_the_cluster_marker_at_latlng_is_for_num_points(step, layer, lat, lng, num_points):
     assert_equals(world.page.cluster_count(layer, lat, lng), int(num_points));
 
+
+@step(u'When I toggle the \'([^\']*)\' checkbox')
+@step(u'And I toggle the \'([^\']*)\' checkbox')
+def and_i_uncheck_the_key_checkbox(step, checkboxkey):
+    world.page.toggle_checkbox(checkboxkey)
+
 @step(u'Then \'([^\']*)\' water point circle markers will be displayed on the map')
 def then_group1_water_point_circle_markers_will_be_displayed_on_the_map(step, group1):
     assert True, 'This step must be implemented'
@@ -84,3 +90,5 @@ def when_i_uncheck_the_group1_checkbox(step, group1):
 @step(u'Then the "([^"]*)" cluster marker at "([^"]*)" will be removed from the map')
 def then_the_group1_cluster_marker_at_group2_will_be_removed_from_the_map(step, group1, group2):
     assert True, 'This step must be implemented'    
+
+

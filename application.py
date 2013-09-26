@@ -30,8 +30,6 @@ js = Bundle(
 	'javascript/location.js',
 	'javascript/layer-map.js',
 	'javascript/layer-options.js',
-	'javascript/filterPanel.js',
-	'javascript/lib/bootstrap-switch.min.js',
      filters='jsmin', output='gen/packed.js')
 
 assets.register('js_all', js)
@@ -42,8 +40,6 @@ css = Bundle(
 	'css/application.css',
 	'css/lib/MarkerCluster.css',
 	'css/lib/MarkerCluster.Default.css',
-	'css/lib/bootstrap-switch.css',
-	'css/lib/flat-ui-fonts.css',
      filters='cssmin', output='gen/packed.css')
 
 assets.register('css_all', css)

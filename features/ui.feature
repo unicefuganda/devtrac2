@@ -1,5 +1,3 @@
-# Feature file for generic UI elements
-
 Feature: UI Elements
 
 Scenario: Display header bar
@@ -16,11 +14,20 @@ Then A header 'Devtrac Global' will be displayed on the left side of the header 
 Scenario: Show/Hide filter panel
 Given that I am a regular user
 When I go to the homepage
-Then the filter panel is displayed
-When I toggle the filter panel
-Then the filter panel is collapsed
-When I toggle the filter panel
-Then the filter panel is displayed
+Then the "filter" panel is displayed
+When I toggle the "filter" panel
+Then the "filter" panel is collapsed
+When I toggle the "filter" panel
+Then the "filter" panel is displayed
+
+Scenario: Show/Hide indicator panel
+Given that I am a regular user
+When I go to the homepage
+Then the "indicator" panel is displayed
+When I toggle the "indicator" panel
+Then the "indicator" panel is collapsed
+When I toggle the "indicator" panel
+Then the "indicator" panel is displayed
 
 Scenario: Display indicator panel
 Given that I am a regular user
