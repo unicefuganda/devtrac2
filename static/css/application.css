@@ -331,6 +331,7 @@ footer label {
   height: 130px;
   margin: 0 auto;
   overflow: hidden;
+  text-align: center;
 }
 
 .indicator-panel {
