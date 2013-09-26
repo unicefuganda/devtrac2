@@ -12,17 +12,21 @@ with open("%s/district_indicators.csv" % local_path, 'rUb') as csvfile:
     with fiona.open('%s/../static/javascript/geojson/uganda_districts_2011_005.json' % local_path, 'r') as district_geojson:
         
         sink_schema = district_geojson.schema.copy()
-        sink_schema['properties']['CompletePS_Perc'] = "float"
+        # sink_schema['properties']['CompletePS_Perc'] = "float"
+        sink_schema['properties']['School_Start_at6_Perc'] = "float"
 
-        with fiona.open('%s/uganda_districts_2011_with_indicators.json' % local_path, 'w', crs= district_geojson.crs, driver=district_geojson.driver, schema=sink_schema ) as sink:
+        file_name = "uganda_districts_2011_with_school_start" 
+        os.system("rm %s.json" % file_name)
+        with fiona.open('%s/%s.json' % (local_path, file_name), 'w', crs= district_geojson.crs, driver=district_geojson.driver, schema=sink_schema ) as sink:
             for district_row in district_geojson:
                 if (not district_row['geometry'] == None):
 
                     indicators = district_indicators[district_row['properties']['DNAME_2010'].lower()]
-                    if (indicators['CompletePS_Perc'] == ""):
+                    if (indicators['School_Start_at6_Perc'] == ""):
                         continue
-                    district_row['properties']['CompletePS_Perc'] = float(indicators['CompletePS_Perc'])
+                    district_row['properties']['School_Start_at6_Perc'] = float(indicators['School_Start_at6_Perc'])
                     sink.write(district_row)
+        os.system("ogr2ogr %s.shp %s.json" % (file_name, file_name))
 
   
 

@@ -61,20 +61,17 @@
             <span class="glyphicon {[{ expanded ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up' }]} toggle-icon"></span>
           </a>
         <div class='container'>
-          <form class="form-inline" role="form">
+          <form ng-controller="IndicatorsCtrl" class="form-inline" role="form">
             <div class="form-group">
               <label for="sector-select">Sector:</label>
               <select id="sector-select">
                 <option value="Youth">Youth</option>
-                <option value="Education">Education</option>
-                <option value="Health">Health</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="indictor-select">Indicator:</label>
-              <select id="indictor-select">
-                <option value="1" >Number of children not starting school at age 6</option>
-                <option value="2" >Other Indicator</option>
+              <label for="indicator-select">Indicator:</label>
+              <select id="indicator-select" name="indicator-select" ng-model="indicator.selected" ng-options="indicator.name for indicator in indicators">
+                <option value="">None</option>
               </select>
             </div>
             <br/>

@@ -333,4 +333,12 @@ footer label {
   overflow: hidden;
 }
 
+.indicator-panel {
+  overflow: hidden;
+}
+
+.indicator-panel select{
+  overflow: hidden;
+}
+
 

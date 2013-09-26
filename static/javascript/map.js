@@ -4,18 +4,10 @@ DT.testing = false;
 DT.Map = function(element) {
 
     var self = this;
+    self.wmsLayer = null;
     var map = L.map(element.attr("id"), {
         zoomControl: true
     });
-
-
-    var heatlayer = L.tileLayer.wms("http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms", {
-        layers: "geonode:uganda_district_indicators_2",
-        format: 'image/png',
-        transparent: true
-    });
-
-
 
     map.on("baselayerchange", function(layer) {
         self.activeLayer = layer;
@@ -46,7 +38,6 @@ DT.Map = function(element) {
         maxZoom: 18
     });
     map.addLayer(osm);
-    map.addLayer(heatlayer);    
     self.layerMap = new DT.LayerMap();
     window.mapmap = map;
 
@@ -168,6 +159,13 @@ DT.Map = function(element) {
         map.addLayer(markers);
     }
 
+    var removeWMSLayer = function() {
+        if (self.wmsLayer != null) {
+            map.removeLayer(self.wmsLayer);
+            self.wmsLayer = null;
+        };
+    }
+
     return {
         addLayer: function(name, location, features, layer_info) {
             if (layer_info.type == "boundary") {
@@ -176,6 +174,19 @@ DT.Map = function(element) {
                 addPointsLayer(name, location, features, layer_info);
             }
         },
+        addWMSLayer: function(wmsServer, layer) {
+            removeWMSLayer();
+            var wmsLayer = L.tileLayer.wms(wmsServer, {
+                layers: layer,
+                format: 'image/png',
+                transparent: true
+            });
+            map.addLayer(wmsLayer);
+            self.wmsLayer = wmsLayer;
+        },
+        removeWMSLayer: function() {
+            removeWMSLayer();
+        },  
         onClickDistrict: function(handler) {
             self.clickDistrictHandler = handler;
         },
@@ -251,7 +262,16 @@ DT.Map = function(element) {
                     // return layer._icon.text();
                 }
             }
-        }
+        },
+        isIndicatorLayerHidden: function() {
+            return self.wmsLayer == null;
+        },
+        getIndicatorValue: function(indicatorName) {
+            return $("#indicator-select option:contains('"+ indicatorName + "')").val();
+        },
+        isIndicatorLayerDisplayed: function(layerName) {
+            return self.wmsLayer.options.layers == layerName;
+        }   
     }
 };
 

@@ -45,6 +45,15 @@ angular.module("dashboard").directive('map', function() {
                 applyLocationAndFilter(scope.location, newFilter);
             }, true);
 
+            scope.$watch("indicator", function(newIndicator, oldIndicator){
+                if (newIndicator == undefined)
+                    return true;
+                if (newIndicator.selected == null)
+                    map.removeWMSLayer();
+                else 
+                    map.addWMSLayer(newIndicator.selected.wmsUrl, newIndicator.selected.layer);
+            }, true);
+
             scope.$watch("location", function(newLocation, oldLocation) {
                 map.unselect();
 
@@ -57,9 +66,6 @@ angular.module("dashboard").directive('map', function() {
 }).directive('panel', function() {
     return {
         scope: true,
-        controller: function($scope, $location, districtService) {
-           
-        },
         link: function(scope, element, attrs) {
             scope.expanded = true;
             

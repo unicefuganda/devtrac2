@@ -149,4 +149,21 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         });
         return deffered.promise;
     };
+}).service("indicatorService", function() {
+    var indicators = [{
+                layer: "uganda_district_indicators_2",
+                key: "CompletePS_Perc",
+                name: "Percentage of children completing Primary School",
+                wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms"
+            },
+            {
+                layer: "uganda_districts_2011_with_school_start",
+                key: "School_Start_at6_Perc",
+                name: "Percentage of children starting school at 6",
+                wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms"
+            }];
+
+    this.all = function() {
+        return indicators;
+    }
 });
