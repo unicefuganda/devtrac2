@@ -52,3 +52,10 @@ def when_i_click_on_the_partner_option_in_the_accordion(step):
 @step(u'Then the partner categories and elements are displayed')
 def then_the_partner_categories_and_elements_are_displayed(step):
     assert True, 'This step must be implemented'
+
+@step(u'And I hover over a "([^"]*)" polygon')
+def and_i_hover_over_a_group1_polygon(step, group1):
+    assert True, 'This step must be implemented'
+@step(u'Then the text "([^"]*)"  is displayed')
+def then_the_text_group1_is_displayed(step, group1):
+    assert True, 'This step must be implemented'

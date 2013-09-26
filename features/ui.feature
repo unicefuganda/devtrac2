@@ -44,4 +44,10 @@ Given that I am a rugular user
 When I click on the partner option in the accordion
 Then the partner categories and elements are displayed
 
+Scenario: Show label on polygon
+Given that I am a regular user
+When I go to the homepage
+And I hover over a "gulu" polygon
+Then the text "gulu"  is displayed
+
 
