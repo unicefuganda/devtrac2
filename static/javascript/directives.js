@@ -54,4 +54,30 @@ angular.module("dashboard").directive('map', function() {
             });
         }
     };
+}).directive('panel', function() {
+    return {
+        scope: true,
+        controller: function($scope, $location, districtService) {
+           
+        },
+        link: function(scope, element, attrs) {
+            scope.expanded = true;
+            
+            var expandAnimation = JSON.parse(attrs.panelExpand);
+            var collapseAnimation = JSON.parse(attrs.panelCollapse);
+            var panel = $(element);
+
+            scope.togglePanel = function() {
+                if (scope.expanded)
+                {   
+                    panel.animate(collapseAnimation);;
+                    scope.expanded = false;
+                } else {
+                    panel.animate(expandAnimation);
+                    scope.expanded = true;
+                }
+                return false;
+            }
+        }
+    };
 })

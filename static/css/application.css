@@ -2,7 +2,7 @@ body {
   padding-top: 50px;
 }
 /* Footer*/
-footer { 
+/*footer { 
   border-top: 1px solid #CCC; 
   text-align: right;
   font-size: 11px;
@@ -18,7 +18,7 @@ footer label {
   font-weight: bold;
   margin-bottom: 0;
 }
-
+*/
 .starter-template {
   padding: 40px 15px;
   text-align: center;
@@ -220,7 +220,6 @@ footer label {
     width: 100%;
     height: 100%;
     float: left;
-    /*background-color: white;*/
     border: 1px solid #CCCCCC;
 }
 
@@ -245,7 +244,7 @@ footer label {
   margin-right: 10px;
 }
 
-.filterPanel .toggleSidebar {    
+.filterPanel .toggle-panel {    
     border-top: 1px solid #CCCCCC;
     border-bottom: 1px solid #CCCCCC;
     border-right: 1px solid #CCCCCC;
@@ -269,21 +268,10 @@ footer label {
   border-radius: 8px;
   margin-right: 4px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.65);
-
-
 }
 
 .health-center-checkbox-icon {
-  
   background-color: rgba(153, 51, 102, 0.65);
-  
-
-
-  /*font-family: 'Glyphicons Halflings';
-  -webkit-font-smoothing: antialiased;
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1;*/
 }
 
 .water-point-checkbox-icon {
@@ -293,6 +281,52 @@ footer label {
 .school-checkbox-icon {
   background-color: rgba(211, 242, 53, 0.65);
   
+}
+
+.indicator-panel {
+  position: absolute;
+  
+  bottom: 0px;
+  z-index: 100;
+  width: 400px;
+  margin: 0 auto;
+  width: 100%;
+  margin-bottom: 10px
+}
+
+.indicator-panel .container {
+  border: 1px solid #CCC; 
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 500px;
+
+}
+
+.indicator-panel .toggle-panel {
+  background-color: rgba(255, 255, 255, 0.8);
+  height: 30px;
+  width: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 6px; 
+  color: black;
+  text-align: center;
+  border-top: 1px solid #CCCCCC;
+  border-left: 1px solid #CCCCCC;
+  border-right: 1px solid #CCCCCC;
+  display: block;
+}
+
+.indicator-outside-panel {
+  position: absolute;
+  bottom: 0px;
+  z-index: 100;
+  width: 100%;
+  height: 120px;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
 

@@ -19,7 +19,7 @@
       </div>
     </div>   
 
-    <div class='filterPanel expanded'>
+    <div panel panel-expand='{"left":"10px"}' panel-collapse='{"left":"-200px"}' class='filterPanel expanded dt-panel' id="filter-panel">
 
       <div class='content'>
 
@@ -49,9 +49,27 @@
         </div>
       </div>     
 
-       <a href="" class ='toggleSidebar'>
-         <span class="glyphicon glyphicon-chevron-left toggle-icon"></span>
+     
+
+       <a href="" class ='toggle-panel' ng-click="togglePanel()">
+         <span class="glyphicon {[{ expanded ? 'glyphicon-chevron-left' : 'glyphicon-chevron-right' }]} toggle-icon"></span>
        </a>  
+    </div>
+
+    <div class='indicator-outside-panel' >
+
+      <div panel panel-expand='{"bottom":"0px"}' panel-collapse='{"bottom":"-72px"}' class='indicator-panel expanded dt-panel' id="indicator-panel">
+        <!-- <div class='toggleSidebar'> -->
+          <a href="" class ='toggle-panel' ng-click="togglePanel()">
+            <span class="glyphicon {[{ expanded ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up' }]} toggle-icon"></span>
+          </a>
+        <!-- </div> -->
+        <div class='container'>
+          <br/>
+          <br/>
+          <br/>
+        </div>     
+      </div>
     </div>
 
     <footer id="footer">
