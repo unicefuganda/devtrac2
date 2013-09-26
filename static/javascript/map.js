@@ -104,7 +104,7 @@ DT.Map = function(element) {
                     className: layer_info.name +"-cluster-icon cluster-icon " + className,
 
                     html: "<div data-lat='"+ latlng.lat.toFixed(4) +"' data-lng='" + latlng.lng.toFixed(4) + "'>" 
-                        // + cluster.getChildCount()
+                        + cluster.getChildCount()
                         + '</div>'
                 });
             }

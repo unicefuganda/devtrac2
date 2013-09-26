@@ -19,7 +19,7 @@
       </div>
     </div>   
 
-    <div panel panel-expand='{"left":"10px"}' panel-collapse='{"left":"-200px"}' class='filterPanel expanded dt-panel' id="filter-panel">
+    <div panel panel-expand='{"left":"10px"}' panel-collapse='{"left":"-200px"}' class='filter-panel expanded dt-panel' id="filter-panel">
 
       <div class='content'>
 
@@ -49,8 +49,6 @@
         </div>
       </div>     
 
-     
-
        <a href="" class ='toggle-panel' ng-click="togglePanel()">
          <span class="glyphicon {[{ expanded ? 'glyphicon-chevron-left' : 'glyphicon-chevron-right' }]} toggle-icon"></span>
        </a>  
@@ -58,16 +56,31 @@
 
     <div class='indicator-outside-panel' >
 
-      <div panel panel-expand='{"bottom":"0px"}' panel-collapse='{"bottom":"-72px"}' class='indicator-panel expanded dt-panel' id="indicator-panel">
-        <!-- <div class='toggleSidebar'> -->
+      <div panel panel-expand='{"bottom":"0px"}' panel-collapse='{"bottom":"-93px"}' class='indicator-panel expanded dt-panel' id="indicator-panel">
           <a href="" class ='toggle-panel' ng-click="togglePanel()">
             <span class="glyphicon {[{ expanded ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up' }]} toggle-icon"></span>
           </a>
-        <!-- </div> -->
         <div class='container'>
-          <br/>
-          <br/>
-          <br/>
+          <form class="form-inline" role="form">
+            <div class="form-group">
+              <label for="sector-select">Sector:</label>
+              <select id="sector-select">
+                <option value="Youth">Youth</option>
+                <option value="Education">Education</option>
+                <option value="Health">Health</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="indictor-select">Indicator:</label>
+              <select id="indictor-select">
+                <option value="1" >Number of children not starting school at age 6</option>
+                <option value="2" >Other Indicator</option>
+              </select>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+          </form>
         </div>     
       </div>
     </div>

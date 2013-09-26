@@ -6,12 +6,12 @@ from time import *
 #Steps to be implemented
 
 @step(u'Then the "([^"]*)" panel is displayed')
-def then_the_filter_panel_is_displayed(step):
+def then_the_filter_panel_is_displayed(step, panel):
     assert world.page.is_panel_expanded(panel)
 
-@step(u'When I toggle the filter panel')
-def when_i_collapse_the_filter_panel(step):
-    world.page.toggle_filter()
+@step(u'When I toggle the "([^"]*)" panel')
+def when_i_collapse_the_filter_panel(step, panel):
+    world.page.toggle_panel(panel)
 
 @step(u'Then the "([^"]*)" panel is collapsed')
 def then_the_filter_panel_is_collapsed(step, panel):

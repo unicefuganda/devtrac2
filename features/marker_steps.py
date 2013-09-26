@@ -22,10 +22,6 @@ def then_the_cluster_marker_at_latlng_is_for_num_points(step, layer, lat, lng, n
 @step(u'And I toggle the \'([^\']*)\' checkbox')
 def and_i_uncheck_the_key_checkbox(step, checkboxkey):
     world.page.toggle_checkbox(checkboxkey)
-    # assert False, 'This step must be implemented'
-
-
-
 
 @step(u'Then \'([^\']*)\' water point circle markers will be displayed on the map')
 def then_group1_water_point_circle_markers_will_be_displayed_on_the_map(step, group1):

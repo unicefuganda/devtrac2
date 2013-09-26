@@ -52,7 +52,6 @@ class Page:
         return "{ district: %s, subcounty: %s, parish: %s}" % (district_name, subcounty_name, parish_name)
 
     def take_screenshot(self):
-
         self.browser.driver.save_screenshot('screenshot_%s.png' % time.strftime("%m-%d-%I-%H:%I:%M:%S"))
 
     def highlighted_layer(self):
@@ -87,11 +86,11 @@ class Page:
     def popup_content(self):
         return self.browser.find_by_css(".marker-popup").text
 
-    def toggle_filter(self):
-        self.browser.find_by_css(".toggleSidebar").click()
+    def toggle_panel(self, panel):
+        self.browser.find_by_css(".%s-panel .toggle-panel" % panel).click()
 
-    def filter_panel_expanded(self):
-        return len(self.browser.find_by_css(".filterPanel.expanded")) > 0
+    def is_panel_expanded(self, panel):
+        return len(self.browser.find_by_css(".%s-panel.expanded" % panel)) > 0
 
     def toggle_checkbox(self, checkboxkey):
 

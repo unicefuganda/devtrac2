@@ -15,7 +15,7 @@ Then the popup should have content:
 Scenario: Cluster Water Point markers
 Given that I am a regular user
 When I open dashboard for "Gulu, Palaro"
-Then the "water-point" cluster marker at "3.2713, 32.3560" is for "6" points
+Then the "water-point" cluster marker at "3.2804, 32.3617" is for "5" points
 
 Scenario: Show Heath Center Marker Summary Info
 Given that I am a regular user
@@ -47,8 +47,8 @@ Then the popup should have content:
 
 Scenario: Cluster school markers
 Given that I am a regular user
-When I open dashboard for "Gulu, Odek, Lukwor"
-Then the "school" cluster marker at "2.6878, 32.6592" is for "6" points
+When I open dashboard for "Gulu, Odek"
+Then the "school" cluster marker at "2.6833, 32.7336" is for "3" points
 
 Scenario: Add waterpoint filter to filter panel
 Given that I am a regular user
@@ -64,7 +64,6 @@ Scenario: Add School filter to filter panel
 Given that I am a regular user
 When I navigate to the home page
 Then the 'Schools' filter will be displayed on the filter panel
-
 
 Scenario: Filter water points
 Given that I am a regular user

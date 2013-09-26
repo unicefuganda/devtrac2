@@ -206,7 +206,7 @@ footer label {
 }
 
 
-.filterPanel {
+.filter-panel {
     /*background: white; */
     background-color: rgba(255, 255, 255, 0.8);
     position: fixed;
@@ -216,35 +216,35 @@ footer label {
     height: 60%;
 }
 
-.filterPanel .content {
+.filter-panel .content {
     width: 100%;
     height: 100%;
     float: left;
     border: 1px solid #CCCCCC;
 }
 
-.filterPanel .content .container .sector {
+.filter-panel .content .container .sector {
   font-size:14px;
   padding-top: 5px;
   font-weight: 500;
   padding-bottom: 6px;
 }
 
-.filterPanel .content .container .sector-content{ 
+.filter-panel .content .container .sector-content{ 
   width: 100%;
   font-size: 12px;
 }
 
-.filterPanel .content .container .sector-content label{ 
+.filter-panel .content .container .sector-content label{ 
   font-weight: normal;
   margin-bottom: 3px;
 }
 
-.filterPanel .content .container .sector-content input[type='checkbox']{ 
+.filter-panel .content .container .sector-content input[type='checkbox']{ 
   margin-right: 10px;
 }
 
-.filterPanel .toggle-panel {    
+.filter-panel .toggle-panel {    
     border-top: 1px solid #CCCCCC;
     border-bottom: 1px solid #CCCCCC;
     border-right: 1px solid #CCCCCC;
@@ -288,7 +288,7 @@ footer label {
   
   bottom: 0px;
   z-index: 100;
-  width: 400px;
+  width: 500px;
   margin: 0 auto;
   width: 100%;
   margin-bottom: 10px
@@ -297,11 +297,15 @@ footer label {
 .indicator-panel .container {
   border: 1px solid #CCC; 
   background-color: rgba(255, 255, 255, 0.8);
-  width: 500px;
+  width: 700px;
   margin-left: auto;
   margin-right: auto;
-  max-width: 500px;
+  max-width: 700px;
+  padding: 8px 20px;
+}
 
+.form-group {
+  margin-right: 10px;
 }
 
 .indicator-panel .toggle-panel {
@@ -324,7 +328,7 @@ footer label {
   bottom: 0px;
   z-index: 100;
   width: 100%;
-  height: 120px;
+  height: 130px;
   margin: 0 auto;
   overflow: hidden;
 }

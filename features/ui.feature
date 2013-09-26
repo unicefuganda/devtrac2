@@ -1,5 +1,3 @@
-# Feature file for generic UI elements
-
 Feature: UI Elements
 
 Scenario: Display header bar

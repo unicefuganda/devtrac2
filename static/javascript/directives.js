@@ -70,9 +70,11 @@ angular.module("dashboard").directive('map', function() {
             scope.togglePanel = function() {
                 if (scope.expanded)
                 {   
+                    panel.removeClass("expanded");
                     panel.animate(collapseAnimation);;
                     scope.expanded = false;
                 } else {
+                    panel.addClass("expanded");
                     panel.animate(expandAnimation);
                     scope.expanded = true;
                 }
