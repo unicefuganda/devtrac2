@@ -36,3 +36,19 @@ def then_a_filter_panel_with_the_header_group1_will_be_displayed(step, group1):
 @step(u'Then an indicator panel will be displayed in the bottom middle section of the map')
 def then_an_indicator_panel_will_be_displayed_in_the_bottom_middle_section_of_the_map(step):
     assert True, 'This step must be implemented'
+
+@step(u'Given that I am a rugular user')
+def given_that_i_am_a_rugular_user(step):
+    assert True, 'This step must be implemented'
+@step(u'When I click on the sector option in the accordion')
+def when_i_click_on_the_sector_option_in_the_accordion(step):
+    assert True, 'This step must be implemented'
+@step(u'Then the sector categories and elements are displayed')
+def then_the_sector_categories_and_elements_are_displayed(step):
+    assert True, 'This step must be implemented'
+@step(u'When I click on the partner option in the accordion')
+def when_i_click_on_the_partner_option_in_the_accordion(step):
+    assert True, 'This step must be implemented'
+@step(u'Then the partner categories and elements are displayed')
+def then_the_partner_categories_and_elements_are_displayed(step):
+    assert True, 'This step must be implemented'

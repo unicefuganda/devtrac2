@@ -25,7 +25,6 @@ When I go to the homepage
 And I click on region "acholi"
 Then region "acholi" will be selected
 
-
 Scenario: Open district dashboard
 Given that I am a regular user
 When I open dashboard for "Gulu"

@@ -33,3 +33,15 @@ Scenario: Display indicator panel
 Given that I am a regular user
 When I go to the homepage
 Then an indicator panel will be displayed in the bottom middle section of the map
+
+Scenario: Select Sector option on Accordion
+Given that I am a rugular user
+When I click on the sector option in the accordion
+Then the sector categories and elements are displayed
+
+Scenario: Select Partner option on Accordion
+Given that I am a rugular user
+When I click on the partner option in the accordion
+Then the partner categories and elements are displayed
+
+
