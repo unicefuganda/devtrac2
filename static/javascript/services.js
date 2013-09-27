@@ -154,13 +154,15 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                 layer: "uganda_district_indicators_2",
                 key: "CompletePS_Perc",
                 name: "Percentage of children completing Primary School",
-                wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms"
+                wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
+                legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:uganda_district_indicators_2&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;"
             },
             {
                 layer: "uganda_districts_2011_with_school_start",
                 key: "School_Start_at6_Perc",
                 name: "Percentage of children starting school at 6",
-                wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms"
+                wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
+                legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:uganda_districts_2011_with_school_start&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;"
             }];
 
     this.all = function() {

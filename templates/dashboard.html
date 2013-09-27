@@ -61,7 +61,7 @@
             <span class="glyphicon {[{ expanded ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up' }]} toggle-icon"></span>
           </a>
         <div class='container'>
-          <form ng-controller="IndicatorsCtrl" class="form-inline" role="form">
+          <form ng-controller="IndicatorsCtrl" role="form" id="indicator-form">
             <div class="form-group">
               <label for="sector-select">Sector:</label>
               <select id="sector-select">
@@ -74,10 +74,11 @@
                 <option value="">None</option>
               </select>
             </div>
-            <br/>
-            <br/>
-            <br/>
+           
           </form>
+            <div ng-if="indicator.selected != null" class='legend'>
+              <img  src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
+            </div>
         </div>     
       </div>
     </div>

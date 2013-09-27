@@ -297,7 +297,8 @@ footer label {
 .indicator-panel .container {
   border: 1px solid #CCC; 
   background-color: rgba(255, 255, 255, 0.8);
-  width: 700px;
+  width: 580px;
+  /*min-height: 700px;*/
   margin-left: auto;
   margin-right: auto;
   max-width: 700px;
@@ -328,18 +329,33 @@ footer label {
   bottom: 0px;
   z-index: 100;
   width: 100%;
-  height: 130px;
+  height: 200px;
   margin: 0 auto;
   overflow: hidden;
-  text-align: center;
+  /*text-align: center;*/
 }
 
+#indicator-form {
+  float:left;
+}
 .indicator-panel {
   overflow: hidden;
 }
 
 .indicator-panel select{
   overflow: hidden;
+}
+
+.form-group label {
+  width: 80px;
+}
+
+.form-group {
+  margin-bottom: 0px
+}
+
+.legend {
+  min-height: 80px;
 }
 
 
