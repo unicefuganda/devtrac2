@@ -32,17 +32,17 @@ DT.LayerOptions = {
         unselectedStyle: {
             "fillOpacity": 0,
             "color": "#333",
-            "weight": 2
+            "weight": 0.5
         },
         selectedStyle: {
             "fillOpacity": 0,
             "color": "#ff0000",
-            "weight": 10
+            "weight": 5
         },
         highlightedStyle: {
             "fillOpacity": 0.2,
             "color": "#ff0000",
-            "weight": 5
+            "weight": 1
         },
         getLocation: function(feature) {
             return new DT.Location({
