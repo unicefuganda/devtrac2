@@ -16,7 +16,7 @@ DT.Location.prototype.toString = function(){
     return this.getName();
 };
 DT.Location.prototype.layersToShow = function(filteredKeys) {
-    var layers = [["region", new DT.Location({})], ["district", new DT.Location({region: "lango" })] ];
+    var layers = [["region", new DT.Location({})], ["district", new DT.Location({})] ];
 
     
     if (this.district != null) {

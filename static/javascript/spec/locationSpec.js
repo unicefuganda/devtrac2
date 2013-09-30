@@ -29,9 +29,14 @@ describe("Location", function() {
 
     it("should show region layer at national level", function() {
         var location1 = new DT.Location({});
-        var uganda_location = new DT.Location({});
 
-        expect(location1.layersToShow([])).toEqual([["region", uganda_location]]);
+        var uganda_location = new DT.Location({});
+        var north_location = new DT.Location({ region: "north"});
+
+        expect(location1.layersToShow([])).toEqual([
+            ["region", uganda_location],
+            ["district", uganda_location]
+        ]);
     });
 
     it("should show district layer at region level", function() {
@@ -40,7 +45,7 @@ describe("Location", function() {
 
         expect(north_location.layersToShow([])).toEqual([
             ["region", uganda_location],
-            ["district", north_location]
+            ["district", uganda_location]
         ]);
     });
 
@@ -56,7 +61,7 @@ describe("Location", function() {
 
         expect(location1.layersToShow([])).toEqual([
             ["region", uganda_location],
-            ["district", north_location],
+            ["district", uganda_location],
             ["subcounty", gulu_location],
             ["water-point", gulu_location],
             ["health-center", gulu_location],
@@ -95,7 +100,7 @@ describe("Location", function() {
 
         expect(location1.layersToShow([])).toEqual([
             ["region", uganda_location],
-            ["district", north_location],
+            ["district", uganda_location],
             ["subcounty", gulu_location],
             ["water-point", gulu_location],
             ["health-center", gulu_location],
@@ -119,7 +124,7 @@ describe("Location", function() {
 
         expect(location1.layersToShow([])).toEqual([
             ["region", uganda_location],
-            ["district", north_location],
+            ["district", uganda_location],
             ["subcounty", gulu_location],
             ["water-point", gulu_location],
             ["health-center", gulu_location],
