@@ -82,20 +82,12 @@ DT.Location.compareLayerKeys = function(layerKeys, otherlayerKeys) {
         }) != null;
     };
 
-    // var filteredKeys = $.grep(filter, function(toggle, filter) { return toggle; }
-
-
     var keysToRemove = $.grep(layerKeys, function(key, index){ 
         return !keyExists(key, otherlayerKeys) 
     });
     var keysToAdd = $.grep(otherlayerKeys, function(key, index){ 
-        // if (key[0])
-        //     return false;
         return !keyExists(key, layerKeys) 
     });
-    
-
-
 
     return {
         toAdd: keysToAdd,
