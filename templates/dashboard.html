@@ -56,7 +56,7 @@
 
     <div class='indicator-outside-panel' >
 
-      <div panel panel-expand='{"bottom":"0px"}' panel-collapse='{"bottom":"-93px"}' class='indicator-panel expanded dt-panel' id="indicator-panel">
+      <div panel panel-expand='{"bottom":"0px"}' panel-collapse='{"bottom":"-108px"}' class='indicator-panel expanded dt-panel' id="indicator-panel">
           <a href="" class ='toggle-panel' ng-click="togglePanel()">
             <span class="glyphicon {[{ expanded ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up' }]} toggle-icon"></span>
           </a>
@@ -76,8 +76,8 @@
             </div>
            
           </form>
-            <div ng-if="indicator.selected != null" class='legend'>
-              <img  src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
+            <div class='legend'>
+              <img ng-if="indicator.selected != null" src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
             </div>
         </div>     
       </div>

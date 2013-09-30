@@ -1,11 +1,13 @@
 DT.Location = function(location_hash) {
+    this.region = location_hash.region ? location_hash.region.toLowerCase() : null;
     this.district = location_hash.district ? location_hash.district.toLowerCase() : null;
     this.subcounty = location_hash.subcounty ? location_hash.subcounty.toLowerCase() : null;
     this.parish = location_hash.parish ? location_hash.parish.toLowerCase() : null;
 
 };
 DT.Location.prototype.equals = function(otherLocation) {
-    return this.district == otherLocation.district &&
+    return this.region == otherLocation.region &&
+        this.district == otherLocation.district &&
         this.subcounty == otherLocation.subcounty &&
         this.parish == otherLocation.parish;
 
@@ -14,10 +16,18 @@ DT.Location.prototype.toString = function(){
     return this.getName();
 };
 DT.Location.prototype.layersToShow = function(filteredKeys) {
-    var layers = [["district", new DT.Location({})]];
+    var layers = [["region", new DT.Location({})]];
 
+    if (this.region != null) {
+        var regionLocation = new DT.Location({
+            region: this.region
+        });
+
+        layers.push(["district", regionLocation])
+    }
     if (this.district != null) {
         var districtLocation = new DT.Location({
+            region: this.region,
             district: this.district
         });
         layers.push(["subcounty", districtLocation]);
@@ -28,6 +38,7 @@ DT.Location.prototype.layersToShow = function(filteredKeys) {
 
     if (this.subcounty != null) {
         var subcountyLocation = new DT.Location({
+            region: this.region,
             district: this.district,
             subcounty: this.subcounty
         });
@@ -39,15 +50,18 @@ DT.Location.prototype.layersToShow = function(filteredKeys) {
     });
 };
 DT.Location.prototype.isNational = function () {
-    return this.district == null && this.subcounty == null && this.parish == null;
+    return this.region == null && this.district == null && this.subcounty == null && this.parish == null;
 };
 DT.Location.prototype.getName = function(location) {
+
     if (this.parish)
-        return this.district + ", " + this.subcounty + ", " + this.parish;
+        return this.region + ", " + this.district + ", " + this.subcounty + ", " + this.parish;
     if (this.subcounty)
-        return this.district + ", " + this.subcounty;
+        return this.region + ", " +  this.district + ", " + this.subcounty;
     if (this.district)
-        return this.district;
+        return this.region + ", " +  this.district;
+    if (this.region)
+        return this.region;
     return "";
 };
 DT.Location.compareLayerKeys = function(layerKeys, otherlayerKeys) {
@@ -80,15 +94,49 @@ DT.Location.compareLayerKeys = function(layerKeys, otherlayerKeys) {
 };
 DT.Location.prototype.toUrl = function() {
     if (this.parish != null) {
-        return "/district/" + DT.encode(this.district) + "/" + DT.encode(this.subcounty) + "/" + DT.encode(this.parish);
+        return "/dashboard/" + DT.encode(this.region) + "/" + DT.encode(this.district) + "/" + DT.encode(this.subcounty) + "/" + DT.encode(this.parish);
     } else if (this.subcounty != null) {
-        return "/district/" + DT.encode(this.district) + "/" + DT.encode(this.subcounty);
+        return "/dashboard/" + DT.encode(this.region) + "/" + DT.encode(this.district) + "/" + DT.encode(this.subcounty);
     } else if (this.district != null) {
-        return "/district/" + DT.encode(this.district);
+        return "/dashboard/" + DT.encode(this.region) + "/" + DT.encode(this.district);
+    } else if (this.region != null){
+        return "/dashboard/" + DT.encode(this.region);
     } else {
         return "/";
     }
 };
+
+DT.Location.prototype.urlForLevel = function(level) {
+    if (level == "parish") {
+        return "/dashboard/" + DT.encode(this.region) + "/" + DT.encode(this.district) + "/" + DT.encode(this.subcounty) + "/" + DT.encode(this.parish);
+    } else if (level == "subcounty") {
+        return "/dashboard/" + DT.encode(this.region) + "/" + DT.encode(this.district) + "/" + DT.encode(this.subcounty);
+    } else if (level == "district") {
+        return "/dashboard/" + DT.encode(this.region) + "/" + DT.encode(this.district);
+    } else if (level == "region"){
+        return "/dashboard/" + DT.encode(this.region);
+    } else {
+        return "/";
+    }
+};
+
+DT.Location.prototype.level = function() {
+    var levels = ["region", "district", "subcounty", "parish"]
+    currentLevel = "national";
+
+    for (var i = 0; i < levels.length; i++) {
+        if (this[levels[i]] == null) {
+            break;
+        } 
+        currentLevel = levels[i];
+
+    };
+    return currentLevel;
+}
+
+DT.Location.prototype.full_name = function() {
+    return this[this.level()] + " " + this.level();
+}
 
 DT.Filter = function(toggles) { 
     $.extend(this, toggles);

@@ -21,7 +21,7 @@ class Page:
         if (len(locations) > 2):
             url += ("/%s" % locations[2]) 
 
-        self.browser.visit("%s/district%s?test=true" % (self.base_url, url))
+        self.browser.visit("%s/dashboard%s?test=true" % (self.base_url, url))
 
     def breadcrumbs(self):
         crumbs = map(lambda crumb:crumb.text, self.browser.find_by_css("#location .breadcrumb li"))
@@ -46,10 +46,11 @@ class Page:
 
     def hash_location(self, location_name):
         locations = location_name.lower().split(", ")
-        district_name = ("'%s'" % locations[0]) if len(locations) > 0 else "null"
-        subcounty_name = ("'%s'" % locations[1]) if len(locations) > 1 else "null"
-        parish_name = ("'%s'" % locations[2]) if len(locations) > 2 else "null"
-        return "{ district: %s, subcounty: %s, parish: %s}" % (district_name, subcounty_name, parish_name)
+        region_name = ("'%s'" % locations[0]) if len(locations) > 0 else "null"
+        district_name = ("'%s'" % locations[1]) if len(locations) > 1 else "null"
+        subcounty_name = ("'%s'" % locations[2]) if len(locations) > 2 else "null"
+        parish_name = ("'%s'" % locations[3]) if len(locations) > 3 else "null"
+        return "{ region: %s, district: %s, subcounty: %s, parish: %s}" % (region_name, district_name, subcounty_name, parish_name)
 
     def take_screenshot(self):
         self.browser.driver.save_screenshot('screenshot_%s.png' % time.strftime("%m-%d-%I-%H:%I:%M:%S"))
@@ -63,10 +64,11 @@ class Page:
 
     def is_displayed(self, location_name):
         location_hash = self.hash_location(location_name)
-        self.browser.evaluate_script("window.map.isDisplayed(%s)" % location_hash)
+        return self.browser.evaluate_script("window.map.isDisplayed(%s)" % location_hash)
 
     def hover_over(self, location_name):
         self.wait_for(lambda page: page.is_displayed(location_name))
+
         location_hash = self.hash_location(location_name)
         self.browser.execute_script("window.map.highlightLayer(%s)" % location_hash)
 
@@ -106,9 +108,11 @@ class Page:
         return self.browser.execute_script("window.map.isIndicatorLayerDisplayed('%s')" % indicator_name)
 
     def wait_for(self, function):
-        for _ in itertools.repeat(None, 10):
-            if (function(self)):    
-                break
+        for _ in itertools.repeat(None, 20):
+            result = function(self)
+            if (result):    
+                return
             time.sleep(0.5)
+        raise Exception('wait for timed out after 5 seconds')
 
 

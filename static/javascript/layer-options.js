@@ -2,11 +2,35 @@ if (typeof DT == "undefined")
     DT = {};
 
 DT.LayerOptions = {
+    "region": {
+        unselectedStyle: {
+            "fillOpacity": 0,
+            "color": "#333",
+            "weight": 1
+        },
+        selectedStyle: {
+            "fillOpacity": 0,
+            "color": "#FFFF00",
+            "weight": 8
+        },
+        highlightedStyle: {
+            "fillOpacity": 0.2,
+            "color": "#FFFF00",
+            "weight": 2
+        },
+        getLocation: function(feature) {
+            return new DT.Location({
+                region: feature.properties["Reg_2011"].toLowerCase()
+            });
+        },
+        key: "region",
+        type: "boundary"
+    },
     "parish": {
         unselectedStyle: {
             "fillOpacity": 0,
             "color": "#333",
-            "weight": 2
+            "weight": 1
         },
         selectedStyle: {
             "fillOpacity": 0,
@@ -20,6 +44,8 @@ DT.LayerOptions = {
         },
         getLocation: function(feature) {
             return new DT.Location({
+
+                region: feature.properties["SUBREGION"].toLowerCase(),
                 district: feature.properties["DNAME_2010"].toLowerCase(),
                 subcounty: feature.properties["SNAME_2010"].toLowerCase(),
                 parish: feature.properties["PNAME_2006"].toLowerCase()
@@ -32,7 +58,7 @@ DT.LayerOptions = {
         unselectedStyle: {
             "fillOpacity": 0,
             "color": "#333",
-            "weight": 0.5
+            "weight": 1
         },
         selectedStyle: {
             "fillOpacity": 0,
@@ -46,6 +72,7 @@ DT.LayerOptions = {
         },
         getLocation: function(feature) {
             return new DT.Location({
+                region: feature.properties["Reg_2011"].toLowerCase(),
                 district: feature.properties["DNAME_2010"].toLowerCase(),
             });
         },
@@ -57,7 +84,7 @@ DT.LayerOptions = {
         unselectedStyle: {
             "fillOpacity": 0,
             "color": "#777",
-            "weight": 2
+            "weight": 1
         },
         selectedStyle: {
             "fillOpacity": 0,
@@ -71,6 +98,7 @@ DT.LayerOptions = {
         },
         getLocation: function(feature) {
             return new DT.Location({
+                region: feature.properties["SUBREGION"].toLowerCase(),
                 district: feature.properties["DNAME_2010"].toLowerCase(),
                 subcounty: feature.properties["SNAME_2010"].toLowerCase()
             });

@@ -5,15 +5,19 @@ var dashboard = angular.module('dashboard', ['ngRoute']).config(function($routeP
             controller: "DashboardCtrl",
             templateUrl: '/static/templates/show.html'
         })
-        .when('/district/:district', {
+        .when('/dashboard/:region', {
             controller: "DashboardCtrl",
             templateUrl: '/static/templates/show.html'
         })
-        .when('/district/:district/:subcounty', {
+        .when('/dashboard/:region/:district', {
             controller: "DashboardCtrl",
             templateUrl: '/static/templates/show.html'
         })
-        .when('/district/:district/:subcounty/:parish', {
+        .when('/dashboard/:region/:district/:subcounty', {
+            controller: "DashboardCtrl",
+            templateUrl: '/static/templates/show.html'
+        })
+        .when('/dashboard/:region/:district/:subcounty/:parish', {
             controller: "DashboardCtrl",
             templateUrl: '/static/templates/show.html'
         })

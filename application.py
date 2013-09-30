@@ -46,10 +46,11 @@ assets.register('css_all', css)
 test = "kevin"
 
 @app.route("/")
-@app.route("/district/<district>")
-@app.route("/district/<district>/<subcounty>")
-@app.route("/district/<district>/<subcounty>/<parish>")
-def dashboards(district="", subcounty="", parish=""):
+@app.route("/dashboard/<region>")
+@app.route("/dashboard/<region>/<district>")
+@app.route("/dashboard/<region>/<district>/<subcounty>")
+@app.route("/dashboard/<region>/<district>/<subcounty>/<parish>")
+def dashboards(region="", district="", subcounty="", parish=""):
 	test = request.args.get("test") == "true"
 	return render_template('dashboard.html', test=test)
 

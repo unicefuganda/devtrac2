@@ -7,3 +7,4 @@ devtrac2.sublime-project
 devtrac2.sublime-workspace
 static/gen/packed.css
 static/gen/packed.js
+tmp/*.png

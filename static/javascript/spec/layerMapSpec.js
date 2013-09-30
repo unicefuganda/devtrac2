@@ -53,9 +53,11 @@ describe("LayerMap", function() {
     it("should find child layer from its location", function() {
         var map = new DT.LayerMap("someid");
         var guluLocation = new DT.Location({
+            region: "north",
             district: "Gulu"
         });
         var patikoLocation = new DT.Location({
+            region: "north",
             district: "Gulu",
             subcounty: "Patiko"
         });

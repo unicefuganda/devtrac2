@@ -11,8 +11,13 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
             var key = locationkey[0]
             var location = locationkey[1];
 
-            if (key == "district") {
-                self.geojson().then(function(data) {
+            if (key == "region") {
+                self.regions_geojson().then(function(data) {
+                    allData[locationkey] = data;
+                    deffered2.resolve();
+                });
+            } else if (key == "district") {
+                self.geojson(location.region).then(function(data) {
                     allData[locationkey] = data;
                     deffered2.resolve();
                 });
@@ -67,7 +72,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         return deffered3.promise;
     }
 
-    this.geojson = function() {
+    this.geojson = function(region_name) {
         var deffered = $q.defer();
         $http({
             method: 'GET',
@@ -75,7 +80,28 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
             cache: true
         }).
         success(function(data, status, headers, config) {
+            var districts = $.grep(data.features, function(feature, index) {
+                return feature.properties["Reg_2011"] != null && feature.properties["Reg_2011"].toLowerCase() == region_name;
+            });
+            console.log(districts)
+            console.log(region_name)
+            deffered.resolve({
+                type: "FeatureCollection",
+                features: districts
+            });
+        });
+        return deffered.promise;
+    };
+
+    this.regions_geojson = function() {
+        var deffered = $q.defer();
+
+        regionsCallback = function(data) {
             deffered.resolve(data);
+        }
+        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_regions_2011_01" + "&outputFormat=json&format_options=callback:regionsCallback";
+        $http.jsonp(url, {
+            cache: true
         });
         return deffered.promise;
     };
@@ -99,7 +125,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         parishesCallback = function(data) {
             deffered.resolve(data);
         }
-        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_parish_2011_50" + "&outputFormat=json&propertyName=the_geom,DNAME_2010,SNAME_2010,PNAME_2006&format_options=callback:parishesCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district_name.toUpperCase() + "</Literal></PropertyIsEqualTo></Filter>";
+        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_parish_2011_50" + "&outputFormat=json&propertyName=the_geom,DNAME_2010,SNAME_2010,PNAME_2006,SUBREGION&format_options=callback:parishesCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district_name.toUpperCase() + "</Literal></PropertyIsEqualTo></Filter>";
 
         $http.jsonp(url, {
             cache: true
@@ -122,7 +148,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         return deffered.promise;
     };
 
-     this.health_centers = function(district_name) {
+    this.health_centers = function(district_name) {
         var deffered = $q.defer();
 
         health_centersCallback = function(data) {
@@ -151,19 +177,18 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
     };
 }).service("indicatorService", function() {
     var indicators = [{
-                layer: "uganda_district_indicators_2",
-                key: "CompletePS_Perc",
-                name: "Percentage of children completing Primary School",
-                wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
-                legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:uganda_district_indicators_2&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;"
-            },
-            {
-                layer: "uganda_districts_2011_with_school_start",
-                key: "School_Start_at6_Perc",
-                name: "Percentage of children starting school at 6",
-                wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
-                legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:uganda_districts_2011_with_school_start&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;"
-            }];
+        layer: "uganda_district_indicators_2",
+        key: "CompletePS_Perc",
+        name: "Percentage of children completing Primary School",
+        wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
+        legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:uganda_district_indicators_2&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;"
+    }, {
+        layer: "uganda_districts_2011_with_school_start",
+        key: "School_Start_at6_Perc",
+        name: "Percentage of children starting school at 6",
+        wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
+        legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:uganda_districts_2011_with_school_start&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;"
+    }];
 
     this.all = function() {
         return indicators;

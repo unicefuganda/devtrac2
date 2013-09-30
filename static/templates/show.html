@@ -2,22 +2,25 @@
 <!--   <h2 class="title">{[{ location_name }]}</h2> -->
   <div >  
     <ul class="breadcrumb">  
+        
       <li>
-        <a ng-if="location.district != null" class="national-crumb" href='/'>Uganda</a>
-        <span ng-if="location.district == null" >Uganda</span>
+        <a class="national-crumb {[{ location.level() == 'national' ? 'active' : '' }]}" href='/'>uganda</a>
       </li>  
+
+      <li ng-if="location.region != null" >
+        <a class="region-crumb {[{ location.level() == 'region' ? 'active' : '' }]}" href="{[{ location.urlForLevel('region') }]}" >{[{ location.level() == 'region' ? location.full_name() : location.region }]}</a>
+      </li>  
+
       <li ng-if="location.district != null">
-        <a ng-if="location.subcounty != null" class="district-crumb" href='/district/{[{ location.district }]}'>{[{ location.district }]}</a>
-        <span ng-if="location.subcounty == null" >{[{ location.district }]} District</span>
+        <a class="district-crumb {[{ location.level() == 'district' ? 'active' : '' }]}" href="{[{ location.urlForLevel('district') }]}" >{[{ location.level() == 'district' ? location.full_name() : location.district }]}</a>
       </li>  
-      
+
       <li ng-if="location.subcounty != null">
-        <a ng-if="location.parish != null" class="subcounty-crumb" href='/district/{[{ location.district }]}/{[{ location.subcounty }]}'>{[{ location.subcounty }]}</a>
-        <span ng-if="location.parish == null" >{[{ location.subcounty }]} Subcounty</span>
+        <a class="subcounty-crumb {[{ location.level() == 'subcounty' ? 'active' : '' }]}" href="{[{ location.urlForLevel('subcounty') }]}" >{[{ location.level() == 'subcounty' ? location.full_name() : location.subcounty }]}</a>
       </li>
 
       <li ng-if="location.parish != null">
-        <span>{[{ location.parish }]} Parish</span>
+        <a class="parish-crumb {[{ location.level() == 'parish' ? 'active' : '' }]}" href="{[{ location.urlForLevel('parish') }]}" >{[{ location.level() == 'parish' ? location.full_name() : location.parish }]}</a>
       </li>           
     </ul>  
   </div> 

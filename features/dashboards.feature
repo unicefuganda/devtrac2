@@ -27,53 +27,53 @@ Then region "acholi" will be selected
 
 Scenario: Open district dashboard
 Given that I am a regular user
-When I open dashboard for "Gulu"
-Then I see map of Uganda - Gulu District
-Then "Gulu" will be selected
+When I open dashboard for "Acholi, Gulu"
+Then I see map of Uganda - Acholi - Gulu District
+Then "Acholi, Gulu" will be selected
 
 Scenario: Highlight a District
 Given that I am a regular user
-When I go to the homepage
-And I hover over "Lira"
-Then "Lira" will be highlighted
+When I open dashboard for "Lango"
+And I hover over "Lango, Lira"
+Then "Lango, Lira" will be highlighted
 
 Scenario: Navigate to District
 Given that I am a regular user
-When I go to the homepage
-And I click on "Gulu"
-Then "Gulu" will be selected
+When I open dashboard for "Acholi"
+And I click on "Acholi, Gulu"
+Then "Acholi, Gulu" will be selected
 
 Scenario: Open subcountry dashboard
 Given that I am a regular user
-When I open dashboard for "Gulu, Patiko"
-Then I see map of Uganda - Gulu - Patiko Subcounty
-Then "Gulu, Patiko" will be selected
+When I open dashboard for "Acholi, Gulu, Patiko"
+Then I see map of Uganda - Acholi - Gulu - Patiko Subcounty
+Then "Acholi, Gulu, Patiko" will be selected
 
 Scenario: Navigate to Subcounty
 Given that I am a regular user
-When I go to the homepage
-And I click on "Gulu"
-Then "Gulu" will be selected
-And I hover over "Gulu, Patiko"
-Then "Gulu, Patiko" will be highlighted
-And I click on "Gulu, Patiko"
-Then "Gulu, Patiko" will be selected
+When I open dashboard for "Acholi"
+And I click on "Acholi, Gulu"
+Then "Acholi, Gulu" will be selected
+And I hover over "Acholi, Gulu, Patiko"
+Then "Acholi, Gulu, Patiko" will be highlighted
+And I click on "Acholi, Gulu, Patiko"
+Then "Acholi, Gulu, Patiko" will be selected
 
 Scenario: Navigate by breadcrumb
 Given that I am a regular user
-When I open dashboard for "Gulu, Patiko"
+When I open dashboard for "Acholi, Gulu, Patiko"
 And I click on the district breadcrumb link
-Then I see map of Uganda - Gulu District
+Then I see map of Uganda - Acholi - Gulu District
 And I click on the national breadcrumb link
 Then I see map of Uganda
 
 Scenario: Navigate to Parish
 Given that I am a regular user
-When I open dashboard for "Gulu, Patiko"
-And I hover over "Gulu, Patiko, Pawel"
-Then "Gulu, Patiko, Pawel" will be highlighted
-And I click on "Gulu, Patiko, Pawel" 
-Then "Gulu, Patiko, Pawel" will be selected
+When I open dashboard for "Acholi, Gulu, Patiko"
+And I hover over "Acholi, Gulu, Patiko, Pawel"
+Then "Acholi, Gulu, Patiko, Pawel" will be highlighted
+And I click on "Acholi, Gulu, Patiko, Pawel" 
+Then "Acholi, Gulu, Patiko, Pawel" will be selected
 
 Scenario: Navigate to Incorrect URL
 Given that I am a regular user

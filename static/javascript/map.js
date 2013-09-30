@@ -218,7 +218,7 @@ DT.Map = function(element) {
         },
         selectLayer: function(location) {
             if (location.isNational()) {
-                var layer = self.layerMap.findLayer("district", location);
+                var layer = self.layerMap.findLayer("region", location);
                 map.fitBounds(layer);
             } else {
                 self.layerMap.findChildLayer(location).focusLayer();

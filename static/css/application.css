@@ -63,7 +63,7 @@ footer label {
   border: 1px solid #CCCCCC;
   padding: 5px 11px;
 }
-#location .breadcrumb li:last-child span{
+#location .breadcrumb li a.active{
   color: black;
   font-size: 18px;
   font-weight: 500;
@@ -327,9 +327,9 @@ footer label {
 .indicator-outside-panel {
   position: absolute;
   bottom: 0px;
-  z-index: 100;
+  z-index: 0;
   width: 100%;
-  height: 200px;
+  height: 138px;
   margin: 0 auto;
   overflow: hidden;
   /*text-align: center;*/
