@@ -3,6 +3,7 @@ if (typeof DT == "undefined")
 
 DT.LayerOptions = {
     "region": {
+        selectable: true,
         unselectedStyle: {
             "fillOpacity": 0,
             "color": "#333",
@@ -26,10 +27,8 @@ DT.LayerOptions = {
         key: "region",
         type: "boundary"
     },
-
-
-
     "parish": {
+        selectable: true,
         unselectedStyle: {
             "fillOpacity": 0,
             "color": "#333",
@@ -58,6 +57,7 @@ DT.LayerOptions = {
         type: "boundary"
     },
     "district": {
+        selectable: true,
         unselectedStyle: {
             "fillOpacity": 0,
             "color": "#333",
@@ -83,7 +83,26 @@ DT.LayerOptions = {
         type: "boundary"
 
     },
+    "district_outline": {
+        selectable: false,
+        unselectedStyle: {
+            "fillOpacity": 0,
+            "color": "#333",
+            "weight": 0.5
+        },
+
+        getLocation: function(feature) {
+            return new DT.Location({
+                region: feature.properties["Reg_2011"].toLowerCase(),
+                district: feature.properties["DNAME_2010"].toLowerCase(),
+            });
+        },
+        key: "district",
+        type: "boundary"
+
+    },
     "subcounty": {
+        selectable: true,
         unselectedStyle: {
             "fillOpacity": 0,
             "color": "#777",

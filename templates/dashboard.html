@@ -82,17 +82,6 @@
         </div>     
       </div>
     </div>
-
-    <footer id="footer">
-      <div>
-        {% if test %}
-          <label>TESTING</label>
-        {% endif %}
-        <label for="environment">environment:</label>&nbsp;<span id="environment"></span>
-        <label for="sha">revision:</label>&nbsp;<span id="sha"></span>
-        <label for="time">deployed at:</label>&nbsp;<time id="time"></time>
-      </div>
-    </footer> 
     
     {% assets "js_all" %}
       <script type="text/javascript" src="{{ ASSET_URL }}"></script>

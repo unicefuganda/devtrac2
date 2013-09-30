@@ -16,18 +16,23 @@ DT.Location.prototype.toString = function(){
     return this.getName();
 };
 DT.Location.prototype.layersToShow = function(filteredKeys) {
-    var layers = [["region", new DT.Location({})], ["district", new DT.Location({})] ];
+    var layers = [["region", new DT.Location({})], ["district_outline", new DT.Location({})] ];
 
-    
+    if (this.region != null) {
+        var regionLocation = new DT.Location({ region: this.region });
+        layers.push(["district", regionLocation]);
+        
+        layers.push(["health-center", regionLocation]);
+        layers.push(["school", regionLocation]);
+    }
+
     if (this.district != null) {
         var districtLocation = new DT.Location({
             region: this.region,
             district: this.district
         });
-        layers.push(["subcounty", districtLocation]);
         layers.push(["water-point", districtLocation]);
-        layers.push(["health-center", districtLocation]);
-        layers.push(["school", districtLocation]);
+        layers.push(["subcounty", districtLocation]);
     }
 
     if (this.subcounty != null) {

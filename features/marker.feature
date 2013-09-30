@@ -20,7 +20,7 @@ Then the "water-point" cluster marker at "3.2804, 32.3617" is for "5" points
 Scenario: Show Heath Center Marker Summary Info
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu, Odek"
-Then the "health-center" layer for "Acholi, Gulu" is displayed
+Then the "health-center" layer for "Acholi" is displayed
 And I hover over a "health-center" marker at "2.6618, 32.6234" 
 Then the popup should have content: 
     """
@@ -36,7 +36,7 @@ Then the "health-center" cluster marker at "2.7492, 32.6948" is for "2" points
 Scenario: Show School Marker Summary Info
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu, Odek, Lamola"
-Then the "school" layer for "Acholi, Gulu" is displayed
+Then the "school" layer for "Acholi" is displayed
 And I hover over a "school" marker at "2.5885, 32.7447" 
 Then the popup should have content: 
     """
@@ -77,14 +77,14 @@ Scenario: Filter health centers
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu, Odek"
 And I toggle the 'health-center' checkbox
-Then the "health-center" layer for "Acholi, Gulu" is not displayed
+Then the "health-center" layer for "Acholi" is not displayed
 When I toggle the 'health-center' checkbox
-Then the "health-center" layer for "Acholi, Gulu" is displayed
+Then the "health-center" layer for "Acholi" is displayed
 
 Scenario: Filter schools
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu, Odek"
 And I toggle the 'school' checkbox
-Then the "school" layer for "Acholi, Gulu" is not displayed
+Then the "school" layer for "Acholi" is not displayed
 When I toggle the 'school' checkbox
-Then the "school" layer for "Acholi, Gulu" is displayed
+Then the "school" layer for "Acholi" is displayed

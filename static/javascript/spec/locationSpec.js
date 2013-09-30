@@ -35,7 +35,7 @@ describe("Location", function() {
 
         expect(location1.layersToShow([])).toEqual([
             ["region", uganda_location],
-            ["district", uganda_location]
+            ["district_outline", uganda_location]
         ]);
     });
 
@@ -45,7 +45,10 @@ describe("Location", function() {
 
         expect(north_location.layersToShow([])).toEqual([
             ["region", uganda_location],
-            ["district", uganda_location]
+            ["district_outline", uganda_location],
+            ["district", north_location],
+            ["health-center", north_location],
+            ["school", north_location]
         ]);
     });
 
@@ -61,11 +64,13 @@ describe("Location", function() {
 
         expect(location1.layersToShow([])).toEqual([
             ["region", uganda_location],
-            ["district", uganda_location],
-            ["subcounty", gulu_location],
+            ["district_outline", uganda_location],
+            ["district", north_location],
+            ["health-center", north_location],
+            ["school", north_location],
             ["water-point", gulu_location],
-            ["health-center", gulu_location],
-            ["school", gulu_location]
+            ["subcounty", gulu_location]
+            
         ]);
     });
 
@@ -76,13 +81,15 @@ describe("Location", function() {
         });
 
         var gulu_location = new DT.Location({ region: "north", district: "gulu" });
+        var north_location = new DT.Location({ region: "north" });
         var uganda_location = new DT.Location({});
 
         expect(location1.layersToShow(["water-point", "district"])).toEqual([
             ["region", uganda_location],
-            ["subcounty", gulu_location],
-            ["health-center", gulu_location],
-            ["school", gulu_location]
+            ["district_outline", uganda_location],
+            ["health-center", north_location],
+            ["school", north_location],
+            ["subcounty", gulu_location]
         ]);
     });
 
@@ -100,11 +107,12 @@ describe("Location", function() {
 
         expect(location1.layersToShow([])).toEqual([
             ["region", uganda_location],
-            ["district", uganda_location],
-            ["subcounty", gulu_location],
+            ["district_outline", uganda_location],
+            ["district", north_location],
+            ["health-center", north_location],
+            ["school", north_location],
             ["water-point", gulu_location],
-            ["health-center", gulu_location],
-            ["school", gulu_location],
+            ["subcounty", gulu_location],
             ["parish", patiko_location]
 
         ]);
@@ -124,12 +132,14 @@ describe("Location", function() {
 
         expect(location1.layersToShow([])).toEqual([
             ["region", uganda_location],
-            ["district", uganda_location],
-            ["subcounty", gulu_location],
+            ["district_outline", uganda_location],
+            ["district", north_location],
+            ["health-center", north_location],
+            ["school", north_location],
             ["water-point", gulu_location],
-            ["health-center", gulu_location],
-            ["school", gulu_location],
+            ["subcounty", gulu_location],
             ["parish", patiko_location]
+
         ]);
     });
 
