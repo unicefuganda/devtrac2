@@ -80,15 +80,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
             cache: true
         }).
         success(function(data, status, headers, config) {
-            var districts = $.grep(data.features, function(feature, index) {
-                return feature.properties["Reg_2011"] != null && feature.properties["Reg_2011"].toLowerCase() == region_name;
-            });
-            console.log(districts)
-            console.log(region_name)
-            deffered.resolve({
-                type: "FeatureCollection",
-                features: districts
-            });
+            deffered.resolve(data)
         });
         return deffered.promise;
     };

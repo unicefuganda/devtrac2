@@ -1,24 +1,16 @@
 body { 
   padding-top: 50px;
 }
-/* Footer*/
-/*footer { 
-  border-top: 1px solid #CCC; 
-  text-align: right;
-  font-size: 11px;
-  padding: 0 10px;
-  position: fixed;
-  bottom: 0;
-  z-index: 2;
-  width: 100%;
-  background-color: white;
+
+body select {
+  font-size: 12px;
 }
 
-footer label {
-  font-weight: bold;
-  margin-bottom: 0;
+.form-group {
+  margin-right: 10px;
 }
-*/
+
+
 .starter-template {
   padding: 40px 15px;
   text-align: center;
@@ -305,9 +297,6 @@ footer label {
   padding: 8px 20px;
 }
 
-.form-group {
-  margin-right: 10px;
-}
 
 .indicator-panel .toggle-panel {
   background-color: rgba(255, 255, 255, 0.8);
@@ -341,9 +330,12 @@ footer label {
 .indicator-panel {
   overflow: hidden;
 }
-
 .indicator-panel select{
   overflow: hidden;
+}
+
+#indicator-select {
+  width: 300px;
 }
 
 .form-group label {
@@ -357,5 +349,3 @@ footer label {
 .legend {
   min-height: 80px;
 }
-
-

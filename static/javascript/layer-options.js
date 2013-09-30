@@ -26,6 +26,9 @@ DT.LayerOptions = {
         key: "region",
         type: "boundary"
     },
+
+
+
     "parish": {
         unselectedStyle: {
             "fillOpacity": 0,
@@ -58,7 +61,7 @@ DT.LayerOptions = {
         unselectedStyle: {
             "fillOpacity": 0,
             "color": "#333",
-            "weight": 1
+            "weight": 0.5
         },
         selectedStyle: {
             "fillOpacity": 0,

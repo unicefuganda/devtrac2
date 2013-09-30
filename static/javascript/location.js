@@ -16,15 +16,9 @@ DT.Location.prototype.toString = function(){
     return this.getName();
 };
 DT.Location.prototype.layersToShow = function(filteredKeys) {
-    var layers = [["region", new DT.Location({})]];
+    var layers = [["region", new DT.Location({})], ["district", new DT.Location({region: "lango" })] ];
 
-    if (this.region != null) {
-        var regionLocation = new DT.Location({
-            region: this.region
-        });
-
-        layers.push(["district", regionLocation])
-    }
+    
     if (this.district != null) {
         var districtLocation = new DT.Location({
             region: this.region,
@@ -49,6 +43,17 @@ DT.Location.prototype.layersToShow = function(filteredKeys) {
         return $.inArray(locationKey[0], filteredKeys) == -1;
     });
 };
+
+DT.Location.prototype.layerOrder = function() {
+    if (this.level() == "national")
+    {
+        return ["district", "region", "subcounty", "parish"]    
+    } else {
+        return ["region", "district", "subcounty", "parish"]
+    }
+}
+
+
 DT.Location.prototype.isNational = function () {
     return this.region == null && this.district == null && this.subcounty == null && this.parish == null;
 };

@@ -75,8 +75,6 @@ DT.Map = function(element) {
             $.each(summaryInformation.lines, function(index, line) {
                 message += '<label>' + line[0] + ':</label> ' + line[1] + '</br>';    
             })
-            
-            // message += '<label>Management:</label> ' + property.Management + '</br>';
             return message;
         };
 
@@ -173,6 +171,13 @@ DT.Map = function(element) {
             } else {
                 addPointsLayer(name, location, features, layer_info);
             }
+        },
+        orderLayers: function(layerOrder) {
+            $.each(layerOrder, function(index, layerKey) {
+                var layer = self.layerMap.findLayerByKey(layerKey);
+                if (layer != null)
+                    layer.bringToFront();
+            });
         },
         addWMSLayer: function(wmsServer, layer) {
             removeWMSLayer();

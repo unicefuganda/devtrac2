@@ -15,7 +15,11 @@ DT.LayerMap.prototype.removeLayer = function(key) {
 };
 
 DT.LayerMap.prototype.findLayerByKey = function(key, location) {
-    return this.layers[key].layer;
+    var element = this.layers[key];
+    if (element != undefined)
+        return element.layer;
+    else
+        return null;
 };
 
 DT.LayerMap.prototype.findLayer = function(key, location) {

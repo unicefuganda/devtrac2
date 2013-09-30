@@ -108,7 +108,7 @@ class Page:
         return self.browser.execute_script("window.map.isIndicatorLayerDisplayed('%s')" % indicator_name)
 
     def wait_for(self, function):
-        for _ in itertools.repeat(None, 20):
+        for _ in itertools.repeat(None, 10):
             result = function(self)
             if (result):    
                 return
