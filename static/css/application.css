@@ -10,6 +10,10 @@ body select {
   margin-right: 10px;
 }
 
+.form-group label, .form-group select{
+  margin-bottom: 2px;
+}
+
 
 .starter-template {
   padding: 40px 15px;
@@ -204,7 +208,7 @@ body select {
     position: fixed;
     top: 80px;
     left: 10px;
-    width: 200px;
+    width: 300px;
     height: 60%;
 }
 
@@ -215,24 +219,24 @@ body select {
     border: 1px solid #CCCCCC;
 }
 
-.filter-panel .content .container .sector {
+.filter-panel .heading {
   font-size:14px;
   padding-top: 5px;
   font-weight: 500;
   padding-bottom: 6px;
 }
 
-.filter-panel .content .container .sector-content{ 
+.filter-panel .sector-content{ 
   width: 100%;
   font-size: 12px;
 }
 
-.filter-panel .content .container .sector-content label{ 
+.filter-panel .sector-content ul label{ 
   font-weight: normal;
   margin-bottom: 3px;
 }
 
-.filter-panel .content .container .sector-content input[type='checkbox']{ 
+.filter-panel .sector-content ul input[type='checkbox']{ 
   margin-right: 10px;
 }
 
@@ -249,6 +253,18 @@ body select {
     top: 0px;
     padding-top: 4px;
     color: black;
+}
+
+.filter-panel .content .container .sector-content ul label{ 
+  font-weight: normal;
+  margin-bottom: 3px;
+}
+
+#indicator-form label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+
 }
 
 .checkbox-icon {
@@ -324,18 +340,8 @@ body select {
   /*text-align: center;*/
 }
 
-#indicator-form {
-  float:left;
-}
-.indicator-panel {
-  overflow: hidden;
-}
-.indicator-panel select{
-  overflow: hidden;
-}
-
 #indicator-select {
-  width: 300px;
+  width: 240px;
 }
 
 .form-group label {

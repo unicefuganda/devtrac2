@@ -19,12 +19,12 @@
       </div>
     </div>   
 
-    <div panel panel-expand='{"left":"10px"}' panel-collapse='{"left":"-200px"}' class='filter-panel expanded dt-panel' id="filter-panel">
+    <div panel panel-expand='{"left":"10px"}' panel-collapse='{"left":"-300px"}' class='filter-panel expanded dt-panel' id="filter-panel">
 
       <div class='content'>
 
         <div class='container'>
-          <div class='sector'>Filter By</div>
+          <div class='heading'>Filter:</div>
           <div class='sector-content'>
             <ul class="nav nav-list">
               <li>
@@ -45,6 +45,27 @@
                 <label for="water-point-checkbox">Water Points</label>
               </li>
             </ul>
+            <form ng-controller="IndicatorsCtrl" role="form" id="indicator-form">
+              <div class="form-group">
+                <label for="sector-select">Sector:</label>
+                <select id="sector-select">
+                  <option value="Youth">Youth</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="indicator-select">Indicator:</label>
+                <select id="indicator-select" name="indicator-select" ng-model="indicator.selected" ng-options="indicator.name for indicator in indicators">
+                  <option value="">None</option>
+                </select>
+              </div>
+
+              <div ng-if="indicator.selected != null" class='legend'>
+                <label for="indicator-select">Legend:</label>
+                <img  src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
+              </div>
+             
+            </form>
+            
           </div> 
         </div>
       </div>     
@@ -52,35 +73,6 @@
        <a href="" class ='toggle-panel' ng-click="togglePanel()">
          <span class="glyphicon {[{ expanded ? 'glyphicon-chevron-left' : 'glyphicon-chevron-right' }]} toggle-icon"></span>
        </a>  
-    </div>
-
-    <div class='indicator-outside-panel' >
-
-      <div panel panel-expand='{"bottom":"0px"}' panel-collapse='{"bottom":"-108px"}' class='indicator-panel expanded dt-panel' id="indicator-panel">
-          <a href="" class ='toggle-panel' ng-click="togglePanel()">
-            <span class="glyphicon {[{ expanded ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up' }]} toggle-icon"></span>
-          </a>
-        <div class='container'>
-          <form ng-controller="IndicatorsCtrl" role="form" id="indicator-form">
-            <div class="form-group">
-              <label for="sector-select">Sector:</label>
-              <select id="sector-select">
-                <option value="Youth">Youth</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="indicator-select">Indicator:</label>
-              <select id="indicator-select" name="indicator-select" ng-model="indicator.selected" ng-options="indicator.name for indicator in indicators">
-                <option value="">None</option>
-              </select>
-            </div>
-           
-          </form>
-            <div class='legend'>
-              <img ng-if="indicator.selected != null" src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
-            </div>
-        </div>     
-      </div>
     </div>
     
     {% assets "js_all" %}
