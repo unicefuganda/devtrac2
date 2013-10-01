@@ -93,3 +93,21 @@ Scenario:  Show clusters on region dashboard
 Given that I am a regular user
 And I click on region "acholi"
 Then the "water-point" layer for region "Acholi" is displayed
+
+Scenario: Show Badges for waterpoints
+Given that I am a regular user
+When I open dashboard for "Acholi"
+Then the "water-point" layer for region "Acholi" is displayed
+And the "water-point" badge will be shown for the "Acholi" region
+
+Scenario: Show Badges for health centres
+Given that I am a regular user
+When I open dashboard for "Acholi"
+Then the "health-center" layer for "Acholi" is displayed
+And the "health-centre" badge will be shown for the "Acholi" region
+
+Scenario: Show Badges for schols
+Given that I am a regular user
+When I open dashboard for "Acholi"
+Then the "school" layer for "Acholi" is displayed
+And the "Schools" badge will be shown for the "Acholi" region

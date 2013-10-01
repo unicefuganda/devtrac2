@@ -76,7 +76,7 @@ def then_the_group1_filter_will_be_displayed_on_the_filter_panel(step, group1):
 def when_i_hover_away_from_a_group1_marker_at_group2(step, group1, group2):
     assert True, 'This step must be implemented'
 
-# Toggle on off scenarios for toggle on/off filters for schools, waterpoints, healthcentres
+# Steps for toggle on/off filters for schools, waterpoints, healthcentres
 
 @step(u'When I check the \'([^\']*)\' checkbox')
 def when_i_check_the_group1_checkbox(step, group1):
@@ -94,3 +94,8 @@ def then_the_group1_cluster_marker_at_group2_will_be_removed_from_the_map(step, 
 @step(u'Then the "([^"]*)" layer for region "([^"]*)" is displayed')
 def then_the_group1_layer_for_region_group2_is_displayed(step, group1, group2):
     assert True, 'This step must be implemented'
+
+# Badges
+@step(u'And the "([^"]*)" badge will be shown for the "([^"]*)" region')
+def and_the_group1_badge_will_be_shown_for_the_group2_region(step, group1, group2):
+    assert True, 'This step must be implemented'   
