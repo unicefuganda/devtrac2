@@ -13,7 +13,8 @@ def when_i_change_indicator(step, indicator_name):
     
 @step(u'Then the "([^"]*)" indicator layer is displayed')
 def then_the_indicator_layer_is_displayed(step, indicator_name):
-    world.page.is_indicator_layer_displayed(indicator_name)
+    IsDisplayed = world.page.is_indicator_layer_displayed(indicator_name)
+    assert_true(IsDisplayed)
 
 @step(u'When I navigate to the \'([^\']*)\' sub county')
 def when_i_navigate_to_the_group1_sub_county(step, group1):

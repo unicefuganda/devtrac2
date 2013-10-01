@@ -105,7 +105,7 @@ class Page:
         self.browser.select("indicator-select", optionValue);
 
     def is_indicator_layer_displayed(self, indicator_name): 
-        return self.browser.execute_script("window.map.isIndicatorLayerDisplayed('%s')" % indicator_name)
+        return self.browser.evaluate_script("window.map.isIndicatorLayerDisplayed('%s')" % indicator_name)
 
     def wait_for(self, function):
         for _ in itertools.repeat(None, 10):
