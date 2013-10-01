@@ -108,3 +108,15 @@ def and_i_click_on_region_group1(step, group1):
 @step(u'Then I see Uganda map with region acholi displayed')
 def then_i_see_uganda_map_with_region_acholi_displayed(step):
     assert True, 'This step must be implemented'
+
+# contextual panel info
+
+@step(u'Then The following information will be shown contextual panel')
+def then_the_following_information_will_be_shown_contextual_panel(step):
+    assert True, 'This step must be implemented'
+@step(u'Then The forllowing information will be shown contextual panel')
+def then_the_forllowing_information_will_be_shown_contextual_panel(step):
+    assert True, 'This step must be implemented'
+@step(u'Then The forllowing information will be shown on the')
+def then_the_forllowing_information_will_be_shown_on_the(step):
+    assert True, 'This step must be implemented'    

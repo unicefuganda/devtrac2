@@ -59,3 +59,15 @@ def and_i_hover_over_a_group1_polygon(step, group1):
 @step(u'Then the text "([^"]*)"  is displayed')
 def then_the_text_group1_is_displayed(step, group1):
     assert True, 'This step must be implemented'
+
+#contextual panel
+
+@step(u'Then the contextual panel is displayed')
+def then_the_contextual_panel_is_displayed(step):
+    assert True, 'This step must be implemented'
+@step(u'When I toggle the contextual panel')
+def when_i_toggle_the_contextual_panel(step):
+    assert True, 'This step must be implemented'
+@step(u'Then the contextual panel is collapsed')
+def then_the_contextual_panel_is_collapsed(step):
+    assert True, 'This step must be implemented'    
