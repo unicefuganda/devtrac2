@@ -34,10 +34,8 @@ angular.module("dashboard").directive('map', function() {
                         });
                         map.selectLayer(newLocation);
                         map.orderLayers(scope.location.layerOrder());
-                        
                     }
                 });
-
             }
 
             scope.$watch("filter", function(newFilter, oldFilter) { 

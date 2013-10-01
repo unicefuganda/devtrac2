@@ -222,7 +222,7 @@ DT.Map = function(element) {
             unselect();
         },
         selectLayer: function(location) {
-            if (location.isNational()) {
+            if (location.level() == "national") {
                 var layer = self.layerMap.findLayer("region", location);
                 map.fitBounds(layer);
             } else {

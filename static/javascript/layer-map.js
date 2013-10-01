@@ -13,7 +13,6 @@ DT.LayerMap.prototype.removeLayer = function(key) {
     delete this.layers[key];
     return element.layer;
 };
-
 DT.LayerMap.prototype.findLayerByKey = function(key, location) {
     var element = this.layers[key];
     if (element != undefined)
@@ -21,7 +20,6 @@ DT.LayerMap.prototype.findLayerByKey = function(key, location) {
     else
         return null;
 };
-
 DT.LayerMap.prototype.findLayer = function(key, location) {
     var element = this.layers[key];
     if (element.location.equals(location))
@@ -45,7 +43,6 @@ DT.LayerMap.prototype.findChildLayer = function(location) {
         }       
     }
     return null;
-    
 };
 DT.LayerMap.prototype.findChildLayers = function(key, location) {
     return $.map(this.layers[key].childLayers, function(key, value) {

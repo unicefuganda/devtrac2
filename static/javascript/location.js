@@ -57,11 +57,6 @@ DT.Location.prototype.layerOrder = function() {
         return ["region", "district", "subcounty", "parish"]
     }
 }
-
-
-DT.Location.prototype.isNational = function () {
-    return this.region == null && this.district == null && this.subcounty == null && this.parish == null;
-};
 DT.Location.prototype.getName = function(location) {
 
     if (this.parish)
