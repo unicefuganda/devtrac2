@@ -88,3 +88,8 @@ And I toggle the 'school' checkbox
 Then the "school" layer for "Acholi" is not displayed
 When I toggle the 'school' checkbox
 Then the "school" layer for "Acholi" is displayed
+
+Scenario:  Show clusters on region dashboard
+Given that I am a regular user
+And I click on region "acholi"
+Then the "water-point" layer for region "Acholi" is displayed

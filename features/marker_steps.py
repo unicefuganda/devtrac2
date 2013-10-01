@@ -91,4 +91,6 @@ def when_i_uncheck_the_group1_checkbox(step, group1):
 def then_the_group1_cluster_marker_at_group2_will_be_removed_from_the_map(step, group1, group2):
     assert True, 'This step must be implemented'    
 
-
+@step(u'Then the "([^"]*)" layer for region "([^"]*)" is displayed')
+def then_the_group1_layer_for_region_group2_is_displayed(step, group1, group2):
+    assert True, 'This step must be implemented'
