@@ -76,21 +76,18 @@
     </div>
     
 
-     <div class='summary-panel' id="summary-panel">
+     <div panel panel-expand='{"right":"10px"}' panel-collapse='{"right":"-300px"}' class='summary-panel' id="summary-panel">
 
       <div class='content'>
-
         <div class='container'>
           <div class='heading'>Summary</div>
           <div class='summary-content'>
-           
-            
           </div> 
         </div>
       </div>     
 
-      <a href="" class ='toggle-panel'>
-         <span class="glyphicon {[{ expanded ? 'glyphicon-chevron-left' : 'glyphicon-chevron-right' }]} toggle-icon"></span>
+      <a href="" class ='toggle-panel' ng-click="togglePanel()">
+         <span class="glyphicon {[{ expanded ? 'glyphicon-chevron-right' : 'glyphicon-chevron-left' }]} toggle-icon"></span>
        </a>  
     </div>
 

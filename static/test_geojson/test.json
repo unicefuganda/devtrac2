@@ -1,0 +1,24 @@
+{
+    "type": "FeatureCollection",
+    "features": [{
+        "id": "uganda_health_centers_replotted.1",
+        "properties": {
+            "DNAME_2010": "district 1"
+        }
+    },{
+        "id": "uganda_health_centers_replotted.2",
+        "properties": {
+            "DNAME_2010": "district 1"
+        }
+    },{
+        "id": "uganda_schools_with_regions.1",
+        "properties": {
+            "DNAME_2010": "district 1"
+        }
+    },{
+        "id": "uganda_schools_with_regions.2",
+        "properties": {
+            "DNAME_2010": "district 2"
+        }
+    }]
+}

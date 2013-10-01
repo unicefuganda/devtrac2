@@ -244,15 +244,19 @@ body select {
     border-top: 1px solid #CCCCCC;
     border-bottom: 1px solid #CCCCCC;
     border-right: 1px solid #CCCCCC;
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-    height: 30px;
-    width: 30px;
     right: -30px;
-    top: 0px;
-    padding-top: 4px;
-    color: black;
+}
+
+.toggle-panel {
+  position: absolute;
+  top: 0px;
+  background-color: rgba(255, 255, 255, 0.8);
+  height: 30px;
+  width: 30px;
+  padding-top: 4px; 
+  color: black;
+  text-align: center;
+  display: block;
 }
 
 .filter-panel .content .container .sector-content ul label{ 
@@ -291,55 +295,6 @@ body select {
   
 }
 
-.indicator-panel {
-  position: absolute;
-  
-  bottom: 0px;
-  z-index: 100;
-  width: 500px;
-  margin: 0 auto;
-  width: 100%;
-  margin-bottom: 10px
-}
-
-.indicator-panel .container {
-  border: 1px solid #CCC; 
-  background-color: rgba(255, 255, 255, 0.8);
-  width: 580px;
-  /*min-height: 700px;*/
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 700px;
-  padding: 8px 20px;
-}
-
-
-.indicator-panel .toggle-panel {
-  background-color: rgba(255, 255, 255, 0.8);
-  height: 30px;
-  width: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 6px; 
-  color: black;
-  text-align: center;
-  border-top: 1px solid #CCCCCC;
-  border-left: 1px solid #CCCCCC;
-  border-right: 1px solid #CCCCCC;
-  display: block;
-}
-
-.indicator-outside-panel {
-  position: absolute;
-  bottom: 0px;
-  z-index: 0;
-  width: 100%;
-  height: 138px;
-  margin: 0 auto;
-  overflow: hidden;
-  /*text-align: center;*/
-}
-
 #indicator-select {
   width: 240px;
 }
@@ -355,9 +310,6 @@ body select {
 .legend {
   min-height: 80px;
 }
-
-
-
 
 .summary-panel {
     /*background: white; */
@@ -389,17 +341,10 @@ body select {
 }
 
 .summary-panel .toggle-panel {    
-    border-top: 1px solid #CCCCCC;
     border-bottom: 1px solid #CCCCCC;
-    border-right: 1px solid #CCCCCC;
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-    height: 30px;
-    width: 30px;
     left: -30px;
-    top: 0px;
-    padding-top: 4px;
-    color: black;
+    border-top: 1px solid #CCCCCC;
+    border-left: 1px solid #CCCCCC;
 }
 
