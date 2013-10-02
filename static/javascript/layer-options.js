@@ -146,10 +146,10 @@ DT.LayerOptions = {
         type: "points",
         summaryInformation: function(properties) { 
             if (!properties.Name)
-                return { title: "Heath Center", lines: []};
+                return { title: "Health Center", lines: []};
 
             return {
-                title: properties.Name.toLowerCase() + " Heath Center",
+                title: properties.Name.toLowerCase() + " Health Center",
                 lines: [
                     ["Unit Type", "HC " + properties.UnitType]
                 ]

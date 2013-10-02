@@ -1,6 +1,11 @@
 from flask import *
 import sys, os
 from flask.ext.assets import Environment, Bundle
+from flask import Flask, jsonify
+from lib import services
+
+from bson import Binary, Code
+from bson.json_util import dumps
 
 app = Flask(__name__)
 app.config.from_pyfile('application.cfg', silent=True)
@@ -47,6 +52,12 @@ assets.register('css_all', css)
 def dashboards(region="", district="", subcounty="", parish=""):
 	test = request.args.get("test") == "true"
 	return render_template('dashboard.html', test=test)
+
+@app.route("/aggregation/<region>")
+def aggregation(region=""):
+	aggregation_service = services.AggregationService()
+	result = aggregation_service.find(region)
+	return Response(dumps(result), mimetype='application/json')
 
 if __name__ == "__main__":
     app.run(debug=True)
