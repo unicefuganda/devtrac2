@@ -56,7 +56,7 @@ class AggregationService(object):
 
 class WFSService(object):
 
-    def __init__(self, url, maxFeatures=10000, test=False):
+    def __init__(self, url, maxFeatures=100000, test=False):
         self.url = url
         self.maxFeatures = maxFeatures 
         self.test = test

@@ -4,8 +4,9 @@ def import_dataset(wfs_service, db, data_type, feature_name):
     features = wfs_service.get_features(feature_name)
     collection = db[data_type]
     collection.remove()
+
     collection.insert(features)
-     
+
     mapper = Code("""
         function() {
             emit("UGANDA, " + this.properties["Reg_2011"], 1);
