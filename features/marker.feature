@@ -17,14 +17,14 @@ Given that I am a regular user
 When I open dashboard for "Acholi, Gulu, Palaro"
 Then the "water-point" cluster marker at "3.2804, 32.3617" is for "5" points
 
-Scenario: Show Heath Center Marker Summary Info
+Scenario: Show Health Center Marker Summary Info
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu, Odek"
 Then the "health-center" layer for "Acholi" is displayed
 And I hover over a "health-center" marker at "2.6618, 32.6234" 
 Then the popup should have content: 
     """
-    Acet Heath Center
+    Acet Health Center
     Unit Type: HC 4
     """
 
