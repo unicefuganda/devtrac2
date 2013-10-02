@@ -98,4 +98,8 @@ def then_the_group1_layer_for_region_group2_is_displayed(step, group1, group2):
 # Badges
 @step(u'And the "([^"]*)" badge will be shown for the "([^"]*)" region')
 def and_the_group1_badge_will_be_shown_for_the_group2_region(step, group1, group2):
-    assert True, 'This step must be implemented'   
+    assert True, 'This step must be implemented'  
+
+@step(u'And the "([^"]*)" badge will show the "([^"]*)" for "([^"]*)"')
+def and_the_group1_badge_will_show_the_group2_for_group3(step, group1, group2, group3):
+    assert True, 'This step must be implemented'
