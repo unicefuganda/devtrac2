@@ -209,7 +209,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
 
         $http({
             method: 'GET',
-            url: "http://localhost:5000/aggregation/" + locator,
+            url: "/aggregation/" + locator,
             cache: true})
                 .success(function(data, status, headers, config) {
                     deffered.resolve(data);
