@@ -82,20 +82,36 @@ class ImportDataTestCase(unittest.TestCase):
         test_aggregation = self.database.test_aggregation
 
         self.assertEqual(self.database.test.count(), 4)
-        self.assertEqual(test_aggregation.count(), 9)
+        self.assertEqual(test_aggregation.count(), 10)
 
-        self.assertEqual(test_aggregation.find({'_id': 'test_region'})[0]['value'], 4) 
+        self.assertEqual(test_aggregation.find({'_id': 'UGANDA, test_region'})[0]['value'], 4) 
 
-        self.assertEqual(test_aggregation.find({'_id': 'test_region, test_district'})[0]['value'], 3) 
-        self.assertEqual(test_aggregation.find({'_id': 'test_region, test_district_2'})[0]['value'], 1) 
+        self.assertEqual(test_aggregation.find({'_id': 'UGANDA, test_region, test_district'})[0]['value'], 3) 
+        self.assertEqual(test_aggregation.find({'_id': 'UGANDA, test_region, test_district_2'})[0]['value'], 1) 
 
-        self.assertEqual(test_aggregation.find({'_id': 'test_region, test_district, test_subcounty'})[0]['value'], 2)
-        self.assertEqual(test_aggregation.find({'_id': 'test_region, test_district, test_subcounty_2'})[0]['value'], 1)
-        self.assertEqual(test_aggregation.find({'_id': 'test_region, test_district_2, test_subcounty_2'})[0]['value'], 1)
+        self.assertEqual(test_aggregation.find({'_id': 'UGANDA, test_region, test_district, test_subcounty'})[0]['value'], 2)
+        self.assertEqual(test_aggregation.find({'_id': 'UGANDA, test_region, test_district, test_subcounty_2'})[0]['value'], 1)
+        self.assertEqual(test_aggregation.find({'_id': 'UGANDA, test_region, test_district_2, test_subcounty_2'})[0]['value'], 1)
 
-        self.assertEqual(test_aggregation.find({'_id': 'test_region, test_district, test_subcounty, test_parish'})[0]['value'], 2)
-        self.assertEqual(test_aggregation.find({'_id': 'test_region, test_district, test_subcounty_2, test_parish_2'})[0]['value'], 1)
-        self.assertEqual(test_aggregation.find({'_id': 'test_region, test_district_2, test_subcounty_2, test_parish_3'})[0]['value'], 1)
+        self.assertEqual(test_aggregation.find({'_id': 'UGANDA, test_region, test_district, test_subcounty, test_parish'})[0]['value'], 2)
+        self.assertEqual(test_aggregation.find({'_id': 'UGANDA, test_region, test_district, test_subcounty_2, test_parish_2'})[0]['value'], 1)
+        self.assertEqual(test_aggregation.find({'_id': 'UGANDA, test_region, test_district_2, test_subcounty_2, test_parish_3'})[0]['value'], 1)
+
+        self.assertEqual(test_aggregation.find({'_id': 'UGANDA'})[0]['value'], 4)
+
+    def test_should_create_location_tree(self):
+        wfs_service = MagicMock()
+        wfs_service.get_features.return_value = test_features
+
+        import_locationTree(wfs_service, self.database)
+        location_tree = self.database.location_tree
+
+        self.assertEqual(location_tree.find({"type": "parish", "location.subcounty": "test_subcounty_2"}).count(), 2)
+        self.assertEqual(location_tree.find({"type": "subcounty", "location.district": "test_district"}).count(), 2)
+        self.assertEqual(location_tree.find({"type": "district", "location.region": "test_region"}).count(), 2)
+        self.assertEqual(location_tree.find({"type": "region"}).count(), 1)
+
+
 
 if __name__ == '__main__':
     unittest.main()

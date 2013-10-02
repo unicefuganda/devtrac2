@@ -32,6 +32,7 @@ def deploy(sha):
         run("git reset --hard %s" % sha)
         
         run("pip install -r requirements.txt --use-mirrors")
+        run("python db/import_job.py")
         
     with cd(code_dir):
         upload_template("version.template", "static/javascript/version.json", { "environment": env.environment, "sha": sha[:6], "time": strftime("%d %b %Y %X", localtime()) })
@@ -44,6 +45,7 @@ def bootstrap_chef():
     run("gem install chef ruby-shadow --no-ri --no-rdoc")
     run("sudo apt-get -y install git")
     run("cd ~/; git clone https://github.com/unicefuganda/devtrac2-provisioning.git")
+
 
 def provision():
     run("cd ~/devtrac2-provisioning/; git pull -r")

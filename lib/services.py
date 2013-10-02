@@ -7,9 +7,6 @@ import json
 from flask import Flask
 from flask.ext.mongoengine import MongoEngine
 
-
-
-
 class DistrictService(object):  
 
     def find_by_name(self, name):
@@ -18,30 +15,44 @@ class DistrictService(object):
     def find_all(self):
         return District.objects().exclude('geometry', 'unicef', 'subcounties').all().order_by("name")
 
-
-# class WFSFeature(object):
-
-#     def __init__(self, id, geometry, properties):
-#         self.id = id
-#         self.geometry = geometry
-#         self.properties = properties
-
-#     def __getitem__(self, key):
-#         return self.properties[key]
-
 class AggregationService(object):
 
     def find(self, locator): 
+
+        labels = { "region": "Regions", "district": "Districts", "subcounty": "Subcounties", "parish": "Parishes" }
+
         mongo_client = MongoClient()
         database = mongo_client.devtrac2
-        health_center_count = database.health_center_aggregation.find({'_id': locator.upper()})[0]['value']
-        school_count = database.school_aggregation.find({'_id': locator.upper()})[0]['value']
+        health_center_entry = database.health_center_aggregation.find({'_id': locator.upper()})
+        health_center_count = health_center_entry[0]['value'] if health_center_entry.count() > 0 else 0
+
+        school_entry = database.school_aggregation.find({'_id': locator.upper()})
+        school_count = school_entry[0]['value'] if school_entry.count() > 0 else 0
+
+        child_count = self.find_child_count(locator)
 
         return {
             "locator": locator,
-            "health_center_count": health_center_count,
-            "school_count": school_count
+            "info": [
+                ["Health Centers", health_center_count],
+                ["Schools", school_count],
+                ["%s" % labels[child_count["type"]], child_count["count"]]
+            ]
         }
+
+    def find_child_count(self, locator):
+        levels = ["national", "region", "district", "subcounty", "parish"]
+
+        location_arr = locator.split(", ")
+        location_name = location_arr[len(location_arr) - 1]
+        location_type = levels[len(location_arr) - 1 ]
+        child_type = levels[len(location_arr)]
+
+        mongo_client = MongoClient()
+        database = mongo_client.devtrac2
+
+        count = database.location_tree.find({"type": child_type.lower(), ("location.%s" % location_type.lower()) : location_name.upper() }).count();
+        return { "type": child_type, "count": count }
 
 class WFSService(object):
 
@@ -61,9 +72,3 @@ class WFSService(object):
         url_handler = urllib.urlopen(url)
         features = json.load(url_handler)["features"]
         return features
-
-
-
-
-      
-

@@ -53,10 +53,10 @@ def dashboards(region="", district="", subcounty="", parish=""):
 	test = request.args.get("test") == "true"
 	return render_template('dashboard.html', test=test)
 
-@app.route("/aggregation/<region>")
-def aggregation(region=""):
+@app.route("/aggregation/<locator>")
+def aggregation(locator):
 	aggregation_service = services.AggregationService()
-	result = aggregation_service.find(region)
+	result = aggregation_service.find(locator)
 	return Response(dumps(result), mimetype='application/json')
 
 if __name__ == "__main__":

@@ -132,6 +132,9 @@ DT.Location.prototype.level = function() {
 }
 
 DT.Location.prototype.full_name = function() {
+    if (this.level() == "national")
+        return "Uganda";
+
     return this[this.level()] + " " + this.level();
 }
 

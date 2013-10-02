@@ -55,6 +55,6 @@ with fiona.open('%s/uganda_parish_10.shp' % data_folder, 'r') as source:
         parish_ploygons.append({ 'shape': shape(f['geometry']), 'properties': f['properties'] })
 
 
-# plot_shapfile_to_parishes(parish_ploygons, "health_centers.shp")
-plot_shapfile_to_parishes(parish_ploygons, "Uganda Schools.shp")
+plot_shapfile_to_parishes(parish_ploygons, "water_points2.shp")
+# plot_shapfile_to_parishes(parish_ploygons, "Uganda Schools.shp")
 # plot_shapfile_to_parishes(parish_ploygons, "waterpoints_wgs84.shp")

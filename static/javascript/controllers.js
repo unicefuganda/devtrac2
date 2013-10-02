@@ -7,4 +7,13 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 }).controller("IndicatorsCtrl", function($scope, $rootScope, indicatorService) {
     $rootScope.indicator = { selected: null } 
     $scope.indicators = indicatorService.all();
-})
+}).controller("SummaryCtrl", function($scope, $rootScope, summaryService) {
+
+    $rootScope.$watch("location", function(newLocation, oldLocation) {
+        if (newLocation == null)
+            return;
+        summaryService.find(newLocation.getName()).then(function(summary) {
+            $scope.summary = summary;    
+        });
+    });
+});

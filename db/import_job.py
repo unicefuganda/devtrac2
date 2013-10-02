@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from import_geonode import import_dataset
+from import_geonode import import_dataset,import_locationTree
 import sys, os
 base_dir = os.path.abspath(os.path.dirname(__file__) + "/../")
 sys.path.append(base_dir)
@@ -13,3 +13,4 @@ wfs_service = services.WFSService("http://ec2-54-218-182-219.us-west-2.compute.a
 
 import_dataset(wfs_service, database, "health_center", "uganda_health_centers_replotted")
 import_dataset(wfs_service, database, "school", "uganda_schools_with_regions")
+import_locationTree(wfs_service,database)   

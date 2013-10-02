@@ -131,7 +131,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         parishesCallback = function(data) {
             deffered.resolve(data);
         }
-        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_parish_2011_50" + "&outputFormat=json&propertyName=the_geom,DNAME_2010,SNAME_2010,PNAME_2006,SUBREGION&format_options=callback:parishesCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district_name.toUpperCase() + "</Literal></PropertyIsEqualTo></Filter>";
+        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_parish_2011_50" + "&outputFormat=json&propertyName=the_geom,DNAME_2010,SNAME_2010,PNAME_2006,Reg_2011,SUBREGION&format_options=callback:parishesCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district_name.toUpperCase() + "</Literal></PropertyIsEqualTo></Filter>";
 
         $http.jsonp(url, {
             cache: true
@@ -199,4 +199,21 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
     this.all = function() {
         return indicators;
     }
-});
+}).service("summaryService", function($q, $http) {
+    
+
+    this.find = function (locator) {
+        var deffered = $q.defer();
+
+        locator = locator == "" ? "UGANDA" : "UGANDA, " + locator
+
+        $http({
+            method: 'GET',
+            url: "http://localhost:5000/aggregation/" + locator,
+            cache: true})
+                .success(function(data, status, headers, config) {
+                    deffered.resolve(data);
+                 });
+        return deffered.promise;
+    }
+})

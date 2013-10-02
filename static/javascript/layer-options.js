@@ -24,6 +24,7 @@ DT.LayerOptions = {
                 region: feature.properties["Reg_2011"].toLowerCase()
             });
         },
+        selectable: true,
         key: "region",
         type: "boundary"
     },
@@ -47,12 +48,13 @@ DT.LayerOptions = {
         getLocation: function(feature) {
             return new DT.Location({
 
-                region: feature.properties["SUBREGION"].toLowerCase(),
+                region: feature.properties["Reg_2011"].toLowerCase(),
                 district: feature.properties["DNAME_2010"].toLowerCase(),
                 subcounty: feature.properties["SNAME_2010"].toLowerCase(),
                 parish: feature.properties["PNAME_2006"].toLowerCase()
             });
         },
+        selectable: true,
         key: "parish",
         type: "boundary"
     },
@@ -79,6 +81,7 @@ DT.LayerOptions = {
                 district: feature.properties["DNAME_2010"].toLowerCase(),
             });
         },
+        selectable: true,
         key: "district",
         type: "boundary"
 
@@ -97,6 +100,7 @@ DT.LayerOptions = {
                 district: feature.properties["DNAME_2010"].toLowerCase(),
             });
         },
+        selectable: false,
         key: "district",
         type: "boundary"
 
@@ -119,12 +123,14 @@ DT.LayerOptions = {
             "weight": 2
         },
         getLocation: function(feature) {
+            console.log(feature);
             return new DT.Location({
                 region: feature.properties["SUBREGION"].toLowerCase(),
                 district: feature.properties["DNAME_2010"].toLowerCase(),
                 subcounty: feature.properties["SNAME_2010"].toLowerCase()
             });
         },
+        selectable: true,
         name: "subcounty",
         type: "boundary"
     },

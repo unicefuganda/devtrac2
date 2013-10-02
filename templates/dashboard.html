@@ -79,9 +79,14 @@
      <div panel panel-expand='{"right":"10px"}' panel-collapse='{"right":"-300px"}' class='summary-panel' id="summary-panel">
 
       <div class='content'>
-        <div class='container'>
-          <div class='heading'>Summary</div>
-          <div class='summary-content'>
+        <div ng-controller="SummaryCtrl" class='container'>
+          <div class='heading'>{[{location.full_name() }]}</div>
+
+          <div  class='summary-content' ng-if="summary != null" >
+            <div ng-repeat="item in summary.info" class="info">
+              <label>{[{item[0]}]}</label>
+              <span>{[{item[1]}]}</span>
+            </div>
           </div> 
         </div>
       </div>     
