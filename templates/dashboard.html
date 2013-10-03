@@ -25,7 +25,7 @@
       <div class='content'>
 
         <div class='container'>
-          <div class='heading'>Filter:</div>
+          <div class='heading'>Show points related to:</div>
           <div class='sector-content'>
             <ul class="nav nav-list">
               <li>
@@ -48,13 +48,13 @@
             </ul>
             <form ng-controller="IndicatorsCtrl" role="form" id="indicator-form">
               <div class="form-group">
-                <label for="sector-select">Sector:</label>
+                <label for="sector-select">Display heatmap associated with:</label>
                 <select id="sector-select">
                   <option value="Youth">Youth</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="indicator-select">Indicator:</label>
+                <label for="indicator-select">By indicator:</label>
                 <select id="indicator-select" name="indicator-select" ng-model="indicator.selected" ng-options="indicator.name for indicator in indicators">
                   <option value="">None</option>
                 </select>
