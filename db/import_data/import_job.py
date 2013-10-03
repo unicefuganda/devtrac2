@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from import_geonode import import_dataset,import_locationTree
+from import_indicators import *
 import sys, os
 base_dir = os.path.abspath(os.path.dirname(__file__) + "/../../")
 sys.path.append(base_dir)
@@ -20,3 +21,5 @@ import_dataset(wfs_service, database, "water_point", "water_points_replottted")
 print "water_point done"
 import_locationTree(wfs_service,database)
 print "location tree done"
+import_indicators()
+print "indicators done"
