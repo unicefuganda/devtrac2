@@ -3,34 +3,32 @@ from pymongo import MongoClient
 import urllib
 import json
 
-from flask import Flask
-
 class AggregationService(object):
 
-    def find(self, locator): 
-
-        labels = { "region": "Regions", "district": "Districts", "subcounty": "Subcounties", "parish": "Parishes" }
-
+    def __init__(self):
         mongo_client = MongoClient()
-        database = mongo_client.devtrac2
-        health_center_entry = database.health_center_aggregation.find({'_id': locator.upper()})
-        health_center_count = health_center_entry[0]['value'] if health_center_entry.count() > 0 else 0
+        self.database = mongo_client.devtrac2
 
-        school_entry = database.school_aggregation.find({'_id': locator.upper()})
-        school_count = school_entry[0]['value'] if school_entry.count() > 0 else 0
 
-        child_count = self.find_child_count(locator)
+    def find(self, locator): 
+        labels = { "region": "Regions", "district": "Districts", "subcounty": "Subcounties", "parish": "Parishes" }
+        child_count = self.child_count(locator)
 
         return {
             "locator": locator,
             "info": [
-                ["Health Centers", health_center_count],
-                ["Schools", school_count],
+                ["Health Centers", self.points_count("health_center", locator)],
+                ["Schools", self.points_count("school", locator)],
+                ["Water Points", self.points_count("water_point", locator)],
                 ["%s" % labels[child_count["type"]], child_count["count"]]
             ]
         }
 
-    def find_child_count(self, locator):
+    def points_count(self, dataset, locator):
+        entry = self.database["%s_aggregation" % dataset].find({'_id': locator.upper()})
+        return entry[0]['value'] if entry.count() > 0 else 0
+
+    def child_count(self, locator):
         levels = ["national", "region", "district", "subcounty", "parish"]
 
         location_arr = locator.split(", ")
@@ -38,10 +36,7 @@ class AggregationService(object):
         location_type = levels[len(location_arr) - 1 ]
         child_type = levels[len(location_arr)]
 
-        mongo_client = MongoClient()
-        database = mongo_client.devtrac2
-
-        count = database.location_tree.find({"type": child_type.lower(), ("location.%s" % location_type.lower()) : location_name.upper() }).count();
+        count = self.database.location_tree.find({"type": child_type.lower(), ("location.%s" % location_type.lower()) : location_name.upper() }).count();
         return { "type": child_type, "count": count }
 
 class WFSService(object):

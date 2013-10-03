@@ -123,7 +123,6 @@ DT.LayerOptions = {
             "weight": 2
         },
         getLocation: function(feature) {
-            console.log(feature);
             return new DT.Location({
                 region: feature.properties["SUBREGION"].toLowerCase(),
                 district: feature.properties["DNAME_2010"].toLowerCase(),

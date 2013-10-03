@@ -42,41 +42,34 @@ def import_locationTree(wfs_service, db):
     
     locations = []
     for feature in features: 
-        region = { "type": "region", "location": { 
+
+        location = { 
             "national": "UGANDA",
-            "region": "UGANDA, " + feature['properties']['Reg_2011'] 
-        }, "_id": feature['properties']["Reg_2011"] }
+            "region":  feature['properties']['Reg_2011'] 
+        };
+
+        region = { "type": "region", "location": location, "_id": feature['properties']["Reg_2011"] }
         insert_if_not_exists(region)
 
+        location['district'] = feature['properties']['DNAME_2010']
         district = { 
             "type": "district", 
-            "location": { 
-                "national": "UGANDA",
-                "region": feature['properties']['Reg_2011'], 
-                "district": feature['properties']['DNAME_2010'] }, 
+            "location": location, 
             "_id": "UGANDA, " + feature['properties']["Reg_2011"] + ", " + feature['properties']["DNAME_2010"] }
         insert_if_not_exists(district)
 
+        location['subcounty'] = feature['properties']['SNAME_2010']
+
         subcounty = { 
             "type": "subcounty", 
-            "location": { 
-                "national": "UGANDA",
-                "region": feature['properties']['Reg_2011'], 
-                "district": feature['properties']['DNAME_2010'],
-                "subcounty": feature['properties']['SNAME_2010']  
-            }, 
+            "location": location, 
             "_id": "UGANDA, " + feature['properties']["Reg_2011"] + ", " + feature['properties']["DNAME_2010"] + ", " + feature['properties']["SNAME_2010"]}
         insert_if_not_exists(subcounty)
 
+        location["parish"] = feature['properties']['PNAME_2006']
         parish = { 
             "type": "parish", 
-            "location": { 
-                "national": "UGANDA",
-                "region": feature['properties']['Reg_2011'], 
-                "district": feature['properties']['DNAME_2010'],
-                "subcounty": feature['properties']['SNAME_2010'],
-                "parish": feature['properties']['PNAME_2006']  
-            }, 
+            "location": location, 
             "_id": "UGANDA, " + feature['properties']["Reg_2011"] + ", " + feature['properties']["DNAME_2010"] + ", " + feature['properties']["SNAME_2010"] + ", " + feature['properties']['PNAME_2006']
         }
         insert_if_not_exists(parish)
