@@ -8,11 +8,8 @@ local_path = os.path.dirname(os.path.abspath(__file__))
 data_folder = "/Users/Thoughtworker/Google Drive/Thoughtworks Drive/Application Data"
 
 def find_closest_ploygon(polygons, point):
-    print "find closest"
     distances = [(x['shape'].distance(point), x) for x in polygons]
-    # print distances
     sorted_distances = sorted(distances, key=lambda x: x[0])
-    print "found closest"
     return sorted_distances[0][1]
 
 def plot_shapfile_to_parishes(parish_ploygons, file_name):

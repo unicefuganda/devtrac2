@@ -12,17 +12,21 @@ class AggregationService(object):
 
     def find(self, locator): 
         labels = { "region": "Regions", "district": "Districts", "subcounty": "Subcounties", "parish": "Parishes" }
-        child_count = self.child_count(locator)
 
-        return {
+        summary =  {
             "locator": locator,
             "info": [
                 ["Health Centers", self.points_count("health_center", locator)],
                 ["Schools", self.points_count("school", locator)],
                 ["Water Points", self.points_count("water_point", locator)],
-                ["%s" % labels[child_count["type"]], child_count["count"]]
+                
             ]
         }
+
+        child_count = self.child_count(locator)
+        if (child_count != None):
+            summary['info'].append(["%s" % labels[child_count["type"]], child_count["count"]])
+        return summary
 
     def points_count(self, dataset, locator):
         entry = self.database["%s_aggregation" % dataset].find({'_id': locator.upper()})
@@ -34,6 +38,10 @@ class AggregationService(object):
         location_arr = locator.split(", ")
         location_name = location_arr[len(location_arr) - 1]
         location_type = levels[len(location_arr) - 1 ]
+
+        if (len(location_arr) == len(levels)):
+            return None;
+
         child_type = levels[len(location_arr)]
 
         count = self.database.location_tree.find({"type": child_type.lower(), ("location.%s" % location_type.lower()) : location_name.upper() }).count();

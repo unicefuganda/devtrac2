@@ -55,8 +55,7 @@ def dashboards(region="", district="", subcounty="", parish=""):
 
 @app.route("/aggregation/<locator>")
 def aggregation(locator):
-	aggregation_service = services.AggregationService()
-	result = aggregation_service.find(locator)
+	result = services.AggregationService().find(locator)
 	return Response(dumps(result), mimetype='application/json')
 
 if __name__ == "__main__":

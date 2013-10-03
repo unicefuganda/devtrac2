@@ -3,7 +3,7 @@ import application
 import unittest
 import tempfile
 from lib.services import *
-from db.import_geonode import *
+from db.import_data.import_geonode import *
 from pymongo import MongoClient
 from mock import MagicMock
 

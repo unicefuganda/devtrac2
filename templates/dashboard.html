@@ -61,7 +61,7 @@
 
               <div ng-if="indicator.selected != null" class='legend'>
                 <label for="indicator-select">Legend:</label>
-                <img  src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
+                <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
               </div>
              
             </form>
@@ -78,11 +78,10 @@
 
      <div panel panel-expand='{"right":"10px"}' panel-collapse='{"right":"-300px"}' class='summary-panel' id="summary-panel">
 
-      <div class='content'>
-        <div ng-controller="SummaryCtrl" class='container'>
+      <div class='content' ng-controller="SummaryCtrl" >
+        <div  ng-show="summary != null" class='container ng-hide' >
           <div class='heading'>{[{location.full_name() }]}</div>
-
-          <div  class='summary-content' ng-if="summary != null" >
+          <div  class='summary-content' >
             <div ng-repeat="item in summary.info" class="info">
               <label>{[{item[0]}]}</label>
               <span>{[{item[1]}]}</span>
