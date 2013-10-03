@@ -78,7 +78,7 @@ class WFSService(object):
         parameters = "service=WFS&version=1.0.0&request=GetFeature&typeName=%s&maxFeatures=%s&outputFormat=json" % (typeName, self.maxFeatures)
         
         if (self.test):
-            url = "http://localhost:8080/" + typeName + ".json"
+            url = "http://localhost:5000/static/test_geojson/" + typeName + ".json"
         else:
             url = "%s?%s" % (self.url, parameters)
 
