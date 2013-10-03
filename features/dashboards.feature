@@ -82,7 +82,7 @@ And I navigate to "../district/hulu"
 Then a page with an error message is displayed 
 And the page has a link to the homepage
 
-Scenario: Show national contextual information
+Scenario: Show national summary information
 Given that I am a regular user
 When I go to the homepage
 Then The following information will be shown contextual panel
@@ -92,9 +92,15 @@ Then The following information will be shown contextual panel
 	[# of] Waterpoints
 	[# of] Health centres
 	[# of] Schools
+    Population as of 2011 - #
+	Percentage of children vaccinated against Diphtheria - #
+    Percentage of children vaccinated against Measles - #
+    Percentage of deliveries in Health Facilities - #
+    Pit latrine coverage percentage - #
+    Safe Water coverage percentage - #
 	"""
 
-Scenario: Show regional contextual information
+Scenario: Show regional summary information
 Given that I am a regular user
 When I go to the homepage
 And I click on region "acholi"
@@ -102,12 +108,15 @@ Then The following information will be shown contextual panel
 	"""
 	Uganda
 	Acholi - [# of] Districts
-	[# of] Waterpoints
-	[# of] Health centres
-	[# of] Schools
+	Population as of 2011 - #
+	Percentage of children vaccinated against Diphtheria - #
+    Percentage of children vaccinated against Measles - #
+    Percentage of deliveries in Health Facilities - #
+    Pit latrine coverage percentage - #
+    Safe Water coverage percentage - #
 	"""
 
-Scenario: Show District contextual information
+Scenario: Show District summary information
 Given that I am a regular user
 When I open dashboard for "Acholi"
 And I click on "Acholi, Gulu"
@@ -118,8 +127,14 @@ Then The forllowing information will be shown contextual panel
 	[# of] Waterpoints
 	[# of] Health centres
 	[# of] Schools
+	Population as of 2011 - 385,600
+	Percentage of children vaccinated against Diphtheria - 1.08%
+    Percentage of children vaccinated against Measles - 1.15%
+    Percentage of deliveries in Health Facilities - 0.5%
+    Pit latrine coverage percentage - 0.37%
+    Safe Water coverage percentage - 0.89%
 	"""
-Scenario: Show sub county contextual information
+Scenario: Show sub county summary information
 Given that I am a regular user
 When I open dashboard for "Acholi"
 And I click on "Acholi, Gulu"
@@ -136,7 +151,7 @@ Then The forllowing information will be shown contextual panel
 	[# of] Schools
 	"""
 
-Scenario: Show parish contextual information
+Scenario: Show parish summary information
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu, Patiko"
 And I hover over "Acholi, Gulu, Patiko, Pawel"
