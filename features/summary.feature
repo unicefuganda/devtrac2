@@ -54,7 +54,19 @@ Then The following information will be shown contextual panel
     Water Points
     1046
     Subcounties  
-    15  
+    15 
+    2011 Population
+    385,600
+    Children vaccinated against Diphtheria
+    108%
+    Children vaccinated against Measles
+    114%
+    Deliveries in Health Facilities
+    50%
+    Pit latrine coverage percentage
+    37%
+    Safe Water coverage percentage
+    89% 
     """
    # Population as of 2011 - 385,600
   # Percentage of children vaccinated against Diphtheria - 1.08%

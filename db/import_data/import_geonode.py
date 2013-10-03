@@ -33,6 +33,7 @@ def import_dataset(wfs_service, db, data_type, feature_name):
 
 def import_locationTree(wfs_service, db):
     features = wfs_service.get_features("uganda_parish_2011_50")
+
     collection = db["location_tree"]
     collection.remove()
 
@@ -52,6 +53,7 @@ def import_locationTree(wfs_service, db):
         insert_if_not_exists(region)
 
         location['district'] = feature['properties']['DNAME_2010']
+
         district = { 
             "type": "district", 
             "location": location, 

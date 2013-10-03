@@ -124,6 +124,7 @@ DT.LayerOptions = {
         },
         getLocation: function(feature) {
             return new DT.Location({
+
                 region: feature.properties["SUBREGION"].toLowerCase(),
                 district: feature.properties["DNAME_2010"].toLowerCase(),
                 subcounty: feature.properties["SNAME_2010"].toLowerCase()
