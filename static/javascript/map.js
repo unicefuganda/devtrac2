@@ -6,7 +6,7 @@ DT.Map = function(element) {
     var self = this;
     self.wmsLayer = null;
     var map = L.map(element.attr("id"), {
-        zoomControl: true
+        zoomControl: false
     });
 
     map.on("baselayerchange", function(layer) {
