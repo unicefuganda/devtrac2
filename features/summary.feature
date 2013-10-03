@@ -1,0 +1,95 @@
+
+Feature: Display Summary
+
+Scenario: Show national summary information
+Given that I am a regular user
+When I go to the homepage
+Then The following information will be shown contextual panel
+    """
+    Uganda
+    Health Centers
+    4437
+    Schools
+    19665
+    Water Points
+    81543
+    Regions
+    13
+    """
+
+# Population as of 2011 - #
+# Percentage of children vaccinated against Diphtheria - #
+# Percentage of children vaccinated against Measles - #
+# Percentage of deliveries in Health Facilities - #
+# Pit latrine coverage percentage - #
+# Safe Water coverage percentage - #
+
+Scenario: Show regional summary information
+Given that I am a regular user
+When I open dashboard for "Acholi"
+Then The following information will be shown contextual panel
+    """
+    Acholi Region
+    Health Centers
+    58
+    Schools
+    663
+    Water Points
+    4788
+    Districts
+    8
+    """
+
+Scenario: Show District summary information
+Given that I am a regular user
+When I open dashboard for "Acholi"
+And I click on "Acholi, Gulu"
+Then The following information will be shown contextual panel
+    """
+    Gulu District
+    Health Centers
+    22
+    Schools
+    210
+    Water Points
+    1046
+    Subcounties  
+    15  
+    """
+   # Population as of 2011 - 385,600
+  # Percentage of children vaccinated against Diphtheria - 1.08%
+  # Percentage of children vaccinated against Measles - 1.15%
+  # Percentage of deliveries in Health Facilities - 0.5%
+  # Pit latrine coverage percentage - 0.37%
+  # Safe Water coverage percentage - 0.89%
+
+Scenario: Show sub county summary information
+Given that I am a regular user
+When I open dashboard for "Acholi, Gulu, Patiko"
+Then The following information will be shown contextual panel
+    """
+    Patiko Subcounty
+    Health Centers
+    0
+    Schools
+    5
+    Water Points
+    41
+    Parishes
+    3
+    """
+
+Scenario: Show parish summary information
+Given that I am a regular user
+When I open dashboard for "Acholi, Gulu, Paicho, Pagik"
+Then The following information will be shown contextual panel
+    """
+    Pagik Parish
+    Health Centers
+    2
+    Schools
+    3
+    Water Points
+    22
+    """
+

@@ -21,6 +21,9 @@ class Page:
         if (len(locations) > 2):
             url += ("/%s" % locations[2]) 
 
+        if (len(locations) > 3):
+            url += ("/%s" % locations[3]) 
+
         self.browser.visit("%s/dashboard%s?test=true" % (self.base_url, url))
 
     def breadcrumbs(self):
@@ -106,6 +109,9 @@ class Page:
 
     def is_indicator_layer_displayed(self, indicator_name): 
         return self.browser.evaluate_script("window.map.isIndicatorLayerDisplayed('%s')" % indicator_name)
+
+    def summary_panel_content(self):
+        return self.browser.find_by_css('.summary-panel').text
 
     def wait_for(self, function):
         for _ in itertools.repeat(None, 10):
