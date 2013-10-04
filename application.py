@@ -58,5 +58,9 @@ def aggregation(locator):
 	result = services.AggregationService().find(locator)
 	return Response(dumps(result), mimetype='application/json')
 
+@app.route("/stub_tiles/<s>/<x>/<y>/<z>.png")
+def stub_tiles(s,x,y,z):
+  return send_file("static/javascript/lib/images/test_tile.png")
+
 if __name__ == "__main__":
     app.run(debug=True)

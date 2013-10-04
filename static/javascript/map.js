@@ -127,9 +127,6 @@ DT.Map = function(element) {
                 zIndexOffset: 10000,
                 icon: circleIcon
             };
-
-
-             
           
             var marker = new L.Marker(new L.LatLng(coordinates[1], coordinates[0]), geojsonMarkerOptions);
 
