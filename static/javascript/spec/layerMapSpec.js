@@ -63,7 +63,7 @@ describe("LayerMap", function() {
         });
 
         map.addLayer("other_layer", patikoLocation, "some data");
-        map.addChildLayer("water-points", guluLocation, patikoLocation, "some data1");
+        map.addChildLayer("subcounty", guluLocation, patikoLocation, "some data1");
 
         expect(map.findChildLayer(patikoLocation)).toEqual("some data1")
     })
