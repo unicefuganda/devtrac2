@@ -38,8 +38,8 @@ DT.LayerMap.prototype.displayedLayers = function() {
 };
 DT.LayerMap.prototype.findChildLayer = function(location) {
     for(var key in this.layers) {
-        if (this.layers[key].childLayers != undefined && this.layers[key].childLayers[location.getName()] != undefined) {
-            return this.layers[key].childLayers[location.getName()];
+        if (key != "district_outline" && this.layers[key].childLayers != undefined && this.layers[key].childLayers[location.getName()] != undefined) {
+            return this.layers[key].childLayers[location.getName()]; 
         }       
     }
     return null;
