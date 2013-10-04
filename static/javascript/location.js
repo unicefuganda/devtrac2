@@ -116,7 +116,6 @@ DT.Location.prototype.urlForLevel = function(level) {
         return "/";
     }
 };
-
 DT.Location.prototype.level = function() {
     var levels = ["region", "district", "subcounty", "parish"]
     currentLevel = "national";
@@ -129,15 +128,13 @@ DT.Location.prototype.level = function() {
 
     };
     return currentLevel;
-}
-
+};
 DT.Location.prototype.full_name = function() {
     if (this.level() == "national")
         return "Uganda";
 
     return this[this.level()] + " " + this.level();
-}
-
+};
 DT.Filter = function(toggles) { 
     $.extend(this, toggles);
 };
