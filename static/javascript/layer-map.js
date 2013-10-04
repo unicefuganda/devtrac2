@@ -37,11 +37,10 @@ DT.LayerMap.prototype.displayedLayers = function() {
     });
 };
 DT.LayerMap.prototype.findChildLayer = function(location) {
-    for(var key in this.layers) {
-        if (key != "district_outline" && this.layers[key].childLayers != undefined && this.layers[key].childLayers[location.getName()] != undefined) {
-            return this.layers[key].childLayers[location.getName()]; 
-        }       
-    }
+    
+    var layers = this.layers[location.level()];
+    if (layers.childLayers[location.getName()] != undefined)
+        return layers.childLayers[location.getName()]; 
     return null;
 };
 DT.LayerMap.prototype.findChildLayers = function(key, location) {
