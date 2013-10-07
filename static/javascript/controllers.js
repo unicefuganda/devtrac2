@@ -4,9 +4,9 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     if ($rootScope.filter == undefined)
         $rootScope.filter = new DT.Filter({health_center: true, water_point: true, school: true});
 
-}).controller("IndicatorsCtrl", function($scope, $rootScope, indicatorService) {
+}).controller("IndicatorsCtrl", function($scope, $rootScope, heatmapService) {
     $rootScope.indicator = { selected: null } 
-    $scope.indicators = indicatorService.all();
+    $scope.indicators = heatmapService.all();
 }).controller("SummaryCtrl", function($scope, $rootScope, summaryService) {
 
     $rootScope.$watch("location", function(newLocation, oldLocation) {
@@ -16,4 +16,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
             $scope.summary = summary;    
         });
     });
+
+
 });

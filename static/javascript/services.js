@@ -1,5 +1,9 @@
 angular.module("dashboard").service('districtService', function($http, $filter, $rootScope, $q) {
     var self = this;
+    if (typeof(callbacks) == 'undefined') {
+        callbacks = {}
+        callbackCounter = 0
+    }
 
     this.getData = function(locationkeys) {
 
@@ -77,24 +81,25 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
 
     this.districts = function(region_name) {
         var deffered = $q.defer();
-        $http({
-            method: 'GET',
-            url: '/static/javascript/geojson/uganda_districts_2011_005.json',
-            cache: true
-        }).
-        success(function(data, status, headers, config) {
+        var districtsCallback = function(data) {
             if (region_name == undefined) {
-                deffered.resolve(data)
+                return data;
             } else {
                 var districts = $.grep(data.features, function(feature, index) {
                     return feature.properties["Reg_2011"] != null && feature.properties["Reg_2011"].toLowerCase() == region_name;
                 });
-                deffered.resolve({
+                return {
                     type: "FeatureCollection",
                     features: districts
-                });
+                };
             }
+        }
 
+        var url = "/static/javascript/geojson/uganda_districts_2011_with_indicators.json";
+
+        $http({method: 'GET', url: url} ).success(function(data) { 
+            var fitleredData = districtsCallback(data); 
+            deffered.resolve(fitleredData);
         });
         return deffered.promise;
     };
@@ -107,7 +112,8 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         }
         var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_regions_2011_01" + "&outputFormat=json&format_options=callback:regionsCallback";
         $http.jsonp(url, {
-            cache: true
+            cache: true,
+            callback: ""
         });
         return deffered.promise;
     };
@@ -138,7 +144,6 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         });
         return deffered.promise;
     };
-
 
     this.water_points = function(district_name) {
         var deffered = $q.defer();
@@ -181,7 +186,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         });
         return deffered.promise;
     };
-}).service("indicatorService", function() {
+}).service("heatmapService", function() {
     var indicators = [{
         layer: "uganda_district_indicators_2",
         key: "CompletePS_Perc",
@@ -199,9 +204,16 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
     this.all = function() {
         return indicators;
     }
-}).service("summaryService", function($q, $http) {
-    
-
+})
+.service("summaryService", function($q, aggregationService) {
+    this.find = function(locator) {
+        var deffered = $q.defer();
+        $q.all([aggregationService.find(locator)]).then(function(data) {
+            deffered.resolve(data[0]);
+        });
+        return deffered.promise;
+    }
+}).service("aggregationService", function($q, $http) {
     this.find = function (locator) {
         var deffered = $q.defer();
 
@@ -216,4 +228,9 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                  });
         return deffered.promise;
     }
-})
+});
+// .service("indicatorService", function(districtService) {
+
+
+
+// });
