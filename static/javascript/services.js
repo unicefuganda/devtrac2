@@ -205,7 +205,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         return indicators;
     }
 })
-.service("summaryService", function($q, aggregationService) {
+.service("summaryService", function($q, aggregationService, indicatorService) {
     this.find = function(locator) {
         var deffered = $q.defer();
         $q.all([aggregationService.find(locator)]).then(function(data) {
@@ -228,9 +228,6 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                  });
         return deffered.promise;
     }
+})
+.service("indicatorService", function(districtService) {
 });
-// .service("indicatorService", function(districtService) {
-
-
-
-// });

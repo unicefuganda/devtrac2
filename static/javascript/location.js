@@ -1,3 +1,6 @@
+if (typeof DT == "undefined")
+    DT = {};
+
 DT.Location = function(location_hash) {
     this.region = location_hash.region ? location_hash.region.toLowerCase() : null;
     this.district = location_hash.district ? location_hash.district.toLowerCase() : null;
