@@ -1,53 +1,55 @@
-describe("Services", function() {
-    // var mock, indicatorService, districtsGeoJson;
+describe("Boundary Service", function() {
+    var testGeoJson, kampalaNorthJson, kampalaSouthJson, guluNorthJson;
 
-    // beforeEach(function() {
-    //     mock = {
-    //         districts: function() {
-    //             return { then: function(func) { func(districtsGeoJson); } };
-    //         }
-    //     };
+    beforeEach(function() {
+        kampalaNorthJson = {
+                type: "Polygon",
+                properties: {
+                    "Reg_2011": "NORTH",
+                    "DNAME_2010": "KAMPALA",
+                    "Measles_Perc": "1.05"
+                }
+            };
 
-    //     module('dashboard', function($provide) {
-    //         $provide.value('districtService', mock);
-    //     });
+        kampalaSouthJson = {
+                type: "Polygon",
+                properties: {
+                    "Reg_2011": "SOUTH",
+                    "DNAME_2010": "KAMPALA",
+                    "Measles_Perc": "1.05"
+                }
+            };
 
-    //     districtsGeoJson = {
-    //         features: [{
-    //             type: "Polygon",
-    //             properties: {
-    //                 "Reg_2011": "NORTH",
-    //                 "DNAME_2010": "GULU",
-    //                 "Measles_Perc": "1.05"
-    //             }
-    //         }, {
-    //             type: "Polygon",
-    //             properties: {
-    //                 "Reg_2011": "SOUTH",
-    //                 "DNAME_2010": "KAMPALA",
-    //                 "Measles_Perc": "2.07"
-    //             }
-    //         }]
-    //     }
-    // });
+        guluNorthJson = {
+                type: "Polygon",
+                properties: {
+                    "Reg_2011": "NORTH",
+                    "DNAME_2010": "GULU",
+                    "Measles_Perc": "1.05"
+                }
+            };
 
-    // it('should give indicator for district', inject(function(indicatorService) {
-    //     var guluLocation = new DT.Location({
-    //         region: "north",
-    //         district: "gulu"
-    //     });
+        testGeoJson = {
+            features: [kampalaNorthJson, kampalaSouthJson, guluNorthJson]
+        }
+        module('dashboard');
+    });
 
-    //     // expect(indicatorService.find(guluLocation)).toEqual({
-    //     //     "Measles_Perc": "1.05"
-    //     // });
-    // }));
+    it ('should filter by district region and name', inject(function(boundaryService) {
+        var location = new DT.Location({region: "north", district: "kampala"})
 
-});
+        expect(boundaryService.locatorFilter(location)(kampalaNorthJson)).toBeTruthy();
+        expect(boundaryService.locatorFilter(location)(kampalaSouthJson)).toBeFalsy();
+        expect(boundaryService.locatorFilter(location)(guluNorthJson)).toBeFalsy();
+
+    }));
+
+})
 
 describe("Geojson Service", function() {
 
     var mock;
-    var testData = {features: ["A", "B", "A", "C"]}
+    var testData = {features: ["A", "B"]}
     beforeEach(function() {
         mock = function(options) {
             return { success: function(func) { func(testData); } };
@@ -61,8 +63,8 @@ describe("Geojson Service", function() {
 
     it('should get geoJson and applyFilter', inject(function($rootScope, geoJsonService){
         var getFinished = false;
-        geoJsonService.get("test_url", function(feature) { return feature == "A"; }).then(function(data) {
-            expect(data).toEqual(['A', 'A']);
+        geoJsonService.get("test_url").then(function(data) {
+            expect(data).toEqual(['A', 'B']);
             getFinished = true;
         });
         

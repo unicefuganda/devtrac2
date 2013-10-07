@@ -7,7 +7,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 }).controller("IndicatorsCtrl", function($scope, $rootScope, heatmapService) {
     $rootScope.indicator = { selected: null } 
     $scope.indicators = heatmapService.all();
-}).controller("SummaryCtrl", function($scope, $rootScope, summaryService) {
+}).controller("SummaryCtrl", function($scope, $rootScope, summaryService, indicatorService) {
 
     $rootScope.$watch("location", function(newLocation, oldLocation) {
         if (newLocation == null)
@@ -15,7 +15,9 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         summaryService.find(newLocation.getName()).then(function(summary) {
             $scope.summary = summary;    
         });
+
+        indicatorService.find(newLocation).then(function(indicatorSummary) {
+            $scope.indicatorSummary = indicatorSummary;
+        });
     });
-
-
 });
