@@ -186,7 +186,61 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         });
         return deffered.promise;
     };
-}).service("heatmapService", function() {
+})
+
+.service("geoJsonService", function($q, $http) 
+{
+    this.get = function(url, filter) {
+        var deffered = $q.defer();
+        $http({method: 'GET', url: url, cache: true})
+            .success(function(data) { 
+                deffered.resolve($.grep(data.features, filter)); 
+            });
+
+        return deffered.promise;
+    }
+})
+
+.service("boundaryService", function(geoJsonService){
+
+    this.districts = function (locator, mapreduce) {
+        url = "/static/javascript/geojson/uganda_districts_2011_with_indicators.json";
+        return geoJsonService.get(url, this.locatorFilter(locator));
+    };
+
+    this.locatorFilter = function(locator) {
+        return function(feature) {
+            feature.properties["Reg_2011"] == locator.region.toUpperCase() &&
+            feature.properties["DNAME_2010"] == locator.region.toUpperCase();
+        };
+    };
+
+    // var deffered = $q.defer();
+    //     var districtsCallback = function(data) {
+    //         if (region_name == undefined) {
+    //             return data;
+    //         } else {
+    //             var districts = $.grep(data.features, function(feature, index) {
+    //                 return feature.properties["Reg_2011"] != null && feature.properties["Reg_2011"].toLowerCase() == region_name;
+    //             });
+    //             return {
+    //                 type: "FeatureCollection",
+    //                 features: districts
+    //             };
+    //         }
+    //     }
+
+    //     var url = "/static/javascript/geojson/uganda_districts_2011_with_indicators.json";
+
+    //     $http({method: 'GET', url: url} ).success(function(data) { 
+    //         var fitleredData = districtsCallback(data); 
+    //         deffered.resolve(fitleredData);
+    //     });
+    //     return deffered.promise;
+
+})
+
+.service("heatmapService", function() {
     var indicators = [{
         layer: "uganda_district_indicators_2",
         key: "CompletePS_Perc",
@@ -230,4 +284,12 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
     }
 })
 .service("indicatorService", function(districtService) {
+
+    // this.find = function(locator, callBack) {
+
+    //     districtService.districts(locator.region).then(function(data) {
+    //         var districtFeature = $.grep(data.features, function(location) { return location.properties["DNAME_2010"] == locator.district.toUpperCase(); });
+    //         return {"Measles Perc" : districtFeature[0].properties["Measles_Perc"] };
+    //     });
+    // };
 });
