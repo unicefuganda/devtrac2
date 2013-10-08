@@ -19,34 +19,13 @@ class AggregationService(object):
                 ["Health Centers", self.points_count("health_center", locator)],
                 ["Schools", self.points_count("school", locator)],
                 ["Water Points", self.points_count("water_point", locator)]
-            ],
-            "indicators" : self.get_indicator(locator)
+            ]
         }
 
         child_count = self.child_count(locator)
         if (child_count != None):
             summary['info'].append(["%s" % labels[child_count["type"]], child_count["count"]])
         return summary
-
-
-    def get_indicator(self,locator):
-
-        def convert_to_percent(str_prc):
-            return str(int((float(str_prc) * 100))) + "%"
-
-        indicators = self.database["indicators"].find_one({'_id':locator.upper()})
-
-        if (indicators == None):
-            return [];
-        indicators = indicators['indicators']
-        return [
-            ["2011 Population", indicators["Pop_2011"]],
-            ["Children vaccinated against Diphtheria", convert_to_percent(indicators["DPT3_perc"])],
-            ["Children vaccinated against Measles", convert_to_percent(indicators["Measles_Perc"])],
-            ["Deliveries in Health Facilities", convert_to_percent(indicators["HF_Delivery_Perc"])],
-            ["Pit latrine coverage percentage", convert_to_percent(indicators["Pit_LatCov_Perc"])],
-            ["Safe Water coverage percentage", convert_to_percent(indicators["Safe_Water_Cov_Perc"])]
-        ]
 
     def points_count(self, dataset, locator):
         entry = self.database["%s_aggregation" % dataset].find({'_id': locator.upper()})
