@@ -49,9 +49,9 @@ DT.Map = function(element) {
         DT.timings["unselectend"] = new Date().getTime();
     }
 
-    function addBoundaryLayer(name, location, features, layer_info) {
+    function addBoundaryLayer(name, location, features, layer_info,aggregate) {         
         var baseLayer = L.geoJson(features, {
-            onEachFeature: function(data, layer) {
+            onEachFeature: function(data, layer) {               
 
                 var options = $.extend({}, layer_info, {
                     clickLayerHandler: function(layer) {
@@ -59,16 +59,84 @@ DT.Map = function(element) {
                     },
                     location: layer_info.getLocation(data),
                 });
-                var layer = new DT.Layer(layer, options, data.properties, map)
+
+                if (aggregate !==undefined) {
+                    layer = negotiateAddLayerBadges(layer,aggregate,layer_info.getLocation(data)); 
+                }
+                
+                var layer = new DT.Layer(layer, options, data.properties, map);
+                               
                 self.layerMap.addChildLayer(name, location, options.location, layer);
             },
-        });
+        });     
+       
+
         self.layerMap.addLayer(name, location, baseLayer);
         map.addLayer(baseLayer, true);
     }
 
+    function negotiateAddLayerBadges(childLayer,aggregateList,options){ 
+        var targetLayer = childLayer; 
+        $.each(aggregateList,function(index,aggregate){            
+            if (aggregate[0] == options['region'] && aggregate[1] == options['district']) {               
+               targetLayer = addLayerBadges(childLayer,aggregate);
+            }          
+        });         
+
+        return childLayer;
+    }
+
+    function negotiateAddLayerPoints(name, location, features, layer_info){ 
+        if (location.parish !=null) {       
+       addPointsLayer(name, location, features, layer_info);
+        }
+    }
+
+function addLayerBadges(baseLayer,aggregate){        
+       var bounds = baseLayer.getBounds();
+       var center = bounds.getCenter(); 
+       var sw = bounds.getSouthWest();
+       var ne = bounds.getNorthEast();       
+       var coords = [[center.lng,center.lat],[ne.lng,ne.lat],[sw.lng,sw.lat]];              
+       var classNames = {
+        'Schools':'school',
+        'Health Centers':'health-center',
+        'Water Points':'water-point'};
+       var map_layers = ['Health Centers','Schools','Water Points']; 
+       var count = 0;  
+
+        $.each(aggregate[2].info,function(index,info){
+            
+        if (info[0] =='Water Points' || info[0] =='Schools' || info[0] =='Health Centers') {
+             var coordinate = [coords[count][0],coords[count][1]];                          
+             //var coordinate = [center.lng,center.lat];
+             var circleCluster = new L.DivIcon({
+                iconSize: new L.Point([20, 20]),
+                className: classNames[info[0]] +"-cluster-icon cluster-icon medium",
+                html: "<div data-lat='"+ coordinate[1].toFixed(4) +"' data-lng='" + coordinate[0].toFixed(4) + "'>" 
+                    + info[1]
+                    + '</div>'
+                });
+             var geojsonMarkerOptions = {
+                zIndexOffset: 10000,
+                icon: circleCluster
+            };          
+            var marker = new L.Marker(new L.LatLng(coordinate[1], coordinate[0]), geojsonMarkerOptions);            
+               map.addLayer(marker,true); 
+               
+               count++; 
+            }                        
+           
+              });
+
+        return baseLayer;      
+       
+    }
+
+  
+
     function addPointsLayer(name, location, features, layer_info) {
-        // TODO: refactor
+        // TODO: refactor        
         var markerPopupMessage = function(summaryInformation) {
 
             var message = '<h4>' + summaryInformation.title + '</h4>';
@@ -162,11 +230,13 @@ DT.Map = function(element) {
     }
 
     return {
-        addLayer: function(name, location, features, layer_info) {
+        addLayer: function(name, location, features, layer_info,aggregate) {
+
             if (layer_info.type == "boundary") {
-                addBoundaryLayer(name, location, features, layer_info);
+
+                addBoundaryLayer(name, location, features, layer_info,aggregate);
             } else {
-                addPointsLayer(name, location, features, layer_info);
+               negotiateAddLayerPoints(name, location, features, layer_info);
             }
         },
         orderLayers: function(layerOrder) {
@@ -302,6 +372,7 @@ DT.Layer = function(leafletLayer, options, featureProperties, map) {
         self.selected = false;
         self.highlighted = false;
     };
+
     self.select = function() {
         if (options.clickLayerHandler) {
             options.clickLayerHandler(self);

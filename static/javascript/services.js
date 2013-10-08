@@ -269,4 +269,3 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
     }
 });
 
-
