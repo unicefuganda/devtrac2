@@ -205,7 +205,8 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
     this.all = function() {
         return indicators;
     }
-}).service("summaryService", function($q, $http) {
+})
+.service("summaryService", function($q, $http) {
     this.find = function (locator) {
         var deffered = $q.defer();
 
@@ -238,8 +239,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
     this.districts = function (locator) {
         var self = this;
         url = "/static/javascript/geojson/uganda_districts_2011_with_indicators.json";
-
-        return geoJsonService.get(url).then(function(data) { return $.grep(data, self.locatorFilter); })
+        return geoJsonService.get(url).then(function(data) { return $.grep(data, self.locatorFilter(locator)); })
     };
 
     this.locatorFilter = function(locator) {
@@ -261,6 +261,12 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
     }
 
     this.mapFeature = function (data) {
-        return { indicators: [ ["Measles_Perc", data[0].properties["Measles_Perc"]] ] };
+        var config = new DT.IndicatorConfig(DT.IndicatorConfig.district)
+        if (data.length == 0)
+            return [];
+        var formatedValues = $.map(data[0].properties, function(value, key) { return [config.format(key, value)] });
+        return $.grep(formatedValues, function(value) { return value != null; })
     }
 });
+
+

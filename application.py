@@ -23,6 +23,7 @@ js = Bundle(
 	'javascript/directives.js',
 	'javascript/map.js',
 	'javascript/utilities.js',
+	'javascript/config.js',
 	'javascript/lib/leaflet.js',
 	'javascript/application.js',
 	'javascript/lib/bootstrap.min.js',

@@ -17,6 +17,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         });
 
         indicatorService.find(newLocation).then(function(indicatorSummary) {
+            
             $scope.indicatorSummary = indicatorSummary;
         });
     });

@@ -17,24 +17,16 @@ module.exports = function(config) {
       'static/javascript/lib/angular.min.js',
       'static/javascript/lib/angular-mocks.js',
       'static/javascript/lib/angular-route.min.js',
-      // 'static/javascript/lib/angular-scenario.js',
       'static/javascript/lib/jquery-2.0.3.min.js',
-      // 'static/javascript/lib/**/*.js',
-      // 'static/javascript/layer-options.js',
-      // 'static/javascript/layer-map.js',
-      // 'static/javascript/location.js',
       'static/javascript/dashboard.js',
       'static/javascript/services.js',
+
       'static/javascript/utilities.js',
       'static/javascript/location.js',
       'static/javascript/layer-map.js',
+      'static/javascript/config.js',
 
-
-      'static/javascript/spec/servicesSpec.js',
-      'static/javascript/spec/locationSpec.js',
-      'static/javascript/spec/filterSpec.js',
-      'static/javascript/spec/layerMapSpec.js',
-      'static/javascript/spec/utilitiesSpec.js',
+      'static/javascript/spec/*.js',
     ],
 
 

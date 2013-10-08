@@ -60,7 +60,7 @@ Then The following information will be shown contextual panel
     Children vaccinated against Diphtheria
     108%
     Children vaccinated against Measles
-    114%
+    115%
     Deliveries in Health Facilities
     50%
     Pit latrine coverage percentage

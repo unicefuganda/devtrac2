@@ -75,3 +75,25 @@ describe("Geojson Service", function() {
     }));
 
 });
+
+describe("Indicator Service", function() {
+
+    var mock;
+    var testData = [ { properties: { "Measles_Perc": 0.2, "other": 0.9 } } ]
+
+    beforeEach(function() {
+        mock = {districts: function(locator) {
+            return { then: function(func) { return func(testData); } };
+        }};
+
+        module('dashboard', function($provide) {
+            $provide.value('boundaryService', mock);
+        });
+    });
+
+
+    it('should get geoJson and applyFilter', inject(function(indicatorService){
+        expect(indicatorService.find("locator")).toEqual([["Children vaccinated against Measles", "20%"]])
+    }));
+
+});
