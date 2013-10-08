@@ -49,10 +49,9 @@ DT.Map = function(element) {
         DT.timings["unselectend"] = new Date().getTime();
     }
 
-    function addBoundaryLayer(name, location, features, layer_info,aggregate) {         
+    function addBoundaryLayer(name, location, features, layer_info,aggregate) {                   
         var baseLayer = L.geoJson(features, {
-            onEachFeature: function(data, layer) {               
-
+            onEachFeature: function(data, layer) {  
                 var options = $.extend({}, layer_info, {
                     clickLayerHandler: function(layer) {
                         self.clickDistrictHandler(layer.location);
@@ -76,9 +75,14 @@ DT.Map = function(element) {
     }
 
     function negotiateAddLayerBadges(childLayer,aggregateList,options){ 
-        var targetLayer = childLayer; 
-        $.each(aggregateList,function(index,aggregate){            
-            if (aggregate[0] == options['region'] && aggregate[1] == options['district']) {               
+       
+        var targetLayer = childLayer;      
+        //console.log(aggregateList.length);   
+        $.each(aggregateList,function(index,aggregate){ 
+        if (aggregate[0] == options['region'] && options['district'] == null) {
+            targetLayer = addLayerBadges(childLayer,aggregate);
+            console.log("regions only");
+        }else if (aggregate[0] == options['region'] && aggregate[1] == options['district']) {               
                targetLayer = addLayerBadges(childLayer,aggregate);
             }          
         });         
