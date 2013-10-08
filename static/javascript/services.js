@@ -17,13 +17,20 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
 
             if (key == "region") {
                 self.regions_geojson().then(function(data) {
-                    allData[locationkey] = data;
-                    deffered2.resolve();
+                    self.get_region_aggregations(data).then(function(summary){
+                        allData['summary'] = summary;
+                        allData[locationkey] = data;
+                        deffered2.resolve();
+                    });
+                                                                 
                 });
             } else if (key == "district") {
                 self.districts(location.region).then(function(data) {
-                    allData[locationkey] = data;
-                    deffered2.resolve();
+                   self.get_district_aggregations(location.region,data).then(function(summary){    
+                        allData['summary'] = summary;
+                        allData[locationkey] = data;
+                        deffered2.resolve();
+                    });   
                 });
             } else if (key == "district_outline") {
                 self.districts().then(function(data) {
@@ -118,6 +125,69 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         return deffered.promise;
     };
 
+ this.get_region_aggregations = function(FeatureCollection){
+        var locatorList = [];
+        var aggregates = [];
+        $.each(FeatureCollection.features,function(index,feature){
+            var region = feature.properties['Reg_2011'].toLowerCase();
+            var locator = 'UGANDA, '+region;
+            locatorList.push([region,locator]);            
+        });
+
+        var deffered = $q.defer();   
+        $.each(locatorList,function(ind,locator){            
+            $http({
+            method: 'GET',
+            url: "/aggregation/" + locator[1],
+            cache: true})
+                .success(function(data, status, headers, config) {                      
+                    aggregates.push([locator[0],locator[1],data]);                 
+
+                 });           
+        });
+
+        var interval = setInterval(function(){
+            if(aggregates.length == locatorList.length){                       
+                deffered.resolve(aggregates);
+                clearInterval(interval);
+            }
+        },20);
+        
+        return deffered.promise;  
+
+    }
+
+     this.get_district_aggregations = function(region,FeatureCollection){        
+        var locatorList = [];
+        var aggregates = [];
+        $.each(FeatureCollection.features,function(index,feature){
+            var district = feature.properties['DNAME_2006'].toLowerCase();
+            var locator = 'UGANDA, '+region+', '+district;
+            locatorList.push([region,district,locator]);
+        });  
+
+        var deffered = $q.defer();         
+
+        $.each(locatorList,function(ind,locator){            
+            $http({
+            method: 'GET',
+            url: "/aggregation/" + locator[2],
+            cache: true})
+                .success(function(data, status, headers, config) {
+                    aggregates.push([locator[0],locator[1],data]);
+
+                 });           
+        });
+
+        var interval = setInterval(function(){
+            if(aggregates.length == locatorList.length){                
+                deffered.resolve(aggregates);
+                clearInterval(interval);
+            }
+        },20);
+        
+        return deffered.promise;        
+}
     this.subcounties_geojson = function(district_name) {
         var deffered = $q.defer();
 

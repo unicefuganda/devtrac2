@@ -77,11 +77,10 @@ DT.Map = function(element) {
     function negotiateAddLayerBadges(childLayer,aggregateList,options){ 
        
         var targetLayer = childLayer;      
-        //console.log(aggregateList.length);   
+        
         $.each(aggregateList,function(index,aggregate){ 
         if (aggregate[0] == options['region'] && options['district'] == null) {
-            targetLayer = addLayerBadges(childLayer,aggregate);
-            console.log("regions only");
+            targetLayer = addLayerBadges(childLayer,aggregate);            
         }else if (aggregate[0] == options['region'] && aggregate[1] == options['district']) {               
                targetLayer = addLayerBadges(childLayer,aggregate);
             }          
