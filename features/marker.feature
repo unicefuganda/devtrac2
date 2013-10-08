@@ -108,9 +108,9 @@ Feature: Map Markers
 # And the "health-centre" badge will be shown for the "Acholi" region
 # And the "health-centre" badge will show the "no of health centres" for "Acholi"
 # 
-# Scenario: Show Badges for schols
-# Given that I am a regular user
-# When I open dashboard for "Acholi"
-# Then the "school" layer for "Acholi" is displayed
-# And the "Schools" badge will be shown for the "Acholi" region
-# And the "schools" badge will show the "no of schools" for "Acholi"
+Scenario: Show Badges for schools
+Given that I am a regular user
+When I open dashboard for "Acholi"
+#Then the "school" layer for "Acholi" is displayed
+#And the "Schools" badge will be shown for the "Acholi" region
+#And the "schools" badge will show the "no of schools" for "Acholi"
