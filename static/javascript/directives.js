@@ -20,9 +20,8 @@ angular.module("dashboard").directive('map', function() {
             });            
 
             var applyLocationAndFilter = function(newLocation, newFilter) {
-                var layerChanges = DT.Location.compareLayerKeys(map.displayedLayers(), newLocation.layersToShow(newFilter.dataToggledOff()));
-
-                $.each(layerChanges.toRemove, function(index, locationKey) {
+                var layerChanges = DT.Location.compareLayerKeys(map.displayedLayers(), newLocation.layersToShow(newFilter.dataToggledOff()));                
+                $.each(layerChanges.toRemove, function(index, locationKey) {                    
                     map.removeLayer(locationKey[0]);
                 });
 

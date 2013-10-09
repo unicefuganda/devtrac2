@@ -17,8 +17,8 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
 
             if (key == "region") {
                 self.regions_geojson().then(function(data) {
-                    self.get_region_aggregations(data).then(function(summary){
-                        allData['summary'] = summary;
+                    self.get_location_aggregations(key,location,data).then(function(summary){
+                        allData['summary'] = summary;                        
                         allData[locationkey] = data;
                         deffered2.resolve();
                     });
@@ -26,8 +26,8 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                 });
             } else if (key == "district") {
                 self.districts(location.region).then(function(data) {
-                   self.get_district_aggregations(location.region,data).then(function(summary){    
-                        allData['summary'] = summary;
+                   self.get_location_aggregations(key,location,data).then(function(summary){    
+                        allData['summary'] = summary; 
                         allData[locationkey] = data;
                         deffered2.resolve();
                     });   
@@ -40,8 +40,12 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
             } else if (key == "subcounty") {
                 self.subcounties_geojson(location.district)
                     .then(function(data) {
+                       self.get_location_aggregations(key,location,data).then(function(summary){
+                        allData['summary'] = summary;                        
                         allData[locationkey] = data;
                         deffered2.resolve();
+                    });
+
                     });
 
             } else if (key == "parish") {
@@ -58,23 +62,29 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                         deffered2.resolve();
                     });
             } else if (key == "water-point") {
-                self.water_points(location.district)
-                    .then(function(data) {
-                        allData[locationkey] = data;
-                        deffered2.resolve();
-                    });
+                 allData[locationkey] = [];
+                 deffered2.resolve();
+                // self.water_points(location.district)
+                //     .then(function(data) {
+                //         allData[locationkey] = [];
+                //         deffered2.resolve();
+                //     });
             } else if (key == "health-center") {
-                self.health_centers(location.region)
-                    .then(function(data) {
-                        allData[locationkey] = data;
-                        deffered2.resolve();
-                    });
+                allData[locationkey] = [];
+                deffered2.resolve();
+                // self.health_centers(location.region)
+                //     .then(function(data) {
+                //         allData[locationkey] = [];
+                //         deffered2.resolve();
+                //     });
             } else if (key == "school") {
-                self.schools(location.region)
-                    .then(function(data) {
-                        allData[locationkey] = data;
-                        deffered2.resolve();
-                    });
+                 allData[locationkey] = [];
+                deffered2.resolve();
+                // self.schools(location.region)
+                //     .then(function(data) {
+                //         allData[locationkey] = [];
+                //         deffered2.resolve();
+                //     });
             }
             return deffered2.promise;
         });
@@ -125,30 +135,41 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         return deffered.promise;
     };
 
- this.get_region_aggregations = function(FeatureCollection){
-        var locatorList = [];
-        var aggregates = [];
+ this.get_location_aggregations = function(key,location,FeatureCollection){    
+        var targetUrls = [];
+        var aggregation = [];
+        var baseURL = '';
+        var baseProperty = '';
+        if (key ==='region') 
+            { baseURL = ''; baseProperty ='Reg_2011';}
+        if (key ==='district') 
+            {baseURL =location.region+', ';baseProperty ='DNAME_2006';}
+        if (key ==='subcounty') 
+            {baseURL = location.region+', '+location.district+', ';baseProperty ='SNAME_2010';}
+
+        
+
         $.each(FeatureCollection.features,function(index,feature){
-            var region = feature.properties['Reg_2011'].toLowerCase();
-            var locator = 'UGANDA, '+region;
-            locatorList.push([region,locator]);            
+            var property = feature.properties[baseProperty].toLowerCase();
+            var locator = baseURL+property;
+            targetUrls.push([property,locator]);            
         });
 
+        
         var deffered = $q.defer();   
-        $.each(locatorList,function(ind,locator){            
+        $.each(targetUrls,function(ind,locator){            
             $http({
             method: 'GET',
-            url: "/aggregation/" + locator[1],
+            url: "/aggregation/" +'UGANDA, '+locator[1],
             cache: true})
-                .success(function(data, status, headers, config) {                      
-                    aggregates.push([locator[0],locator[1],data]);                 
-
+                .success(function(data, status, headers, config) {                                                                        
+                    aggregation.push([locator[1],data]);                 
                  });           
         });
 
         var interval = setInterval(function(){
-            if(aggregates.length == locatorList.length){                       
-                deffered.resolve(aggregates);
+            if(aggregation.length == targetUrls.length){                       
+                deffered.resolve(aggregation);
                 clearInterval(interval);
             }
         },20);
@@ -157,37 +178,6 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
 
     }
 
-     this.get_district_aggregations = function(region,FeatureCollection){        
-        var locatorList = [];
-        var aggregates = [];
-        $.each(FeatureCollection.features,function(index,feature){
-            var district = feature.properties['DNAME_2006'].toLowerCase();
-            var locator = 'UGANDA, '+region+', '+district;
-            locatorList.push([region,district,locator]);
-        });  
-
-        var deffered = $q.defer();         
-
-        $.each(locatorList,function(ind,locator){            
-            $http({
-            method: 'GET',
-            url: "/aggregation/" + locator[2],
-            cache: true})
-                .success(function(data, status, headers, config) {
-                    aggregates.push([locator[0],locator[1],data]);
-
-                 });           
-        });
-
-        var interval = setInterval(function(){
-            if(aggregates.length == locatorList.length){                
-                deffered.resolve(aggregates);
-                clearInterval(interval);
-            }
-        },20);
-        
-        return deffered.promise;        
-}
     this.subcounties_geojson = function(district_name) {
         var deffered = $q.defer();
 

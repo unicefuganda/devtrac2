@@ -40,6 +40,7 @@ DT.Map = function(element) {
     map.addLayer(osm);
     self.layerMap = new DT.LayerMap();
     window.mapmap = map;
+    window.badgeLayerGroup = null;   
 
     function unselect() {
         $.each(self.layerMap.allChildLayers(), function(index, layer) {
@@ -49,7 +50,8 @@ DT.Map = function(element) {
         DT.timings["unselectend"] = new Date().getTime();
     }
 
-    function addBoundaryLayer(name, location, features, layer_info,aggregate) {                   
+    function addBoundaryLayer(name, location, features, layer_info,aggregate) {  
+    window.badgeMarkers = {'school' : [],'health-center' : [],'water-point' : []};                                
         var baseLayer = L.geoJson(features, {
             onEachFeature: function(data, layer) {  
                 var options = $.extend({}, layer_info, {
@@ -58,45 +60,46 @@ DT.Map = function(element) {
                     },
                     location: layer_info.getLocation(data),
                 });
-
-                if (aggregate !==undefined) {
-                    layer = negotiateAddLayerBadges(layer,aggregate,layer_info.getLocation(data)); 
+                
+                if (aggregate !==undefined) {                    
+                    negotiateAddLayerBadges(layer,aggregate,layer_info.getLocation(data));                   
                 }
                 
-                var layer = new DT.Layer(layer, options, data.properties, map);
-                               
+                var layer = new DT.Layer(layer, options, data.properties, map);                               
                 self.layerMap.addChildLayer(name, location, options.location, layer);
             },
-        });     
-       
-
+        });            
         self.layerMap.addLayer(name, location, baseLayer);
         map.addLayer(baseLayer, true);
+        addBadgesToMap(location);
     }
 
-    function negotiateAddLayerBadges(childLayer,aggregateList,options){ 
-       
-        var targetLayer = childLayer;      
-        
+    function addBadgesToMap(location){  
+    if (location.region !== null) {
+        $.each(window.badgeMarkers,function(key,value){
+            var markerGroup = L.layerGroup(value);
+            self.layerMap.addLayer(key,location,markerGroup);
+            map.addLayer(markerGroup,true);            
+            });
+    } }
+
+
+    function negotiateAddLayerBadges(childLayer,aggregateList,location){            
         $.each(aggregateList,function(index,aggregate){ 
-        if (aggregate[0] == options['region'] && options['district'] == null) {
-            targetLayer = addLayerBadges(childLayer,aggregate);            
-        }else if (aggregate[0] == options['region'] && aggregate[1] == options['district']) {               
-               targetLayer = addLayerBadges(childLayer,aggregate);
-            }          
-        });         
-
-        return childLayer;
+        if (aggregate[0] == location.getName()) {            
+            addLayerBadges(childLayer,aggregate);            
+        }     
+        });    
     }
 
-    function negotiateAddLayerPoints(name, location, features, layer_info){ 
+    function negotiateAddLayerPoints(name, location, features, layer_info){                  
         if (location.parish !=null) {       
        addPointsLayer(name, location, features, layer_info);
         }
     }
 
-function addLayerBadges(baseLayer,aggregate){        
-       var bounds = baseLayer.getBounds();
+function addLayerBadges(childLayer,aggregate){ 
+       var bounds = childLayer.getBounds();
        var center = bounds.getCenter(); 
        var sw = bounds.getSouthWest();
        var ne = bounds.getNorthEast();       
@@ -106,9 +109,9 @@ function addLayerBadges(baseLayer,aggregate){
         'Health Centers':'health-center',
         'Water Points':'water-point'};
        var map_layers = ['Health Centers','Schools','Water Points']; 
-       var count = 0;  
+       var count = 0;         
 
-        $.each(aggregate[2].info,function(index,info){
+        $.each(aggregate[1].info,function(index,info){
             
         if (info[0] =='Water Points' || info[0] =='Schools' || info[0] =='Health Centers') {
              var coordinate = [coords[count][0],coords[count][1]];                          
@@ -125,15 +128,10 @@ function addLayerBadges(baseLayer,aggregate){
                 icon: circleCluster
             };          
             var marker = new L.Marker(new L.LatLng(coordinate[1], coordinate[0]), geojsonMarkerOptions);            
-               map.addLayer(marker,true); 
-               
+            window.badgeMarkers[classNames[info[0]]].push(marker);
                count++; 
-            }                        
-           
-              });
-
-        return baseLayer;      
-       
+            }   
+        });        
     }
 
   
@@ -236,7 +234,6 @@ function addLayerBadges(baseLayer,aggregate){
         addLayer: function(name, location, features, layer_info,aggregate) {
 
             if (layer_info.type == "boundary") {
-
                 addBoundaryLayer(name, location, features, layer_info,aggregate);
             } else {
                negotiateAddLayerPoints(name, location, features, layer_info);
@@ -310,7 +307,7 @@ function addLayerBadges(baseLayer,aggregate){
                 return locationKey[0] + " - " + locationKey[1].getName();
             });
         },
-        removeLayer: function(key) {
+        removeLayer: function(key) {            
             var layer = self.layerMap.removeLayer(key);
             map.removeLayer(layer);
         },
