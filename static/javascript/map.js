@@ -66,7 +66,7 @@ DT.Map = function(element) {
         self.layerMap.addLayer(name, location, baseLayer);
         map.addLayer(baseLayer, true);
     }
-    function addPointsLayer(name, location, data, layer_info) {
+    function addAggregateLayer(name, location, data, layer_info) {
         var layerGroup = L.layerGroup();
 
 
@@ -95,6 +95,53 @@ DT.Map = function(element) {
         self.layerMap.addLayer(name, location, layerGroup);
         map.addLayer(layerGroup);
     }
+
+    function addPointsLayer(name, location, features, layer_info) {
+        var layerGroup = L.layerGroup();
+
+        var markerPopupMessage = function(summaryInformation) {
+            var message = '<h4>' + summaryInformation.title + '</h4>';
+            $.each(summaryInformation.lines, function(index, line) {
+                message += '<label>' + line[0] + ':</label> ' + line[1] + '</br>';    
+            })
+            return message;
+        };
+
+        $.each(features.features, function(index, feature) {
+            var coordinates = feature.geometry.coordinates;
+
+            var popup = L.popup({
+                className: "marker-popup" ,
+                closeButton: false
+            }).setContent(markerPopupMessage(layer_info.summaryInformation(feature.properties)));
+
+            var circleIcon = new L.DivIcon({
+                iconSize: new L.Point([10, 10]),
+                className: layer_info.name + "-icon marker-icon ",
+                html: "<div data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'></div>",
+                // html:"",
+                popupAnchor: [5, -10]
+            });
+            var geojsonMarkerOptions = {
+                zIndexOffset: 10000,
+                icon: circleIcon
+            };
+          
+            var marker = new L.Marker(new L.LatLng(coordinates[1], coordinates[0]), geojsonMarkerOptions);
+
+            marker.bindPopup(popup)
+                .on('mouseover', function() {
+                    marker.openPopup();
+                })
+                .on('mouseout', function() {
+                    marker.closePopup();
+                });
+            layerGroup.addLayer(marker);
+        });
+
+        self.layerMap.addLayer(name, location, layerGroup);
+        map.addLayer(layerGroup);
+    }
   
     var removeWMSLayer = function() {
         if (self.wmsLayer != null) {
@@ -106,14 +153,7 @@ DT.Map = function(element) {
 
     // function addPointsLayer(name, location, features, layer_info) {
     //     // TODO: refactor        
-    //     var markerPopupMessage = function(summaryInformation) {
 
-    //         var message = '<h4>' + summaryInformation.title + '</h4>';
-    //         $.each(summaryInformation.lines, function(index, line) {
-    //             message += '<label>' + line[0] + ':</label> ' + line[1] + '</br>';    
-    //         })
-    //         return message;
-    //     };
 
     //     var markers = L.markerClusterGroup({
     //         showCoverageOnHover: false,
@@ -194,11 +234,12 @@ DT.Map = function(element) {
 
     return {
         addLayer: function(name, location, data, layer_info) {
-
             if (layer_info.type == "boundary") {
                 addBoundaryLayer(name, location, data, layer_info);
-            } else {
-               addPointsLayer(name, location, data, layer_info);
+            } else if (layer_info.type == "aggregate"){
+                addAggregateLayer(name, location, data, layer_info);
+            } else if (layer_info.type == "point") {
+                addPointsLayer(name, location, data, layer_info);
             }
         },
         orderLayers: function(layerOrder) {
@@ -275,8 +316,8 @@ DT.Map = function(element) {
         },
         openPopupForMarkerAt: function(layer, lat, lng) {
             var markerLayer = self.layerMap.findLayerByKey(layer);
-            for(var layerKey in markerLayer._featureGroup._layers) {
-                var layer = markerLayer._featureGroup._layers[layerKey];
+            for(var layerKey in markerLayer._layers) {
+                var layer = markerLayer._layers[layerKey];
                 var markerlat = layer.getLatLng().lat.toFixed(4).toString();
                 var markerlng = layer.getLatLng().lng.toFixed(4).toString();
                 if (markerlat == lat && markerlng == lng) {

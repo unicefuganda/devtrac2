@@ -34,14 +34,8 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
             } else if (key == "subcounty") {
                 self.subcounties_geojson(location.district)
                     .then(function(data) {
-                       // self.get_location_aggregations(key,location,data).then(function(summary){
-                        // allData['summary'] = summary;                        
-                        // allData[locationkey] = data;
-                        // deffered2.resolve();
-                    // });
                         allData[locationkey] = data;
                         deffered2.resolve();
-
                     });
 
             } else if (key == "parish") {
@@ -73,6 +67,11 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                     allData[locationkey] = data;
                     deffered2.resolve();
                 })
+            } else if (key == "water-point-point") {
+                self.water_points(location).then(function(data) {
+                    allData[locationkey] = data;
+                    deffered2.resolve();
+                 })
             }
             return deffered2.promise;
         });
@@ -123,49 +122,6 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         return deffered.promise;
     };
 
- this.get_location_aggregations = function(key,location,FeatureCollection){    
-        var targetUrls = [];
-        var aggregation = [];
-        var baseURL = '';
-        var baseProperty = '';
-        if (key ==='region') 
-            { baseURL = ''; baseProperty ='Reg_2011';}
-        if (key ==='district') 
-            {baseURL =location.region+', ';baseProperty ='DNAME_2006';}
-        if (key ==='subcounty') 
-            {baseURL = location.region+', '+location.district+', ';baseProperty ='SNAME_2010';}
-
-        
-
-        $.each(FeatureCollection.features,function(index,feature){
-            var property = feature.properties[baseProperty].toLowerCase();
-            var locator = baseURL+property;
-            targetUrls.push([property,locator]);            
-        });
-
-        
-        var deffered = $q.defer();   
-        $.each(targetUrls,function(ind,locator){            
-            $http({
-            method: 'GET',
-            url: "/aggregation/" +'UGANDA, '+locator[1],
-            cache: true})
-                .success(function(data, status, headers, config) {                                                                        
-                    aggregation.push([locator[1],data]);                 
-                 });           
-        });
-
-        var interval = setInterval(function(){
-            if(aggregation.length == targetUrls.length){                       
-                deffered.resolve(aggregation);
-                clearInterval(interval);
-            }
-        },20);
-        
-        return deffered.promise;  
-
-    }
-
     this.subcounties_geojson = function(district_name) {
         var deffered = $q.defer();
 
@@ -179,13 +135,14 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         return deffered.promise;
     };
 
-    this.parishes_geojson = function(district_name) {
+    this.parishes_geojson = function(district) {
         var deffered = $q.defer();
 
         parishesCallback = function(data) {
             deffered.resolve(data);
         }
-        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_parish_2011_50" + "&outputFormat=json&propertyName=the_geom,DNAME_2010,SNAME_2010,PNAME_2006,Reg_2011,SUBREGION&format_options=callback:parishesCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district_name.toUpperCase() + "</Literal></PropertyIsEqualTo></Filter>";
+
+        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_parish_2011_50" + "&outputFormat=json&propertyName=the_geom,DNAME_2010,SNAME_2010,PNAME_2006,Reg_2011,SUBREGION&format_options=callback:parishesCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district.toUpperCase() + "</Literal></PropertyIsEqualTo></Filter>";
 
         $http.jsonp(url, {
             cache: true
@@ -193,13 +150,21 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         return deffered.promise;
     };
 
-    this.water_points = function(district_name) {
+    this.water_points = function(location) {
         var deffered = $q.defer();
 
         water_pointsCallback = function(data) {
-            deffered.resolve(data);
+
+            var parish_points = $.grep(data.features, function(feature, index) {
+                return feature.properties["SNAME_2010"].toLowerCase() == location.subcounty && feature.properties["PNAME_2006"].toLowerCase() == location.parish;
+            });
+
+            deffered.resolve({
+                type: "FeatureCollection",
+                features: parish_points
+            });
         }
-        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:water_points_replottted" + "&outputFormat=json&propertyName=the_geom,District,SubcountyN,ParishName,SourceType," + "Management,Functional&format_options=callback:water_pointsCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>District</PropertyName><Literal>" + district_name.toUpperCase() + "</Literal></PropertyIsEqualTo>" + "</Filter>";
+        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:water_points_replottted" + "&outputFormat=json&propertyName=the_geom,District,SubcountyN,ParishName,SourceType,SNAME_2010,PNAME_2006,Management,Functional&format_options=callback:water_pointsCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>District</PropertyName><Literal>" + location.district.toUpperCase() + "</Literal></PropertyIsEqualTo>" + "</Filter>";
 
         $http.jsonp(url, {
             cache: true

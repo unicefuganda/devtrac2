@@ -1,16 +1,16 @@
 Feature: Map Markers
  
-# Scenario: Show Water point Marker Summary Info
-# Given that I am a regular user
-# When I open dashboard for "Acholi, Gulu, Palaro"
-# Then the "water-point" layer for "Acholi, Gulu" is displayed
-# And I hover over a "water-point" marker at "3.1917, 32.3581" 
-# Then the popup should have content: 
-#     """
-#     Deep Borehole Water Point
-#     Functional: Functional (in use)
-#     Management: Communal
-#     """
+Scenario: Show Water point Marker Summary Info
+Given that I am a regular user
+When I open dashboard for "Acholi, Gulu, Palaro, Mede"
+Then the "water-point-point" layer for "Acholi, Gulu, Palaro, Mede" is displayed
+And I hover over a "water-point-point" marker at "3.1917, 32.3581" 
+Then the popup should have content: 
+    """
+    Deep Borehole Water Point
+    Functional: Functional (in use)
+    Management: Communal
+    """
    
 Scenario: Cluster Water Point markers
 Given that I am a regular user

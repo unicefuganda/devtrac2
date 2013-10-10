@@ -167,7 +167,7 @@ font-weight: 500;
   left: -40px;
 }
 
-.water-point-icon {
+.water-point-point-icon {
   background-color: rgba(0, 0, 255, 0.6); 
 }
 
@@ -206,7 +206,7 @@ font-weight: 500;
 }
 
 
-.health-center-icon
+.health-center-point-icon
 {
   background-color: rgba(153, 51, 102, 0.5);
 }
@@ -216,7 +216,7 @@ font-weight: 500;
   background-color: rgba(211, 242, 53, 0.65);
 }
 
-.school-icon
+.school-point-icon
 {
   background-color: rgba(211, 242, 53, 0.9);
 }

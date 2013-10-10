@@ -135,7 +135,21 @@ DT.LayerOptions = {
     },
     "water-point": {
         name: "water-point",
-        type: "points",
+        type: "aggregate",
+        
+    },
+    "health-center": {
+        name: "health-center",
+        type: "aggregate"
+    },
+    "school": {
+        name: "school",
+        type: "aggregate",
+        
+    },
+    "water-point-point": {
+        name: "water-point-point",
+        type: "point",
         summaryInformation: function(properties) {
             return {
                 title: properties.SourceType + " Water Point",
@@ -144,11 +158,24 @@ DT.LayerOptions = {
                     ["Management", properties.Management],
                 ]
             }
-        }   
+        } 
     },
-    "health-center": {
-        name: "health-center",
-        type: "points",
+    "school-point": {
+        name: "school-point",
+        type: "point",       
+        summaryInformation: function(properties) { 
+            return {
+                title: properties.SCHOOLNAME + " School",
+                lines: [
+                    ["Owner", properties.MAPSCHLOWN],
+                    ["Type", properties.SCHOOLTYPE],
+                ]
+            }
+        }
+    },
+    "health-center-point": {
+        name: "health-center-point",
+        type: "point",
         summaryInformation: function(properties) { 
             if (!properties.Name)
                 return { title: "Health Center", lines: []};
@@ -161,17 +188,4 @@ DT.LayerOptions = {
             }
         }
     },
-    "school": {
-        name: "school",
-        type: "points",
-        summaryInformation: function(properties) { 
-            return {
-                title: properties.SCHOOLNAME + " School",
-                lines: [
-                    ["Owner", properties.MAPSCHLOWN],
-                    ["Type", properties.SCHOOLTYPE],
-                ]
-            }
-        }
-    }
 }
