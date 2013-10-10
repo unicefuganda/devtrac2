@@ -84,8 +84,8 @@ class Page:
     def hover_over_popup(self, layer, lat, lng):
         self.browser.execute_script("window.map.openPopupForMarkerAt('%s', '%s', '%s');" % (layer, lat, lng))
 
-    def cluster_count(self, layer, lat, lng):
-        content = self.browser.find_by_css(".%s-cluster-icon [data-lat='%s'][data-lng='%s']" % (layer, lat, lng))
+    def marker_count(self, layer, locator):
+        content = self.browser.find_by_css(".%s-cluster-icon [data-locator='%s']" % (layer, locator.lower()))
         return int(content.text)
 
     def popup_content(self):

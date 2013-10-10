@@ -79,7 +79,7 @@ DT.Map = function(element) {
                 var circleCluster = new L.DivIcon({
                 iconSize: new L.Point([20, 20]),
                 className: layer_info.name +"-cluster-icon cluster-icon medium",
-                html: "<div data-lat='"+ centerPoint.lat.toFixed(4) +"' data-lng='" + centerPoint.lng.toFixed(4) + "'>" 
+                html: "<div data-locator='" + childLocation.getName() + "'>" 
                     + childStats.info[name]
                     + '</div>'
                 });

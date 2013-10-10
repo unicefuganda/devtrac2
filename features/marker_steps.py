@@ -13,9 +13,9 @@ def and_i_hover_over_a_marker_at_lnglat(step, layer, lat, lng):
 def then_the_pop_should_have_content(step):
     assert_equals(world.page.popup_content(), step.multiline);
 
-@step(u'Then the "([^"]*)" cluster marker at "([^"]*), ([^"]*)" is for "([^"]*)" points')
-def then_the_cluster_marker_at_latlng_is_for_num_points(step, layer, lat, lng, num_points):
-    assert_equals(world.page.cluster_count(layer, lat, lng), int(num_points));
+@step(u'Then the "([^"]*)" marker for "([^"]*)" is "([^"]*)" points')
+def then_the_cluster_marker_at_latlng_is_for_num_points(step, layer, locator, num_points):
+    assert_equals(world.page.marker_count(layer, locator), int(num_points));
 
 
 @step(u'When I toggle the \'([^\']*)\' checkbox')
