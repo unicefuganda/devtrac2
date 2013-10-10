@@ -101,7 +101,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
 
         var url = "/static/javascript/geojson/uganda_districts_2011_with_indicators.json";
 
-        $http({method: 'GET', url: url} ).success(function(data) { 
+        $http({method: 'GET', url: url, cache: true} ).success(function(data) { 
             var fitleredData = districtsCallback(data); 
             deffered.resolve(fitleredData);
         });
