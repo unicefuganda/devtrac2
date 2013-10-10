@@ -5,33 +5,51 @@ import json
 
 class AggregationService(object):
 
+    
+    def __init__(self, location_service):
+        self.location_service = location_service
+
+    def find(self, locator, includeChildren = False): 
+        summary = self.__calc_summary(locator)
+
+        if (includeChildren):
+            children = self.location_service.children(locator)
+            if (children != None):
+                children_summaries = [self.__calc_summary(child['_id']) for child in children['children']]
+                summary['children'] = children_summaries
+
+        return summary
+
+    def __calc_summary(self, locator):
+        
+
+        child_count = self.location_service.children(locator)
+        summary =  {
+            "locator": locator,
+            "info": {
+                "health-center": self.location_service.points_count("health_center", locator),
+                "school": self.location_service.points_count("school", locator),
+                "water-point": self.location_service.points_count("water_point", locator)
+            },
+        }
+    
+        if (child_count != None):
+            summary["type"] = child_count["parent_type"]
+            summary['info'][child_count['child_type']] = len(child_count['children']) 
+
+        return summary
+
+class LocationService(object): 
+
     def __init__(self):
         mongo_client = MongoClient()
         self.database = mongo_client.devtrac2
-
-
-    def find(self, locator): 
-        labels = { "region": "Regions", "district": "Districts", "subcounty": "Subcounties", "parish": "Parishes" }
-
-        summary =  {
-            "locator": locator,
-            "info": [
-                ["Health Centers", self.points_count("health_center", locator)],
-                ["Schools", self.points_count("school", locator)],
-                ["Water Points", self.points_count("water_point", locator)]
-            ]
-        }
-
-        child_count = self.child_count(locator)
-        if (child_count != None):
-            summary['info'].append(["%s" % labels[child_count["type"]], child_count["count"]])
-        return summary
 
     def points_count(self, dataset, locator):
         entry = self.database["%s_aggregation" % dataset].find({'_id': locator.upper()})
         return entry[0]['value'] if entry.count() > 0 else 0
 
-    def child_count(self, locator):
+    def children(self, locator):
         levels = ["national", "region", "district", "subcounty", "parish"]
 
         location_arr = locator.split(", ")
@@ -43,8 +61,8 @@ class AggregationService(object):
 
         child_type = levels[len(location_arr)]
 
-        count = self.database.location_tree.find({"type": child_type.lower(), ("location.%s" % location_type.lower()) : location_name.upper() }).count()
-        return { "type": child_type, "count": count }
+        children_entries = self.database.location_tree.find({"type": child_type.lower(), ("location.%s" % location_type.lower()) : location_name.upper() })
+        return {"child_type": child_type, "children": list(children_entries), "parent_type": location_type }
 
 class WFSService(object):
 

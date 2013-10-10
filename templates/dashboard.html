@@ -78,7 +78,7 @@
         <div  ng-show="summary != null" class='container ng-hide' >
           <div class='heading'>{[{location.full_name() }]}</div>
           <div  class='summary-content' >
-            <div ng-repeat="item in summary.info" class="info">
+            <div ng-repeat="item in summary" class="info">
               <label>{[{item[0]}]}</label>
               <span>{[{item[1]}]}</span>
             </div>

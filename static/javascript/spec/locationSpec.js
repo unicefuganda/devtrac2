@@ -35,7 +35,10 @@ describe("Location", function() {
 
         expect(location1.layersToShow([])).toEqual([
             ["region", uganda_location],
-            ["district_outline", uganda_location]
+            ["district_outline", uganda_location],
+            ["health-center", uganda_location],
+            ["school", uganda_location],
+            ["water-point", uganda_location]
         ]);
     });
 
@@ -48,7 +51,8 @@ describe("Location", function() {
             ["district_outline", uganda_location],
             ["district", north_location],
             ["health-center", north_location],
-            ["school", north_location]
+            ["school", north_location],
+            ["water-point", north_location]
         ]);
     });
 
@@ -66,11 +70,10 @@ describe("Location", function() {
             ["region", uganda_location],
             ["district_outline", uganda_location],
             ["district", north_location],
-            ["health-center", north_location],
-            ["school", north_location],
-            ["water-point", gulu_location],
-            ["subcounty", gulu_location]
-            
+            ["subcounty", gulu_location],
+            ["health-center", gulu_location],
+            ["school", gulu_location],
+            ["water-point", gulu_location]
         ]);
     });
 
@@ -87,9 +90,9 @@ describe("Location", function() {
         expect(location1.layersToShow(["water-point", "district"])).toEqual([
             ["region", uganda_location],
             ["district_outline", uganda_location],
-            ["health-center", north_location],
-            ["school", north_location],
-            ["subcounty", gulu_location]
+            ["subcounty", gulu_location],
+            ["health-center", gulu_location],
+            ["school", gulu_location],
         ]);
     });
 
@@ -105,18 +108,24 @@ describe("Location", function() {
         var gulu_location = new DT.Location({region: "north", district: "gulu" });
         var patiko_location = new DT.Location({region: "north", district: "gulu", subcounty: "patiko" });
 
-        expect(location1.layersToShow([])).toEqual([
+        var expected_layers = [
             ["region", uganda_location],
             ["district_outline", uganda_location],
             ["district", north_location],
-            ["health-center", north_location],
-            ["school", north_location],
-            ["water-point", gulu_location],
             ["subcounty", gulu_location],
-            ["parish", patiko_location]
-
-        ]);
+            ["parish", patiko_location],
+            ["health-center", patiko_location],
+            ["school", patiko_location],
+            ["water-point", patiko_location]
+        ]
+        assertLayers(location1.layersToShow([]), expected_layers);
     });
+
+    function assertLayers(result, expected) {
+        result_pp = $.map(result, function(layer_info) { return layer_info[0] + " - " +layer_info[1].getName() });
+        expected_pp = $.map(expected, function(layer_info) { return layer_info[0] + " - " + layer_info[1].getName() });
+        expect(result_pp).toEqual(expected_pp);
+    }
 
     it("should show layer subcounties, water-points and parishes for parish", function() {
         var location1 = new DT.Location({
@@ -130,15 +139,16 @@ describe("Location", function() {
         var gulu_location = new DT.Location({ region: "north", district: "gulu" });
         var patiko_location = new DT.Location({ region: "north", district: "gulu", subcounty: "patiko" });
 
+
         expect(location1.layersToShow([])).toEqual([
             ["region", uganda_location],
             ["district_outline", uganda_location],
             ["district", north_location],
-            ["health-center", north_location],
-            ["school", north_location],
-            ["water-point", gulu_location],
             ["subcounty", gulu_location],
-            ["parish", patiko_location]
+            ["parish", patiko_location],
+            ["health-center", location1],
+            ["school", location1],
+            ["water-point", location1],
 
         ]);
     });
@@ -206,7 +216,17 @@ describe("Location", function() {
         });
 
         expect(guluLocation.full_name()).toBe("a parish parish");
-        
+    })
+
+    it("shoud parse Location from name", function() {
+        expect(DT.Location.fromName("Uganda")).toEqual(new DT.Location({}));
+        expect(DT.Location.fromName("")).toEqual(new DT.Location({}));
+        expect(DT.Location.fromName("Uganda, a_region")).toEqual(new DT.Location({region: "a_region"}));
+        expect(DT.Location.fromName("Uganda, a_region, a_district")).toEqual(new DT.Location({region: "a_region", district: "a_district"}));
+        expect(DT.Location.fromName("a_region, a_district")).toEqual(new DT.Location({region: "a_region", district: "a_district"}));
+        expect(DT.Location.fromName("Uganda, a_region, a_district, a_subcounty")).toEqual(new DT.Location({region: "a_region", district: "a_district", subcounty: "a_subcounty"}));
+        expect(DT.Location.fromName("Uganda, a_region, a_district, a_subcounty, a_parish")).toEqual(new DT.Location({region: "a_region", district: "a_district", subcounty: "a_subcounty", parish: "a_parish"}));
+
     })
 
 });

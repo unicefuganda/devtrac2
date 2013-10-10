@@ -13,11 +13,18 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         if (newLocation == null)
             return;
         summaryService.find(newLocation.getName()).then(function(summary) {
-            $scope.summary = summary;    
+
+            var summaryLabels = [];
+            $.each(DT.AgregationConfig.labels, function(index, label) {
+
+                if (summary.info[label.key] != null)
+                    summaryLabels.push([label.label, label.formatter(summary.info[label.key]) ])
+            });
+
+            $scope.summary = summaryLabels;
         });
 
         indicatorService.find(newLocation).then(function(indicatorSummary) {
-            
             $scope.indicatorSummary = indicatorSummary;
         });
     });

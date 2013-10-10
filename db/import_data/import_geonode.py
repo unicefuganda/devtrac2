@@ -49,7 +49,7 @@ def import_locationTree(wfs_service, db):
             "region":  feature['properties']['Reg_2011'] 
         };
 
-        region = { "type": "region", "location": location, "_id": feature['properties']["Reg_2011"] }
+        region = { "type": "region", "location": location, "_id": "UGANDA, " + feature['properties']["Reg_2011"] }
         insert_if_not_exists(region)
 
         location['district'] = feature['properties']['DNAME_2010']

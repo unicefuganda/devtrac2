@@ -164,6 +164,7 @@ font-weight: 500;
 
 .water-point-cluster-icon {
   background-color: rgba(116, 223, 252, 0.6);
+  left: -40px;
 }
 
 .water-point-icon {
@@ -201,7 +202,9 @@ font-weight: 500;
 .health-center-cluster-icon
 {
   background-color: rgba(153, 51, 102, 0.65);
+  left: 40px;
 }
+
 
 .health-center-icon
 {

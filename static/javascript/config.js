@@ -27,3 +27,15 @@ DT.IndicatorConfig.prototype.format = function(key, value) {
     return [indicatorConfig.label, indicatorConfig.formatter(value)]
 };
 
+DT.AgregationConfig = {}
+DT.AgregationConfig.labels = [
+    { key: "health-center", label: "Health Centers", formatter: DT.NumberFormatter},
+    { key: "school", label: "Schools", formatter: DT.NumberFormatter},
+    { key: "water-point", label: "Water Points", formatter: DT.NumberFormatter},
+    { key: "region", label: "Regions", formatter: DT.NumberFormatter},
+    { key: "district", label: "Districts", formatter: DT.NumberFormatter},
+    { key: "subcounty", label: "Subcounties", formatter: DT.NumberFormatter},
+    { key: "parish", label: "Parishes", formatter: DT.NumberFormatter}
+]
+
+

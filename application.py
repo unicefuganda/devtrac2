@@ -56,7 +56,7 @@ def dashboards(region="", district="", subcounty="", parish=""):
 
 @app.route("/aggregation/<locator>")
 def aggregation(locator):
-	result = services.AggregationService().find(locator)
+	result = services.AggregationService(services.LocationService()).find(locator, request.args.get('include_children') == "true")
 	return Response(dumps(result), mimetype='application/json')
 
 @app.route("/stub_tiles/<s>/<x>/<y>/<z>.png")

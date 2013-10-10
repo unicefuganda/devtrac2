@@ -40,7 +40,6 @@ DT.Map = function(element) {
     map.addLayer(osm);
     self.layerMap = new DT.LayerMap();
     window.mapmap = map;
-    window.badgeLayerGroup = null;   
 
     function unselect() {
         $.each(self.layerMap.allChildLayers(), function(index, layer) {
@@ -50,8 +49,7 @@ DT.Map = function(element) {
         DT.timings["unselectend"] = new Date().getTime();
     }
 
-    function addBoundaryLayer(name, location, features, layer_info,aggregate) {  
-    window.badgeMarkers = {'school' : [],'health-center' : [],'water-point' : []};                                
+    function addBoundaryLayer(name, location, features, layer_info) {  
         var baseLayer = L.geoJson(features, {
             onEachFeature: function(data, layer) {  
                 var options = $.extend({}, layer_info, {
@@ -61,168 +59,43 @@ DT.Map = function(element) {
                     location: layer_info.getLocation(data),
                 });
                 
-                if (aggregate !==undefined) {                    
-                    negotiateAddLayerBadges(layer,aggregate,layer_info.getLocation(data));                   
-                }
-                
                 var layer = new DT.Layer(layer, options, data.properties, map);                               
                 self.layerMap.addChildLayer(name, location, options.location, layer);
             },
         });            
         self.layerMap.addLayer(name, location, baseLayer);
         map.addLayer(baseLayer, true);
-        addBadgesToMap(location);
     }
-
-    function addBadgesToMap(location){  
-    if (location.region !== null) {
-        $.each(window.badgeMarkers,function(key,value){
-            var markerGroup = L.layerGroup(value);
-            self.layerMap.addLayer(key,location,markerGroup);
-            map.addLayer(markerGroup,true);            
-            });
-    } }
+    function addPointsLayer(name, location, data, layer_info) {
+        var layerGroup = L.layerGroup();
 
 
-    function negotiateAddLayerBadges(childLayer,aggregateList,location){            
-        $.each(aggregateList,function(index,aggregate){ 
-        if (aggregate[0] == location.getName()) {            
-            addLayerBadges(childLayer,aggregate);            
-        }     
-        });    
-    }
+        $.each(data.children, function(index, childStats) {
+            var childLocation = DT.Location.fromName(childStats.locator);
+            var childLayer = self.layerMap.findChildLayer(childLocation);
+            if (childLayer != null) {
 
-    function negotiateAddLayerPoints(name, location, features, layer_info){                  
-        if (location.parish !=null) {       
-       addPointsLayer(name, location, features, layer_info);
-        }
-    }
-
-function addLayerBadges(childLayer,aggregate){ 
-       var bounds = childLayer.getBounds();
-       var center = bounds.getCenter(); 
-       var sw = bounds.getSouthWest();
-       var ne = bounds.getNorthEast();       
-       var coords = [[center.lng,center.lat],[ne.lng,ne.lat],[sw.lng,sw.lat]];              
-       var classNames = {
-        'Schools':'school',
-        'Health Centers':'health-center',
-        'Water Points':'water-point'};
-       var map_layers = ['Health Centers','Schools','Water Points']; 
-       var count = 0;         
-
-        $.each(aggregate[1].info,function(index,info){
-            
-        if (info[0] =='Water Points' || info[0] =='Schools' || info[0] =='Health Centers') {
-             var coordinate = [coords[count][0],coords[count][1]];                          
-             //var coordinate = [center.lng,center.lat];
-             var circleCluster = new L.DivIcon({
+                var centerPoint = childLayer.getCenter();   
+                var circleCluster = new L.DivIcon({
                 iconSize: new L.Point([20, 20]),
-                className: classNames[info[0]] +"-cluster-icon cluster-icon medium",
-                html: "<div data-lat='"+ coordinate[1].toFixed(4) +"' data-lng='" + coordinate[0].toFixed(4) + "'>" 
-                    + info[1]
+                className: layer_info.name +"-cluster-icon cluster-icon medium",
+                html: "<div data-lat='"+ centerPoint.lat.toFixed(4) +"' data-lng='" + centerPoint.lng.toFixed(4) + "'>" 
+                    + childStats.info[name]
                     + '</div>'
                 });
-             var geojsonMarkerOptions = {
-                zIndexOffset: 10000,
-                icon: circleCluster
-            };          
-            var marker = new L.Marker(new L.LatLng(coordinate[1], coordinate[0]), geojsonMarkerOptions);            
-            window.badgeMarkers[classNames[info[0]]].push(marker);
-               count++; 
-            }   
-        });        
-    }
-
-  
-
-    function addPointsLayer(name, location, features, layer_info) {
-        // TODO: refactor        
-        var markerPopupMessage = function(summaryInformation) {
-
-            var message = '<h4>' + summaryInformation.title + '</h4>';
-            $.each(summaryInformation.lines, function(index, line) {
-                message += '<label>' + line[0] + ':</label> ' + line[1] + '</br>';    
-            })
-            return message;
-        };
-
-        var markers = L.markerClusterGroup({
-            showCoverageOnHover: false,
-            zoomToBoundsOnClick: false,
-            spiderfyOnMaxZoom: false,
-            removeOutsideVisibleBounds: false,
-            disableClusteringAtZoom: 13,
-
-            iconCreateFunction: function(cluster) {
-                var latlng = cluster.getLatLng()
-                var childCount = cluster.getChildCount();
-
-                var childCount = cluster.getChildCount();
-
-                var className = "small";
-                   if (childCount > 10)
-                       className = "medium";
-                   if (childCount > 25)
-                       className = "large";
-                   if (childCount > 50)
-                       className = "extra-large";
-                return new L.DivIcon({
-                    iconSize: new L.Point([20, 20]),
-                    className: layer_info.name +"-cluster-icon cluster-icon " + className,
-
-                    html: "<div data-lat='"+ latlng.lat.toFixed(4) +"' data-lng='" + latlng.lng.toFixed(4) + "'>" 
-                        + cluster.getChildCount()
-                        + '</div>'
-                });
+                 var geojsonMarkerOptions = {
+                    zIndexOffset: 10000,
+                    icon: circleCluster
+                };        
+                var marker = new L.Marker(centerPoint, geojsonMarkerOptions);
+                layerGroup.addLayer(marker);
             }
         });
 
-        L.Icon.Default.imagePath = '/static/javascript/lib/images/';
-        window.markers = []
-
-        $.each(features.features, function(index, feature) {
-            var coordinates = feature.geometry.coordinates;
-
-
-            var circleIcon = new L.DivIcon({
-                iconSize: new L.Point([10, 10]),
-                className: layer_info.name + "-icon marker-icon ",
-                html: "<div data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'></div>",
-                // html:"",
-                popupAnchor: [5, -10]
-            });
-            var geojsonMarkerOptions = {
-                zIndexOffset: 10000,
-                icon: circleIcon
-            };
-          
-            var marker = new L.Marker(new L.LatLng(coordinates[1], coordinates[0]), geojsonMarkerOptions);
-
-            window.markers.push(marker);
-            // window.marker = marker;
-            var popup = L.popup({
-                className: "marker-popup" ,
-                closeButton: false
-            }).setContent(markerPopupMessage(layer_info.summaryInformation(feature.properties)));
-
-            marker.bindPopup(popup)
-                .on('mouseover', function() {
-                    marker.openPopup();
-                })
-                .on('mouseout', function() {
-                    marker.closePopup();
-                })
-            window.basemarkers = markers;
-            markers.addLayer(marker);
-
-
-        });
-
-        self.layerMap.addLayer(name, location, markers);
-        map.addLayer(markers);
+        self.layerMap.addLayer(name, location, layerGroup);
+        map.addLayer(layerGroup);
     }
-
+  
     var removeWMSLayer = function() {
         if (self.wmsLayer != null) {
             map.removeLayer(self.wmsLayer);
@@ -230,13 +103,102 @@ function addLayerBadges(childLayer,aggregate){
         };
     }
 
+
+    // function addPointsLayer(name, location, features, layer_info) {
+    //     // TODO: refactor        
+    //     var markerPopupMessage = function(summaryInformation) {
+
+    //         var message = '<h4>' + summaryInformation.title + '</h4>';
+    //         $.each(summaryInformation.lines, function(index, line) {
+    //             message += '<label>' + line[0] + ':</label> ' + line[1] + '</br>';    
+    //         })
+    //         return message;
+    //     };
+
+    //     var markers = L.markerClusterGroup({
+    //         showCoverageOnHover: false,
+    //         zoomToBoundsOnClick: false,
+    //         spiderfyOnMaxZoom: false,
+    //         removeOutsideVisibleBounds: false,
+    //         disableClusteringAtZoom: 13,
+
+    //         iconCreateFunction: function(cluster) {
+    //             var latlng = cluster.getLatLng()
+    //             var childCount = cluster.getChildCount();
+
+    //             var childCount = cluster.getChildCount();
+
+    //             var className = "small";
+    //                if (childCount > 10)
+    //                    className = "medium";
+    //                if (childCount > 25)
+    //                    className = "large";
+    //                if (childCount > 50)
+    //                    className = "extra-large";
+    //             return new L.DivIcon({
+    //                 iconSize: new L.Point([20, 20]),
+    //                 className: layer_info.name +"-cluster-icon cluster-icon " + className,
+
+    //                 html: "<div data-lat='"+ latlng.lat.toFixed(4) +"' data-lng='" + latlng.lng.toFixed(4) + "'>" 
+    //                     + cluster.getChildCount()
+    //                     + '</div>'
+    //             });
+    //         }
+    //     });
+
+    //     L.Icon.Default.imagePath = '/static/javascript/lib/images/';
+    //     window.markers = []
+
+    //     $.each(features.features, function(index, feature) {
+    //         var coordinates = feature.geometry.coordinates;
+
+
+    //         var circleIcon = new L.DivIcon({
+    //             iconSize: new L.Point([10, 10]),
+    //             className: layer_info.name + "-icon marker-icon ",
+    //             html: "<div data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'></div>",
+    //             // html:"",
+    //             popupAnchor: [5, -10]
+    //         });
+    //         var geojsonMarkerOptions = {
+    //             zIndexOffset: 10000,
+    //             icon: circleIcon
+    //         };
+          
+    //         var marker = new L.Marker(new L.LatLng(coordinates[1], coordinates[0]), geojsonMarkerOptions);
+
+    //         window.markers.push(marker);
+    //         // window.marker = marker;
+    //         var popup = L.popup({
+    //             className: "marker-popup" ,
+    //             closeButton: false
+    //         }).setContent(markerPopupMessage(layer_info.summaryInformation(feature.properties)));
+
+    //         marker.bindPopup(popup)
+    //             .on('mouseover', function() {
+    //                 marker.openPopup();
+    //             })
+    //             .on('mouseout', function() {
+    //                 marker.closePopup();
+    //             })
+    //         window.basemarkers = markers;
+    //         markers.addLayer(marker);
+
+
+    //     });
+
+    //     self.layerMap.addLayer(name, location, markers);
+    //     map.addLayer(markers);
+    // }
+
+
     return {
-        addLayer: function(name, location, features, layer_info,aggregate) {
+        addLayer: function(name, location, data, layer_info) {
 
             if (layer_info.type == "boundary") {
-                addBoundaryLayer(name, location, features, layer_info,aggregate);
+                addBoundaryLayer(name, location, data, layer_info);
             } else {
-               negotiateAddLayerPoints(name, location, features, layer_info);
+               addPointsLayer(name, location, data, layer_info);
             }
         },
         orderLayers: function(layerOrder) {
@@ -402,9 +364,14 @@ DT.Layer = function(leafletLayer, options, featureProperties, map) {
             self.highlighted = false;
         }
     };
+
+    self.getCenter = function() {
+        return leafletLayer.getBounds().getCenter();
+    }
     self.location = options.location;
 
     return {
+        getCenter: self.getCenter,
         unselect: self.unselect,
         leafletLayer: leafletLayer,
         hierarchy: self.hierarchy,

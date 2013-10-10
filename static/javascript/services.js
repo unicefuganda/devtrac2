@@ -1,4 +1,4 @@
-angular.module("dashboard").service('districtService', function($http, $filter, $rootScope, $q) {
+angular.module("dashboard").service('districtService', function($http, $filter, $rootScope, $q, summaryService) {
     var self = this;
     if (typeof(callbacks) == 'undefined') {
         callbacks = {}
@@ -16,21 +16,15 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
             var location = locationkey[1];
 
             if (key == "region") {
+
                 self.regions_geojson().then(function(data) {
-                    self.get_location_aggregations(key,location,data).then(function(summary){
-                        allData['summary'] = summary;                        
-                        allData[locationkey] = data;
-                        deffered2.resolve();
-                    });
-                                                                 
+                    allData[locationkey] = data;
+                    deffered2.resolve();     
                 });
             } else if (key == "district") {
                 self.districts(location.region).then(function(data) {
-                   self.get_location_aggregations(key,location,data).then(function(summary){    
-                        allData['summary'] = summary; 
-                        allData[locationkey] = data;
-                        deffered2.resolve();
-                    });   
+                    allData[locationkey] = data;
+                    deffered2.resolve();
                 });
             } else if (key == "district_outline") {
                 self.districts().then(function(data) {
@@ -40,11 +34,13 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
             } else if (key == "subcounty") {
                 self.subcounties_geojson(location.district)
                     .then(function(data) {
-                       self.get_location_aggregations(key,location,data).then(function(summary){
-                        allData['summary'] = summary;                        
+                       // self.get_location_aggregations(key,location,data).then(function(summary){
+                        // allData['summary'] = summary;                        
+                        // allData[locationkey] = data;
+                        // deffered2.resolve();
+                    // });
                         allData[locationkey] = data;
                         deffered2.resolve();
-                    });
 
                     });
 
@@ -62,29 +58,21 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                         deffered2.resolve();
                     });
             } else if (key == "water-point") {
-                 allData[locationkey] = [];
-                 deffered2.resolve();
-                // self.water_points(location.district)
-                //     .then(function(data) {
-                //         allData[locationkey] = [];
-                //         deffered2.resolve();
-                //     });
+                summaryService.find(location.getName(), true).then(function(data) {
+                    allData[locationkey] = data;
+                    deffered2.resolve();
+                 })
+
             } else if (key == "health-center") {
-                allData[locationkey] = [];
-                deffered2.resolve();
-                // self.health_centers(location.region)
-                //     .then(function(data) {
-                //         allData[locationkey] = [];
-                //         deffered2.resolve();
-                //     });
+                summaryService.find(location.getName(), true).then(function(data) {
+                    allData[locationkey] = data;
+                    deffered2.resolve();
+                 })
             } else if (key == "school") {
-                 allData[locationkey] = [];
-                deffered2.resolve();
-                // self.schools(location.region)
-                //     .then(function(data) {
-                //         allData[locationkey] = [];
-                //         deffered2.resolve();
-                //     });
+                summaryService.find(location.getName(), true).then(function(data) {
+                    allData[locationkey] = data;
+                    deffered2.resolve();
+                })
             }
             return deffered2.promise;
         });
@@ -268,13 +256,14 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
 })
 .service("summaryService", function($q, $http) {
     this.find = function (locator) {
+
         var deffered = $q.defer();
 
         locator = locator == "" ? "UGANDA" : "UGANDA, " + locator
 
         $http({
             method: 'GET',
-            url: "/aggregation/" + locator,
+            url: "/aggregation/" + locator + "?include_children=" + true,
             cache: true})
                 .success(function(data, status, headers, config) {
                     deffered.resolve(data);

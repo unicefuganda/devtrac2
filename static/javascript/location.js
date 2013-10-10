@@ -13,7 +13,6 @@ DT.Location.prototype.equals = function(otherLocation) {
         this.district == otherLocation.district &&
         this.subcounty == otherLocation.subcounty &&
         this.parish == otherLocation.parish;
-
 };
 DT.Location.prototype.toString = function(){
     return this.getName();
@@ -24,9 +23,6 @@ DT.Location.prototype.layersToShow = function(filteredKeys) {
     if (this.region != null) {
         var regionLocation = new DT.Location({ region: this.region });
         layers.push(["district", regionLocation]);
-        
-        layers.push(["health-center", regionLocation]);
-        layers.push(["school", regionLocation]);
     }
 
     if (this.district != null) {
@@ -34,7 +30,6 @@ DT.Location.prototype.layersToShow = function(filteredKeys) {
             region: this.region,
             district: this.district
         });
-        layers.push(["water-point", districtLocation]);
         layers.push(["subcounty", districtLocation]);
     }
 
@@ -46,6 +41,10 @@ DT.Location.prototype.layersToShow = function(filteredKeys) {
         });
         layers.push(["parish", subcountyLocation]);
     }
+
+    layers.push(["health-center", this]);
+    layers.push(["school", this]);
+    layers.push(["water-point", this]);
 
     return $.grep(layers, function(locationKey) { 
         return $.inArray(locationKey[0], filteredKeys) == -1;
@@ -72,6 +71,19 @@ DT.Location.prototype.getName = function(location) {
         return this.region;
     return "";
 };
+
+DT.Location.fromName = function(name) {
+    var name = name.toUpperCase();
+    name = name.replace(/^UGANDA(, )?/g, '');
+    area_names = name.split(", ")
+    location_options = {}
+
+    $.each(DT.Location.levels, function(index, level) {
+        location_options[level] = area_names[index];
+    });
+    
+    return new DT.Location(location_options);
+}
 DT.Location.compareLayerKeys = function(layerKeys, otherlayerKeys) {
 
     var keyExists = function(key, keys) {
@@ -119,15 +131,16 @@ DT.Location.prototype.urlForLevel = function(level) {
         return "/";
     }
 };
+
+DT.Location.levels = ["region", "district", "subcounty", "parish"]
 DT.Location.prototype.level = function() {
-    var levels = ["region", "district", "subcounty", "parish"]
     currentLevel = "national";
 
-    for (var i = 0; i < levels.length; i++) {
-        if (this[levels[i]] == null) {
+    for (var i = 0; i < DT.Location.levels.length; i++) {
+        if (this[DT.Location.levels[i]] == null) {
             break;
         } 
-        currentLevel = levels[i];
+        currentLevel = DT.Location.levels[i];
 
     };
     return currentLevel;

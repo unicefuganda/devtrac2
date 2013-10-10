@@ -8,11 +8,11 @@ Then The following information will be shown contextual panel
     """
     Uganda
     Health Centers
-    4437
+    4,437
     Schools
-    19665
+    19,665
     Water Points
-    81543
+    81,543
     Regions
     13
     """
@@ -35,7 +35,7 @@ Then The following information will be shown contextual panel
     Schools
     663
     Water Points
-    4788
+    4,788
     Districts
     8
     """
@@ -52,7 +52,7 @@ Then The following information will be shown contextual panel
     Schools
     210
     Water Points
-    1046
+    1,046
     Subcounties  
     15 
     2011 Population
