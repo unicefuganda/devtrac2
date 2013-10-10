@@ -145,10 +145,8 @@ describe("Location", function() {
             ["district_outline", uganda_location],
             ["district", north_location],
             ["subcounty", gulu_location],
-            ["parish", patiko_location],
-            ["health-center", location1],
-            ["school", location1],
-            ["water-point", location1],
+            ["parish", patiko_location],],
+            ["water-point-point", location1],
 
         ]);
     });
