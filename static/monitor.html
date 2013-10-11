@@ -41,8 +41,8 @@
                     var travisProject = "unicefuganda/devtrac2"
                     var lastBuildNumber = 0
 
-                    startPoll("https://api.travis-ci.org/repos/" + travisProject, function(data) { 
-                        if (lastBuildNumber != data.last_build_number)
+                    startPoll("https://api.travis-ci.org/repos/" + travisProject + ".json", function(data) { 
+                        if (lastBuildNumber != data.last_build_number && data.last_build_status != null)
                         {
                             lastBuildNumber = data.last_build_number;
                             var status = data.last_build_status == 0 ? "Success" : "Failed";
