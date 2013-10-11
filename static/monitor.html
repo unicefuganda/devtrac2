@@ -3,8 +3,7 @@
         <script type="text/javascript" src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
 
         <script type="text/javascript">
-
-            
+            var travisProject = "unicefuganda/devtrac2"
 
             function showNotification(message) {
                 var notification = window.webkitNotifications.createNotification(
@@ -13,6 +12,7 @@
                   message 
                 );
 
+                notification.onclick = function () { window.open("https://travis-ci.org/" + travisProject); } 
                 notification.show();
             } 
 
@@ -38,7 +38,7 @@
 
                     $(this).text("Monitoring is ON");
                     showNotification("Monitoring is ON");
-                    var travisProject = "unicefuganda/devtrac2"
+                    
                     var lastBuildNumber = 0
 
                     startPoll("https://api.travis-ci.org/repos/" + travisProject + ".json", function(data) { 
