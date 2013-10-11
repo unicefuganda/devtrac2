@@ -72,6 +72,16 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                     allData[locationkey] = data;
                     deffered2.resolve();
                  })
+            } else if (key == "health-center-point") {
+                self.health_centers(location).then(function(data) {
+                    allData[locationkey] = data;
+                    deffered2.resolve();
+                 })
+            } else if (key == "school-point") {
+                self.schools(location).then(function(data) {
+                    allData[locationkey] = data;
+                    deffered2.resolve();
+                 })
             }
             return deffered2.promise;
         });
@@ -172,13 +182,20 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         return deffered.promise;
     };
 
-    this.health_centers = function(region_name) {
+    this.health_centers = function(location) {
         var deffered = $q.defer();
 
         health_centersCallback = function(data) {
-            deffered.resolve(data);
+            var parish_points = $.grep(data.features, function(feature, index) {
+                return feature.properties["SNAME_2010"].toLowerCase() == location.subcounty && feature.properties["PNAME_2006"].toLowerCase() == location.parish;
+            });
+
+            deffered.resolve({
+                type: "FeatureCollection",
+                features: parish_points
+            });
         }
-        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_health_centers_replotted" + "&outputFormat=json" + "&format_options=callback:health_centersCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>Reg_2011</PropertyName><Literal>" + region_name.toUpperCase() + "</Literal></PropertyIsEqualTo>" + "</Filter>";
+        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_health_centers_replotted" + "&outputFormat=json" + "&format_options=callback:health_centersCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + location.district.toUpperCase() + "</Literal></PropertyIsEqualTo>" + "</Filter>";
 
         $http.jsonp(url, {
             cache: true
@@ -186,13 +203,20 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         return deffered.promise;
     };
 
-    this.schools = function(region_name) {
+    this.schools = function(location) {
         var deffered = $q.defer();
 
         schoolsCallback = function(data) {
-            deffered.resolve(data);
+            var parish_points = $.grep(data.features, function(feature, index) {
+                return feature.properties["SNAME_2010"].toLowerCase() == location.subcounty && feature.properties["PNAME_2006"].toLowerCase() == location.parish;
+            });
+
+            deffered.resolve({
+                type: "FeatureCollection",
+                features: parish_points
+            });
         }
-        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_schools_with_regions" + "&outputFormat=json" + "&format_options=callback:schoolsCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>Reg_2011</PropertyName><Literal>" + region_name.toUpperCase() + "</Literal></PropertyIsEqualTo>" + "</Filter>";
+        var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_schools_with_regions" + "&outputFormat=json" + "&format_options=callback:schoolsCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + location.district.toUpperCase() + "</Literal></PropertyIsEqualTo>" + "</Filter>";
 
         $http.jsonp(url, {
             cache: true

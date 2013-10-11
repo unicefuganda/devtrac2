@@ -53,6 +53,8 @@ DT.Location.prototype.layersToShow = function(filteredKeys) {
         layers.push(["water-point", this]);
     } else {
         layers.push(["water-point-point", this]);
+        layers.push(["school-point", this]);
+        layers.push(["health-center-point", this]);
     }
 
     return $.grep(layers, function(locationKey) {

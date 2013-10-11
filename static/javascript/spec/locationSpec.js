@@ -21,7 +21,7 @@ describe("Location", function() {
         var location2 = new DT.Location({
             district: "test_district",
             subcounty: "test_subcounty",
-            parish: "test_parish2"
+            parish: "test_parish"
         });
 
         expect(location1.equals(location2)).toBeTruthy();
@@ -72,8 +72,8 @@ describe("Location", function() {
             ["district", north_location],
             ["subcounty", gulu_location],
             ["health-center", gulu_location],
-            ["school", gulu_location]
-            // ["water-point", gulu_location]
+            ["school", gulu_location],
+            ["water-point", gulu_location]
         ]);
     });
 
@@ -140,13 +140,15 @@ describe("Location", function() {
         var patiko_location = new DT.Location({ region: "north", district: "gulu", subcounty: "patiko" });
 
 
-        expect(location1.layersToShow([])).toEqual([
+        assertLayers(location1.layersToShow([]),[
             ["region", uganda_location],
             ["district_outline", uganda_location],
             ["district", north_location],
             ["subcounty", gulu_location],
             ["parish", patiko_location],
-            ["water-point-point", location1]
+            ["water-point-point", location1],
+            ["school-point", location1],
+            ["health-center-point", location1],
         ]);
     });
 
