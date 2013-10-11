@@ -260,24 +260,24 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         return deffered.promise;
     }
 })
-.service("geoJsonService", function($q, $http) 
+.service("jsonService", function($q, $http) 
 {
     this.get = function(url) {
         var deffered = $q.defer();
         $http({method: 'GET', url: url, cache: true})
             .success(function(data) { 
-                deffered.resolve(data.features); 
+                deffered.resolve(data); 
             });
 
         return deffered.promise;
     }
 })
-.service("boundaryService", function(geoJsonService){
+.service("boundaryService", function(jsonService){
 
     this.districts = function (locator) {
         var self = this;
         url = "/static/javascript/geojson/uganda_districts_2011_with_indicators.json";
-        return geoJsonService.get(url).then(function(data) { return $.grep(data, self.locatorFilter(locator)); })
+        return jsonService.get(url).then(function(data) { return $.grep(data.features, self.locatorFilter(locator)); })
     };
 
     this.locatorFilter = function(locator) {
@@ -305,5 +305,13 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         var formatedValues = $.map(data[0].properties, function(value, key) { return [config.format(key, value)] });
         return $.grep(formatedValues, function(value) { return value != null; })
     }
+})
+.service("ureportService", function(jsonService) {
+
+    this.questions = function() {
+        var url = "/ureport/questions"
+        return jsonService.get(url);
+    }
+
 });
 

@@ -3,6 +3,7 @@ import sys, os
 from flask.ext.assets import Environment, Bundle
 from flask import Flask, jsonify
 from lib import services
+from pymongo import MongoClient
 
 from bson import Binary, Code
 from bson.json_util import dumps
@@ -56,8 +57,17 @@ def dashboards(region="", district="", subcounty="", parish=""):
 
 @app.route("/aggregation/<locator>")
 def aggregation(locator):
-	result = services.AggregationService(services.LocationService()).find(locator, request.args.get('include_children') == "true")
+	result = services.AggregationService(services.LocationService(__mongo_connection())).find(locator)
 	return Response(dumps(result), mimetype='application/json')
+
+@app.route("/ureport/questions")
+def ureport_questions():
+	result = services.UReportService(__mongo_connection()).questions()
+	return Response(dumps(result), mimetype='application/json')
+
+def __mongo_connection():
+	return MongoClient().devtrac2
+
 
 @app.route("/stub_tiles/<s>/<x>/<y>/<z>.png")
 def stub_tiles(s,x,y,z):

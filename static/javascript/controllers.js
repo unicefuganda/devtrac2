@@ -28,4 +28,9 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
             $scope.indicatorSummary = indicatorSummary;
         });
     });
+}).controller("UReportCtrl", function($scope, $rootScope, ureportService) {
+    $rootScope.question = { selected: null } 
+    ureportService.questions().then(function(data) {
+        $scope.questions = data;
+    });
 });

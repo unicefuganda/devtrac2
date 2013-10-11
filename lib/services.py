@@ -9,20 +9,16 @@ class AggregationService(object):
     def __init__(self, location_service):
         self.location_service = location_service
 
-    def find(self, locator, includeChildren = False): 
+    def find(self, locator): 
         summary = self.__calc_summary(locator)
 
-        if (includeChildren):
-            children = self.location_service.children(locator)
-            if (children != None):
-                children_summaries = [self.__calc_summary(child['_id']) for child in children['children']]
-                summary['children'] = children_summaries
-
+        children = self.location_service.children(locator)
+        if (children != None):
+            children_summaries = [self.__calc_summary(child['_id']) for child in children['children']]
+            summary['children'] = children_summaries
         return summary
 
     def __calc_summary(self, locator):
-        
-
         child_count = self.location_service.children(locator)
         summary =  {
             "locator": locator,
@@ -30,23 +26,21 @@ class AggregationService(object):
                 "health-center": self.location_service.points_count("health_center", locator),
                 "school": self.location_service.points_count("school", locator),
                 "water-point": self.location_service.points_count("water_point", locator)
-            },
+            }
         }
     
         if (child_count != None):
             summary["type"] = child_count["parent_type"]
             summary['info'][child_count['child_type']] = len(child_count['children']) 
-
         return summary
 
 class LocationService(object): 
 
-    def __init__(self):
-        mongo_client = MongoClient()
-        self.database = mongo_client.devtrac2
+    def __init__(self, db):
+        self.db = db
 
     def points_count(self, dataset, locator):
-        entry = self.database["%s_aggregation" % dataset].find({'_id': locator.upper()})
+        entry = self.db["%s_aggregation" % dataset].find({'_id': locator.upper()})
         return entry[0]['value'] if entry.count() > 0 else 0
 
     def children(self, locator):
@@ -61,8 +55,16 @@ class LocationService(object):
 
         child_type = levels[len(location_arr)]
 
-        children_entries = self.database.location_tree.find({"type": child_type.lower(), ("location.%s" % location_type.lower()) : location_name.upper() })
-        return {"child_type": child_type, "children": list(children_entries), "parent_type": location_type }
+        children_entries = self.db.location_tree.find({"type": child_type.lower(), ("location.%s" % location_type.lower()) : location_name.upper() })
+        return { "child_type": child_type, "children": list(children_entries), "parent_type": location_type }
+
+class UReportService(object):
+
+    def __init__(self, db):
+        self.db = db
+
+    def questions(self):
+        return list(self.db.ureport_questions.find())
 
 class WFSService(object):
 

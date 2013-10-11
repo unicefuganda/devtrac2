@@ -1,3 +1,11 @@
+mockGeoJson = function(testData) {
+    return { 
+        get: function (options) {
+            return { then: function(func) { return func(testData); } };
+        }
+    };
+};
+
 describe("Boundary Service", function() {
     var testGeoJson, kampalaNorthJson, kampalaSouthJson, guluNorthJson;
 
@@ -61,10 +69,10 @@ describe("Geojson Service", function() {
     });
 
 
-    it('should get geoJson and applyFilter', inject(function($rootScope, geoJsonService){
+    it('should get geoJson and applyFilter', inject(function($rootScope, jsonService){
         var getFinished = false;
-        geoJsonService.get("test_url").then(function(data) {
-            expect(data).toEqual(['A', 'B']);
+        jsonService.get("test_url").then(function(data) {
+            expect(data).toEqual({features: ['A', 'B']});
             getFinished = true;
         });
         
@@ -97,3 +105,22 @@ describe("Indicator Service", function() {
     }));
 
 });
+
+describe("Ureport Service", function() {
+
+    var mock;
+    var testData = [ { id: 1, question: "a question 1", abbreviation: "abbrev 1" }, { id: 1, question: "a question 2", abbreviation: "abbrev 2" } ]
+
+    beforeEach(function() {
+        module('dashboard', function($provide) {
+            $provide.value('jsonService', mockGeoJson(testData));
+        });
+    });
+
+    it ('should get ureport questions', inject(function(ureportService) {
+        ureportService.questions().then(function(data){
+            expect(data).toEqual(testData);
+        });
+    }));
+
+})

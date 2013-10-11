@@ -44,6 +44,7 @@
                 <label for="water-point-checkbox">Water Points</label>
               </li>
             </ul>
+
             <form ng-controller="IndicatorsCtrl" role="form" id="indicator-form">
               <div class="form-group">
                 <label for="sector-select">Display heatmap associated with:</label>
@@ -62,6 +63,12 @@
                 <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
               </div>
             </form>
+
+            <div class='heading'>Ureport question:</div>
+            <form ng-controller="UReportCtrl" role="form" >
+                <button type="button" ng-repeat="question in questions" class="btn btn-default btn-sm toggle">{[{question.abbreviation}]}</button>    
+            </form>
+
           </div> 
         </div>
       </div>     

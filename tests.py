@@ -23,6 +23,20 @@ class DistrictServiceTestCase(unittest.TestCase):
         self.assertGreater(len(districts), 1)
         self.assertIsNotNone(districts[0].name)
 
+class UReportTestCase(unittest.TestCase):
+
+    def setUp(self):
+        self.db = MongoClient().devtrac2_test
+        self.db.ureport_questions.remove()
+        self.db.ureport_questions.insert({"_id": 1, "question": "a_question"})
+        self.db.ureport_questions.insert({"_id": 2, "question": "a_question_2"})
+
+    def test_should_find_all_questions(self):
+        ureportService = UReportService(self.db)
+        self.assertEqual(len(ureportService.questions()), 2)
+        self.assertEqual(ureportService.questions()[0]['_id'], 1); 
+        self.assertEqual(ureportService.questions()[0]['question'], "a_question"); 
+
 class WFSServiceTestCase(unittest.TestCase):
 
     def test_should_find_features(self):

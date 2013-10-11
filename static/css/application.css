@@ -14,6 +14,15 @@ body select {
   margin-bottom: 2px;
 }
 
+.toggle {
+  font-weight: bold;
+  padding: 3px 8px;
+  border: none;
+  background-color: #CCC;
+  margin-bottom: 4px;
+  margin-right: 6px;
+
+}
 
 .starter-template {
   padding: 40px 15px;
@@ -164,7 +173,7 @@ font-weight: 500;
 
 .water-point-cluster-icon {
   background-color: rgba(116, 223, 252, 0.6);
-  left: -40px;
+  left: -33px;
 }
 
 .water-point-point-icon {
@@ -202,7 +211,7 @@ font-weight: 500;
 .health-center-cluster-icon
 {
   background-color: rgba(153, 51, 102, 0.65);
-  left: 40px;
+  left: 33px;
 }
 
 
@@ -372,4 +381,6 @@ font-weight: 500;
 /*change this label*/
 .nav-list { margin-bottom: 14px; } 
 .form-group { margin-bottom: 6px; }
+
+
 
