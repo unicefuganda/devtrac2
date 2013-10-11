@@ -17,34 +17,33 @@ Given that I am a regular user
 When I open dashboard for "Acholi, Gulu, Palaro"
 Then the "water-point" marker for "Acholi, Gulu, Palaro, Mede" is "6" points
 
-#Scenario: Show Health Center Marker Summary Info
-#Given that I am a regular user
-#When I open dashboard for "Acholi, Gulu, Odek"
-#Then the "health-center" layer for "Acholi" is displayed
-#And I hover over a "health-center" marker at "2.6618, 32.6234" 
-#Then the popup should have content: 
-#    """
-#    Acet Health Center
-#    Unit Type: HC 4
-#    """
+Scenario: Show Health Center Marker Summary Info
+Given that I am a regular user
+When I open dashboard for "Acholi, Gulu, Odek, Binya"
+Then the "health-center-point" layer for "Acholi, Gulu, Odek, Binya" is displayed
+And I hover over a "health-center-point" marker at "2.7492, 32.6948" 
+Then the popup should have content: 
+    """
+    Odek Health Center
+    Unit Type: HC 3
+    """
 
 Scenario: Cluster health center markers
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu, Odek"
 Then the "health-center" marker for "Acholi, Gulu, Odek, Binya" is "2" points
-# 
-# Scenario: Show School Marker Summary Info
-# Given that I am a regular user
-# When I open dashboard for "Acholi, Gulu, Odek, Lamola"
-# Then the "school" layer for "Acholi" is displayed
-# And I hover over a "school" marker at "2.5885, 32.7447" 
-# Then the popup should have content: 
-#     """
-#     Abella P.S School
-#     Owner: Government
-#     Type: Primary
-#     """
-# 
+
+Scenario: Show School Marker Summary Info
+Given that I am a regular user
+When I open dashboard for "Acholi, Gulu, Odek, Lamola"
+Then the "school-point" layer for "Acholi, Gulu, Odek, Lamola" is displayed
+And I hover over a "school-point" marker at "2.5885, 32.7447" 
+Then the popup should have content: 
+    """
+    Abella P.S School
+    Owner: Government
+    Type: Primary
+    """
 Scenario: Cluster school markers
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu, Odek"
