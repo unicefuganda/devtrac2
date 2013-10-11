@@ -6,18 +6,19 @@
             var travisProject = "unicefuganda/devtrac2"
 
             function showNotification(message) {
-                var notification = window.webkitNotifications.createNotification(
-                  "http://www.google.com/images/logo.png", // icon url - can be relative
-                  "Travis CI", 
-                  message 
-                );
+                if (window.webkitNotifications.checkPermission() == 0) {
+                    var notification = window.webkitNotifications.createNotification(
+                      "http://www.google.com/images/logo.png", // icon url - can be relative
+                      "Travis CI", 
+                      message 
+                    );
 
-                notification.onclick = function () { window.open("https://travis-ci.org/" + travisProject); } 
-                notification.show();
+                    notification.onclick = function () { window.open("https://travis-ci.org/" + travisProject); } 
+                    notification.show();
+                }
             } 
 
             function startPoll(url, pollCallBack) {
-
                 (function poll() {
                     $.ajax({
                         url: url,
@@ -30,39 +31,39 @@
                 })();
             }
 
-            $(function() {
-                $(".turn-on-monitoring").click(function () {
-                    if (window.webkitNotifications.checkPermission() != 0) {
-                        window.webkitNotifications.requestPermission();
+            function startMonitoring() {
+                $(".monitoring-on").show();
+                var lastBuildNumber = 0
+
+                showNotification("Monitoring is ON");
+                startPoll("https://api.travis-ci.org/repos/" + travisProject + ".json", function(data) { 
+                    if (lastBuildNumber != data.last_build_number && data.last_build_status != null)
+                    {
+                        lastBuildNumber = data.last_build_number;
+                        var status = data.last_build_status == 0 ? "Success" : "Failed";
+                        showNotification("Build " + status + " in " + data.last_build_duration + " seconds");
                     }
-
-                    $(this).text("Monitoring is ON");
-                    showNotification("Monitoring is ON");
-                    
-                    var lastBuildNumber = 0
-
-                    startPoll("https://api.travis-ci.org/repos/" + travisProject + ".json", function(data) { 
-                        if (lastBuildNumber != data.last_build_number && data.last_build_status != null)
-                        {
-                            lastBuildNumber = data.last_build_number;
-                            var status = data.last_build_status == 0 ? "Success" : "Failed";
-                            showNotification("Build " + status + " in " + data.last_build_duration + " seconds");
-                        }
-                    });
-                    return false
                 });
+            }
+            $(function() {
+                if (window.webkitNotifications.checkPermission() != 0) 
+                    $(".turn-on-monitoring").show();
+                else 
+                    startMonitoring();
 
-
+                $(".turn-on-monitoring").click(function () {
+                    window.webkitNotifications.requestPermission();
+                    $(".turn-on-monitoring").hide();
+                    startMonitoring();
+                    
+                });
+                return false
             })
-
         </script>
-
     </head>
 
     <body>
-        <a href='#' class='turn-on-monitoring' >turn on monitoring </a>
+        <a href='' class='turn-on-monitoring' style="display:none">Turn on monitoring </a>
+        <span class='monitoring-on' style="display:none" >Monitoring is ON</span>
     </body>
-
-    
-
 </html>
