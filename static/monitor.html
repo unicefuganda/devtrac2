@@ -76,13 +76,11 @@
                 }
 
                 this.monitor = function (projectName, statusChangedCallBack) {
-                    
                     var lastBuildNumber = 0;
-
 
                     function checkStatus() {
                         self.status(projectName, function(status) {
-                            if (lastBuildNumber != status.last_build_number)
+                            if (lastBuildNumber != status.last_build_number && status.last_build_status != null)
                             {
                                 lastBuildNumber = status.last_build_number;
                                 statusChangedCallBack(status);
@@ -90,7 +88,6 @@
                         });
                         $timeout(checkStatus, 30000);
                     };  
-
                     checkStatus();
                 };
             });
