@@ -10,7 +10,12 @@ from bson import Binary, Code
 from bson.json_util import dumps
 
 app = Flask(__name__)
-app.config.from_object('config.config.%sConfig' % os.environ['DEVTRAC_ENV'])
+
+env = os.environ.get('DEVTRAC_ENV')
+env = "Development" if env == None else env
+app.config.from_object('config.config.%sConfig' % env)
+
+print env
 
 # app.config.from_pyfile('application.cfg', silent=True)
 assets = Environment(app)
