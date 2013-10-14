@@ -6,7 +6,12 @@ DT.Map = function(element) {
     var self = this;
     self.wmsLayer = null;
     var map = L.map(element.attr("id"), {
-        zoomControl: false
+        zoomControl: false,
+        scrollWheelZoom: false,
+        touchZoom: false,
+        doubleClickZoom: false,
+        dragging: false
+
     });
 
     map.on("baselayerchange", function(layer) {
