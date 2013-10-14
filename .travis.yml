@@ -2,6 +2,8 @@ language: python
 python: "2.7"
 services: mongodb
 
+env: DEVTRAC_ENV=Testing
+
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"

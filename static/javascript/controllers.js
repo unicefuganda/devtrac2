@@ -58,5 +58,4 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     ureportService.questions().then(function(data) {
         $scope.questions = data;
     });
-
 });

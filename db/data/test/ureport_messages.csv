@@ -1,4 +1,4 @@
-id,text,type_id,district,question,poll_id,response_type,type
+ID,text,type_id,district,question,poll_id,response_type,type
 3771013,e) luck capital,district,Gulu,"Of the following, what do you think frustrates farmers the most?a)Climate,b) Pests and Diseases,c) Poor farming methods, d)Lack of land,e)Lack of capital?",165,a,t
 3771937,E,district,Gulu,"Of the following, what do you think frustrates farmers the most?a)Climate,b) Pests and Diseases,c) Poor farming methods, d)Lack of land,e)Lack of capital?",165,a,t
 5889655,"YES, ABOUT 250",district,Gulu,"Do you know of any children in your community that are of school going age but are not in school? If yes, how many do you know?",180,a,t
@@ -65,7 +65,8 @@ id,text,type_id,district,question,poll_id,response_type,type
 7407013,"No,the fund won't help youth in our community b'se only the corrupt offical will benefit from the youth fund.",district,Gulu,"Hi U-reporters. Do you think the Youth Fund will help the youth in your community? Answer YES or NO, and tell us why.",200,a,t
 7410880,NO b'se its only capturing those who trained with enterprise ug.,district,Gulu,"Hi U-reporters. Do you think the Youth Fund will help the youth in your community? Answer YES or NO, and tell us why.",200,a,t
 7412720,"NO.BECAUSE THE YOUTH ARE NOT SENSITIZ ABOUT THE FUND AND ITS TERMS AND CONDITION.SECONDLY THERE ARE ELEMENTS OF GIGERS (CORRUPT MINDED PERSONALITIES) WHO ARE JUST WAITING FOR THE MONEY AND THEY STEAL, AFTERAL THEY CAN RESIGN WITHOUT AND NOT BE PROSECUTED.THIRDLY THERE MIGHT BE STRINGS ATTARCHED TO IT BASE ON POLITICAL PARTY.SO WE NEED CLARITY!!!",district,Gulu,"Hi U-reporters. Do you think the Youth Fund will help the youth in your community? Answer YES or NO, and tell us why.",200,a,t
-3769301,"I  THINK  IT'S  LACK   OF  CAPITAL THAT  FRUSTRATES  THE  FARMERS THE  MOST  ",district,Gulu,"Of the following, what do you think frustrates farmers the most?a)Climate,b) Pests and Diseases,c) Poor farming methods, d)Lack of land,e)Lack of capital?",165,a,t
+3769301,"I  THINK  IT'S  LACK   OF  CAPITAL THAT  FRUSTRATES  THE  FARMERS THE  MOST 
+ ",district,Gulu,"Of the following, what do you think frustrates farmers the most?a)Climate,b) Pests and Diseases,c) Poor farming methods, d)Lack of land,e)Lack of capital?",165,a,t
 5893067,Am a teacher & therefore i know more than ahundred,district,Gulu,"Do you know of any children in your community that are of school going age but are not in school? If yes, how many do you know?",180,a,t
 5898137,5,district,Gulu,"Do you know of any children in your community that are of school going age but are not in school? If yes, how many do you know?",180,a,t
 5900897,YES MORE TEN,district,Gulu,"Do you know of any children in your community that are of school going age but are not in school? If yes, how many do you know?",180,a,t

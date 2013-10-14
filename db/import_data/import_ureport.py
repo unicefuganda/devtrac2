@@ -5,7 +5,7 @@ from sets import Set
 
 base_dir = os.path.abspath(os.path.dirname(__file__) + "/../../")
 
-def import_ureport(db):
+def import_ureport(data_dir, db):
 
     collection = db.ureport_questions
     collection.remove()
@@ -21,7 +21,8 @@ def import_ureport(db):
     location_tree = db.location_tree
 
     mismatching_districts = Set([])
-    with open("%s/db/ureport_messages.csv" % base_dir, 'rUb') as csvfile: 
+    print data_dir
+    with open("%s/%s/ureport_messages.csv" % (base_dir, data_dir), 'rUb') as csvfile: 
         reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
         for row in reader: 
             district = location_tree.find_one({"type": "district", "location.district": row['district'].upper() })

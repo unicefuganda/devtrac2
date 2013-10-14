@@ -3,13 +3,16 @@ import sys, os
 from flask.ext.assets import Environment, Bundle
 from flask import Flask, jsonify
 from app import services
+from config import *
 from pymongo import MongoClient
 
 from bson import Binary, Code
 from bson.json_util import dumps
 
 app = Flask(__name__)
-app.config.from_pyfile('application.cfg', silent=True)
+app.config.from_object('config.config.%sConfig' % os.environ['DEVTRAC_ENV'])
+
+# app.config.from_pyfile('application.cfg', silent=True)
 assets = Environment(app)
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
