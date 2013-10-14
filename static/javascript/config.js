@@ -37,5 +37,3 @@ DT.AgregationConfig.labels = [
     { key: "subcounty", label: "Subcounties", formatter: DT.NumberFormatter},
     { key: "parish", label: "Parishes", formatter: DT.NumberFormatter}
 ]
-
-

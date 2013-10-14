@@ -9,21 +9,21 @@ Then I see map of Uganda
 
 Scenario: Open region dashboard
 Given that I am a regular user
-When I open dashboard for region "acholi"
-Then I see Uganda map with region acholi displayed
-Then region "acholi" will be selected
+When I open dashboard for "Acholi"
+Then I see map of Uganda - Acholi Region
+Then "Acholi" will be selected
 
 Scenario: Highlight a region
 Given that I am a regular user
 When I go to the homepage
-And I hover over region "acholi"
-Then region "acholi" will be highlighted
+And I hover over "Acholi"
+Then "Acholi" will be highlighted
 
 Scenario: Navigate to region
 Given that I am a regular user
 When I go to the homepage
-And I click on region "acholi"
-Then region "acholi" will be selected
+And I click on "Acholi"
+Then "Acholi" will be selected
 
 Scenario: Open district dashboard
 Given that I am a regular user

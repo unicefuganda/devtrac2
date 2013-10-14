@@ -119,7 +119,6 @@ DT.Map = function(element) {
                 iconSize: new L.Point([10, 10]),
                 className: layer_info.name + "-icon marker-icon ",
                 html: "<div data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'></div>",
-                // html:"",
                 popupAnchor: [5, -10]
             });
             var geojsonMarkerOptions = {
@@ -148,89 +147,7 @@ DT.Map = function(element) {
             map.removeLayer(self.wmsLayer);
             self.wmsLayer = null;
         };
-    }
-
-
-    // function addPointsLayer(name, location, features, layer_info) {
-    //     // TODO: refactor        
-
-
-    //     var markers = L.markerClusterGroup({
-    //         showCoverageOnHover: false,
-    //         zoomToBoundsOnClick: false,
-    //         spiderfyOnMaxZoom: false,
-    //         removeOutsideVisibleBounds: false,
-    //         disableClusteringAtZoom: 13,
-
-    //         iconCreateFunction: function(cluster) {
-    //             var latlng = cluster.getLatLng()
-    //             var childCount = cluster.getChildCount();
-
-    //             var childCount = cluster.getChildCount();
-
-    //             var className = "small";
-    //                if (childCount > 10)
-    //                    className = "medium";
-    //                if (childCount > 25)
-    //                    className = "large";
-    //                if (childCount > 50)
-    //                    className = "extra-large";
-    //             return new L.DivIcon({
-    //                 iconSize: new L.Point([20, 20]),
-    //                 className: layer_info.name +"-cluster-icon cluster-icon " + className,
-
-    //                 html: "<div data-lat='"+ latlng.lat.toFixed(4) +"' data-lng='" + latlng.lng.toFixed(4) + "'>" 
-    //                     + cluster.getChildCount()
-    //                     + '</div>'
-    //             });
-    //         }
-    //     });
-
-    //     L.Icon.Default.imagePath = '/static/javascript/lib/images/';
-    //     window.markers = []
-
-    //     $.each(features.features, function(index, feature) {
-    //         var coordinates = feature.geometry.coordinates;
-
-
-    //         var circleIcon = new L.DivIcon({
-    //             iconSize: new L.Point([10, 10]),
-    //             className: layer_info.name + "-icon marker-icon ",
-    //             html: "<div data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'></div>",
-    //             // html:"",
-    //             popupAnchor: [5, -10]
-    //         });
-    //         var geojsonMarkerOptions = {
-    //             zIndexOffset: 10000,
-    //             icon: circleIcon
-    //         };
-          
-    //         var marker = new L.Marker(new L.LatLng(coordinates[1], coordinates[0]), geojsonMarkerOptions);
-
-    //         window.markers.push(marker);
-    //         // window.marker = marker;
-    //         var popup = L.popup({
-    //             className: "marker-popup" ,
-    //             closeButton: false
-    //         }).setContent(markerPopupMessage(layer_info.summaryInformation(feature.properties)));
-
-    //         marker.bindPopup(popup)
-    //             .on('mouseover', function() {
-    //                 marker.openPopup();
-    //             })
-    //             .on('mouseout', function() {
-    //                 marker.closePopup();
-    //             })
-    //         window.basemarkers = markers;
-    //         markers.addLayer(marker);
-
-
-    //     });
-
-    //     self.layerMap.addLayer(name, location, markers);
-    //     map.addLayer(markers);
-    // }
-
+    }   
 
     return {
         addLayer: function(name, location, data, layer_info) {
