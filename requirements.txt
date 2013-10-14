@@ -8,4 +8,3 @@ Flask-Assets==0.8
 jsmin==2.0.5
 cssmin==0.1.4
 mock==1.0.1
-Twisted==13.1.0
