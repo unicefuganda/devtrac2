@@ -9,5 +9,5 @@ static/gen/packed.css
 static/gen/packed.js
 tmp/*.png
 node_modules/
-twistd.log
+twistd.log*
 twistd.pid
