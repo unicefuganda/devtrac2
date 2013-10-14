@@ -3,7 +3,7 @@ class Config(object):
 
 class ProductionConfig(Config):
     ASSETS_DEBUG = False
-    SEND_FILE_MAX_AGE_DEFAULT = 1000
+    SEND_FILE_MAX_AGE_DEFAULT = 100
     DATA_DIR = "db/data/prod"
 
 class DevelopmentConfig(Config):
@@ -22,4 +22,4 @@ def config_from_env(env):
     elif (env == "Testing"):
         return TestingConfig
     elif (env == "Production"):
-        return ProductionConfig
+        return ProductionConfig 
