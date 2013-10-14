@@ -313,5 +313,9 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         return jsonService.get(url);
     }
 
+    this.top5 = function(location, question) {
+        var url = "/ureport/top5/UGANDA, " +  location.getName().toUpperCase();
+        return jsonService.get(url);   
+    }
 });
 

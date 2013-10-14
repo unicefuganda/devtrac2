@@ -2,7 +2,7 @@ from flask import *
 import sys, os
 from flask.ext.assets import Environment, Bundle
 from flask import Flask, jsonify
-from lib import services
+from app import services
 from pymongo import MongoClient
 
 from bson import Binary, Code
@@ -63,6 +63,11 @@ def aggregation(locator):
 @app.route("/ureport/questions")
 def ureport_questions():
 	result = services.UReportService(__mongo_connection()).questions()
+	return Response(dumps(result), mimetype='application/json')
+
+@app.route("/ureport/top5/<locator>")
+def ureport_top5(locator):
+	result = services.UReportService(__mongo_connection()).top5(locator)
 	return Response(dumps(result), mimetype='application/json')
 
 def __mongo_connection():

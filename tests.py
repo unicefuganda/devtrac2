@@ -2,34 +2,29 @@ import os
 import application
 import unittest
 import tempfile
-from lib.services import *
+from app.services import *
 from db.import_data.import_geonode import *
 from pymongo import MongoClient
 from mock import MagicMock
 
-class DistrictServiceTestCase(unittest.TestCase):
-
-    def test_should_find_by_name(self):
-        self.skipTest("Import of data has been disabled")
-        service = DistrictService()
-        district = service.find_by_name("gulu")
-        self.assertEquals(district.name, "Gulu")
-        self.assertEquals(district.subregion, "Acholi")
-
-    def test_should_find_all(self):
-        self.skipTest("Import of data has been disabled")
-        service = DistrictService()
-        districts = service.find_all()
-        self.assertGreater(len(districts), 1)
-        self.assertIsNotNone(districts[0].name)
 
 class UReportTestCase(unittest.TestCase):
 
     def setUp(self):
         self.db = MongoClient().devtrac2_test
         self.db.ureport_questions.remove()
+        self.db.ureport_responses.remove()
         self.db.ureport_questions.insert({"_id": 1, "question": "a_question"})
         self.db.ureport_questions.insert({"_id": 2, "question": "a_question_2"})
+
+        self.db.ureport_responses.insert({"_id": 1, "locator": "UGANDA, ACHOLI, GULU", "text": "text1"})
+        self.db.ureport_responses.insert({"_id": 2, "locator": "UGANDA, ACHOLI, GULU", "text": "text2"})
+        self.db.ureport_responses.insert({"_id": 3, "locator": "UGANDA, ACHOLI, GULU", "text": "text3"})
+        self.db.ureport_responses.insert({"_id": 4, "locator": "UGANDA, ACHOLI, GULU", "text": "text4"})
+        self.db.ureport_responses.insert({"_id": 5, "locator": "UGANDA, ACHOLI, GULU", "text": "text5"})
+        self.db.ureport_responses.insert({"_id": 6, "locator": "UGANDA, ACHOLI, GULU", "text": "text6"})
+        
+        self.db.ureport_responses.insert({"_id": 7, "locator": "UGANDA, ACHOLI, OTHER", "text": "other text"})
 
     def test_should_find_all_questions(self):
         ureportService = UReportService(self.db)
@@ -37,15 +32,12 @@ class UReportTestCase(unittest.TestCase):
         self.assertEqual(ureportService.questions()[0]['_id'], 1); 
         self.assertEqual(ureportService.questions()[0]['question'], "a_question"); 
 
-class WFSServiceTestCase(unittest.TestCase):
+    def test_should_find_top5_for_district(self):
+        ureportService = UReportService(self.db)
+        responses = [ report['text'] for report in ureportService.top5("UGANDA, ACHOLI, GULU")]
+        self.assertEqual(responses, ["text1", "text2", "text3", "text4", "text5"])
 
-    def test_should_find_features(self):
-        self.skipTest("This hits an actual service. Skip until integration tests setup.")
-        url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows"
-        service = WFSService(url, 2)
-        features = service.get_features("uganda_districts_2010")
-        self.assertEqual(len(features), 2)
-        self.assertIsNotNone(features[0]["AREA"])
+
 
 test_features = [
     {'properties' : 

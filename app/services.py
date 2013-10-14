@@ -66,6 +66,9 @@ class UReportService(object):
     def questions(self):
         return list(self.db.ureport_questions.find())
 
+    def top5(self, locator):
+        return list(self.db.ureport_responses.find({'locator': locator}).limit(5))
+
 class WFSService(object):
 
     def __init__(self, url, maxFeatures=100000, test=False):

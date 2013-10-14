@@ -9,9 +9,9 @@ sys.path.append(base_dir)
 mongo_client = MongoClient()
 database = mongo_client.devtrac2
 
-from lib import services
+from app import services
 
-wfs_service = services.WFSService("http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows", test=True)
+wfs_service = services.WFSService("http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows")
 
 print "import start"
 import_dataset(wfs_service, database, "health_center", "uganda_health_centers_replotted")

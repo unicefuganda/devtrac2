@@ -15,7 +15,7 @@ def import_ureport(db):
         for row in reader: 
             collection.insert({"question": row['question'], "_id": row['ID'], "id": row['ID'], "abbreviation": row['abbreviation']})
 
-    collection = db.ureport_messages
+    collection = db.ureport_responses
     collection.remove()
 
     location_tree = db.location_tree
@@ -27,8 +27,8 @@ def import_ureport(db):
             district = location_tree.find_one({"type": "district", "location.district": row['district'].upper() })
             if (district == None):
                 mismatching_districts.add(row['district'])
-
-            collection.insert({"poll_id": row['poll_id'], "id": row['ID'], "text": row['text'], "district": row['district']})
+            else: 
+                collection.insert({"poll_id": row['poll_id'], "id": row['ID'], "text": row['text'], "district": row['district'], "locator": district['_id']})
 
     print "These districts were not found in the location_tree"
     print mismatching_districts

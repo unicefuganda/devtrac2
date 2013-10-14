@@ -106,21 +106,42 @@ describe("Indicator Service", function() {
 
 });
 
-describe("Ureport Service", function() {
+describe("Ureport Service questions", function() {
 
     var mock;
-    var testData = [ { id: 1, question: "a question 1", abbreviation: "abbrev 1" }, { id: 1, question: "a question 2", abbreviation: "abbrev 2" } ]
+    var testQuestions = [ { id: 1, question: "a question 1", abbreviation: "abbrev 1" }, { id: 1, question: "a question 2", abbreviation: "abbrev 2" } ]
 
-    beforeEach(function() {
+    beforeEach(function(){
         module('dashboard', function($provide) {
-            $provide.value('jsonService', mockGeoJson(testData));
+            $provide.value('jsonService', mockGeoJson(testQuestions));
         });
     });
 
     it ('should get ureport questions', inject(function(ureportService) {
         ureportService.questions().then(function(data){
-            expect(data).toEqual(testData);
+            expect(data).toEqual(testQuestions);
         });
     }));
+})
 
+
+describe("Ureport Service responses", function() {
+    var testReponses = [{id: 1, text: "some text"}, {id: 2, text: "some text"}]
+    var mock = mockGeoJson(testReponses);
+
+    beforeEach(function(){
+
+        module('dashboard', function($provide) {
+            spyOn(mock, 'get').andCallThrough();
+            $provide.value('jsonService', mock);
+        });
+    });
+
+    it ('should get ureport questions', inject(function(ureportService) {
+        ureportService.top5(new DT.Location({region: 'north'})).then(function(data){
+
+            expect(data).toEqual(testReponses);
+            expect(mock.get).toHaveBeenCalledWith('/ureport/top5/UGANDA, NORTH');
+        });
+    }));
 })

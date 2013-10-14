@@ -7,12 +7,11 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 }).controller("IndicatorsCtrl", function($scope, $rootScope, heatmapService) {
     $rootScope.indicator = { selected: null } 
     $scope.indicators = heatmapService.all();
-}).controller("SummaryCtrl", function($scope, $rootScope, summaryService, indicatorService) {
+}).controller("SummaryCtrl", function($scope, $rootScope, summaryService, indicatorService, ureportService) {
 
-    $rootScope.$watch("location", function(newLocation, oldLocation) {
-        if (newLocation == null)
-            return;
-        summaryService.find(newLocation.getName()).then(function(summary) {
+
+    var showSummary = function (location) {
+        summaryService.find(location.getName()).then(function(summary) {
 
             var summaryLabels = [];
             $.each(DT.AgregationConfig.labels, function(index, label) {
@@ -24,13 +23,40 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
             $scope.summary = summaryLabels;
         });
 
-        indicatorService.find(newLocation).then(function(indicatorSummary) {
+        indicatorService.find(location).then(function(indicatorSummary) {
             $scope.indicatorSummary = indicatorSummary;
         });
+    };
+
+    var showUReportResults = function (location, ureportQuestion) {
+        if ($rootScope.ureportQuestion.selected == null) {
+            $scope.ureportTop5 = []
+        } else {
+            ureportService.top5(location, ureportQuestion.question_id).then(function (data) {
+                $scope.ureportTop5 = data
+            });
+        }
+    }
+
+
+    $rootScope.$watch("location", function(newLocation, oldLocation) {
+        if (newLocation == null)
+            return;
+
+        showSummary($rootScope.location);
+        showUReportResults($rootScope.location, $rootScope.ureportQuestion.selected);
     });
+
+   
+
+    $rootScope.$watch("ureportQuestion", function() {
+        showUReportResults($rootScope.location, $rootScope.ureportQuestion.selected);
+    }, true);
+
 }).controller("UReportCtrl", function($scope, $rootScope, ureportService) {
-    $rootScope.question = { selected: null } 
+    $rootScope.ureportQuestion = { selected: null } 
     ureportService.questions().then(function(data) {
         $scope.questions = data;
     });
+
 });

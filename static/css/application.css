@@ -343,7 +343,7 @@ font-weight: 500;
     top: 80px;
     right: 10px;
     width: 300px;
-    height: 60%;
+
 }
 
 .summary-panel .content {
@@ -351,6 +351,7 @@ font-weight: 500;
     height: 100%;
     float: left;
     border: 1px solid #CCCCCC;
+    min-height: 400px;
 }
 
 .summary-panel .heading {
@@ -364,6 +365,7 @@ font-weight: 500;
 .summary-panel .summary-content{ 
   width: 100%;
   font-size: 12px;
+  overflow: hidden;
 }
 
 .summary-panel .toggle-panel {    
@@ -381,6 +383,18 @@ font-weight: 500;
 /*change this label*/
 .nav-list { margin-bottom: 14px; } 
 .form-group { margin-bottom: 6px; }
+
+.ureport-summary {
+
+  overflow:hidden;
+  width: 100%;
+  font-size: 12px;
+}
+
+.ureport-summary .response span{
+  font-size: 10px;
+  font-weight: normal;
+}
 
 
 

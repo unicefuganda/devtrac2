@@ -6,5 +6,5 @@ Copy (
  INNER JOIN rapidsms_connection rcon ON rhm.connection_id = rcon.id 
  INNER JOIN rapidsms_contact rc ON rcon.contact_id = rc.id 
  INNER JOIN locations_location ll ON ll.id = rc.reporting_location_id 
- WHERE pr.poll_id IN (165, 180, 200, 551))
- To '/Users/Thoughtworker/work/devtrac2/db/ureport_messages.csv' WITH CSV HEADER;
+ WHERE pr.poll_id IN (165, 180, 200, 551) AND ll.name = 'Gulu')
+ To '/Users/Thoughtworker/work/devtrac2/db/ureport_messages_test.csv' WITH CSV HEADER;
