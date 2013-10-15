@@ -33,4 +33,10 @@ describe("Utilities", function() {
         expect(DT.capitalize("kevin bacon")).toBe("Kevin Bacon");
     });
 
+    it ("should load feature toggle from query string", function() {
+        feature_toggles = DT.feature_toggles("feature_left_side=true&feature_other=false")
+        expect(feature_toggles.is_on('left_side')).toBeTruthy();
+        expect(feature_toggles.is_on('other')).toBeFalsy();
+    })
+
 });

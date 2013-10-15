@@ -1,8 +1,9 @@
-angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $routeParams) {
+angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $routeParams, $location) {
     DT.timings["urlchange"] = new Date().getTime();
     $rootScope.location = new DT.Location($routeParams);
     if ($rootScope.filter == undefined)
         $rootScope.filter = new DT.Filter({health_center: true, water_point: true, school: true});
+    $rootScope.feature_toggles = DT.feature_toggles($location.absUrl());
 
 }).controller("IndicatorsCtrl", function($scope, $rootScope, heatmapService) {
     $rootScope.indicator = { selected: null } 
@@ -38,7 +39,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         }
     }
 
-
     $rootScope.$watch("location", function(newLocation, oldLocation) {
         if (newLocation == null)
             return;
@@ -46,7 +46,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         showSummary($rootScope.location);
         showUReportResults($rootScope.location, $rootScope.ureportQuestion.selected);
     });
-
    
 
     $rootScope.$watch("ureportQuestion", function() {

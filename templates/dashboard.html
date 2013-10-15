@@ -22,9 +22,9 @@
 
     <div panel panel-expand='{"left":"10px"}' panel-collapse='{"left":"-300px"}' class='filter-panel expanded dt-panel' id="filter-panel">
 
-      <div class='content'>
+      <div class='content' >
 
-        <div class='container'>
+        <div  class='container'>
           <div class='heading'>Show points related to:</div>
           <div class='sector-content'>
             <ul class="nav nav-list">
@@ -78,7 +78,7 @@
     </div>
     
 
-     <div panel panel-expand='{"right":"10px"}' panel-collapse='{"right":"-300px"}' class='summary-panel' id="summary-panel">
+     <div ng-show="!feature_toggles.is_on('left_side')" panel panel-expand='{"right":"10px"}' panel-collapse='{"right":"-300px"}' class='summary-panel' id="summary-panel">
 
       <div class='content' ng-controller="SummaryCtrl" >
         <div  ng-show="summary != null" class='container ng-hide' >

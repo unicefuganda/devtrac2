@@ -52,3 +52,16 @@ DT.timings.print = function() {
     });
     console.log(output);
 };
+
+DT.feature_toggles = function(queryString) {
+    console.log("here");
+    console.log(queryString);    
+    return {
+        is_on: function(toggle) {
+            if (queryString.match("feature_" + toggle + "=true"))
+                return true;
+            else 
+                return false;
+        }
+    }
+} 
