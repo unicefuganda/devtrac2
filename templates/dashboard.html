@@ -21,10 +21,10 @@
     
     <div map id='devtrac-map'></div>
     
-    <div ng-show="!feature_toggles.is_on('left_side')" id='ngview' ng-view></div>
+    <div ng-show="!feature_toggles.is_on('left_side')" id='ngview' ng-view class="ng-cloak"></div>
     <!-- </div>   / -->
 
-    <div panel panel-expand='{"left":"10px"}' panel-collapse='{"left":"-300px"}' class='filter-panel expanded dt-panel' id="filter-panel">
+    <div panel panel-expand='{"left":"10px"}' panel-collapse='{"left":"-300px"}' class='filter-panel expanded dt-panel ng-cloak' id="filter-panel">
 
       <div ng-show="feature_toggles.is_on('left_side')" id='ngview' ng-view></div>
 
@@ -83,7 +83,7 @@
          <span class="glyphicon {[{ expanded ? 'glyphicon-chevron-left' : 'glyphicon-chevron-right' }]} toggle-icon"></span>
        </a>  
 
-       <div ng-if="feature_toggles.is_on('left_side')" class='summary-panel' id='summary-panel' >
+       <div ng-if="feature_toggles.is_on('left_side')" class='summary-panel ng-cloak' id='summary-panel' >
        <div class='content' ng-controller="SummaryCtrl" >
        <div  ng-show="summary != null" class='container ng-hide' >
           <div class='heading'>{[{location.full_name() }]}</div>
@@ -99,7 +99,7 @@
             </div>
           </div> 
 
-          <div ng-if="feature_toggles.is_on('ureport')" ng-show="ureportTop5.length > 0" class='ng-hide ureport-summary'>
+          <div ng-if="feature_toggles.is_on('ureport')" ng-show="ureportTop5.length > 0" class='ng-hide ureport-summary ng-cloak'>
             <div class='heading'>uReport Responses</div>
             <div ng-repeat="item in ureportTop5" class="response">
               <span>{[{item.text }]}</span>
@@ -112,7 +112,7 @@
     </div>
     
 
-     <div ng-if="!feature_toggles.is_on('left_side')" panel panel-expand='{"right":"10px"}' panel-collapse='{"right":"-300px"}' class='summary-panel' id="summary-panel">
+     <div ng-if="!feature_toggles.is_on('left_side')" panel panel-expand='{"right":"10px"}' panel-collapse='{"right":"-300px"}' class='summary-panel ng-cloak' id="summary-panel">
 
       <div class='content' ng-controller="SummaryCtrl" >
         <div  ng-show="summary != null" class='container ng-hide' >
