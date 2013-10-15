@@ -129,17 +129,19 @@ DT.Location.prototype.toUrl = function() {
 };
 
 DT.Location.prototype.urlForLevel = function(level) {
+    var url;
     if (level == "parish") {
-        return "/dashboard/" + DT.encode(this.region) + "/" + DT.encode(this.district) + "/" + DT.encode(this.subcounty) + "/" + DT.encode(this.parish);
+        url = "/dashboard/" + DT.encode(this.region) + "/" + DT.encode(this.district) + "/" + DT.encode(this.subcounty) + "/" + DT.encode(this.parish);
     } else if (level == "subcounty") {
-        return "/dashboard/" + DT.encode(this.region) + "/" + DT.encode(this.district) + "/" + DT.encode(this.subcounty);
+        url = "/dashboard/" + DT.encode(this.region) + "/" + DT.encode(this.district) + "/" + DT.encode(this.subcounty);
     } else if (level == "district") {
-        return "/dashboard/" + DT.encode(this.region) + "/" + DT.encode(this.district);
+        url = "/dashboard/" + DT.encode(this.region) + "/" + DT.encode(this.district);
     } else if (level == "region") {
-        return "/dashboard/" + DT.encode(this.region);
+        url = "/dashboard/" + DT.encode(this.region);
     } else {
-        return "/";
+        url = "/";
     }
+    return url + window.location.search;
 };
 
 DT.Location.levels = ["region", "district", "subcounty", "parish"]

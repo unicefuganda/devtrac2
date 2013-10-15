@@ -30,7 +30,9 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     };
 
     var showUReportResults = function (location, ureportQuestion) {
-        if ($rootScope.ureportQuestion.selected == null) {
+        
+
+        if (ureportQuestion == null || ureportQuestion.selected == null) {
             $scope.ureportTop5 = []
         } else {
             ureportService.top5(location, ureportQuestion.question_id).then(function (data) {
@@ -44,12 +46,13 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
             return;
 
         showSummary($rootScope.location);
-        showUReportResults($rootScope.location, $rootScope.ureportQuestion.selected);
+        showUReportResults($rootScope.location, $rootScope.ureportQuestion);
     });
    
 
-    $rootScope.$watch("ureportQuestion", function() {
-        showUReportResults($rootScope.location, $rootScope.ureportQuestion.selected);
+    $rootScope.$watch("ureportQuestion", function(newQuestion) {
+        
+        showUReportResults($rootScope.location, $rootScope.ureportQuestion);
     }, true);
 
 }).controller("UReportCtrl", function($scope, $rootScope, ureportService) {

@@ -7,11 +7,11 @@
     <ul class="breadcrumb">  
         
       <li>
-        <a class="national-crumb {[{ location.level() == 'national' ? 'active' : '' }]}" href='/'>uganda</a>
+        <a class="national-crumb {[{ location.level() == 'national' ? 'active' : '' }]}" href="{[{ location.urlForLevel('national')}]}">uganda</a>
       </li>  
 
       <li ng-if="location.region != null" >
-        <a class="region-crumb {[{ location.level() == 'region' ? 'active' : '' }]}" href="{[{ location.urlForLevel('region') }]}" >{[{ location.level() == 'region' ? location.full_name() : location.region }]}</a>
+        <a class="region-crumb {[{ location.level() == 'region' ? 'active' : '' }]}" href="{[{ location.urlForLevel('region')}]}" >{[{ location.level() == 'region' ? location.full_name() : location.region }]}</a>
       </li>  
 
       <li ng-if="location.district != null">
