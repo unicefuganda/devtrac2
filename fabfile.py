@@ -30,9 +30,10 @@ def deploy(sha):
     with cd(code_dir):
         run("git fetch origin")
         run("git reset --hard %s" % sha)
-        
+            
         run("pip install -r requirements.txt --use-mirrors")
-        run("python db/import_data/import_job.py")
+        with shell_env(DEVTRAC_ENV='Production'):
+            run("python db/import_data/import_job.py")
         
     with cd(code_dir):
         upload_template("version.template", "static/javascript/version.json", { "environment": env.environment, "sha": sha[:6], "time": strftime("%d %b %Y %X", localtime()) })
