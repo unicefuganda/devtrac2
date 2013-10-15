@@ -21,15 +21,19 @@ def import_ureport(data_dir, db):
     location_tree = db.location_tree
 
     mismatching_districts = Set([])
+
+    districts = list(location_tree.find({"type": "district"}))
+
     print data_dir
     with open("%s/%s/ureport_messages.csv" % (base_dir, data_dir), 'rUb') as csvfile: 
         reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
-        for row in reader: 
-            district = location_tree.find_one({"type": "district", "location.district": row['district'].upper() })
-            if (district == None):
+        for row in reader:    
+
+            try:
+               district = (x for x in districts if x['location']['district'] == row['district'].upper()).next()
+               collection.insert({"poll_id": row['poll_id'], "id": row['ID'], "text": row['text'], "district": row['district'], "locator": district['_id']})
+            except Exception as inst:
                 mismatching_districts.add(row['district'])
-            else: 
-                collection.insert({"poll_id": row['poll_id'], "id": row['ID'], "text": row['text'], "district": row['district'], "locator": district['_id']})
 
     print "These districts were not found in the location_tree"
     print mismatching_districts
