@@ -26,7 +26,7 @@
 
     <div panel panel-expand='{"left":"10px"}' panel-collapse='{"left":"-300px"}' class='filter-panel expanded dt-panel' id="filter-panel">
 
-      <div ng-if="feature_toggles.is_on('left_side')" id='ngview' ng-view></div>
+      <div ng-show="feature_toggles.is_on('left_side')" id='ngview' ng-view></div>
 
       <div class='content filter-panel-content' >
 
