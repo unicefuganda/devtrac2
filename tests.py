@@ -7,6 +7,56 @@ from db.import_data.import_geonode import *
 from pymongo import MongoClient
 from mock import MagicMock
 
+class LocatorTestCase(unittest.TestCase):
+
+    def test_should_find_level_name_of_locator(self):
+        self.assertEqual(Locator("UGANDA").level_name(), "national")
+        self.assertEqual(Locator("UGANDA, ACHOLI").level_name(), "region")
+        self.assertEqual(Locator("UGANDA, ACHOLI, GULU").level_name(), "district")
+        self.assertEqual(Locator("UGANDA, ACHOLI, GULU, PATIKO").level_name(), "subcounty")
+        self.assertEqual(Locator("UGANDA, ACHOLI, GULU, PATIKO, OTHER").level_name(), "parish")
+
+    def test_should_find_child_level_name_of_locator(self):
+        self.assertEqual(Locator("UGANDA").child_level_name(), "region")
+        self.assertEqual(Locator("UGANDA, ACHOLI").child_level_name(), "district")
+        self.assertEqual(Locator("UGANDA, ACHOLI, GULU").child_level_name(), "subcounty")
+        self.assertEqual(Locator("UGANDA, ACHOLI, GULU, PATIKO").child_level_name(), "parish")
+        self.assertEqual(Locator("UGANDA, ACHOLI, GULU, PATIKO, OTHER").child_level_name(), None)
+
+class LocationServiceTestCase(unittest.TestCase):
+
+    def setUp(self):
+        self.db = MongoClient().location_tree
+        self.db.location_tree.remove()
+        self.db.location_tree.insert({
+            "_id": "UGANDA, ACHOLI", 
+            "type": "region",
+            "location": { 
+                "national": "UGANDA",
+                "region": "ACHOLI"
+        }})
+        self.db.location_tree.insert({
+            "_id": "UGANDA, ACHOLI, GULU", 
+            "type": "district",
+            "location": { 
+                "national": "UGANDA",
+                "region": "ACHOLI",
+                "district": "GULU"
+        }})
+        self.db.location_tree.insert({
+            "_id": "UGANDA, ACHOLI, AMURU", 
+            "type": "district",
+            "location": { 
+                "national": "UGANDA",
+                "region": "ACHOLI",
+                "district": "AMURU"
+        }})
+
+    def test_find_children_of_location(self):
+        locationService = LocationService(self.db)
+        children = locationService.children(Locator("UGANDA, ACHOLI"))
+        self.assertEqual(list((child['_id'] for child in children['children'])), ["UGANDA, ACHOLI, GULU", "UGANDA, ACHOLI, AMURU"])
+
 
 class UReportTestCase(unittest.TestCase):
 
@@ -17,14 +67,61 @@ class UReportTestCase(unittest.TestCase):
         self.db.ureport_questions.insert({"_id": 1, "question": "a_question"})
         self.db.ureport_questions.insert({"_id": 2, "question": "a_question_2"})
 
-        self.db.ureport_responses.insert({"_id": 1, "locator": "UGANDA, ACHOLI, GULU", "text": "text1"})
-        self.db.ureport_responses.insert({"_id": 2, "locator": "UGANDA, ACHOLI, GULU", "text": "text2"})
-        self.db.ureport_responses.insert({"_id": 3, "locator": "UGANDA, ACHOLI, GULU", "text": "text3"})
-        self.db.ureport_responses.insert({"_id": 4, "locator": "UGANDA, ACHOLI, GULU", "text": "text4"})
-        self.db.ureport_responses.insert({"_id": 5, "locator": "UGANDA, ACHOLI, GULU", "text": "text5"})
-        self.db.ureport_responses.insert({"_id": 6, "locator": "UGANDA, ACHOLI, GULU", "text": "text6"})
-        
-        self.db.ureport_responses.insert({"_id": 7, "locator": "UGANDA, ACHOLI, OTHER", "text": "other text"})
+        self.db.ureport_responses.insert({
+            "_id": 1, 
+            "location": {
+                "region": "ACHOLI"
+            },
+            "text": "text1"})
+
+        self.db.ureport_responses.insert({
+            "_id": 2, 
+            "location": {
+                "region": "ACHOLI",
+                "district": "GULU"
+            },
+            "text": "text2"})
+
+        self.db.ureport_responses.insert({
+            "_id": 3, 
+            "location": {
+                "region": "ACHOLI",
+                "district": "GULU",
+                "parish": "OTHER"
+            },
+            "text": "text3"})
+
+        self.db.ureport_responses.insert({
+            "_id": 4, 
+            "location": {
+                "region": "ACHOLI",
+                "district": "GULU",
+                "parish": "PATIKO"
+            },
+                "text": "text4"})
+
+        self.db.ureport_responses.insert({
+            "_id": 5, 
+            "location": {
+                "region": "KAMPALA"
+            },
+            "text": "text7"})
+
+        self.db.ureport_responses.insert({
+            "_id": 6, 
+            "location": {
+                "region": "ACHOLI",
+                "district": "GULU"
+            },
+            "text": "text5"})
+
+        self.db.ureport_responses.insert({
+            "_id": 7, 
+            "location": {
+                "region": "ACHOLI",
+                "district": "GULU"
+            },
+            "text": "text6"})
 
     def test_should_find_all_questions(self):
         ureportService = UReportService(self.db)
@@ -34,7 +131,7 @@ class UReportTestCase(unittest.TestCase):
 
     def test_should_find_top5_for_district(self):
         ureportService = UReportService(self.db)
-        responses = [ report['text'] for report in ureportService.top5("UGANDA, ACHOLI, GULU")]
+        responses = [ report['text'] for report in ureportService.top5(Locator("UGANDA, ACHOLI"))]
         self.assertEqual(responses, ["text1", "text2", "text3", "text4", "text5"])
 
 

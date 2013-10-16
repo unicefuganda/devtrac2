@@ -8,25 +8,28 @@
     {% assets "css_all" %}
         <link rel="stylesheet" media="screen" href="{{ ASSET_URL }}"></script>
     {% endassets %}
-
+    
+    
 
 
   </head>
   <body>
+    <style> 
+      [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+        display: none !important;
+      }
+    </style>
     <div id='map-container'>
 
     <link ng-if="feature_toggles.is_on('left_side')" rel="stylesheet" media="screen" ng-href="/static/css/feature_toggles/left_side.css"></link>
     
-    <!-- <div class="container"> -->
-    
     <div map id='devtrac-map'></div>
     
     <div ng-show="!feature_toggles.is_on('left_side')" id='ngview' ng-view class="ng-cloak"></div>
-    <!-- </div>   / -->
 
     <div panel panel-expand='{"left":"10px"}' panel-collapse='{"left":"-300px"}' class='filter-panel expanded dt-panel ng-cloak' id="filter-panel">
 
-      <div ng-show="feature_toggles.is_on('left_side')" id='ngview' ng-view></div>
+      <div ng-show="feature_toggles.is_on('left_side')" id='ngview' ng-view class="ng-cloak"></div>
 
       <div class='content filter-panel-content' >
 
@@ -114,7 +117,7 @@
 
      <div ng-if="!feature_toggles.is_on('left_side')" panel panel-expand='{"right":"10px"}' panel-collapse='{"right":"-300px"}' class='summary-panel ng-cloak' id="summary-panel">
 
-      <div class='content' ng-controller="SummaryCtrl" >
+      <div class='content ng-cloak' ng-controller="SummaryCtrl">
         <div  ng-show="summary != null" class='container ng-hide' >
           <div class='heading'>{[{location.full_name() }]}</div>
           <div  class='summary-content' >

@@ -65,7 +65,7 @@ def dashboards(region="", district="", subcounty="", parish=""):
 
 @app.route("/aggregation/<locator>")
 def aggregation(locator):
-	result = services.AggregationService(services.LocationService(__mongo_connection())).find(locator)
+	result = services.AggregationService(services.LocationService(__mongo_connection())).find(services.Locator(locator))
 	return Response(dumps(result), mimetype='application/json')
 
 @app.route("/ureport/questions")
@@ -75,7 +75,7 @@ def ureport_questions():
 
 @app.route("/ureport/top5/<locator>")
 def ureport_top5(locator):
-	result = services.UReportService(__mongo_connection()).top5(locator)
+	result = services.UReportService(__mongo_connection()).top5(services.Locator(locator))
 	return Response(dumps(result), mimetype='application/json')
 
 def __mongo_connection():

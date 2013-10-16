@@ -1,13 +1,13 @@
+import sys, os
+base_dir = os.path.abspath(os.path.dirname(__file__) + "/../../")
+sys.path.append(base_dir)
+
 from pymongo import MongoClient
 from import_geonode import import_dataset,import_locationTree
 from import_indicators import *
 from import_ureport import *
 import importlib
 
-
-import sys, os
-base_dir = os.path.abspath(os.path.dirname(__file__) + "/../../")
-sys.path.append(base_dir)
 
 from config.config import *
 config = config_from_env(os.environ['DEVTRAC_ENV'])
