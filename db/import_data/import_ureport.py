@@ -6,12 +6,37 @@ from app.services import *
 
 base_dir = os.path.abspath(os.path.dirname(__file__) + "/../../")
 
-
 def first(list, func):
     try:
         return (x for x in list if func(x)).next()
     except Exception as inst:
         return None
+
+# class UReportLocationService(object):
+    
+#     def __init__(self): 
+#         self.locations = []
+#         with open("%s/db/locations.csv" % base_dir, 'rUb') as csvfile:         
+#             reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
+#             self.locations = list(reader)
+
+
+#     def lookup_village(self, village):
+#         locations = [location for location in self.locations if location['name'] == village]
+#         print locations
+#         if (len(locations) == 0):
+#             return None;
+
+#         find_lowest_level(location)
+#         return locations[0]
+
+#     def find_lowest_level(locations):
+#         def find_level(location):
+#             levels = {'village': 1, 'sub_village': 2, 'parish': 3,'sub_county': 4, 'district': 5 }
+#             levels.contains_key('a')
+
+#         sorted(locations, key=find_level)
+
 
 class UReportLocationMatcher(object):
 
@@ -31,7 +56,7 @@ class UReportLocationMatcher(object):
         
         if (location == None):
             location = first(self.districts, lambda x: x['location']['district'] == district.upper())
-        return location        
+        return location
 
 def import_ureport(data_dir, db):
 
@@ -49,14 +74,16 @@ def import_ureport(data_dir, db):
     mismatching_districts = Set([])
     locationMatcher = UReportLocationMatcher(LocationService(db))
 
-
     with open("%s/%s/ureport_messages.csv" % (base_dir, data_dir), 'rUb') as csvfile: 
         reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
         for row in reader:    
 
             location = locationMatcher.match_location(row['district'], row['standard_village'], row['village_type_id'], row['parish'])
-            if (location != None):
+            existing_record = collection.find_one({"_id": row['ID']})
+
+            if (location != None and existing_record == None):
                 collection.insert({
+                    "_id": row['ID'],
                     "poll_id": row['poll_id'], 
                     "id": row['ID'], 
                     "text": row['text'].decode('cp1252'),
@@ -66,7 +93,8 @@ def import_ureport(data_dir, db):
                     "location": location["location"]
                 })
             else:
-                mismatching_districts.add(row['district'])
+                if (existing_record != None):
+                    mismatching_districts.add(row['district'])
 
     print "These districts were not found in the location_tree"
     print mismatching_districts

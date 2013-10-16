@@ -9,6 +9,8 @@ Copy (
  INNER JOIN locations_location ll ON ll.id = uc.reporting_location_id 
  LEFT OUTER JOIN locations_location vl ON vl.name = uc.village
  LEFT OUTER JOIN locations_location vlp ON vl.type_id = 'village' AND vl.parent_id = vlp.id OR vl.type_id = 'parish' AND vl.id = vlp.id
+
+ 
  WHERE pr.poll_id IN (165, 180, 200, 551) --AND ll.name = 'Gulu' 
  ) 
  To '/Users/Thoughtworker/work/devtrac2/db/ureport_messages_test.csv' WITH CSV HEADER;

@@ -3,6 +3,27 @@ from pymongo import MongoClient
 import urllib
 import json
 
+# eg "UGANDA, ACHOLI, GULU" 
+class Locator(object):
+    LEVELS = ["national", "region", "district", "subcounty", "parish"]
+
+    def __init__(self, locator):
+        self.locator = locator
+        self.location_arr = self.locator.split(", ")
+        self.level = len(self.location_arr)
+
+    def __str__(self):
+        return self.locator
+
+    def level_name(self):
+        return Locator.LEVELS[self.level - 1]
+
+    def child_level_name(self): 
+        return (Locator.LEVELS[self.level] if (self.level < len(Locator.LEVELS)) else None)
+
+    def name(self):
+        return self.location_arr[self.level - 1]
+
 class AggregationService(object):
 
     
@@ -62,7 +83,6 @@ class LocationService(object):
     def parishes(self):
         return list(self.db.location_tree.find({"type": "parish"}))
 
-
 class UReportService(object):
 
     def __init__(self, db):
@@ -74,27 +94,6 @@ class UReportService(object):
     def top5(self, locator):
         cursor = self.db.ureport_responses.find({"location.%s" % locator.level_name(): locator.name()})
         return list(cursor.sort("ID", 1).limit(5))
-
-# eg "UGANDA, ACHOLI, GULU" 
-class Locator(object):
-    LEVELS = ["national", "region", "district", "subcounty", "parish"]
-
-    def __init__(self, locator):
-        self.locator = locator
-        self.location_arr = self.locator.split(", ")
-        self.level = len(self.location_arr)
-
-    def __str__(self):
-        return self.locator
-
-    def level_name(self):
-        return Locator.LEVELS[self.level - 1]
-
-    def child_level_name(self): 
-        return (Locator.LEVELS[self.level] if (self.level < len(Locator.LEVELS)) else None)
-
-    def name(self):
-        return self.location_arr[self.level - 1]
 
 class WFSService(object):
 
