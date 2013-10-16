@@ -396,5 +396,18 @@ font-weight: 500;
   font-weight: normal;
 }
 
+.ureport-question {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.toggle.toggle-selected {
+  background-color: lightblue;
+}
+
+.toggle.toggle-selected:focus {
+  background-color: lightblue;
+}
+
 
 

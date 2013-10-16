@@ -75,9 +75,14 @@
             <div ng-if="feature_toggles.is_on('ureport')">
               <div class='heading'>Ureport question:</div>
               <form ng-controller="UReportCtrl" role="form" >
-                  <button type="button" ng-click='ureportQuestion.selected = question' ng-repeat="question in questions" class="btn btn-default btn-sm toggle">{[{question.abbreviation}]}</button>    
+                  <button type="button" ng-click='ureportQuestion.selected = question;' ng-repeat="question in questions" class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == question ? 'toggle-selected' : '' }]}" >{[{question.abbreviation}]}</button>    
               </form>
+
+              <div ng-if="ureportQuestion.selected != null" class="ureport-question ng-cloak">
+                <span>{[{ureportQuestion.selected.question}]}</span>
+              </div>
             </div>
+            
           </div> 
         </div>
       </div>     
