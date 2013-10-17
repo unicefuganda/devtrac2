@@ -314,8 +314,11 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
     }
 
     this.top5 = function(location, question) {
-        var url = location.level() == "national" ? "/ureport/top5/UGANDA" : "/ureport/top5/UGANDA, " +  location.getName().toUpperCase();
-        return jsonService.get(url);   
+        //var url = location.level() == "national" ? "/ureport/top5/UGANDA" : "/ureport/top5/UGANDA, " +  ;
+
+        var url = "/ureport/questions/" + question.id + "/top5/" + location.getName(true).toUpperCase();
+
+        return jsonService.get(url);
     }
 });
 

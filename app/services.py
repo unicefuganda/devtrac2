@@ -91,8 +91,8 @@ class UReportService(object):
     def questions(self):
         return list(self.db.ureport_questions.find())
 
-    def top5(self, locator):
-        cursor = self.db.ureport_responses.find({"location.%s" % locator.level_name(): locator.name()})
+    def top5(self, locator, poll_id):
+        cursor = self.db.ureport_responses.find({"location.%s" % locator.level_name(): locator.name(), "poll_id": poll_id})
         return list(cursor.sort("ID", 1).limit(5))
 
 class WFSService(object):

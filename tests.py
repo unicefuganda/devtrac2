@@ -72,7 +72,19 @@ class UReportTestCase(unittest.TestCase):
             "location": {
                 "region": "ACHOLI"
             },
-            "text": "text1"})
+            "text": "text1",
+            "poll_id": 1
+            })
+
+        self.db.ureport_responses.insert({
+            "_id": 8, 
+            "location": {
+                "region": "ACHOLI",
+                "district": "GULU"
+            },
+            "text": "text8",
+            "poll_id": 2
+        })
 
         self.db.ureport_responses.insert({
             "_id": 2, 
@@ -80,7 +92,9 @@ class UReportTestCase(unittest.TestCase):
                 "region": "ACHOLI",
                 "district": "GULU"
             },
-            "text": "text2"})
+            "text": "text2",
+            "poll_id": 1
+            })
 
         self.db.ureport_responses.insert({
             "_id": 3, 
@@ -89,7 +103,9 @@ class UReportTestCase(unittest.TestCase):
                 "district": "GULU",
                 "parish": "OTHER"
             },
-            "text": "text3"})
+            "text": "text3",
+            "poll_id": 1
+        })
 
         self.db.ureport_responses.insert({
             "_id": 4, 
@@ -98,14 +114,18 @@ class UReportTestCase(unittest.TestCase):
                 "district": "GULU",
                 "parish": "PATIKO"
             },
-                "text": "text4"})
+            "text": "text4",
+            "poll_id": 1
+        })
 
         self.db.ureport_responses.insert({
             "_id": 5, 
             "location": {
                 "region": "KAMPALA"
             },
-            "text": "text7"})
+            "text": "text7",
+            "poll_id": 1
+        })
 
         self.db.ureport_responses.insert({
             "_id": 6, 
@@ -113,7 +133,9 @@ class UReportTestCase(unittest.TestCase):
                 "region": "ACHOLI",
                 "district": "GULU"
             },
-            "text": "text5"})
+            "text": "text5",
+            "poll_id": 1
+        })
 
         self.db.ureport_responses.insert({
             "_id": 7, 
@@ -121,7 +143,9 @@ class UReportTestCase(unittest.TestCase):
                 "region": "ACHOLI",
                 "district": "GULU"
             },
-            "text": "text6"})
+            "text": "text6",
+            "poll_id": 1
+        })
 
     def test_should_find_all_questions(self):
         ureportService = UReportService(self.db)
@@ -131,7 +155,7 @@ class UReportTestCase(unittest.TestCase):
 
     def test_should_find_top5_for_district(self):
         ureportService = UReportService(self.db)
-        responses = [ report['text'] for report in ureportService.top5(Locator("UGANDA, ACHOLI"))]
+        responses = [ report['text'] for report in ureportService.top5(Locator("UGANDA, ACHOLI"), 1)]
         self.assertEqual(responses, ["text1", "text2", "text3", "text4", "text5"])
 
 

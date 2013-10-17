@@ -138,10 +138,10 @@ describe("Ureport Service responses", function() {
     });
 
     it ('should get ureport questions', inject(function(ureportService) {
-        ureportService.top5(new DT.Location({region: 'north'})).then(function(data){
+        ureportService.top5(new DT.Location({region: 'north'}), {id: 100}).then(function(data){
 
             expect(data).toEqual(testReponses);
-            expect(mock.get).toHaveBeenCalledWith('/ureport/top5/UGANDA, NORTH');
+            expect(mock.get).toHaveBeenCalledWith('/ureport/questions/100/top5/UGANDA, NORTH');
         });
     }));
 })

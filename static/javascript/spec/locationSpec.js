@@ -225,7 +225,17 @@ describe("Location", function() {
         expect(DT.Location.fromName("a_region, a_district")).toEqual(new DT.Location({region: "a_region", district: "a_district"}));
         expect(DT.Location.fromName("Uganda, a_region, a_district, a_subcounty")).toEqual(new DT.Location({region: "a_region", district: "a_district", subcounty: "a_subcounty"}));
         expect(DT.Location.fromName("Uganda, a_region, a_district, a_subcounty, a_parish")).toEqual(new DT.Location({region: "a_region", district: "a_district", subcounty: "a_subcounty", parish: "a_parish"}));
-
     })
 
+    it ("should include national level in name", function() {
+        expect(new DT.Location({}).getName(true)).toEqual("UGANDA");
+        expect(new DT.Location({region: "north"}).getName(true)).toEqual("UGANDA, north");
+        expect(new DT.Location({region: "north", district: "gulu"}).getName(true)).toEqual("UGANDA, north, gulu");
+    })
+
+    it ("should not include national level in name by default", function() {
+        expect(new DT.Location({}).getName()).toEqual("");
+        expect(new DT.Location({region: "north"}).getName()).toEqual("north");
+        expect(new DT.Location({region: "north", district: "gulu"}).getName()).toEqual("north, gulu");
+    })
 });

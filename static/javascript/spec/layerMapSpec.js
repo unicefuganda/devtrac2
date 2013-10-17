@@ -71,18 +71,20 @@ describe("LayerMap", function() {
     it("should find child layers from its parents location", function() {
         var map = new DT.LayerMap("someid");
         var guluLocation = new DT.Location({
+            region: "North",
             district: "Gulu"
         });
         var patikoLocation = new DT.Location({
+            region: "North",
             district: "Gulu",
             subcounty: "Patiko"
         });
 
         var awachLocation = new DT.Location({
+            region: "North",
             district: "Gulu",
             subcounty: "Awach"
         });
-
 
         map.addChildLayer("water-points", guluLocation, patikoLocation, "some data1");
         map.addChildLayer("water-points", guluLocation, awachLocation, "some data2");
@@ -92,23 +94,28 @@ describe("LayerMap", function() {
     it("should list all child layers", function() {
         var map = new DT.LayerMap("someid");
         var guluLocation = new DT.Location({
+            region: "North",
             district: "Gulu"
         });
         var patikoLocation = new DT.Location({
+            region: "North",
             district: "Gulu",
             subcounty: "Patiko"
         });
 
         var awachLocation = new DT.Location({
+            region: "North",
             district: "Gulu",
             subcounty: "Awach"
         });
 
         var kampalaLocation = new DT.Location({
+            region: "North",
             district: "Kampala"
         });
 
         var makindyeLocation = new DT.Location({
+            region: "North",
             district: "Gulu",
             subcounty: "Makindye Divison"
         });

@@ -69,17 +69,26 @@ DT.Location.prototype.layerOrder = function() {
         return ["region", "district", "subcounty", "parish"]
     }
 }
-DT.Location.prototype.getName = function(location) {
+DT.Location.prototype.getName = function(includeNational) {
 
-    if (this.parish)
-        return this.region + ", " + this.district + ", " + this.subcounty + ", " + this.parish;
-    if (this.subcounty)
-        return this.region + ", " + this.district + ", " + this.subcounty;
-    if (this.district)
-        return this.region + ", " + this.district;
-    if (this.region)
-        return this.region;
-    return "";
+    if (typeof(includeNational) == 'undefined')
+        includeNational = false;
+
+    if (this.level() == "national" && includeNational)
+        return "UGANDA";
+
+    var name =  includeNational ? "UGANDA, " : "";
+
+    if (this.level() == "parish")
+        name += this.region + ", " + this.district + ", " + this.subcounty + ", " + this.parish;
+    if (this.level() == "subcounty")
+        name += this.region + ", " + this.district + ", " + this.subcounty;
+    if (this.level() == "district")
+        name += this.region + ", " + this.district;
+    if (this.level() == "region")
+        name += this.region;
+
+    return name;
 };
 
 DT.Location.fromName = function(name) {

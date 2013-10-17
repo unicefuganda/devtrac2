@@ -35,7 +35,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         if (ureportQuestion == null || ureportQuestion.selected == null) {
             $scope.ureportTop5 = []
         } else {
-            ureportService.top5(location, ureportQuestion.question_id).then(function (data) {
+            ureportService.top5(location, ureportQuestion.selected).then(function (data) {
                 $scope.ureportTop5 = data
             });
         }
@@ -51,7 +51,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
    
 
     $rootScope.$watch("ureportQuestion", function(newQuestion) {
-        
         showUReportResults($rootScope.location, $rootScope.ureportQuestion);
     }, true);
 
