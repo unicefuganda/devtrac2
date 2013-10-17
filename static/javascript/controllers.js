@@ -31,7 +31,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $rootScope.$watch("location", function(newLocation, oldLocation) {
         if (newLocation == null)
             return;
-
+        console.log("here");
         showSummary($rootScope.location);
     });
 
