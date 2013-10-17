@@ -1,4 +1,4 @@
-angular.module("dashboard").service('districtService', function($http, $filter, $rootScope, $q, summaryService) {
+angular.module("dashboard").service('districtService', function($http, $filter, $rootScope, $q, summaryService, ureportService) {
     var self = this;
     if (typeof(callbacks) == 'undefined') {
         callbacks = {}
@@ -82,6 +82,17 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                     allData[locationkey] = data;
                     deffered2.resolve();
                  })
+            } else if (key == "ureport") {
+                if ($rootScope.ureportQuestion == undefined || $rootScope.ureportQuestion.selected == null) {
+                    allData[locationkey] = {children: []};
+                    deffered2.resolve();
+                } else {
+
+                    ureportService.child_results(location, $rootScope.ureportQuestion.selected).then(function(data) {
+                        allData[locationkey] = data;
+                        deffered2.resolve();
+                    })
+                }
             }
             return deffered2.promise;
         });

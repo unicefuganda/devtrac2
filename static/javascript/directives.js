@@ -11,7 +11,7 @@ angular.module("dashboard").directive('map', function() {
 
             //TODO: Is there a more angular way of doing this?
             $rootScope.mapResize = function() {
-                
+
                 if ($scope.onresize != null ){
                     $scope.onresize();    
                 }
@@ -54,6 +54,12 @@ angular.module("dashboard").directive('map', function() {
                 if (newFilter == undefined)
                     return true;
                 applyLocationAndFilter(scope.location, newFilter);
+            }, true);
+
+            scope.$watch("ureportQuestion", function(newQuestion) {
+                if (newQuestion == undefined)
+                    return true;
+                applyLocationAndFilter(scope.location, scope.filter);
             }, true);
 
             scope.$watch("indicator", function(newIndicator, oldIndicator){

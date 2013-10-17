@@ -28,30 +28,24 @@
     
     <div id='right-hand-panel' class='{[{ show_bottom_panel ? "ureport-question-selected" : ""}]}' ng-controller='RightPanelCtrl'>
       <div map id='devtrac-map'></div>
-      <div  id='ureport-panel' class='ng-cloak' ng-if="show_bottom_panel">
-        UReport
-        <div class="ureport-question ng-cloak">
-          <span>{[{ureportQuestion.selected.question}]}</span>
+      <div ng-controller="UReportResponsesCtrl" id='ureport-panel' class='ng-cloak' ng-if="show_bottom_panel">
+        <h3>UReport Poll Results</h3>
+        
+
+        <div ng-show="ureportTop5.length > 0" class='ng-hide ureport-summary ng-cloak'>
+          <span class="ureport-question" >{[{ureportQuestion.selected.question}]}</span>
+          <ul class='ureport-top5'>
+            <li ng-repeat="item in ureportTop5" class="response">“{[{item.text }]}”</li>  
+          </ul>
         </div>
 
 
-        <div class='content' ng-if="feature_toggles.is_on('ureport')"  >
-          <div ng-controller="UReportResponsesCtrl" ng-show="ureportTop5.length > 0" class='ng-hide ureport-summary ng-cloak'>
-            <div class='ureport-top5'>
-              <div class='heading'>Responses</div>
-              <div ng-repeat="item in ureportTop5" class="response">
-                <span>{[{item.text }]}</span>
-              </div>  
-            </div>
-            <div class='ureport-results'>
-              <div class='heading'>Responses</div>
-              <div ng-repeat="item in ureportResults.results">
-                 <label>{[{item.category}]}</label>
-                 <span>{[{item.percent}]}</span>
-              </div>  
-            </div>
-          </div>
-        </div>
+        <ul class='ureport-results'>
+          <li ng-repeat="item in ureportResults.results">
+            <label>{[{item.category}]}:</label>
+            <span>{[{item.percent}]}</span>
+          </li>
+        </ul>  
       </div>
     </div>
     
@@ -64,6 +58,12 @@
       <div class='content filter-panel-content' >
 
         <div  class='container'>
+          <form role="form">
+            <div class="form-group">
+              <label for="sector-select">Display datasets associated with:</label>
+              <button type="button" class="btn btn-default btn-sm toggle toggle-selected">Youth</button>
+            </div>
+          </form>
           <div class='heading'>Show points related to:</div>
           <div class='sector-content'>
             <ul class="nav nav-list">
@@ -85,17 +85,12 @@
             </ul>
 
             <form ng-controller="IndicatorsCtrl" role="form" id="indicator-form">
-              <div class="form-group">
-                <label for="sector-select">Display heatmap associated with:</label>
-                <select id="sector-select">
-                  <option value="Youth">Youth</option>
-                </select>
-              </div>
+              
               <div class="form-group">
                 <label for="indicator-select">By indicator:</label>
-                <select id="indicator-select" name="indicator-select" ng-model="indicator.selected" ng-options="indicator.name for indicator in indicators">
-                  <option value="">None</option>
-                </select>
+
+                <button type="button" ng-click='indicator.selected = null;' class="btn btn-default btn-sm toggle {[{indicator.selected == null ? 'toggle-selected' : '' }]}" >None</button>  
+                <button type="button" ng-repeat="ind in indicators" data-indicator='{[{ind.name}]}' ng-click="indicator.selected = ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
               </div>
               <div ng-if="indicator.selected != null" class='legend'>
                 <label for="indicator-select">Legend:</label>
@@ -111,7 +106,13 @@
               </form>
             </div>
 
-            <div ng-if="feature_toggles.is_on('left_side')" class='summary-panel' id='summary-panel' >
+            
+            
+          </div> 
+        </div>
+
+        <div  class='container'>
+          <div ng-if="feature_toggles.is_on('left_side')" class='summary-panel' id='summary-panel' >
               <div class='content' ng-controller="SummaryCtrl" >
                 <div ng-show="summary != null" class='ng-hide' >
                   <div class='heading'>{[{location.full_name() }]}</div>
@@ -130,8 +131,6 @@
                 </div>
               </div>
             </div>  
-            
-          </div> 
         </div>
       </div>     
 

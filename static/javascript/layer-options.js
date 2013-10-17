@@ -136,15 +136,29 @@ DT.LayerOptions = {
     "water-point": {
         name: "water-point",
         type: "aggregate",
-        
+        getValue: function(stats, childLocation) { 
+            return "<div data-locator='" + childLocation.getName() + "'>" 
+                    + stats.info['water-point']
+                    + '</div>';
+        }
     },
     "health-center": {
         name: "health-center",
-        type: "aggregate"
+        type: "aggregate",
+        getValue: function(stats, childLocation) { 
+            return "<div data-locator='" + childLocation.getName() + "'>" 
+                    + stats.info['health-center']
+                    + '</div>';
+        }
     },
     "school": {
         name: "school",
         type: "aggregate",
+        getValue: function(stats, childLocation) { 
+            return "<div data-locator='" + childLocation.getName() + "'>" 
+                    + stats.info.school
+                    + '</div>';
+        }
         
     },
     "water-point-point": {
@@ -186,6 +200,16 @@ DT.LayerOptions = {
                     ["Unit Type", "HC " + properties.UnitType]
                 ]
             }
+        }
+    },
+
+    "ureport": {
+        name: "ureport",
+        type: "aggregate",
+        // getName: function() { return ""},
+        getValue: function(stats) { 
+            // <a href=""  data-name="wifi" data-type="" data-prefix="glyphicons" data-utf="E074"></a>
+            return "<div class= 'glyphicon glyphicon-th category_" + stats.top.category_id + "' ></div>" 
         }
     },
 }

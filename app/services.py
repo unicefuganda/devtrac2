@@ -97,15 +97,18 @@ class UReportService(object):
 
     def __convert_to_percent(self,pollResults):
         results = pollResults['results']
-        rs = [int(results[result]) for result in results]
+        rs = [int(result['count']) for result in results]
         total = sum(rs)
 
         def calc_percent(percent, total):
             result = float(percent)/total * 100
             return "%0.0f%%" % result
 
-        percentages = [{"category": result, "percent": calc_percent(results[result], total) } for result in results]
+        percentages = [{'category': result['category'], 'category_id': result['category_id'], 'percent': calc_percent(result['count'], total) } for result in results]
+
+        top = max(results, key=lambda x: x['count'])
         pollResults['results'] = percentages
+        pollResults['top'] = top
         return pollResults
 
 
@@ -117,7 +120,7 @@ class UReportService(object):
 
     def child_results(self, locator, poll_id):
         cursor = self.db.ureport_poll_categories.find({"location.%s" % locator.level_name(): locator.name(), "poll_id": poll_id})
-        return list(self.__convert_to_percent(result) for result in cursor)
+        return {"children": list(self.__convert_to_percent(result) for result in cursor)}
 
 class WFSService(object):
 

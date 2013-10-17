@@ -17,7 +17,7 @@ Copy (
 
 
 Copy (
-SELECT ll.name as district, pp.id AS poll_id, pcat.name AS category, COUNT(1) AS count
+SELECT ll.name as district, pp.id AS poll_id, pcat.name AS category, COUNT(1) AS count, pcat.id AS category_id
 FROM poll_poll pp
 INNER JOIN poll_response pr ON pp.ID = pr.poll_id
 INNER JOIN poll_responsecategory prc ON prc.response_id = pr.id

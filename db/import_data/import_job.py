@@ -19,17 +19,17 @@ from app import services
 
 wfs_service = services.WFSService("http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows")
 
-# print "import start"
-# import_dataset(wfs_service, database, "health_center", "uganda_health_centers_replotted")
-# print "health_center done"
-# import_dataset(wfs_service, database, "school", "uganda_schools_with_regions")
-# print "school done"
-# import_dataset(wfs_service, database, "water_point", "water_points_replottted")
-# print "water_point done"
-# import_locationTree(wfs_service,database)
-# print "location tree done"
-# import_indicators()
-# print "indicators done"
+print "import start"
+import_dataset(wfs_service, database, "health_center", "uganda_health_centers_replotted")
+print "health_center done"
+import_dataset(wfs_service, database, "school", "uganda_schools_with_regions")
+print "school done"
+import_dataset(wfs_service, database, "water_point", "water_points_replottted")
+print "water_point done"
+import_locationTree(wfs_service,database)
+print "location tree done"
+import_indicators()
+print "indicators done"
 
 import_ureport(config.DATA_DIR, database)
 print "ureport done"

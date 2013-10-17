@@ -58,14 +58,13 @@ def import_ureport_categories(db, locationMatcher):
             location = locationMatcher.match_location(district_poll[0], None, None, None)
 
             question = db.ureport_questions.find_one(rows[0]['poll_id'])
-            results = {}
+            results = []
 
-            for category in question['categories']:
+            for index, category in enumerate(question['categories']): 
                 category_row = first(rows, lambda r: r['category'] == category)
+                print category_row
                 if (category_row != None):
-                    results[category] = category_row['count']
-                else:
-                    results[category] = 0                
+                    results.append({'count': category_row['count'], 'category': category_row['category'], 'category_id': index})
             if (location != None):
                 collection.insert({"poll_id": rows[0]['poll_id'], "locator": location["_id"], "location": location["location"], "results": results })    
             else:

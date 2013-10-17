@@ -1,3 +1,11 @@
+h3 {
+
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    margin-bottom: 8px;
+}
+
 #map-container {
     width: 100%;
     top: 0px;
@@ -7,7 +15,6 @@
     position: absolute;
 }
 
-
 #devtrac-map {
     width: 100%;
     height: 100%;   
@@ -15,13 +22,53 @@
 
 .ureport-question-selected #ureport-panel {
     width: 100%;
-    height: 20%;
-    padding: 10px;
+    height: 25%;
+    padding: 6px;
     border-top: 1px solid #AAA;
 }
 
+.ureport-summary {
+    width: 60%;
+    float: left;
+}
+
+.ureport-question {
+    font-weight: normal;
+}
+.ureport-top5  {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top:6px;
+}
+
+.ureport-top5 li {
+    float: left;
+    font-size: 12px;
+    background-color: #EEE;
+    display: block;
+    padding: 2px;
+    border-radius: 3px;
+    font-style: italic;
+    margin-right: 10px;
+    margin-bottom: 6px;
+    
+}   
+
+.ureport-results {
+    width: 40%;
+    float:left;
+    overflow: hidden;;
+    list-style-type: none;
+    padding-left: 0;
+}
+.ureport-results label {
+    text-transform: capitalize; 
+    font-size: 13px;   
+    font-weight: 500;
+}
+
 .ureport-question-selected #devtrac-map {
-    height: 80%;
+    height: 75%;
 }
 
 #right-hand-panel {
@@ -46,8 +93,12 @@
 #filter-panel .filter-panel-content {
     border: none;
     height: auto;
-    border-bottom: 1px solid #CCC;
     padding-bottom: 20px
+}
+
+#filter-panel .container {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #CCC;
 }
 
 #filter-panel .toggle-panel {
@@ -59,8 +110,6 @@
     top: 0px;
     left: 0px;
 }
-
-
 
 #summary-panel .content{
     margin: 0;

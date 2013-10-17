@@ -149,8 +149,7 @@ body select {
 }
 
 .cluster-icon {
-  overflow: hidden;
-  padding: 6px 0 0 0;
+  overflow: hidden;/
   width: 32px;
   height: 32px;
   text-align: center;
@@ -168,7 +167,54 @@ body select {
   box-shadow: 0 2px 4px rgba(0,0,0,0.65);
 }
 
+.cluster-icon.medium.ureport-cluster-icon {
+  background-color: rgba(116, 100, 252, 0.6);
+  top: -30px;
+  width: 26px;
+  height: 26px;
+  border-radius: 13px;
+  left: 3px;
+}
+
+.ureport-cluster-icon .glyphicon {
+  top: 0px;
+  padding-top: 5px;
+  padding-left: 1px;
+}
+
+.ureport-cluster-icon .category_0 { 
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.8);
+  
+}
+
+.ureport-cluster-icon .category_1 { 
+  width: 100%;
+  height: 100%;
+  background-color: rgba(225, 125, 0, 0.8);
+}
+
+.ureport-cluster-icon .category_2 { 
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 0, 0.8);
+}
+
+.ureport-cluster-icon .category_3 { 
+  width: 100%;
+  height: 100%;
+  background-color: rgba(125, 255, 0, 0.8);
+}
+
+.ureport-cluster-icon .category_4 { 
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 255, 0, 0.8);
+}
+
 .water-point-cluster-icon {
+  padding: 7px 0 0 0;
   background-color: rgba(116, 223, 252, 0.6);
   left: -33px;
 }
@@ -187,7 +233,7 @@ body select {
 .cluster-icon.medium {
   width: 32px;
   height: 32px;
-  padding: 7px 0 0 0;
+  /*padding: 7px 0 0 0;*/
   border-radius: 16px;  
 }
 
@@ -207,10 +253,10 @@ body select {
 
 .health-center-cluster-icon
 {
+  padding: 7px 0 0 0;
   background-color: rgba(153, 51, 102, 0.65);
   left: 33px;
 }
-
 
 .health-center-point-icon
 {
@@ -219,6 +265,7 @@ body select {
 
 .school-cluster-icon
 {
+  padding: 7px 0 0 0;
   background-color: rgba(211, 242, 53, 0.65);
 }
 
@@ -233,18 +280,17 @@ body select {
     position: fixed;
     top: 100px;
     left: 10px;
-    width: 300px;
+    width: 330px;
     min-height: 70%;
-
 }
 
 .filter-panel > .content {
     position: absolute;
     width: 100%;
     height: 100%;
-    /*float: left;*/
     padding-bottom: 10px;
     border: 1px solid #CCCCCC;
+    padding-top: 10px;
 }
 
 .filter-panel .heading {
@@ -288,11 +334,11 @@ body select {
 }
 
 .filter-panel .content .container .sector-content ul label{ 
-  font-weight: normal;
+  font-weight: bold;
   margin-bottom: 3px;
 }
 
-#indicator-form label {
+form label {
   display: block;
   font-size: 14px;
   font-weight: 500;
@@ -395,8 +441,10 @@ body select {
 }
 
 .ureport-question {
-  margin-top: 10px;
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  display: inline-block;
 }
 
 .toggle.toggle-selected {

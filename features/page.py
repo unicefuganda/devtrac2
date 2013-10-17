@@ -104,8 +104,7 @@ class Page:
         return self.browser.evaluate_script("window.map.isIndicatorLayerHidden()")
 
     def change_indicator(self, indicator_name):
-        optionValue = self.browser.evaluate_script("window.map.getIndicatorValue('%s')" % indicator_name)
-        self.browser.select("indicator-select", optionValue);
+        self.browser.find_by_css("#indicator-form .toggle[data-indicator='%s']" % indicator_name).click()
 
     def is_indicator_layer_displayed(self, indicator_name): 
         return self.browser.evaluate_script("window.map.isIndicatorLayerDisplayed('%s')" % indicator_name)
