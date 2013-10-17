@@ -52,10 +52,10 @@ def import_ureport_categories(db, locationMatcher):
 
     with open("%s/db/ureport_poll_categories.csv" % base_dir, 'rUb') as csvfile: 
         reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
-        sorted_result = sorted(reader, key=lambda x: x['district'].upper());
-        for district, group in itertools.groupby(sorted_result, lambda x: x['district'].upper()):
+        sorted_result = sorted(reader, key=lambda x: (x['district'].upper(), x['poll_id']));
+        for district_poll, group in itertools.groupby(sorted_result, lambda x: (x['district'].upper(), x['poll_id'])):
             rows = list(group)
-            location = locationMatcher.match_location(district, None, None, None)
+            location = locationMatcher.match_location(district_poll[0], None, None, None)
 
             question = db.ureport_questions.find_one(rows[0]['poll_id'])
             results = {}
@@ -66,11 +66,10 @@ def import_ureport_categories(db, locationMatcher):
                     results[category] = category_row['count']
                 else:
                     results[category] = 0                
-
             if (location != None):
-                collection.insert({"poll_id": rows[0]['poll_id'], "_id": location["_id"], "results": results })    
+                collection.insert({"poll_id": rows[0]['poll_id'], "locator": location["_id"], "results": results })    
             else:
-                print district
+                print district_poll
 
 def import_ureport_responses(data_dir, db, locationMatcher):
     collection = db.ureport_responses
@@ -104,4 +103,5 @@ def import_ureport(data_dir, db):
     locationMatcher = UReportLocationMatcher(LocationService(db))
     import_ureport_questions(db)
     import_ureport_categories(db, locationMatcher)
+
     # import_ureport_responses(db)

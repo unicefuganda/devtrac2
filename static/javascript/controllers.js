@@ -31,7 +31,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $rootScope.$watch("location", function(newLocation, oldLocation) {
         if (newLocation == null)
             return;
-        console.log("here");
         showSummary($rootScope.location);
     });
 
@@ -47,7 +46,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         if (newQuestion == null)
             return;
         $scope.show_bottom_panel = newQuestion.selected != null;
-
         // Give time for the map to resize
         $timeout($scope.mapResize, 300);
     }, true)
@@ -60,6 +58,10 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
             ureportService.top5(location, ureportQuestion.selected).then(function (data) {
                 $scope.ureportTop5 = data
             });
+
+            ureportService.results(location, ureportQuestion.selected).then(function (data) {
+                $scope.ureportResults = data
+            });
         }
     }
 
@@ -68,7 +70,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
             return;
         showUReportResults($rootScope.location, $rootScope.ureportQuestion);
     });
-   
 
     $rootScope.$watch("ureportQuestion", function(newQuestion) {
         showUReportResults($rootScope.location, $rootScope.ureportQuestion);

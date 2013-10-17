@@ -28,13 +28,14 @@ INNER JOIN rapidsms_connection rcon ON rhm.connection_id = rcon.id
 INNER JOIN rapidsms_contact rc ON rcon.contact_id = rc.id 
 INNER JOIN locations_location ll ON ll.id = rc.reporting_location_id 
 
-WHERE pr.poll_id IN (165)
-GROUP BY ll.name, ll.type_id, pp.id, pcat.idP
+WHERE pr.poll_id IN (165, 180, 200, 551)
+GROUP BY ll.name, ll.type_id, pp.id, pcat.id
 ) 
 To '/Users/Thoughtworker/work/devtrac2/db/ureport_poll_categories.csv' WITH CSV HEADER;
 
 Copy(
 SELECT pp.id AS ID, pp.name AS abbreviation, pp.question, array_to_string(ARRAY(SELECT name FROM poll_category WHERE poll_id = pp.id ), ',') AS categories
 FROM poll_poll pp
+ WHERE pp.id IN (165, 180, 200, 551) --AND ll.name = 'Gulu' 
 )
 To '/Users/Thoughtworker/work/devtrac2/db/poll_questions.csv' WITH CSV HEADER;

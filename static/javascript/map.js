@@ -165,7 +165,8 @@ DT.Map = function(element) {
             // TODO: refactor
             if (layer == null) {
                 var regionLayer = self.layerMap.findLayerByKey("region");
-                map.fitBounds(regionLayer);
+                if (regionLayer != null)
+                    map.fitBounds(regionLayer);
             } else {
 
                 var childLayer = self.layerMap.findChildLayer(layer.location);

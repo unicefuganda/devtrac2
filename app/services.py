@@ -95,6 +95,26 @@ class UReportService(object):
         cursor = self.db.ureport_responses.find({"location.%s" % locator.level_name(): locator.name(), "poll_id": poll_id})
         return list(cursor.sort("ID", 1).limit(5))
 
+    def __convert_to_percent(self,pollResults):
+        results = pollResults['results']
+        rs = [int(results[result]) for result in results]
+        total = sum(rs)
+
+        def calc_percent(percent, total):
+            result = float(percent)/total * 100
+            return "%0.0f%%" % result
+
+        percentages = [{"category": result, "percent": calc_percent(results[result], total) } for result in results]
+        pollResults['results'] = percentages
+        return pollResults
+
+
+    def results(self, locator, poll_id):
+        cursor = self.db.ureport_poll_categories.find_one({"locator": str(locator), "poll_id": poll_id})
+        if (cursor == None):
+            return None
+        return self.__convert_to_percent(cursor)
+
 class WFSService(object):
 
     def __init__(self, url, maxFeatures=100000, test=False):

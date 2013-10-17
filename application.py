@@ -78,6 +78,11 @@ def ureport_top5(question_id, locator):
 	result = services.UReportService(__mongo_connection()).top5(services.Locator(locator), question_id)
 	return Response(dumps(result), mimetype='application/json')
 
+@app.route("/ureport/results/<question_id>/<locator>")
+def ureport_results(question_id, locator):
+	result = services.UReportService(__mongo_connection()).results(services.Locator(locator), question_id)
+	return Response(dumps(result), mimetype='application/json')
+
 def __mongo_connection():
 	return MongoClient().devtrac2
 
