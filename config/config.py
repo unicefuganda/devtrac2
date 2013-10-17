@@ -12,8 +12,8 @@ class DevelopmentConfig(Config):
     DATA_DIR = "db/data/prod"
 
 class TestingConfig(Config):
-    ASSETS_DEBUG = False
-    SEND_FILE_MAX_AGE_DEFAULT = 100
+    ASSETS_DEBUG = True
+    SEND_FILE_MAX_AGE_DEFAULT = 0
     DATA_DIR = "db/data/test"
 
 def config_from_env(env):
