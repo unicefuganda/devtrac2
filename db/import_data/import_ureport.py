@@ -62,7 +62,6 @@ def import_ureport_categories(db, locationMatcher):
 
             for index, category in enumerate(question['categories']): 
                 category_row = first(rows, lambda r: r['category'] == category)
-                print category_row
                 if (category_row != None):
                     results.append({'count': category_row['count'], 'category': category_row['category'], 'category_id': index})
             if (location != None):
