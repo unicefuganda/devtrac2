@@ -1,6 +1,6 @@
 angular.module("dashboard").directive('map', function() {
     return {
-        controller: function($scope, $location, districtService) {
+        controller: function($rootScope, $scope, $location, districtService) {
             $scope.navigateToLocation = function(location) {
                 $location.path(location.toUrl());
             }
@@ -8,10 +8,23 @@ angular.module("dashboard").directive('map', function() {
             $scope.getData = function(locationKeys) {
                 return districtService.getData(locationKeys);
             };
+
+            //TODO: Is there a more angular way of doing this?
+            $rootScope.mapResize = function() {
+                
+                if ($scope.onresize != null ){
+                    $scope.onresize();    
+                }
+            }
+            $scope.onresize = null;
         },
         link: function(scope, element, attrs) {
             var map = new DT.Map(element);
             window.map = map;
+            
+            scope.onresize = function() {
+                map.redraw();
+            };
 
             map.onClickDistrict(function(newLocation) {
                 scope.$apply(function (){

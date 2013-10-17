@@ -14,6 +14,9 @@
 
   </head>
   <body>
+
+    <link ng-if="feature_toggles.is_on('left_side')" rel="stylesheet" media="screen" ng-href="/static/css/feature_toggles/left_side.css"></link>
+
     <style> 
       [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
         display: none !important;
@@ -21,9 +24,27 @@
     </style>
     <div id='map-container'>
 
-    <link ng-if="feature_toggles.is_on('left_side')" rel="stylesheet" media="screen" ng-href="/static/css/feature_toggles/left_side.css"></link>
     
-    <div map id='devtrac-map'></div>
+    
+    <div id='right-hand-panel' class='{[{ show_bottom_panel ? "ureport-question-selected" : ""}]}' ng-controller='RightPanelCtrl'>
+      <div map id='devtrac-map'></div>
+      <div  id='ureport-panel' class='ng-cloak' ng-if="show_bottom_panel">
+        UReport
+        <div class="ureport-question ng-cloak">
+          <span>{[{ureportQuestion.selected.question}]}</span>
+        </div>
+
+
+        <div class='content' ng-if="feature_toggles.is_on('ureport')"  >
+          <div  ng-controller="UReportResponsesCtrl" ng-show="ureportTop5.length > 0" class='ng-hide ureport-summary ng-cloak'>
+            <div class='heading'>Responses</div>
+            <div ng-repeat="item in ureportTop5" class="response">
+              <span>{[{item.text }]}</span>
+            </div>  
+          </div>
+        </div>
+      </div>
+    </div>
     
     <div ng-show="!feature_toggles.is_on('left_side')" id='ngview' ng-view class="ng-cloak"></div>
 
@@ -75,12 +96,11 @@
             <div ng-if="feature_toggles.is_on('ureport')">
               <div class='heading'>Ureport question:</div>
               <form ng-controller="UReportCtrl" role="form" >
+                <button type="button" ng-click='ureportQuestion.selected = null;' class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == null ? 'toggle-selected' : '' }]}" >None</button>    
                   <button type="button" ng-click='ureportQuestion.selected = question;' ng-repeat="question in questions" class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == question ? 'toggle-selected' : '' }]}" >{[{question.abbreviation}]}</button>    
               </form>
 
-              <div ng-if="ureportQuestion.selected != null" class="ureport-question ng-cloak">
-                <span>{[{ureportQuestion.selected.question}]}</span>
-              </div>
+              
             </div>
             
           </div> 
@@ -90,33 +110,6 @@
        <a href="" class ='toggle-panel' ng-click="togglePanel()">
          <span class="glyphicon {[{ expanded ? 'glyphicon-chevron-left' : 'glyphicon-chevron-right' }]} toggle-icon"></span>
        </a>  
-
-       <div ng-if="feature_toggles.is_on('left_side')" class='summary-panel ng-cloak' id='summary-panel' >
-       <div class='content' ng-controller="SummaryCtrl" >
-       <div  ng-show="summary != null" class='container ng-hide' >
-          <div class='heading'>{[{location.full_name() }]}</div>
-          <div  class='summary-content' >
-            <div ng-repeat="item in summary" class="info">
-              <label>{[{item[0]}]}</label>
-              <span>{[{item[1]}]}</span>
-            </div>
-
-            <div ng-repeat="item in indicatorSummary" class="info">
-              <label>{[{item[0]}]}</label>
-              <span>{[{item[1]}]}</span>
-            </div>
-          </div> 
-
-          <div ng-if="feature_toggles.is_on('ureport')" ng-show="ureportTop5.length > 0" class='ng-hide ureport-summary ng-cloak'>
-            <div class='heading'>uReport Responses</div>
-            <div ng-repeat="item in ureportTop5" class="response">
-              <span>{[{item.text }]}</span>
-            </div>  
-          </div>
-
-        </div>
-        </div>
-        </div>
     </div>
     
 
@@ -137,7 +130,7 @@
             </div>
           </div> 
 
-          <div ng-show="ureportTop5.length > 0" class='ng-hide ureport-summary'>
+          <div ng-show="ureportTop5.length > 0" class='ng-hide ureport-summary' ng-controller="UReportResponsesCtrl">
             <div class='heading'>uReport Responses</div>
             <div ng-repeat="item in ureportTop5" class="response">
               <span>{[{item.text }]}</span>

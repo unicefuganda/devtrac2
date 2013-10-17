@@ -155,6 +155,24 @@ DT.Map = function(element) {
     }   
 
     return {
+        redraw: function() {
+            map.invalidateSize(false);
+            
+            var layer = DT.first(self.layerMap.allChildLayers(), function(layer) {
+                return layer.isSelected();
+            });
+
+            // TODO: refactor
+            if (layer == null) {
+                var regionLayer = self.layerMap.findLayerByKey("region");
+                map.fitBounds(regionLayer);
+            } else {
+
+                var childLayer = self.layerMap.findChildLayer(layer.location);
+                map.fitBounds(childLayer.leafletLayer.getBounds());
+            }
+            
+        },
         addLayer: function(name, location, data, layer_info) {
             if (layer_info.type == "boundary") {
                 addBoundaryLayer(name, location, data, layer_info);
@@ -306,7 +324,7 @@ DT.Layer = function(leafletLayer, options, featureProperties, map) {
     };
 
     self.focusLayer = function() {
-        if (self.selected)
+        if (self.selected == true)
             return;
 
         self.selected = true;

@@ -10,7 +10,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $scope.indicators = heatmapService.all();
 }).controller("SummaryCtrl", function($scope, $rootScope, summaryService, indicatorService, ureportService) {
 
-
     var showSummary = function (location) {
         summaryService.find(location.getName()).then(function(summary) {
 
@@ -29,9 +28,32 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         });
     };
 
-    var showUReportResults = function (location, ureportQuestion) {
-        
+    $rootScope.$watch("location", function(newLocation, oldLocation) {
+        if (newLocation == null)
+            return;
 
+        showSummary($rootScope.location);
+    });
+
+}).controller("UReportCtrl", function($scope, $rootScope, ureportService) {
+    $rootScope.ureportQuestion = { selected: null } 
+    ureportService.questions().then(function(data) {
+        $scope.questions = data;
+    });
+}).controller("RightPanelCtrl", function($scope, $timeout) {
+    $scope.show_bottom_panel = false;
+
+    $scope.$watch("ureportQuestion", function(newQuestion) {
+        if (newQuestion == null)
+            return;
+        $scope.show_bottom_panel = newQuestion.selected != null;
+
+        // Give time for the map to resize
+        $timeout($scope.mapResize, 300);
+    }, true)
+}).controller("UReportResponsesCtrl", function($rootScope, $scope, ureportService){
+
+    var showUReportResults = function (location, ureportQuestion) {
         if (ureportQuestion == null || ureportQuestion.selected == null) {
             $scope.ureportTop5 = []
         } else {
@@ -44,8 +66,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $rootScope.$watch("location", function(newLocation, oldLocation) {
         if (newLocation == null)
             return;
-
-        showSummary($rootScope.location);
         showUReportResults($rootScope.location, $rootScope.ureportQuestion);
     });
    
@@ -54,9 +74,4 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         showUReportResults($rootScope.location, $rootScope.ureportQuestion);
     }, true);
 
-}).controller("UReportCtrl", function($scope, $rootScope, ureportService) {
-    $rootScope.ureportQuestion = { selected: null } 
-    ureportService.questions().then(function(data) {
-        $scope.questions = data;
-    });
 });
