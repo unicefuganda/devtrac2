@@ -1,4 +1,4 @@
-Feature: ureport
+# Feature: ureport
 # 
 # Scenario: Display ureport panel
 # Given that I am a regular user

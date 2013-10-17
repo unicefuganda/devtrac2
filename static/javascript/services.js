@@ -319,7 +319,12 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
     }
 
     this.results = function(location, question) {
-        var url = "/ureport/results/" + question.id + "/" + location.getName(true).toUpperCase();
+        var url = "/ureport/questions/" + question.id + "/results/" + location.getName(true).toUpperCase();
+        return jsonService.get(url);
+    }
+
+    this.child_results = function(location, question) {
+        var url = "/ureport/questions/" + question.id + "/child_results/" + location.getName(true).toUpperCase();
         return jsonService.get(url);
     }
 });

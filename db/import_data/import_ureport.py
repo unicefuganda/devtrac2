@@ -67,7 +67,7 @@ def import_ureport_categories(db, locationMatcher):
                 else:
                     results[category] = 0                
             if (location != None):
-                collection.insert({"poll_id": rows[0]['poll_id'], "locator": location["_id"], "results": results })    
+                collection.insert({"poll_id": rows[0]['poll_id'], "locator": location["_id"], "location": location["location"], "results": results })    
             else:
                 print district_poll
 

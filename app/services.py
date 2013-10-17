@@ -115,6 +115,10 @@ class UReportService(object):
             return None
         return self.__convert_to_percent(cursor)
 
+    def child_results(self, locator, poll_id):
+        cursor = self.db.ureport_poll_categories.find({"location.%s" % locator.level_name(): locator.name(), "poll_id": poll_id})
+        return list(self.__convert_to_percent(result) for result in cursor)
+
 class WFSService(object):
 
     def __init__(self, url, maxFeatures=100000, test=False):
