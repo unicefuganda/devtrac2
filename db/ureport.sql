@@ -14,3 +14,27 @@ Copy (
  WHERE pr.poll_id IN (165, 180, 200, 551) --AND ll.name = 'Gulu' 
  ) 
  To '/Users/Thoughtworker/work/devtrac2/db/ureport_messages_test.csv' WITH CSV HEADER;
+
+
+Copy (
+SELECT ll.name as district, pp.id AS poll_id, pcat.name AS category, COUNT(1) AS count
+FROM poll_poll pp
+INNER JOIN poll_response pr ON pp.ID = pr.poll_id
+INNER JOIN poll_responsecategory prc ON prc.response_id = pr.id
+INNER JOIN poll_category pcat ON prc.category_id = pcat.id
+INNER JOIN ureport_contact uc ON uc.id = pr.contact_id
+INNER JOIN rapidsms_httprouter_message rhm ON rhm.ID = pr.message_id
+INNER JOIN rapidsms_connection rcon ON rhm.connection_id = rcon.id 
+INNER JOIN rapidsms_contact rc ON rcon.contact_id = rc.id 
+INNER JOIN locations_location ll ON ll.id = rc.reporting_location_id 
+
+WHERE pr.poll_id IN (165)
+GROUP BY ll.name, ll.type_id, pp.id, pcat.idP
+) 
+To '/Users/Thoughtworker/work/devtrac2/db/ureport_poll_categories.csv' WITH CSV HEADER;
+
+Copy(
+SELECT pp.id AS ID, pp.name AS abbreviation, pp.question, array_to_string(ARRAY(SELECT name FROM poll_category WHERE poll_id = pp.id ), ',') AS categories
+FROM poll_poll pp
+)
+To '/Users/Thoughtworker/work/devtrac2/db/poll_questions.csv' WITH CSV HEADER;

@@ -1,0 +1,537 @@
+district,poll_id,category,count
+Moyo,165,Lack of land,11
+Amudat,165,Lack of land,2
+Masaka,165,climate,32
+Alebtong,165,Lack of land,9
+Nakasongola,165,Pests and Diseases,2
+Bukomansimbi,165,Lack of capital,2
+Dokolo,165,Lack of land,9
+Kanungu,165,Pests and Diseases,3
+Koboko,165,Pests and Diseases,4
+Luuka,165,Pests and Diseases,2
+Kamwenge,165,Lack of capital,16
+Kyegegwa,165,Pests and Diseases,8
+Amuru,165,Lack of land,5
+Butambala,165,Lack of capital,10
+Mitooma,165,Pests and Diseases,2
+Iganga,165,Pests and Diseases,12
+Abim,165,Pests and Diseases,4
+Bududa,165,Pests and Diseases,2
+Kole,165,Pests and Diseases,5
+Bugiri,165,Poor farming methods,6
+Mbarara,165,climate,138
+Mbale,165,Pests and Diseases,33
+Kaberamaido,165,Poor farming methods,6
+Namayingo,165,Poor farming methods,3
+Sironko,165,Lack of land,4
+Kaliro,165,climate,7
+Kabarole,165,climate,47
+Namutumba,165,Pests and Diseases,5
+Kabale,165,Pests and Diseases,10
+Buikwe,165,Lack of capital,24
+Serere,165,Pests and Diseases,8
+Zombo,165,Poor farming methods,6
+Manafwa,165,climate,33
+Lamwo,165,Lack of capital,21
+Nakaseke,165,Lack of land,1
+Ngora,165,Poor farming methods,1
+Kiboga,165,Lack of land,1
+Nwoya,165,climate,43
+Kween,165,climate,19
+Kotido,165,Pests and Diseases,3
+Bukwo,165,climate,5
+Napak,165,climate,14
+Apac,165,Lack of land,7
+Kiryandongo,165,Lack of capital,22
+Lyantonde,165,Poor farming methods,1
+Kampala,165,Poor farming methods,278
+Gomba,165,climate,4
+Jinja,165,Lack of capital,72
+Isingiro,165,Lack of land,12
+Lwengo,165,Pests and Diseases,3
+Agago,165,Pests and Diseases,2
+Kasese,165,Poor farming methods,40
+Buyende,165,Poor farming methods,1
+Mayuge,165,climate,20
+Kisoro,165,Pests and Diseases,7
+Kamuli,165,Poor farming methods,15
+Kumi,165,Poor farming methods,5
+Lwengo,165,Lack of land,1
+Isingiro,165,Pests and Diseases,9
+Ntungamo,165,climate,29
+Amuria,165,Poor farming methods,8
+Amolatar,165,Lack of capital,6
+Kisoro,165,Lack of land,4
+Luwero,165,climate,31
+Kitgum,165,Lack of capital,41
+Kapchorwa,165,Poor farming methods,5
+Agago,165,Lack of land,3
+Apac,165,Pests and Diseases,16
+Ssembabule,165,Poor farming methods,5
+Masindi,165,Lack of capital,22
+Pallisa,165,Poor farming methods,10
+Kotido,165,Lack of land,1
+Lira,165,Poor farming methods,48
+Kaabong,165,Poor farming methods,6
+Bundibugyo,165,Lack of capital,17
+Bukedea,165,climate,32
+Nakaseke,165,Pests and Diseases,6
+Kyenjojo,165,climate,28
+Hoima,165,Poor farming methods,13
+Kiboga,165,Pests and Diseases,2
+Bushenyi,165,climate,25
+Nebbi,165,climate,65
+Wakiso,165,Lack of capital,375
+Kabale,165,Lack of land,13
+Mpigi,165,Poor farming methods,8
+Namutumba,165,Lack of land,2
+Serere,165,Lack of land,5
+Mukono,165,Poor farming methods,35
+Rakai,165,Poor farming methods,8
+Kalangala,165,Lack of land,1
+Sironko,165,Pests and Diseases,1
+Buliisa,165,Lack of capital,4
+Mubende,165,Poor farming methods,10
+Budaka,165,Lack of capital,9
+Rubirizi,165,Lack of capital,15
+Kibaale,165,Lack of capital,8
+Nakapiripirit,165,Lack of land,2
+Rukungiri,165,climate,18
+Bulambuli,165,Poor farming methods,5
+Buhweju,165,climate,4
+Sheema,165,Poor farming methods,17
+Kole,165,Lack of land,6
+Bududa,165,Lack of land,1
+Oyam,165,Poor farming methods,40
+Kayunga,165,climate,17
+Ibanda,165,Poor farming methods,11
+Abim,165,Lack of land,8
+Iganga,165,Lack of land,8
+Otuke,165,Poor farming methods,7
+Mbale,165,Lack of land,29
+Adjumani,165,Poor farming methods,9
+Mitooma,165,Lack of land,9
+Gulu,165,climate,314
+Katakwi,165,Poor farming methods,5
+Amuru,165,Pests and Diseases,10
+Butaleja,165,climate,13
+Arua,165,climate,252
+Pader,165,Lack of capital,30
+Kyegegwa,165,Lack of land,3
+Moroto,165,climate,44
+Kalungu,165,Lack of capital,5
+Yumbe,165,Lack of capital,12
+Soroti,165,climate,72
+Kyankwanzi,165,Poor farming methods,5
+Alebtong,165,Pests and Diseases,8
+Nakasongola,165,Lack of land,1
+Mityana,165,climate,19
+Kibuku,165,Poor farming methods,2
+Moyo,165,Pests and Diseases,14
+Busia,165,climate,47
+Kiruhura,165,Poor farming methods,8
+Tororo,165,climate,97
+Kanungu,165,Lack of land,3
+Ntoroko,165,Poor farming methods,3
+Koboko,165,Lack of land,3
+Dokolo,165,Pests and Diseases,4
+Sironko,165,Lack of capital,15
+Kaliro,165,Poor farming methods,2
+Namayingo,165,climate,10
+Kaberamaido,165,climate,28
+Buliisa,165,Pests and Diseases,1
+Kibaale,165,Pests and Diseases,3
+Budaka,165,Pests and Diseases,2
+Rubirizi,165,Pests and Diseases,6
+Kabarole,165,Poor farming methods,24
+Bugiri,165,climate,22
+Mbarara,165,Poor farming methods,59
+Amuru,165,Lack of capital,22
+Butambala,165,Lack of land,3
+Kamwenge,165,Lack of land,2
+Pader,165,Pests and Diseases,9
+Kalungu,165,Pests and Diseases,1
+Yumbe,165,Pests and Diseases,4
+Alebtong,165,Lack of capital,20
+Moyo,165,Lack of capital,37
+Amudat,165,Lack of capital,2
+Masaka,165,Poor farming methods,21
+Dokolo,165,Lack of capital,23
+Isingiro,165,Lack of capital,21
+Jinja,165,Lack of land,22
+Kampala,165,climate,448
+Mayuge,165,Poor farming methods,15
+Kitgum,165,Pests and Diseases,13
+Buyende,165,climate,5
+Kasese,165,climate,109
+Amolatar,165,Pests and Diseases,4
+Masindi,165,Pests and Diseases,7
+Apac,165,Lack of capital,31
+Napak,165,Poor farming methods,1
+Bukwo,165,Poor farming methods,2
+Kween,165,Poor farming methods,4
+Lyantonde,165,climate,3
+Bundibugyo,165,Pests and Diseases,7
+Kiryandongo,165,Lack of land,5
+Nakaseke,165,Lack of capital,8
+Ngora,165,climate,34
+Lamwo,165,Lack of land,5
+Nwoya,165,Poor farming methods,9
+Kiboga,165,Lack of capital,6
+Wakiso,165,Pests and Diseases,146
+Buikwe,165,Lack of land,3
+Manafwa,165,Poor farming methods,9
+Zombo,165,climate,12
+Kabale,165,Lack of capital,44
+Mpigi,165,climate,18
+Namutumba,165,Lack of capital,11
+Buikwe,165,Pests and Diseases,17
+Wakiso,165,Lack of land,64
+Rakai,165,climate,34
+Serere,165,Lack of capital,15
+Mukono,165,climate,83
+Kyenjojo,165,Poor farming methods,10
+Lamwo,165,Pests and Diseases,3
+Bukedea,165,Poor farming methods,7
+Nebbi,165,Poor farming methods,18
+Bushenyi,165,Poor farming methods,17
+Hoima,165,climate,30
+Kotido,165,Lack of capital,8
+Pallisa,165,climate,33
+Ssembabule,165,climate,6
+Masindi,165,Lack of land,8
+Kiryandongo,165,Pests and Diseases,9
+Bundibugyo,165,Lack of land,6
+Kaabong,165,climate,14
+Lira,165,climate,226
+Ntungamo,165,Poor farming methods,15
+Lwengo,165,Lack of capital,5
+Jinja,165,Pests and Diseases,27
+Kumi,165,climate,55
+Kamuli,165,climate,24
+Kapchorwa,165,climate,16
+Agago,165,Lack of capital,13
+Kisoro,165,Lack of capital,21
+Luwero,165,Poor farming methods,22
+Amolatar,165,Lack of land,1
+Amuria,165,climate,52
+Kitgum,165,Lack of land,4
+Busia,165,Poor farming methods,20
+Kibuku,165,climate,10
+Mityana,165,Poor farming methods,8
+Nakasongola,165,Lack of capital,8
+Buvuma,165,climate,3
+Ntoroko,165,climate,10
+Luuka,165,Lack of capital,8
+Koboko,165,Lack of capital,18
+Tororo,165,Poor farming methods,20
+Kiruhura,165,climate,12
+Kanungu,165,Lack of capital,10
+Pader,165,Lack of land,10
+Kyegegwa,165,Lack of capital,9
+Moroto,165,Poor farming methods,4
+Kamwenge,165,Pests and Diseases,4
+Arua,165,Poor farming methods,46
+Butaleja,165,Poor farming methods,6
+Mitooma,165,Lack of capital,16
+Katakwi,165,climate,35
+Gulu,165,Poor farming methods,83
+Yumbe,165,Lack of land,2
+Kyankwanzi,165,climate,6
+Soroti,165,Poor farming methods,12
+Abim,165,Lack of capital,18
+Ibanda,165,climate,23
+Kayunga,165,Poor farming methods,9
+Iganga,165,Lack of capital,36
+Oyam,165,climate,161
+Kole,165,Lack of capital,29
+Bududa,165,Lack of capital,18
+Adjumani,165,climate,30
+Mbale,165,Lack of capital,103
+Otuke,165,climate,16
+Kalangala,165,Lack of capital,7
+Sheema,165,climate,41
+Buhweju,165,Poor farming methods,1
+Bulambuli,165,climate,11
+Rukungiri,165,Poor farming methods,10
+Maracha,165,climate,6
+Budaka,165,Lack of land,1
+Rubirizi,165,Lack of land,2
+Kibaale,165,Lack of land,2
+Nakapiripirit,165,Lack of capital,3
+Mubende,165,climate,25
+Kyenjojo,165,Lack of land,8
+Bukedea,165,Lack of land,1
+Nebbi,165,Lack of land,5
+Hoima,165,Lack of capital,24
+Bushenyi,165,Lack of land,8
+Nwoya,165,Pests and Diseases,7
+Namutumba,165,climate,15
+Mpigi,165,Lack of capital,19
+Kabale,165,climate,45
+Wakiso,165,Poor farming methods,166
+Mukono,165,Lack of capital,90
+Serere,165,climate,41
+Rakai,165,Lack of capital,31
+Manafwa,165,Pests and Diseases,6
+Ntungamo,165,Lack of land,14
+Gomba,165,Pests and Diseases,2
+Kamuli,165,Lack of capital,12
+Kumi,165,Lack of capital,29
+Lwengo,165,climate,11
+Agago,165,climate,39
+Kapchorwa,165,Lack of capital,13
+Luwero,165,Lack of land,8
+Amuria,165,Lack of capital,24
+Amolatar,165,Poor farming methods,6
+Mayuge,165,Pests and Diseases,11
+Kitgum,165,Poor farming methods,18
+Kisoro,165,climate,22
+Pallisa,165,Lack of capital,24
+Kween,165,Pests and Diseases,2
+Kotido,165,climate,19
+Bukwo,165,Pests and Diseases,2
+Napak,165,Pests and Diseases,1
+Masindi,165,Poor farming methods,12
+Ssembabule,165,Lack of capital,9
+Bundibugyo,165,Poor farming methods,13
+Lira,165,Lack of capital,99
+Kaabong,165,Lack of capital,4
+Pader,165,Poor farming methods,9
+Kyegegwa,165,climate,23
+Moroto,165,Lack of land,2
+Arua,165,Lack of land,24
+Butaleja,165,Lack of land,1
+Katakwi,165,Lack of capital,11
+Mitooma,165,climate,13
+Gulu,165,Lack of land,36
+Yumbe,165,Poor farming methods,9
+Kyankwanzi,165,Lack of capital,4
+Soroti,165,Lack of land,5
+Kalungu,165,Poor farming methods,1
+Busia,165,Lack of land,8
+Masaka,165,Pests and Diseases,18
+Kibuku,165,Lack of capital,4
+Mityana,165,Lack of land,5
+Nakasongola,165,climate,12
+Buvuma,165,Lack of capital,1
+Kiruhura,165,Lack of capital,16
+Kanungu,165,climate,13
+Koboko,165,climate,41
+Tororo,165,Lack of land,16
+Luuka,165,climate,7
+Ntoroko,165,Lack of capital,11
+Buliisa,165,Poor farming methods,2
+Kalangala,165,climate,3
+Kaliro,165,Pests and Diseases,1
+Buhweju,165,Lack of land,1
+Bulambuli,165,Lack of capital,5
+Rukungiri,165,Lack of land,9
+Kabarole,165,Pests and Diseases,22
+Sheema,165,Lack of capital,42
+Mubende,165,Lack of capital,27
+Nakapiripirit,165,climate,14
+Rubirizi,165,Poor farming methods,5
+Kibaale,165,Poor farming methods,6
+Maracha,165,Lack of capital,2
+Iganga,165,climate,50
+Ibanda,165,Lack of capital,28
+Abim,165,climate,33
+Kayunga,165,Lack of land,3
+Bududa,165,climate,10
+Kole,165,climate,42
+Oyam,165,Lack of capital,85
+Mbarara,165,Pests and Diseases,41
+Otuke,165,Lack of capital,9
+Mbale,165,climate,165
+Adjumani,165,Lack of capital,16
+Bugiri,165,Lack of capital,7
+Kayunga,165,Pests and Diseases,2
+Mbarara,165,Lack of land,49
+Kaberamaido,165,Lack of capital,17
+Namayingo,165,Lack of capital,9
+Kaliro,165,Lack of land,1
+Sironko,165,climate,17
+Rukungiri,165,Pests and Diseases,7
+Kabarole,165,Lack of land,14
+Buhweju,165,Pests and Diseases,1
+Bukomansimbi,165,Poor farming methods,2
+Alebtong,165,climate,38
+Mityana,165,Pests and Diseases,6
+Masaka,165,Lack of land,7
+Busia,165,Pests and Diseases,18
+Amudat,165,climate,3
+Moyo,165,climate,77
+Tororo,165,Pests and Diseases,26
+Dokolo,165,climate,31
+Gulu,165,Pests and Diseases,58
+Butambala,165,Poor farming methods,6
+Butaleja,165,Pests and Diseases,2
+Arua,165,Pests and Diseases,22
+Amuru,165,climate,39
+Kamwenge,165,Poor farming methods,12
+Moroto,165,Pests and Diseases,3
+Soroti,165,Pests and Diseases,17
+Apac,165,climate,90
+Napak,165,Lack of land,2
+Bukwo,165,Lack of land,1
+Kween,165,Lack of land,3
+Lyantonde,165,Lack of capital,4
+Kiryandongo,165,Poor farming methods,8
+Isingiro,165,climate,22
+Jinja,165,Poor farming methods,47
+Kampala,165,Lack of capital,551
+Ntungamo,165,Pests and Diseases,11
+Mayuge,165,Lack of land,4
+Kasese,165,Lack of capital,88
+Buyende,165,Lack of capital,5
+Luwero,165,Pests and Diseases,15
+Buikwe,165,Poor farming methods,17
+Zombo,165,Lack of capital,10
+Manafwa,165,Lack of land,7
+Ngora,165,Lack of capital,16
+Bukedea,165,Pests and Diseases,7
+Nakaseke,165,climate,7
+Kyenjojo,165,Pests and Diseases,9
+Lamwo,165,Poor farming methods,7
+Nwoya,165,Lack of land,2
+Bushenyi,165,Pests and Diseases,9
+Kiboga,165,climate,7
+Nebbi,165,Pests and Diseases,14
+Masindi,165,climate,20
+Ssembabule,165,Lack of land,4
+Pallisa,165,Lack of land,11
+Kotido,165,Poor farming methods,2
+Lira,165,Lack of land,23
+Lyantonde,165,Pests and Diseases,2
+Bundibugyo,165,climate,25
+Lwengo,165,Poor farming methods,6
+Kumi,165,Lack of land,6
+Ntungamo,165,Lack of capital,42
+Kampala,165,Pests and Diseases,217
+Kisoro,165,Poor farming methods,5
+Luwero,165,Lack of capital,45
+Kitgum,165,climate,79
+Amuria,165,Lack of land,10
+Amolatar,165,climate,25
+Kasese,165,Pests and Diseases,33
+Agago,165,Poor farming methods,4
+Wakiso,165,climate,288
+Kabale,165,Poor farming methods,11
+Mpigi,165,Lack of land,1
+Namutumba,165,Poor farming methods,6
+Zombo,165,Pests and Diseases,5
+Serere,165,Poor farming methods,5
+Rakai,165,Lack of land,5
+Mukono,165,Lack of land,15
+Ngora,165,Pests and Diseases,8
+Bukedea,165,Lack of capital,20
+Kyenjojo,165,Lack of capital,21
+Hoima,165,Lack of land,7
+Nebbi,165,Lack of capital,43
+Bushenyi,165,Lack of capital,44
+Bugiri,165,Pests and Diseases,2
+Kole,165,Poor farming methods,12
+Oyam,165,Lack of land,24
+Bududa,165,Poor farming methods,4
+Ibanda,165,Lack of land,8
+Abim,165,Poor farming methods,9
+Kayunga,165,Lack of capital,10
+Iganga,165,Poor farming methods,29
+Otuke,165,Lack of land,1
+Mbale,165,Poor farming methods,51
+Adjumani,165,Lack of land,1
+Kaberamaido,165,Pests and Diseases,4
+Namayingo,165,Pests and Diseases,5
+Buliisa,165,climate,7
+Kibaale,165,climate,10
+Mubende,165,Lack of land,6
+Rubirizi,165,climate,18
+Budaka,165,climate,17
+Nakapiripirit,165,Poor farming methods,1
+Maracha,165,Lack of land,2
+Bulambuli,165,Lack of land,4
+Buhweju,165,Lack of capital,3
+Sheema,165,Lack of land,20
+Rukungiri,165,Lack of capital,34
+Nakasongola,165,Poor farming methods,1
+Busia,165,Lack of capital,30
+Kibuku,165,Lack of land,5
+Mityana,165,Lack of capital,47
+Luuka,165,Poor farming methods,5
+Kiruhura,165,Lack of land,7
+Koboko,165,Poor farming methods,8
+Tororo,165,Lack of capital,46
+Kanungu,165,Poor farming methods,9
+Ntoroko,165,Lack of land,1
+Arua,165,Lack of capital,119
+Butaleja,165,Lack of capital,3
+Mitooma,165,Poor farming methods,7
+Gulu,165,Lack of capital,185
+Katakwi,165,Lack of land,1
+Kyegegwa,165,Poor farming methods,5
+Moroto,165,Lack of capital,14
+Pader,165,climate,58
+Kalungu,165,climate,3
+Yumbe,165,climate,39
+Soroti,165,Lack of capital,37
+Kamwenge,165,climate,16
+Amuru,165,Poor farming methods,9
+Katakwi,165,Pests and Diseases,7
+Butambala,165,climate,10
+Moyo,165,Poor farming methods,13
+Kibuku,165,Pests and Diseases,2
+Masaka,165,Lack of capital,38
+Alebtong,165,Poor farming methods,5
+Bukomansimbi,165,climate,5
+Dokolo,165,Poor farming methods,4
+Ntoroko,165,Pests and Diseases,2
+Kiruhura,165,Pests and Diseases,7
+Sironko,165,Poor farming methods,7
+Kaliro,165,Lack of capital,7
+Kaberamaido,165,Lack of land,6
+Namayingo,165,Lack of land,4
+Kabarole,165,Lack of capital,51
+Sheema,165,Pests and Diseases,11
+Bulambuli,165,Pests and Diseases,3
+Maracha,165,Pests and Diseases,5
+Mubende,165,Pests and Diseases,7
+Ibanda,165,Pests and Diseases,11
+Oyam,165,Pests and Diseases,31
+Bugiri,165,Lack of land,2
+Mbarara,165,Lack of capital,130
+Adjumani,165,Pests and Diseases,6
+Otuke,165,Pests and Diseases,5
+Lamwo,165,climate,39
+Nakaseke,165,Poor farming methods,3
+Ngora,165,Lack of land,4
+Kiboga,165,Poor farming methods,8
+Hoima,165,Pests and Diseases,7
+Nwoya,165,Lack of capital,20
+Mpigi,165,Pests and Diseases,3
+Buikwe,165,climate,38
+Rakai,165,Pests and Diseases,13
+Mukono,165,Pests and Diseases,29
+Zombo,165,Lack of land,5
+Manafwa,165,Lack of capital,22
+Kampala,165,Lack of land,109
+Gomba,165,Lack of capital,3
+Jinja,165,climate,92
+Isingiro,165,Poor farming methods,16
+Kumi,165,Pests and Diseases,9
+Kamuli,165,Pests and Diseases,5
+Kapchorwa,165,Pests and Diseases,1
+Buyende,165,Lack of land,2
+Mayuge,165,Lack of capital,17
+Kasese,165,Lack of land,22
+Amuria,165,Pests and Diseases,5
+Pallisa,165,Pests and Diseases,2
+Kween,165,Lack of capital,14
+Ssembabule,165,Pests and Diseases,1
+Apac,165,Poor farming methods,15
+Bukwo,165,Lack of capital,5
+Napak,165,Lack of capital,9
+Kiryandongo,165,climate,26
+Kaabong,165,Pests and Diseases,1
+Lira,165,Pests and Diseases,33
+Lyantonde,165,Lack of land,1
