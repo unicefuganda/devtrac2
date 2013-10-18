@@ -11,13 +11,13 @@ class DevelopmentConfig(Config):
     ASSETS_DEBUG = True
     SEND_FILE_MAX_AGE_DEFAULT = 0
     DATA_DIR = "db/data/test"
-    USE_LOCAL_GEOJSON = True
+    USE_LOCAL_GEOJSON = False
 
 class TestingConfig(Config):
     ASSETS_DEBUG = True
     SEND_FILE_MAX_AGE_DEFAULT = 0
     DATA_DIR = "db/data/test"
-    USE_LOCAL_GEOJSON = True
+    USE_LOCAL_GEOJSON = False
 
 def config_from_env(env):
     if (env == "Development"):

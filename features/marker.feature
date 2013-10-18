@@ -49,21 +49,6 @@ Given that I am a regular user
 When I open dashboard for "Acholi, Gulu, Odek"
 Then the "school" marker for "Acholi, Gulu, Odek, Palaro" is "3" points
 
-Scenario: Add waterpoint filter to filter panel
-Given that I am a regular user
-When I navigate to the home page
-Then the 'Waterpoints' filter will be displayed on the filter panel
-
-Scenario: Add health centre filter to filter panel
-Given that I am a regular user
-When I navigate to the home page
-Then the 'Health Centres' filter will be displayed on the filter panel
-
-Scenario: Add School filter to filter panel
-Given that I am a regular user
-When I navigate to the home page
-Then the 'Schools' filter will be displayed on the filter panel
-
 Scenario: Filter water points
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu, Odek"

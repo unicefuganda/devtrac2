@@ -27,7 +27,7 @@
           <div ng-show="ureportTop5.length > 0" class='ng-hide ureport-summary ng-cloak'>
             <span class="ureport-question" >{[{ureportQuestion.selected.question}]}</span>
             <ul class='ureport-top5'>
-              <li ng-repeat="item in ureportTop5" class="response">{[{item.text }]}</li>  
+              <li ng-repeat="item in ureportTop5" class="response">"{[{item.text }]}"</li>  
             </ul>
           </div>
 
@@ -96,7 +96,7 @@
           </div>
 
           <div class='container'>
-            <div ng-if="feature_toggles.is_on('left_side')" class='summary-panel' >
+            <div ng-if="feature_toggles.is_on('left_side')" class='summary-panel' id='summary-panel' >
               <div class='content' ng-controller="SummaryCtrl" >
                 <div ng-show="summary != null" class='ng-hide' >
                   <div class='heading'>{[{location.full_name() }]}</div>
