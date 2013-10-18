@@ -56,7 +56,7 @@ class Page:
         return "{ region: %s, district: %s, subcounty: %s, parish: %s}" % (region_name, district_name, subcounty_name, parish_name)
 
     def take_screenshot(self):
-        self.browser.driver.save_screenshot('screenshot_%s.png' % time.strftime("%m-%d-%I-%H:%I:%M:%S"))
+        self.browser.driver.save_screenshot('tmp/screenshots/screenshot_%s.png' % time.strftime("%m-%d-%I-%H:%I:%M:%S"))
 
     def highlighted_layer(self):
         return self.browser.evaluate_script("window.map.getHighlightedLayer();")

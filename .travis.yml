@@ -28,4 +28,4 @@ script:
   - "lettuce"
 
 after_failure: # this will of course run only on failure
-  - "travis-artifacts upload --path *.png"
+  - "travis-artifacts upload --path tmp/screenshots"
