@@ -15,7 +15,8 @@ before_script:
 - twistd web --port 5000 --wsgi application.app
 - sleep 3
 - mkdir ".webassets-cache"
-- mkdir tmp/screenshots
+- mkdir "tmp"
+- mkdir "tmp/screenshots"
 install: pip install -r requirements.txt --use-mirrors
 script:
 - python tests.py
