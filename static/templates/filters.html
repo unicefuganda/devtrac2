@@ -1,0 +1,45 @@
+<form role='form' id='filters-form'>
+  
+  <h3>Display datasets associated with:</h3>
+  
+  <button type="button" class="btn btn-default btn-sm toggle toggle-selected">Youth</button>
+  
+  <h3>Show points related to:</h3>
+
+  <ul class="points-filter">
+    <li>
+      <span class="school-checkbox-icon checkbox-icon"></span>
+      <input type="checkbox" ng-model="filter.school" class='school-checkbox' id='school-checkbox'></input>
+      <label for="school-checkbox">Schools</label>
+    </li>   
+    <li>
+      <span class="health-center-checkbox-icon checkbox-icon"></span>
+      <input type="checkbox" ng-model="filter.health_center" class='health-center-checkbox' id="health-center-checkbox"/>
+      <label for="health-center-checkbox">Health Centers</label>
+    </li> 
+    <li>
+      <span class="water-point-checkbox-icon checkbox-icon"></span>
+      <input type="checkbox" ng-model="filter.water_point" class='water-point-checkbox' id="water-point-checkbox"/>
+      <label for="water-point-checkbox">Water Points</label>
+    </li>
+  </ul>       
+                
+  <h3>By indicator:</h3>
+
+  <div ng-controller="IndicatorsCtrl">
+    <button type="button" ng-click='indicator.selected = null;' class="btn btn-default btn-sm toggle {[{indicator.selected == null ? 'toggle-selected' : '' }]}" >None</button>  
+    <button type="button" ng-repeat="ind in indicators" ng-click="indicator.selected = ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
+  </div>
+
+  <div ng-if="indicator.selected != null" class='legend'>
+    <h3>Legend:</h3>
+    <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
+  </div>
+
+  <h3>Ureport question:</h3>
+
+  <div ng-controller="UReportCtrl">
+    <button type="button" ng-click='ureportQuestion.selected = null;' class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == null ? 'toggle-selected' : '' }]}" >None</button>    
+    <button type="button" ng-click='ureportQuestion.selected = question;' ng-repeat="question in questions" class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == question ? 'toggle-selected' : '' }]}" >{[{question.abbreviation}]}</button>    
+  </div>
+</form>

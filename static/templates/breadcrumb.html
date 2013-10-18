@@ -1,0 +1,30 @@
+<div id='location'>
+<!--   <h2 class="title">{[{ location_name }]}</h2> -->
+  <div class="breadcrumb-panel heading" >  
+    <div class="breadcrumb-title">
+      Showing dashboard of:
+    </div>
+    <ul class="breadcrumb">  
+        
+      <li>
+        <a class="national-crumb {[{ location.level() == 'national' ? 'active' : '' }]}" href="{[{ location.urlForLevel('national')}]}">uganda</a>
+      </li>  
+
+      <li ng-if="location.region != null" >
+        <a class="region-crumb {[{ location.level() == 'region' ? 'active' : '' }]}" href="{[{ location.urlForLevel('region')}]}" >{[{ location.level() == 'region' ? location.full_name() : location.region }]}</a>
+      </li>  
+
+      <li ng-if="location.district != null">
+        <a class="district-crumb {[{ location.level() == 'district' ? 'active' : '' }]}" href="{[{ location.urlForLevel('district') }]}" >{[{ location.level() == 'district' ? location.full_name() : location.district }]}</a>
+      </li>  
+
+      <li ng-if="location.subcounty != null">
+        <a class="subcounty-crumb {[{ location.level() == 'subcounty' ? 'active' : '' }]}" href="{[{ location.urlForLevel('subcounty') }]}" >{[{ location.level() == 'subcounty' ? location.full_name() : location.subcounty }]}</a>
+      </li>
+
+      <li ng-if="location.parish != null">
+        <a class="parish-crumb {[{ location.level() == 'parish' ? 'active' : '' }]}" href="{[{ location.urlForLevel('parish') }]}" >{[{ location.level() == 'parish' ? location.full_name() : location.parish }]}</a>
+      </li>           
+    </ul>  
+  </div> 
+</div>

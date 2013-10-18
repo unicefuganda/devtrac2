@@ -1,0 +1,149 @@
+.marker-popup label {
+  width: 74px;
+  font-style: italic;
+  font-weight: normal;
+  margin-bottom: 2px;
+}
+
+.marker-popup h4 {
+  font-size: 14px;
+  margin-bottom: 4px;
+  margin-top: 4px;
+  text-transform: capitalize;
+}
+
+.marker-popup .leaflet-popup-content-wrapper {
+  border-radius: 2px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.65);
+}
+
+.marker-popup .leaflet-popup-content{
+  margin: 6px 10px;
+}
+
+.cluster-icon {
+  overflow: hidden;/
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  color: #444;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.65);
+  font-size: 12px;
+  border-radius: 16px;
+  font-weight: 500;
+}
+
+.marker-icon {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.65);
+}
+
+.cluster-icon.medium.ureport-cluster-icon {
+  background-color: rgba(116, 100, 252, 0.6);
+  top: -30px;
+  width: 26px;
+  height: 26px;
+  border-radius: 13px;
+  left: 3px;
+}
+
+.ureport-cluster-icon .glyphicon {
+  top: 0px;
+  padding-top: 5px;
+  padding-left: 1px;
+}
+
+.ureport-cluster-icon .category_0 { 
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.8);
+  
+}
+
+.ureport-cluster-icon .category_1 { 
+  width: 100%;
+  height: 100%;
+  background-color: rgba(225, 125, 0, 0.8);
+}
+
+.ureport-cluster-icon .category_2 { 
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 0, 0.8);
+}
+
+.ureport-cluster-icon .category_3 { 
+  width: 100%;
+  height: 100%;
+  background-color: rgba(125, 255, 0, 0.8);
+}
+
+.ureport-cluster-icon .category_4 { 
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 255, 0, 0.8);
+}
+
+.water-point-cluster-icon {
+  padding: 7px 0 0 0;
+  background-color: rgba(116, 223, 252, 0.6);
+  left: -33px;
+}
+
+.water-point-point-icon {
+  background-color: rgba(0, 0, 255, 0.6); 
+}
+
+.cluster-icon.small {
+  width: 24px;
+  height: 24px;
+  padding: 3px 0 0 0;
+  border-radius: 12px;
+}
+
+.cluster-icon.medium {
+  width: 32px;
+  height: 32px;
+  /*padding: 7px 0 0 0;*/
+  border-radius: 16px;  
+}
+
+.cluster-icon.large {
+  width: 38px;
+  height: 38px;
+  padding: 9px 0 0 0;
+  border-radius: 19px;   
+}
+
+.cluster-icon.extra-large {
+  width: 46px;
+  height: 46px;
+  padding: 13px 0 0 0;
+  border-radius: 23px;    
+}
+
+.health-center-cluster-icon
+{
+  padding: 7px 0 0 0;
+  background-color: rgba(153, 51, 102, 0.65);
+  left: 33px;
+}
+
+.health-center-point-icon
+{
+  background-color: rgba(153, 51, 102, 0.5);
+}
+
+.school-cluster-icon
+{
+  padding: 7px 0 0 0;
+  background-color: rgba(211, 242, 53, 0.65);
+}
+
+.school-point-icon
+{
+  background-color: rgba(211, 242, 53, 0.9);
+}
+

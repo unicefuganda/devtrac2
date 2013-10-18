@@ -11,3 +11,4 @@ tmp/*.png
 node_modules/
 twistd.log*
 twistd.pid
+screen*.png

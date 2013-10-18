@@ -15,9 +15,6 @@ env = os.environ.get('DEVTRAC_ENV')
 env = "Development" if env == None else env
 app.config.from_object('config.config.%sConfig' % env)
 
-print env
-
-# app.config.from_pyfile('application.cfg', silent=True)
 assets = Environment(app)
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -36,7 +33,6 @@ js = Bundle(
 	'javascript/lib/leaflet.js',
 	'javascript/application.js',
 	'javascript/lib/bootstrap.min.js',
-	'javascript/lib/leaflet.markercluster.js',
 	'javascript/location.js',
 	'javascript/layer-map.js',
 	'javascript/layer-options.js',
@@ -48,8 +44,7 @@ css = Bundle(
 	'css/lib/bootstrap.min.css', 
 	'css/lib/leaflet.css', 
 	'css/application.css',
-	'css/lib/MarkerCluster.css',
-	'css/lib/MarkerCluster.Default.css',
+	'css/map.css',
      filters='cssmin', output='gen/packed.css')
 
 assets.register('css_all', css)

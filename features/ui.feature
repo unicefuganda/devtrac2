@@ -11,15 +11,6 @@ Given That I am a regular user
 When I go to the homepage
 Then A header 'Devtrac Global' will be displayed on the left side of the header bar
 
-Scenario: Show/Hide filter panel
-Given that I am a regular user
-When I go to the homepage
-Then the "filter" panel is displayed
-When I toggle the "filter" panel
-Then the "filter" panel is collapsed
-When I toggle the "filter" panel
-Then the "filter" panel is displayed
-
 Scenario: Display indicator panel
 Given that I am a regular user
 When I go to the homepage

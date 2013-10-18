@@ -98,8 +98,8 @@ class Page:
         return len(self.browser.find_by_css(".%s-panel.expanded" % panel)) > 0
 
     def toggle_checkbox(self, checkboxkey):
-        self.wait_for(lambda x: not x.browser.find_by_id("%s-checkbox" % checkboxkey).is_empty())
-        self.browser.find_by_id("%s-checkbox" % checkboxkey).click()
+        self.take_screenshot()
+        self.browser.find_by_css("#%s-checkbox" % checkboxkey).click()
 
     def is_indicator_layer_hidden(self):
         return self.browser.evaluate_script("window.map.isIndicatorLayerHidden()")
@@ -111,7 +111,7 @@ class Page:
         return self.browser.evaluate_script("window.map.isIndicatorLayerDisplayed('%s')" % indicator_name)
 
     def summary_panel_content(self):
-        return self.browser.find_by_css('.summary-panel').text
+        return self.browser.find_by_css('#summary').text
 
     def wait_for(self, function):
         for _ in itertools.repeat(None, 10):

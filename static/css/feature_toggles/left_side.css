@@ -1,24 +1,4 @@
-h3 {
 
-    font-size: 14px;
-    font-weight: 500;
-    margin: 0;
-    margin-bottom: 8px;
-}
-
-#map-container {
-    width: 100%;
-    top: 0px;
-    height: 100%;
-    left: 0px;
-    z-index: 0;
-    position: absolute;
-}
-
-#devtrac-map {
-    width: 100%;
-    height: 100%;   
-}
 
 .ureport-question-selected #ureport-panel {
     width: 100%;
@@ -69,40 +49,6 @@ h3 {
 
 .ureport-question-selected #devtrac-map {
     height: 75%;
-}
-
-#right-hand-panel {
-    position: relative;
-    float: right;
-    width: 75%;
-    border-left: 1px solid #AAA;
-    height:100%;
-}
-
-#filter-panel {
-    position: relative;
-    top: none;
-    left: none;
-    float: right;
-    width: 25%;
-    left: 0px;
-    top: 0px;
-    border: none;
-}
-
-#filter-panel .filter-panel-content {
-    border: none;
-    height: auto;
-    padding-bottom: 20px
-}
-
-#filter-panel .container {
-    padding-bottom: 10px;
-    border-bottom: 1px solid #CCC;
-}
-
-#filter-panel .toggle-panel {
-    display: none;
 }
 
 #summary-panel {
