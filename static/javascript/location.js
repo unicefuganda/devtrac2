@@ -28,7 +28,6 @@ DT.Location.prototype.layersToShow = function(filteredKeys) {
             region: this.region
         });
         layers.push(["district", regionLocation]);
-        layers.push(["ureport", regionLocation]);
     }
 
     if (this.district != null) {

@@ -86,7 +86,6 @@ class Page:
 
     def marker_count(self, layer, locator):
         content = self.browser.find_by_css(".%s-cluster-icon div[data-locator='%s']" % (layer, locator.lower()))
-        self.take_screenshot()
         return int(content.text)
 
     def popup_content(self):

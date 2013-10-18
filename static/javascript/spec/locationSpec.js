@@ -46,15 +46,15 @@ describe("Location", function() {
         var uganda_location = new DT.Location({});
         var north_location = new DT.Location({ region: "north"});
 
-        expect(north_location.layersToShow([])).toEqual([
+        expected_layers = [
             ["region", uganda_location],
             ["district_outline", uganda_location],
             ["district", north_location],
-            ["ureport", north_location],
             ["health-center", north_location],
             ["school", north_location],
             ["water-point", north_location]
-        ]);
+        ];
+        assertLayers(north_location.layersToShow([]), expected_layers);
     });
 
     it("should show layer subcounties and water-points for district", function() {
@@ -71,7 +71,6 @@ describe("Location", function() {
             ["region", uganda_location],
             ["district_outline", uganda_location],
             ["district", north_location],
-            ["ureport", north_location],
             ["subcounty", gulu_location],
             ["health-center", gulu_location],
             ["school", gulu_location],
@@ -92,7 +91,6 @@ describe("Location", function() {
         expect(location1.layersToShow(["water-point", "district"])).toEqual([
             ["region", uganda_location],
             ["district_outline", uganda_location],
-            ["ureport", north_location],
             ["subcounty", gulu_location],
             ["health-center", gulu_location],
             ["school", gulu_location],
@@ -115,7 +113,6 @@ describe("Location", function() {
             ["region", uganda_location],
             ["district_outline", uganda_location],
             ["district", north_location],
-            ["ureport", north_location],
             ["subcounty", gulu_location],
             ["parish", patiko_location],
             ["health-center", patiko_location],
@@ -148,7 +145,6 @@ describe("Location", function() {
             ["region", uganda_location],
             ["district_outline", uganda_location],
             ["district", north_location],
-            ["ureport", north_location],
             ["subcounty", gulu_location],
             ["parish", patiko_location],
             ["water-point-point", location1],
