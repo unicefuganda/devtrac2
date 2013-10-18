@@ -16,102 +16,87 @@
   <body>
 
     <link ng-if="feature_toggles.is_on('left_side')" rel="stylesheet" media="screen" ng-href="/static/css/feature_toggles/left_side.css"></link>
-
-    <style> 
-      [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-        display: none !important;
-      }
-    </style>
     <div id='map-container'>
-
     
-    
-    <div id='right-hand-panel' class='{[{ show_bottom_panel ? "ureport-question-selected" : ""}]}' ng-controller='RightPanelCtrl'>
-      <div map id='devtrac-map'></div>
-      <div ng-controller="UReportResponsesCtrl" id='ureport-panel' class='ng-cloak' ng-if="show_bottom_panel">
-        <h3>UReport Poll Results</h3>
-        
-
-        <div ng-show="ureportTop5.length > 0" class='ng-hide ureport-summary ng-cloak'>
-          <span class="ureport-question" >{[{ureportQuestion.selected.question}]}</span>
-          <ul class='ureport-top5'>
-            <li ng-repeat="item in ureportTop5" class="response">“{[{item.text }]}”</li>  
-          </ul>
-        </div>
-
-
-        <ul class='ureport-results'>
-          <li ng-repeat="item in ureportResults.results">
-            <label>{[{item.category}]}:</label>
-            <span>{[{item.percent}]}</span>
-          </li>
-        </ul>  
-      </div>
-    </div>
-    
-    <div ng-show="!feature_toggles.is_on('left_side')" id='ngview' ng-view class="ng-cloak"></div>
-
-    <div panel panel-expand='{"left":"10px"}' panel-collapse='{"left":"-300px"}' class='filter-panel expanded dt-panel ng-cloak' id="filter-panel">
-
-      <div ng-show="feature_toggles.is_on('left_side')" id='ngview' ng-view class="ng-cloak"></div>
-
-      <div class='content filter-panel-content' >
-
-        <div  class='container'>
+      <div id='right-hand-panel' class='{[{ show_bottom_panel ? "ureport-question-selected" : ""}]}' ng-controller='RightPanelCtrl'>
+        <div map id='devtrac-map'></div>
+        <div ng-controller="UReportResponsesCtrl" id='ureport-panel' class='ng-cloak' ng-if="show_bottom_panel">
+          <h3>UReport Poll Results</h3>
           
-          <div class="form-group">
-            <label for="sector-select">Display datasets associated with:</label>
-            <button type="button" class="btn btn-default btn-sm toggle toggle-selected">Youth</button>
-          </div>
-          <div class='heading'>Show points related to:</div>
-          <div class='sector-content'>
-            <ul class="nav nav-list">
-              <li>
-                <span class="school-checkbox-icon checkbox-icon"></span>
-                <input type="checkbox" ng-model="filter.school" class='school-checkbox' id='school-checkbox'/>
-                <label for="school-checkbox">Schools</label>
-              </li>   
-              <li>
-                <span class="health-center-checkbox-icon checkbox-icon"></span>
-                <input type="checkbox" ng-model="filter.health_center" class='health-center-checkbox' id="health-center-checkbox"/>
-                <label for="health-center-checkbox">Health Centers</label>
-              </li> 
-              <li>
-                <span class="water-point-checkbox-icon checkbox-icon"></span>
-                <input type="checkbox" ng-model="filter.water_point" class='water-point-checkbox' id="water-point-checkbox"/>
-                <label for="water-point-checkbox">Water Points</label>
-              </li>
+
+          <div ng-show="ureportTop5.length > 0" class='ng-hide ureport-summary ng-cloak'>
+            <span class="ureport-question" >{[{ureportQuestion.selected.question}]}</span>
+            <ul class='ureport-top5'>
+              <li ng-repeat="item in ureportTop5" class="response">{[{item.text }]}</li>  
             </ul>
+          </div>
 
-            <form ng-controller="IndicatorsCtrl" role="form" id="indicator-form">
-              
-              <div class="form-group">
-                <label for="indicator-select">By indicator:</label>
 
-                <button type="button" ng-click='indicator.selected = null;' class="btn btn-default btn-sm toggle {[{indicator.selected == null ? 'toggle-selected' : '' }]}" >None</button>  
-                <button type="button" ng-repeat="ind in indicators" data-indicator='{[{ind.name}]}' ng-click="indicator.selected = ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
-              </div>
-              <div ng-if="indicator.selected != null" class='legend'>
-                <label for="indicator-select">Legend:</label>
-                <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
-              </div>
-            </form>
-
-            <div ng-if="feature_toggles.is_on('ureport')">
-              <div class='heading'>Ureport question:</div>
-              <form ng-controller="UReportCtrl" role="form" >
-                <button type="button" ng-click='ureportQuestion.selected = null;' class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == null ? 'toggle-selected' : '' }]}" >None</button>    
-                  <button type="button" ng-click='ureportQuestion.selected = question;' ng-repeat="question in questions" class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == question ? 'toggle-selected' : '' }]}" >{[{question.abbreviation}]}</button>    
-              </form>
-            </div>
-
-            
-            
-          </div> 
+          <ul class='ureport-results'>
+            <li ng-repeat="item in ureportResults.results">
+              <label>{[{item.category}]}:</label>
+              <span>{[{item.percent}]}</span>
+            </li>
+          </ul>  
         </div>
+      </div>
+    
+      <div ng-show="!feature_toggles.is_on('left_side')" id='ngview' ng-view class="ng-cloak"></div>
 
-        <div  class='container'>
-          <div ng-if="feature_toggles.is_on('left_side')" class='summary-panel' id='summary-panel' >
+      <div panel panel-expand='{"left":"10px"}' panel-collapse='{"left":"-300px"}' class='filter-panel expanded dt-panel ng-cloak' id="filter-panel">
+        <div ng-show="feature_toggles.is_on('left_side')" id='ngview' ng-view class="ng-cloak"></div>
+        <div class='content filter-panel-content' >
+          <div class='container'>
+            <!-- <div class="form-group">
+              <label for="sector-select">Display datasets associated with:</label>
+              <button type="button" class="btn btn-default btn-sm toggle toggle-selected">Youth</button>
+            </div> -->
+            <div class='heading'>Show points related to:</div>
+            <div class='sector-content'>
+              <ul class="nav nav-list">
+                <li>
+                  <span class="school-checkbox-icon checkbox-icon"></span>
+                  <input type="checkbox" ng-model="filter.school" class='school-checkbox' id='school-checkbox'></input>
+                  <label for="school-checkbox">Schools</label>
+                </li>   
+                <li>
+                  <span class="health-center-checkbox-icon checkbox-icon"></span>
+                  <input type="checkbox" ng-model="filter.health_center" class='health-center-checkbox' id="health-center-checkbox"/>
+                  <label for="health-center-checkbox">Health Centers</label>
+                </li> 
+                <li>
+                  <span class="water-point-checkbox-icon checkbox-icon"></span>
+                  <input type="checkbox" ng-model="filter.water_point" class='water-point-checkbox' id="water-point-checkbox"/>
+                  <label for="water-point-checkbox">Water Points</label>
+                </li>
+              </ul>
+
+              <form ng-controller="IndicatorsCtrl" role="form" id="indicator-form">
+            
+                <div class="form-group">
+                  <label for="indicator-select">By indicator:</label>
+
+                  <button type="button" ng-click='indicator.selected = null;' class="btn btn-default btn-sm toggle {[{indicator.selected == null ? 'toggle-selected' : '' }]}" >None</button>  
+                  <button type="button" ng-repeat="ind in indicators" data-indicator='{[{ind.name}]}' ng-click="indicator.selected = ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
+                </div>
+                <div ng-if="indicator.selected != null" class='legend'>
+                  <label for="indicator-select">Legend:</label>
+                  <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
+                </div>
+              </form>
+
+              <div ng-if="feature_toggles.is_on('ureport')">
+                <div class='heading'>Ureport question:</div>
+                <form ng-controller="UReportCtrl" role="form" >
+                  <button type="button" ng-click='ureportQuestion.selected = null;' class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == null ? 'toggle-selected' : '' }]}" >None</button>    
+                  <button type="button" ng-click='ureportQuestion.selected = question;' ng-repeat="question in questions" class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == question ? 'toggle-selected' : '' }]}" >{[{question.abbreviation}]}</button>    
+                </form>
+              </div>
+            </div> 
+          </div>
+
+          <div class='container'>
+            <div ng-if="feature_toggles.is_on('left_side')" class='summary-panel' >
               <div class='content' ng-controller="SummaryCtrl" >
                 <div ng-show="summary != null" class='ng-hide' >
                   <div class='heading'>{[{location.full_name() }]}</div>
@@ -120,34 +105,33 @@
                       <label>{[{item[0]}]}</label>
                       <span>{[{item[1]}]}</span>
                     </div>
-      
+    
                     <div ng-repeat="item in indicatorSummary" class="info">
                       <label>{[{item[0]}]}</label>
                       <span>{[{item[1]}]}</span>
                     </div>
                   </div> 
-        
                 </div>
               </div>
             </div>  
-        </div>
-      </div>     
+          </div>
+        </div>     
 
-       <a href="" class ='toggle-panel' ng-click="togglePanel()">
+        <a href="" class ='toggle-panel' ng-click="togglePanel()">
          <span class="glyphicon {[{ expanded ? 'glyphicon-chevron-left' : 'glyphicon-chevron-right' }]} toggle-icon"></span>
-       </a>  
-    </div>
+        </a>  
+      </div>
     
 
-     <div ng-if="!feature_toggles.is_on('left_side')" panel panel-expand='{"right":"10px"}' panel-collapse='{"right":"-300px"}' class='summary-panel ng-cloak' id="summary-panel">
+      <div ng-if="!feature_toggles.is_on('left_side')" panel panel-expand='{"right":"10px"}' panel-collapse='{"right":"-300px"}' class='summary-panel ng-cloak' id="summary-panel">
 
-      <div class='content ng-cloak' ng-controller="SummaryCtrl">
-        <div  ng-show="summary != null" class='container ng-hide' >
-          <div class='heading'>{[{location.full_name() }]}</div>
-          <div  class='summary-content' >
-            <div ng-repeat="item in summary" class="info">
-              <label>{[{item[0]}]}</label>
-              <span>{[{item[1]}]}</span>
+        <div class='content ng-cloak' ng-controller="SummaryCtrl">
+          <div ng-show="summary != null" class='container ng-hide' >
+            <div class='heading'>{[{location.full_name() }]}</div>
+            <div class='summary-content'>
+              <div ng-repeat="item in summary" class="info">
+                <label>{[{item[0]}]}</label>
+                <span>{[{item[1]}]}</span>
             </div>
 
             <div ng-repeat="item in indicatorSummary" class="info">
@@ -166,10 +150,10 @@
       </div>     
 
       <a href="" class ='toggle-panel' ng-click="togglePanel()">
-         <span class="glyphicon {[{ expanded ? 'glyphicon-chevron-right' : 'glyphicon-chevron-left' }]} toggle-icon"></span>
-       </a>  
+        <span class="glyphicon {[{ expanded ? 'glyphicon-chevron-right' : 'glyphicon-chevron-left' }]} toggle-icon"></span>
+      </a>  
     </div>
-    </div>
+  </div>
 
     {% assets "js_all" %}
       <script type="text/javascript" src="{{ ASSET_URL }}"></script>
