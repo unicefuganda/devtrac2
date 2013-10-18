@@ -85,21 +85,21 @@ class Page:
         self.browser.execute_script("window.map.openPopupForMarkerAt('%s', '%s', '%s');" % (layer, lat, lng))
 
     def marker_count(self, layer, locator):
-        content = self.browser.find_by_css(".%s-cluster-icon div[data-locator='%s']" % (layer, locator.lower()))
+        content = self.browser.find_by_css(str( ".%s-cluster-icon div[data-locator='%s']" % (layer, locator.lower())))
         return int(content.text)
 
     def popup_content(self):
         return self.browser.find_by_css(".marker-popup").text
 
     def toggle_panel(self, panel):
-        self.browser.find_by_css(".%s-panel .toggle-panel" % panel).click()
+        self.browser.find_by_css(str(".%s-panel .toggle-panel" % panel)).click()
 
     def is_panel_expanded(self, panel):
-        return len(self.browser.find_by_css(".%s-panel.expanded" % panel)) > 0
+        return len(self.browser.find_by_css(str(".%s-panel.expanded" % panel))) > 0
 
     def toggle_checkbox(self, checkboxkey):
         self.take_screenshot()
-        self.browser.find_by_css("#%s-checkbox" % checkboxkey).click()
+        self.browser.find_by_css(str("#%s-checkbox" % checkboxkey)).click()
 
     def is_indicator_layer_hidden(self):
         return self.browser.evaluate_script("window.map.isIndicatorLayerHidden()")
