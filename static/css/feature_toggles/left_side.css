@@ -65,25 +65,4 @@
     min-height: 0px;
 }
 
-#location {
-    position: relative;
-    top: 0px;
-    left: 0px;
-    border: none;
-}
 
-#location .breadcrumb-panel{
-    border: none;
-    border-bottom: 1px solid #CCC;
-    margin-bottom: 10px;
-}
-
-#location .breadcrumb li a.active {
-
-    font-size: 16px;
-}
-
-#location .breadcrumb li a {
-
-    font-size: 12px;
-}

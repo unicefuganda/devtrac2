@@ -42,13 +42,6 @@ h3 {
     height:100%;
 }
 
-#location {
-  position: absolute; 
-  top: 10px;
-  left: 10px;
-  z-index: 1;
-}
-
 /* BREADCRUMB */
 
 #location .breadcrumb-title {
@@ -62,12 +55,18 @@ h3 {
   background-color: rgba(255, 255, 255, 0.8);
   font-size: 14px;
   border-radius: 0;
-  border: 1px solid #CCCCCC;
   padding: 5px 6px;
+  border-bottom: 1px solid #CCC;
+  margin-bottom: 10px;
 }
+
+#location .breadcrumb li a {
+    font-size: 12px;
+}
+
 #location .breadcrumb li a.active{
   color: black;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
 }
 
