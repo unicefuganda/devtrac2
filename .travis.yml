@@ -3,7 +3,6 @@ python: '2.7'
 services: mongodb
 env:
   global:
-  - ARTIFACTS_AWS_REGION=us-west-2
   - ARTIFACTS_S3_BUCKET=unicefuganda-devtrac2
   - DEVTRAC_ENV=Testing
   - secure: fOQSOWbja1z+15e7Tu6bjds2Bh8Qd54/iWrGnRtq7Jy28TmTLf8q0rknhewt9HhwL3iwWk3MssKJkAvWSOaXCQsC8M11OJXcdqyLQxYv4UoVUgPCGdlVvTpRIOnX2Q9KJSPN0QI5oGasC5PkctJQ459bogQBnQfh9U8pKzz6IxQ=
