@@ -28,4 +28,5 @@ script:
   - "lettuce"
 
 after_failure: # this will of course run only on failure
-  - "travis-artifacts upload --path tmp/screenshots"
+  - tar -cvzf screenshots-$TRAVIS_BUILD_ID-$TRAVIS_JOB_ID.tar.gz tmp/screenshots
+  - travis-artifacts upload --path screenshots-$TRAVIS_BUILD_ID-$TRAVIS_JOB_ID.tar.gz
