@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html ng-app="dashboard">
+  <head>
+    <title>DevTrac Global</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- {% assets "css_all" %}
+        <link rel="stylesheet" media="screen" href="{{ ASSET_URL }}"></link>
+    {% endassets %} -->
+  </head>
+  
+  <style>
+
+    .background {
+    fill: none;
+    pointer-events: all;
+    }
+    body {
+      background-color: white;
+    }
+
+    #states {
+    fill: dodgerblue;
+    stroke: #fff;
+    stroke-width: 2px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    }
+
+    #states .active {
+    fill: orange;
+    }
+
+    #state-borders {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1.5px;
+    
+    pointer-events: none;
+    }
+
+    .question {
+
+    }
+
+    .reponse {
+      
+    }
+
+    #left {
+      font-family: 'Helvetica Neue';
+      position: absolute;
+      left: 20px;
+      top: 20px;
+    }
+
+    #sector {
+      font-family: 'Helvetica Neue';
+      font-size: 28px;
+      padding-left: 10px;
+    }
+
+    #sector span { 
+      font-family: 'Helvetica Neue';
+      font-size: 28px;
+      /*border: 1px solid #AAA;*/
+      width: 100px;
+      /*padding: 4px 10px;*/
+      /*font-weight: bold;*/
+      color: black;
+    }
+
+    #citizens { 
+      margin-top: 20px; 
+      font-size: 23px;
+      border-radius: 2px;
+      padding: 0px 6px;
+      border-left: 8px solid dodgerblue;
+      /*border-right: 4px solid blue;*/
+      width: 400px;
+      overflow: hidden;
+    }
+
+    #citizens h3 {
+      padding: 0;
+      margin: 0;
+      font-size: 21px;
+      font-weight: 500;
+      ;
+    }
+
+    #citizens .question { 
+      margin-top: 10px; 
+      font-size: 14px;
+      /*width: 400px;*/
+      margin-left: 4px;
+
+      /*font-weight: 500;*/
+    }
+
+    #citizens .response { 
+      /*margin-top: 10px; */
+      font-size: 14px;
+      /*width: 400px;*/
+      background-color: #EEE;
+      border-radius: 3px;
+      padding: 4px 8px;
+      margin: 10px 2px;
+      font-style: italic;
+      /*margin-left: 4px;*/
+      /*font-family: Times;*/
+    }
+
+    #citizens {
+
+      /*background-color: lightblue;*/
+      
+    }
+
+    </style>
+
+  <body>
+      <div id='left'>
+        <div id='sector'>
+          <span>Youth</span> in Uganda
+        </div>
+
+        <div id='citizens'>
+          <h3>What the citizens are saying</h3>
+          <div class='question'>Hi U-reporters. Do you think the Youth Fund will help the youth in your community? Answer YES or NO, and tell us why.</div>
+          <div class='response'>"Well i do not think it will help them due to the currupt leaders we have in this country."</div>
+          <div class='response'>"YES . B'se the can start their own businesses instead of seeking 4 jobs and it can decrease on the unemployment problem in the country."</div>
+
+        </div>
+      </div>
+
+
+      <script type="text/javascript" src="/static/javascript/lib/d3.v3.min.js"></script>
+      <script type="text/javascript" src="/static/javascript/lib/jquery-2.0.3.min.js"></script>
+      <script type="text/javascript" src="http://d3js.org/topojson.v1.min.js"></script>
+
+      <script type="text/javascript" >
+
+      
+
+      $(function() {
+          console.log("load");
+          var width = 1440, height = 1360;
+
+          var svg = d3.select("body").append("svg")
+              .attr("width", width)
+              .attr("height", height);
+
+          var projection = d3.geo.mercator()
+            .center([0, 0.5])
+            .rotate([-31.2, 0])
+            .scale(10500)
+            .translate([width / 2, height / 2]);            
+
+          d3.json("/static/javascript/geojson/regions.json", function(error, uk) {
+              svg.append("path")
+                  .attr("id", "states")
+                  .datum(uk)
+                  .attr("d", d3.geo.path().projection(projection));
+            });
+
+
+        });
+
+      </script>
+  </body>
+</html>
+
+
+

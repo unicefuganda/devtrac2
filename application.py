@@ -36,6 +36,7 @@ js = Bundle(
 	'javascript/location.js',
 	'javascript/layer-map.js',
 	'javascript/layer-options.js',
+	'javascript/lib/d3.v3.min.js',
      filters='jsmin', output='gen/packed.js')
 
 assets.register('js_all', js)

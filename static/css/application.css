@@ -34,6 +34,14 @@ h3 {
   margin-right: 6px;
 }
 
+.toggle.toggle-selected {
+  background-color: lightblue;
+}
+
+.toggle.toggle-selected:focus {
+  background-color: lightblue;
+}
+
 #right-hand-panel {
     position: relative;
     float: right;
@@ -158,13 +166,6 @@ h3 {
 
 /* UREPORT SUMMARY */
 
-.ureport-summary {
-
-  overflow:hidden;
-  width: 100%;
-  font-size: 12px;
-}
-
 .ureport-summary .response span{
   font-size: 10px;
   font-weight: normal;
@@ -177,10 +178,61 @@ h3 {
   display: inline-block;
 }
 
-.toggle.toggle-selected {
-  background-color: lightblue;
+.ureport-question-selected #ureport-panel {
+    width: 100%;
+    height: 25%;
+    padding: 6px;
+    border-top: 1px solid #AAA;
 }
 
-.toggle.toggle-selected:focus {
-  background-color: lightblue;
+.ureport-top5  {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top:6px;
+    width: 60%;
+    float: left;
+}
+
+.ureport-top5 li {
+    float: left;
+    font-size: 12px;
+    background-color: #EEE;
+    display: block;
+    padding: 2px;
+    border-radius: 3px;
+    font-style: italic;
+    margin-right: 10px;
+    margin-bottom: 6px;
+    
+}   
+
+.ureport-results {
+    width: 40%;
+    float:left;
+    overflow: hidden;;
+    list-style-type: none;
+    padding-left: 0;
+}
+.ureport-results label {
+    text-transform: capitalize; 
+    font-size: 13px;   
+    font-weight: 500;
+}
+
+.ureport-question-selected #devtrac-map {
+    height: 75%;
+}
+
+#summary-panel {
+    position: relative;
+    top: 0px;
+    left: 0px;
+}
+
+#summary-panel .content{
+    margin: 0;
+    padding: 0;
+    margin-top: 10px;
+    border: none;
+    min-height: 0px;
 }

@@ -3,16 +3,13 @@
   <head>
     <title>DevTrac Global</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     {% assets "css_all" %}
         <link rel="stylesheet" media="screen" href="{{ ASSET_URL }}"></link>
     {% endassets %}
   </head>
   <body>
     <div ng-view></div>
-    <!-- <link rel="stylesheet" media="screen" ng-href="/static/css/feature_toggles/left_side.css"></link> -->
     <div id='map-container'>
-    
       <div id='right-hand-panel' class='{[{ show_bottom_panel ? "ureport-question-selected" : ""}]}' ng-controller='RightPanelCtrl' >
         <div map id='devtrac-map'></div>
         <div ng-include="'/static/templates/ureport_summary.html'"></div>

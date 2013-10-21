@@ -22,7 +22,7 @@ Then The following information will be shown contextual panel
 # Percentage of children vaccinated against Measles - #
 # Percentage of deliveries in Health Facilities - #
 # Pit latrine coverage percentage - #
-# Safe Water coverage percentage - #
+# Safe Water coverage Percentageentage - #
 
 Scenario: Show regional summary information
 Given that I am a regular user

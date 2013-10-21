@@ -1,14 +1,12 @@
-<div ng-controller="SummaryCtrl" id='summary'>
-  <div ng-show="summary != null" class='ng-hide' >
-    <h3>{[{location.full_name() }]}</h3>
-    <div ng-repeat="item in summary" class="info">
-      <label>{[{item[0]}]}</label>
-      <span>{[{item[1]}]}</span>
-    </div>
+<div ng-controller="SummaryCtrl" id='summary' ng-show="summary != null" class='ng-hide'>
+  <h3>{[{location.full_name() }]}</h3>
+  <div ng-repeat="item in summary" class="info">
+    <label>{[{item[0]}]}</label>
+    <span>{[{item[1]}]}</span>
+  </div>
 
-    <div ng-repeat="item in indicatorSummary" class="info">
-      <label>{[{item[0]}]}</label>
-      <span>{[{item[1]}]}</span>
-    </div>
+  <div ng-repeat="item in indicatorSummary" class="info">
+    <label>{[{item[0]}]}</label>
+    <span>{[{item[1]}]}</span>
   </div>
 </div>

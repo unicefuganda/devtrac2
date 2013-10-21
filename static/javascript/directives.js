@@ -33,6 +33,10 @@ angular.module("dashboard").directive('map', function() {
             });            
 
             var applyLocationAndFilter = function(newLocation, newFilter) {
+
+                if (newFilter == null)
+                    return; 
+                
                 var layerChanges = DT.Location.compareLayerKeys(map.displayedLayers(), newLocation.layersToShow(newFilter.dataToggledOff()));                
                 $.each(layerChanges.toRemove, function(index, locationKey) {                    
                     map.removeLayer(locationKey[0]);
@@ -56,11 +60,9 @@ angular.module("dashboard").directive('map', function() {
                 applyLocationAndFilter(scope.location, newFilter);
             }, true);
 
-            scope.$watch("ureportQuestion", function(newQuestion) {
-                if (newQuestion == undefined)
-                    return true;
+            scope.$watch("ureportQuestion.selected", function(newQuestion) {
                 applyLocationAndFilter(scope.location, scope.filter);
-            }, true);
+            }, false);
 
             scope.$watch("indicator", function(newIndicator, oldIndicator){
                 if (newIndicator == undefined)

@@ -1,5 +1,4 @@
 angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $routeParams, $location) {
-    console.log("dashboard here");
     DT.timings["urlchange"] = new Date().getTime();
 
     $rootScope.location = new DT.Location($routeParams);

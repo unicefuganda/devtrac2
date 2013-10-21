@@ -64,11 +64,11 @@ DT.Location.prototype.layersToShow = function(filteredKeys) {
 
 DT.Location.prototype.layerOrder = function() {
     if (this.level() == "national") {
-        return ["district", "region", "subcounty", "parish"]
+        return ["district", "region", "subcounty", "parish"];
     } else {
-        return ["region", "district", "subcounty", "parish"]
+        return ["region", "district", "subcounty", "parish"];
     }
-}
+};
 DT.Location.prototype.getName = function(includeNational) {
 
     if (typeof(includeNational) == 'undefined')
@@ -112,10 +112,10 @@ DT.Location.compareLayerKeys = function(layerKeys, otherlayerKeys) {
     };
 
     var keysToRemove = $.grep(layerKeys, function(key, index) {
-        return !keyExists(key, otherlayerKeys)
+        return !keyExists(key, otherlayerKeys);
     });
     var keysToAdd = $.grep(otherlayerKeys, function(key, index) {
-        return !keyExists(key, layerKeys)
+        return !keyExists(key, layerKeys);
     });
 
     return {

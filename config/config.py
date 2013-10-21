@@ -15,7 +15,7 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     ASSETS_DEBUG = True
-    SEND_FILE_MAX_AGE_DEFAULT = 0
+    SEND_FILE_MAX_AGE_DEFAULT = 100
     DATA_DIR = "db/data/test"
     USE_LOCAL_GEOJSON = True
 
