@@ -160,7 +160,7 @@ describe("Ureport Service question results", function(){
 
     it('should fetch and reorder Ureport questions', inject(function(ureportService){
         var results = ureportService.results(new DT.Location({region: 'north'}), {id: 100});
-        expect(results.results).toEqual([{percent:50}, {percent:30}, {percent:20}]);
+        expect(results).toEqual(testResponses);
         expect(mock.get).toHaveBeenCalledWith('/ureport/questions/100/results/UGANDA, NORTH');
     }));
 });

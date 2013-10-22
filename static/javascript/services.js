@@ -336,8 +336,6 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         return jsonService.get(url).then(function(data) {
             if (data == "null")
                 return null;
-            data.results = $filter("orderBy")(data.results, "-percent");
-
             return data;
         });
     }
