@@ -44,8 +44,10 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $scope.show_bottom_panel = false;
 
     $scope.$watch("ureportQuestion", function(newQuestion) {
-        if (newQuestion == null)
+        if (newQuestion == null) {
+            $scope.show_bottom_panel = false;
             return;
+        }
         $scope.show_bottom_panel = newQuestion.selected != null;
         // Give time for the map to resize
         $timeout($scope.mapResize, 300);
