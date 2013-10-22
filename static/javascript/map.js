@@ -1,18 +1,37 @@
 if (typeof DT == "undefined")
     DT = {};
 DT.testing = false;
-DT.Map = function(element) {
+DT.Map = function(element, basemap) {
 
     var self = this;
     self.wmsLayer = null;
-    var map = L.map(element.attr("id"), {
-        zoomControl: false,
-        scrollWheelZoom: false,
-        touchZoom: false,
-        doubleClickZoom: false,
-        dragging: false
 
-    });
+    if (basemap == 'test') {
+        var testingUrl = 'http://localhost:5000/stub_tiles/{s}/{z}/{x}/{y}.png';
+
+        var map = L.map(element.attr("id"), {
+            zoomControl: false,
+            scrollWheelZoom: false,
+            touchZoom: false,
+            doubleClickZoom: false,
+            dragging: false
+        });
+
+        var layer = new L.TileLayer(testingUrl, {
+            minZoom: 6,
+            maxZoom: 18
+        });
+
+        map.addLayer(layer);
+    } else {   
+        var map =  L.mapbox.map(element.attr('id'), basemap, {
+            zoomControl: false, 
+            scrollWheelZoom: false,
+            touchZoom: false,
+            doubleClickZoom: false,
+            dragging: false
+        });
+    }
 
     map.on("baselayerchange", function(layer) {
         self.activeLayer = layer;
@@ -34,15 +53,13 @@ DT.Map = function(element) {
         DT.timings["zoomend"] = new Date().getTime();
     });
 
+    var mapboxUrl = 'http://{s}.tiles.mapbox.com/v3/mapbox.mapbox-light/{z}/{x}/{y}.png'
     var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    var testingUrl = 'http://localhost:5000/stub_tiles/{s}/{z}/{x}/{y}.png';
+    
 
-    var tileServerUrl = DT.testing ? testingUrl : osmUrl;
-    var osm = new L.TileLayer(tileServerUrl, {
-        minZoom: 6,
-        maxZoom: 18
-    });
-    map.addLayer(osm);
+    var tileServerUrl = DT.testing ? testingUrl : mapboxUrl;
+    
+    // map.addLayer(osm);
     self.layerMap = new DT.LayerMap();
     window.mapmap = map;
 

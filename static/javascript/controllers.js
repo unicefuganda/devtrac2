@@ -4,7 +4,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $rootScope.location = new DT.Location($routeParams);
     if ($rootScope.filter == undefined)
         $rootScope.filter = new DT.Filter({health_center: true, water_point: true, school: true});
-    $rootScope.feature_toggles = DT.feature_toggles($location.absUrl());
+
 
 }).controller("IndicatorsCtrl", function($scope, $rootScope, heatmapService) {
     $rootScope.indicator = { selected: null } 

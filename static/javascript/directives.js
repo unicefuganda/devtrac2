@@ -17,9 +17,16 @@ angular.module("dashboard").directive('map', function() {
                 }
             }
             $scope.onresize = null;
+
+            if ($location.search().basemap == null) {
+                $scope.basemap = 'tcochran.map-hxvpvlhi';   
+            } else {
+                $scope.basemap = $location.search().basemap;
+            }
+            
         },
         link: function(scope, element, attrs) {
-            var map = new DT.Map(element);
+            var map = new DT.Map(element, scope.basemap);
             window.map = map;
             
             scope.onresize = function() {
