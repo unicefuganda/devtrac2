@@ -1,10 +1,25 @@
-Feature: ureport
+Feature: Ureport
 
-Scenario: Display ureport panel
+Scenario: Show pie chart of ureport results for district
 Given that I am a regular user
-When I go to the homepage
-And I select a ureport question "Youth Fund"
-Then the bottom panel will be displayed
+When I open dashboard for "Acholi, Gulu"
+And I select ureport question "Barriers to Farming"
+Then I should see a pie chart of 
+    """
+    Climate - 46%
+    Lack Of Capital - 27%
+    Poor Farming Methods - 12%
+    Pests And Diseases - 9%
+    Lack Of Land - 5%
+    """
+
+#
+#Scenario: Display ureport panel
+#Given that I am a regular user
+#When I go to the homepage
+#And I select a ureport question "Youth Fund"
+#Then the bottom panel will be displayed
+#
 # 
 # Scenario: Show highest response badge for a district
 # Given that I am a regular user

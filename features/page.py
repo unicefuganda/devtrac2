@@ -113,6 +113,13 @@ class Page:
     def summary_panel_content(self):
         return self.browser.find_by_css('#summary').text
 
+    def select_ureport_question(self, abbreviation):
+        return self.browser.find_by_css(str(".ureport-questions .toggle[data-question='%s']" % abbreviation)).click();
+
+    def ureport_results(self):
+        self.take_screenshot();
+        return self.browser.find_by_css(".ureport-results .legend").text
+
     def wait_for(self, function):
         for _ in itertools.repeat(None, 10):
             result = function(self)
