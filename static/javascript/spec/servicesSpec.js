@@ -126,8 +126,8 @@ describe("Ureport Service questions", function() {
 
 
 describe("Ureport Service responses", function() {
-    var testReponses = [{id: 1, text: "some text"}, {id: 2, text: "some text"}]
-    var mock = mockGeoJson(testReponses);
+    var testResponses = [{id: 1, text: "some text"}, {id: 2, text: "some text"}]
+    var mock = mockGeoJson(testResponses);
 
     beforeEach(function(){
 
@@ -140,8 +140,27 @@ describe("Ureport Service responses", function() {
     it ('should get ureport questions', inject(function(ureportService) {
         ureportService.top5(new DT.Location({region: 'north'}), {id: 100}).then(function(data){
 
-            expect(data).toEqual(testReponses);
+            expect(data).toEqual(testResponses);
             expect(mock.get).toHaveBeenCalledWith('/ureport/questions/100/top5/UGANDA, NORTH');
         });
     }));
 })
+
+describe("Ureport Service question results", function(){
+    var testResponses = {results: [{percent:20}, {percent:30}, {percent:50}]};
+    var mock = mockGeoJson(testResponses);
+
+    beforeEach(function(){
+        module('dashboard',function($provide){
+            spyOn(mock,'get').andCallThrough();
+            $provide.value('jsonService',mock);
+        });
+
+    });
+
+    it('should fetch and reorder Ureport questions', inject(function(ureportService){
+        var results = ureportService.results(new DT.Location({region: 'north'}), {id: 100});
+        expect(results.results).toEqual([{percent:50}, {percent:30}, {percent:20}]);
+        expect(mock.get).toHaveBeenCalledWith('/ureport/questions/100/results/UGANDA, NORTH');
+    }));
+});

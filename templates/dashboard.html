@@ -12,7 +12,7 @@
     <div id='map-container'>
       <div id='right-hand-panel' class='{[{ show_bottom_panel ? "ureport-question-selected" : ""}]}' ng-controller='RightPanelCtrl' >
         <div map id='devtrac-map'></div>
-        <div ng-include="'/static/templates/ureport_summary.html'"></div>
+        <div ng-include="'/static/templates/ureport_summary.html'" ng-show='show_bottom_panel'></div>
       </div>
 
       <div panel panel-expand='{"left":"10px"}' panel-collapse='{"left":"-300px"}' class='filter-panel expanded dt-panel ng-cloak' id="filter-panel">

@@ -102,7 +102,7 @@ class UReportService(object):
 
         def calc_percent(percent, total):
             result = float(percent)/total * 100
-            return "%0.0f%%" % result
+            return int("%0.0f" % result)
 
         percentages = [{'category': result['category'], 'category_id': result['category_id'], 'percent': calc_percent(result['count'], total) } for result in results]
 

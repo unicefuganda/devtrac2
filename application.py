@@ -37,6 +37,8 @@ js = Bundle(
 	'javascript/layer-map.js',
 	'javascript/layer-options.js',
 	'javascript/lib/d3.v3.min.js',
+	'javascript/lib/jquery.flot.min.js',
+	'javascript/lib/jquery.flot.pie.min.js',
      filters='jsmin', output='gen/packed.js')
 
 assets.register('js_all', js)
@@ -77,6 +79,8 @@ def ureport_top5(question_id, locator):
 @app.route("/ureport/questions/<question_id>/results/<locator>")
 def ureport_results(question_id, locator):
 	result = services.UReportService(__mongo_connection()).results(services.Locator(locator), question_id)
+	
+
 	return Response(dumps(result), mimetype='application/json')
 
 @app.route("/ureport/questions/<question_id>/child_results/<locator>")

@@ -1,15 +1,22 @@
 <div ng-controller="UReportResponsesCtrl" id='ureport-panel' class='ng-cloak'>
   <h3>UReport Poll Results</h3>
-    <span class="ureport-question" >{[{ureportQuestion.selected.question}]}</span>
-      
+    
     <ul ng-show="ureportTop5.length > 0" class='ureport-top5'>
+    <span class="ureport-question" >{[{ureportQuestion.selected.question}]}</span>
       <li ng-repeat="item in ureportTop5" class="response">"{[{item.text }]}"</li>  
     </ul>
+    
+    <div piechart class='ureport-results' ng-show='show_pie'>
+      <div class="flot-piechart" style="width:100px;height:100px"></div>
+      <ul class="legend">
+        <li ng-repeat="legend in data">
+          <span class='legend-color' style='background-color:{[{legend.color}]}'></span>
+          <label>{[{legend.label}]} -</label>
+          <span>{[{legend.data}]}%</span>
+        </li>
+      </ul>
 
-    <ul class='ureport-results'>
-    <li ng-repeat="item in ureportResults.results">
-      <label>{[{item.category}]}:</label>
-      <span>{[{item.percent}]}</span>
-    </li>
+    </div>
+
   </ul>
 </div>

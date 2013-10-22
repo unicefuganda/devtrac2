@@ -317,7 +317,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         return $.grep(formatedValues, function(value) { return value != null; })
     }
 })
-.service("ureportService", function(jsonService) {
+.service("ureportService", function(jsonService, $filter) {
 
     this.questions = function() {
         var url = "/ureport/questions"
@@ -330,8 +330,16 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
     }
 
     this.results = function(location, question) {
+
+
         var url = "/ureport/questions/" + question.id + "/results/" + location.getName(true).toUpperCase();
-        return jsonService.get(url);
+        return jsonService.get(url).then(function(data) {
+            if (data == "null")
+                return null;
+            data.results = $filter("orderBy")(data.results, "-percent");
+
+            return data;
+        });
     }
 
     this.child_results = function(location, question) {

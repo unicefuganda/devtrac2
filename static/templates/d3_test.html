@@ -143,7 +143,6 @@
       
 
       $(function() {
-          console.log("load");
           var width = 1440, height = 1360;
 
           var svg = d3.select("body").append("svg")
@@ -162,7 +161,6 @@
                   .datum(uk)
                   .attr("d", d3.geo.path().projection(projection));
             });
-
 
         });
 

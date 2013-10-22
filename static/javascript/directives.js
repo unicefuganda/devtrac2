@@ -107,4 +107,43 @@ angular.module("dashboard").directive('map', function() {
             }
         }
     };
+}).directive('piechart', function() {
+    return {
+        scope: true,
+        link: function(scope, element, attrs) {
+            scope.$watch("ureportResults", function(result) {
+                if (result == null){
+                    scope.show_pie = false;
+                    return;
+                }
+                scope.show_pie = true;
+
+                scope.data = $.map(result.results, function(percent_row, index) {
+                    return {
+                        label: percent_row.category,
+                        data: percent_row.percent,
+                        color: DT.piechart_colors[index]
+                    }
+                });
+
+                var piechart = $(element).find(".flot-piechart");
+
+                $.plot(piechart, scope.data, {
+                    series: {
+                        pie: {
+                            show: true,
+                            label: {
+                                show: false
+                            }
+                        }
+                    },
+                    legend: {
+                        show: false
+                    }
+                });
+            });
+
+        
+        }
+    };
 })

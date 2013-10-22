@@ -215,8 +215,29 @@ h3 {
 }
 .ureport-results label {
     text-transform: capitalize; 
-    font-size: 13px;   
+    font-size: 12px;   
     font-weight: 500;
+    margin-left: 6px;
+}
+
+.ureport-results .legend {
+  list-style-type: none;
+  padding-left: 0;
+  float: left;
+  margin-left: 12px;
+  font-size: 12px;
+}
+
+.ureport-results .flot-piechart {
+  float: left;
+}
+
+.ureport-results .legend-color {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 8px;
+  /*border: 1px solid #CCC;*/
 }
 
 .ureport-question-selected #devtrac-map {

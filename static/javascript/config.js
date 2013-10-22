@@ -37,3 +37,5 @@ DT.AgregationConfig.labels = [
     { key: "subcounty", label: "Subcounties", formatter: DT.NumberFormatter},
     { key: "parish", label: "Parishes", formatter: DT.NumberFormatter}
 ]
+
+DT.piechart_colors = ["red", "blue", "yellow", "green", "lightblue", "orange", "salmon", "cyan", "magenta"]
