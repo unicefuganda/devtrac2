@@ -58,13 +58,13 @@
       <div class="panel-heading">
         <h3 class="panel-title">
           <a class="accordion-toggle heatmap-toggle" data-toggle="collapse"  data-target="#heatmap-collapse" href="#">
-            Heat Map
+            Indicators
           </a>
         </h3>
       </div>
       <div id="heatmap-collapse" class="panel-collapse collapse">
         <div class="panel-body">
-          <h3>By indicator:</h3>
+          <h3>By dataset:</h3>
 
           <div ng-controller="IndicatorsCtrl">
             <button type="button" ng-click='indicator.selected = null;' class="btn btn-default btn-sm toggle {[{indicator.selected == null ? 'toggle-selected' : '' }]}" >None</button>  

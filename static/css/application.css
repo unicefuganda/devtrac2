@@ -47,7 +47,7 @@ h3 {
     float: right;
     width: 75%;
     border-left: 1px solid #AAA;
-    height:100%;
+    height:95%;
 }
 
 /* BREADCRUMB */
@@ -91,6 +91,10 @@ h3 {
   font-size: 24px;
 }
 
+#location h3 {
+  margin-bottom: 0;
+}
+
 /* FILTERS */
 
 .panel-title {
@@ -113,9 +117,20 @@ h3 {
   border-bottom: none;
 }
 
+.panel-title a {
+  display: block;
+}
+
+.detail-panel {
+  border-top: 1px solid #666 ;
+  background-color: #DDD;
+  width: 100%;
+  height: 200px;
+}
 .breadcrumb-section {
   position: absolute;
-  height: 70px;
+  height: 80px;
+  width: 25%;
 }
 
 .filters-section {
@@ -125,12 +140,12 @@ h3 {
 
 .filters-container {
   height: 100%;
-  padding-top: 70px;
+  padding-top: 80px;
 }
 
 #filter-panel {
   width: 25%;
-  height: 100%;
+  height: 95%;
   overflow: hidden;
 }
 
