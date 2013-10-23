@@ -1,46 +1,118 @@
+
+
+
 <form role='form' id='filters-form'>
-  
-  <h3>Display datasets associated with:</h3>
-  
-  <button type="button" class="btn btn-default btn-sm toggle toggle-selected">Youth</button>
-  
-  <h3>Show points related to:</h3>
 
-  <ul class="points-filter">
-    <li>
-      <span class="school-checkbox-icon checkbox-icon"></span>
-      <input type="checkbox" ng-model="filter.school" class='school-checkbox' id='school-checkbox'></input>
-      <label for="school-checkbox">Schools</label>
-    </li>   
-    <li>
-      <span class="health-center-checkbox-icon checkbox-icon"></span>
-      <input type="checkbox" ng-model="filter.health_center" class='health-center-checkbox' id="health-center-checkbox"/>
-      <label for="health-center-checkbox">Health Centers</label>
-    </li> 
-    <li>
-      <span class="water-point-checkbox-icon checkbox-icon"></span>
-      <input type="checkbox" ng-model="filter.water_point" class='water-point-checkbox' id="water-point-checkbox"/>
-      <label for="water-point-checkbox">Water Points</label>
-    </li>
-  </ul>       
-                
-  <h3>By indicator:</h3>
+  
 
-  <div ng-controller="IndicatorsCtrl">
-    <button type="button" ng-click='indicator.selected = null;' class="btn btn-default btn-sm toggle {[{indicator.selected == null ? 'toggle-selected' : '' }]}" >None</button>  
-    <button type="button" ng-repeat="ind in indicators" ng-click="indicator.selected = ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
+  <div class="panel-group" id="accordion">
+    
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a class="accordion-toggle" data-toggle="collapse"  data-target="#sector-collapse" href="#">
+            Sector
+          </a>
+        </h3>
+      </div>
+      <div id="sector-collapse" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <h3>Display datasets associated with:</h3>
+          <button type="button" class="btn btn-default btn-sm toggle toggle-selected">Youth</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a class="accordion-toggle" data-toggle="collapse"  data-target="#statistics-collapse" href="#">
+            Statistics
+          </a>
+        </h3>
+      </div>
+      <div id="statistics-collapse" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <h3>Show points related to:</h3>
+          <ul class="points-filter">
+            <li>
+              <span class="school-checkbox-icon checkbox-icon"></span>
+              <input type="checkbox" ng-model="filter.school" class='school-checkbox' id='school-checkbox'></input>
+              <label for="school-checkbox">Schools</label>
+            </li>   
+            <li>
+              <span class="health-center-checkbox-icon checkbox-icon"></span>
+              <input type="checkbox" ng-model="filter.health_center" class='health-center-checkbox' id="health-center-checkbox"/>
+              <label for="health-center-checkbox">Health Centers</label>
+            </li> 
+            <li>
+              <span class="water-point-checkbox-icon checkbox-icon"></span>
+              <input type="checkbox" ng-model="filter.water_point" class='water-point-checkbox' id="water-point-checkbox"/>
+              <label for="water-point-checkbox">Water Points</label>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a class="accordion-toggle heatmap-toggle" data-toggle="collapse"  data-target="#heatmap-collapse" href="#">
+            Heat Map
+          </a>
+        </h3>
+      </div>
+      <div id="heatmap-collapse" class="panel-collapse collapse">
+        <div class="panel-body">
+          <h3>By indicator:</h3>
+
+          <div ng-controller="IndicatorsCtrl">
+            <button type="button" ng-click='indicator.selected = null;' class="btn btn-default btn-sm toggle {[{indicator.selected == null ? 'toggle-selected' : '' }]}" >None</button>  
+            <button type="button" ng-repeat="ind in indicators" ng-click="indicator.selected = ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
+          </div>
+
+          <div ng-if="indicator.selected != null" class='legend'>
+            <h3>Legend:</h3>
+            <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
+          </div>
+
+          <h3>Ureport question:</h3>
+
+          <div ng-controller="UReportCtrl" class="ureport-questions">
+            <button type="button" ng-click='ureportQuestion.selected = null;' class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == null ? 'toggle-selected' : '' }]}" >None</button>    
+            <button type="button" data-question='{[{question.abbreviation}]}' ng-click='ureportQuestion.selected = question;' ng-repeat="question in questions" class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == question ? 'toggle-selected' : '' }]}" >{[{question.abbreviation}]}</button>    
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a class="accordion-toggle" data-toggle="collapse" data-target="#partner-projects-collapse" href="#">
+            Partner projects
+          </a>
+        </h3>
+      </div>
+      <div id="partner-projects-collapse" class="panel-collapse collapse">
+        <div class="panel-body">
+          Partner projects
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a class="accordion-toggle" data-toggle="collapse" data-target="#summary-collapse" href="#">
+            Summary
+          </a>
+        </h3>
+      </div>
+      <div id="summary-collapse" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <div ng-include="'/static/templates/summary.html'" class='summary-section'></div>
+        </div>
+      </div>
+    </div>
+
   </div>
-
-  <div ng-if="indicator.selected != null" class='legend'>
-    <h3>Legend:</h3>
-    <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
-  </div>
-
-  <h3>Ureport question:</h3>
-
-  <div ng-controller="UReportCtrl" class="ureport-questions">
-    <button type="button" ng-click='ureportQuestion.selected = null;' class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == null ? 'toggle-selected' : '' }]}" >None</button>    
-    <button type="button" data-question='{[{question.abbreviation}]}' ng-click='ureportQuestion.selected = question;' ng-repeat="question in questions" class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == question ? 'toggle-selected' : '' }]}" >{[{question.abbreviation}]}</button>    
-  </div>
-  
 </form>

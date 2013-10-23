@@ -64,7 +64,6 @@ h3 {
   font-size: 14px;
   border-radius: 0;
   padding: 5px 6px;
-  border-bottom: 1px solid #CCC;
   margin-bottom: 10px;
 }
 
@@ -94,14 +93,49 @@ h3 {
 
 /* FILTERS */
 
+.panel-title {
+  font-size: inherit;
+}
+
+.panel-group .panel {
+  border-radius: 0;
+}
+
+.panel-heading {
+  padding: 4px 6px;
+}
+
+.panel-body {
+  padding: 6px;
+}
+
+.panel {
+  border-bottom: none;
+}
+
+.breadcrumb-section {
+  position: absolute;
+  height: 70px;
+}
+
+.filters-section {
+  height: 100%;
+  overflow: auto;
+}
+
+.filters-container {
+  height: 100%;
+  padding-top: 70px;
+}
+
 #filter-panel {
   width: 25%;
+  height: 100%;
+  overflow: hidden;
 }
 
 #filters-form {
-  padding-left: 10px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #CCC;
 }
 
 #filters-form label {
