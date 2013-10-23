@@ -114,7 +114,6 @@ class Page:
         return self.browser.find_by_css('#summary').text
 
     def select_ureport_question(self, abbreviation):
-        self.browser.find_by_css(".heatmap-toggle").click();
         toggle_css = str(".ureport-questions .toggle[data-question='%s']" % abbreviation)
         self.wait_for(lambda x: self.browser.find_by_css(toggle_css).visible)
         return self.browser.find_by_css(toggle_css).click();

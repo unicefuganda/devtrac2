@@ -1,103 +1,60 @@
 
 
 
+
+
+
 <form role='form' id='filters-form'>
-
+  <div class="sectors-pane">
+    <h3>Display datasets associated with:</h3>
+    <button type="button" class="btn btn-default btn-sm toggle toggle-selected">Youth</button>
+  </div>
   
+  <ul class="nav nav-tabs" id="myTab">
+    <li class="active"><a data-target='#statistics' data-toggle="tab" >Statistics</a></li>
+    <li><a data-target='#heatmap' data-toggle="tab" href="#">Heat map</a></li>
+    <li><a data-target='#projects' data-toggle="tab" href="#">Projects/Partners</a></li>
+  </ul>
 
-  <div class="panel-group" id="accordion">
-    
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          <a class="accordion-toggle" data-toggle="collapse"  data-target="#sector-collapse" href="#">
-            Sector
-          </a>
-        </h3>
+  <div class="tab-content">
+    <div class="tab-pane active" id="statistics">
+      <h3>Show points related to:</h3>
+      <ul class="points-filter">
+        <li>
+          <span class="school-checkbox-icon checkbox-icon"></span>
+          <input type="checkbox" ng-model="filter.school" class='school-checkbox' id='school-checkbox'></input>
+          <label for="school-checkbox">Schools</label>
+        </li>   
+        <li>
+          <span class="health-center-checkbox-icon checkbox-icon"></span>
+          <input type="checkbox" ng-model="filter.health_center" class='health-center-checkbox' id="health-center-checkbox"/>
+          <label for="health-center-checkbox">Health Centers</label>
+        </li> 
+        <li>
+          <span class="water-point-checkbox-icon checkbox-icon"></span>
+          <input type="checkbox" ng-model="filter.water_point" class='water-point-checkbox' id="water-point-checkbox"/>
+          <label for="water-point-checkbox">Water Points</label>
+        </li>
+      </ul> 
+    </div>
+    <div class="tab-pane" id="heatmap">
+      <button type="button" ng-click='indicator.selected = null;' class="btn btn-default btn-sm toggle {[{indicator.selected == null ? 'toggle-selected' : '' }]}" >None</button>  
+      <h3>By dataset:</h3>
+
+      <div ng-controller="IndicatorsCtrl">
+        
+        <button type="button" ng-repeat="ind in datasets" ng-click="indicator.selected = ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
       </div>
-      <div id="sector-collapse" class="panel-collapse collapse in">
-        <div class="panel-body">
-          <h3>Display datasets associated with:</h3>
-          <button type="button" class="btn btn-default btn-sm toggle toggle-selected">Youth</button>
-        </div>
+
+      <h3>Ureport question:</h3>
+
+      <div ng-controller="IndicatorsCtrl">
+        
+        <button type="button" ng-repeat="ind in ureport_datasets" ng-click="indicator.selected = ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
       </div>
     </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          <a class="accordion-toggle" data-toggle="collapse"  data-target="#statistics-collapse" href="#">
-            Statistics
-          </a>
-        </h3>
-      </div>
-      <div id="statistics-collapse" class="panel-collapse collapse in">
-        <div class="panel-body">
-          <h3>Show points related to:</h3>
-          <ul class="points-filter">
-            <li>
-              <span class="school-checkbox-icon checkbox-icon"></span>
-              <input type="checkbox" ng-model="filter.school" class='school-checkbox' id='school-checkbox'></input>
-              <label for="school-checkbox">Schools</label>
-            </li>   
-            <li>
-              <span class="health-center-checkbox-icon checkbox-icon"></span>
-              <input type="checkbox" ng-model="filter.health_center" class='health-center-checkbox' id="health-center-checkbox"/>
-              <label for="health-center-checkbox">Health Centers</label>
-            </li> 
-            <li>
-              <span class="water-point-checkbox-icon checkbox-icon"></span>
-              <input type="checkbox" ng-model="filter.water_point" class='water-point-checkbox' id="water-point-checkbox"/>
-              <label for="water-point-checkbox">Water Points</label>
-            </li>
-          </ul>
-        </div>
-      </div>
+    <div class="tab-pane" id="projects">
+      Partner projects
     </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          <a class="accordion-toggle heatmap-toggle" data-toggle="collapse"  data-target="#heatmap-collapse" href="#">
-            Indicators
-          </a>
-        </h3>
-      </div>
-      <div id="heatmap-collapse" class="panel-collapse collapse">
-        <div class="panel-body">
-          <button type="button" ng-click='indicator.selected = null;' class="btn btn-default btn-sm toggle {[{indicator.selected == null ? 'toggle-selected' : '' }]}" >None</button>  
-          <h3>By dataset:</h3>
-
-          <div ng-controller="IndicatorsCtrl">
-            
-            <button type="button" ng-repeat="ind in datasets" ng-click="indicator.selected = ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
-          </div>
-
-          <h3>Ureport question:</h3>
-
-          <div ng-controller="IndicatorsCtrl">
-            
-            <button type="button" ng-repeat="ind in ureport_datasets" ng-click="indicator.selected = ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
-          </div>
-
-          
-
-        </div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          <a class="accordion-toggle" data-toggle="collapse" data-target="#partner-projects-collapse" href="#">
-            Partner projects
-          </a>
-        </h3>
-      </div>
-      <div id="partner-projects-collapse" class="panel-collapse collapse">
-        <div class="panel-body">
-          Partner projects
-        </div>
-      </div>
-    </div>
-
   </div>
 </form>

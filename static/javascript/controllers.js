@@ -44,6 +44,8 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 }).controller("RightPanelCtrl", function($scope, $timeout) {
     $scope.show_bottom_panel = false;
 
+    
+
     $scope.$watch("ureportQuestion", function(newQuestion) {
         if (newQuestion == null) {
             $scope.show_bottom_panel = false;
