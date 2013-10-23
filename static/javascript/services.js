@@ -254,6 +254,12 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         name: "Barriers to farming",
         wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
         legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:ureport_poll_165&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;"
+    }, {
+        layer: "ureport_poll_551",
+        key: "School_Start_at6_Perc",
+        name: "Youth Day",
+        wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
+        legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:ureport_poll_551&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;"
     }
     ]
 
