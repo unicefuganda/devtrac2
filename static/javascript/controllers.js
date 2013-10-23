@@ -8,7 +8,8 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 
 }).controller("IndicatorsCtrl", function($scope, $rootScope, heatmapService) {
     $rootScope.indicator = { selected: null } 
-    $scope.indicators = heatmapService.all();
+    $scope.datasets = heatmapService.datasets();
+    $scope.ureport_datasets = heatmapService.ureport();
 }).controller("SummaryCtrl", function($scope, $rootScope, summaryService, indicatorService, ureportService) {
 
     var showSummary = function (location) {

@@ -64,24 +64,23 @@
       </div>
       <div id="heatmap-collapse" class="panel-collapse collapse">
         <div class="panel-body">
+          <button type="button" ng-click='indicator.selected = null;' class="btn btn-default btn-sm toggle {[{indicator.selected == null ? 'toggle-selected' : '' }]}" >None</button>  
           <h3>By dataset:</h3>
 
           <div ng-controller="IndicatorsCtrl">
-            <button type="button" ng-click='indicator.selected = null;' class="btn btn-default btn-sm toggle {[{indicator.selected == null ? 'toggle-selected' : '' }]}" >None</button>  
-            <button type="button" ng-repeat="ind in indicators" ng-click="indicator.selected = ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
-          </div>
-
-          <div ng-if="indicator.selected != null" class='legend'>
-            <h3>Legend:</h3>
-            <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
+            
+            <button type="button" ng-repeat="ind in datasets" ng-click="indicator.selected = ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
           </div>
 
           <h3>Ureport question:</h3>
 
-          <div ng-controller="UReportCtrl" class="ureport-questions">
-            <button type="button" ng-click='ureportQuestion.selected = null;' class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == null ? 'toggle-selected' : '' }]}" >None</button>    
-            <button type="button" data-question='{[{question.abbreviation}]}' ng-click='ureportQuestion.selected = question;' ng-repeat="question in questions" class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == question ? 'toggle-selected' : '' }]}" >{[{question.abbreviation}]}</button>    
+          <div ng-controller="IndicatorsCtrl">
+            
+            <button type="button" ng-repeat="ind in ureport_datasets" ng-click="indicator.selected = ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
           </div>
+
+          
+
         </div>
       </div>
     </div>
@@ -96,20 +95,6 @@
       <div id="partner-projects-collapse" class="panel-collapse collapse">
         <div class="panel-body">
           Partner projects
-        </div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          <a class="accordion-toggle" data-toggle="collapse" data-target="#summary-collapse" href="#">
-            Summary
-          </a>
-        </h3>
-      </div>
-      <div id="summary-collapse" class="panel-collapse collapse in">
-        <div class="panel-body">
-          <div ng-include="'/static/templates/summary.html'" class='summary-section'></div>
         </div>
       </div>
     </div>

@@ -250,21 +250,24 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:uganda_districts_2011_with_school_start&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;"
     }, {
         layer: "ureport_poll_165",
-        key: "School_Start_at6_Perc",
         name: "Barriers to farming",
         wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
-        legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:ureport_poll_165&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;"
+        legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:ureport_poll_165&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;",
+        ureport_poll: 165
     }, {
         layer: "ureport_poll_551",
-        key: "School_Start_at6_Perc",
         name: "Youth Day",
         wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
-        legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:ureport_poll_551&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;"
-    }
-    ]
+        legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:ureport_poll_551&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;",
+        ureport_poll: 551
+    }]
 
-    this.all = function() {
-        return indicators;
+    this.ureport = function() {
+        return $.grep(indicators, function(indicator) { return indicator.ureport_poll != null; });
+    }
+
+    this.datasets = function() {
+        return $.grep(indicators, function(indicator) { return indicator.ureport_poll == null; });
     }
 })
 .service("summaryService", function($q, $http) {
@@ -334,6 +337,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
 
     this.questions = function() {
         var url = "/ureport/questions"
+
         return jsonService.get(url);
     }
 

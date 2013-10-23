@@ -213,6 +213,19 @@ h3 {
   display: block; 
 }
 
+/* LEGEND */
+
+.heatmap-legend {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+
+} 
+
+.map-container {
+  background-color: #DDD;
+}
+
 /* UREPORT SUMMARY */
 
 .ureport-summary .response span{
