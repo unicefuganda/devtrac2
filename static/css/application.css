@@ -45,9 +45,10 @@ h3 {
 #right-hand-panel {
     position: relative;
     float: right;
-    width: 75%;
+    width: 100%;
     border-left: 1px solid #AAA;
     height:95%;
+    padding-left: 350px;
 }
 
 /* BREADCRUMB */
@@ -130,7 +131,6 @@ h3 {
 .breadcrumb-section {
   position: absolute;
   height: 80px;
-  width: 25%;
 }
 
 .filters-section {
@@ -144,9 +144,12 @@ h3 {
 }
 
 #filter-panel {
-  width: 25%;
+  width: 350px;
   height: 95%;
   overflow: hidden;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #CCC;
 }
 
 #filters-form {
