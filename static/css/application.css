@@ -127,6 +127,7 @@ h3 {
   background-color: #DDD;
   width: 100%;
   min-height: 400px;
+  float: left;
 }
 .breadcrumb-section {
   position: absolute;
