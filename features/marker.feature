@@ -15,6 +15,7 @@ Then the popup should have content:
 Scenario: Cluster Water Point markers
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu, Palaro"
+And I toggle the 'water-point' checkbox
 Then the "water-point" marker for "Acholi, Gulu, Palaro, Mede" is "6" points
 
 Scenario: Show Health Center Marker Summary Info
@@ -31,6 +32,7 @@ Then the popup should have content:
 Scenario: Cluster health center markers
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu, Odek"
+And I toggle the 'health-center' checkbox
 Then the "health-center" marker for "Acholi, Gulu, Odek, Binya" is "2" points
 
 Scenario: Show School Marker Summary Info
@@ -53,17 +55,17 @@ Scenario: Filter water points
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu, Odek"
 And I toggle the 'water-point' checkbox
-Then the "water-point" layer for "Acholi, Gulu, Odek" is not displayed
-When I toggle the 'water-point' checkbox
 Then the "water-point" layer for "Acholi, Gulu, Odek" is displayed
+When I toggle the 'water-point' checkbox
+Then the "water-point" layer for "Acholi, Gulu, Odek" is not displayed
 
 Scenario: Filter health centers
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu, Odek"
 And I toggle the 'health-center' checkbox
-Then the "health-center" layer for "Acholi, Gulu, Odek" is not displayed
-When I toggle the 'health-center' checkbox
 Then the "health-center" layer for "Acholi, Gulu, Odek" is displayed
+When I toggle the 'health-center' checkbox
+Then the "health-center" layer for "Acholi, Gulu, Odek" is not displayed
 
 Scenario: Filter schools
 Given that I am a regular user

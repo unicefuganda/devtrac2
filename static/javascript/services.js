@@ -19,7 +19,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
 
                 self.regions_geojson().then(function(data) {
                     allData[locationkey] = data;
-                    deffered2.resolve();     
+                    deffered2.resolve();
                 });
             } else if (key == "district") {
                 self.districts(location.region).then(function(data) {
@@ -55,13 +55,13 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                 summaryService.find(location.getName(), true).then(function(data) {
                     allData[locationkey] = data;
                     deffered2.resolve();
-                 })
+                })
 
             } else if (key == "health-center") {
                 summaryService.find(location.getName(), true).then(function(data) {
                     allData[locationkey] = data;
                     deffered2.resolve();
-                 })
+                })
             } else if (key == "school") {
                 summaryService.find(location.getName(), true).then(function(data) {
                     allData[locationkey] = data;
@@ -71,20 +71,22 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                 self.water_points(location).then(function(data) {
                     allData[locationkey] = data;
                     deffered2.resolve();
-                 })
+                })
             } else if (key == "health-center-point") {
                 self.health_centers(location).then(function(data) {
                     allData[locationkey] = data;
                     deffered2.resolve();
-                 })
+                })
             } else if (key == "school-point") {
                 self.schools(location).then(function(data) {
                     allData[locationkey] = data;
                     deffered2.resolve();
-                 })
+                })
             } else if (key == "ureport") {
                 if ($rootScope.ureportQuestion == undefined || $rootScope.ureportQuestion.selected == null) {
-                    allData[locationkey] = {children: []};
+                    allData[locationkey] = {
+                        children: []
+                    };
                     deffered2.resolve();
                 } else {
 
@@ -122,8 +124,12 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
 
         var url = "/static/javascript/geojson/uganda_districts_2011_with_indicators.json";
 
-        $http({method: 'GET', url: url, cache: true} ).success(function(data) { 
-            var fitleredData = districtsCallback(data); 
+        $http({
+            method: 'GET',
+            url: url,
+            cache: true
+        }).success(function(data) {
+            var fitleredData = districtsCallback(data);
             deffered.resolve(fitleredData);
         });
         return deffered.promise;
@@ -235,131 +241,198 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         return deffered.promise;
     };
 })
-.service("heatmapService", function() {
-    var indicators = [{
-        layer: "uganda_district_indicators_2",
-        key: "CompletePS_Perc",
-        name: "Percentage of children completing Primary School",
-        wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
-        legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:uganda_district_indicators_2&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;"
-    }, {
-        layer: "uganda_districts_2011_with_school_start",
-        key: "School_Start_at6_Perc",
-        name: "Percentage of children starting school at 6",
-        wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
-        legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:uganda_districts_2011_with_school_start&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;"
-    }, {
-        layer: "ureport_poll_165",
-        name: "Barriers to farming",
-        wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
-        legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:ureport_poll_165&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;",
-        ureport_poll: 165
-    }, {
-        layer: "ureport_poll_551",
-        name: "Youth Day",
-        wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
-        legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:ureport_poll_551&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;",
-        ureport_poll: 551
-    }]
+    .service("heatmapService", function() {
+        var indicators = [{
+            layer: "uganda_district_indicators_2",
+            key: "CompletePS_Perc",
+            name: "Percentage of children completing Primary School",
+            wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
+            legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:uganda_district_indicators_2&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;"
+        }, {
+            layer: "uganda_districts_2011_with_school_start",
+            key: "School_Start_at6_Perc",
+            name: "Percentage of children starting school at 6",
+            wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
+            legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:uganda_districts_2011_with_school_start&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;"
+        }, {
+            layer: "ureport_poll_165",
+            name: "Barriers to farming",
+            wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
+            legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:ureport_poll_165&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;",
+            ureport_poll: 165
+        }, {
+            layer: "ureport_poll_551",
+            name: "Youth Day",
+            wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
+            legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:ureport_poll_551&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;",
+            ureport_poll: 551
+        }]
 
-    this.ureport = function() {
-        return $.grep(indicators, function(indicator) { return indicator.ureport_poll != null; });
-    }
+        this.ureport = function() {
+            return $.grep(indicators, function(indicator) {
+                return indicator.ureport_poll != null;
+            });
+        }
 
-    this.datasets = function() {
-        return $.grep(indicators, function(indicator) { return indicator.ureport_poll == null; });
-    }
-})
-.service("summaryService", function($q, $http) {
-    this.find = function (locator) {
+        this.datasets = function() {
+            return $.grep(indicators, function(indicator) {
+                return indicator.ureport_poll == null;
+            });
+        }
+    })
+    .service("summaryService", function($q, $http) {
+        this.find = function(locator) {
 
-        var deffered = $q.defer();
+            var deffered = $q.defer();
 
-        locator = locator == "" ? "UGANDA" : "UGANDA, " + locator
+            locator = locator == "" ? "UGANDA" : "UGANDA, " + locator
 
-        $http({
-            method: 'GET',
-            url: "/aggregation/" + locator + "?include_children=" + true,
-            cache: true})
+            $http({
+                method: 'GET',
+                url: "/aggregation/" + locator + "?include_children=" + true,
+                cache: true
+            })
                 .success(function(data, status, headers, config) {
                     deffered.resolve(data);
-                 });
-        return deffered.promise;
-    }
-})
-.service("jsonService", function($q, $http) 
-{
-    this.get = function(url) {
-        var deffered = $q.defer();
-        $http({method: 'GET', url: url, cache: true})
-            .success(function(data) { 
-                deffered.resolve(data); 
-            });
-
-        return deffered.promise;
-    }
-})
-.service("boundaryService", function(jsonService){
-
-    this.districts = function (locator) {
-        var self = this;
-        url = "/static/javascript/geojson/uganda_districts_2011_with_indicators.json";
-        return jsonService.get(url).then(function(data) { return $.grep(data.features, self.locatorFilter(locator)); })
-    };
-
-    this.locatorFilter = function(locator) {
-        return function(feature) {
-            var featureLocator = new DT.Location({
-              region: feature.properties["Reg_2011"],
-              district: feature.properties["DNAME_2010"],
-              subcounty: feature.properties["SNAME_2010"],
-              parish: feature.properties["PNAME_2006"]
+                });
+            return deffered.promise;
+        }
+    })
+    .service("jsonService", function($q, $http) {
+        this.get = function(url) {
+            var deffered = $q.defer();
+            $http({
+                method: 'GET',
+                url: url,
+                cache: true
             })
-            return featureLocator.equals(locator);
+                .success(function(data) {
+                    deffered.resolve(data);
+                });
+
+            return deffered.promise;
+        }
+    })
+    .service("boundaryService", function(jsonService) {
+
+        this.districts = function(locator) {
+            var self = this;
+            url = "/static/javascript/geojson/uganda_districts_2011_with_indicators.json";
+            return jsonService.get(url).then(function(data) {
+                return $.grep(data.features, self.locatorFilter(locator));
+            })
         };
-    };
-})
-.service("indicatorService", function(boundaryService) {
 
-    this.find = function(locator) {
-        return boundaryService.districts(locator).then(this.mapFeature);
-    }
+        this.locatorFilter = function(locator) {
+            return function(feature) {
+                var featureLocator = new DT.Location({
+                    region: feature.properties["Reg_2011"],
+                    district: feature.properties["DNAME_2010"],
+                    subcounty: feature.properties["SNAME_2010"],
+                    parish: feature.properties["PNAME_2006"]
+                })
+                return featureLocator.equals(locator);
+            };
+        };
+    })
+    .service("indicatorService", function(boundaryService) {
 
-    this.mapFeature = function (data) {
-        var config = new DT.IndicatorConfig(DT.IndicatorConfig.district)
-        if (data.length == 0)
-            return [];
-        var formatedValues = $.map(data[0].properties, function(value, key) { return [config.format(key, value)] });
-        return $.grep(formatedValues, function(value) { return value != null; })
-    }
-})
-.service("ureportService", function(jsonService, $filter) {
+        this.find = function(locator) {
+            return boundaryService.districts(locator).then(this.mapFeature);
+        }
 
-    this.questions = function() {
-        var url = "/ureport/questions"
+        this.mapFeature = function(data) {
+            var config = new DT.IndicatorConfig(DT.IndicatorConfig.district)
+            if (data.length == 0)
+                return [];
+            var formatedValues = $.map(data[0].properties, function(value, key) {
+                return [config.format(key, value)]
+            });
+            return $.grep(formatedValues, function(value) {
+                return value != null;
+            })
+        }
+    })
+    .service("ureportService", function(jsonService, $filter) {
 
-        return jsonService.get(url);
-    }
+        this.questions = function() {
+            var url = "/ureport/questions"
 
-    this.top5 = function(location, question) {
-        var url = "/ureport/questions/" + question.id + "/top5/" + location.getName(true).toUpperCase();
-        return jsonService.get(url);
-    }
+            return jsonService.get(url);
+        }
 
-    this.results = function(location, question) {
+        this.top5 = function(location, question) {
+            var url = "/ureport/questions/" + question.id + "/top5/" + location.getName(true).toUpperCase();
+            return jsonService.get(url);
+        }
+
+        this.results = function(location, question) {
 
 
-        var url = "/ureport/questions/" + question.id + "/results/" + location.getName(true).toUpperCase();
-        return jsonService.get(url).then(function(data) {
-            if (data == "null")
-                return null;
-            return data;
-        });
-    }
+            var url = "/ureport/questions/" + question.id + "/results/" + location.getName(true).toUpperCase();
+            return jsonService.get(url).then(function(data) {
+                if (data == "null")
+                    return null;
+                return data;
+            });
+        }
 
-    this.child_results = function(location, question) {
-        var url = "/ureport/questions/" + question.id + "/child_results/" + location.getName(true).toUpperCase();
-        return jsonService.get(url);
-    }
-});
+        this.child_results = function(location, question) {
+            var url = "/ureport/questions/" + question.id + "/child_results/" + location.getName(true).toUpperCase();
+            return jsonService.get(url);
+        }
+    })
+    .service("projectService", function(jsonService, $filter) {
 
+
+        this.partners = function() {
+            // return [{projectId:"",partner:"", projection:"", partnerIconUrl:"",}]
+            return [{
+                    projects: [{
+                        id: "US-1-LEAD",
+                        name: "Livelihoods and Enterprise for Agricultural Development (LEAD)",
+                        description: "Livelihoods and Enterprises for Agricultural Development (LEAD) is a USAID-funded project with an estimated budget of $36 million over five years.  LEAD’s primary objective is to increase productivity, trade capacity, and competitiveness in selected agricultural value chains.  The program aims to improve farming practices, increase market access, and ensure empowered relationships between producers, input suppliers, agro-processors, and product buyers.  Overall, LEAD’s approach is characterized by 1) a market-driven strategy; 2) strategic partnerships/ alliances; 3) a participatory technology transfer methodology; and 4) outreach via commercially-oriented producer organizations.  Following the approval of the USAID Uganda Feed the Future strategy in March 2011, LEAD activities were redirected in order to be consistent with the strategy.  Major aspects of the redirection include a reduction in the number of value chains.  The major focus is now on maize, beans and coffee.  The number of focus districts was also reduced. "
+                    }, {
+                        id: "US-1-SCORE",
+                        name: " Sustainable, Comprehensive Responses for Vulnerable Children and their Families (SCORE)",
+                        description: "The Sustainable, Comprehensive Responses for Vulnerable Children and their Families (SCORE) project is a $29.4 million, five-year cooperative agreement implemented by the Association of Volunteers in International Service Foundation. The project is to improve the lives of vulnerable children and their families living in conditions of critical and moderate vulnerability. The program focuses on improving household economic and food security, enhancing protection and legal services for vulnerable children, and empowering and strengthening families with the ability to access, acquire or provide critical services for women and children such as health, education and psychosocial support. Strategic and continuous collaboration between this program and other USG and non USG activities is expected. "
+                    }],
+                    id: 'us_aid',
+                    name: "US-AID",
+                    icon: "us_aid.png"
+                }, {
+                    id: 'unicef',
+                    name: "UNICEF",
+                    icon: "unicef.png"
+                }
+            ]
+
+        }
+
+        this.questions = function() {
+            var url = "/ureport/questions"
+
+            return jsonService.get(url);
+        }
+
+        this.top5 = function(location, question) {
+            var url = "/ureport/questions/" + question.id + "/top5/" + location.getName(true).toUpperCase();
+            return jsonService.get(url);
+        }
+
+        this.results = function(location, question) {
+
+
+            var url = "/ureport/questions/" + question.id + "/results/" + location.getName(true).toUpperCase();
+            return jsonService.get(url).then(function(data) {
+                if (data == "null")
+                    return null;
+                return data;
+            });
+        }
+
+        this.child_results = function(location, question) {
+            var url = "/ureport/questions/" + question.id + "/child_results/" + location.getName(true).toUpperCase();
+            return jsonService.get(url);
+        }
+    });;

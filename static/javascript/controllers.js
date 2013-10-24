@@ -81,4 +81,8 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         showUReportResults($rootScope.location, $rootScope.ureportQuestion);
     }, true);
 
+})
+.controller("PartnersCtrl", function($scope, projectService){
+    $scope.partner = { selected: null };
+    $scope.partners = projectService.partners();
 });

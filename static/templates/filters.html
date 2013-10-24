@@ -53,8 +53,16 @@
         <button type="button" ng-repeat="ind in ureport_datasets" ng-click="indicator.selected = ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
       </div>
     </div>
-    <div class="tab-pane" id="projects">
-      Partner projects
+    <div ng-controller="PartnersCtrl" class="tab-pane" id="projects">
+      
+      <h3>Our partners:</h3>
+      <ul class="points-filter">
+        <li ng-repeat="p in partners">
+          <img src="/static/images/{[{ p.icon}]}" />
+          <input type="checkbox" ng-model='partner[p.name]' class='school-checkbox' id='school-checkbox'></input>
+          <label for="school-checkbox">{[{ p.name}]}</label>
+        </li> 
+      </ul> 
     </div>
   </div>
 </form>
