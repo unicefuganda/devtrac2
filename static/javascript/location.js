@@ -36,6 +36,7 @@ DT.Location.prototype.layersToShow = function(filteredKeys) {
             district: this.district
         });
         layers.push(["subcounty", districtLocation]);
+
     }
 
     if (this.subcounty != null) {
@@ -55,7 +56,12 @@ DT.Location.prototype.layersToShow = function(filteredKeys) {
         layers.push(["water-point-point", this]);
         layers.push(["school-point", this]);
         layers.push(["health-center-point", this]);
+    }
+
+    if (this.level() == "district" || this.level() == "subcounty" || this.level() == "parish") {
         layers.push(["project-point", this]);
+    } else {
+
     }
 
     return $.grep(layers, function(locationKey) {

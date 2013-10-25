@@ -96,7 +96,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                     })
                 }
             } else if (key == "project-point") {
-                projectService.projects_geojson().then(function(data) {
+                projectService.projects_geojson(location).then(function(data) {
                     allData[locationkey] = data;
                     deffered2.resolve();
                 })
@@ -387,12 +387,9 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
             return jsonService.get(url);
         }
     })
-    .service("projectService", function(jsonService, $filter, $http, $q) {
-
-        var deffered = $q.defer();
+    .service("projectService", function(jsonService, $filter, $http, $q) {        
 
         this.partners = function() {
-            // return [{projectId:"",partner:"", projection:"", partnerIconUrl:"",}]
             return [{
                     projects: [{
                         id: "US-1-LEAD",
@@ -412,13 +409,25 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                     icon: "unicef.png"
                 }
             ]
-
         }
 
-        this.projects_geojson = function () {
-            console.log("projects_geojson");
+        this.projects_geojson = function (location) {
+
+            var deffered = $q.defer();
+            
             projectsCallback = function(data) {
-                deffered.resolve(data);
+
+                if (location.level() == 'district')
+                    var features =  $.grep(data.features, function(feature) { return feature.properties['DNAME_2010'].toLowerCase() == location.district; })
+                else if (location.level() == 'subcounty')
+                    var features =  $.grep(data.features, function(feature) { return feature.properties['SNAME_2010'].toLowerCase() == location.subcounty; })
+                else if (location.level() == 'parish') 
+                    var features =  $.grep(data.features, function(feature) { return feature.properties['PNAME_2006'].toLowerCase() == location.parish; })
+
+                deffered.resolve({
+                    type: "FeatureCollection",
+                    features: features
+                });
             }
 
             var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:projects" + "&outputFormat=json" + "&format_options=callback:projectsCallback";

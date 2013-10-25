@@ -74,7 +74,8 @@ describe("Location", function() {
             ["subcounty", gulu_location],
             ["health-center", gulu_location],
             ["school", gulu_location],
-            ["water-point", gulu_location]
+            ["water-point", gulu_location],
+            ["project-point", gulu_location]
         ]);
     });
 
@@ -94,6 +95,7 @@ describe("Location", function() {
             ["subcounty", gulu_location],
             ["health-center", gulu_location],
             ["school", gulu_location],
+            ["project-point", gulu_location]
         ]);
     });
 
@@ -117,7 +119,8 @@ describe("Location", function() {
             ["parish", patiko_location],
             ["health-center", patiko_location],
             ["school", patiko_location],
-            ["water-point", patiko_location]
+            ["water-point", patiko_location],
+            ["project-point", patiko_location]
         ]
         assertLayers(location1.layersToShow([]), expected_layers);
     });
