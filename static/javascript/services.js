@@ -5,7 +5,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         callbackCounter = 0
     }
 
-    this.getData = function(locationkeys) {
+    this.getData = function(locationkeys, filter) {
 
         var deffered3 = $q.defer();
         var allData = {};
@@ -96,7 +96,7 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                     })
                 }
             } else if (key == "project-point") {
-                projectService.projects_geojson(location).then(function(data) {
+                projectService.projects_geojson(location, filter.project).then(function(data) {
                     allData[locationkey] = data;
                     deffered2.resolve();
                 })
@@ -387,54 +387,67 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
             return jsonService.get(url);
         }
     })
-    .service("projectService", function(jsonService, $filter, $http, $q) {        
-
+    .service("projectService", function(jsonService, $filter, $http, $q) {
+        var self = this;
+        
+        var getUniquePartners = function(data) {
+            var features = $.map(data.features, function(project, index) { return {
+                id: project.properties['PARTNER'].toLowerCase(),
+                name: project.properties['PARTNER']
+            }})
+            return $.unique(features);
+        };
         this.partners = function() {
-            return [{
-                    projects: [{
-                        id: "US-1-LEAD",
-                        name: "Livelihoods and Enterprise for Agricultural Development (LEAD)",
-                        description: "Livelihoods and Enterprises for Agricultural Development (LEAD) is a USAID-funded project with an estimated budget of $36 million over five years.  LEAD’s primary objective is to increase productivity, trade capacity, and competitiveness in selected agricultural value chains.  The program aims to improve farming practices, increase market access, and ensure empowered relationships between producers, input suppliers, agro-processors, and product buyers.  Overall, LEAD’s approach is characterized by 1) a market-driven strategy; 2) strategic partnerships/ alliances; 3) a participatory technology transfer methodology; and 4) outreach via commercially-oriented producer organizations.  Following the approval of the USAID Uganda Feed the Future strategy in March 2011, LEAD activities were redirected in order to be consistent with the strategy.  Major aspects of the redirection include a reduction in the number of value chains.  The major focus is now on maize, beans and coffee.  The number of focus districts was also reduced. "
-                    }, {
-                        id: "US-1-SCORE",
-                        name: " Sustainable, Comprehensive Responses for Vulnerable Children and their Families (SCORE)",
-                        description: "The Sustainable, Comprehensive Responses for Vulnerable Children and their Families (SCORE) project is a $29.4 million, five-year cooperative agreement implemented by the Association of Volunteers in International Service Foundation. The project is to improve the lives of vulnerable children and their families living in conditions of critical and moderate vulnerability. The program focuses on improving household economic and food security, enhancing protection and legal services for vulnerable children, and empowering and strengthening families with the ability to access, acquire or provide critical services for women and children such as health, education and psychosocial support. Strategic and continuous collaboration between this program and other USG and non USG activities is expected. "
-                    }],
-                    id: 'usaid',
-                    name: "US AID",
-                    icon: "usaid.png"
-                }, {
-                    id: 'unicef',
-                    name: "UNICEF",
-                    icon: "unicef.png"
-                }
-            ]
+            return projectsGeojson.then(getUniquePartners);
         }
 
-        this.projects_geojson = function (location) {
-
+        var get_geojson = function () {
             var deffered = $q.defer();
-            
+
+            var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:projects" + "&outputFormat=json" + "&format_options=callback:projectsCallback";
+
             projectsCallback = function(data) {
-
-                if (location.level() == 'district')
-                    var features =  $.grep(data.features, function(feature) { return feature.properties['DNAME_2010'].toLowerCase() == location.district; })
-                else if (location.level() == 'subcounty')
-                    var features =  $.grep(data.features, function(feature) { return feature.properties['SNAME_2010'].toLowerCase() == location.subcounty; })
-                else if (location.level() == 'parish') 
-                    var features =  $.grep(data.features, function(feature) { return feature.properties['PNAME_2006'].toLowerCase() == location.parish; })
-
-                deffered.resolve({
-                    type: "FeatureCollection",
-                    features: features
-                });
+                deffered.resolve(data);
             }
-
-            var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:projects" + "&outputFormat=json" + "&format_options=callback:projectsCallback";
 
             $http.jsonp(url, {
                 cache: true
             });
             return deffered.promise;
+
+        }
+
+        var projectsGeojson = get_geojson();
+
+        var parseFeatureLocation = function(feature) {
+            return new DT.Location({
+                region: feature.properties['Reg_2011'],
+                district: feature.properties['DNAME_2010'],
+                subcounty: feature.properties['SNAME_2010'],
+                parish: feature.properties['PNAME_2006']
+            })
+        }
+
+        this.projects_geojson = function (location, projectFilter) {
+            
+            return projectsGeojson.then(function(data) {
+
+                var features =  $.grep(data.features, function(feature) { 
+                    return location.contains(parseFeatureLocation(feature));
+                });
+                var partners = getUniquePartners(data);
+                $.each(partners, function(index, partner) {
+                    if ( projectFilter.partner[partner.id] == undefined || projectFilter.partner[partner.id] == false) {
+                        features =  $.grep(features, function(feature) { 
+                            return feature.properties['PARTNER'].toLowerCase() != partner.id; 
+                        });
+                    }
+                })
+
+                return {
+                    type: "FeatureCollection",
+                    features: features
+                };
+            });
         }
     });;

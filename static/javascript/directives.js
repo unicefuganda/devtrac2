@@ -6,7 +6,7 @@ angular.module("dashboard").directive('map', function() {
             }
 
             $scope.getData = function(locationKeys) {
-                return districtService.getData(locationKeys);
+                return districtService.getData(locationKeys, $scope.filter);
             };
 
             //TODO: Is there a more angular way of doing this?

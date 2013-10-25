@@ -243,4 +243,16 @@ describe("Location", function() {
         expect(new DT.Location({region: "north"}).getName()).toEqual("north");
         expect(new DT.Location({region: "north", district: "gulu"}).getName()).toEqual("north, gulu");
     })
+
+    it ("should indicate if location contains other location", function () {
+
+        var parentLocation = new DT.Location({ region: "north", district: "gulu" });
+        var childLocation = new DT.Location({ region: "north", district: "gulu", subcounty: "patiko" });
+        var outsideLocation = new DT.Location({ region: "north", district: "kampala", subcounty: "whatever" });
+
+        expect(parentLocation.contains(childLocation)).toBeTruthy();
+        expect(childLocation.contains(parentLocation)).toBeFalsy();
+        expect(parentLocation.contains(outsideLocation)).toBeFalsy();
+        expect(parentLocation.contains(parentLocation)).toBeTruthy();
+    })
 });

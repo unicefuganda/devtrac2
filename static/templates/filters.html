@@ -58,7 +58,7 @@
       <h3>Our partners:</h3>
       <ul class="points-filter">
         <li ng-repeat="p in partners">
-          <img ng-src="/static/images/{[{ p.icon}]}" />
+          <img ng-src="/static/images/{[{ p.id}]}.png" />
           <input type="checkbox" ng-model='filter.project.partner[p.id]' class='school-checkbox' id='school-checkbox'></input>
           <label for="school-checkbox">{[{ p.name}]}</label>
         </li> 

@@ -179,6 +179,12 @@ DT.Location.prototype.full_name = function() {
 
     return this[this.level()] + " " + this.level();
 };
+
+DT.Location.prototype.contains = function(location) {
+    return location[this.level()] == this[this.level()];
+};
+
+
 DT.Filter = function(toggles) {
     $.extend(this, toggles);
 };
