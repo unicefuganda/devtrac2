@@ -138,7 +138,9 @@ DT.Map = function(element, basemap) {
             var circleIcon = new L.DivIcon({
                 iconSize: new L.Point([10, 10]),
                 className: layer_info.name + "-icon marker-icon ",
-                html: "<div data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'></div>",
+                html: "<div data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'>"
+                    + layer_info.getValue(feature.properties) + 
+                "</div>",
                 popupAnchor: [5, -10]
             });
             var geojsonMarkerOptions = {

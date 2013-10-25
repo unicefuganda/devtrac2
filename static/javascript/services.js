@@ -1,4 +1,4 @@
-angular.module("dashboard").service('districtService', function($http, $filter, $rootScope, $q, summaryService, ureportService) {
+angular.module("dashboard").service('districtService', function($http, $filter, $rootScope, $q, summaryService, ureportService, projectService) {
     var self = this;
     if (typeof(callbacks) == 'undefined') {
         callbacks = {}
@@ -95,6 +95,11 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                         deffered2.resolve();
                     })
                 }
+            } else if (key == "project-point") {
+                projectService.projects_geojson().then(function(data) {
+                    allData[locationkey] = data;
+                    deffered2.resolve();
+                })
             }
             return deffered2.promise;
         });
@@ -382,8 +387,9 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
             return jsonService.get(url);
         }
     })
-    .service("projectService", function(jsonService, $filter) {
+    .service("projectService", function(jsonService, $filter, $http, $q) {
 
+        var deffered = $q.defer();
 
         this.partners = function() {
             // return [{projectId:"",partner:"", projection:"", partnerIconUrl:"",}]
@@ -397,9 +403,9 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                         name: " Sustainable, Comprehensive Responses for Vulnerable Children and their Families (SCORE)",
                         description: "The Sustainable, Comprehensive Responses for Vulnerable Children and their Families (SCORE) project is a $29.4 million, five-year cooperative agreement implemented by the Association of Volunteers in International Service Foundation. The project is to improve the lives of vulnerable children and their families living in conditions of critical and moderate vulnerability. The program focuses on improving household economic and food security, enhancing protection and legal services for vulnerable children, and empowering and strengthening families with the ability to access, acquire or provide critical services for women and children such as health, education and psychosocial support. Strategic and continuous collaboration between this program and other USG and non USG activities is expected. "
                     }],
-                    id: 'us_aid',
-                    name: "US-AID",
-                    icon: "us_aid.png"
+                    id: 'usaid',
+                    name: "US AID",
+                    icon: "usaid.png"
                 }, {
                     id: 'unicef',
                     name: "UNICEF",
@@ -409,30 +415,17 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
 
         }
 
-        this.questions = function() {
-            var url = "/ureport/questions"
+        this.projects_geojson = function () {
+            console.log("projects_geojson");
+            projectsCallback = function(data) {
+                deffered.resolve(data);
+            }
 
-            return jsonService.get(url);
-        }
+            var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:projects" + "&outputFormat=json" + "&format_options=callback:projectsCallback";
 
-        this.top5 = function(location, question) {
-            var url = "/ureport/questions/" + question.id + "/top5/" + location.getName(true).toUpperCase();
-            return jsonService.get(url);
-        }
-
-        this.results = function(location, question) {
-
-
-            var url = "/ureport/questions/" + question.id + "/results/" + location.getName(true).toUpperCase();
-            return jsonService.get(url).then(function(data) {
-                if (data == "null")
-                    return null;
-                return data;
+            $http.jsonp(url, {
+                cache: true
             });
-        }
-
-        this.child_results = function(location, question) {
-            var url = "/ureport/questions/" + question.id + "/child_results/" + location.getName(true).toUpperCase();
-            return jsonService.get(url);
+            return deffered.promise;
         }
     });;

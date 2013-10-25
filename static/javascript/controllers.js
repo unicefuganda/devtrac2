@@ -3,7 +3,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 
     $rootScope.location = new DT.Location($routeParams);
     if ($rootScope.filter == undefined)
-        $rootScope.filter = new DT.Filter({health_center: false, water_point: false, school: true});
+        $rootScope.filter = new DT.Filter({health_center: false, water_point: false, school: true, project: { partner: {} }} );
 
 
 }).controller("IndicatorsCtrl", function($scope, $rootScope, heatmapService) {
@@ -41,20 +41,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     ureportService.questions().then(function(data) {
         $scope.questions = data;
     });
-}).controller("RightPanelCtrl", function($scope, $timeout) {
-    $scope.show_bottom_panel = false;
-
-    
-
-    $scope.$watch("ureportQuestion", function(newQuestion) {
-        if (newQuestion == null) {
-            $scope.show_bottom_panel = false;
-            return;
-        }
-        $scope.show_bottom_panel = newQuestion.selected != null;
-        // Give time for the map to resize
-        $timeout($scope.mapResize, 300);
-    }, true)
 }).controller("UReportResponsesCtrl", function($rootScope, $scope, ureportService){
 
     var showUReportResults = function (location, ureportQuestion) {
@@ -83,6 +69,5 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 
 })
 .controller("PartnersCtrl", function($scope, projectService){
-    $scope.partner = { selected: null };
     $scope.partners = projectService.partners();
 });

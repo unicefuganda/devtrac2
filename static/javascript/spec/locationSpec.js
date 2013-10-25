@@ -150,6 +150,7 @@ describe("Location", function() {
             ["water-point-point", location1],
             ["school-point", location1],
             ["health-center-point", location1],
+            ["project-point", location1]
         ]);
     });
 

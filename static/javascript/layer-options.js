@@ -47,7 +47,6 @@ DT.LayerOptions = {
         },
         getLocation: function(feature) {
             return new DT.Location({
-
                 region: feature.properties["Reg_2011"].toLowerCase(),
                 district: feature.properties["DNAME_2010"].toLowerCase(),
                 subcounty: feature.properties["SNAME_2010"].toLowerCase(),
@@ -164,6 +163,9 @@ DT.LayerOptions = {
     "water-point-point": {
         name: "water-point-point",
         type: "point",
+        getValue: function(properties) { 
+            return "" 
+        },
         summaryInformation: function(properties) {
             return {
                 title: properties.SourceType + " Water Point",
@@ -176,7 +178,10 @@ DT.LayerOptions = {
     },
     "school-point": {
         name: "school-point",
-        type: "point",       
+        type: "point",    
+        getValue: function(properties) { 
+            return "" 
+        },   
         summaryInformation: function(properties) { 
             return {
                 title: properties.SCHOOLNAME + " School",
@@ -190,6 +195,9 @@ DT.LayerOptions = {
     "health-center-point": {
         name: "health-center-point",
         type: "point",
+        getValue: function(properties) { 
+            return "" 
+        },
         summaryInformation: function(properties) { 
             if (!properties.Name)
                 return { title: "Health Center", lines: []};
@@ -202,14 +210,27 @@ DT.LayerOptions = {
             }
         }
     },
-
     "ureport": {
         name: "ureport",
         type: "aggregate",
-        // getName: function() { return ""},
         getValue: function(stats) { 
-            // <a href=""  data-name="wifi" data-type="" data-prefix="glyphicons" data-utf="E074"></a>
             return "<div class= 'glyphicon glyphicon-th category_" + stats.top.category_id + "' ></div>" 
+        }
+    },
+    "project-point": {
+        name: "project-point",
+        type: "point",
+        getValue: function(properties) { 
+            return "<img src='\\static\\images\\" + properties.PARTNER.toLowerCase() + ".png'> " 
+        },
+        summaryInformation: function(properties) { 
+           return {
+                title: properties.PROJ_NAME.toLowerCase() + " Project",
+                lines: [
+                    ["Partner", properties.PARTNER],
+                    ["Description", properties.PROJ_DESC]
+                ]
+            }
         }
     },
 }

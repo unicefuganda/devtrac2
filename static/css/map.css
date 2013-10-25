@@ -96,6 +96,8 @@
   background-color: rgba(0, 0, 255, 0.6); 
 }
 
+
+
 .cluster-icon.small {
   width: 24px;
   height: 24px;
@@ -145,5 +147,13 @@
 .school-point-icon
 {
   background-color: rgba(211, 242, 53, 0.9);
+}
+
+.project-point-icon {
+  width: 36px;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+
 }
 
