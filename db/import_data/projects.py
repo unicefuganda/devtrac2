@@ -24,12 +24,15 @@ with open("%s/projects.csv" % local_path, 'rUb') as csvfile:
     reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
     projects = list(reader)
 
+keys = set( projects[0].keys()) - set(['long', 'lat'])
 
 sink_schema = {'properties': {}}
 sink_schema['geometry'] = 'Point'
-sink_schema['properties']['PROJ_NAME'] = "str:35"
-sink_schema['properties']['PROJ_DESC'] = "str:35"
-sink_schema['properties']['PROJ_ID'] = "str:35"
+
+for key in keys:
+    sink_schema['properties'][key] = "str:35"
+
+
 sink_schema['properties']['Reg_2011'] = "str:35"
 sink_schema['properties']['DNAME_2010'] = "str:35"
 sink_schema['properties']['SNAME_2010'] = "str:35"
@@ -43,12 +46,12 @@ with fiona.open("%s/test_projects" % local_path, 'w', driver='ESRI Shapefile', s
 
         row = {
             'properties': {
-                'PROJ_NAME': project['name'],
-                'PROJ_DESC': project['description'],
-                'PROJ_ID': project['id'],
                 }, 
             'geometry': {"type":"Point","coordinates":[ float(project['long']), float(project['lat'])]} 
         }
+
+        for key in keys:
+            row['properties'][key] = project[key]
 
         point = shape(row['geometry'])
 
