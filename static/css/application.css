@@ -1,6 +1,7 @@
 /* DASHBOARD */
 body { 
   padding-top: 50px;
+  -webkit-font-smoothing: antialiased;
 }
 
 h3 {
@@ -9,6 +10,7 @@ h3 {
     margin: 0;
     margin-bottom: 8px;
     text-transform: capitalize;
+    -webkit-font-smoothing: antialiased;
 }
 
 #map-container {
