@@ -4,14 +4,9 @@
 
 
 
-<form role='form' id='filters-form'>
-  <div class="sectors-pane">
-    <h3>Display datasets associated with:</h3>
-    <button type="button" class="btn btn-default btn-sm toggle toggle-selected">Youth</button>
-  </div>
-  
+<form role='form' id='filters-form'>  
   <ul class="nav nav-tabs" id="myTab">
-    <li class="active"><a data-target='#statistics' data-toggle="tab" >Statistics</a></li>
+    <li class="active"><a  data-target='#statistics' data-toggle="tab" href="#" >Statistics</a></li>
     <li><a data-target='#heatmap' data-toggle="tab" href="#">Heat map</a></li>
     <li><a data-target='#projects' data-toggle="tab" href="#">Projects/Partners</a></li>
   </ul>
@@ -19,7 +14,7 @@
   <div class="tab-content">
     <div class="tab-pane active" id="statistics">
       <h3>Show points related to:</h3>
-      <ul class="points-filter">
+      <ul class="points-filter filter">
         <li>
           <span class="school-checkbox-icon checkbox-icon"></span>
           <input type="checkbox" ng-model="filter.school" class='school-checkbox' id='school-checkbox'></input>
@@ -38,29 +33,37 @@
       </ul> 
     </div>
     <div class="tab-pane" id="heatmap">
-      <button type="button" ng-click='indicator.selected = null;' class="btn btn-default btn-sm toggle {[{indicator.selected == null ? 'toggle-selected' : '' }]}" >None</button>  
+      <div class='filter'>
+        <button type="button" ng-click='indicator.selected = null;' class="btn btn-default btn-sm toggle {[{indicator.selected == null ? 'toggle-selected' : '' }]}" >None</button>  
+      </div>
       <h3>By dataset:</h3>
-
-      <div ng-controller="IndicatorsCtrl">
-        
-        <button type="button" ng-repeat="ind in datasets" ng-click="indicator.selected = ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
+      <div ng-controller="IndicatorsCtrl" class='filter'>
+        <div ng-repeat="ind in datasets">
+          <button type="button"  ng-click="indicator.selected = ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
+        </div>
       </div>
 
       <h3>Ureport question:</h3>
 
-      <div ng-controller="IndicatorsCtrl">
-        
-        <button type="button" ng-repeat="ind in ureport_datasets" ng-click="indicator.selected = ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
+      <div ng-controller="IndicatorsCtrl"  class='filter'>
+        <div ng-repeat="ind in ureport_datasets">
+          <button type="button"  ng-click="indicator.selected = ind" class="btn btn-default btn-sm   toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
+        </div>
       </div>
     </div>
     <div ng-controller="PartnersCtrl" class="tab-pane" id="projects">
       
       <h3>Our partners:</h3>
-      <ul class="points-filter">
-        <li ng-repeat="p in partners">
-          <img ng-src="/static/images/{[{ p.id}]}.png" />
-          <input type="checkbox" ng-model='filter.project.partner[p.id]' class='school-checkbox' id='school-checkbox'></input>
-          <label for="school-checkbox">{[{ p.name}]}</label>
+      <ul class="points-filter filter">
+        <li ng-repeat="p in partners" class='partner-toggle'>
+          <span class='icon'>
+            <label for='{[{p.id}]}-checkbox'>
+              <img ng-src="/static/images/{[{p.id}]}.png" />
+            </label>
+          </span>
+          <input type="checkbox" ng-model='filter.project.partner[p.id]' id='{[{p.id}]}-checkbox' ></input>
+          
+          <label for='{[{p.id}]}-checkbox'>{[{ p.name}]}</label>
         </li> 
       </ul> 
     </div>

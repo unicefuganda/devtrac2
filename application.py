@@ -23,6 +23,7 @@ js = Bundle(
 	'javascript/lib/angular.min.js', 
 	'javascript/lib/angular-route.min.js', 
 	'javascript/lib/jquery-2.0.3.min.js',
+	'javascript/lib/mapbox.js',
 	'javascript/dashboard.js',
 	'javascript/controllers.js',
 	'javascript/services.js',
@@ -30,7 +31,6 @@ js = Bundle(
 	'javascript/map.js',
 	'javascript/utilities.js',
 	'javascript/config.js',
-	'javascript/lib/leaflet.js',
 	'javascript/application.js',
 	'javascript/lib/bootstrap.min.js',
 	'javascript/location.js',
@@ -45,9 +45,10 @@ assets.register('js_all', js)
 
 css = Bundle(
 	'css/lib/bootstrap.min.css', 
-	'css/lib/leaflet.css', 
+	'css/lib/mapbox.css',
 	'css/application.css',
 	'css/map.css',
+	
      filters='cssmin', output='gen/packed.css')
 
 assets.register('css_all', css)
