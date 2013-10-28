@@ -85,7 +85,7 @@ DT.Map = function(element, basemap) {
                 self.layerMap.addChildLayer(name, location, options.location, layer);
             },
         });            
-        self.layerMap.addLayer(name, location, baseLayer);
+        self.layerMap.addLayer(name, location, baseLayer, layer_info.type);
         map.addLayer(baseLayer, true);
     }
     function addAggregateLayer(name, location, data, layer_info) {
@@ -112,7 +112,7 @@ DT.Map = function(element, basemap) {
             }
         });
 
-        self.layerMap.addLayer(name, location, layerGroup);
+        self.layerMap.addLayer(name, location, layerGroup, layer_info.type);
         map.addLayer(layerGroup);
     }
 
@@ -160,7 +160,7 @@ DT.Map = function(element, basemap) {
             layerGroup.addLayer(marker);
         });
 
-        self.layerMap.addLayer(name, location, layerGroup);
+        self.layerMap.addLayer(name, location, layerGroup, layer_info.type);
         map.addLayer(layerGroup);
     }
   

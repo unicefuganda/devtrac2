@@ -4,12 +4,13 @@ if (typeof DT == "undefined")
 DT.LayerMap = function(layerOptions) {
     this.layers = {};
 }
-DT.LayerMap.prototype.addLayer = function(key, location, layer) {
+DT.LayerMap.prototype.addLayer = function(key, location, layer, type) {
     if (!this.layers[key])
         this.layers[key] = {}
 
     this.layers[key].location = location;
     this.layers[key].layer = layer;
+    this.layers[key].type = type;
 };
 DT.LayerMap.prototype.removeLayer = function(key) {
     var element = this.layers[key];
@@ -31,7 +32,7 @@ DT.LayerMap.prototype.findLayer = function(key, location) {
 };
 DT.LayerMap.prototype.displayedLayerKeys = function() {
     return $.map(this.layers, function(layer, key) {
-        return [[key, layer.location]];
+        return [[key, layer.location, layer.type]];
     });
 };
 DT.LayerMap.prototype.displayedLayers = function() {

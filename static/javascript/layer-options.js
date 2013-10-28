@@ -1,6 +1,99 @@
 if (typeof DT == "undefined")
     DT = {};
 
+DT.Layers = {
+    boundaryLayers: function(location) {
+         var layers = [
+            ["region", new DT.Location({})],
+            ["district_outline", new DT.Location({})]
+        ];
+
+        if (location.region != null) {
+            var regionLocation = new DT.Location({
+                region: location.region
+            });
+            layers.push(["district", regionLocation]);
+        }
+
+        if (location.district != null) {
+            var districtLocation = new DT.Location({
+                region: location.region,
+                district: location.district
+            });
+            layers.push(["subcounty", districtLocation]);
+        }
+
+        if (location.subcounty != null) {
+            var subcountyLocation = new DT.Location({
+                region: location.region,
+                district: location.district,
+                subcounty: location.subcounty
+            });
+            layers.push(["parish", subcountyLocation]);
+        }
+        return layers;
+        
+    },
+    filterLayers: function (location, filteredKeys) {
+        var layers = [];
+        if (location.level() != "parish") {
+            layers.push(["health-center", location]);
+            layers.push(["school", location]);
+            layers.push(["water-point", location]);
+        } else {
+            layers.push(["water-point-point", location]);
+            layers.push(["school-point", location]);
+            layers.push(["health-center-point", location]);
+        }
+
+        if (location.level() == "district" || location.level() == "subcounty" || location.level() == "parish") {
+            layers.push(["project-point", location]);
+        } else {
+
+        }
+
+        return $.grep(layers, function(locationKey) {
+            return $.inArray(locationKey[0], filteredKeys) == -1;
+        });
+    },
+
+    compareLayerKeys: function(layerKeys, otherlayerKeys) {
+        var keyExists = function(key, keys) {
+            return DT.first(keys, function(k) {
+                return k[0] == key[0] && k[1].equals(key[1])
+            }) != null;
+        };
+
+        var keysToRemove = $.grep(layerKeys, function(key, index) {
+            return !keyExists(key, otherlayerKeys);
+        });
+        var keysToAdd = $.grep(otherlayerKeys, function(key, index) {
+            return !keyExists(key, layerKeys);
+        });
+
+        return {
+            toAdd: keysToAdd,
+            toRemove: keysToRemove
+        }
+    },
+
+    getChanges: function (layers, location) {
+        newLayers = DT.Layers.boundaryLayers(location).concat(DT.Layers.filterLayers(location, []));
+
+        //TODO: refactor to use keys instead of indexes
+        var boundaryLayers = $.grep(layers, function(layer) { return layer[2] == 'boundary'; });
+        var nonBoundaryLayers = $.grep(layers, function(layer) { return layer[2] != 'boundary'; });
+
+
+        var comparison = DT.Layers.compareLayerKeys(boundaryLayers, newLayers);
+        comparison.toRemove = comparison.toRemove.concat(nonBoundaryLayers);
+        return comparison
+    }
+
+};
+
+
+
 DT.LayerOptions = {
     "region": {
         selectable: true,
