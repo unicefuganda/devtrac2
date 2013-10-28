@@ -20,8 +20,6 @@ from app import services
 wfs_service = services.WFSService("http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows", test=config.USE_LOCAL_GEOJSON)
 
 print "import start"
-import_project_dataset(wfs_service, database, "project", "projects")
-print "project done"
 import_dataset(wfs_service, database, "health_center", "uganda_health_centers_replotted")
 print "health_center done"
 import_dataset(wfs_service, database, "school", "uganda_schools_with_regions")
