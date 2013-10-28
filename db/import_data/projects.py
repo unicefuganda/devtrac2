@@ -20,7 +20,7 @@ with fiona.open('%s/uganda_parish_10.shp' % data_folder, 'r') as source:
         parish_ploygons.append({ 'shape': shape(f['geometry']), 'properties': f['properties'] })
 
 
-with open("%s/../UNICEF_activities_better_new.csv" % local_path, 'rUb') as csvfile: 
+with open("%s/../projects_activities.csv" % local_path, 'rUb') as csvfile: 
     reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
     projects = list(reader)
 
@@ -47,7 +47,7 @@ with fiona.open("%s/projects" % local_path, 'w', driver='ESRI Shapefile', schema
         row = {
             'properties': {
                 }, 
-            'geometry': {"type":"Point","coordinates":[ float(project['long']), float(project['lat'])]} 
+            'geometry': {"type":"Point","coordinates":[ float(project['LONG']), float(project['LAT'])]} 
         }
 
         for key in keys:

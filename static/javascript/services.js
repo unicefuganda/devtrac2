@@ -101,6 +101,16 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                     allData[locationkey] = data;
                     deffered2.resolve();
                 });
+            } else if (key == "unicef") {
+                projectService.aggregation(location, filter.project).then(function(data) {
+                    allData[locationkey] = data;
+                    deffered2.resolve();
+                });
+            } else if (key == "usaid") {
+                projectService.aggregation(location, filter.project).then(function(data) {
+                    allData[locationkey] = data;
+                    deffered2.resolve();
+                });
             } 
             return deffered2.promise;
         });
@@ -305,8 +315,8 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
             return deffered.promise;
         }
 
-        this.child_locations = function (location) {
-            self.find(location).then(function(data) {
+        this.childLocations = function (location) {
+            return self.find(location).then(function(data) {
                 return $.map(data.children, function(childSummary, index) { 
                     return DT.Location.fromName(childSummary.locator);
                 });
@@ -470,12 +480,14 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
             return projectsGeojson.then(function(data) {
                 var filteredProjects = filterProjects(data, location, projectFilter);
                 return summaryService.childLocations(location).then(function(locations) {
-                    return $.map(locations, function(location, index) {
+                    var children = $.map(locations, function(location, index) {
                         return {
                             locator: location.getName(),
                             info: calculateAggregation(location, filteredProjects)
                         }
                     });
+
+                    return { children: children};
                 });  
             });
         };

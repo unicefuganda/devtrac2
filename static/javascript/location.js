@@ -17,57 +17,6 @@ DT.Location.prototype.equals = function(otherLocation) {
 DT.Location.prototype.toString = function() {
     return this.getName();
 };
-DT.Location.prototype.layersToShow = function(filteredKeys) {
-    var layers = [
-        ["region", new DT.Location({})],
-        ["district_outline", new DT.Location({})]
-    ];
-
-    if (this.region != null) {
-        var regionLocation = new DT.Location({
-            region: this.region
-        });
-        layers.push(["district", regionLocation]);
-    }
-
-    if (this.district != null) {
-        var districtLocation = new DT.Location({
-            region: this.region,
-            district: this.district
-        });
-        layers.push(["subcounty", districtLocation]);
-
-    }
-
-    if (this.subcounty != null) {
-        var subcountyLocation = new DT.Location({
-            region: this.region,
-            district: this.district,
-            subcounty: this.subcounty
-        });
-        layers.push(["parish", subcountyLocation]);
-    }
-
-    if (this.level() != "parish") {
-        layers.push(["health-center", this]);
-        layers.push(["school", this]);
-        layers.push(["water-point", this]);
-    } else {
-        layers.push(["water-point-point", this]);
-        layers.push(["school-point", this]);
-        layers.push(["health-center-point", this]);
-    }
-
-    if (this.level() == "district" || this.level() == "subcounty" || this.level() == "parish") {
-        layers.push(["project-point", this]);
-    } else {
-
-    }
-
-    return $.grep(layers, function(locationKey) {
-        return $.inArray(locationKey[0], filteredKeys) == -1;
-    });
-};
 
 DT.Location.prototype.layerOrder = function() {
     if (this.level() == "national") {

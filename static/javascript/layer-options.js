@@ -49,7 +49,8 @@ DT.Layers = {
         if (location.level() == "district" || location.level() == "subcounty" || location.level() == "parish") {
             layers.push(["project-point", location]);
         } else {
-            // layers.push(["project", location]);
+            // layers.push(["unicef", location]);
+            // layers.push(["usaid", location]);
         }
 
         return $.grep(layers, function(locationKey) {
@@ -87,8 +88,6 @@ DT.Layers = {
         return comparison
     }
 };
-
-
 
 DT.LayerOptions = {
     "region": {
@@ -299,13 +298,6 @@ DT.LayerOptions = {
             }
         }
     },
-    "ureport": {
-        name: "ureport",
-        type: "aggregate",
-        getValue: function(stats) { 
-            return "<div class= 'glyphicon glyphicon-th category_" + stats.top.category_id + "' ></div>" 
-        }
-    },
     "project-point": {
         name: "project-point",
         type: "point",
@@ -320,6 +312,26 @@ DT.LayerOptions = {
                     ["Description", properties.PROJ_DESC]
                 ]
             }
+        }
+    },
+
+    "unicef": {
+        name: "ureport",
+        type: "aggregate",
+        getValue: function(stats, childLocation) { 
+            return "<div data-locator='" + childLocation.getName() + "'>" 
+                    + stats.info.unicef
+                    + '</div>';
+        }
+    },
+
+    "usaid": {
+        name: "ureport",
+        type: "aggregate",
+        getValue: function(stats, childLocation) { 
+            return "<div data-locator='" + childLocation.getName() + "'>" 
+                    + stats.info.usaid
+                    + '</div>';
         }
     },
 }
