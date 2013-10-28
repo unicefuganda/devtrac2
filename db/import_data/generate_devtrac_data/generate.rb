@@ -4,8 +4,8 @@ require 'json'
 require 'net/http'
 
 @header = ''
-@file_name = "UNICEF_activities_formatted.csv"
-@districts_file_name = "UNICEF_districts.csv"
+@file_name = 'UNICEF_activities_formatted.csv'
+@districts_file_name = 'UNICEF_districts.csv'
 
 def read_file file_name
     lines = CSV.read(file_name)
@@ -15,10 +15,42 @@ def read_file file_name
     lines
 end
 
-def clean_bad_bytes line
+def clean_bad_bytes file_name
+    clean_lines = []
+
+    File.open(file_name, 'r') do |infile|
+        while (line = infile.gets)
+            clean_lines << clean_line(line)
+        end
+    end
+
+    clean_lines
+end
+
+def clean_line line
     ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
 
     ic.iconv(line + ' ')[0..-2]
+end
+
+def write_new_file file_name, lines
+    counter = 0
+    File.open(file_name, "w") do |file|
+        file.puts @header.join(',')
+        counter += 1
+        lines.each do |line|
+            if line.size > 1
+                counter += 1
+                file.puts line.join(',')
+            end
+        end
+    end
+
+    puts "Wrote main file as #{file_name} (#{counter} lines)"
+end
+
+def remove_header lines
+    lines.shift
 end
 
 def manipulate_data lines, districts_hash
@@ -61,26 +93,6 @@ def manipulate_data lines, districts_hash
     end
 
     lines.concat temp_lines
-end
-
-def write_new_file file_name, lines
-    counter = 0
-    File.open(file_name, "w") do |file|
-        file.puts @header.join(',')
-        counter += 1
-        lines.each do |line|
-            if line.size > 1
-                counter += 1
-                file.puts line.join(',')
-            end
-        end
-    end
-
-    puts "Wrote main file as #{file_name} (#{counter} lines)"
-end
-
-def remove_header lines
-    lines.shift
 end
 
 

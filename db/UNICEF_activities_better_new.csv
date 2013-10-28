@@ -1,4 +1,4 @@
-PROJECT_ID,PARTNER,PROJ_NAME,PROJ_DESC,START_PLANNED,START_ACTUAL,START_ACTUAL,END_ACTUAL,DISTRICT,IMPLEMENTER,LAT,LONG
+PROJECT_ID,PARTNER,PROJ_NAME,PROJ_DESC,START_PLANNED,START_ACTUAL,END_PLANNED,END_ACTUAL,DISTRICT,IMPLEMENTER,LAT,LONG
 1,UNICEF,Roll-Out of National Hand Washing Campaign,Roll-Out of National Hand Washing Campaign,,,,,Mukono,Africare,0.3533,32.7553
 2,UNICEF,Roll-Out of National Hand Washing Campaign,Roll-Out of National Hand Washing Campaign,,,,,Iganga,Africare,0.615,33.485
 3,UNICEF,Roll-Out of National Hand Washing Campaign,Roll-Out of National Hand Washing Campaign,,,,,Kamuli,Africare,0.945,33.125
