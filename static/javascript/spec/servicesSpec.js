@@ -231,7 +231,7 @@ describe("Project Service", function () {
     it('should aggregate by partner', inject(function(projectService) {
         var filter = { partner: { unicef: true, usaid: true}};
         var aggregation = projectService.aggregation(new DT.Location({region: 'test region'}), filter);
-        expect(aggregation).toEqual([{ 
+        expect(aggregation.children).toEqual([{ 
                 locator: 'test region, test district',
                 info: { unicef: 2, usaid: 0}
             },{
