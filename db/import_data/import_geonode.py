@@ -28,7 +28,7 @@ def import_dataset(wfs_service, db, data_type, feature_name):
         """)
 
     collection.map_reduce(mapper, reducer, "%s_aggregation" % data_type)
-    db["%s_aggregation" % data_type].insert({ "_id": "UGANDA",  "value": len(features) })
+    db["%s_aggregation" % data_type].insert({ "_id": "UGANDA", "value": len(features) })
 
 
 def import_locationTree(wfs_service, db):

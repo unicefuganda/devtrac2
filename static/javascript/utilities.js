@@ -2,6 +2,8 @@ if (typeof DT == "undefined")
     DT = {};
 
 
+DT.JSONPCallbacks = {};
+
 DT.lpad = function(str, padString, length) {
     while (str.length < length)
         str = padString + str;
@@ -15,6 +17,21 @@ DT.first = function(list, func) {
     };
     return null;
 };
+
+DT.unique = function (list) {
+    var array = []
+    for(var i in list) {
+
+        var firstItem = DT.first(array, function (e) {
+            return angular.equals(e, list[i]);
+        });
+
+        if (firstItem == null) {
+            array.push(list[i]);
+        }
+    }
+    return array;
+}; 
 
 DT.capitalize = function(string) {
     return string.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });

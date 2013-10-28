@@ -13,7 +13,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 }).controller("SummaryCtrl", function($scope, $rootScope, summaryService, indicatorService, ureportService) {
 
     var showSummary = function (location) {
-        summaryService.find(location.getName()).then(function(summary) {
+        summaryService.find(location).then(function(summary) {
 
             var summaryLabels = [];
             $.each(DT.AgregationConfig.labels, function(index, label) {

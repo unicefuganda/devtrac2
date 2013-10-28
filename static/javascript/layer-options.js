@@ -49,14 +49,13 @@ DT.Layers = {
         if (location.level() == "district" || location.level() == "subcounty" || location.level() == "parish") {
             layers.push(["project-point", location]);
         } else {
-
+            // layers.push(["project", location]);
         }
 
         return $.grep(layers, function(locationKey) {
             return $.inArray(locationKey[0], filteredKeys) == -1;
         });
     },
-
     compareLayerKeys: function(layerKeys, otherlayerKeys) {
         var keyExists = function(key, keys) {
             return DT.first(keys, function(k) {
@@ -76,7 +75,6 @@ DT.Layers = {
             toRemove: keysToRemove
         }
     },
-
     getChanges: function (layers, location, filteredKeys) {
         newLayers = DT.Layers.boundaryLayers(location).concat(DT.Layers.filterLayers(location, filteredKeys));
 
@@ -84,12 +82,10 @@ DT.Layers = {
         var boundaryLayers = $.grep(layers, function(layer) { return layer[2] == 'boundary'; });
         var nonBoundaryLayers = $.grep(layers, function(layer) { return layer[2] != 'boundary'; });
 
-
         var comparison = DT.Layers.compareLayerKeys(boundaryLayers, newLayers);
         comparison.toRemove = comparison.toRemove.concat(nonBoundaryLayers);
         return comparison
     }
-
 };
 
 

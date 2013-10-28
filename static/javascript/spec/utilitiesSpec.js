@@ -39,4 +39,8 @@ describe("Utilities", function() {
         expect(feature_toggles.is_on('other')).toBeFalsy();
     })
 
+    it ("should remove non unique element based on property values", function () {
+        expect(DT.unique([{id: 'unicef'}, {id: 'usaid'}, {id: 'unicef'}])).toEqual([{id: 'unicef'}, {id: 'usaid'}])
+    })
+
 });

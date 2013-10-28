@@ -53,19 +53,19 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                     });
             } else if (key == "water-point") {
                 
-                summaryService.find(location.getName(), true).then(function(data) {
+                summaryService.find(location, true).then(function(data) {
                     allData[locationkey] = data;
                     deffered2.resolve();
                 });
 
 
             } else if (key == "health-center") {
-                summaryService.find(location.getName(), true).then(function(data) {
+                summaryService.find(location, true).then(function(data) {
                     allData[locationkey] = data;
                     deffered2.resolve();
                 })
             } else if (key == "school") {
-                summaryService.find(location.getName(), true).then(function(data) {
+                summaryService.find(location, true).then(function(data) {
                     allData[locationkey] = data;
                     deffered2.resolve();
                 })
@@ -91,18 +91,17 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                     };
                     deffered2.resolve();
                 } else {
-
                     ureportService.child_results(location, $rootScope.ureportQuestion.selected).then(function(data) {
                         allData[locationkey] = data;
                         deffered2.resolve();
-                    })
+                    });
                 }
             } else if (key == "project-point") {
                 projectService.projects_geojson(location, filter.project).then(function(data) {
                     allData[locationkey] = data;
                     deffered2.resolve();
-                })
-            }
+                });
+            } 
             return deffered2.promise;
         });
 
@@ -288,11 +287,12 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
         }
     })
     .service("summaryService", function($q, $http) {
-        this.find = function(locator) {
+        var self = this;
+        this.find = function(location) {
 
             var deffered = $q.defer();
 
-            locator = locator == "" ? "UGANDA" : "UGANDA, " + locator
+            var locator = location.getName() == "" ? "UGANDA" : "UGANDA, " + location.getName();
 
             $http({
                 method: 'GET',
@@ -304,6 +304,14 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                 });
             return deffered.promise;
         }
+
+        this.child_locations = function (location) {
+            self.find(location).then(function(data) {
+                return $.map(data.children, function(childSummary, index) { 
+                    return DT.Location.fromName(childSummary.locator);
+                });
+            });
+        };
     })
     .service("jsonService", function($q, $http) {
         this.get = function(url) {
@@ -319,6 +327,21 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
 
             return deffered.promise;
         }
+    })
+    .service("geonodeService", function($q, $http) {
+        this.get = function(dataset) {
+            var deffered = $q.defer();
+
+            DT.JSONPCallbacks[dataset] = function(data) {
+                deffered.resolve(data);
+            };
+
+            var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:" + dataset + "&outputFormat=json" + "&format_options=callback:DT.JSONPCallbacks." + dataset;
+            $http.jsonp(url, {
+                cache: true
+            });
+            return deffered.promise;
+        };
     })
     .service("boundaryService", function(jsonService) {
 
@@ -389,67 +412,80 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
             return jsonService.get(url);
         }
     })
-    .service("projectService", function(jsonService, $filter, $http, $q) {
+
+    .service("projectService", function(jsonService, geonodeService, summaryService) {
         var self = this;
         
-        var getUniquePartners = function(data) {
-            var features = $.map(data.features, function(project, index) { return {
+        var getUniquePartners = function(features) {
+            var features = $.map(features, function(project, index) { return {
                 id: project.properties['PARTNER'].toLowerCase(),
                 name: project.properties['PARTNER']
             }})
-            return $.unique(features);
+            return DT.unique(features).sort(function (partner1, partner2) { return partner1.name < partner2.name; });
         };
-        this.partners = function() {
-            return projectsGeojson.then(getUniquePartners);
-        }
 
-        var get_geojson = function () {
-            var deffered = $q.defer();
-
-            var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:projects" + "&outputFormat=json" + "&format_options=callback:projectsCallback";
-
-            projectsCallback = function(data) {
-                deffered.resolve(data);
-            }
-
-            $http.jsonp(url, {
-                cache: true
+        var filterByLocation = function(features, location) {
+            return $.grep(features, function(feature) { 
+                var featureLocation = new DT.Location({
+                    region: feature.properties['Reg_2011'],
+                    district: feature.properties['DNAME_2010'],
+                    subcounty: feature.properties['SNAME_2010'],
+                    parish: feature.properties['PNAME_2006']
+                });
+                return location.contains(featureLocation);
             });
-            return deffered.promise;
+        };
 
-        }
+        var filterProjects = function(data, location, projectFilter) {
+            var features = filterByLocation(data.features, location);            
+            var partners = getUniquePartners(data.features);
 
-        var projectsGeojson = get_geojson();
-
-        var parseFeatureLocation = function(feature) {
-            return new DT.Location({
-                region: feature.properties['Reg_2011'],
-                district: feature.properties['DNAME_2010'],
-                subcounty: feature.properties['SNAME_2010'],
-                parish: feature.properties['PNAME_2006']
+            $.each(partners, function(index, partner) {
+                if (projectFilter.partner[partner.id] == undefined || projectFilter.partner[partner.id] == false) {
+                    features =  $.grep(features, function(feature) { 
+                        return feature.properties['PARTNER'].toLowerCase() != partner.id; 
+                    });
+                }
             })
-        }
+            return features;
+        };
+
+        var calculateAggregation = function (location, projects) {
+            var locationProjects = filterByLocation(projects, location);
+            var projectAggregation = {};
+            $.each(getUniquePartners(projects), function(index, partner) {
+                var partnerProjects = $.grep(locationProjects, function(project) { return project.properties["PARTNER"] == partner.name});
+                projectAggregation[partner.id] = partnerProjects.length;
+            });
+            return projectAggregation;
+        };
+
+        var projectsGeojson = geonodeService.get('projects');
+
+        this.partners = function() {
+            return projectsGeojson.then(function(data) { return getUniquePartners(data.features) });
+        };
+
+        this.aggregation = function (location, projectFilter) {
+            return projectsGeojson.then(function(data) {
+                var filteredProjects = filterProjects(data, location, projectFilter);
+                return summaryService.childLocations(location).then(function(locations) {
+                    return $.map(locations, function(location, index) {
+                        return {
+                            locator: location.getName(),
+                            info: calculateAggregation(location, filteredProjects)
+                        }
+                    });
+                });  
+            });
+        };
 
         this.projects_geojson = function (location, projectFilter) {
-            
             return projectsGeojson.then(function(data) {
-
-                var features =  $.grep(data.features, function(feature) { 
-                    return location.contains(parseFeatureLocation(feature));
-                });
-                var partners = getUniquePartners(data);
-                $.each(partners, function(index, partner) {
-                    if ( projectFilter.partner[partner.id] == undefined || projectFilter.partner[partner.id] == false) {
-                        features =  $.grep(features, function(feature) { 
-                            return feature.properties['PARTNER'].toLowerCase() != partner.id; 
-                        });
-                    }
-                })
-
                 return {
                     type: "FeatureCollection",
-                    features: features
+                    features: filterProjects(data, location, projectFilter)
                 };
             });
-        }
+        };
     });;

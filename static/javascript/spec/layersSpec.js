@@ -1,4 +1,4 @@
-describe("Layer", function() { 
+describe("Layers", function() { 
     var ugandaLocation = new DT.Location({});
     var regionLocation = new DT.Location({ region: "north"});
     var districtLocation = new DT.Location({ region: "north", district: "gulu" });
