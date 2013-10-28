@@ -12,3 +12,4 @@ node_modules/
 twistd.log*
 twistd.pid
 screen*.png
+devtrac2-env
