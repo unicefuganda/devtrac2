@@ -6,10 +6,10 @@ describe("LayerMap", function() {
         });
         var map = new DT.LayerMap("someid");
 
-        map.addLayer("water-points", location, []);
+        map.addLayer("water-points", location, [], "type");
 
         expect(map.displayedLayerKeys()).toEqual([
-            ["water-points", location]
+            ["water-points", location, "type"]
         ]);
     });
 
@@ -22,14 +22,14 @@ describe("LayerMap", function() {
             district: "Gulu"
         });
 
-        map.addLayer("water-points", location1, ["some data"]);
-        map.addLayer("districts", location2, ["some data"]);
+        map.addLayer("water-points", location1, ["some data"], "type");
+        map.addLayer("districts", location2, ["some data"], "type");
 
         var removedLayer = map.removeLayer("districts", location2);
         expect(removedLayer).toEqual(["some data"]);
 
         expect(map.displayedLayerKeys()).toEqual([
-            ["water-points", location1]
+            ["water-points", location1, "type"]
         ]);
     });
 
