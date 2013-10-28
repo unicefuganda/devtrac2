@@ -3,6 +3,8 @@ require 'csv'
 require 'json'
 require 'net/http'
 
+@test = (ARGV.first == 'test' ? true : false)
+
 @header = ''
 @file_name = 'USAID_activities_formatted.csv'
 @districts_file_name = 'UNICEF_districts.csv'
@@ -41,7 +43,7 @@ def write_new_file file_name, lines
         lines.each do |line|
             if line.size > 1
                 counter += 1
-                file.puts line.join(',')
+                file.puts "\"" + line.join("\",\"") + "\""
             end
         end
     end
@@ -58,9 +60,7 @@ def manipulate_data lines, districts_hash
     old_lines = []
 
     lines.each do |line|
-        districts = line[8]
-        p districts
-        puts "\n_________\n"
+        districts = line[8].clone
         if districts.include?("|")
             districts = districts.split("|")
         else
@@ -128,17 +128,24 @@ def array_to_hash array
 end
 
 def get_google_location place
-    url = "http://maps.googleapis.com/maps/api/geocode/json?address=#{format_address place}&sensor=true"
-    resp = Net::HTTP.get_response(URI.parse(url))
-    data = resp.body
-
-    data = JSON.parse data
-
     results = {}
-    results['lat'] = data['results'][0]['geometry']['location']['lat'].to_s
-    results['lng'] = data['results'][0]['geometry']['location']['lng'].to_s
 
-    results
+    if @test == true
+        results['lat'] = '1.00'
+        results['lng'] = '1.00'
+        results
+    else
+        url = "http://maps.googleapis.com/maps/api/geocode/json?address=#{format_address place}&sensor=true"
+        resp = Net::HTTP.get_response(URI.parse(url))
+        data = resp.body
+
+        data = JSON.parse data
+
+        results['lat'] = data['results'][0]['geometry']['location']['lat'].to_s
+        results['lng'] = data['results'][0]['geometry']['location']['lng'].to_s
+
+        results
+    end
 end
 
 def format_address address
@@ -155,12 +162,6 @@ districts = read_file @districts_file_name
 
 puts "File read, now adding data"
 new_lines = manipulate_data(lines, array_to_hash(districts))
-
-counter = 1
-lines.each do |line|
-    line[0] = counter
-    counter += 1
-end
 
 write_new_file add_new_to_file_name(@file_name), new_lines
 
