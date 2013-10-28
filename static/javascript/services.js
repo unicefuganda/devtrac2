@@ -52,10 +52,12 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                         deffered2.resolve();
                     });
             } else if (key == "water-point") {
+                
                 summaryService.find(location.getName(), true).then(function(data) {
                     allData[locationkey] = data;
                     deffered2.resolve();
-                })
+                });
+
 
             } else if (key == "health-center") {
                 summaryService.find(location.getName(), true).then(function(data) {

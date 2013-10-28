@@ -44,7 +44,7 @@ angular.module("dashboard").directive('map', function() {
                 if (newFilter == null)
                     return; 
                 
-                var layerChanges = DT.Layers.getChanges(map.displayedLayers(), newLocation);
+                var layerChanges = DT.Layers.getChanges(map.displayedLayers(), newLocation, newFilter.dataToggledOff());
                 console.log(layerChanges);
 
                 $.each(layerChanges.toRemove, function(index, locationKey) {                    

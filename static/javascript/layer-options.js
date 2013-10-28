@@ -77,8 +77,8 @@ DT.Layers = {
         }
     },
 
-    getChanges: function (layers, location) {
-        newLayers = DT.Layers.boundaryLayers(location).concat(DT.Layers.filterLayers(location, []));
+    getChanges: function (layers, location, filteredKeys) {
+        newLayers = DT.Layers.boundaryLayers(location).concat(DT.Layers.filterLayers(location, filteredKeys));
 
         //TODO: refactor to use keys instead of indexes
         var boundaryLayers = $.grep(layers, function(layer) { return layer[2] == 'boundary'; });
