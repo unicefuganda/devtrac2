@@ -4,7 +4,7 @@ require 'json'
 require 'net/http'
 
 @header = ''
-@file_name = 'UNICEF_activities_formatted.csv'
+@file_name = 'USAID_activities_formatted.csv'
 @districts_file_name = 'UNICEF_districts.csv'
 
 def read_file file_name
@@ -59,11 +59,12 @@ def manipulate_data lines, districts_hash
 
     lines.each do |line|
         districts = line[8]
-
+        p districts
+        puts "\n_________\n"
         if districts.include?("|")
             districts = districts.split("|")
         else
-            districts.to_a!
+            districts = [districts]
         end
 
         temp_districts = []
