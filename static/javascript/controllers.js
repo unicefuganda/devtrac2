@@ -70,4 +70,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 })
 .controller("PartnersCtrl", function($scope, projectService){
     $scope.partners = projectService.partners();
+    $scope.sectors = projectService.sectors();
+    $scope.statuses = projectService.statuses();
 });

@@ -23,6 +23,8 @@ angular.module("dashboard").directive('map', function() {
             } else {
                 $scope.basemap = $location.search().basemap;
             }
+
+            $rootScope.selectedProject = null;
             
         },
         link: function(scope, element, attrs) {
@@ -36,8 +38,15 @@ angular.module("dashboard").directive('map', function() {
             map.onClickDistrict(function(newLocation) {
                 scope.$apply(function (){
                     scope.navigateToLocation(newLocation);    
+
                 });
-            });            
+            });
+
+            map.onClickProject(function(project) {
+                scope.$apply(function (){
+                    scope.selectedProject = project; 
+                });
+            });
 
             var applyLocationAndFilter = function(newLocation, newFilter) {
 
@@ -140,18 +149,52 @@ angular.module("dashboard").directive('map', function() {
                     series: {
                         pie: {
                             show: true,
-                            label: {
-                                show: false
-                            }
+                            label: { show: false }
                         }
                     },
-                    legend: {
-                        show: false
-                    }
+                    legend: { show: false }
+                });
+            });
+        }
+    };
+}).directive('chosen', function() {
+    return {
+        scope: false,
+        link: function(scope, element, attrs) {
+            $(element).chosen({ width: "300px", allow_single_deselect: true }).change(function () {
+                scope.$apply(function () {
+                    var values = $.map($(element).find("option:selected"), function (option) { return $(option).val(); }); 
+                    scope.filter.project[attrs.filtercollection] = values
                 });
             });
 
-        
+            scope.$watch("sectors", function(sectors) {
+                scope.$evalAsync(function () {
+                    $(element).trigger("chosen:updated");    
+                })
+                    
+            });
         }
     };
-})
+}).directive("projectdetails", function(){
+    return {
+        scope: true,
+        link: function(scope, element, attrs){
+            scope.$watch('selectedProject',function(newValue, oldValue){
+                message = [];
+                if(newValue){
+                    $.each(newValue.properties, function(key, value){
+                        var newKey = $.each(DT.projectDetailLabels, function(index, details){
+                            if(details.key == key && value){
+                                message.push({"key" : details.label, "value" : value, "order": details.order });
+                            }
+                        });
+                    });
+                }
+
+                scope.projectDetails = message;
+
+            }, true);
+        }
+    }
+});

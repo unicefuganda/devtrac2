@@ -156,7 +156,12 @@ DT.Map = function(element, basemap) {
                 })
                 .on('mouseout', function() {
                     marker.closePopup();
-                });
+                })
+                .on('click', function() { 
+                    if (self.clickProjectHandler != null)
+                        self.clickProjectHandler(feature);
+                })
+                ;
             layerGroup.addLayer(marker);
         });
 
@@ -222,6 +227,9 @@ DT.Map = function(element, basemap) {
         },  
         onClickDistrict: function(handler) {
             self.clickDistrictHandler = handler;
+        },
+        onClickProject: function(handler) {
+            self.clickProjectHandler = handler;
         },
         getSelectedLayer: function() {
             var layer = DT.first(self.layerMap.allChildLayers(), function(layer) {

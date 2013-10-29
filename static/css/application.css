@@ -349,10 +349,19 @@ h3 {
   padding: 10px 12px;
 }
 
-.filter {
+/* PARTNERS */
 
+.chosen-select {
+  color: black;
 }
 
+.chosen-container {
+  color: black;
+}
+
+.chosen-container-multi .chosen-choices li.search-field input[type=text] {
+  height: auto;
+}
 
 /* SUMMARY */
 
