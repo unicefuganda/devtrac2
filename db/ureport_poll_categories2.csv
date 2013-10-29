@@ -1,0 +1,190 @@
+district,poll_id,category,count,category_id
+Palaro,165,climate,33,230
+Palaro,165,Poor farming methods,9,232
+Palaro,165,Lack of land,8,233
+Palaro,165,Lack of capital,18,234
+Palaro,165,Pests and Diseases,4,235
+Palaro,200,yes,31,277
+Palaro,200,no,23,278
+Palaro,200,unknown,33,279
+Palaro,551,Agricultural Diversification,14,1149
+Palaro,551,Engagement in Productive Activities,16,1150
+Palaro,551,Self Employment/ Entreprenuership,23,1151
+Palaro,551,Accessibility to Soft loans,13,1152
+Palaro,551,Acquisition of Practical Skills,21,1153
+Palaro,551,Accountability & Transparency,20,1154
+Palaro,551,Other,26,1155
+Patiko,165,climate,30,230
+Patiko,165,Poor farming methods,9,232
+Patiko,165,Lack of land,1,233
+Patiko,165,Lack of capital,16,234
+Patiko,165,Pests and Diseases,6,235
+Patiko,200,yes,21,277
+Patiko,200,no,18,278
+Patiko,200,unknown,9,279
+Patiko,551,Agricultural Diversification,12,1149
+Patiko,551,Engagement in Productive Activities,15,1150
+Patiko,551,Self Employment/ Entreprenuership,24,1151
+Patiko,551,Accessibility to Soft loans,8,1152
+Patiko,551,Acquisition of Practical Skills,15,1153
+Patiko,551,Accountability & Transparency,13,1154
+Patiko,551,Other,30,1155
+Awach,165,climate,39,230
+Awach,165,Poor farming methods,4,232
+Awach,165,Lack of land,3,233
+Awach,165,Lack of capital,13,234
+Awach,165,Pests and Diseases,2,235
+Awach,200,yes,62,277
+Awach,200,no,41,278
+Awach,200,unknown,38,279
+Awach,551,Agricultural Diversification,9,1149
+Awach,551,Engagement in Productive Activities,24,1150
+Awach,551,Self Employment/ Entreprenuership,24,1151
+Awach,551,Accessibility to Soft loans,8,1152
+Awach,551,Acquisition of Practical Skills,25,1153
+Awach,551,Accountability & Transparency,14,1154
+Awach,551,Other,24,1155
+Unyama,165,climate,38,230
+Unyama,165,Poor farming methods,5,232
+Unyama,165,Lack of land,9,233
+Unyama,165,Lack of capital,20,234
+Unyama,165,Pests and Diseases,8,235
+Unyama,200,yes,37,277
+Unyama,200,no,44,278
+Unyama,200,unknown,20,279
+Unyama,551,Agricultural Diversification,6,1149
+Unyama,551,Engagement in Productive Activities,11,1150
+Unyama,551,Self Employment/ Entreprenuership,6,1151
+Unyama,551,Accessibility to Soft loans,9,1152
+Unyama,551,Acquisition of Practical Skills,15,1153
+Unyama,551,Accountability & Transparency,14,1154
+Unyama,551,Other,31,1155
+Paicho,165,climate,25,230
+Paicho,165,Poor farming methods,6,232
+Paicho,165,Lack of land,1,233
+Paicho,165,Lack of capital,6,234
+Paicho,165,Pests and Diseases,4,235
+Paicho,200,yes,17,277
+Paicho,200,no,31,278
+Paicho,200,unknown,19,279
+Paicho,551,Agricultural Diversification,6,1149
+Paicho,551,Engagement in Productive Activities,14,1150
+Paicho,551,Self Employment/ Entreprenuership,9,1151
+Paicho,551,Accessibility to Soft loans,7,1152
+Paicho,551,Acquisition of Practical Skills,22,1153
+Paicho,551,Accountability & Transparency,13,1154
+Paicho,551,Other,25,1155
+Lalogi,165,climate,3,230
+Lalogi,165,Lack of land,2,233
+Lalogi,165,Lack of capital,2,234
+Lalogi,200,yes,5,277
+Lalogi,200,no,2,278
+Lalogi,200,unknown,1,279
+Lalogi,551,Engagement in Productive Activities,1,1150
+Lalogi,551,Self Employment/ Entreprenuership,3,1151
+Lalogi,551,Accessibility to Soft loans,1,1152
+Lalogi,551,Other,7,1155
+Koro,165,climate,52,230
+Koro,165,Poor farming methods,8,232
+Koro,165,Lack of land,10,233
+Koro,165,Lack of capital,24,234
+Koro,165,Pests and Diseases,5,235
+Koro,200,yes,30,277
+Koro,200,no,42,278
+Koro,200,unknown,10,279
+Koro,551,Agricultural Diversification,7,1149
+Koro,551,Engagement in Productive Activities,18,1150
+Koro,551,Self Employment/ Entreprenuership,12,1151
+Koro,551,Accessibility to Soft loans,9,1152
+Koro,551,Acquisition of Practical Skills,22,1153
+Koro,551,Accountability & Transparency,9,1154
+Koro,551,Other,34,1155
+Lakwana,165,climate,39,230
+Lakwana,165,Poor farming methods,9,232
+Lakwana,165,Lack of land,5,233
+Lakwana,165,Lack of capital,22,234
+Lakwana,165,Pests and Diseases,10,235
+Lakwana,200,yes,32,277
+Lakwana,200,no,51,278
+Lakwana,200,unknown,20,279
+Lakwana,551,Agricultural Diversification,12,1149
+Lakwana,551,Engagement in Productive Activities,26,1150
+Lakwana,551,Self Employment/ Entreprenuership,26,1151
+Lakwana,551,Accessibility to Soft loans,15,1152
+Lakwana,551,Acquisition of Practical Skills,35,1153
+Lakwana,551,Accountability & Transparency,17,1154
+Lakwana,551,Other,31,1155
+Lalogi,165,climate,90,230
+Lalogi,165,Poor farming methods,15,232
+Lalogi,165,Lack of land,7,233
+Lalogi,165,Lack of capital,31,234
+Lalogi,165,Pests and Diseases,16,235
+Lalogi,200,yes,76,277
+Lalogi,200,no,71,278
+Lalogi,200,unknown,59,279
+Lalogi,551,Agricultural Diversification,7,1149
+Lalogi,551,Engagement in Productive Activities,47,1150
+Lalogi,551,Self Employment/ Entreprenuership,26,1151
+Lalogi,551,Accessibility to Soft loans,18,1152
+Lalogi,551,Acquisition of Practical Skills,51,1153
+Lalogi,551,Accountability & Transparency,28,1154
+Lalogi,551,Other,54,1155
+Lalogi,165,climate,252,230
+Lalogi,165,Poor farming methods,46,232
+Lalogi,165,Lack of land,24,233
+Lalogi,165,Lack of capital,119,234
+Lalogi,165,Pests and Diseases,22,235
+Lalogi,200,yes,218,277
+Lalogi,200,no,191,278
+Lalogi,200,unknown,132,279
+Lalogi,551,Agricultural Diversification,59,1149
+Lalogi,551,Engagement in Productive Activities,114,1150
+Lalogi,551,Self Employment/ Entreprenuership,123,1151
+Lalogi,551,Accessibility to Soft loans,81,1152
+Lalogi,551,Acquisition of Practical Skills,132,1153
+Lalogi,551,Accountability & Transparency,107,1154
+Lalogi,551,Other,229,1155
+Odek,165,climate,17,230
+Odek,165,Lack of land,1,233
+Odek,165,Lack of capital,9,234
+Odek,165,Pests and Diseases,2,235
+Odek,200,yes,16,277
+Odek,200,no,19,278
+Odek,200,unknown,12,279
+Odek,551,Agricultural Diversification,7,1149
+Odek,551,Engagement in Productive Activities,10,1150
+Odek,551,Self Employment/ Entreprenuership,27,1151
+Odek,551,Accessibility to Soft loans,11,1152
+Odek,551,Acquisition of Practical Skills,15,1153
+Odek,551,Accountability & Transparency,18,1154
+Odek,551,Other,24,1155
+Odek,165,climate,10,230
+Odek,165,Poor farming methods,4,232
+Odek,165,Lack of land,1,233
+Odek,165,Lack of capital,18,234
+Odek,165,Pests and Diseases,2,235
+Odek,200,yes,6,277
+Odek,200,no,18,278
+Odek,200,unknown,3,279
+Odek,551,Agricultural Diversification,5,1149
+Odek,551,Engagement in Productive Activities,8,1150
+Odek,551,Self Employment/ Entreprenuership,19,1151
+Odek,551,Accessibility to Soft loans,8,1152
+Odek,551,Acquisition of Practical Skills,11,1153
+Odek,551,Accountability & Transparency,11,1154
+Odek,551,Other,37,1155
+Bungatira,165,climate,22,230
+Bungatira,165,Poor farming methods,6,232
+Bungatira,165,Lack of land,2,233
+Bungatira,165,Lack of capital,7,234
+Bungatira,165,Pests and Diseases,2,235
+Bungatira,200,yes,21,277
+Bungatira,200,no,30,278
+Bungatira,200,unknown,8,279
+Bungatira,551,Agricultural Diversification,3,1149
+Bungatira,551,Engagement in Productive Activities,18,1150
+Bungatira,551,Self Employment/ Entreprenuership,13,1151
+Bungatira,551,Accessibility to Soft loans,8,1152
+Bungatira,551,Acquisition of Practical Skills,16,1153
+Bungatira,551,Accountability & Transparency,20,1154
+Bungatira,551,Other,24,1155
