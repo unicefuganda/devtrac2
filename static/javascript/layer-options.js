@@ -49,8 +49,8 @@ DT.Layers = {
         if (location.level() == "district" || location.level() == "subcounty" || location.level() == "parish") {
             layers.push(["project-point", location]);
         } else {
-            // layers.push(["unicef", location]);
-            // layers.push(["usaid", location]);
+            layers.push(["unicef", location]);
+            layers.push(["usaid", location]);
         }
 
         return $.grep(layers, function(locationKey) {
@@ -76,12 +76,12 @@ DT.Layers = {
             toRemove: keysToRemove
         }
     },
-    getChanges: function (layers, location, filteredKeys) {
+    getChanges: function (shownLayers, location, filteredKeys) {
         newLayers = DT.Layers.boundaryLayers(location).concat(DT.Layers.filterLayers(location, filteredKeys));
 
         //TODO: refactor to use keys instead of indexes
-        var boundaryLayers = $.grep(layers, function(layer) { return layer[2] == 'boundary'; });
-        var nonBoundaryLayers = $.grep(layers, function(layer) { return layer[2] != 'boundary'; });
+        var boundaryLayers = $.grep(shownLayers, function(layer) { return layer[2] == 'boundary'; });
+        var nonBoundaryLayers = $.grep(shownLayers, function(layer) { return layer[2] != 'boundary'; });
 
         var comparison = DT.Layers.compareLayerKeys(boundaryLayers, newLayers);
         comparison.toRemove = comparison.toRemove.concat(nonBoundaryLayers);
@@ -223,6 +223,7 @@ DT.LayerOptions = {
     "water-point": {
         name: "water-point",
         type: "aggregate",
+        display: function(stats){ return true; },
         getValue: function(stats, childLocation) { 
             return "<div data-locator='" + childLocation.getName() + "'>" 
                     + stats.info['water-point']
@@ -232,6 +233,7 @@ DT.LayerOptions = {
     "health-center": {
         name: "health-center",
         type: "aggregate",
+        display: function(stats){ return true; },
         getValue: function(stats, childLocation) { 
             return "<div data-locator='" + childLocation.getName() + "'>" 
                     + stats.info['health-center']
@@ -241,6 +243,7 @@ DT.LayerOptions = {
     "school": {
         name: "school",
         type: "aggregate",
+        display: function(stats){ return true; },
         getValue: function(stats, childLocation) { 
             return "<div data-locator='" + childLocation.getName() + "'>" 
                     + stats.info.school
@@ -316,20 +319,24 @@ DT.LayerOptions = {
     },
 
     "unicef": {
-        name: "ureport",
+        name: "unicef",
         type: "aggregate",
+        display: function(stats){ return stats.info.unicef > 0; },
         getValue: function(stats, childLocation) { 
-            return "<div data-locator='" + childLocation.getName() + "'>" 
+            return  "<img src='/static/images/unicef_small.png'></img>"
+                    + "<div data-locator='" + childLocation.getName() + "'>" 
                     + stats.info.unicef
                     + '</div>';
         }
     },
 
     "usaid": {
-        name: "ureport",
+        name: "usaid",
         type: "aggregate",
+        display: function(stats){ return stats.info.usaid > 0; },
         getValue: function(stats, childLocation) { 
-            return "<div data-locator='" + childLocation.getName() + "'>" 
+            return "<img src='/static/images/usaid_small.png'></img>"
+                    + "<div data-locator='" + childLocation.getName() + "'>" 
                     + stats.info.usaid
                     + '</div>';
         }

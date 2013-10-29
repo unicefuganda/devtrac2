@@ -95,7 +95,7 @@ DT.Map = function(element, basemap) {
         $.each(data.children, function(index, childStats) {
             var childLocation = DT.Location.fromName(childStats.locator);
             var childLayer = self.layerMap.findChildLayer(childLocation);
-            if (childLayer != null) {
+            if (childLayer != null && layer_info.display(childStats)) {
 
                 var centerPoint = childLayer.getCenter();   
                 var circleCluster = new L.DivIcon({

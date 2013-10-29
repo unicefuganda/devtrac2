@@ -1,7 +1,7 @@
 /* DASHBOARD */
 body { 
   -webkit-font-smoothing: antialiased;
-  color: #DDD;
+  
   font-size: 13px;
 }
 
@@ -234,6 +234,7 @@ h3 {
   overflow: hidden;
   position: absolute;
   background-color: rgba(36, 36, 36, 1); 
+  color: #DDD;
 }
 
 #filters-form {

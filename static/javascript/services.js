@@ -460,10 +460,10 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
             return features;
         };
 
-        var calculateAggregation = function (location, projects) {
+        var calculateAggregation = function (partners, location, projects) {
             var locationProjects = filterByLocation(projects, location);
             var projectAggregation = {};
-            $.each(getUniquePartners(projects), function(index, partner) {
+            $.each(partners, function(index, partner) {
                 var partnerProjects = $.grep(locationProjects, function(project) { return project.properties["PARTNER"] == partner.name});
                 projectAggregation[partner.id] = partnerProjects.length;
             });
@@ -478,12 +478,13 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
 
         this.aggregation = function (location, projectFilter) {
             return projectsGeojson.then(function(data) {
+                var partners = getUniquePartners(data.features)
                 var filteredProjects = filterProjects(data, location, projectFilter);
                 return summaryService.childLocations(location).then(function(locations) {
                     var children = $.map(locations, function(location, index) {
                         return {
                             locator: location.getName(),
-                            info: calculateAggregation(location, filteredProjects)
+                            info: calculateAggregation(partners, location, filteredProjects)
                         }
                     });
 
