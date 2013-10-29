@@ -140,18 +140,31 @@ angular.module("dashboard").directive('map', function() {
                     series: {
                         pie: {
                             show: true,
-                            label: {
-                                show: false
-                            }
+                            label: { show: false }
                         }
                     },
-                    legend: {
-                        show: false
-                    }
+                    legend: { show: false }
+                });
+            });
+        }
+    };
+}).directive('chosen', function() {
+    return {
+        scope: false,
+        link: function(scope, element, attrs) {
+            $(element).chosen({ width: "300px"}).change(function () {
+                scope.$apply(function () {
+                    var selectedSectors = $.map($(element).find("option:selected"), function (option) { return $(option).val(); }); 
+                    scope.filter.project.sectors = selectedSectors
                 });
             });
 
-        
+            scope.$watch("sectors", function(sectors) {
+                scope.$evalAsync(function () {
+                    $(element).trigger("chosen:updated");    
+                })
+                    
+            });
         }
     };
 })

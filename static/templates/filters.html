@@ -66,6 +66,12 @@
           <label for='{[{p.id}]}-checkbox'>{[{ p.name}]}</label>
         </li> 
       </ul> 
+      <h3>Sector:</h3>
+      <div class='filter'>
+      <select style="width:350px;" ng-model='filter.project.sector' data-placeholder="Choose sectors" chosen class='chosen-select' multiple="">
+        <option ng-repeat="sector in sectors" ng-model='filter.project[sector]' value="{[{sector}]}">{[{sector}]}</option>
+      </select>
+      </div>
     </div>
   </div>
 </form>

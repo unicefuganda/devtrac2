@@ -36,9 +36,9 @@ js = Bundle(
 	'javascript/location.js',
 	'javascript/layer-map.js',
 	'javascript/layer-options.js',
-	'javascript/lib/d3.v3.min.js',
 	'javascript/lib/jquery.flot.min.js',
 	'javascript/lib/jquery.flot.pie.min.js',
+	'javascript/lib/chosen.jquery.min.js',
      filters='jsmin', output='gen/packed.js')
 
 assets.register('js_all', js)
@@ -46,6 +46,7 @@ assets.register('js_all', js)
 css = Bundle(
 	'css/lib/bootstrap.min.css', 
 	'css/lib/mapbox.css',
+	'css/lib/chosen.min.css',
 	'css/application.css',
 	'css/map.css',
 	

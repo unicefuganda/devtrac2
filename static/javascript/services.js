@@ -457,6 +457,12 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                     });
                 }
             })
+            if (projectFilter.sectors && projectFilter.sectors.length > 0) {
+                features = $.grep(features, function(project) {
+                    return $.inArray(project.properties['SECTOR'], projectFilter.sectors) != -1
+                });
+            }
+
             return features;
         };
 
@@ -474,6 +480,10 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
 
         this.partners = function() {
             return projectsGeojson.then(function(data) { return getUniquePartners(data.features) });
+        };
+
+        this.sectors = function () {
+            return ["Basic Education", "Agriculture", "Basic life skills for youths and Adults", "Social", "Small and medium-sized enterprises", "Development"];
         };
 
         this.aggregation = function (location, projectFilter) {
