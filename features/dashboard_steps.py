@@ -60,12 +60,21 @@ def and_i_click_on_the_breadcrumb_link(step):
 def and_i_click_on_the_breadcrumb_link(step):
     world.page.click_national_breadcrumb()
 
+@step(u'And I click on the project Icon at latitude "([^"]+)" and logitude "([^"]+)"')
+def and_i_click_on_the_project_icon_at_latitude_and_logitude(step, lat, lng):
+    world.page.click_marker_at(lat, lng)
+
+@step(u'Then the bottom panel contains the following details:')
+def then_the_bottom_panel_contains_the_following_details(step):
+    for details in step.hashes:
+        assert_true(details['detail'] in world.page.extra_info_content())
+
 #STEPS to be implemented
 
 @step(u'And I navigate to "([^"]*)"')
 def and_i_navigate_to_group1(step, group1):
-
     assert True, 'This step must be implemented'
+
 @step(u'Then a page with an error message is displayed')
 def then_a_page_with_an_error_message_is_displayed(step):
     assert True, 'This step must be implemented'

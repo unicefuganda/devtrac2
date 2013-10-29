@@ -39,7 +39,7 @@
               </div>
               <div ng-include="'/static/templates/ureport_summary.html'"></div>
               
-                <div projectdetails >
+                <div id="project-details" projectdetails >
                   <div ng-repeat="details in projectDetails | orderBy:'order'">{[{ details["key"] }]} : {[{ details["value"] }]}</div>
                 </div>
               

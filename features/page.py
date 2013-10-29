@@ -113,6 +113,9 @@ class Page:
     def summary_panel_content(self):
         return self.browser.find_by_css('#summary').text
 
+    def extra_info_content(self):
+        return self.browser.find_by_css('#project-details').text
+
     def select_ureport_question(self, abbreviation):
         toggle_css = str(".ureport-questions .toggle[data-question='%s']" % abbreviation)
         self.wait_for(lambda x: self.browser.find_by_css(toggle_css).visible)
@@ -130,4 +133,7 @@ class Page:
             time.sleep(0.5)
         raise Exception('wait for timed out after 5 seconds')
 
-
+    def click_marker_at(self, lat, lng):
+        marker = self.browser.find_by_css(str( "div[data-lat='%s'][data-lng='%s']" % (lat, lng)))
+        marker.click()
+        
