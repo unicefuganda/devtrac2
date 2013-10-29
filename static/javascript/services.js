@@ -463,6 +463,12 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
                 });
             }
 
+            if(projectFilter.statuses && projectFilter.statuses.length > 0){
+                features = $.grep(features,function(project){
+                    return $.inArray(project.properties['STATUS'], projectFilter.statuses) != -1
+                });
+            }   
+
             return features;
         };
 
@@ -484,6 +490,10 @@ angular.module("dashboard").service('districtService', function($http, $filter, 
 
         this.sectors = function () {
             return ["Basic Education", "Agriculture", "Basic life skills for youths and Adults", "Social", "Small and medium-sized enterprises", "Development"];
+        };
+
+        this.statuses = function () {
+            return ["Pipeline/identification","Implementation","Completion","Post-completion","Cancelled"];
         };
 
         this.aggregation = function (location, projectFilter) {

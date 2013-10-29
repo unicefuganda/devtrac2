@@ -152,10 +152,10 @@ angular.module("dashboard").directive('map', function() {
     return {
         scope: false,
         link: function(scope, element, attrs) {
-            $(element).chosen({ width: "300px"}).change(function () {
+            $(element).chosen({ width: "300px", allow_single_deselect: true }).change(function () {
                 scope.$apply(function () {
-                    var selectedSectors = $.map($(element).find("option:selected"), function (option) { return $(option).val(); }); 
-                    scope.filter.project.sectors = selectedSectors
+                    var values = $.map($(element).find("option:selected"), function (option) { return $(option).val(); }); 
+                    scope.filter.project[attrs.filtercollection] = values
                 });
             });
 
