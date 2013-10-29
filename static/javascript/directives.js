@@ -23,6 +23,8 @@ angular.module("dashboard").directive('map', function() {
             } else {
                 $scope.basemap = $location.search().basemap;
             }
+
+            $rootScope.selectedProject = null;
             
         },
         link: function(scope, element, attrs) {
@@ -36,8 +38,15 @@ angular.module("dashboard").directive('map', function() {
             map.onClickDistrict(function(newLocation) {
                 scope.$apply(function (){
                     scope.navigateToLocation(newLocation);    
+
                 });
-            });            
+            });
+
+            map.onClickProject(function(project) {
+                scope.$apply(function (){
+                    scope.selectedProject = project; 
+                });
+            });
 
             var applyLocationAndFilter = function(newLocation, newFilter) {
 
@@ -167,4 +176,25 @@ angular.module("dashboard").directive('map', function() {
             });
         }
     };
-})
+}).directive("projectdetails", function(){
+    return {
+        scope: true,
+        link: function(scope, element, attrs){
+            scope.$watch('selectedProject',function(newValue, oldValue){
+                message = [];
+                if(newValue){
+                    $.each(newValue.properties, function(key, value){
+                        var newKey = $.each(DT.projectDetailLabels, function(index, details){
+                            if(details.key == key && value){
+                                message.push({"key" : details.label, "value" : value, "order": details.order });
+                            }
+                        });
+                    });
+                }
+
+                scope.projectDetails = message;
+
+            }, true);
+        }
+    }
+});

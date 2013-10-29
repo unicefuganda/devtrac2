@@ -38,6 +38,11 @@
                 <button type="button" data-question='{[{question.abbreviation}]}' ng-click='ureportQuestion.selected = question;' ng-repeat="question in questions" class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == question ? 'toggle-selected' : '' }]}" >{[{question.abbreviation}]}</button>    
               </div>
               <div ng-include="'/static/templates/ureport_summary.html'"></div>
+              
+                <div projectdetails >
+                  <div ng-repeat="details in projectDetails | orderBy:'order'">{[{ details["key"] }]} : {[{ details["value"] }]}</div>
+                </div>
+              
             </div>
           </div>
         </div>

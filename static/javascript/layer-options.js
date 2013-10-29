@@ -307,12 +307,12 @@ DT.LayerOptions = {
         getValue: function(properties) { 
             return "<img src='\\static\\images\\" + properties.PARTNER.toLowerCase() + ".png'> " 
         },
-        summaryInformation: function(properties) { 
-           return {
+        summaryInformation: function(properties) {
+            return {
                 title: properties.PROJ_NAME.toLowerCase() + " Project",
                 lines: [
                     ["Partner", properties.PARTNER],
-                    ["Description", properties.PROJ_DESC]
+                    ["District", properties.DISTRICTS]
                 ]
             }
         }
