@@ -47,7 +47,6 @@ def bootstrap_chef():
     run("sudo apt-get -y install git")
     run("cd ~/; git clone https://github.com/unicefuganda/devtrac2-provisioning.git")
 
-
 def provision():
     run("cd ~/devtrac2-provisioning/; git pull -r")
     run("cd ~/devtrac2-provisioning; chef-solo -c solo.rb")

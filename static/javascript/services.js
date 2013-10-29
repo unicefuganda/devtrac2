@@ -489,7 +489,7 @@ angular.module("dashboard")
         };
 
         this.sectors = function () {
-            return ["Basic Education", "Agriculture", "Basic life skills for youths and Adults", "Social", "Small and medium-sized enterprises", "Development"];
+            return ["Basic Education", "Agriculture", "Basic life skills for youths and Adults", "Social, Small and medium-sized enterprises (SME) development"];
         };
 
         this.statuses = function () {
