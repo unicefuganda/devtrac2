@@ -80,6 +80,13 @@
         </select>
       </div>
 
+       <h3>Implementing Partner:</h3>
+      <div class='filter'>
+        <select chosen data-placeholder="Choose Partner" data-filterCollection='implementingPartners' multiple class='chosen-select'>
+          <option ng-repeat="implementingPartner in implementingPartners" value="{[{implementingPartner}]}">{[{implementingPartner}]}</option>
+        </select>
+      </div>
+
 
     </div>
   </div>

@@ -434,6 +434,13 @@ angular.module("dashboard")
             return DT.unique(features).sort(function (partner1, partner2) { return partner1.name < partner2.name; });
         };
 
+        var getUniqueImplementingPartners = function(features) {
+            var features = $.map(features, function(project, index) {
+                return project.properties['IMPLEMENTE']
+            });
+            return DT.unique(features).sort();  
+        }
+
         var filterByLocation = function(features, location) {
             return $.grep(features, function(feature) { 
                 var featureLocation = new DT.Location({
@@ -467,7 +474,13 @@ angular.module("dashboard")
                 features = $.grep(features,function(project){
                     return $.inArray(project.properties['STATUS'], projectFilter.statuses) != -1
                 });
-            }   
+            }  
+
+            if(projectFilter.implementingPartners && projectFilter.implementingPartners.length > 0){
+                features = $.grep(features,function(project){
+                    return $.inArray(project.properties['IMPLEMENTE'], projectFilter.implementingPartners) != -1
+                });
+            }    
 
             return features;
         };
@@ -495,6 +508,14 @@ angular.module("dashboard")
         this.statuses = function () {
             return ["Pipeline/identification","Implementation","Completion","Post-completion","Cancelled"];
         };
+
+        this.implementingPartners = function () {
+            return projectsGeojson.then(function(data) { 
+                var result =  getUniqueImplementingPartners(data.features) 
+                console.log(result);
+                return result;
+            });
+        }
 
         this.aggregation = function (location, projectFilter) {
             return projectsGeojson.then(function(data) {

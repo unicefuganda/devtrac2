@@ -168,7 +168,7 @@ angular.module("dashboard").directive('map', function() {
                 });
             });
 
-            scope.$watch("sectors", function(sectors) {
+            scope.$watch(attrs.filtercollection, function(sectors) {
                 scope.$evalAsync(function () {
                     $(element).trigger("chosen:updated");    
                 })

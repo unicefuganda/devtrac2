@@ -72,4 +72,5 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $scope.partners = projectService.partners();
     $scope.sectors = projectService.sectors();
     $scope.statuses = projectService.statuses();
+    $scope.implementingPartners = projectService.implementingPartners();
 });

@@ -167,9 +167,9 @@ describe("Ureport Service question results", function(){
 
 describe("Project Service", function () {
     var testResponses = {features: [
-        {properties: {PARTNER: 'Unicef', 'Reg_2011': 'test region', 'DNAME_2010': 'test district', 'ID': 1,'SECTOR': 'Education','STATUS': 'Completion'}}, 
-        {properties: {PARTNER: 'Unicef', 'Reg_2011': 'test region', 'DNAME_2010': 'test district', 'SNAME_2010': 'test subcounty', 'ID': 2,'SECTOR': 'Agriculture','STATUS': 'Completion'}}, 
-        {properties: {PARTNER: 'USAID', 'Reg_2011': 'test region', 'DNAME_2010': 'test district 2', 'ID': 3 ,'SECTOR': 'Education','STATUS': 'Post-completion'}}] }
+        {properties: {PARTNER: 'Unicef', 'Reg_2011': 'test region', 'DNAME_2010': 'test district', 'ID': 1,'SECTOR': 'Education','STATUS': 'Completion', 'IMPLEMENTE': 'Africare'}}, 
+        {properties: {PARTNER: 'Unicef', 'Reg_2011': 'test region', 'DNAME_2010': 'test district', 'SNAME_2010': 'test subcounty', 'ID': 2,'SECTOR': 'Agriculture','STATUS': 'Completion', 'IMPLEMENTE': 'Africare'}}, 
+        {properties: {PARTNER: 'USAID', 'Reg_2011': 'test region', 'DNAME_2010': 'test district 2', 'ID': 3 ,'SECTOR': 'Education','STATUS': 'Post-completion', 'IMPLEMENTE': 'Arbeiter Samariter Bund'}}] }
 
     var testSummaryChildrenLocations = [
         new DT.Location({region: 'test region', district: 'test district'}),
@@ -240,7 +240,7 @@ describe("Project Service", function () {
 
     }));
 
-     it('should filter projects by status', inject(function(projectService){
+    it('should filter projects by status', inject(function(projectService){
         var location =new DT.Location({region: 'test region'});
         var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, statuses: ['Completion'] });
 
@@ -250,6 +250,20 @@ describe("Project Service", function () {
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
         var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, statuses: null });
+        expect(mapProjectId(projects)).toEqual([1, 2, 3]);
+
+    }));
+
+    it('should filter projects by implementing partner', inject(function(projectService){
+        var location =new DT.Location({region: 'test region'});
+        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, implementingPartners: ['Africare'] });
+
+        expect(mapProjectId(projects)).toEqual([1,2]);
+
+        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, implementingPartners: ['Africare', 'Arbeiter Samariter Bund'] });
+        expect(mapProjectId(projects)).toEqual([1, 2, 3]);
+
+        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, implementingPartners:  null });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
     }));
