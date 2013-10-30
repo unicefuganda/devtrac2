@@ -172,7 +172,6 @@ angular.module("dashboard").directive('map', function() {
                 scope.$evalAsync(function () {
                     $(element).trigger("chosen:updated");    
                 })
-                    
             });
         }
     };

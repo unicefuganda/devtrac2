@@ -30,7 +30,7 @@ sink_schema = {'properties': {}}
 sink_schema['geometry'] = 'Point'
 
 for key in keys:
-    sink_schema['properties'][key] = "str:35"
+    sink_schema['properties'][key] = "str:100"
 
 
 sink_schema['properties']['Reg_2011'] = "str:35"
