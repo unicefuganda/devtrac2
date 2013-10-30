@@ -160,6 +160,10 @@ DT.Map = function(element, basemap) {
                 .on('click', function() { 
                     if (self.clickProjectHandler != null)
                         self.clickProjectHandler(feature);
+                    $('html, body').animate({
+                        scrollTop: $("#project-details").offset().top
+                    }, 500);
+                        //$(document).scrollTo( "#project-details", 800, {easing:'elasout'} );
                 })
                 ;
             layerGroup.addLayer(marker);

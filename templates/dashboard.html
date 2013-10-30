@@ -1,68 +1,73 @@
 <!DOCTYPE html>
 <html ng-app="dashboard">
-  <head>
-    <title>DevTrac Global</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% assets "css_all" %}
-        <link rel="stylesheet" media="screen" href="{{ ASSET_URL }}"></link>
-    {% endassets %}
-    
-  </head>
-  <body>
-    <div ng-include="'/static/templates/nav_bar.html'"></div>
-    <div ng-view></div>
-    <div id='map-container'>
-      <div id='right-hand-panel' >
-        <div map id='devtrac-map'></div>
-        <div ng-if="indicator.selected != null" class='heatmap-legend'>
-            <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
-        </div>
-      </div>
+<head>
+  <title>DevTrac Global</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% assets "css_all" %}
+  <link rel="stylesheet" media="screen" href="{{ ASSET_URL }}"></link>
+  {% endassets %}
 
-      <div panel panel-expand='{"left":"10px"}' panel-collapse='{"left":"-300px"}' class='filter-panel expanded dt-panel ng-cloak' id="filter-panel">
-        <div ng-include="'/static/templates/breadcrumb.html'" class='breadcrumb-section'></div>
+</head>
+<body>
+  <div ng-include="'/static/templates/nav_bar.html'"></div>
+  <div ng-view></div>
+  <div id='map-container'>
+    <div id='right-hand-panel' >
+      <div map id='devtrac-map'></div>
+      <div ng-if="indicator.selected != null" class='heatmap-legend'>
+        <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
+      </div>
+    </div>
+
+    <div panel panel-expand='{"left":"10px"}' panel-collapse='{"left":"-300px"}' class='filter-panel expanded dt-panel ng-cloak' id="filter-panel">
+      <div ng-include="'/static/templates/breadcrumb.html'" class='breadcrumb-section'></div>
       
-        <div class='filters-container'>  
-          <div ng-include="'/static/templates/filters.html'" class='filters-section'></div>
-        </div>
+      <div class='filters-container'>  
+        <div ng-include="'/static/templates/filters.html'" class='filters-section'></div>
       </div>
+    </div>
 
-      <div class='detail-panel'>
-        <div  class='container'>
-          <div class ="row">
-            <div class="col-md-5" ng-include="'/static/templates/summary.html'" class='summary-section'></div>
-            <div class="col-md-6 ureport-section" >
+    <div class='detail-panel'>
+      <div  class='container'>
+        <div class ="row">
+          <div class="col-md-5 well tinted-background well-offset" ng-include="'/static/templates/summary.html'" class='summary-section'></div>
+          <div class="col-md-6 ureport-section" >
+            <div class="well tinted-background">
               <div ng-controller="UReportCtrl" class="ureport-questions">
                 <h3>UReport questions.</h3>
                 <button type="button" ng-click='ureportQuestion.selected = null;' class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == null ? 'toggle-selected' : '' }]}" >None</button>    
                 <button type="button" data-question='{[{question.abbreviation}]}' ng-click='ureportQuestion.selected = question;' ng-repeat="question in questions" class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == question ? 'toggle-selected' : '' }]}" >{[{question.abbreviation}]}</button>    
               </div>
               <div ng-include="'/static/templates/ureport_summary.html'"></div>
-              
-                <div id="project-details" projectdetails >
-                  <div ng-repeat="details in projectDetails | orderBy:'order'">{[{ details["key"] }]} : {[{ details["value"] }]}</div>
-                </div>
-              
+            </div>
+            <div class="well tinted-background">
+            <div class="well-header">
+                <h3>Project Details</h3>                  
+              </div>
+              <div id="project-details" style="clear:both" projectdetails >
+                <div ng-repeat="details in projectDetails | orderBy:'order'"><span class="detail-key">{[{ details["key"] }]}:</span><span class="detail-value">{[{ details["value"] }]}</span></div>
+              </div>  
             </div>
           </div>
         </div>
       </div>
-
-
     </div>
 
 
+  </div>
 
-    
 
-    {% assets "js_all" %}
-      <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {% endassets %}
 
-    {% if test %}
-      <script type="text/javascript"> DT.testing = true;</script>
-    {% endif %}
-  </body>
+
+
+  {% assets "js_all" %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
+
+  {% if test %}
+  <script type="text/javascript"> DT.testing = true;</script>
+  {% endif %}
+</body>
 </html>
 
 

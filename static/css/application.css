@@ -517,4 +517,34 @@ h3 {
 }
 .container{
   max-width: 1220px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.well-offset{
+  margin: 10px 15px 0px 30px;
+}
+.well-header{
+  margin: 0 0 15px 0;
+  border-bottom: 1px solid #aaaaaa;
+}
+.well-header h3{
+  font-size: 14pt;
+}
+
+.tinted-background{
+  background-color: rgba(255, 255, 255, 0.96);
+}
+#project-details .detail-value{
+  display: inline-block;
+  width: 80%;
+  margin-bottom: 3px;
+}
+#project-details .detail-key{
+  font-weight: bold;
+  width: 18%;
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+#poll-results{
+  height: 175px;
 }
