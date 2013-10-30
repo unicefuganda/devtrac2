@@ -184,7 +184,9 @@ angular.module("dashboard").directive('map', function() {
                 if(newValue){
                     $.each(newValue.properties, function(key, value){
                         var newKey = $.each(DT.projectDetailLabels, function(index, details){
-                            if(details.key == key && value){
+                            if(details.key == key){
+                                value = value ? value : "N/A";
+                                
                                 message.push({"key" : details.label, "value" : value, "order": details.order });
                             }
                         });
