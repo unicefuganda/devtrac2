@@ -6,31 +6,31 @@ body {
 }
 
 h3 {
-    font-size: 13px;
-    font-weight: 500;
-    font-style: normal;
-    font-variant: normal;
-    margin: 0;
-    margin-bottom: 10px;
-    margin-top: 4px;
-    text-transform: capitalize;
-    -webkit-font-smoothing: antialiased;
-    color: #DDD;
+  font-size: 13px;
+  font-weight: 500;
+  font-style: normal;
+  font-variant: normal;
+  margin: 0;
+  margin-bottom: 10px;
+  margin-top: 4px;
+  text-transform: capitalize;
+  -webkit-font-smoothing: antialiased;
+  color: #DDD;
 }
 
 
 #map-container {
-    width: 100%;
-    top: 0px;
-    height: 100%;
-    left: 0px;
-    z-index: 0;
-    position: absolute;
+  width: 100%;
+  top: 0px;
+  height: 100%;
+  left: 0px;
+  z-index: 0;
+  position: absolute;
 }
 
 #devtrac-map {
-    width: 100%;
-    height: 100%;   
+  width: 100%;
+  height: 100%;   
 }
 
 .toggle {
@@ -57,12 +57,15 @@ h3 {
 }
 
 #right-hand-panel {
-    position: relative;
-    float: right;
-    width: 100%;
-    border-left: 1px solid #AAA;
-    height:95%;
-    padding-left: 350px;
+  position: relative;
+  float: right;
+  width: 100%;
+  border-left: 1px solid #AAA;
+  height:95%;
+  padding-left: 350px;
+  -webkit-box-shadow: 0px 2px 16px #000;
+  -moz-box-shadow: 0px 2px 16px #000;
+  box-shadow: 0px 2px 16px #000;
 }
 
 /* NAV BAR */
@@ -200,9 +203,8 @@ h3 {
 
 .detail-panel {
   border-top: 1px solid #666 ;
-  background-color: #DDD;
+  background-color: rgba(27, 27, 27, 0.93);
   width: 100%;
-  min-height: 400px;
   float: left;
   color: black;
 }
@@ -292,14 +294,14 @@ h3 {
 }
 
 .nav.nav-tabs>li>a {
-   padding: 6px 10px;
-  background-color: rgb(64, 64, 64);
-  color: #DDD;
-  font-weight: 500;
-  -webkit-font-smoothing: antialiased;
-  border-color: #666;
-  font-size: 13px;
-  border: none;
+ padding: 6px 10px;
+ background-color: rgb(64, 64, 64);
+ color: #DDD;
+ font-weight: 500;
+ -webkit-font-smoothing: antialiased;
+ border-color: #666;
+ font-size: 13px;
+ border: none;
 }
 
 .nav.nav-tabs>li.active a:hover {
@@ -435,41 +437,41 @@ h3 {
 }
 
 .ureport-section {
-    margin: 10px 5px;
+  margin: 10px 5px;
 }
 
 .ureport-top5  {
-    list-style-type: none;
-    padding-left: 0;
-    margin-top:6px;
-    width: 60%;
-    float: left;
+  list-style-type: none;
+  padding-left: 0;
+  margin-top:6px;
+  width: 60%;
+  float: left;
 }
 
 .ureport-top5 li {
-    float: left;
-    font-size: 12px;
-    background-color: #EEE;
-    display: block;
-    padding: 2px;
-    border-radius: 3px;
-    font-style: italic;
-    margin-right: 10px;
-    margin-bottom: 6px;
-    
+  float: left;
+  font-size: 12px;
+  background-color: #EEE;
+  display: block;
+  padding: 2px;
+  border-radius: 3px;
+  font-style: italic;
+  margin-right: 10px;
+  margin-bottom: 6px;
+
 }   
 
 .ureport-results {
-    float:left;
-    overflow: hidden;;
-    list-style-type: none;
-    padding-left: 0;
+  float:left;
+  overflow: hidden;;
+  list-style-type: none;
+  padding-left: 0;
 }
 .ureport-results label {
-    text-transform: capitalize; 
-    font-size: 12px;   
-    font-weight: 500;
-    margin-left: 6px;
+  text-transform: capitalize; 
+  font-size: 12px;   
+  font-weight: 500;
+  margin-left: 6px;
 }
 
 .ureport-results .legend {
@@ -493,21 +495,21 @@ h3 {
 }
 
 .ureport-question-selected #devtrac-map {
-    height: 75%;
+  height: 75%;
 }
 
 #summary-panel {
-    position: relative;
-    top: 0px;
-    left: 0px;
+  position: relative;
+  top: 0px;
+  left: 0px;
 }
 
 #summary-panel .content{
-    margin: 0;
-    padding: 0;
-    margin-top: 10px;
-    border: none;
-    min-height: 0px;
+  margin: 0;
+  padding: 0;
+  margin-top: 10px;
+  border: none;
+  min-height: 0px;
 }
 .tab-pane.active{
   padding: 12px 0px;
@@ -516,8 +518,10 @@ h3 {
   padding: 10px 8px;
 }
 .container{
-  max-width: 1220px;
-  background-color: rgba(255, 255, 255, 0.4);
+  max-width: 1058px;
+  background-color: #E5E5E5;
+  margin-bottom: 5px;
+  padding-bottom: 10px;
 }
 .well-offset{
   margin: 10px 15px 0px 30px;
@@ -535,12 +539,12 @@ h3 {
 }
 #project-details .detail-value{
   display: inline-block;
-  width: 80%;
+  width: 71%;
   margin-bottom: 3px;
 }
 #project-details .detail-key{
   font-weight: bold;
-  width: 18%;
+  width: 21%;
   margin-right: 10px;
   display: inline-block;
   vertical-align: top;

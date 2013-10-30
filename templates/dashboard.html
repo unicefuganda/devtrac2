@@ -34,14 +34,16 @@
           <div class="col-md-6 ureport-section" >
             <div class="well tinted-background">
               <div ng-controller="UReportCtrl" class="ureport-questions">
-                <h3>UReport questions.</h3>
+                <div class="well-header">
+                  <h3>UReport questions.</h3>
+                </div>
                 <button type="button" ng-click='ureportQuestion.selected = null;' class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == null ? 'toggle-selected' : '' }]}" >None</button>    
                 <button type="button" data-question='{[{question.abbreviation}]}' ng-click='ureportQuestion.selected = question;' ng-repeat="question in questions" class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == question ? 'toggle-selected' : '' }]}" >{[{question.abbreviation}]}</button>    
               </div>
               <div ng-include="'/static/templates/ureport_summary.html'"></div>
             </div>
             <div class="well tinted-background">
-            <div class="well-header">
+              <div class="well-header">
                 <h3>Project Details</h3>                  
               </div>
               <div id="project-details" style="clear:both" projectdetails >
