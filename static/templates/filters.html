@@ -89,14 +89,9 @@
       <h3>Year</h3>
       <div class='filter' id='project-year'>
           <ul class='year-labels'>
-            <li>2008</li>
-            <li>2009</li>
-            <li>2010</li>
-            <li>2011</li>
-            <li>2012</li>
-            <li>2013</li>
-          </ul>
-          <input type="range" name="points" min="2008" max="2013">        
+            <li ng-repeat="endDate in endDates" value="{[{endDate}]}">{[{endDate}]}</li>
+          <input ng-model="filter.project.endDate" type="range" name="points" min="2008" max="2013"> 
+          </ul>       
       </div>
 
     </div>

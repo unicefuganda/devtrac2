@@ -39,7 +39,7 @@ js = Bundle(
 	'javascript/lib/jquery.flot.min.js',
 	'javascript/lib/jquery.flot.pie.min.js',
 	'javascript/lib/chosen.jquery.min.js',
-	'javascript/lib/modernizer.js',
+	'javascript/lib/modernizr.js',
      filters='jsmin', output='gen/packed.js')
 
 assets.register('js_all', js)

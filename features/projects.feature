@@ -45,6 +45,13 @@ And I filter by Partner for "UNICEF"
 Then there are "34" unicef projects in "Acholi"
 And there are no usaid projects in "Acholi"
 
+Scenario: Filter by End Date
+Given that I am a regular user
+When I go to the homepage
+And I filter by End Date for "2011"
+Then there are "34" unicef projects in "Acholi"
+
+
 
 
 

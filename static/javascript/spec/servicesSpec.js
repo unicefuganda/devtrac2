@@ -167,9 +167,9 @@ describe("Ureport Service question results", function(){
 
 describe("Project Service", function () {
     var testResponses = {features: [
-        {properties: {PARTNER: 'Unicef', 'Reg_2011': 'test region', 'DNAME_2010': 'test district', 'ID': 1,'SECTOR': 'Education','STATUS': 'Completion', 'IMPLEMENTE': 'Africare'}}, 
-        {properties: {PARTNER: 'Unicef', 'Reg_2011': 'test region', 'DNAME_2010': 'test district', 'SNAME_2010': 'test subcounty', 'ID': 2,'SECTOR': 'Agriculture','STATUS': 'Completion', 'IMPLEMENTE': 'Africare'}}, 
-        {properties: {PARTNER: 'USAID', 'Reg_2011': 'test region', 'DNAME_2010': 'test district 2', 'ID': 3 ,'SECTOR': 'Education','STATUS': 'Post-completion', 'IMPLEMENTE': 'Arbeiter Samariter Bund'}}] }
+        {properties: {PARTNER: 'Unicef', 'Reg_2011': 'test region', 'DNAME_2010': 'test district', 'ID': 1,'SECTOR': 'Education','STATUS': 'Completion', 'IMPLEMENTE': 'Africare','END_ACTUAL': '25/07/2010'}}, 
+        {properties: {PARTNER: 'Unicef', 'Reg_2011': 'test region', 'DNAME_2010': 'test district', 'SNAME_2010': 'test subcounty', 'ID': 2,'SECTOR': 'Agriculture','STATUS': 'Completion', 'IMPLEMENTE': 'Africare','END_ACTUAL': '25/07/2011'}}, 
+        {properties: {PARTNER: 'USAID', 'Reg_2011': 'test region', 'DNAME_2010': 'test district 2', 'ID': 3 ,'SECTOR': 'Education','STATUS': 'Post-completion', 'IMPLEMENTE': 'Arbeiter Samariter Bund','END_ACTUAL': '25/07/2010'}}] }
 
     var testSummaryChildrenLocations = [
         new DT.Location({region: 'test region', district: 'test district'}),
@@ -264,6 +264,20 @@ describe("Project Service", function () {
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
         var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, implementingPartners:  null });
+        expect(mapProjectId(projects)).toEqual([1, 2, 3]);
+
+    }));
+
+      it('should filter projects by End Year', inject(function(projectService){
+        var location =new DT.Location({region: 'test region'});
+        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, endDate: '2010' });
+
+        expect(mapProjectId(projects)).toEqual([1,3]);
+
+        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, endDate: '2011' });
+        expect(mapProjectId(projects)).toEqual([2]);
+
+        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, endDate:  null });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
     }));

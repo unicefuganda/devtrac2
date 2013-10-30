@@ -482,17 +482,12 @@ angular.module("dashboard")
                 });
             }  
 
-              if(projectFilter.startDate && projectFilter.startDate.length > 0){
-                features = $.grep(features,function(project){
-                    return $.inArray(project.properties['START_ACTU'], projectFilter.startDate) != -1
-                });
-            }
-
               if(projectFilter.endDate && projectFilter.endDate.length > 0){
                 features = $.grep(features,function(project){
-                    return $.inArray(project.properties['END_ACTUAL'], projectFilter.endDate) != -1
-                });
-            }  
+                    return project.properties['END_ACTUAL'].substring(6) == projectFilter.endDate
+                });     
+
+            }
 
             return features;
         };
@@ -519,6 +514,10 @@ angular.module("dashboard")
 
         this.statuses = function () {
             return ["Pipeline/identification","Implementation","Completion","Post-completion","Cancelled"];
+        };
+
+         this.endDates = function () {
+            return ["2008","2009","2010","2011","2012","2013"];
         };
 
         this.implementingPartners = function () {
