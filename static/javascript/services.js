@@ -480,7 +480,19 @@ angular.module("dashboard")
                 features = $.grep(features,function(project){
                     return $.inArray(project.properties['IMPLEMENTE'], projectFilter.implementingPartners) != -1
                 });
-            }    
+            }  
+
+              if(projectFilter.startDate && projectFilter.startDate.length > 0){
+                features = $.grep(features,function(project){
+                    return $.inArray(project.properties['START_ACTU'], projectFilter.startDate) != -1
+                });
+            }
+
+              if(projectFilter.endDate && projectFilter.endDate.length > 0){
+                features = $.grep(features,function(project){
+                    return $.inArray(project.properties['END_ACTUAL'], projectFilter.endDate) != -1
+                });
+            }  
 
             return features;
         };

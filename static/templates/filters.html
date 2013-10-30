@@ -80,13 +80,24 @@
         </select>
       </div>
 
-       <h3>Implementing Partner:</h3>
+      <h3>Implementing Partner:</h3>
       <div class='filter' id='project-implementing-partner'>
         <select chosen data-placeholder="Choose Partner" data-filterCollection='implementingPartners' multiple class='chosen-select' >
           <option ng-repeat="implementingPartner in implementingPartners" value="{[{implementingPartner}]}">{[{implementingPartner}]}</option>
         </select>
       </div>
-
+      <h3>Year</h3>
+      <div class='filter' id='project-year'>
+          <ul class='year-labels'>
+            <li>2008</li>
+            <li>2009</li>
+            <li>2010</li>
+            <li>2011</li>
+            <li>2012</li>
+            <li>2013</li>
+          </ul>
+          <input type="range" name="points" min="2008" max="2013">        
+      </div>
 
     </div>
   </div>

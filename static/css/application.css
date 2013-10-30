@@ -363,6 +363,24 @@ h3 {
   height: auto;
 }
 
+#project-year .year-labels {
+  list-style-type: none;
+  padding-left: 0;
+  width: 100%;
+}
+
+#project-year .year-labels li{
+  display: inline-block;
+  text-align: center;
+  width: 15%;
+}
+
+#project-year input[type=range] {
+  width: 80%;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 /* SUMMARY */
 
 #summary {
