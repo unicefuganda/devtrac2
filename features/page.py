@@ -122,8 +122,12 @@ class Page:
         return self.browser.find_by_css(toggle_css).click();
 
     def ureport_results(self):
-        self.take_screenshot();
+        self.take_screenshot()
         return self.browser.find_by_css(".ureport-results .legend").text
+
+    def wait_for_element_visible(self, selector):
+        self.wait_for(lambda page: len(self.browser.find_by_css(selector)) > 0)
+        return self.browser.find_by_css(selector)
 
     def wait_for(self, function):
         for _ in itertools.repeat(None, 10):
@@ -134,6 +138,27 @@ class Page:
         raise Exception('wait for timed out after 5 seconds')
 
     def click_marker_at(self, lat, lng):
-        marker = self.browser.find_by_css(str( "div[data-lat='%s'][data-lng='%s']" % (lat, lng)))
+        marker = self.wait_for_element_visible(str("div[data-lat='%s'][data-lng='%s']" % (lat, lng)))
         marker.click()
+
+    def __filter_chosen__(self, parentId, value):
+        container = self.browser.find_by_css("#%s .chosen-container" % parentId)
+        container.click()
+        text_list = list([elem.text for elem in container.find_by_css(".chosen-results li")])
+        index = text_list.index(value)
+        container.find_by_css(str(".chosen-results li:nth-child(%s)" % (index +1))).click()
+
+    def filter_by_sector(self, sector): 
+        self.browser.find_link_by_text("Projects/Partners").click()
+        self.__filter_chosen__('project-sector', sector)
+
+    def filter_by_status(self, status): 
+        self.browser.find_link_by_text("Projects/Partners").click()
+        self.__filter_chosen__('project-status', status)
+
+    def filter_by_implementing_partner(self, implementing_partner): 
+        self.browser.find_link_by_text("Projects/Partners").click()
+        self.__filter_chosen__('project-implementing-partner', implementing_partner)
+
+        
         
