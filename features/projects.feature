@@ -19,6 +19,7 @@ Then the bottom panel contains the following details:
 	Description : Preventing and Responding to Violence against Children and support to keep children alive
     """
 
+
 Scenario: Filter by Sector
 Given that I am a regular user
 When I go to the homepage
@@ -36,6 +37,13 @@ Given that I am a regular user
 When I open dashboard for "Teso"
 And I filter by Implementing Partner for "Africare"
 Then there are "1" unicef projects in "Teso, Amuria"
+
+Scenario: Filter by Partner
+Given that I am a regular user
+When I go to the homepage
+And I filter by Partner for "UNICEF"
+Then there are "34" unicef projects in "Acholi"
+And there are no usaid projects in "Acholi"
 
 
 

@@ -88,6 +88,10 @@ class Page:
         content = self.browser.find_by_css(str( ".%s-cluster-icon div[data-locator='%s']" % (layer, locator.lower())))
         return int(content.text)
 
+    def marker_visible(self, layer, locator):
+        content = self.browser.find_by_css(str( ".%s-cluster-icon div[data-locator='%s']" % (layer, locator.lower())))
+        return len(content) > 0
+
     def popup_content(self):
         return self.browser.find_by_css(".marker-popup").text
 
@@ -159,6 +163,12 @@ class Page:
     def filter_by_implementing_partner(self, implementing_partner): 
         self.browser.find_link_by_text("Projects/Partners").click()
         self.__filter_chosen__('project-implementing-partner', implementing_partner)
+
+    def filter_by_partner(self, partner): 
+        self.browser.find_link_by_text("Projects/Partners").click()
+        self.browser.uncheck("usaid-checkbox");
+        self.take_screenshot();
+        
 
         
         
