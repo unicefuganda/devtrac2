@@ -12,4 +12,6 @@ node_modules/
 twistd.log*
 twistd.pid
 screen*.png
+
+#virtual env python environments
 devtrac2-env

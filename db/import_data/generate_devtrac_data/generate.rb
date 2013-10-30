@@ -2,6 +2,7 @@ require 'iconv'
 require 'csv'
 require 'json'
 require 'net/http'
+require_relative 'file_accessor'
 
 @test = (ARGV.first == 'test' ? true : false)
 
@@ -9,47 +10,6 @@ require 'net/http'
 @file_name = 'USAID_activities_formatted.csv'
 @districts_file_name = 'UNICEF_districts.csv'
 
-def read_file file_name
-    lines = CSV.read(file_name)
-
-    puts "Read main file #{file_name} (#{lines.size} lines)"
-
-    lines
-end
-
-def clean_bad_bytes file_name
-    clean_lines = []
-
-    File.open(file_name, 'r') do |infile|
-        while (line = infile.gets)
-            clean_lines << clean_line(line)
-        end
-    end
-
-    clean_lines
-end
-
-def clean_line line
-    ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
-
-    ic.iconv(line + ' ')[0..-2]
-end
-
-def write_new_file file_name, lines
-    counter = 0
-    File.open(file_name, "w") do |file|
-        file.puts @header.join(',')
-        counter += 1
-        lines.each do |line|
-            if line.size > 1
-                counter += 1
-                file.puts "\"" + line.join("\",\"") + "\""
-            end
-        end
-    end
-
-    puts "Wrote main file as #{file_name} (#{counter} lines)"
-end
 
 def remove_header lines
     lines.shift
@@ -59,20 +19,11 @@ def manipulate_data lines, districts_hash
     temp_lines = []
     old_lines = []
 
-    lines.each do |line|
-        districts = line[8].clone
-        if districts.include?("|")
-            districts = districts.split("|")
-        else
-            districts = [districts]
-        end
+    lines.each do |original_line|
+        districts = split_districts line[8].clone
 
-        temp_districts = []
-        districts.each do |dist|
-            temp_districts << districts_hash[dist]
-        end
+        temp_districts = lookup_district_names districts, districts_hash
 
-        original_line = line
         old_lines << line
 
         temp_districts.each do |t_d|
@@ -86,7 +37,7 @@ def manipulate_data lines, districts_hash
             end
         end
 
-        puts "Done with line " + line[0]
+        puts "Done with line " + original_line[0]
     end
 
     old_lines.each do |line|
@@ -96,25 +47,24 @@ def manipulate_data lines, districts_hash
     lines.concat temp_lines
 end
 
+def lookup_district_names districts, districts_hash
+    temp_districts = []
 
-def add_new_to_file_name file_name
-    file_pieces = file_name.split('.')
-    if file_pieces.size !=2
-        raise 'File name should have only single extension'
-    else
-        file_pieces[0] + "_new." + file_pieces[1]
+    districts.each do |dist|
+        temp_districts << districts_hash[dist]
     end
+
+    temp_districts
 end
 
-def read_districts file_name
-    File.open(file_name, "r") do |infile|
-        while (line = infile.gets)
-            @lines << line.split(',')
-            @counter += 1
-        end
-
-        puts "Read districts file #{file_name} (#{@counter} lines)"
+def split_districts districts
+    if districts.include?("|")
+        split_districts = districts.split("|")
+    else
+        split_districts = [districts]
     end
+
+    split_districts
 end
 
 def array_to_hash array
@@ -152,16 +102,13 @@ def format_address address
     address.concat("%2C%20Uganda")
 end
 
-lines = read_file @file_name
+file_accessor = FileAccessor.new
+districts = file_accessor.read_file @districts_file_name, false
 
-@header = remove_header lines
-@header[@header.size - 2] = 'DISTRICT'
-@header.concat ['LAT', 'LONG']
-
-districts = read_file @districts_file_name
+lines = file_accessor.read_file @file_name, true
 
 puts "File read, now adding data"
 new_lines = manipulate_data(lines, array_to_hash(districts))
 
-write_new_file add_new_to_file_name(@file_name), new_lines
+file_accessor.write_new_file @file_name, new_lines
 
