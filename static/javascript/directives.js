@@ -6,7 +6,7 @@ angular.module("dashboard").directive('map', function() {
             }
 
             $scope.selectProject = function(projectId) {
-                $scope.project.selected = projectService.findById($scope.location, $scope.filter.project, projectId)
+                $scope.project.selected = projectService.findById(projectId)
             }
 
 
@@ -180,27 +180,4 @@ angular.module("dashboard").directive('map', function() {
             });
         }
     };
-}).directive("projectdetails", function(){
-    return {
-        scope: true,
-        link: function(scope, element, attrs){
-            scope.$watch('selectedProject',function(newValue, oldValue){
-                var projectDetails = [];
-                console.log(newValue);
-                if(newValue){
-                    $.each(DT.projectDetailLabels, function(index, details){
-                        $.each(newValue.properties, function(key, value){
-                            if(details.key == key){
-                                var nonEmptyValue = value ? value : "N/A";
-                                projectDetails.push({"key" : details.label, "value" :  nonEmptyValue });   
-                            }
-                        });
-                    });
-                }
-
-                scope.projectDetails = projectDetails;
-
-            }, true);
-        }
-    }
 });

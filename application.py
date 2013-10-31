@@ -26,7 +26,6 @@ js = Bundle(
 	'javascript/lib/mapbox.js',
 	'javascript/dashboard.js',
 	'javascript/controllers.js',
-	'javascript/services.js',
 	'javascript/directives.js',
 	'javascript/map.js',
 	'javascript/utilities.js',
@@ -41,6 +40,8 @@ js = Bundle(
 	'javascript/lib/chosen.jquery.min.js',
 	'javascript/lib/modernizr.js',
 	'javascript/dt/project.js',
+	'javascript/services/services.js',
+	'javascript/services/project-service.js',
      filters='jsmin', output='gen/packed.js')
 
 assets.register('js_all', js)
