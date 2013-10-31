@@ -397,8 +397,8 @@ h3 {
 }
 
 #summary div.info { 
-  float: left; 
   margin-right: 30px; 
+  display:  inline-block;
 }
 
 #summary label { 
@@ -516,25 +516,28 @@ h3 {
   border: none;
   min-height: 0px;
 }
+
 .tab-pane.active{
   padding: 12px 0px;
 }
+
 .sectors-pane{
   padding: 10px 8px;
 }
+
 .container{
-  max-width: 1058px;
   background-color: #E5E5E5;
-  margin-bottom: 5px;
-  padding-bottom: 10px;
 }
+
 .well-offset{
   margin: 10px 15px 0px 30px;
 }
+
 .well-header{
   margin: 0 0 15px 0;
   border-bottom: 1px solid #aaaaaa;
 }
+
 .well-header h3{
   font-size: 14pt;
 }
@@ -542,18 +545,26 @@ h3 {
 .tinted-background{
   background-color: rgba(255, 255, 255, 0.96);
 }
+
+#project-details ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
 #project-details .detail-value{
   display: inline-block;
-  width: 71%;
+  width: 61%;
   margin-bottom: 3px;
 }
+
 #project-details .detail-key{
   font-weight: bold;
-  width: 21%;
+  width: 31%;
   margin-right: 10px;
   display: inline-block;
   vertical-align: top;
 }
+
 #poll-results{
   overflow: hidden;
 }

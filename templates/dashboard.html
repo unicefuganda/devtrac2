@@ -33,7 +33,13 @@
     <div class='detail-panel'>
       <div  class='container'>
         <div class ="row">
-          <div class="col-md-5 well tinted-background well-offset" ng-include="'/static/templates/summary.html'" class='summary-section'></div>
+          <div class="col-md-5" >
+            <div class="well tinted-background  well-offset">
+              <div ng-include="'/static/templates/summary.html'" class='summary-section'></div>
+            </div>
+            
+
+          </div>
           <div class="col-md-6 ureport-section" >
             <div class="well tinted-background">
               <div ng-controller="UReportCtrl" class="ureport-questions">
@@ -45,17 +51,14 @@
               </div>
               <div ng-include="'/static/templates/ureport_summary.html'"></div>
             </div>
-            <div class="well tinted-background">
-              <div class="well-header">
-                <h3>Project Details</h3>                  
-              </div>
-              <div id="project-details" style="clear:both" projectdetails >
-                <div ng-repeat="details in projectDetails">
-                  <span class="detail-key">{[{ details["key"] }]}:</span>
-                  <span class="detail-value">{[{ details["value"] }]}</span>
-                </div>
-              </div>  
+            <div class="well tinted-background"  ng-show='project.selected != null'>
+              <div ng-include="'/static/templates/project.html'"></div> 
             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 ">
+            <div ng-include="'/static/templates/projects.html'"></div> 
           </div>
         </div>
       </div>

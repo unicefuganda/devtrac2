@@ -1,0 +1,22 @@
+<div ng-controller="ProjectsCtrl" class='well tinted-background'>
+  <div class="well-header">
+    <h3>Projects </h3>
+    <table class="table table-condensed table-striped">
+      <thead>
+        <tr>
+          <th>Partner</th>
+          <th>Project Name</th>
+          <th>Planned Dates</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="p in projects" >
+
+          <td>{[{ p.partner }]}</td>
+          <td><a href="#" ng-click="project.selected = p">{[{ p.name }]}</a></td>
+          <td>{[{ p.startActual }]} - {[{ p.endActual }]}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,9 +1,13 @@
 angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $routeParams, $location) {
     DT.timings["urlchange"] = new Date().getTime();
 
+    if ($rootScope.project == undefined)
+        $rootScope.project = {};
+    
     $rootScope.location = new DT.Location($routeParams);
     if ($rootScope.filter == undefined)
         $rootScope.filter = new DT.Filter({health_center: false, water_point: false, school: true, project: { partner: { unicef: true, usaid: true} }} );
+    
 
 
 }).controller("IndicatorsCtrl", function($scope, $rootScope, heatmapService) {
@@ -74,4 +78,14 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $scope.statuses = projectService.statuses();
     $scope.implementingPartners = projectService.implementingPartners();
     $scope.years = projectService.years();
+})
+.controller("ProjectsCtrl", function($scope, projectService){
+    $scope.$watch('location',function(newLocation,oldLocation){
+        if(newLocation == null){
+            return;
+        }
+        projectService.projects(newLocation, $scope.filter.project).then(function(data){
+            $scope.projects = data;
+        });
+    });
 });

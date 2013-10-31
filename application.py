@@ -40,6 +40,7 @@ js = Bundle(
 	'javascript/lib/jquery.flot.pie.min.js',
 	'javascript/lib/chosen.jquery.min.js',
 	'javascript/lib/modernizr.js',
+	'javascript/dt/project.js',
      filters='jsmin', output='gen/packed.js')
 
 assets.register('js_all', js)
@@ -82,8 +83,6 @@ def ureport_top5(question_id, locator):
 @app.route("/ureport/questions/<question_id>/results/<locator>")
 def ureport_results(question_id, locator):
 	result = services.UReportService(__mongo_connection()).results(services.Locator(locator), question_id)
-	
-
 	return Response(dumps(result), mimetype='application/json')
 
 @app.route("/ureport/questions/<question_id>/child_results/<locator>")

@@ -6,14 +6,11 @@ And I click on the project Icon at latitude "2.8193" and logitude "32.3848"
 Then the bottom panel contains the following details:
     """
 	Project Name: Preventing and Responding to Violence against Children and support to keep children alive
-	Partner: UNICEF
-	Implementer: World Council of Churches
-	District: Gulu
+	Accountable Agency: UNICEF
+	Implementing Partner: World Council of Churches
 	Sector: Development 
-	Start Actual: 25/01/2011
-	Start Planned: 25/01/2011
-	End Actual: 25/07/2011
-	End Planned: 25/07/2011
+	Actual Duration: 25/01/2011 - 25/07/2011
+	Planned Duration: 25/01/2011 - 25/07/2011
 	Status: Post-completion
 	Description: Preventing and Responding to Violence against Children and support to keep children alive
     """

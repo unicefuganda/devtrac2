@@ -509,10 +509,10 @@ angular.module("dashboard")
             return projectAggregation;
         };
 
-        var projectsGeojson = geonodeService.get('projects');
+        var projectsGeojsonPromise = geonodeService.get('projects');
 
         this.partners = function() {
-            return projectsGeojson.then(function(data) { return getUniquePartners(data.features) });
+            return projectsGeojsonPromise.then(function(data) { return getUniquePartners(data.features) });
         };
 
         this.sectors = function () {
@@ -528,7 +528,7 @@ angular.module("dashboard")
         };
 
         this.implementingPartners = function () {
-            return projectsGeojson.then(function(data) { 
+            return projectsGeojsonPromise.then(function(data) { 
                 var result =  getUniqueImplementingPartners(data.features) 
                 console.log(result);
                 return result;
@@ -536,7 +536,7 @@ angular.module("dashboard")
         }
 
         this.aggregation = function (location, projectFilter) {
-            return projectsGeojson.then(function(data) {
+            return projectsGeojsonPromise.then(function(data) {
                 var partners = getUniquePartners(data.features)
                 var filteredProjects = filterProjects(data, location, projectFilter);
                 return summaryService.childLocations(location).then(function(locations) {
@@ -553,11 +553,29 @@ angular.module("dashboard")
         };
 
         this.projects_geojson = function (location, projectFilter) {
-            return projectsGeojson.then(function(data) {
+            return projectsGeojsonPromise.then(function(data) {
                 return {
                     type: "FeatureCollection",
                     features: filterProjects(data, location, projectFilter)
                 };
             });
         };
+
+        this.projects = function(location, projectFilter){
+            return self.projects_geojson(location, projectFilter).then(function(data){
+                return $.map(data.features, function (projectFeature, index) {
+                    return new DT.Project(projectFeature.properties)
+                });
+            });
+        }
+        
+        this.findById = function(location, projectFilter, projectId) {
+            return self.projects(location, projectFilter).then(function(projects) { 
+                return DT.first(projects, function(project) { 
+                    return project.id == projectId; 
+                }); 
+            });
+        }
     });;
+
+
