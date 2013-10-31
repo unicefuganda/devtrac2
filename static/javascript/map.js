@@ -139,7 +139,7 @@ DT.Map = function(element, basemap) {
                 iconSize: new L.Point([10, 10]),
                 className: layer_info.name + "-icon marker-icon ",
                 html: "<div data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'>"
-                    + layer_info.getValue(feature.properties) + 
+                    + layer_info.getValue(feature.properties, layer_info) + 
                 "</div>",
                 popupAnchor: [5, -10]
             });

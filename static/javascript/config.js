@@ -54,3 +54,8 @@ DT.projectDetailLabels =
 ]
 
 DT.piechart_colors = ["red", "blue", "yellow", "green", "lightblue", "orange", "salmon", "cyan", "magenta"]
+
+DT.markerColorLegend = {
+    unicef: "red",
+    usaid: 'blue'
+}

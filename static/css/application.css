@@ -568,3 +568,6 @@ h3 {
 #poll-results{
   overflow: hidden;
 }
+.pin-images{
+  width: 20px;
+}

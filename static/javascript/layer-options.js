@@ -46,12 +46,7 @@ DT.Layers = {
             layers.push(["health-center-point", location]);
         }
 
-        if (location.level() == "district" || location.level() == "subcounty" || location.level() == "parish") {
-            layers.push(["project-point", location]);
-        } else {
-            layers.push(["unicef", location]);
-            layers.push(["usaid", location]);
-        }
+        layers.push(["project-point", location]);
 
         return $.grep(layers, function(locationKey) {
             return $.inArray(locationKey[0], filteredKeys) == -1;
@@ -304,8 +299,8 @@ DT.LayerOptions = {
     "project-point": {
         name: "project-point",
         type: "point",
-        getValue: function(properties) { 
-            return "<img src='\\static\\images\\" + properties.PARTNER.toLowerCase() + ".png'> " 
+        getValue: function(properties, layer_info) {
+            return "<img class='pin-images' src='\\static\\images\\pins\\pin_"+layer_info.markerColorLegend[properties.PARTNER.toLowerCase()]+".png'> " 
         },
         summaryInformation: function(properties) {
             return {
@@ -321,6 +316,7 @@ DT.LayerOptions = {
     "unicef": {
         name: "unicef",
         type: "aggregate",
+        markerColor: "blue",
         display: function(stats){ return stats.info.unicef > 0; },
         getValue: function(stats, childLocation) { 
             return  "<img src='/static/images/unicef_small.png'></img>"
@@ -333,6 +329,7 @@ DT.LayerOptions = {
     "usaid": {
         name: "usaid",
         type: "aggregate",
+        markerColor: "red",
         display: function(stats){ return stats.info.usaid > 0; },
         getValue: function(stats, childLocation) { 
             return "<img src='/static/images/usaid_small.png'></img>"
