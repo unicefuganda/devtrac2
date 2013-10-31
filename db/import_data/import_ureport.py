@@ -43,6 +43,7 @@ def import_ureport_questions(db):
         reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
 
         for row in reader: 
+            print row
             categories = row['categories'].split(",")
             collection.insert({"question": row['question'], "_id": row['ID'], "id": row['ID'], "abbreviation": row['abbreviation'], "categories": categories})
 
