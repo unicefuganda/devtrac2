@@ -180,20 +180,19 @@ angular.module("dashboard").directive('map', function() {
         scope: true,
         link: function(scope, element, attrs){
             scope.$watch('selectedProject',function(newValue, oldValue){
-                message = [];
+                var projectDetails = [];
                 if(newValue){
-                    $.each(newValue.properties, function(key, value){
-                        var newKey = $.each(DT.projectDetailLabels, function(index, details){
+                    $.each(DT.projectDetailLabels, function(index, details){
+                        $.each(newValue.properties, function(key, value){
                             if(details.key == key){
-                                value = value ? value : "N/A";
-                                
-                                message.push({"key" : details.label, "value" : value, "order": details.order });
+                                var nonEmptyValue = value ? value : "N/A";
+                                projectDetails.push({"key" : details.label, "value" :  nonEmptyValue });   
                             }
                         });
                     });
                 }
 
-                scope.projectDetails = message;
+                scope.projectDetails = projectDetails;
 
             }, true);
         }

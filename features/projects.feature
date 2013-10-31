@@ -1,5 +1,5 @@
 Feature: Projects
-
+@wip
 Scenario: Display extra project information
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu"
@@ -11,10 +11,10 @@ Then the bottom panel contains the following details:
 	Implementer:World Council of Churches
 	District:Gulu
 	Sector:Development 
-	Start Actual:N/A
-	Start Planned:N/A
+	Start Actual:25/01/2011
+	Start Planned:25/01/2011
 	End Actual:25/07/2011
-	End Planned:N/A
+	End Planned:25/07/2011
 	Status:Post-completion
 	Description:Preventing and Responding to Violence against Children and support to keep children alive
     """

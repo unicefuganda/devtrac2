@@ -37,20 +37,20 @@ DT.AgregationConfig.labels = [
     { key: "subcounty", label: "Subcounties", formatter: DT.NumberFormatter},
     { key: "parish", label: "Parishes", formatter: DT.NumberFormatter}
 ]
-order_number = 0;
+
 DT.projectDetailLabels = 
 [
-    {key: "PROJ_NAME", label: "Project Name", order: order_number++},
-    {key: "PARTNER", label: "Partner", order: order_number++},
-    {key: "IMPLEMENTE", label: "Implementer", order: order_number++},
-    {key: "DISTRICTS", label: "District", order: order_number++},
-    {key: "SECTOR", label: "Sector", order: order_number++},
-    {key: "START_ACTU", label: "Start Actual", order: order_number++},
-    {key: "START_PLAN", label: "Start Planned", order: order_number++},
-    {key: "END_ACTUAL", label: "End Actual", order: order_number++},
-    {key: "END_PLANNE", label: "End Planned", order: order_number++},
-    {key: "STATUS", label: "Status", order: order_number++},
-    {key: "PROJ_DESC", label: "Description", order: order_number++}
+    {key: "PROJ_NAME", label: "Project Name"},
+    {key: "PARTNER", label: "Partner"},
+    {key: "IMPLEMENTE", label: "Implementer"},
+    {key: "DISTRICTS", label: "District"},
+    {key: "SECTOR", label: "Sector"},
+    {key: "START_ACTU", label: "Start Actual"},
+    {key: "START_PLAN", label: "Start Planned"},
+    {key: "END_ACTUAL", label: "End Actual"},
+    {key: "END_PLANNE", label: "End Planned"},
+    {key: "STATUS", label: "Status"},
+    {key: "PROJ_DESC", label: "Description"}
 ]
 
 DT.piechart_colors = ["red", "blue", "yellow", "green", "lightblue", "orange", "salmon", "cyan", "magenta"]
