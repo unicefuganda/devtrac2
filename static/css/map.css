@@ -36,12 +36,6 @@
 .filter {
   margin-left: 12px;
 }
-.marker-icon {
-  width: 10px;
-  height: 10px;
-  border-radius: 2px;
-  /*box-shadow: 0 2px 4px rgba(0,0,0,0.65);*/
-}
 
 .cluster-icon.medium.ureport-cluster-icon {
   background-color: rgba(116, 100, 252, 0.6);
@@ -152,13 +146,6 @@
   background-color: rgba(211, 242, 53, 0.9);
 }
 
-.project-point-icon {
-  width: 36px;
-  height: 20px;
-  /*background-color: rgba(255, 255, 255, 0.9);*/
-  text-align: center;
-}
-
 .cluster-icon.medium.unicef-cluster-icon {
   width: 36px;
   height: 36px;
@@ -179,6 +166,7 @@
   line-height: 8px;
   vertical-align: bottom;
 }
+
 .cluster-icon.medium.usaid-cluster-icon {
   width: 36px;
   height: 36px;
@@ -187,4 +175,8 @@
   top: -35px;
   left: -20px;
   border-radius: 18px;
+}
+
+.pin-images{
+  width: 20px;
 }

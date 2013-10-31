@@ -300,7 +300,10 @@ DT.LayerOptions = {
         name: "project-point",
         type: "point",
         getValue: function(properties, layer_info) {
-            return "<img class='pin-images' src='\\static\\images\\pins\\pin_"+layer_info.markerColorLegend[properties.PARTNER.toLowerCase()]+".png'> " 
+            var long_pins = true;
+            var pin_folder = long_pins ? 'long_pins' : 'pins';
+
+            return "<img class='pin-images' src='\\static\\images\\"+pin_folder+"\\pin_"+layer_info.markerColorLegend[properties.PARTNER.toLowerCase()]+".png'> " 
         },
         summaryInformation: function(properties) {
             return {
