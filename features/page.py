@@ -170,6 +170,9 @@ class Page:
         self.browser.find_link_by_text("Projects/Partners").click()
         self.__filter_chosen__('project-year', year)
         self.browser.uncheck("usaid-checkbox");
+
+    def scroll_to_bottom(self): 
+        self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);");
         
 
 

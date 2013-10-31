@@ -22,7 +22,7 @@ script:
 - python tests.py
 - phantomjs jasmine_runner.js http://localhost:5000/static/SpecRunner.html
 - python db/import_data/import_job.py
-- lettuce -t -@wip
+- lettuce -t -wip
 after_failure:
 - tar -cvzf screenshots-$TRAVIS_BUILD_ID-$TRAVIS_JOB_ID.tar.gz tmp/screenshots
 - travis-artifacts upload --path screenshots-$TRAVIS_BUILD_ID-$TRAVIS_JOB_ID.tar.gz
