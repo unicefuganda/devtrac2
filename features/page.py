@@ -102,7 +102,6 @@ class Page:
         return len(self.browser.find_by_css(str(".%s-panel.expanded" % panel))) > 0
 
     def toggle_checkbox(self, checkboxkey):
-        self.take_screenshot()
         self.browser.find_by_css(str("#%s-checkbox" % checkboxkey)).click()
 
     def is_indicator_layer_hidden(self):
@@ -126,7 +125,6 @@ class Page:
         return self.browser.find_by_css(toggle_css).click();
 
     def ureport_results(self):
-        self.take_screenshot()
         return self.browser.find_by_css(".ureport-results .legend").text
 
     def wait_for_element_visible(self, selector):
