@@ -52,18 +52,22 @@
       </div>
     </div>
     <div ng-controller="PartnersCtrl" class="tab-pane" id="projects">
-      
+
       <h3>Our partners:</h3>
       <ul class="points-filter filter">
         <li ng-repeat="p in partners" class='partner-toggle'>
-          <span class='icon'>
-            <label for='{[{p.id}]}-checkbox'>
-              <img ng-src="/static/images/{[{p.id}]}.png" />
-            </label>
+          <span class="partner-info">
+            <span class='icon'>
+              <label for='{[{p.id}]}-checkbox'>
+                <img ng-src="/static/images/{[{p.id}]}.png" />
+              </label>
+            </span>
+            <input type="checkbox" ng-model='filter.project.partner[p.id]' id='{[{p.id}]}-checkbox' name='{[{p.id}]}-checkbox' ></input>
+
+            <label for='{[{p.id}]}-checkbox'>{[{ p.name}]}</label>
           </span>
-          <input type="checkbox" ng-model='filter.project.partner[p.id]' id='{[{p.id}]}-checkbox' name='{[{p.id}]}-checkbox' ></input>
+          <img ng-show="{[{p.color != undefined}]}" ng-src="static/images/long_pins/pin_{[{p.color}]}.png" class="pin-images"/>
           
-          <label for='{[{p.id}]}-checkbox'>{[{ p.name}]}</label>
         </li> 
       </ul> 
       <h3>Sector:</h3>

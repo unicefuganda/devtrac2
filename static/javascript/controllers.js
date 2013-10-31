@@ -71,9 +71,8 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         showUReportResults($rootScope.location, $rootScope.ureportQuestion);
     }, true);
 
-})
-.controller("PartnersCtrl", function($scope, projectService){
-    $scope.partners = projectService.partners();
+}).controller("PartnersCtrl", function($scope, projectService){
+    $scope.partners = projectService.partnersWithColors();
     $scope.sectors = projectService.sectors();
     $scope.statuses = projectService.statuses();
     $scope.implementingPartners = projectService.implementingPartners();

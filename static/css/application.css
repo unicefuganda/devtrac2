@@ -568,3 +568,7 @@ h3 {
 #poll-results{
   overflow: hidden;
 }
+.partner-info{
+  width:120px; 
+  display:inline-block;
+}

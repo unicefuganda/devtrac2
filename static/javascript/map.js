@@ -135,7 +135,6 @@ DT.Map = function(element, basemap) {
                 closeButton: false
             }).setContent(markerPopupMessage(layer_info.summaryInformation(feature.properties)));
 
-            console.log(layer_info.name);
             var circleIcon = new L.DivIcon({
                 iconSize: new L.Point([10, 10]),
                 className: "",

@@ -70,6 +70,7 @@ angular.module("dashboard").directive('map', function() {
                         $.each(layerChanges.toAdd, function(index, locationKey) {
                             var layerOptions = DT.LayerOptions[locationKey[0]];
                             layerOptions.markerColorLegend = DT.markerColorLegend;
+
                             map.addLayer(locationKey[0], locationKey[1], allData[locationKey], layerOptions);
                         });
                         map.selectLayer(newLocation);
