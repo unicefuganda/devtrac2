@@ -27,9 +27,9 @@ def and_i_filter_by_implementing_partner(step, implementing_partner):
 def and_i_filter_by_partner(step, partner):
     world.page.filter_by_partner(partner)
 
-@step(u'And I filter by End Date for "([^"]+)"')
-def and_i_filter_by_end_date(step, endDate):
-    world.page.filter_by_end_date(endDate)
+@step(u'And I filter by Year for "([^"]+)"')
+def and_i_filter_by_end_date(step, year):
+    world.page.filter_by_year(year)
 
 @step(u'And there are "([^"]*)" unicef projects in "([^"]*)"')
 @step(u'Then there are "([^"]*)" unicef projects in "([^"]*)"')

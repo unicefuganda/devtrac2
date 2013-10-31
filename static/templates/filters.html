@@ -86,12 +86,12 @@
           <option ng-repeat="implementingPartner in implementingPartners" value="{[{implementingPartner}]}">{[{implementingPartner}]}</option>
         </select>
       </div>
+
       <h3>Year</h3>
       <div class='filter' id='project-year'>
-          <ul class='year-labels'>
-            <li ng-repeat="endDate in endDates" value="{[{endDate}]}">{[{endDate}]}</li>
-          <input ng-model="filter.project.endDate" type="range" name="points" min="2008" max="2013"> 
-          </ul>       
+        <select chosen data-placeholder="Choose Year" data-filterCollection='years' multiple class='chosen-select' >
+          <option ng-repeat="year in years" value="{[{year}]}">{[{year}]}</option>
+        </select>
       </div>
 
     </div>

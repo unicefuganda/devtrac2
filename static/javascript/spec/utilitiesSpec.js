@@ -10,6 +10,20 @@ describe("Utilities", function() {
         expect(DT.decode(stringWithSlash)).toBe("tim/rocks");
     });
 
+    it("should indicate if an item in the list matches conition", function() {
+        var arr = ["robert", "tim", "bob"];
+        expect(DT.any(arr, function(str) {
+            return str.length == 3;
+        })).toBeTruthy();
+    });
+
+    it("should give false if no items in the list matches conition", function() {
+        var arr = ["robert", "tim", "bob"];
+        expect(DT.any(arr, function(str) {
+            return str == "kevin bacon";
+        })).toBeFalsy();
+    });
+
     it("should filter list for the first element matching condition function", function() {
         var arr = ["robert", "tim", "bob"];
         expect(DT.first(arr, function(str) {

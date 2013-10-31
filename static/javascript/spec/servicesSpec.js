@@ -167,9 +167,30 @@ describe("Ureport Service question results", function(){
 
 describe("Project Service", function () {
     var testResponses = {features: [
-        {properties: {PARTNER: 'Unicef', 'Reg_2011': 'test region', 'DNAME_2010': 'test district', 'ID': 1,'SECTOR': 'Education','STATUS': 'Completion', 'IMPLEMENTE': 'Africare','END_ACTUAL': '25/07/2010'}}, 
-        {properties: {PARTNER: 'Unicef', 'Reg_2011': 'test region', 'DNAME_2010': 'test district', 'SNAME_2010': 'test subcounty', 'ID': 2,'SECTOR': 'Agriculture','STATUS': 'Completion', 'IMPLEMENTE': 'Africare','END_ACTUAL': '25/07/2011'}}, 
-        {properties: {PARTNER: 'USAID', 'Reg_2011': 'test region', 'DNAME_2010': 'test district 2', 'ID': 3 ,'SECTOR': 'Education','STATUS': 'Post-completion', 'IMPLEMENTE': 'Arbeiter Samariter Bund','END_ACTUAL': '25/07/2010'}}] }
+        {properties: {
+            PARTNER: 'Unicef', 'Reg_2011': 'test region', 'DNAME_2010': 'test district', 'ID': 1,
+            'SECTOR': 'Education',
+            'STATUS': 'Completion', 
+            'IMPLEMENTE': 'Africare',
+            'START_PLAN': '25/07/2010',
+            'END_PLANNE': '25/07/2012'
+        }}, 
+        {properties: {
+            PARTNER: 'Unicef', 'Reg_2011': 'test region', 'DNAME_2010': 'test district', 'SNAME_2010': 'test subcounty', 'ID': 2,
+            'SECTOR': 'Agriculture',
+            'STATUS': 'Completion', 
+            'IMPLEMENTE': 'Africare',
+            'START_PLAN': '25/07/2008',
+            'END_PLANNE': '25/07/2012'
+        }}, 
+        {properties: {
+            PARTNER: 'USAID', 'Reg_2011': 'test region', 'DNAME_2010': 'test district 2', 'ID': 3 ,
+            'SECTOR': 'Education',
+            'STATUS': 'Post-completion', 
+            'IMPLEMENTE': 'Arbeiter Samariter Bund',
+            'START_PLAN': '25/07/2013',
+            'END_PLANNE': '25/07/2013'
+        }}] }
 
     var testSummaryChildrenLocations = [
         new DT.Location({region: 'test region', district: 'test district'}),
@@ -268,18 +289,23 @@ describe("Project Service", function () {
 
     }));
 
-      it('should filter projects by End Year', inject(function(projectService){
+    it('should filter projects by Year', inject(function(projectService){
         var location =new DT.Location({region: 'test region'});
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, endDate: '2010' });
+        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, years: ['2010'] });
 
-        expect(mapProjectId(projects)).toEqual([1,3]);
+        expect(mapProjectId(projects)).toEqual([1, 2]);
 
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, endDate: '2011' });
+        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, years: ['2009'] });
         expect(mapProjectId(projects)).toEqual([2]);
 
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, endDate:  null });
+        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, years: ['2012', '2013'] });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
+        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, years: ['2013'] });
+        expect(mapProjectId(projects)).toEqual([3]);
+
+        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, years: [] });
+        expect(mapProjectId(projects)).toEqual([1, 2, 3]);
     }));
 
     it('should aggregate by partner', inject(function(projectService) {

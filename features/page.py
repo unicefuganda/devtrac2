@@ -168,10 +168,11 @@ class Page:
         self.browser.find_link_by_text("Projects/Partners").click()
         self.browser.uncheck("usaid-checkbox");
 
-    def filter_by_end_date(self, endDate): 
+    def filter_by_year(self, year): 
         self.browser.find_link_by_text("Projects/Partners").click()
-        self.browser.find_by_css("#project-year .year-labels li").text
-        self.take_screenshot();
+        self.__filter_chosen__('project-year', year)
+        self.browser.uncheck("usaid-checkbox");
+        
 
 
         

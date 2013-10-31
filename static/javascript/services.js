@@ -482,9 +482,16 @@ angular.module("dashboard")
                 });
             }  
 
-              if(projectFilter.endDate && projectFilter.endDate.length > 0){
+            if(projectFilter.years && projectFilter.years.length > 0){
                 features = $.grep(features,function(project){
-                    return project.properties['END_ACTUAL'].substring(6) == projectFilter.endDate
+
+                    var startYear = Number(project.properties['START_PLAN'].substring(6));                        
+                    var endYear = Number(project.properties['END_PLANNE'].substring(6));
+
+                    return DT.any(projectFilter.years, function(year) {
+                        var testYear = Number(year)
+                        return testYear >= startYear && testYear <= endYear;
+                    });
                 });     
 
             }
@@ -516,7 +523,7 @@ angular.module("dashboard")
             return ["Pipeline/identification","Implementation","Completion","Post-completion","Cancelled"];
         };
 
-         this.endDates = function () {
+        this.years = function () {
             return ["2008","2009","2010","2011","2012","2013"];
         };
 

@@ -10,6 +10,10 @@ DT.lpad = function(str, padString, length) {
     return str;
 }
 
+DT.any = function(list, func) {
+    return DT.first(list, func) != null;
+};
+
 DT.first = function(list, func) {
     for (var i = 0; i < list.length; i++) {
         if (func(list[i]))
