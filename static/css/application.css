@@ -68,6 +68,12 @@ h3 {
   box-shadow: 0px 2px 16px #000;
 }
 
+#right-hand-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 /* NAV BAR */
 .navbar-default {
   background-color: #000;
@@ -231,7 +237,7 @@ h3 {
 }
 
 #filter-panel {
-  width: 350px;
+  width: 351px;
   height: 95%;
   overflow: hidden;
   position: absolute;
