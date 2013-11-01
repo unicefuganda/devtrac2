@@ -114,7 +114,7 @@ describe("Layers", function() {
         containLayer(DT.Layers.filterLayers(districtLocation, []), ["project-point", districtLocation]);
         containLayer(DT.Layers.filterLayers(subcountyLocation, []), ["project-point", subcountyLocation]);
         containLayer(DT.Layers.filterLayers(parishLocation, []), ["project-point", parishLocation]);
-        notContainLayer(DT.Layers.filterLayers(regionLocation, []), ["project-point", regionLocation]);
+        containLayer(DT.Layers.filterLayers(regionLocation, []), ["project-point", regionLocation]);
     });
 
     it ("should display health aggregation for all layers above parish", function() {

@@ -92,6 +92,24 @@ angular.module("dashboard")
             });
         });
 
+        var getPartnersWithColorMap = function(dataFeatures){
+            DT.markerColorLegend = {};
+            var colors = DT.markerColors;
+
+            var partnersWithColors = $.map(getUniquePartners(dataFeatures), function(partner, index){
+                partner.color = colors[index];
+                DT.markerColorLegend[partner.id] = partner.color;
+                return partner;
+            });
+            return partnersWithColors;
+        };
+
+        this.partnersWithColors = function() {
+            return projectsGeojsonPromise.then(function(data) {
+                return getPartnersWithColorMap(data.features);
+            });
+        };
+
         this.partners = function() {
             return projectsGeojsonPromise.then(function(data) { return getUniquePartners(data.features) });
         };
