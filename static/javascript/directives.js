@@ -68,10 +68,7 @@ angular.module("dashboard").directive('map', function() {
                     if (newLocation.equals(scope.location))
                     {
                         $.each(layerChanges.toAdd, function(index, locationKey) {
-                            var layerOptions = DT.LayerOptions[locationKey[0]];
-                            layerOptions.markerColorLegend = DT.markerColorLegend;
-
-                            map.addLayer(locationKey[0], locationKey[1], allData[locationKey], layerOptions);
+                            map.addLayer(locationKey[0], locationKey[1], allData[locationKey], DT.LayerOptions[locationKey[0]]);
                         });
                         map.selectLayer(newLocation);
                         map.orderLayers(scope.location.layerOrder());

@@ -299,11 +299,11 @@ DT.LayerOptions = {
     "project-point": {
         name: "project-point",
         type: "point",
-        getValue: function(properties, layer_info) {
+        getValue: function(properties) {
             var long_pins = true;
             var pin_folder = long_pins ? 'long_pins' : 'pins';
 
-            return "<img class='pin-images' src='\\static\\images\\"+pin_folder+"\\pin_"+layer_info.markerColorLegend[properties.PARTNER.toLowerCase()]+".png'> " 
+            return "<img class='pin-images' src='\\static\\images\\"+pin_folder+"\\pin_"+DT.markerColorLegend[properties.PARTNER.toLowerCase()]+".png'> "
         },
         summaryInformation: function(properties) {
             return {
@@ -319,7 +319,6 @@ DT.LayerOptions = {
     "unicef": {
         name: "unicef",
         type: "aggregate",
-        markerColor: "blue",
         display: function(stats){ return stats.info.unicef > 0; },
         getValue: function(stats, childLocation) { 
             return  "<img src='/static/images/unicef_small.png'></img>"
@@ -332,7 +331,6 @@ DT.LayerOptions = {
     "usaid": {
         name: "usaid",
         type: "aggregate",
-        markerColor: "red",
         display: function(stats){ return stats.info.usaid > 0; },
         getValue: function(stats, childLocation) { 
             return "<img src='/static/images/usaid_small.png'></img>"

@@ -17,7 +17,6 @@ angular.module("dashboard")
             var location = locationkey[1];
 
             if (key == "region") {
-
                 self.regions_geojson().then(function(data) {
                     allData[locationkey] = data;
                     deffered2.resolve();
@@ -112,7 +111,7 @@ angular.module("dashboard")
                     allData[locationkey] = data;
                     deffered2.resolve();
                 });
-            } 
+            }
             return deffered2.promise;
         });
 
@@ -318,7 +317,7 @@ this.schools = function(location) {
 
     this.childLocations = function (location) {
         return self.find(location).then(function(data) {
-            return $.map(data.children, function(childSummary, index) { 
+            return $.map(data.children, function(childSummary, index) {
                 return DT.Location.fromName(childSummary.locator);
             });
         });
@@ -430,7 +429,8 @@ this.schools = function(location) {
         var features = $.map(features, function(project, index) { return {
             id: project.properties['PARTNER'].toLowerCase(),
             name: project.properties['PARTNER']
-        }})
+        };
+        });
         return DT.unique(features).sort(function (partner1, partner2) { return partner1.name < partner2.name; });
     };
 
@@ -438,11 +438,11 @@ this.schools = function(location) {
         var features = $.map(features, function(project, index) {
             return project.properties['IMPLEMENTE']
         });
-        return DT.unique(features).sort();  
+        return DT.unique(features).sort();
     }
 
     var filterByLocation = function(features, location) {
-        return $.grep(features, function(feature) { 
+        return $.grep(features, function(feature) {
             var featureLocation = new DT.Location({
                 region: feature.properties['Reg_2011'],
                 district: feature.properties['DNAME_2010'],
@@ -454,13 +454,13 @@ this.schools = function(location) {
     };
 
     var filterProjects = function(data, location, projectFilter) {
-        var features = filterByLocation(data.features, location);            
+        var features = filterByLocation(data.features, location);
         var partners = getUniquePartners(data.features);
 
         $.each(partners, function(index, partner) {
             if (projectFilter.partner[partner.id] == undefined || projectFilter.partner[partner.id] == false) {
-                features =  $.grep(features, function(feature) { 
-                    return feature.properties['PARTNER'].toLowerCase() != partner.id; 
+                features =  $.grep(features, function(feature) {
+                    return feature.properties['PARTNER'].toLowerCase() != partner.id;
                 });
             }
         })
@@ -474,25 +474,25 @@ this.schools = function(location) {
             features = $.grep(features,function(project){
                 return $.inArray(project.properties['STATUS'], projectFilter.statuses) != -1
             });
-        }  
+        }
 
         if(projectFilter.implementingPartners && projectFilter.implementingPartners.length > 0){
             features = $.grep(features,function(project){
                 return $.inArray(project.properties['IMPLEMENTE'], projectFilter.implementingPartners) != -1
             });
-        }  
+        }
 
         if(projectFilter.years && projectFilter.years.length > 0){
             features = $.grep(features,function(project){
 
-                var startYear = Number(project.properties['START_PLAN'].substring(6));                        
+                var startYear = Number(project.properties['START_PLAN'].substring(6));
                 var endYear = Number(project.properties['END_PLANNE'].substring(6));
 
                 return DT.any(projectFilter.years, function(year) {
                     var testYear = Number(year)
                     return testYear >= startYear && testYear <= endYear;
                 });
-            });     
+            });
 
         }
 
@@ -516,18 +516,21 @@ this.schools = function(location) {
     };
 
     var getPartnersWithColorMap = function(dataFeatures){
+        DT.markerColorLegend = {};
+        var colors = DT.markerColors;
+
         var partnersWithColors = $.map(getUniquePartners(dataFeatures), function(partner, index){
-            var colors = ['red','blue','green'];
             partner.color = colors[index];
+            DT.markerColorLegend[partner.id] = partner.color;
             return partner;
         });
         return partnersWithColors;
     };
 
     this.partnersWithColors = function() {
-        return projectsGeojson.then(function(data) { 
+        return projectsGeojson.then(function(data) {
             return getPartnersWithColorMap(data.features);
-        });  
+        });
     };
 
     this.sectors = function () {
@@ -543,8 +546,8 @@ this.schools = function(location) {
     };
 
     this.implementingPartners = function () {
-        return projectsGeojson.then(function(data) { 
-            var result =  getUniqueImplementingPartners(data.features); 
+        return projectsGeojson.then(function(data) {
+            var result =  getUniqueImplementingPartners(data.features);
             return result;
         });
     }
@@ -562,7 +565,7 @@ this.schools = function(location) {
                 });
 
                 return { children: children};
-            });  
+            });
         });
     };
 
