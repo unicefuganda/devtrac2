@@ -422,7 +422,7 @@ angular.module("dashboard")
             var url = "/ureport/questions/" + question.id + "/child_results/" + location.getName(true).toUpperCase();
             return jsonService.get(url);
         }
-    })
+    });
     
 
 

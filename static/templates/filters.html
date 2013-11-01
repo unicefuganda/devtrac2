@@ -56,12 +56,11 @@
                 <img ng-src="/static/images/{[{p.id}]}.png" />
               </label>
             </span>
-            <input type="checkbox" ng-model='filter.project.partner[p.id]' id='{[{p.id}]}-checkbox' name='{[{p.id}]}-checkbox' ></input>
+            <input type="checkbox" ng-model='filter.project.partner[p.id]' id='{[{p.id}]}-checkbox' name='{[{p.id}]}-checkbox'  ng-change= "stateChange()"></input>
 
             <label for='{[{p.id}]}-checkbox'>{[{ p.name}]}</label>
           </span>
           <img ng-show="{[{p.color != undefined}]}" ng-src="static/images/long_pins/pin_{[{p.color}]}.png" class="pin-images"/>
-          
         </li> 
       </ul> 
       <h3>Sector:</h3>

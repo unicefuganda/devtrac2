@@ -128,8 +128,7 @@ angular.module("dashboard")
 
         this.implementingPartners = function () {
             return projectsGeojsonPromise.then(function(data) { 
-                var result =  getUniqueImplementingPartners(data.features) 
-                console.log(result);
+                var result =  getUniqueImplementingPartners(data.features);
                 return result;
             });
         }

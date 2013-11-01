@@ -3,15 +3,16 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 
     if ($rootScope.project == undefined)
         $rootScope.project = {};
-    
+        $rootScope.project.list = null;
+
     $rootScope.location = new DT.Location($routeParams);
     if ($rootScope.filter == undefined)
         $rootScope.filter = new DT.Filter({health_center: false, water_point: false, school: true, project: { partner: { unicef: true, usaid: true} }} );
-    
+
 
 
 }).controller("IndicatorsCtrl", function($scope, $rootScope, heatmapService) {
-    $rootScope.indicator = { selected: null } 
+    $rootScope.indicator = { selected: null }
     $scope.datasets = heatmapService.datasets();
     $scope.ureport_datasets = heatmapService.ureport();
 }).controller("SummaryCtrl", function($scope, $rootScope, summaryService, indicatorService, ureportService) {
@@ -41,7 +42,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     });
 
 }).controller("UReportCtrl", function($scope, $rootScope, ureportService) {
-    $rootScope.ureportQuestion = { selected: null } 
+    $rootScope.ureportQuestion = { selected: null }
     ureportService.questions().then(function(data) {
         $scope.questions = data;
     });
@@ -77,14 +78,21 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $scope.statuses = projectService.statuses();
     $scope.implementingPartners = projectService.implementingPartners();
     $scope.years = projectService.years();
+
+    $scope.stateChange= function(){
+        projectService.projects($rootScope.location, $rootScope.filter.project).then(function(data){
+            $rootScope.project.list = data;
+        });
+    }
 })
-.controller("ProjectsCtrl", function($scope, projectService){
-    $scope.$watch('location',function(newLocation,oldLocation){
-        if(newLocation == null){
+.controller("ProjectsCtrl", function($rootScope, $scope, projectService){
+
+    $rootScope.$watch('location',function(newLocation){
+        if(newLocation == null)
             return;
-        }
+
         projectService.projects(newLocation, $scope.filter.project).then(function(data){
-            $scope.projects = data;
+            $rootScope.project.list = data;
         });
     });
 });
