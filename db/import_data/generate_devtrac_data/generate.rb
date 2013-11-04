@@ -11,10 +11,6 @@ require_relative 'file_accessor'
 @districts_file_name = 'UNICEF_districts.csv'
 
 
-def remove_header lines
-    lines.shift
-end
-
 def manipulate_data lines, districts_hash
     temp_lines = []
     old_lines = []

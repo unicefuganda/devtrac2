@@ -12,7 +12,7 @@ local_path = os.path.dirname(os.path.abspath(__file__))
 
 parish_ploygons = []
 
-data_folder = "/Users/Thoughtworker/Google Drive/Thoughtworks Drive/Application Data"
+data_folder = "/Users/ThoughtWorks/Downloads/Application Data"
 
 with fiona.open('%s/uganda_parish_10.shp' % data_folder, 'r') as source:
 
@@ -20,7 +20,7 @@ with fiona.open('%s/uganda_parish_10.shp' % data_folder, 'r') as source:
         parish_ploygons.append({ 'shape': shape(f['geometry']), 'properties': f['properties'] })
 
 
-with open("%s/../projects_activities.csv" % local_path, 'rUb') as csvfile: 
+with open("%s/../projects_activities.csv" % local_path, 'rUb') as csvfile:
     reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
     projects = list(reader)
 
@@ -41,13 +41,13 @@ sink_schema['properties']['PNAME_2006'] = "str:35"
 os.system("rm -rf %s/projects" % local_path)
 
 with fiona.open("%s/projects" % local_path, 'w', driver='ESRI Shapefile', schema = sink_schema) as source:
-    
-    for project in projects: 
+
+    for project in projects:
 
         row = {
             'properties': {
-                }, 
-            'geometry': {"type":"Point","coordinates":[ float(project['LONG']), float(project['LAT'])]} 
+                },
+            'geometry': {"type":"Point","coordinates":[ float(project['LONG']), float(project['LAT'])]}
         }
 
         for key in keys:

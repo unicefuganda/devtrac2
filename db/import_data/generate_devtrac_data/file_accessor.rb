@@ -36,7 +36,7 @@ class FileAccessor
         file_name = add_new_to_file_name(file_name)
 
         File.open(file_name, "w") do |file|
-            file.puts @header.join(',')
+            file.puts @header.join(',') if @header
             counter += 1
             lines.each do |line|
                 if line.size > 1
@@ -56,5 +56,10 @@ class FileAccessor
         else
             file_pieces[0] + "_new." + file_pieces[1]
         end
+    end
+
+  private
+    def remove_header lines
+      lines.shift
     end
 end
