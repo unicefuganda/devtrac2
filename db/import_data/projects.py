@@ -12,7 +12,7 @@ local_path = os.path.dirname(os.path.abspath(__file__))
 
 parish_ploygons = []
 
-data_folder = "/Users/ThoughtWorks/Downloads/Application Data"
+data_folder = "/Users/tunjisunmonu/work/devtrac2/Application Data"
 
 with fiona.open('%s/uganda_parish_10.shp' % data_folder, 'r') as source:
 

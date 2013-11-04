@@ -40,6 +40,27 @@ def random_change_number
 end
 
 #print_list duplicated_activities_grouped
+def generate_random_lat_long lat_long
+  new_lat = round_digits(lat_long[0].to_f + random_change_number)
+    new_lng = round_digits(lat_long[1].to_f + random_change_number)
+
+
+    if new_lat < -1.2
+      lat_long = generate_random_lat_long lat_long
+    else
+      lat_long[0] = new_lat.to_s
+    end
+
+
+    if new_lng > 34
+      lat_long = generate_random_lat_long lat_long
+    else
+      lat_long[1] = new_lng.to_s
+    end
+
+    lat_long
+end
+
 
 
 edited_activities = duplicated_activities_grouped.each do |group|
@@ -47,22 +68,10 @@ edited_activities = duplicated_activities_grouped.each do |group|
   group[1].each do |duplicated_activity|
     lat_long = duplicated_activity[12]
 
-    new_lat = round_digits(lat_long[0].to_f + random_change_number)
-    new_lng = round_digits(lat_long[1].to_f + random_change_number)
+    randomized_lat_long = generate_random_lat_long(lat_long)
 
-
-    if new_lat < -1.2
-      duplicated_activity[12] = '-1.2'
-    else
-      duplicated_activity[12] = new_lat.to_s
-    end
-
-
-    if new_lng > 34
-      duplicated_activity[13] = '34.0'
-    else
-      duplicated_activity[13] = new_lng.to_s
-    end
+    duplicated_activity[12] = randomized_lat_long[0]
+    duplicated_activity[13] = randomized_lat_long[1]
 
     puts duplicated_activity[12] + ' : ' + duplicated_activity[13]
   end

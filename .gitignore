@@ -13,6 +13,6 @@ twistd.log*
 twistd.pid
 screen*.png
 .idea/
-
+/Application Data
 #virtual env python environments
 devtrac2-env

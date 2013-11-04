@@ -1,5 +1,6 @@
 import time
 import itertools
+from pprint import pprint
 class Page:
     base_url = "http://localhost:5000"
     
@@ -88,6 +89,11 @@ class Page:
         content = self.browser.find_by_css(str( ".%s-cluster-icon div[data-locator='%s']" % (layer, locator.lower())))
         return int(content.text)
 
+    def marker_count_pins(self,locator):
+        self.click_on_layer(locator)
+        content = self.browser.find_by_css(".leaflet-marker-pane .pin-images")
+        return len(content)
+
     def marker_visible(self, layer, locator):
         content = self.browser.find_by_css(str( ".%s-cluster-icon div[data-locator='%s']" % (layer, locator.lower())))
         return len(content) > 0
@@ -153,14 +159,18 @@ class Page:
     def filter_by_sector(self, sector): 
         self.browser.find_link_by_text("Projects/Partners").click()
         self.__filter_chosen__('project-sector', sector)
+        self.browser.uncheck("usaid-checkbox");
+       
 
     def filter_by_status(self, status): 
         self.browser.find_link_by_text("Projects/Partners").click()
         self.__filter_chosen__('project-status', status)
+        self.browser.uncheck("unicef-checkbox");
 
     def filter_by_implementing_partner(self, implementing_partner): 
         self.browser.find_link_by_text("Projects/Partners").click()
         self.__filter_chosen__('project-implementing-partner', implementing_partner)
+        self.browser.uncheck("usaid-checkbox");
 
     def filter_by_partner(self, partner): 
         self.browser.find_link_by_text("Projects/Partners").click()
@@ -170,6 +180,7 @@ class Page:
         self.browser.find_link_by_text("Projects/Partners").click()
         self.__filter_chosen__('project-year', year)
         self.browser.uncheck("usaid-checkbox");
+
 
     def scroll_to_bottom(self): 
         self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);");
