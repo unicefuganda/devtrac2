@@ -1,6 +1,7 @@
 <div ng-controller="ProjectsCtrl" class='well tinted-background'>
   <div class="well-header">
     <h3>Projects </h3>
+  </div>
     <table class="table table-condensed table-striped">
       <thead>
         <tr>
@@ -10,7 +11,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="p in project.list" >
+        <tr ng-repeat="p in project.pagedList" >
 
           <td>{[{ p.partner }]}</td>
           <td><a href="#" ng-click="project.selected = p">{[{ p.name }]}</a></td>
@@ -18,5 +19,5 @@
         </tr>
       </tbody>
     </table>
-  </div>
-</div>
+    <ul pagination id="project-pagination" class="pagination"></ul>
+<div>

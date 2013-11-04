@@ -1,3 +1,6 @@
+if (typeof DT == "undefined") 
+    DT = {};
+
 DT.IndicatorConfig = function(config) { 
     this.config = config;
 };

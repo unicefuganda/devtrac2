@@ -57,4 +57,9 @@ describe("Utilities", function() {
         expect(DT.unique([{id: 'unicef'}, {id: 'usaid'}, {id: 'unicef'}])).toEqual([{id: 'unicef'}, {id: 'usaid'}])
     })
 
+    it("should split an array into chunks of a given length", function(){
+        var testArray = ["james","tim", "bob","kevin", "jude","paul", "peter"];
+        expect(DT.splitIntoChuncks(testArray,3)).toEqual( [["james","tim", "bob"],["kevin", "jude","paul"],["peter"]] );
+    })
+
 });

@@ -83,4 +83,20 @@ DT.feature_toggles = function(queryString) {
                 return false;
         }
     }
-} 
+}
+
+DT.splitIntoChuncks = function(array, chunckLength){
+    
+    if(array.length <= chunckLength)
+        return [array];
+
+    return  spliceIntoChunks(array, chunckLength);   
+}
+
+var spliceIntoChunks = function(array,chunckLength){
+    var newArray = [];
+    for(var i = 0; i < array.length; i+=chunckLength){
+        newArray.push(array.slice(i,i+chunckLength))
+    }
+    return newArray;
+}

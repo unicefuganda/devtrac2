@@ -180,4 +180,35 @@ angular.module("dashboard").directive('map', function() {
             });
         }
     };
+}).directive('pagination', function(){
+    return {
+        scope: true,
+        link: function(scope, element, attrs){
+            var projectListInfo = {}
+            scope.pageSelected = 1;
+
+            scope.$watchCollection('[project.list, pageSelected]', function(newValues, oldValues){
+                if(newValues[0] == null)
+                    return
+
+                var listChucks = DT.splitIntoChuncks(newValues[0], 10); 
+                
+                $(element).bootstrapPaginator({
+                    totalPages: listChucks.length,
+                    bootstrapMajorVersion: 3,
+                    numberOfPages: 10,
+                    itemContainerClass: function (type, page, current) {
+                        return (page === current) ? "active" : "pointer-cursor";
+                    },
+                    onPageClicked: function(e,originalEvent,type,page){
+                        scope.$apply(function(){
+                            scope.pageSelected = parseInt(page);
+                        });
+                    }
+                });
+
+                scope.project.pagedList=listChucks[newValues[1]-1];
+            });
+        }
+    }
 });
