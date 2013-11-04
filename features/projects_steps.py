@@ -7,7 +7,7 @@ from time import *
 def and_i_click_on_the_project_icon_at_latitude_and_logitude(step, lat, lng):
     world.page.click_marker_at(lat, lng)
 
-@step(u'Then the bottom panel contains the following details:')
+@step(u'Then the project details are:')
 def then_the_bottom_panel_contains_the_following_details(step):
     assert_multi_line_equal.im_class.maxDiff = None
     assert_multi_line_equal(world.page.extra_info_content(), step.multiline)
@@ -44,4 +44,16 @@ def there_are_usaid_projects(step, num_projects, locator):
 @step(u'And there are no usaid projects in "([^"]*)"')
 def there_are_no_usaid_projects(step, locator): 
     assert_false(world.page.marker_visible('usaid', locator));
+
+@step(u'And I click on the project link "([^"]*)"')
+def and_i_click_on_the_project_link(step, project):
+    world.page.click_link(project);
+
+@step(u'And I click on the pagination link "([^"]*)"')
+def and_i_click_on_the_pagination_link(step, pager_link):
+     world.page.click_link(pager_link);
+
+@step(u'Then the project list contains:')
+def then_the_project_list_contains(step):
+    assert_multi_line_equal(world.page.project_list_content(), step.multiline)
 

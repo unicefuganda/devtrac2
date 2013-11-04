@@ -125,6 +125,10 @@ class Page:
     def extra_info_content(self):
         return self.browser.find_by_css('#project-details').text
 
+    def project_list_content(self):
+        elements = map(lambda element: element.text, self.browser.find_by_css('#project-list'))
+        return elements[0];
+
     def select_ureport_question(self, abbreviation):
         toggle_css = str(".ureport-questions .toggle[data-question='%s']" % abbreviation)
         self.wait_for(lambda x: self.browser.find_by_css(toggle_css).visible)
@@ -183,7 +187,10 @@ class Page:
 
 
     def scroll_to_bottom(self): 
-        self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);");
+        self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+    def click_link(self, link_name):
+        self.browser.find_link_by_text(link_name).click()
         
 
 
