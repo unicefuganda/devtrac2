@@ -1,4 +1,4 @@
-var dashboard = angular.module('dashboard', ['ngRoute']).config(function($routeProvider, $interpolateProvider, $locationProvider) {
+var dashboard = angular.module('dashboard', ['ngRoute', 'ui.bootstrap']).config(function($routeProvider, $interpolateProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     $routeProvider
         .when('/', {

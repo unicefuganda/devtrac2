@@ -43,6 +43,8 @@ js = Bundle(
 	'javascript/dt/project.js',
 	'javascript/services/services.js',
 	'javascript/services/project-service.js',
+	'javascript/lib/ui-bootstrap-custom-0.6.0.min.js',
+	'javascript/lib/ui-bootstrap-custom-tpls-0.6.0.min.js',
      filters='jsmin', output='gen/packed.js')
 
 assets.register('js_all', js)

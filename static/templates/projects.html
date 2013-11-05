@@ -5,18 +5,31 @@
     <table class="table table-condensed table-striped" id='project-list'>
       <thead>
         <tr>
-          <th class='partner-col'>Partner</th>
-          <th class='name-col'>Project Name</th>
+          <th class='accountable-agency-col'>Accountable Agency</th>
+          <th class='funding-organization-col'>Funding Organization</th>
+          <th class='implementing-partner-col'>Implementing Partner</th>
+          <th class='name-col'>Name</th>
           <th class='dates-col'>Planned Dates</th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="p in project.pagedList" >
           <td>{[{ p.partner }]}</td>
+          <td></td>
+          <td>{[{ p.implementingPartner }]}</td>
           <td><a href="#" ng-click="project.selected = p">{[{ p.name }]}</a></td>
           <td>{[{ p.startActual }]} - {[{ p.endActual }]}</td>
         </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="5">
+            <div pagination total-items="totalItems" page="currentPage" max-size="maxSize"></div>
+          </th>
+        </tr>
+      </tfoot>
+
     </table>
-    <ul pagination id="project-pagination" class="pagination"></ul>
+
+    
 <div>

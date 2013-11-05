@@ -55,10 +55,10 @@ Given that I am a regular user
 When I open dashboard for "Acholi, Gulu"
 Then the project list contains:
 	"""
-	UNICEF Preventing and Responding to Violence against Children and support to keep children alive 25/01/2011 - 25/07/2011
-	UNICEF Quality Education through BRMS and ECD and VSO volunteers 25/01/2011 - 25/07/2011
-	UNICEF STRENGTHENING PARLIAMENATRY OVERSIGHT 28/01/2013 - 28/07/2013
-	UNICEF Strengthening Reintegration of Young Mothers with children Formerly Associated with the LRA 28/01/2013 - 28/07/2013
+	UNICEF World Council of Churches Preventing and Responding to Violence against Children and support to keep children alive 25/01/2011 - 25/07/2011
+    UNICEF Vountary Services Overseas Quality Education through BRMS and ECD and VSO volunteers 25/01/2011 - 25/07/2011
+    UNICEF The Uganda Assciation of Women Lawyers STRENGTHENING PARLIAMENATRY OVERSIGHT 28/01/2013 - 28/07/2013
+    UNICEF Gulu United to Save the Children Organization Strengthening Reintegration of Young Mothers with children Formerly Associated with the LRA 28/01/2013 - 28/07/2013
 	"""
 
 
@@ -84,9 +84,9 @@ When I open dashboard for "Acholi"
 And I click on the pagination link "4"	
 Then the project list contains:
 	"""
-	UNICEF Strengthening peace building, education policy and practice at national and regional level 23/01/2010 - 23/07/2010
-    UNICEF Support to keep children and mothers ALIVE through provision of a comprehensive Health, Nutrition and HIV/AIDS packages for Northern Uganda 23/01/2010 - 23/07/2010
-    UNICEF Support to keep children and mothers ALIVE through provision of a comprehensive Health, Nutrition and HIV/AIDS packages for Northern Uganda 25/01/2011 - 25/07/2011
-    UNICEF Support to keep children and mothers ALIVE through provision of a comprehensive Health, Nutrition and HIV/AIDS packages for Northern Uganda 27/01/2012 - 27/07/2012
+	UNICEF Forum of Education NGOs in Uganda (FENU) Strengthening peace building, education policy and practice at national and regional level 23/01/2010 - 23/07/2010
+    UNICEF Italian Development Coorperation Support to keep children and mothers ALIVE through provision of a comprehensive Health, Nutrition and HIV/AIDS packages for Northern Uganda 23/01/2010 - 23/07/2010
+    UNICEF Italian Development Coorperation Support to keep children and mothers ALIVE through provision of a comprehensive Health, Nutrition and HIV/AIDS packages for Northern Uganda 25/01/2011 - 25/07/2011
+    UNICEF Italian Development Coorperation Support to keep children and mothers ALIVE through provision of a comprehensive Health, Nutrition and HIV/AIDS packages for Northern Uganda 27/01/2012 - 27/07/2012
 	"""
 

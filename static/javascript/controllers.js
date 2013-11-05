@@ -81,6 +81,31 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $scope.years = projectService.years();
 })
 .controller("ProjectsCtrl", function($scope, projectService){
+
+    $scope.maxSize = 10;
+    $scope.currentPage = 1;
+
+    $scope.$watch('currentPage', function() {
+        if ($scope.project == null)
+            return;
+
+        var listChucks = DT.splitIntoChuncks($scope.project.list, 10); 
+        $scope.project.pagedList = listChucks[$scope.currentPage - 1];
+    })
+
+    $scope.$watch('project.list', function(newValues, oldValues){ 
+        if ($scope.project == null || $scope.project.list == null)
+            return;
+
+        $scope.totalItems = $scope.project.list.length;
+        $scope.currentPage = 1;
+        
+        var listChucks = DT.splitIntoChuncks($scope.project.list, 10); 
+        $scope.project.pagedList = listChucks[$scope.currentPage - 1];
+    });
+
+    
+
     var updateProjectList = function() {
         if ($scope.filter == null)
             return;
