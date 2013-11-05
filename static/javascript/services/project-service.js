@@ -6,8 +6,15 @@ angular.module("dashboard")
             var features = $.map(features, function(project, index) { return {
                 id: project.properties['PARTNER'].toLowerCase(),
                 name: project.properties['PARTNER']
-            }})
+            }});
             return DT.unique(features).sort(function (partner1, partner2) { return partner1.name < partner2.name; });
+        };
+
+        var getUniqueFinancialOrgs = function(features) {
+            var features = $.map(features, function(project, index) { 
+                return project.properties['FINANCIAL']
+            });
+            return DT.unique(features).sort();
         };
 
         var getUniqueImplementingPartners = function(features) {
@@ -33,15 +40,18 @@ angular.module("dashboard")
             var features = filterByLocation(data.features, location);            
             var partners = getUniquePartners(data.features);
 
-            $.each(partners, function(index, partner) {
-                if (projectFilter.partner[partner.id] == undefined || projectFilter.partner[partner.id] == false) {
-                    features =  $.grep(features, function(feature) { 
-                        return feature.properties['PARTNER'].toLowerCase() != partner.id; 
-                    });
-                }
-            })
+            // $.each(partners, function(index, partner) {
+            //     if (projectFilter.partner[partner.id] == undefined || projectFilter.partner[partner.id] == false) {
+            //         features =  $.grep(features, function(feature) { 
+            //             return feature.properties['PARTNER'].toLowerCase() != partner.id; 
+            //         });
+            //     }
+            // })
+
+            console.log(projectFilter);
             if (projectFilter.sectors && projectFilter.sectors.length > 0) {
                 features = $.grep(features, function(project) {
+                    console.log(project.properties['SECTOR']);
                     return $.inArray(project.properties['SECTOR'], projectFilter.sectors) != -1
                 });
             }
@@ -52,11 +62,23 @@ angular.module("dashboard")
                 });
             }  
 
+            if( projectFilter.partners && projectFilter.partners.length > 0){
+                features = $.grep(features,function(project){
+                    return $.inArray(project.properties['PARTNER'].toLowerCase(), projectFilter.partners) != -1
+                });
+            }  
+
+            if( projectFilter.financialOrgs && projectFilter.financialOrgs.length > 0){
+                features = $.grep(features,function(project){
+                    return $.inArray(project.properties['FINANCIAL'], projectFilter.financialOrgs) != -1
+                });
+            }  
+
             if(projectFilter.implementingPartners && projectFilter.implementingPartners.length > 0){
                 features = $.grep(features,function(project){
                     return $.inArray(project.properties['IMPLEMENTE'], projectFilter.implementingPartners) != -1
                 });
-            }  
+            } 
 
             if(projectFilter.years && projectFilter.years.length > 0){
                 features = $.grep(features,function(project){
@@ -117,6 +139,10 @@ angular.module("dashboard")
 
         this.partners = function() {
             return projectsGeojsonPromise.then(function(data) { return getUniquePartners(data.features) });
+        };
+
+        this.financialOrgs = function() {
+            return projectsGeojsonPromise.then(function(data) { return getUniqueFinancialOrgs(data.features) });
         };
 
         this.sectors = function () {

@@ -162,28 +162,34 @@ class Page:
 
     def filter_by_sector(self, sector): 
         self.browser.find_link_by_text("Projects/Partners").click()
-        self.__filter_chosen__('project-sector', sector)
-        self.browser.uncheck("usaid-checkbox");
+        self.__filter_chosen__('project-sector', sector);
+        self.browser.choose("organisationsRadio",'accountable-agency');
+        self.__filter_chosen__("accounting-selector","UNICEF");
        
 
     def filter_by_status(self, status): 
         self.browser.find_link_by_text("Projects/Partners").click()
         self.__filter_chosen__('project-status', status)
-        self.browser.uncheck("unicef-checkbox");
-
+        self.browser.choose("organisationsRadio",'accountable-agency');
+        self.__filter_chosen__("accounting-selector","USAID");
+       
     def filter_by_implementing_partner(self, implementing_partner): 
         self.browser.find_link_by_text("Projects/Partners").click()
         self.__filter_chosen__('project-implementing-partner', implementing_partner)
-        self.browser.uncheck("usaid-checkbox");
-
+        self.browser.choose("organisationsRadio",'accountable-agency');
+        self.__filter_chosen__("accounting-selector","UNICEF");
+       
     def filter_by_partner(self, partner): 
         self.browser.find_link_by_text("Projects/Partners").click()
-        self.browser.uncheck("usaid-checkbox");
-
+        self.browser.choose("organisationsRadio",'accountable-agency');
+        self.__filter_chosen__("accounting-selector","UNICEF");
+       
     def filter_by_year(self, year): 
         self.browser.find_link_by_text("Projects/Partners").click()
-        self.__filter_chosen__('project-year', year)
-        self.browser.uncheck("usaid-checkbox");
+        self.__filter_chosen__('project-year', year);
+        self.browser.choose("organisationsRadio",'accountable-agency');
+        self.__filter_chosen__("accounting-selector","UNICEF");
+       
 
     def scroll_to_bottom(self): 
         self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")

@@ -86,10 +86,10 @@ describe("Project Service", function () {
 
     it('should fitler projects by partner', inject(function(projectService) {
         var location = new DT.Location({region: 'test region', district: 'test district'});
-        var projects = projectService.projects_geojson(location, { partner: { unicef: true, usaid: false}});
+        var projects = projectService.projects_geojson(location, { partners: ['unicef', 'usaid']});
         expect(mapProjectId(projects)).toEqual([1, 2])
 
-        var projects = projectService.projects_geojson(location, { partner: { unicef: false, usaid: false}});
+        var projects = projectService.projects_geojson(location, partners: []]});
         expect(mapProjectId(projects)).toEqual([]);
     }));
 

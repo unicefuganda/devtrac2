@@ -1,7 +1,7 @@
 angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $routeParams, $location) {
     DT.timings["urlchange"] = new Date().getTime();
 
-    if ($rootScope.project == undefined) { 
+    if ($rootScope.project == undefined) {
         $rootScope.project = {};
         $rootScope.project.list = null;
     }
@@ -79,6 +79,8 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $scope.statuses = projectService.statuses();
     $scope.implementingPartners = projectService.implementingPartners();
     $scope.years = projectService.years();
+    $scope.financialOrgs = projectService.financialOrgs();
+
 })
 .controller("ProjectsCtrl", function($scope, projectService){
 
@@ -89,22 +91,22 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         if ($scope.project == null)
             return;
 
-        var listChucks = DT.splitIntoChuncks($scope.project.list, 10); 
+        var listChucks = DT.splitIntoChuncks($scope.project.list, 10);
         $scope.project.pagedList = listChucks[$scope.currentPage - 1];
     })
 
-    $scope.$watch('project.list', function(newValues, oldValues){ 
+    $scope.$watch('project.list', function(newValues, oldValues){
         if ($scope.project == null || $scope.project.list == null)
             return;
 
         $scope.totalItems = $scope.project.list.length;
         $scope.currentPage = 1;
-        
-        var listChucks = DT.splitIntoChuncks($scope.project.list, 10); 
+
+        var listChucks = DT.splitIntoChuncks($scope.project.list, 10);
         $scope.project.pagedList = listChucks[$scope.currentPage - 1];
     });
 
-    
+
 
     var updateProjectList = function() {
         if ($scope.filter == null)

@@ -36,7 +36,6 @@ When I open dashboard for "Teso"
 And I filter by Implementing Partner for "Africare"
 Then there are "1" unicef projects in "Teso, Amuria"
 
-
 Scenario: Filter by Partner
 Given that I am a regular user
 When I go to the homepage

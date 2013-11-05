@@ -18,49 +18,49 @@ angular.module("dashboard").directive('map', function() {
             $rootScope.mapResize = function() {
 
                 if ($scope.onresize != null ){
-                    $scope.onresize();    
+                    $scope.onresize();
                 }
             }
             $scope.onresize = null;
 
             if ($location.search().basemap == null) {
-                $scope.basemap = 'tcochran.map-hxvpvlhi';   
+                $scope.basemap = 'tcochran.map-hxvpvlhi';
             } else {
                 $scope.basemap = $location.search().basemap;
             }
 
-            
-            
+
+
         },
         link: function(scope, element, attrs) {
             var map = new DT.Map(element, scope.basemap);
             window.map = map;
-            
+
             scope.onresize = function() {
                 map.redraw();
             };
 
             map.onClickDistrict(function(newLocation) {
                 scope.$apply(function (){
-                    scope.navigateToLocation(newLocation);    
+                    scope.navigateToLocation(newLocation);
 
                 });
             });
 
             map.onClickProject(function(projectFeature) {
                 scope.$apply(function (){
-                    scope.selectProject(projectFeature.properties['PROJECT_ID']); 
+                    scope.selectProject(projectFeature.properties['PROJECT_ID']);
                 });
             });
 
             var applyLocationAndFilter = function(newLocation, newFilter) {
 
                 if (newFilter == null)
-                    return; 
-                
+                    return;
+
                 var layerChanges = DT.Layers.getChanges(map.displayedLayers(), newLocation, newFilter.dataToggledOff());
 
-                $.each(layerChanges.toRemove, function(index, locationKey) {                    
+                $.each(layerChanges.toRemove, function(index, locationKey) {
                     map.removeLayer(locationKey[0]);
                 });
 
@@ -76,7 +76,7 @@ angular.module("dashboard").directive('map', function() {
                 });
             }
 
-            scope.$watch("filter", function(newFilter, oldFilter) { 
+            scope.$watch("filter", function(newFilter, oldFilter) {
                 if (newFilter == undefined)
                     return true;
                 applyLocationAndFilter(scope.location, newFilter);
@@ -91,7 +91,7 @@ angular.module("dashboard").directive('map', function() {
                     return true;
                 if (newIndicator.selected == null)
                     map.removeWMSLayer();
-                else 
+                else
                     map.addWMSLayer(newIndicator.selected.wmsUrl, newIndicator.selected.layer);
             }, true);
 
@@ -109,14 +109,14 @@ angular.module("dashboard").directive('map', function() {
         scope: true,
         link: function(scope, element, attrs) {
             scope.expanded = true;
-            
+
             var expandAnimation = JSON.parse(attrs.panelExpand);
             var collapseAnimation = JSON.parse(attrs.panelCollapse);
             var panel = $(element);
 
             scope.togglePanel = function() {
                 if (scope.expanded)
-                {   
+                {
                     panel.removeClass("expanded");
                     panel.animate(collapseAnimation);;
                     scope.expanded = false;
@@ -168,16 +168,37 @@ angular.module("dashboard").directive('map', function() {
         link: function(scope, element, attrs) {
             $(element).chosen({ width: "300px", allow_single_deselect: true }).change(function () {
                 scope.$apply(function () {
-                    var values = $.map($(element).find("option:selected"), function (option) { return $(option).val(); }); 
+                    var values = $.map($(element).find("option:selected"), function (option) { return $(option).val(); });
                     scope.filter.project[attrs.filtercollection] = values
                 });
             });
 
             scope.$watch(attrs.filtercollection, function(sectors) {
                 scope.$evalAsync(function () {
-                    $(element).trigger("chosen:updated");    
+                    $(element).trigger("chosen:updated");
                 })
             });
         }
     };
+}).directive('partnerstoggle', function(){
+    return {
+        scope: true,
+        link: function(scope, element, attrs){
+            scope.$watch('organisation', function(newOrganisation){
+                if(newOrganisation == null)
+                    return
+                if(newOrganisation == 'accountable-agency'){
+                    scope.filter.project.financialOrgs = [];
+                    $("#funding-org-select").val('').trigger("chosen:updated");
+                    $("#funding-org-select").prop('disabled', true).trigger("chosen:updated");
+                    $("#acc-agency-select").prop('disabled', false).trigger("chosen:updated");
+                }else{
+                    scope.filter.project.partners = [];
+                    $("#acc-agency-select").val('').trigger("chosen:updated");
+                    $("#acc-agency-select").prop('disabled', true).trigger("chosen:updated");
+                    $("#funding-org-select").prop('disabled', false).trigger("chosen:updated");
+                }
+            });
+        }
+    }
 });

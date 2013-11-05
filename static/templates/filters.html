@@ -47,7 +47,7 @@
     </div>
     <div ng-controller="PartnersCtrl" class="tab-pane" id="projects">
 
-      <h3>Our partners:</h3>
+      <!-- <h3>Our partners:</h3>
       <ul class="points-filter filter">
         <li ng-repeat="p in partners" class='partner-toggle'>
           <span class="partner-info">
@@ -62,7 +62,32 @@
           </span>
           <img ng-show="{[{p.color != undefined}]}" ng-src="static/images/long_pins/pin_{[{p.color}]}.png" class="pin-images"/>
         </li> 
-      </ul> 
+      </ul> -->
+      <div partnerstoggle >
+        <div class="radio partners-header">
+          <label>
+            <input type="radio" ng-model="organisation" name="organisationsRadio" id="accountableAgency" value="accountable-agency">
+            Accountable Agency
+          </label>
+        </div>
+        <div class='filter' id ="accounting-selector">
+          <select id="acc-agency-select" chosen ng-model='filter.project.accountAgencies' data-placeholder="Choose Accounting Agency" data-filterCollection='partners' multiple >
+            <option ng-repeat="p in partners" value="{[{p.id}]}">{[{p.name}]}</option>
+          </select>  
+        </div>
+        <div class="radio partners-header">
+          <label>
+            <input type="radio" ng-model="organisation" name="organisationsRadio" id="finacialOrganisation" value="financial-org">
+            Funding Organisation
+          </label>
+        </div>
+        <div class="filter" id="funding-selector">
+          <select id="funding-org-select" chosen ng-model='filter.project.financialOrgs' data-placeholder="Choose Financial Organisation" data-filterCollection='financialOrgs' multiple >
+            <option ng-repeat="financialOrg in financialOrgs" value="{[{financialOrg}]}">{[{financialOrg}]}</option>
+          </select>  
+        </div>
+      </div>
+
       <h3>Sector:</h3>
       <div class='filter' id='project-sector'>
         <select style="width:350px;" data-placeholder="Choose sectors" chosen class='chosen-select' multiple="" data-filterCollection='sectors' >

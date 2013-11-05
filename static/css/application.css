@@ -684,3 +684,10 @@ div.pagination > ul > li > span {
   padding: 5px 10px;
   font-size: 12px;
 }
+.partners-header{
+  background-color: rgb(0, 0, 0);
+  padding: 10px 30px;
+}
+.partners-header label{
+  font-size: 13px !important;
+}
