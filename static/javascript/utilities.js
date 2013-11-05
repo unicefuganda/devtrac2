@@ -77,10 +77,7 @@ DT.timings.print = function() {
 DT.feature_toggles = function(queryString) {
     return {
         is_on: function(toggle) {
-            if (queryString.match("feature_" + toggle + "=true"))
-                return true;
-            else 
-                return false;
+            return queryString.match("feature_" + toggle + "=true")
         }
     }
 }

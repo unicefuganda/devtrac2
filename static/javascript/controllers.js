@@ -1,9 +1,10 @@
 angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $routeParams, $location) {
     DT.timings["urlchange"] = new Date().getTime();
 
-    if ($rootScope.project == undefined)
+    if ($rootScope.project == undefined) {
         $rootScope.project = {};
         $rootScope.project.list = null;
+    }
 
     $rootScope.location = new DT.Location($routeParams);
     if ($rootScope.filter == undefined)

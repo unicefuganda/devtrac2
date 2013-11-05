@@ -423,5 +423,3 @@ angular.module("dashboard")
             return jsonService.get(url);
         }
     });
-
-
