@@ -158,7 +158,6 @@ angular.module("dashboard")
         this.projects_geojson = function (location, projectFilter) {
             return projectsGeojsonPromise.then(function(data) {
                 var results = filterProjects(data, location, projectFilter)
-                console.log(results)
                 return {
                     type: "FeatureCollection",
                     features: results

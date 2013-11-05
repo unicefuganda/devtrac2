@@ -9,8 +9,8 @@ Then the project details are:
 	Accountable Agency: UNICEF
 	Implementing Partner: World Council of Churches
 	Sector: Development
-	Actual Duration: 27/01/2012 - 27/07/2012
-	Planned Duration: 27/01/2012 - 27/07/2012
+	Actual Duration: 23/01/2010 - 23/07/2010
+	Planned Duration: 23/01/2010 - 23/07/2010
 	Status: Post-completion
 	Description: Preventing and Responding to Violence against Children and support to keep children alive
     """

@@ -546,6 +546,14 @@ h3 {
   background-color: rgba(255, 255, 255, 0.96);
 }
 
+}
+.partner-info{
+  width: 120px; 
+  display: inline-block;
+}
+
+/* PROJECTS */
+
 #project-details ul {
   list-style-type: none;
   padding-left: 0;
@@ -565,10 +573,18 @@ h3 {
   vertical-align: top;
 }
 
+#project-list .partner-col {
+  width: 15%;
+}
+
+#project-list .dates-col {
+  width: 15%; 
+}
+
+#project-list .name-col {
+  width: 70%;
+}
+
 #poll-results{
   overflow: hidden;
-}
-.partner-info{
-  width:120px; 
-  display:inline-block;
-}
+

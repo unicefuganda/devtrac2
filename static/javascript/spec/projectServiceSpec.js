@@ -13,6 +13,7 @@ describe("Project Service", function () {
             'SECTOR': 'Education',
             'STATUS': 'Completion', 
             'IMPLEMENTE': 'Africare',
+            'PROJ_NAME': 'A',
             'START_PLAN': '25/07/2010',
             'END_PLANNE': '25/07/2012'
         }}, 
@@ -20,6 +21,7 @@ describe("Project Service", function () {
             PARTNER: 'Unicef', 'Reg_2011': 'test region', 'DNAME_2010': 'test district', 'SNAME_2010': 'test subcounty', 'ID': 2,
             'SECTOR': 'Agriculture',
             'STATUS': 'Completion', 
+            'PROJ_NAME': 'B',
             'IMPLEMENTE': 'Africare',
             'START_PLAN': '25/07/2008',
             'END_PLANNE': '25/07/2012'
@@ -28,6 +30,7 @@ describe("Project Service", function () {
             PARTNER: 'USAID', 'Reg_2011': 'test region', 'DNAME_2010': 'test district 2', 'ID': 3 ,
             'SECTOR': 'Education',
             'STATUS': 'Post-completion', 
+            'PROJ_NAME': 'C',
             'IMPLEMENTE': 'Arbeiter Samariter Bund',
             'START_PLAN': '25/07/2013',
             'END_PLANNE': '25/07/2013'

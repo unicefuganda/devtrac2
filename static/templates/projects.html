@@ -1,18 +1,17 @@
-<div ng-controller="ProjectsCtrl" class='well tinted-background'>
+<div ng-controller="ProjectsCtrl" class='well tinted-background '>
   <div class="well-header">
   <h3>Projects </h3>
   </div>
-    <table class="table table-condensed table-striped">
+    <table class="table table-condensed table-striped" id='project-list'>
       <thead>
         <tr>
-          <th>Partner</th>
-          <th>Project Name</th>
-          <th>Planned Dates</th>
+          <th class='partner-col'>Partner</th>
+          <th class='name-col'>Project Name</th>
+          <th class='dates-col'>Planned Dates</th>
         </tr>
       </thead>
-      <tbody id="project-list" >
+      <tbody>
         <tr ng-repeat="p in project.pagedList" >
-
           <td>{[{ p.partner }]}</td>
           <td><a href="#" ng-click="project.selected = p">{[{ p.name }]}</a></td>
           <td>{[{ p.startActual }]} - {[{ p.endActual }]}</td>

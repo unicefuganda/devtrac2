@@ -207,7 +207,7 @@ angular.module("dashboard").directive('map', function() {
                     }
                 });
 
-                scope.project.pagedList=listChucks[newValues[1]-1];
+                scope.project.pagedList = listChucks[newValues[1]-1];
             });
         }
     }

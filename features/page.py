@@ -126,7 +126,7 @@ class Page:
         return self.browser.find_by_css('#project-details').text
 
     def project_list_content(self):
-        elements = map(lambda element: element.text, self.browser.find_by_css('#project-list'))
+        elements = map(lambda element: element.text, self.browser.find_by_css('#project-list tbody'))
         return elements[0];
 
     def select_ureport_question(self, abbreviation):
@@ -184,7 +184,6 @@ class Page:
         self.browser.find_link_by_text("Projects/Partners").click()
         self.__filter_chosen__('project-year', year)
         self.browser.uncheck("usaid-checkbox");
-
 
     def scroll_to_bottom(self): 
         self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
