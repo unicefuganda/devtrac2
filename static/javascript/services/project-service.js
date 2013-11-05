@@ -69,10 +69,15 @@ angular.module("dashboard")
                         return testYear >= startYear && testYear <= endYear;
                     });
                 });     
+            };
 
-            }
-
-            return features;
+            return features.sort(function (project1, project2) { 
+                if ((project1.properties['PROJ_NAME'] + project1.properties['START_PLAN']) > (project2.properties['PROJ_NAME'] + project2.properties['START_PLAN']))
+                  return 1;
+                if ((project1.properties['PROJ_NAME'] + project1.properties['START_PLAN']) < (project2.properties['PROJ_NAME'] + project2.properties['START_PLAN']))
+                  return -1;
+                return 0;
+            });
         };
 
         var calculateAggregation = function (partners, location, projects) {
@@ -152,9 +157,11 @@ angular.module("dashboard")
 
         this.projects_geojson = function (location, projectFilter) {
             return projectsGeojsonPromise.then(function(data) {
+                var results = filterProjects(data, location, projectFilter)
+                console.log(results)
                 return {
                     type: "FeatureCollection",
-                    features: filterProjects(data, location, projectFilter)
+                    features: results
                 };
             });
         };

@@ -51,9 +51,10 @@ def and_i_click_on_the_project_link(step, project):
 
 @step(u'And I click on the pagination link "([^"]*)"')
 def and_i_click_on_the_pagination_link(step, pager_link):
-     world.page.click_link(pager_link);
+    world.page.click_link(pager_link);
 
 @step(u'Then the project list contains:')
 def then_the_project_list_contains(step):
+    assert_multi_line_equal.im_class.maxDiff = None
     assert_multi_line_equal(world.page.project_list_content(), step.multiline)
 

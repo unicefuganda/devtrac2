@@ -190,7 +190,7 @@ class Page:
         self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
     def click_link(self, link_name):
-        self.browser.find_link_by_text(link_name).click()
+        self.browser.find_link_by_text(str(link_name)).click();
         
 
 

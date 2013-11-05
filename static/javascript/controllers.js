@@ -1,7 +1,7 @@
 angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $routeParams, $location) {
     DT.timings["urlchange"] = new Date().getTime();
 
-    if ($rootScope.project == undefined) {
+    if ($rootScope.project == undefined) { 
         $rootScope.project = {};
         $rootScope.project.list = null;
     }
@@ -73,27 +73,23 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         showUReportResults($rootScope.location, $rootScope.ureportQuestion);
     }, true);
 
-}).controller("PartnersCtrl", function($scope, projectService){
+}).controller("PartnersCtrl", function($rootScope, $scope, projectService){
     $scope.partners = projectService.partnersWithColors();
     $scope.sectors = projectService.sectors();
     $scope.statuses = projectService.statuses();
     $scope.implementingPartners = projectService.implementingPartners();
     $scope.years = projectService.years();
-
-    $scope.stateChange= function(){
-        projectService.projects($rootScope.location, $rootScope.filter.project).then(function(data){
-            $rootScope.project.list = data;
-        });
-    }
 })
-.controller("ProjectsCtrl", function($rootScope, $scope, projectService){
-
-    $rootScope.$watch('location',function(newLocation){
-        if(newLocation == null)
+.controller("ProjectsCtrl", function($scope, projectService){
+    var updateProjectList = function() {
+        if ($scope.filter == null)
             return;
 
-        projectService.projects(newLocation, $scope.filter.project).then(function(data){
-            $rootScope.project.list = data;
+        projectService.projects($scope.location, $scope.filter.project).then(function(data){
+            $scope.project.list = data;
         });
-    });
+    };
+
+    $scope.$watch("filter.project", updateProjectList, true);
+    $scope.$watch("location", updateProjectList, true);
 });

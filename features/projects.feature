@@ -8,9 +8,9 @@ Then the project details are:
 	Project Name: Preventing and Responding to Violence against Children and support to keep children alive
 	Accountable Agency: UNICEF
 	Implementing Partner: World Council of Churches
-	Sector: Development 
-	Actual Duration: 23/01/2010 - 23/07/2010
-	Planned Duration: 23/01/2010 - 23/07/2010
+	Sector: Development
+	Actual Duration: 27/01/2012 - 27/07/2012
+	Planned Duration: 27/01/2012 - 27/07/2012
 	Status: Post-completion
 	Description: Preventing and Responding to Violence against Children and support to keep children alive
     """
@@ -55,10 +55,10 @@ Given that I am a regular user
 When I open dashboard for "Acholi, Gulu"
 Then the project list contains:
 	"""
+	UNICEF Preventing and Responding to Violence against Children and support to keep children alive 25/01/2011 - 25/07/2011
+	UNICEF Quality Education through BRMS and ECD and VSO volunteers 25/01/2011 - 25/07/2011
 	UNICEF STRENGTHENING PARLIAMENATRY OVERSIGHT 28/01/2013 - 28/07/2013
-    UNICEF Strengthening Reintegration of Young Mothers with children Formerly Associated with the LRA 28/01/2013 - 28/07/2013
-    UNICEF Quality Education through BRMS and ECD and VSO volunteers 25/01/2011 - 25/07/2011
-    UNICEF Preventing and Responding to Violence against Children and support to keep children alive 25/01/2011 - 25/07/2011
+	UNICEF Strengthening Reintegration of Young Mothers with children Formerly Associated with the LRA 28/01/2013 - 28/07/2013
 	"""
 
 
@@ -81,12 +81,12 @@ Then the project details are:
 Scenario: Paginate the project list
 Given that I am a regular user
 When I open dashboard for "Acholi"
-And I click on the pagination link "4"
+And I click on the pagination link "4"	
 Then the project list contains:
 	"""
-	UNICEF Preventing and Responding to Violence against Children and support to keep children alive 25/01/2011 - 25/07/2011
-	UNICEF Preventing and Responding to Violence against Children and support to keep children alive 21/01/2009 - 21/07/2009
-	UNICEF Preventing and Responding to Violence against Children and support to keep children alive 20/01/2008 - 20/07/2008
-	UNICEF Preventing and Responding to Violence against Children and support to keep children alive 25/01/2011 - 25/07/2011
+	UNICEF Strengthening peace building, education policy and practice at national and regional level 23/01/2010 - 23/07/2010
+    UNICEF Support to keep children and mothers ALIVE through provision of a comprehensive Health, Nutrition and HIV/AIDS packages for Northern Uganda 23/01/2010 - 23/07/2010
+    UNICEF Support to keep children and mothers ALIVE through provision of a comprehensive Health, Nutrition and HIV/AIDS packages for Northern Uganda 25/01/2011 - 25/07/2011
+    UNICEF Support to keep children and mothers ALIVE through provision of a comprehensive Health, Nutrition and HIV/AIDS packages for Northern Uganda 27/01/2012 - 27/07/2012
 	"""
 

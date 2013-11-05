@@ -51,15 +51,15 @@ describe("Utilities", function() {
         feature_toggles = DT.feature_toggles("feature_left_side=true&feature_other=false")
         expect(feature_toggles.is_on('left_side')).toBeTruthy();
         expect(feature_toggles.is_on('other')).toBeFalsy();
-    })
+    });
 
     it ("should remove non unique element based on property values", function () {
         expect(DT.unique([{id: 'unicef'}, {id: 'usaid'}, {id: 'unicef'}])).toEqual([{id: 'unicef'}, {id: 'usaid'}])
-    })
+    });
 
     it("should split an array into chunks of a given length", function(){
         var testArray = ["james","tim", "bob","kevin", "jude","paul", "peter"];
         expect(DT.splitIntoChuncks(testArray,3)).toEqual( [["james","tim", "bob"],["kevin", "jude","paul"],["peter"]] );
-    })
+    });
 
 });
