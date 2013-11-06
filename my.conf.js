@@ -32,7 +32,6 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-      'static/javascript/application.js',
       'static/javascript/version.json',
       'static/javascript/map.js',
     ],

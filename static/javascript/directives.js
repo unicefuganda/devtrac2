@@ -2,13 +2,14 @@ angular.module("dashboard").directive('map', function() {
     return {
         controller: function($rootScope, $scope, $location, districtService, projectService) {
             $scope.navigateToLocation = function(location) {
+                $scope.project.selected = null;
                 $location.path(location.toUrl());
             }
 
             $scope.selectProject = function(projectId) {
-                $scope.project.selected = projectService.findById(projectId)
+                $scope.project.selected = projectService.findById(projectId);
+                $rootScope.$broadcast('projectClicked');
             }
-
 
             $scope.getData = function(locationKeys) {
                 return districtService.getData(locationKeys, $scope.filter);
@@ -19,9 +20,6 @@ angular.module("dashboard").directive('map', function() {
             } else {
                 $scope.basemap = $location.search().basemap;
             }
-
-
-
         },
         link: function(scope, element, attrs) {
             var map = new DT.Map(element, scope.basemap);
@@ -30,7 +28,6 @@ angular.module("dashboard").directive('map', function() {
             map.onClickDistrict(function(newLocation) {
                 scope.$apply(function (){
                     scope.navigateToLocation(newLocation);
-
                 });
             });
 
@@ -188,4 +185,15 @@ angular.module("dashboard").directive('map', function() {
             });
         }
     }
-});
+}).directive('project', function() {
+    return {
+        link: function(scope, element, attrs) {
+            scope.$on('projectClicked', function(project) {
+                    $('html, body').animate({
+                        scrollTop: $(".detail-panel").offset().top
+                    }, 500);
+            });
+        }
+    }
+
+})

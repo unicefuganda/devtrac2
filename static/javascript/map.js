@@ -52,11 +52,9 @@ DT.Map = function(element, basemap) {
 
     var mapboxUrl = 'http://{s}.tiles.mapbox.com/v3/mapbox.mapbox-light/{z}/{x}/{y}.png'
     var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    
 
     var tileServerUrl = DT.testing ? testingUrl : mapboxUrl;
     
-    // map.addLayer(osm);
     self.layerMap = new DT.LayerMap();
     window.mapmap = map;
 
@@ -157,9 +155,6 @@ DT.Map = function(element, basemap) {
                 .on('click', function() { 
                     if (self.clickProjectHandler != null)
                         self.clickProjectHandler(feature);
-                    $('html, body').animate({
-                        scrollTop: $("#project-details").offset().top
-                    }, 500);
                         //$(document).scrollTo( "#project-details", 800, {easing:'elasout'} );
                 })
                 ;
@@ -176,14 +171,6 @@ DT.Map = function(element, basemap) {
             self.wmsLayer = null;
         };
     }   
-
-    // var initBaseLayer = function {
-    //     if (!self.hasBaseLayer) {
-    //         var layer = L.mapbox.tileLayer(basemap);
-    //         map.addLayer(layer);
-    //         self.hasBaseLayer = true;
-    //     }
-    // };  
 
     return {
         addLayer: function(name, location, data, layer_info) {
@@ -282,7 +269,6 @@ DT.Map = function(element, basemap) {
                 }
             }
         },
-
         getMarker: function(layer, lat, lng) {
             var markerLayer = self.layerMap.findLayerByKey(layer);
             for(var layerKey in markerLayer._featureGroup._layers) {
@@ -345,8 +331,6 @@ DT.Layer = function(leafletLayer, options, featureProperties, map) {
 
         self.selected = true;
         leafletLayer.setStyle(options.selectedStyle);
-        
-
         map.fitBounds(leafletLayer.getBounds());    
     };
 

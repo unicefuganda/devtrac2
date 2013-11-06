@@ -3,6 +3,7 @@ DT.Project = function(feature) {
     this.name = feature['PROJ_NAME'];
     this.partner = feature['PARTNER'];
     this.implementingPartner = feature['IMPLEMENTE'];
+    this.financialOrganization = feature['FINANCIAL'];
     this.startPlanned = feature['START_PLAN'];
     this.endPlanned = feature['END_PLANNE'];
     this.startActual = feature['START_ACTU'];

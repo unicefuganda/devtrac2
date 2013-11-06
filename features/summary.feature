@@ -6,7 +6,7 @@ Given that I am a regular user
 When I go to the homepage
 Then The following information will be shown contextual panel
     """
-    Uganda
+    Indicators
     Health Centers
     4,437
     Schools
@@ -17,19 +17,12 @@ Then The following information will be shown contextual panel
     13
     """
 
-# Population as of 2011 - #
-# Percentage of children vaccinated against Diphtheria - #
-# Percentage of children vaccinated against Measles - #
-# Percentage of deliveries in Health Facilities - #
-# Pit latrine coverage percentage - #
-# Safe Water coverage Percentageentage - #
-
 Scenario: Show regional summary information
 Given that I am a regular user
 When I open dashboard for "Acholi"
 Then The following information will be shown contextual panel
     """
-    Acholi Region
+    Indicators
     Health Centers
     58
     Schools
@@ -46,7 +39,7 @@ When I open dashboard for "Acholi"
 And I click on "Acholi, Gulu"
 Then The following information will be shown contextual panel
     """
-    Gulu District
+    Indicators
     Health Centers
     22
     Schools
@@ -80,7 +73,7 @@ Given that I am a regular user
 When I open dashboard for "Acholi, Gulu, Patiko"
 Then The following information will be shown contextual panel
     """
-    Patiko Subcounty
+    Indicators
     Health Centers
     0
     Schools
@@ -96,7 +89,7 @@ Given that I am a regular user
 When I open dashboard for "Acholi, Gulu, Paicho, Pagik"
 Then The following information will be shown contextual panel
     """
-    Pagik Parish
+    Indicators
     Health Centers
     2
     Schools

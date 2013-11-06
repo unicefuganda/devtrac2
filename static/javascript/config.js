@@ -42,21 +42,6 @@ DT.AgregationConfig.labels = [
     { key: "parish", label: "Parishes", formatter: DT.NumberFormatter}
 ];
 
-DT.projectDetailLabels =
-    [
-        {key: "PROJ_NAME", label: "Project Name"},
-        {key: "PARTNER", label: "Partner"},
-        {key: "IMPLEMENTE", label: "Implementer"},
-        {key: "DISTRICTS", label: "District"},
-        {key: "SECTOR", label: "Sector"},
-        {key: "START_ACTU", label: "Start Actual"},
-        {key: "START_PLAN", label: "Start Planned"},
-        {key: "END_ACTUAL", label: "End Actual"},
-        {key: "END_PLANNE", label: "End Planned"},
-        {key: "STATUS", label: "Status"},
-        {key: "PROJ_DESC", label: "Description"}
-    ];
-
 DT.piechart_colors = ["red", "blue", "yellow", "green", "lightblue", "orange", "salmon", "cyan", "magenta"];
 
 DT.markerColors = ["red", "blue", "green"];

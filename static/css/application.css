@@ -5,6 +5,11 @@ body {
   font-size: 13px;
 }
 
+h2 {
+  font-size: 16px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
 h3 {
   font-size: 13px;
   font-weight: 500;
@@ -391,11 +396,6 @@ h3 {
 
 /* SUMMARY */
 
-#summary {
-  padding-top: 10px;
-  padding-left: 10px; 
-}
-
 #summary div.info { 
   margin-right: 30px; 
   display:  inline-block;
@@ -554,6 +554,10 @@ h3 {
 
 /* PROJECTS */
 
+.back-to-area-link {
+  text-transform: capitalize; 
+}
+
 #project-details ul {
   list-style-type: none;
   padding-left: 0;
@@ -561,13 +565,13 @@ h3 {
 
 #project-details .detail-value{
   display: inline-block;
-  width: 61%;
+  width: 82%;
   margin-bottom: 3px;
 }
 
 #project-details .detail-key{
   font-weight: bold;
-  width: 31%;
+  width: 16%;
   margin-right: 10px;
   display: inline-block;
   vertical-align: top;

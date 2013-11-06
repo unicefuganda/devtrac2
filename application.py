@@ -30,7 +30,6 @@ js = Bundle(
 	'javascript/map.js',
 	'javascript/utilities.js',
 	'javascript/config.js',
-	'javascript/application.js',
 	'javascript/lib/bootstrap.min.js',
 	'javascript/lib/bootstrap-paginator.js',
 	'javascript/location.js',

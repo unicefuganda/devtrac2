@@ -1,40 +1,47 @@
-<div class="well-header">
-    <h3>Project Details</h3>                  
-</div>
-<div id="project-details" style="clear:both">
-    <ul>
-        <li>
-            <span class="detail-key">Project Name:</span>
-            <span class="detail-value">{[{project.selected.name}]}</span>      
-        </li>
-        <li>
-            <span class="detail-key">Accountable Agency:</span>
-            <span class="detail-value">{[{project.selected.partner}]}</span>      
-        </li>
-        <li>
-            <span class="detail-key">Implementing Partner:</span>
-            <span class="detail-value">{[{project.selected.implementingPartner}]}</span>      
-        </li>
-        <li>
-            <span class="detail-key">Sector:</span>
-            <span class="detail-value">{[{project.selected.sector}]}</span>      
-        </li>
-        <li>
-            <span class="detail-key">Actual Duration:</span>
-            <span class="detail-value">{[{project.selected.startActual}]} - {[{project.selected.endActual}]}</span>      
-        </li>
-        <li>
-            <span class="detail-key">Planned Duration:</span>
-            <span class="detail-value">{[{project.selected.startPlanned}]} - {[{project.selected.endPlanned}]}</span>      
-        </li>
-        <li>
-            <span class="detail-key">Status:</span>
-            <span class="detail-value">{[{project.selected.status}]}</span>      
-        </li>
-        <li>
-            <span class="detail-key">Description:</span>
-            <span class="detail-value">{[{project.selected.description}]}</span>      
-        </li>
 
-    </ul>
-</div> 
+
+
+
+<div project class="well tinted-background">
+    <div class="well-header">
+        <h3>{[{project.selected.name}]}</h3>                  
+    </div>
+    <div id="project-details" style="clear:both">
+        <ul>
+            <li>
+                <span class="detail-key">Accountable Agency:</span>
+                <span class="detail-value">{[{project.selected.partner}]}</span>      
+            </li>
+            <li>
+                <span class="detail-key">Financial Organizatin:</span>
+                <span class="detail-value">{[{project.selected.financialOrganization}]}</span>      
+            </li>
+            <li>
+                <span class="detail-key">Implementing Partner:</span>
+                <span class="detail-value">{[{project.selected.implementingPartner}]}</span>      
+            </li>
+            <li>
+                <span class="detail-key">Sector:</span>
+                <span class="detail-value">{[{project.selected.sector}]}</span>      
+            </li>
+            <li>
+                <span class="detail-key">Actual Duration:</span>
+                <span class="detail-value">{[{project.selected.startActual}]} - {[{project.selected.endActual}]}</span>      
+            </li>
+            <li>
+                <span class="detail-key">Planned Duration:</span>
+                <span class="detail-value">{[{project.selected.startPlanned}]} - {[{project.selected.endPlanned}]}</span>      
+            </li>
+            <li>
+                <span class="detail-key">Status:</span>
+                <span class="detail-value">{[{project.selected.status}]}</span>      
+            </li>
+            <li>
+                <span class="detail-key">Description:</span>
+                <span class="detail-value">{[{project.selected.description}]}</span>      
+            </li>
+        </ul>
+    </div> 
+
+    <a class='back-to-area-link' ng-click='project.selected=null' href=''>Back to {[{location.full_name();}]}</a>
+</div>

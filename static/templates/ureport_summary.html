@@ -1,7 +1,13 @@
 
+<h2>U-Report</h2>
+
+<div ng-controller="UReportCtrl" class="ureport-questions">  
+  <button type="button" ng-click='ureportQuestion.selected = null;' class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == null ? 'toggle-selected' : '' }]}" >None</button>    
+  <button type="button" data-question='{[{question.abbreviation}]}' ng-click='ureportQuestion.selected = question;' ng-repeat="question in questions" class="btn btn-default btn-sm toggle {[{ureportQuestion.selected == question ? 'toggle-selected' : '' }]}" >{[{question.abbreviation}]}</button>    
+</div>
+
 <div ng-controller="UReportResponsesCtrl"  id='ureport-panel' ng-show="ureportQuestion.selected" >
   <div id="poll-results">
-    <h3>UReport Poll Results</h3>
 
     <ul ng-show="ureportTop5.length > 0" class='ureport-top5'>
       <span class="ureport-question" >{[{ureportQuestion.selected.question}]}</span>
