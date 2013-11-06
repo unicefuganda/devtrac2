@@ -698,17 +698,16 @@ div.pagination > ul > li > span {
 }
 
 .pin {
-  background-color: #aaa;
+  background-color: #9A999B;
   background-image: linear-gradient(left, hsla(0,0%,100%,.2), hsla(0,0%,0%,.2));
   display: block;
   height: 1em;
   left: 50%;
-  margin: 0.2em 0.7em;
   position: absolute;
   top: 50%;
   width: .1em;
 }
-.pin:after {
+.pin span {
   background-color: red;
   background-image: radial-gradient(25% 25%, circle, hsla(0,0%,100%,.2), hsla(0,0%,0%,.2));
   border-radius: 50%;

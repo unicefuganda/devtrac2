@@ -43,7 +43,7 @@ angular.module("dashboard").directive('map', function() {
                     return;
 
                 var layerChanges = DT.Layers.getChanges(map.displayedLayers(), newLocation, newFilter.dataToggledOff());
-
+                $(".pin span").css("background-color","green");
                 $.each(layerChanges.toRemove, function(index, locationKey) {
                     map.removeLayer(locationKey[0]);
                 });
@@ -196,4 +196,4 @@ angular.module("dashboard").directive('map', function() {
         }
     }
 
-})
+});

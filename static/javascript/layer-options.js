@@ -32,7 +32,7 @@ DT.Layers = {
             layers.push(["parish", subcountyLocation]);
         }
         return layers;
-        
+
     },
     filterLayers: function (location, filteredKeys) {
         var layers = [];
@@ -219,8 +219,8 @@ DT.LayerOptions = {
         name: "water-point",
         type: "aggregate",
         display: function(stats){ return true; },
-        getValue: function(stats, childLocation) { 
-            return "<div data-locator='" + childLocation.getName() + "'>" 
+        getValue: function(stats, childLocation) {
+            return "<div data-locator='" + childLocation.getName() + "'>"
                     + stats.info['water-point']
                     + '</div>';
         }
@@ -229,8 +229,8 @@ DT.LayerOptions = {
         name: "health-center",
         type: "aggregate",
         display: function(stats){ return true; },
-        getValue: function(stats, childLocation) { 
-            return "<div data-locator='" + childLocation.getName() + "'>" 
+        getValue: function(stats, childLocation) {
+            return "<div data-locator='" + childLocation.getName() + "'>"
                     + stats.info['health-center']
                     + '</div>';
         }
@@ -239,18 +239,18 @@ DT.LayerOptions = {
         name: "school",
         type: "aggregate",
         display: function(stats){ return true; },
-        getValue: function(stats, childLocation) { 
-            return "<div data-locator='" + childLocation.getName() + "'>" 
+        getValue: function(stats, childLocation) {
+            return "<div data-locator='" + childLocation.getName() + "'>"
                     + stats.info.school
                     + '</div>';
         }
-        
+
     },
     "water-point-point": {
         name: "water-point-point",
         type: "point",
-        getValue: function(properties) { 
-            return "" 
+        getValue: function(properties) {
+            return ""
         },
         summaryInformation: function(properties) {
             return {
@@ -260,15 +260,15 @@ DT.LayerOptions = {
                     ["Management", properties.Management],
                 ]
             }
-        } 
+        }
     },
     "school-point": {
         name: "school-point",
-        type: "point",    
-        getValue: function(properties) { 
-            return "" 
-        },   
-        summaryInformation: function(properties) { 
+        type: "point",
+        getValue: function(properties) {
+            return ""
+        },
+        summaryInformation: function(properties) {
             return {
                 title: properties.SCHOOLNAME + " School",
                 lines: [
@@ -281,10 +281,10 @@ DT.LayerOptions = {
     "health-center-point": {
         name: "health-center-point",
         type: "point",
-        getValue: function(properties) { 
-            return "" 
+        getValue: function(properties) {
+            return ""
         },
-        summaryInformation: function(properties) { 
+        summaryInformation: function(properties) {
             if (!properties.Name)
                 return { title: "Health Center", lines: []};
 
@@ -302,9 +302,7 @@ DT.LayerOptions = {
         getValue: function(properties) {
             var long_pins = true;
             var pin_folder = long_pins ? 'long_pins' : 'pins';
-
-            //return "<img class='pin-images' src='\\static\\images\\"+pin_folder+"\\pin_"+DT.markerColorLegend[properties.PARTNER.toLowerCase()]+".png'> "
-            return "<i class='pin'></i>"
+            return "<i class='pin' colour='"+DT.markerColorLegend[properties.PARTNER.toLowerCase()]+"' color ><span style='background-color:"+DT.markerColorLegend[properties.PARTNER.toLowerCase()]+"'></span></i>"
         },
         summaryInformation: function(properties) {
             return {
@@ -321,9 +319,9 @@ DT.LayerOptions = {
         name: "unicef",
         type: "aggregate",
         display: function(stats){ return stats.info.unicef > 0; },
-        getValue: function(stats, childLocation) { 
+        getValue: function(stats, childLocation) {
             return  "<img src='/static/images/unicef_small.png'></img>"
-                    + "<div data-locator='" + childLocation.getName() + "'>" 
+                    + "<div data-locator='" + childLocation.getName() + "'>"
                     + stats.info.unicef
                     + '</div>';
         }
@@ -333,9 +331,9 @@ DT.LayerOptions = {
         name: "usaid",
         type: "aggregate",
         display: function(stats){ return stats.info.usaid > 0; },
-        getValue: function(stats, childLocation) { 
+        getValue: function(stats, childLocation) {
             return "<img src='/static/images/usaid_small.png'></img>"
-                    + "<div data-locator='" + childLocation.getName() + "'>" 
+                    + "<div data-locator='" + childLocation.getName() + "'>"
                     + stats.info.usaid
                     + '</div>';
         }

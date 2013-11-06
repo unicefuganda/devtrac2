@@ -1,5 +1,5 @@
 mockGeoJson = function(testData) {
-    return { 
+    return {
         get: function (options) {
             return { then: function(func) { return func(testData); } };
         }
@@ -11,28 +11,28 @@ describe("Project Service", function () {
         {properties: {
             PARTNER: 'Unicef', 'Reg_2011': 'test region', 'DNAME_2010': 'test district', 'ID': 1,
             'SECTOR': 'Education',
-            'STATUS': 'Completion', 
+            'STATUS': 'Completion',
             'IMPLEMENTE': 'Africare',
             'PROJ_NAME': 'A',
             'START_PLAN': '25/07/2010',
             'END_PLANNE': '25/07/2012',
             'FINANCIAL': 'DFID'
-        }}, 
+        }},
         {properties: {
             PARTNER: 'Unicef', 'Reg_2011': 'test region', 'DNAME_2010': 'test district', 'SNAME_2010': 'test subcounty', 'ID': 2,
             'SECTOR': 'Agriculture',
-            'STATUS': 'Completion', 
+            'STATUS': 'Completion',
             'PROJ_NAME': 'B',
             'IMPLEMENTE': 'Africare',
             'START_PLAN': '25/07/2008',
             'END_PLANNE': '25/07/2012',
             'FINANCIAL': 'Japan'
 
-        }}, 
+        }},
         {properties: {
             PARTNER: 'USAID', 'Reg_2011': 'test region', 'DNAME_2010': 'test district 2', 'ID': 3 ,
             'SECTOR': 'Education',
-            'STATUS': 'Post-completion', 
+            'STATUS': 'Post-completion',
             'PROJ_NAME': 'C',
             'IMPLEMENTE': 'Arbeiter Samariter Bund',
             'START_PLAN': '25/07/2013',
@@ -43,14 +43,14 @@ describe("Project Service", function () {
 
     var testSummaryChildrenLocations = [
         new DT.Location({region: 'test region', district: 'test district'}),
-        new DT.Location({region: 'test region', district: 'test district 2'}), 
+        new DT.Location({region: 'test region', district: 'test district 2'}),
         new DT.Location({region: 'test region', district: 'test district 3'})
     ];
 
     var mock = mockGeoJson(testResponses);
 
     var mockSummaryServiceFactory = function(testData) {
-        return { 
+        return {
             childLocations: function (options) {
                 return { then: function(func) { return func(testData); } };
             }
@@ -63,7 +63,7 @@ describe("Project Service", function () {
         module('dashboard',function($provide){
             spyOn(mock,'get').andCallThrough();
             $provide.value('geonodeService',mock);
-            // spyOn(mockSummaryService,'get').andCallThrough();   
+            // spyOn(mockSummaryService,'get').andCallThrough();
             $provide.value('summaryService',mockSummaryService);
         });
 
@@ -89,18 +89,16 @@ describe("Project Service", function () {
         expect(mapProjectId(projects)).toEqual([])
     }));
 
-
-    it('should fitler projects by partner', inject(function(projectService) {
-        var location = new DT.Location({region: 'test region'});
+    it('should filter projects by partner', inject(function(projectService) {
+        var location = new DT.Location({region: 'test region', district: 'test district'});
         var projects = projectService.projects_geojson(location, { partners: ['unicef', 'usaid']});
         expect(mapProjectId(projects)).toEqual([1, 2, 3])
 
         var projects = projectService.projects_geojson(location, { partners: ['unicef']});
-        expect(mapProjectId(projects)).toEqual([1, 2])
+        expect(mapProjectId(projects)).toEqual([1, 2,3)
 
-
-        var projects = projectService.projects_geojson(location, { partners: []} );
-        expect(mapProjectId(projects)).toEqual([1, 2, 3]);
+        var projects = projectService.projects_geojson(location, { partners: [] });
+        expect(mapProjectId(projects)).toEqual([1,2]);
     }));
 
     it('should filter projects by sector', inject(function(projectService){
@@ -179,11 +177,11 @@ describe("Project Service", function () {
     it('should aggregate by partner', inject(function(projectService) {
         var filter = { partner: { unicef: true, usaid: true}};
         var aggregation = projectService.aggregation(new DT.Location({region: 'test region'}), filter);
-        expect(aggregation.children).toEqual([{ 
+        expect(aggregation.children).toEqual([{
                 locator: 'test region, test district',
                 info: { unicef: 2, usaid: 0}
             },{
-                locator: 'test region, test district 2', 
+                locator: 'test region,  district 2',
                 info: { unicef: 0, usaid: 1}
             },{
                 locator: 'test region, test district 3',

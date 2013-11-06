@@ -1,11 +1,10 @@
 angular.module("dashboard")
     .service("projectService", function(jsonService, geonodeService, summaryService) {
         var self = this;
-
         var getUniquePartners = function(features) {
             var features = $.map(features, function(project, index) { return {
                 id: project.properties['PARTNER'].toLowerCase(),
-                name: project.properties['PARTNER']
+                name: project.properties['PARTNER'],
             }});
             return DT.unique(features).sort(function (partner1, partner2) { return partner1.name < partner2.name; });
         };
