@@ -16,10 +16,9 @@ describe("Project Service", function () {
             'PROJ_NAME': 'A',
             'START_PLAN': '25/07/2010',
             'END_PLANNE': '25/07/2012',
-
             'FINANCIAL': 'DFID',
             'PROJ_ID': 'UNICEF-1'
-        }}, 
+        }},
         {properties: {
             PARTNER: 'Unicef', 'Reg_2011': 'test region', 'DNAME_2010': 'test district', 'SNAME_2010': 'test subcounty', 'ID': 2,
             'SECTOR': 'Agriculture',
@@ -187,7 +186,7 @@ describe("Project Service", function () {
         expect(projects[0].id).toEqual('UNICEF-1')
         expect(projects[0].locations[0].location).toEqual(new DT.Location({'DNAME_2010': 'test district', 'Reg_2011': 'test region'}))
         expect(projects[0].locations[1].location).toEqual(new DT.Location({'DNAME_2010': 'test district', 'Reg_2011': 'test region', 'SNAME_2010': 'test subcounty'}))
-        
+
         expect(projects[1].id).toEqual('USAID-2')
         expect(projects[1].locations[0].location).toEqual(new DT.Location({'DNAME_2010': 'test district 2', 'Reg_2011': 'test region'}))
     }));

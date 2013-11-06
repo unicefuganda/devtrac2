@@ -172,16 +172,14 @@ angular.module("dashboard").directive('map', function() {
                 if(newOrganisation == null)
                     return
                 if(newOrganisation == 'accountable-agency'){
-                    scope.filter.project.financialOrgs = [];
-                    $("#funding-org-select").val('').trigger("chosen:updated");
-                    $("#funding-org-select").prop('disabled', true).trigger("chosen:updated");
+                    $("#funding-org-select").val('').prop('disabled', true).trigger("chosen:updated");
                     $("#acc-agency-select").prop('disabled', false).trigger("chosen:updated");
                 }else{
-                    scope.filter.project.partners = [];
-                    $("#acc-agency-select").val('').trigger("chosen:updated");
-                    $("#acc-agency-select").prop('disabled', true).trigger("chosen:updated");
+                    $("#acc-agency-select").val('').prop('disabled', true).trigger("chosen:updated");
                     $("#funding-org-select").prop('disabled', false).trigger("chosen:updated");
                 }
+                if(scope.filter)
+                    scope.filter.project.partners = [];
             });
         }
     }
