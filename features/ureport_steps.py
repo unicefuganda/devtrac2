@@ -10,6 +10,7 @@ def and_i_select_ureport_question(step, question):
 
 @step(u'Then I should see a pie chart of')
 def then_i_should_see_a_pie_chart_of(step):
+    world.page.wait_for(lambda page: page.ureport_results() == step.multiline)
     assert_equals(world.page.ureport_results(), step.multiline)
 
 @step(u'And I select a ureport question "([^"]*)"')
