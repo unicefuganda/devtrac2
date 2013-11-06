@@ -6,6 +6,8 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         $rootScope.project.list = null;
     }
 
+    $rootScope.project.selected = null;
+
     $rootScope.location = new DT.Location($routeParams);
     if ($rootScope.filter == undefined)
         $rootScope.filter = new DT.Filter({health_center: false, water_point: false, school: true, project: { partner: { unicef: true, usaid: true} }} );
