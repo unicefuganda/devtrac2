@@ -189,9 +189,9 @@ angular.module("dashboard").directive('map', function() {
     return {
         link: function(scope, element, attrs) {
             scope.$on('projectClicked', function(project) {
-                    $('html, body').animate({
-                        scrollTop: $(".detail-panel").offset().top
-                    }, 500);
+                    // $('html, body').animate({
+                    //     scrollTop: $(".detail-panel").offset().top
+                    // }, 500);
             });
         }
     }

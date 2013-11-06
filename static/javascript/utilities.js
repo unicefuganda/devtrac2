@@ -96,4 +96,4 @@ var spliceIntoChunks = function(array,chunckLength){
         newArray.push(array.slice(i,i+chunckLength))
     }
     return newArray;
-}
+};

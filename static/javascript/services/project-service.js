@@ -153,23 +153,6 @@ angular.module("dashboard")
             });
         }
 
-        this.aggregation = function (location, projectFilter) {
-            return projectsGeojsonPromise.then(function(data) {
-                var partners = getUniquePartners(data.features)
-                var filteredProjects = filterProjects(data, location, projectFilter);
-                return summaryService.childLocations(location).then(function(locations) {
-                    var children = $.map(locations, function(location, index) {
-                        return {
-                            locator: location.getName(),
-                            info: calculateAggregation(partners, location, filteredProjects)
-                        }
-                    });
-
-                    return { children: children};
-                });
-            });
-        };
-
         this.projects_geojson = function (location, projectFilter) {
             return projectsGeojsonPromise.then(function(data) {
                 var results = filterProjects(data, location, projectFilter)

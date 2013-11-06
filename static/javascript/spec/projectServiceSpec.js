@@ -16,8 +16,10 @@ describe("Project Service", function () {
             'PROJ_NAME': 'A',
             'START_PLAN': '25/07/2010',
             'END_PLANNE': '25/07/2012',
-            'FINANCIAL': 'DFID'
-        }},
+
+            'FINANCIAL': 'DFID',
+            'PROJ_ID': 'UNICEF-1'
+        }}, 
         {properties: {
             PARTNER: 'Unicef', 'Reg_2011': 'test region', 'DNAME_2010': 'test district', 'SNAME_2010': 'test subcounty', 'ID': 2,
             'SECTOR': 'Agriculture',
@@ -26,7 +28,8 @@ describe("Project Service", function () {
             'IMPLEMENTE': 'Africare',
             'START_PLAN': '25/07/2008',
             'END_PLANNE': '25/07/2012',
-            'FINANCIAL': 'Japan'
+            'FINANCIAL': 'Japan',
+            'PROJ_ID': 'UNICEF-1'
 
         }},
         {properties: {
@@ -37,7 +40,8 @@ describe("Project Service", function () {
             'IMPLEMENTE': 'Arbeiter Samariter Bund',
             'START_PLAN': '25/07/2013',
             'END_PLANNE': '25/07/2013',
-            'FINANCIAL': 'DFID'
+            'FINANCIAL': 'DFID',
+            'PROJ_ID': 'USAID-1'
 
         }}] }
 
@@ -172,6 +176,20 @@ describe("Project Service", function () {
 
         var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, years: [] });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
+    }));
+
+    it('map locations into projects', inject(function(projectService) {
+        var filter = { partner: { unicef: true, usaid: true}};
+        var projects = projectService.projects(new DT.Location({region: 'test region'}), filter);
+
+        expect(projects.length).toEqual(2)
+
+        expect(projects[0].id).toEqual('UNICEF-1')
+        expect(projects[0].locations[0].location).toEqual(new DT.Location({'DNAME_2010': 'test district', 'Reg_2011': 'test region'}))
+        expect(projects[0].locations[1].location).toEqual(new DT.Location({'DNAME_2010': 'test district', 'Reg_2011': 'test region', 'SNAME_2010': 'test subcounty'}))
+        
+        expect(projects[1].id).toEqual('USAID-2')
+        expect(projects[1].locations[0].location).toEqual(new DT.Location({'DNAME_2010': 'test district 2', 'Reg_2011': 'test region'}))
     }));
 
     it('should aggregate by partner', inject(function(projectService) {

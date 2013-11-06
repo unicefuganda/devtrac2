@@ -298,7 +298,7 @@ DT.LayerOptions = {
     },
     "project-point": {
         name: "project-point",
-        type: "point",
+        type: "project",
         getValue: function(properties) {
             var long_pins = true;
             var pin_folder = long_pins ? 'long_pins' : 'pins';

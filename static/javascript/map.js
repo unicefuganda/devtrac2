@@ -111,7 +111,7 @@ DT.Map = function(element, basemap) {
         map.addLayer(layerGroup);
     }
 
-    function addPointsLayer(name, location, features, layer_info) {
+    function addProjectLayer(name, location, features, layer_info) {
         var layerGroup = L.layerGroup();
 
         var markerPopupMessage = function(summaryInformation) {
@@ -129,10 +129,13 @@ DT.Map = function(element, basemap) {
                 className: "marker-popup" ,
                 closeButton: false
             }).setContent(markerPopupMessage(layer_info.summaryInformation(feature.properties)));
+
+            var projectId = feature.properties['PROJECT_ID'];
+            
             var circleIcon = new L.DivIcon({
                 iconSize: new L.Point([10, 10]),
                 className: layer_info.name + "-icon marker-icon ",
-                html: "<div data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'>"
+                html: "<div class='icon-inner'' data-project-id = '" + projectId +  "' data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'>"
                     + layer_info.getValue(feature.properties, layer_info) + 
                 "</div>",
                 popupAnchor: [5, -10]
@@ -155,9 +158,58 @@ DT.Map = function(element, basemap) {
                 .on('click', function() { 
                     if (self.clickProjectHandler != null)
                         self.clickProjectHandler(feature);
-                        //$(document).scrollTo( "#project-details", 800, {easing:'elasout'} );
+                    $(".icon-inner").addClass("disabled-icon")
+                    $(".icon-inner[data-project-id='" +  projectId + "']").removeClass("disabled-icon")
+                });
+            layerGroup.addLayer(marker);
+        });
+
+        self.layerMap.addLayer(name, location, layerGroup, layer_info.type);
+        map.addLayer(layerGroup);
+    }
+
+    function addPointsLayer(name, location, features, layer_info) {
+        var layerGroup = L.layerGroup();
+
+        var markerPopupMessage = function(summaryInformation) {
+            var message = '<h4>' + summaryInformation.title + '</h4>';
+            $.each(summaryInformation.lines, function(index, line) {
+                message += '<label>' + line[0] + ':</label> ' + line[1] + '</br>';    
+            })
+            return message;
+        };
+
+        $.each(features.features, function(index, feature) {
+            var coordinates = feature.geometry.coordinates;
+
+            var popup = L.popup({
+                className: "marker-popup" ,
+                closeButton: false
+            }).setContent(markerPopupMessage(layer_info.summaryInformation(feature.properties)));
+            
+            var circleIcon = new L.DivIcon({
+                iconSize: new L.Point([10, 10]),
+                className: layer_info.name + "-icon marker-icon ",
+                html: "<div data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'>"
+                    + layer_info.getValue(feature.properties, layer_info) + 
+                "</div>",
+                popupAnchor: [5, -10]
+            });
+
+            var geojsonMarkerOptions = {
+                zIndexOffset: 10000,
+                icon: circleIcon
+            };
+          
+            var marker = new L.Marker(new L.LatLng(coordinates[1], coordinates[0]), geojsonMarkerOptions);
+
+            marker.bindPopup(popup)
+                .on('mouseover', function() {
+                    marker.openPopup();
                 })
-                ;
+                .on('mouseout', function() {
+                    marker.closePopup();
+                });
             layerGroup.addLayer(marker);
         });
 
@@ -180,6 +232,8 @@ DT.Map = function(element, basemap) {
                 addAggregateLayer(name, location, data, layer_info);
             } else if (layer_info.type == "point") {
                 addPointsLayer(name, location, data, layer_info);
+            } else if (layer_info.type == 'project') {
+                addProjectLayer(name, location, data, layer_info);
             }
         },
         orderLayers: function(layerOrder) {
