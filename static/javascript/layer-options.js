@@ -303,7 +303,8 @@ DT.LayerOptions = {
             var long_pins = true;
             var pin_folder = long_pins ? 'long_pins' : 'pins';
 
-            return "<img class='pin-images' src='\\static\\images\\"+pin_folder+"\\pin_"+DT.markerColorLegend[properties.PARTNER.toLowerCase()]+".png'> "
+            //return "<img class='pin-images' src='\\static\\images\\"+pin_folder+"\\pin_"+DT.markerColorLegend[properties.PARTNER.toLowerCase()]+".png'> "
+            return "<i class='pin'></i>"
         },
         summaryInformation: function(properties) {
             return {

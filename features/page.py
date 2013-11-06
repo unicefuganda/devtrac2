@@ -91,7 +91,7 @@ class Page:
 
     def marker_count_pins(self,locator):
         self.click_on_layer(locator)
-        content = self.browser.find_by_css(".leaflet-marker-pane .pin-images")
+        content = self.browser.find_by_css(".leaflet-marker-pane .pin")
         return len(content)
 
     def marker_visible(self, layer, locator):

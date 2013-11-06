@@ -1,7 +1,7 @@
 angular.module("dashboard")
     .service("projectService", function(jsonService, geonodeService, summaryService) {
         var self = this;
-        
+
         var getUniquePartners = function(features) {
             var features = $.map(features, function(project, index) { return {
                 id: project.properties['PARTNER'].toLowerCase(),
@@ -11,7 +11,7 @@ angular.module("dashboard")
         };
 
         var getUniqueFinancialOrgs = function(features) {
-            var features = $.map(features, function(project, index) { 
+            var features = $.map(features, function(project, index) {
                 return project.properties['FINANCIAL']
             });
             return DT.unique(features).sort();
@@ -21,11 +21,11 @@ angular.module("dashboard")
             var features = $.map(features, function(project, index) {
                 return project.properties['IMPLEMENTE']
             });
-            return DT.unique(features).sort();  
+            return DT.unique(features).sort();
         }
 
         var filterByLocation = function(features, location) {
-            return $.grep(features, function(feature) { 
+            return $.grep(features, function(feature) {
                 var featureLocation = new DT.Location({
                     region: feature.properties['Reg_2011'],
                     district: feature.properties['DNAME_2010'],
@@ -37,16 +37,8 @@ angular.module("dashboard")
         };
 
         var filterProjects = function(data, location, projectFilter) {
-            var features = filterByLocation(data.features, location);            
+            var features = filterByLocation(data.features, location);
             var partners = getUniquePartners(data.features);
-
-            // $.each(partners, function(index, partner) {
-            //     if (projectFilter.partner[partner.id] == undefined || projectFilter.partner[partner.id] == false) {
-            //         features =  $.grep(features, function(feature) { 
-            //             return feature.properties['PARTNER'].toLowerCase() != partner.id; 
-            //         });
-            //     }
-            // })
 
             if (projectFilter.sectors && projectFilter.sectors.length > 0) {
                 features = $.grep(features, function(project) {
@@ -58,40 +50,40 @@ angular.module("dashboard")
                 features = $.grep(features,function(project){
                     return $.inArray(project.properties['STATUS'], projectFilter.statuses) != -1
                 });
-            }  
+            }
 
             if( projectFilter.partners && projectFilter.partners.length > 0){
                 features = $.grep(features,function(project){
                     return $.inArray(project.properties['PARTNER'].toLowerCase(), projectFilter.partners) != -1
                 });
-            }  
+            }
 
             if( projectFilter.financialOrgs && projectFilter.financialOrgs.length > 0){
                 features = $.grep(features,function(project){
                     return $.inArray(project.properties['FINANCIAL'], projectFilter.financialOrgs) != -1
                 });
-            }  
+            }
 
             if(projectFilter.implementingPartners && projectFilter.implementingPartners.length > 0){
                 features = $.grep(features,function(project){
                     return $.inArray(project.properties['IMPLEMENTE'], projectFilter.implementingPartners) != -1
                 });
-            } 
+            }
 
             if(projectFilter.years && projectFilter.years.length > 0){
                 features = $.grep(features,function(project){
 
-                    var startYear = Number(project.properties['START_PLAN'].substring(6));                        
+                    var startYear = Number(project.properties['START_PLAN'].substring(6));
                     var endYear = Number(project.properties['END_PLANNE'].substring(6));
 
                     return DT.any(projectFilter.years, function(year) {
                         var testYear = Number(year)
                         return testYear >= startYear && testYear <= endYear;
                     });
-                });     
+                });
             };
 
-            return features.sort(function (project1, project2) { 
+            return features.sort(function (project1, project2) {
                 if ((project1.properties['PROJ_NAME'] + project1.properties['START_PLAN']) > (project2.properties['PROJ_NAME'] + project2.properties['START_PLAN']))
                   return 1;
                 if ((project1.properties['PROJ_NAME'] + project1.properties['START_PLAN']) < (project2.properties['PROJ_NAME'] + project2.properties['START_PLAN']))
@@ -156,7 +148,7 @@ angular.module("dashboard")
         };
 
         this.implementingPartners = function () {
-            return projectsGeojsonPromise.then(function(data) { 
+            return projectsGeojsonPromise.then(function(data) {
                 var result =  getUniqueImplementingPartners(data.features);
                 return result;
             });
@@ -175,7 +167,7 @@ angular.module("dashboard")
                     });
 
                     return { children: children};
-                });  
+                });
             });
         };
 
@@ -198,10 +190,10 @@ angular.module("dashboard")
         }
 
         this.findById = function(projectId) {
-            return projectsPromise.then(function(projects) { 
-                return DT.first(projects, function(project) { 
-                    return project.id == projectId; 
-                }); 
+            return projectsPromise.then(function(projects) {
+                return DT.first(projects, function(project) {
+                    return project.id == projectId;
+                });
             });
         }
     });;
