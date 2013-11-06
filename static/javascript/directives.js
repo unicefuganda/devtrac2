@@ -14,15 +14,6 @@ angular.module("dashboard").directive('map', function() {
                 return districtService.getData(locationKeys, $scope.filter);
             };
 
-            //TODO: Is there a more angular way of doing this?
-            $rootScope.mapResize = function() {
-
-                if ($scope.onresize != null ){
-                    $scope.onresize();
-                }
-            }
-            $scope.onresize = null;
-
             if ($location.search().basemap == null) {
                 $scope.basemap = 'tcochran.map-hxvpvlhi';
             } else {
@@ -35,10 +26,6 @@ angular.module("dashboard").directive('map', function() {
         link: function(scope, element, attrs) {
             var map = new DT.Map(element, scope.basemap);
             window.map = map;
-
-            scope.onresize = function() {
-                map.redraw();
-            };
 
             map.onClickDistrict(function(newLocation) {
                 scope.$apply(function (){

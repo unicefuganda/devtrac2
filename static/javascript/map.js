@@ -5,33 +5,30 @@ DT.Map = function(element, basemap) {
 
     var self = this;
     self.wmsLayer = null;
+    self.hasBaseLayer = false;
+
+     var map = L.map(element.attr("id"), {
+        zoomControl: false,
+        scrollWheelZoom: false,
+        touchZoom: false,
+        doubleClickZoom: false,
+        dragging: false
+    });
 
     if (basemap == 'test') {
         var testingUrl = 'http://localhost:5000/stub_tiles/{s}/{z}/{x}/{y}.png';
-
-        var map = L.map(element.attr("id"), {
-            zoomControl: false,
-            scrollWheelZoom: false,
-            touchZoom: false,
-            doubleClickZoom: false,
-            dragging: false
-        });
-
         var layer = new L.TileLayer(testingUrl, {
             minZoom: 6,
             maxZoom: 18
         });
-
-        map.addLayer(layer);
     } else {   
-        var map =  L.mapbox.map(element.attr('id'), basemap, {
-            zoomControl: false, 
-            scrollWheelZoom: false,
-            touchZoom: false,
-            doubleClickZoom: false,
-            dragging: false
+        var layer = new L.mapbox.tileLayer(basemap, {
+            minZoom: 6,
+            maxZoom: 18
         });
     }
+
+    map.addLayer(layer);
 
     map.on("baselayerchange", function(layer) {
         self.activeLayer = layer;
@@ -180,26 +177,15 @@ DT.Map = function(element, basemap) {
         };
     }   
 
+    // var initBaseLayer = function {
+    //     if (!self.hasBaseLayer) {
+    //         var layer = L.mapbox.tileLayer(basemap);
+    //         map.addLayer(layer);
+    //         self.hasBaseLayer = true;
+    //     }
+    // };  
+
     return {
-        redraw: function() {
-            map.invalidateSize(false);
-            
-            var layer = DT.first(self.layerMap.allChildLayers(), function(layer) {
-                return layer.isSelected();
-            });
-
-            // TODO: refactor
-            if (layer == null) {
-                var regionLayer = self.layerMap.findLayerByKey("region");
-                if (regionLayer != null)
-                    map.fitBounds(regionLayer);
-            } else {
-
-                var childLayer = self.layerMap.findChildLayer(layer.location);
-                map.fitBounds(childLayer.leafletLayer.getBounds());
-            }
-            
-        },
         addLayer: function(name, location, data, layer_info) {
             if (layer_info.type == "boundary") {
                 addBoundaryLayer(name, location, data, layer_info);
@@ -316,7 +302,7 @@ DT.Map = function(element, basemap) {
         },
         isIndicatorLayerDisplayed: function(layerName) {
             return self.wmsLayer.options.layers == layerName;
-        }   
+        }      
     }
 };
 
@@ -359,7 +345,9 @@ DT.Layer = function(leafletLayer, options, featureProperties, map) {
 
         self.selected = true;
         leafletLayer.setStyle(options.selectedStyle);
-        map.fitBounds(leafletLayer.getBounds());
+        
+
+        map.fitBounds(leafletLayer.getBounds());    
     };
 
     self.highlight = function() {

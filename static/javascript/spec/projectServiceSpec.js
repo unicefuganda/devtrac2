@@ -89,13 +89,18 @@ describe("Project Service", function () {
         expect(mapProjectId(projects)).toEqual([])
     }));
 
-    it('should filter projects by partner', inject(function(projectService) {
-        var location = new DT.Location({region: 'test region', district: 'test district'});
+
+    it('should fitler projects by partner', inject(function(projectService) {
+        var location = new DT.Location({region: 'test region'});
         var projects = projectService.projects_geojson(location, { partners: ['unicef', 'usaid']});
+        expect(mapProjectId(projects)).toEqual([1, 2, 3])
+
+        var projects = projectService.projects_geojson(location, { partners: ['unicef']});
         expect(mapProjectId(projects)).toEqual([1, 2])
 
-        var projects = projectService.projects_geojson(location, { partners: [] });
-        expect(mapProjectId(projects)).toEqual([1,2]);
+
+        var projects = projectService.projects_geojson(location, { partners: []} );
+        expect(mapProjectId(projects)).toEqual([1, 2, 3]);
     }));
 
     it('should filter projects by sector', inject(function(projectService){

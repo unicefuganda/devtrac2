@@ -35,10 +35,12 @@ def and_i_filter_by_end_date(step, year):
 @step(u'And there are "([^"]*)" unicef projects in "([^"]*)"')
 @step(u'Then there are "([^"]*)" unicef projects in "([^"]*)"')
 def there_are_unicef_projects(step, num_projects, locator): 
+    world.page.wait_for(lambda page: page.marker_count_pins(locator) == int(num_projects))
     assert_equals(world.page.marker_count_pins(locator), int(num_projects));
 
 @step(u'Then there are "([^"]*)" usaid projects in "([^"]*)"')
 def there_are_usaid_projects(step, num_projects, locator): 
+    world.page.wait_for(lambda page: page.marker_count_pins(locator) == int(num_projects))
     assert_equals(world.page.marker_count_pins(locator), int(num_projects));
 
 @step(u'And there are no usaid projects in "([^"]*)"')
