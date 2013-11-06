@@ -158,8 +158,14 @@ DT.Map = function(element, basemap) {
                 .on('click', function() { 
                     if (self.clickProjectHandler != null)
                         self.clickProjectHandler(feature);
-                    $(".icon-inner").addClass("disabled-icon")
-                    $(".icon-inner[data-project-id='" +  projectId + "']").removeClass("disabled-icon")
+                    if ($(".icon-inner").hasClass("selected-icon")) {
+                        $(".icon-inner").removeClass("disabled-icon selected-icon");
+                    } else {
+                        $(".icon-inner").addClass("disabled-icon")
+                        $(".icon-inner[data-project-id='" +  projectId + "']").removeClass("disabled-icon");
+                        $(".icon-inner[data-project-id='" +  projectId + "']").addClass("selected-icon");    
+                    }
+                    
                 });
             layerGroup.addLayer(marker);
         });
