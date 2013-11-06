@@ -134,15 +134,15 @@ DT.Map = function(element, basemap) {
                 className: "marker-popup" ,
                 closeButton: false
             }).setContent(markerPopupMessage(layer_info.summaryInformation(feature.properties)));
-
             var circleIcon = new L.DivIcon({
                 iconSize: new L.Point([10, 10]),
-                className: "",
+                className: layer_info.name + "-icon marker-icon ",
                 html: "<div data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'>"
                     + layer_info.getValue(feature.properties, layer_info) + 
                 "</div>",
-                popupAnchor: [10, -3]
+                popupAnchor: [5, -10]
             });
+
             var geojsonMarkerOptions = {
                 zIndexOffset: 10000,
                 icon: circleIcon

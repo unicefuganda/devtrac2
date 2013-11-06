@@ -21,6 +21,13 @@
   margin: 6px 10px;
 }
 
+.marker-icon {
+   width: 10px;
+   height: 10px;
+   border-radius: 2px;
+   box-shadow: 0 2px 4px rgba(0,0,0,0.65);
+ }
+
 .cluster-icon {
   overflow: hidden;/
   width: 32px;
@@ -146,6 +153,10 @@
   background-color: rgba(211, 242, 53, 0.9);
 }
 
+.project-point-icon {
+  box-shadow: none;
+}
+
 .cluster-icon.medium.unicef-cluster-icon {
   width: 36px;
   height: 36px;
@@ -179,4 +190,7 @@
 
 .pin-images{
   width: 20px;
+  left: -5px;
+  top: -10px;
+  position: absolute;
 }

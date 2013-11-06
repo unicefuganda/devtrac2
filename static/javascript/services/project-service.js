@@ -48,10 +48,8 @@ angular.module("dashboard")
             //     }
             // })
 
-            console.log(projectFilter);
             if (projectFilter.sectors && projectFilter.sectors.length > 0) {
                 features = $.grep(features, function(project) {
-                    console.log(project.properties['SECTOR']);
                     return $.inArray(project.properties['SECTOR'], projectFilter.sectors) != -1
                 });
             }
