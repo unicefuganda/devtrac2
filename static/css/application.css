@@ -576,6 +576,10 @@ h3 {
   vertical-align: top;
 }
 
+#project-details .project-location {
+  text-transform: capitalize;
+}
+
 #project-list .accountable-agency-col {
   width: 12%;
 }
@@ -595,6 +599,7 @@ h3 {
 #project-list .dates-col {
   width: 12%;
 }
+
 
 #poll-results{
   overflow: hidden;

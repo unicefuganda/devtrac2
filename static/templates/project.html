@@ -40,6 +40,12 @@
                 <span class="detail-key">Description:</span>
                 <span class="detail-value">{[{project.selected.description}]}</span>      
             </li>
+            <li>
+                <span class="detail-key">Locations:</span>
+                <ul class="detail-value">
+                    <li ng-repeat="proj in project.selected.locations | orderBy:['district','parish']" class='project-location'>{[{proj.district + " District, " + proj.full_name()}]}</li>
+                </ul>      
+            </li>
         </ul>
     </div> 
 

@@ -96,12 +96,7 @@ angular.module("dashboard")
             return projectAggregation;
         };
 
-        var projectsGeojsonPromise = geonodeService.get('projects');
-        var projectsPromise = projectsGeojsonPromise.then(function(data) {
-            return $.map(data.features, function (projectFeature, index) {
-                return new DT.Project(projectFeature.properties);
-            });
-        });
+        
 
         this.partnerLegend = function(projectFilter, features) {
             if (projectFilter.partners != null && projectFilter.partners.length > 0)
@@ -170,17 +165,23 @@ angular.module("dashboard")
                     return projects;
                 }, {})
 
-
                 var values = DT.values(projectHash);
                 return values;
             });
         }
 
         this.findById = function(projectId) {
+
             return projectsPromise.then(function(projects) {
-                return DT.first(projects, function(project) {
+                var project = DT.first(projects, function(project) {
                     return project.id == projectId;
                 });
+
+                console.log(project);
+                return project;
             });
         }
+
+        var projectsGeojsonPromise = geonodeService.get('projects');
+        var projectsPromise = self.projects(new DT.Location({}), {});
     });;

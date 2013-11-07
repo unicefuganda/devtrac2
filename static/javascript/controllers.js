@@ -109,8 +109,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         $scope.project.pagedList = listChucks[$scope.currentPage - 1];
     });
 
-
-
     var updateProjectList = function() {
         if ($scope.filter == null)
             return;
