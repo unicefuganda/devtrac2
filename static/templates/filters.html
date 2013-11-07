@@ -67,22 +67,22 @@
         <div class="radio partners-header">
           <label>
             <input type="radio" ng-model="organisation" name="organisationsRadio" id="accountableAgency" value="accountable-agency">
-            Accountable Agency
+            Funding Agency
           </label>
         </div>
         <div class='filter' id ="accounting-selector">
-          <select id="acc-agency-select" chosen ng-model='filter.project.accountAgencies' data-placeholder="Choose Accounting Agency" data-filterCollection='partners' multiple >
+          <select id="acc-agency-select" chosen ng-model='filter.project.accountAgencies' data-placeholder="Choose Funding Agency" data-filterCollection='partners' multiple >
             <option ng-repeat="p in partners" value="{[{p.id}]}">{[{p.name}]}</option>
           </select>  
         </div>
         <div class="radio partners-header">
           <label>
             <input type="radio" ng-model="organisation" name="organisationsRadio" id="finacialOrganisation" value="financial-org">
-            Funding Organisation
+            Accountable Agency
           </label>
         </div>
         <div class="filter" id="funding-selector">
-          <select id="funding-org-select" chosen ng-model='filter.project.financialOrgs' data-placeholder="Choose Funding Organisation" data-filterCollection='financialOrgs' multiple >
+          <select id="funding-org-select" chosen ng-model='filter.project.financialOrgs' data-placeholder="Choose Accountable Agency" data-filterCollection='financialOrgs' multiple >
             <option ng-repeat="financialOrg in financialOrgs" value="{[{financialOrg}]}">{[{financialOrg}]}</option>
           </select>  
         </div>
