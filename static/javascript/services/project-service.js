@@ -25,12 +25,7 @@ angular.module("dashboard")
 
         var filterByLocation = function(features, location) {
             return $.grep(features, function(feature) {
-                var featureLocation = new DT.Location({
-                    region: feature.properties['Reg_2011'],
-                    district: feature.properties['DNAME_2010'],
-                    subcounty: feature.properties['SNAME_2010'],
-                    parish: feature.properties['PNAME_2006']
-                });
+                var featureLocation = DT.Location.fromFeatureProperties(feature.properties);
                 return location.contains(featureLocation);
             });
         };
@@ -162,9 +157,22 @@ angular.module("dashboard")
 
         this.projects = function(location, projectFilter){
             return self.projects_geojson(location, projectFilter).then(function(data){
-                return $.map(data.geojson.features, function (projectFeature, index) {
-                    return new DT.Project(projectFeature.properties)
-                });
+
+                var projectHash = data.geojson.features.reduce(function(projects, projectFeature) {
+                    var projectId = projectFeature.properties['PROJECT_ID']
+
+                    if (projects[projectId] == null)
+                    {
+                        projects[projectId] = new DT.Project(projectFeature.properties);
+                    }
+                    projects[projectId].addLocation(projectFeature.properties);
+
+                    return projects;
+                }, {})
+
+
+                var values = DT.values(projectHash);
+                return values;
             });
         }
 

@@ -8,6 +8,16 @@ DT.Location = function(location_hash) {
     this.parish = location_hash.parish ? location_hash.parish.toLowerCase() : null;
 
 };
+
+DT.Location.fromFeatureProperties = function(properties) {
+    return new DT.Location({
+        region: properties['Reg_2011'],
+        district: properties['DNAME_2010'],
+        subcounty: properties['SNAME_2010'],
+        parish: properties['PNAME_2006']
+    });
+};
+
 DT.Location.prototype.equals = function(otherLocation) {
     return this.region == otherLocation.region &&
         this.district == otherLocation.district &&

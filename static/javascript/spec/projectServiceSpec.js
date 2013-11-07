@@ -1,7 +1,16 @@
+mockThen = function (testData) {
+    return { 
+        then: function(func) { 
+            var result = func(testData); 
+            return mockThen(result);
+        }
+    };
+}
+
 mockGeoJson = function(testData) {
     return {
         get: function (options) {
-            return { then: function(func) { return func(testData); } };
+            return mockThen(testData);
         }
     };
 };
@@ -17,7 +26,7 @@ describe("Project Service", function () {
             'START_PLAN': '25/07/2010',
             'END_PLANNE': '25/07/2012',
             'FINANCIAL': 'DFID',
-            'PROJ_ID': 'UNICEF-1'
+            'PROJECT_ID': 'UNICEF-1'
         }},
         {properties: {
             PARTNER: 'Unicef', 'Reg_2011': 'test region', 'DNAME_2010': 'test district', 'SNAME_2010': 'test subcounty', 'ID': 2,
@@ -28,7 +37,7 @@ describe("Project Service", function () {
             'START_PLAN': '25/07/2008',
             'END_PLANNE': '25/07/2012',
             'FINANCIAL': 'Japan',
-            'PROJ_ID': 'UNICEF-1'
+            'PROJECT_ID': 'UNICEF-1'
 
         }},
         {properties: {
@@ -40,7 +49,7 @@ describe("Project Service", function () {
             'START_PLAN': '25/07/2013',
             'END_PLANNE': '25/07/2013',
             'FINANCIAL': 'DFID',
-            'PROJ_ID': 'USAID-1'
+            'PROJECT_ID': 'USAID-1'
 
         }}] }
 
@@ -60,15 +69,17 @@ describe("Project Service", function () {
         };
     };
 
-    var mockSummaryService = mockSummaryServiceFactory(testSummaryChildrenLocations);
+    // var mockSummaryService = mockSummaryServiceFactory(testSummaryChildrenLocations);
 
-    beforeEach(function(){
+    beforeEach(function($q){
         module('dashboard',function($provide){
             spyOn(mock,'get').andCallThrough();
             $provide.value('geonodeService',mock);
             // spyOn(mockSummaryService,'get').andCallThrough();
-            $provide.value('summaryService',mockSummaryService);
+            // $provide.value('summaryService',mockSummaryService);
         });
+
+
 
     });
     function mapProjectId(data) {
@@ -76,41 +87,67 @@ describe("Project Service", function () {
     }
 
     it('should get list of partners from project', inject(function(projectService) {
-        var partners = projectService.partners();
+        var partners;
+        projectService.partners().then(function(data) {
+            partners = data;
+        });
         expect(partners).toEqual([{id: 'Unicef', name: 'Unicef'}, {id: 'USAID', name: 'USAID'}])
     }));
 
     it('should filter projects by location', inject(function(projectService) {
         var filter = { partner: { unicef: true, usaid: true}};
-        var projects = projectService.projects_geojson(new DT.Location({region: 'test region', district: 'test district'}), filter);
+        var projects;
+        projectService.projects_geojson(new DT.Location({region: 'test region', district: 'test district'}), filter).then(function(data) {
+            projects = data;
+        });
+
         expect(mapProjectId(projects)).toEqual([1, 2])
 
-        var projects = projectService.projects_geojson(new DT.Location({region: 'test region', district: 'test district 2'}), filter);
+        projectService.projects_geojson(new DT.Location({region: 'test region', district: 'test district 2'}), filter).then(function(data) {
+            projects = data;
+        });
+        
         expect(mapProjectId(projects)).toEqual([3]);
 
-        var projects = projectService.projects_geojson(new DT.Location({region: 'test region', district: 'test district 3'}), filter);
+        projectService.projects_geojson(new DT.Location({region: 'test region', district: 'test district 3'}), filter).then(function(data) {
+            projects = data;
+        });
+
         expect(mapProjectId(projects)).toEqual([])
     }));
 
     it('should filter projects by partner', inject(function(projectService) {
         var location = new DT.Location({region: 'test region'});
-        var projects = projectService.projects_geojson(location, { partners: ['Unicef', 'USAID']});
+        var projects;
+
+        projectService.projects_geojson(location, { partners: ['Unicef', 'USAID']}).then(function(data) {
+            projects = data;
+        });
         expect(mapProjectId(projects)).toEqual([1, 2, 3])
 
-        var projects = projectService.projects_geojson(location, { partners: ['Unicef']});
+         projectService.projects_geojson(location, { partners: ['Unicef']}).then(function(data) {
+            projects = data;
+        });
         expect(mapProjectId(projects)).toEqual([1, 2]);
 
-        var projects = projectService.projects_geojson(location, { partners: [] });
+        projectService.projects_geojson(location, { partners: [] }).then(function(data) {
+            projects = data;
+        });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
     }));
 
     it('should filter projects by sector', inject(function(projectService){
         var location =new DT.Location({region: 'test region'});
-        var projects = projectService.projects_geojson(location,{ sectors: ['Education'] });
+        var projects;
+        projectService.projects_geojson(location,{ sectors: ['Education'] }).then(function(data) {
+            projects = data;
+        });
 
         expect(mapProjectId(projects)).toEqual([1,3]);
 
-        var projects = projectService.projects_geojson(location,{ sectors: [] });
+        projectService.projects_geojson(location,{ sectors: [] }).then(function(data) {
+            projects = data;
+        });
 
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
@@ -118,92 +155,142 @@ describe("Project Service", function () {
 
     it('should filter projects by status', inject(function(projectService){
         var location =new DT.Location({region: 'test region'});
-        var projects = projectService.projects_geojson(location,{ statuses: ['Completion'] });
+        var projects;
+        projectService.projects_geojson(location,{ statuses: ['Completion'] }).then(function(data) {
+            projects = data;
+        });
 
         expect(mapProjectId(projects)).toEqual([1,2]);
 
-        var projects = projectService.projects_geojson(location,{ statuses: ['Completion', 'Post-completion'] });
+        projectService.projects_geojson(location,{ statuses: ['Completion', 'Post-completion'] }).then(function(data) {
+            projects = data;
+        });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
-        var projects = projectService.projects_geojson(location,{ statuses: null });
+        projectService.projects_geojson(location,{ statuses: null }).then(function(data) {
+            projects = data;
+        });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
     }));
 
     it('should filter projects by funding partner', inject(function(projectService){
         var location =new DT.Location({region: 'test region'});
-        var projects = projectService.projects_geojson(location,{ financialOrgs: ['DFID'] });
+        var projects;
+
+        projectService.projects_geojson(location,{ financialOrgs: ['DFID'] }).then(function(data) {
+            projects = data;
+        });
 
         expect(mapProjectId(projects)).toEqual([1,3]);
 
-        var projects = projectService.projects_geojson(location,{ financialOrgs: ['DFID', 'Japan'] });
+        projectService.projects_geojson(location,{ financialOrgs: ['DFID', 'Japan'] }).then(function(data) {
+            projects = data;
+        });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
-        var projects = projectService.projects_geojson(location,{ financialOrgs: null });
+        projectService.projects_geojson(location,{ financialOrgs: null }).then(function(data) {
+            projects = data;
+        });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
     }));
 
     it('should filter projects by implementing partner', inject(function(projectService){
         var location =new DT.Location({region: 'test region'});
-        var projects = projectService.projects_geojson(location,{ implementingPartners: ['Africare'] });
+        var projects;
+        projectService.projects_geojson(location, { implementingPartners: ['Africare'] }).then(function(data) {
+            projects = data;
+        });
 
         expect(mapProjectId(projects)).toEqual([1,2]);
 
-        var projects = projectService.projects_geojson(location,{ implementingPartners: ['Africare', 'Arbeiter Samariter Bund'] });
+        projectService.projects_geojson(location, { implementingPartners: ['Africare', 'Arbeiter Samariter Bund'] }).then(function(data) {
+            projects = data;
+        });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
-        var projects = projectService.projects_geojson(location,{ implementingPartners:  null });
+        projectService.projects_geojson(location, { implementingPartners:  null }).then(function(data) {
+            projects = data;
+        });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
     }));
 
     it('should filter projects by Year', inject(function(projectService){
         var location =new DT.Location({region: 'test region'});
-        var projects = projectService.projects_geojson(location,{ years: ['2010'] });
+        var projects;
 
+        projectService.projects_geojson(location,{ years: ['2010'] }).then(function(data) {
+            projects = data;
+        });
         expect(mapProjectId(projects)).toEqual([1, 2]);
 
-        var projects = projectService.projects_geojson(location,{ years: ['2009'] });
+        projectService.projects_geojson(location,{ years: ['2009'] }).then(function(data) {
+            projects = data;
+        });
         expect(mapProjectId(projects)).toEqual([2]);
 
-        var projects = projectService.projects_geojson(location,{ years: ['2012', '2013'] });
+        projectService.projects_geojson(location,{ years: ['2012', '2013'] }).then(function(data) {
+            projects = data;
+        });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
-        var projects = projectService.projects_geojson(location,{ years: ['2013'] });
+        projectService.projects_geojson(location,{ years: ['2013'] }).then(function(data) {
+            projects = data;
+        });
         expect(mapProjectId(projects)).toEqual([3]);
 
-        var projects = projectService.projects_geojson(location,{ years: [] });
+        projectService.projects_geojson(location,{ years: [] }).then(function(data) {
+            projects = data;
+        });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
     }));
 
-    // it('map locations into projects', inject(function(projectService) {
-    //     var filter = { partner: { unicef: true, usaid: true}};
-    //     var projects = projectService.projects(new DT.Location({region: 'test region'}), filter);
+    it('map locations into projects', inject(function(projectService) {
+        var filter = { partner: { unicef: true, usaid: true}};
+        var projects;
 
-    //     expect(projects.length).toEqual(2)
+        projectService.projects(new DT.Location({region: 'test region'}), filter).then(function(data) {
+            projects = data;
+        });
 
-    //     expect(projects[0].id).toEqual('UNICEF-1');
-    //     expect(projects[0].locations[0].location).toEqual(new DT.Location({'DNAME_2010': 'test district', 'Reg_2011': 'test region'}))
-    //     expect(projects[0].locations[1].location).toEqual(new DT.Location({'DNAME_2010': 'test district', 'Reg_2011': 'test region', 'SNAME_2010': 'test subcounty'}))
+        expect(projects.length).toEqual(2)
 
-    //     expect(projects[1].id).toEqual('USAID-2');
-    //     expect(projects[1].locations[0].location).toEqual(new DT.Location({'DNAME_2010': 'test district 2', 'Reg_2011': 'test region'}))
-    // }));
+        expect(projects[0].id).toEqual('UNICEF-1');
+        expect(projects[0].locations[0]).toEqual(new DT.Location({'district': 'test district', 'region': 'test region'}))
+        expect(projects[0].locations[1]).toEqual(new DT.Location({'district': 'test district', 'region': 'test region', 'subcounty': 'test subcounty'}))
+
+        expect(projects[1].id).toEqual('USAID-1');
+        expect(projects[1].locations[0]).toEqual(new DT.Location({'district': 'test district 2', 'region': 'test region'}))
+    }));
 
 
     it('should list partners selected in filter', inject(function(projectService) { 
         var location = new DT.Location({region: 'test region'});
 
         var filter = { partners: [], financialOrgs: [] }
-        expect(projectService.projects_geojson(location, filter).legendPartners).toEqual({ partners: [], type: 'PARTNER'});
+        var legendPartners;
+        projectService.projects_geojson(location, filter).then(function(data) {
+            legendPartners = data.legendPartners;
+        });
+
+        expect(legendPartners).toEqual({ partners: [], type: 'PARTNER'})
 
         var filter = { partners: ["Unicef", "USAID"], financialOrgs: [] }
-        expect(projectService.projects_geojson(location, filter).legendPartners).toEqual({ partners: ["Unicef", "USAID"], type: 'PARTNER'});
+        projectService.projects_geojson(location, filter).then(function(data) {
+            legendPartners = data.legendPartners;
+        });
+
+        expect(legendPartners).toEqual({ partners: ["Unicef", "USAID"], type: 'PARTNER'});
 
         var filter = { partners: [], financialOrgs: ["DFID", "Japan"] }
         
-        expect(projectService.projects_geojson(location, filter).legendPartners).toEqual({partners: ["DFID", "Japan"], type: 'FINANCIAL'});
+        projectService.projects_geojson(location, filter).then(function(data) {
+            legendPartners = data.legendPartners
+        });
+
+        expect(legendPartners).toEqual({partners: ["DFID", "Japan"], type: 'FINANCIAL'});
     }));
 
 });

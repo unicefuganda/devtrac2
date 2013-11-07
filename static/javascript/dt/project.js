@@ -1,14 +1,19 @@
-DT.Project = function(feature) {
-    this.id = feature['PROJECT_ID'];
-    this.name = feature['PROJ_NAME'];
-    this.partner = feature['PARTNER'];
-    this.implementingPartner = feature['IMPLEMENTE'];
-    this.financialOrganization = feature['FINANCIAL'];
-    this.startPlanned = feature['START_PLAN'];
-    this.endPlanned = feature['END_PLANNE'];
-    this.startActual = feature['START_ACTU'];
-    this.endActual = feature['END_ACTUAL'];
-    this.description = feature['PROJ_DESC'];
-    this.sector = feature['SECTOR'];
-    this.status = feature['STATUS'];
+DT.Project = function(properties) {
+    this.id = properties['PROJECT_ID'];
+    this.name = properties['PROJ_NAME'];
+    this.partner = properties['PARTNER'];
+    this.implementingPartner = properties['IMPLEMENTE'];
+    this.financialOrganization = properties['FINANCIAL'];
+    this.startPlanned = properties['START_PLAN'];
+    this.endPlanned = properties['END_PLANNE'];
+    this.startActual = properties['START_ACTU'];
+    this.endActual = properties['END_ACTUAL'];
+    this.description = properties['PROJ_DESC'];
+    this.sector = properties['SECTOR'];
+    this.status = properties['STATUS'];
+    this.locations = [];
 }
+
+DT.Project.prototype.addLocation = function(properties) {
+    this.locations.push(DT.Location.fromFeatureProperties(properties));
+};

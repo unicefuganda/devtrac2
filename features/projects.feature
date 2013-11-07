@@ -76,13 +76,12 @@ Then the project details are:
 
 Scenario: Paginate the project list
 Given that I am a regular user
-When I open dashboard for "Acholi"
-And I click on the pagination link "4"	
+When I open dashboard for "Teso"
+And I click on the pagination link "3"	
 Then the project list contains:
 	"""
-	UNICEF JICA Forum of Education NGOs in Uganda (FENU) Strengthening peace building, education policy and practice at national and regional level 23/01/2010 - 23/07/2010
-    UNICEF ICEIDA Italian Development Coorperation Support to keep children and mothers ALIVE through provision of a comprehensive Health, Nutrition and HIV/AIDS packages for Northern Uganda 23/01/2010 - 23/07/2010
-    UNICEF Japan Italian Development Coorperation Support to keep children and mothers ALIVE through provision of a comprehensive Health, Nutrition and HIV/AIDS packages for Northern Uganda 25/01/2011 - 25/07/2011
-    UNICEF JICA Italian Development Coorperation Support to keep children and mothers ALIVE through provision of a comprehensive Health, Nutrition and HIV/AIDS packages for Northern Uganda 27/01/2012 - 27/07/2012
+	USAID ICEIDA Royal Danish Embassy Support to the Development of Strategic Agricultural Commodity Value-Chains 27/01/2012 - 27/07/2012
+    USAID Canada Chemonics Technical Management Agency for the Civil Society Fund (TMA-CSF) 2/3/10 - 2/9/10
+    UNICEF GTZ Mothers to Mothers ptimizing Access to Simplified HIV Treatment to Reduce New HIV Infections Among Children in UGANDA- SIDA funded 21/01/2009 - 21/07/2009
 	"""
 

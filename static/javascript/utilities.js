@@ -22,6 +22,16 @@ DT.first = function(list, func) {
     return null;
 };
 
+DT.values = function (obj) {
+    var vals = [];
+    for( var key in obj ) {
+        if ( obj.hasOwnProperty(key) ) {
+            vals.push(obj[key]);
+        }
+    }
+    return vals;
+}
+
 DT.unique = function (list) {
     var array = []
     for(var i in list) {
