@@ -180,17 +180,21 @@ angular.module("dashboard").directive('map', function() {
         scope: true,
         link: function(scope, element, attrs){
             scope.$watch('organisation', function(newOrganisation){
+                scope.show_financialOrg=false;
                 if(newOrganisation == null)
                     return
                 if(newOrganisation == 'accountable-agency'){
-                    $("#funding-org-select").val('').prop('disabled', true).trigger("chosen:updated");
-                    $("#acc-agency-select").prop('disabled', false).trigger("chosen:updated");
+                    $("#funding-org-select").val('').trigger("chosen:updated");
+                    scope.show_financialOrg=false;
                 }else{
-                    $("#acc-agency-select").val('').prop('disabled', true).trigger("chosen:updated");
-                    $("#funding-org-select").prop('disabled', false).trigger("chosen:updated");
+                    $("#acc-agency-select").val('').trigger("chosen:updated");
+                    scope.show_financialOrg=true;
                 }
-                if(scope.filter)
+                if(scope.filter){
                     scope.filter.project.partners = [];
+                    scope.filter.project.financialOrgs =[];
+                }
+                    
             });
         }
     }

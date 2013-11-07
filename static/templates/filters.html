@@ -64,24 +64,27 @@
         </li> 
       </ul> -->
       <div partnerstoggle >
-        <div class="radio partners-header">
+      <div class="partners-header">
+        <span class="radio">
           <label>
             <input type="radio" ng-model="organisation" name="organisationsRadio" id="accountableAgency" value="accountable-agency">
             Funding Agency
           </label>
-        </div>
-        <div class='filter' id ="accounting-selector">
-          <select id="acc-agency-select" chosen ng-model='filter.project.accountAgencies' data-placeholder="Choose Funding Agency" data-filterCollection='partners' multiple >
-            <option ng-repeat="p in partners" value="{[{p.id}]}">{[{p.name}]}</option>
-          </select>  
-        </div>
-        <div class="radio partners-header">
+        </span>
+        <span class="radio">
           <label>
             <input type="radio" ng-model="organisation" name="organisationsRadio" id="finacialOrganisation" value="financial-org">
             Accountable Agency
           </label>
+        </span>
+      </div>
+        <div class='filter' id ="accounting-selector" ng-hide="show_financialOrg" > 
+          <select id="acc-agency-select" chosen ng-model='filter.project.accountAgencies' data-placeholder="Choose Funding Agency" data-filterCollection='partners' multiple >
+            <option ng-repeat="p in partners" value="{[{p.id}]}">{[{p.name}]}</option>
+          </select>  
         </div>
-        <div class="filter" id="funding-selector">
+        
+        <div class="filter" id="funding-selector" ng-show="show_financialOrg">
           <select id="funding-org-select" chosen ng-model='filter.project.financialOrgs' data-placeholder="Choose Accountable Agency" data-filterCollection='financialOrgs' multiple >
             <option ng-repeat="financialOrg in financialOrgs" value="{[{financialOrg}]}">{[{financialOrg}]}</option>
           </select>  
