@@ -84,4 +84,11 @@ Then the project list contains:
     USAID Canada Chemonics Technical Management Agency for the Civil Society Fund (TMA-CSF) 2/3/10 - 2/9/10
     UNICEF GTZ Mothers to Mothers ptimizing Access to Simplified HIV Treatment to Reduce New HIV Infections Among Children in UGANDA- SIDA funded 21/01/2009 - 21/07/2009
 	"""
+	
+Scenario: Filter by Partner Legend
+Given that I am a regular user
+When I go to the homepage
+And I filter by Partner for "UNICEF"
+Then the color of the pin is 'red'
+
 

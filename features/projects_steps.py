@@ -36,12 +36,12 @@ def and_i_filter_by_end_date(step, year):
 @step(u'Then there are "([^"]*)" unicef projects in "([^"]*)"')
 def there_are_unicef_projects(step, num_projects, locator): 
     world.page.wait_for(lambda page: page.marker_count_pins(locator) == int(num_projects))
-    assert_equals(world.page.marker_count_pins(locator), int(num_projects));
+    assert_equals(world.page.marker_count_pins(locator), int(num_projects))
 
 @step(u'Then there are "([^"]*)" usaid projects in "([^"]*)"')
 def there_are_usaid_projects(step, num_projects, locator): 
     world.page.wait_for(lambda page: page.marker_count_pins(locator) == int(num_projects))
-    assert_equals(world.page.marker_count_pins(locator), int(num_projects));
+    assert_equals(world.page.marker_count_pins(locator), int(num_projects))
 
 @step(u'And there are no usaid projects in "([^"]*)"')
 def there_are_no_usaid_projects(step, locator): 
@@ -59,4 +59,8 @@ def and_i_click_on_the_pagination_link(step, pager_link):
 def then_the_project_list_contains(step):
     assert_multi_line_equal.im_class.maxDiff = None
     assert_multi_line_equal(world.page.project_list_content(), step.multiline)
+
+@step(u'Then the color of the pin is \'([^\']*)\'')
+def then_the_color_of_the_pin_is(step, color):
+    assert_equals(len(world.page.find_pin_with_color(color)), 1)
 
