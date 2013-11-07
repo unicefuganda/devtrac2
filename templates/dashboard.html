@@ -12,13 +12,14 @@
   <div ng-include="'/static/templates/nav_bar.html'"></div>
   <div ng-view></div>
   <div id='map-container'>
-    <div id='right-hand-panel' >
+    <div id='right-hand-panel'>
       <div id='right-hand-container'>
         <div map id='devtrac-map'></div>
 
         <div ng-if="indicator.selected != null" class='heatmap-legend'>
           <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
         </div>
+        <div class="partner-legend"><ul></ul></div>
       </div>
     </div>
 

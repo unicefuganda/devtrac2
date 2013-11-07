@@ -122,6 +122,15 @@ DT.Map = function(element, basemap) {
             return message;
         };
 
+        var projectLegendLabels = "";
+        $(".partner-legend ul").toggle(data.legendPartners.partners.length > 0)
+
+        $.each(data.legendPartners.partners, function(index, partner) {
+            var color = DT.markerColors[index];
+            projectLegendLabels +="<li><span class='legend-color' style='background-color:"+ color +"'></span><span>" +partner+ "</span></li>";
+            $(".partner-legend ul").html(projectLegendLabels);
+        });
+        
         $.each(data.geojson.features, function(index, feature) {
             var coordinates = feature.geometry.coordinates;
 
@@ -131,8 +140,7 @@ DT.Map = function(element, basemap) {
             }).setContent(markerPopupMessage(layer_info.summaryInformation(feature.properties)));
 
             var projectId = feature.properties['PROJECT_ID'];
-            var legendPartner = feature.properties[data.legendPartners.type];
-            var legendIndex = data.legendPartners.partners.indexOf(legendPartner);
+            var legendIndex = data.legendPartners.partners.indexOf(feature.properties[data.legendPartners.type]);
             var color = DT.markerColors[legendIndex];
             
             var circleIcon = new L.DivIcon({

@@ -194,3 +194,9 @@
   top: -10px;
   position: absolute;
 }
+
+.partner-legend {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
