@@ -127,7 +127,7 @@ DT.Map = function(element, basemap) {
 
         $.each(data.legendPartners.partners, function(index, partner) {
             var color = DT.markerColors[index];
-            projectLegendLabels +="<li><span class='legend-color' data-color="+color+" style='background-color:"+ color +"'></span><span>" +partner+ "</span></li>";
+            projectLegendLabels +="<li><span class='legend-color' data-colorselected='"+color+"' style='background-color:"+ color +"'></span><span>" +partner+ "</span></li>";
             $(".partner-legend ul").html(projectLegendLabels);
         });
         

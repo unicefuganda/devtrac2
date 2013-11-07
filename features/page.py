@@ -198,7 +198,7 @@ class Page:
         self.browser.find_link_by_text(str(link_name)).click();
 
     def find_pin_with_color(self, color):
-        return self.browser.find_by_css(str("span[data-color='%s'][class='legend-color']" % color));
+        return self.browser.find_by_css(str("span[data-colorselected='%s'][class='legend-color']" % color));
 
        
         
