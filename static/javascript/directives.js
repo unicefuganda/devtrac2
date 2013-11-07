@@ -15,6 +15,8 @@ angular.module("dashboard").directive('map', function() {
                 return districtService.getData(locationKeys, $scope.filter);
             };
 
+
+
             if ($location.search().basemap == null) {
                 $scope.basemap = 'tcochran.map-hxvpvlhi';
             } else {
@@ -31,9 +33,15 @@ angular.module("dashboard").directive('map', function() {
                 });
             });
 
-            map.onClickProject(function(projectFeature) {
+            map.onSelectProject(function(projectFeature) {
                 scope.$apply(function (){
                     scope.selectProject(projectFeature.properties['PROJECT_ID']);
+                });
+            });
+
+            map.onUnselectProject(function() {
+                scope.$apply(function (){
+                    scope.project.selected = null;
                 });
             });
 
@@ -66,9 +74,12 @@ angular.module("dashboard").directive('map', function() {
                 applyLocationAndFilter(scope.location, newFilter);
             }, true);
 
-            scope.$watch("ureportQuestion.selected", function(newQuestion) {
-                applyLocationAndFilter(scope.location, scope.filter);
-            }, false);
+            scope.$watch("project.selected", function(newProject) {
+                if (newProject == null)
+                    map.unselectProject();
+                else
+                    map.selectProject(newProject.id);
+            });
 
             scope.$watch("indicator", function(newIndicator, oldIndicator){
                 if (newIndicator == undefined)

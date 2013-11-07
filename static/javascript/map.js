@@ -111,6 +111,16 @@ DT.Map = function(element, basemap) {
         map.addLayer(layerGroup);
     }
 
+    self.selectProject = function(projectId) {
+        $(".icon-inner").addClass("disabled-icon")
+        $(".icon-inner[data-project-id='" +  projectId + "']").removeClass("disabled-icon");
+        $(".icon-inner[data-project-id='" +  projectId + "']").addClass("selected-icon");    
+    };
+
+    self.unselectProject = function() {
+        $(".icon-inner").removeClass("disabled-icon selected-icon");
+    } 
+
     function addProjectLayer(name, location, data, layer_info) {
         var layerGroup = L.layerGroup();
 
@@ -167,14 +177,15 @@ DT.Map = function(element, basemap) {
                     marker.closePopup();
                 })
                 .on('click', function() { 
-                    if (self.clickProjectHandler != null)
-                        self.clickProjectHandler(feature);
+
+                    
                     if ($(".icon-inner").hasClass("selected-icon")) {
-                        $(".icon-inner").removeClass("disabled-icon selected-icon");
+                        self.unselectProjectHandler(feature);
+                        self.unselectProject();
+                        
                     } else {
-                        $(".icon-inner").addClass("disabled-icon")
-                        $(".icon-inner[data-project-id='" +  projectId + "']").removeClass("disabled-icon");
-                        $(".icon-inner[data-project-id='" +  projectId + "']").addClass("selected-icon");    
+                        self.selectProjectHandler(feature);
+                        self.selectProject(feature.properties['PROJECT_ID']);
                     }
                     
                 });
@@ -276,8 +287,11 @@ DT.Map = function(element, basemap) {
         onClickDistrict: function(handler) {
             self.clickDistrictHandler = handler;
         },
-        onClickProject: function(handler) {
-            self.clickProjectHandler = handler;
+        onSelectProject: function(handler) {
+            self.selectProjectHandler = handler;
+        },
+        onUnselectProject: function(handler) {
+            self.unselectProjectHandler = handler;
         },
         getSelectedLayer: function() {
             var layer = DT.first(self.layerMap.allChildLayers(), function(layer) {
@@ -359,7 +373,14 @@ DT.Map = function(element, basemap) {
         },
         isIndicatorLayerDisplayed: function(layerName) {
             return self.wmsLayer.options.layers == layerName;
-        }      
+        },
+        selectProject: function(projectId) {
+            self.selectProject(projectId);
+        },
+        unselectProject: function() {
+            self.unselectProject();
+        }
+
     }
 };
 

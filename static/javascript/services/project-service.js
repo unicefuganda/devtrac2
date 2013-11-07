@@ -177,7 +177,6 @@ angular.module("dashboard")
                     return project.id == projectId;
                 });
 
-                console.log(project);
                 return project;
             });
         }
