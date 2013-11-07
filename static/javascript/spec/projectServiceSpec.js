@@ -72,12 +72,12 @@ describe("Project Service", function () {
 
     });
     function mapProjectId(data) {
-        return $.map(data.features, function(feature) { return feature.properties.ID; } );
+        return $.map(data.geojson.features, function(feature) { return feature.properties.ID; } );
     }
 
     it('should get list of partners from project', inject(function(projectService) {
         var partners = projectService.partners();
-        expect(partners).toEqual([{id: 'unicef', name: 'Unicef'}, {id: 'usaid', name: 'USAID'}])
+        expect(partners).toEqual([{id: 'Unicef', name: 'Unicef'}, {id: 'USAID', name: 'USAID'}])
     }));
 
     it('should filter projects by location', inject(function(projectService) {
@@ -93,24 +93,24 @@ describe("Project Service", function () {
     }));
 
     it('should filter projects by partner', inject(function(projectService) {
-        var location = new DT.Location({region: 'test region', district: 'test district'});
-        var projects = projectService.projects_geojson(location, { partners: ['unicef', 'usaid']});
+        var location = new DT.Location({region: 'test region'});
+        var projects = projectService.projects_geojson(location, { partners: ['Unicef', 'USAID']});
         expect(mapProjectId(projects)).toEqual([1, 2, 3])
 
-        var projects = projectService.projects_geojson(location, { partners: ['unicef']});
-        expect(mapProjectId(projects)).toEqual([1, 2,3)
+        var projects = projectService.projects_geojson(location, { partners: ['Unicef']});
+        expect(mapProjectId(projects)).toEqual([1, 2]);
 
         var projects = projectService.projects_geojson(location, { partners: [] });
-        expect(mapProjectId(projects)).toEqual([1,2]);
+        expect(mapProjectId(projects)).toEqual([1, 2, 3]);
     }));
 
     it('should filter projects by sector', inject(function(projectService){
         var location =new DT.Location({region: 'test region'});
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, sectors: ['Education'] });
+        var projects = projectService.projects_geojson(location,{ sectors: ['Education'] });
 
         expect(mapProjectId(projects)).toEqual([1,3]);
 
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, sectors: [] });
+        var projects = projectService.projects_geojson(location,{ sectors: [] });
 
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
@@ -118,93 +118,92 @@ describe("Project Service", function () {
 
     it('should filter projects by status', inject(function(projectService){
         var location =new DT.Location({region: 'test region'});
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, statuses: ['Completion'] });
+        var projects = projectService.projects_geojson(location,{ statuses: ['Completion'] });
 
         expect(mapProjectId(projects)).toEqual([1,2]);
 
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, statuses: ['Completion', 'Post-completion'] });
+        var projects = projectService.projects_geojson(location,{ statuses: ['Completion', 'Post-completion'] });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, statuses: null });
+        var projects = projectService.projects_geojson(location,{ statuses: null });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
     }));
 
-        it('should filter projects by funding partner', inject(function(projectService){
+    it('should filter projects by funding partner', inject(function(projectService){
         var location =new DT.Location({region: 'test region'});
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, financialOrgs: ['DFID'] });
+        var projects = projectService.projects_geojson(location,{ financialOrgs: ['DFID'] });
 
         expect(mapProjectId(projects)).toEqual([1,3]);
 
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, financialOrgs: ['DFID', 'Japan'] });
+        var projects = projectService.projects_geojson(location,{ financialOrgs: ['DFID', 'Japan'] });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, financialOrgs: null });
+        var projects = projectService.projects_geojson(location,{ financialOrgs: null });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
     }));
 
     it('should filter projects by implementing partner', inject(function(projectService){
         var location =new DT.Location({region: 'test region'});
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, implementingPartners: ['Africare'] });
+        var projects = projectService.projects_geojson(location,{ implementingPartners: ['Africare'] });
 
         expect(mapProjectId(projects)).toEqual([1,2]);
 
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, implementingPartners: ['Africare', 'Arbeiter Samariter Bund'] });
+        var projects = projectService.projects_geojson(location,{ implementingPartners: ['Africare', 'Arbeiter Samariter Bund'] });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, implementingPartners:  null });
+        var projects = projectService.projects_geojson(location,{ implementingPartners:  null });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
     }));
 
     it('should filter projects by Year', inject(function(projectService){
         var location =new DT.Location({region: 'test region'});
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, years: ['2010'] });
+        var projects = projectService.projects_geojson(location,{ years: ['2010'] });
 
         expect(mapProjectId(projects)).toEqual([1, 2]);
 
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, years: ['2009'] });
+        var projects = projectService.projects_geojson(location,{ years: ['2009'] });
         expect(mapProjectId(projects)).toEqual([2]);
 
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, years: ['2012', '2013'] });
+        var projects = projectService.projects_geojson(location,{ years: ['2012', '2013'] });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
 
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, years: ['2013'] });
+        var projects = projectService.projects_geojson(location,{ years: ['2013'] });
         expect(mapProjectId(projects)).toEqual([3]);
 
-        var projects = projectService.projects_geojson(location,{ partner: {unicef: true, usaid: true}, years: [] });
+        var projects = projectService.projects_geojson(location,{ years: [] });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);
     }));
 
-    it('map locations into projects', inject(function(projectService) {
-        var filter = { partner: { unicef: true, usaid: true}};
-        var projects = projectService.projects(new DT.Location({region: 'test region'}), filter);
+    // it('map locations into projects', inject(function(projectService) {
+    //     var filter = { partner: { unicef: true, usaid: true}};
+    //     var projects = projectService.projects(new DT.Location({region: 'test region'}), filter);
 
-        expect(projects.length).toEqual(2)
+    //     expect(projects.length).toEqual(2)
 
-        expect(projects[0].id).toEqual('UNICEF-1')
-        expect(projects[0].locations[0].location).toEqual(new DT.Location({'DNAME_2010': 'test district', 'Reg_2011': 'test region'}))
-        expect(projects[0].locations[1].location).toEqual(new DT.Location({'DNAME_2010': 'test district', 'Reg_2011': 'test region', 'SNAME_2010': 'test subcounty'}))
+    //     expect(projects[0].id).toEqual('UNICEF-1');
+    //     expect(projects[0].locations[0].location).toEqual(new DT.Location({'DNAME_2010': 'test district', 'Reg_2011': 'test region'}))
+    //     expect(projects[0].locations[1].location).toEqual(new DT.Location({'DNAME_2010': 'test district', 'Reg_2011': 'test region', 'SNAME_2010': 'test subcounty'}))
 
-        expect(projects[1].id).toEqual('USAID-2')
-        expect(projects[1].locations[0].location).toEqual(new DT.Location({'DNAME_2010': 'test district 2', 'Reg_2011': 'test region'}))
-    }));
+    //     expect(projects[1].id).toEqual('USAID-2');
+    //     expect(projects[1].locations[0].location).toEqual(new DT.Location({'DNAME_2010': 'test district 2', 'Reg_2011': 'test region'}))
+    // }));
 
-    it('should aggregate by partner', inject(function(projectService) {
-        var filter = { partner: { unicef: true, usaid: true}};
-        var aggregation = projectService.aggregation(new DT.Location({region: 'test region'}), filter);
-        expect(aggregation.children).toEqual([{
-                locator: 'test region, test district',
-                info: { unicef: 2, usaid: 0}
-            },{
-                locator: 'test region,  district 2',
-                info: { unicef: 0, usaid: 1}
-            },{
-                locator: 'test region, test district 3',
-                info: { unicef: 0, usaid: 0}
-            }]
-        )
+
+    it('should list partners selected in filter', inject(function(projectService) { 
+        var location = new DT.Location({region: 'test region'});
+
+        var filter = { partners: [], financialOrgs: [] }
+        expect(projectService.projects_geojson(location, filter).legendPartners).toEqual({ partners: [], type: 'PARTNER'});
+
+        var filter = { partners: ["Unicef", "USAID"], financialOrgs: [] }
+        expect(projectService.projects_geojson(location, filter).legendPartners).toEqual({ partners: ["Unicef", "USAID"], type: 'PARTNER'});
+
+        var filter = { partners: [], financialOrgs: ["DFID", "Japan"] }
+        
+        expect(projectService.projects_geojson(location, filter).legendPartners).toEqual({partners: ["DFID", "Japan"], type: 'FINANCIAL'});
     }));
 
 });

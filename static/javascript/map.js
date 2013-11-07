@@ -111,7 +111,7 @@ DT.Map = function(element, basemap) {
         map.addLayer(layerGroup);
     }
 
-    function addProjectLayer(name, location, features, layer_info) {
+    function addProjectLayer(name, location, data, layer_info) {
         var layerGroup = L.layerGroup();
 
         var markerPopupMessage = function(summaryInformation) {
@@ -122,7 +122,7 @@ DT.Map = function(element, basemap) {
             return message;
         };
 
-        $.each(features.features, function(index, feature) {
+        $.each(data.geojson.features, function(index, feature) {
             var coordinates = feature.geometry.coordinates;
 
             var popup = L.popup({
@@ -131,12 +131,15 @@ DT.Map = function(element, basemap) {
             }).setContent(markerPopupMessage(layer_info.summaryInformation(feature.properties)));
 
             var projectId = feature.properties['PROJECT_ID'];
+            var legendPartner = feature.properties[data.legendPartners.type];
+            var legendIndex = data.legendPartners.partners.indexOf(legendPartner);
+            var color = DT.markerColors[legendIndex];
             
             var circleIcon = new L.DivIcon({
                 iconSize: new L.Point([10, 10]),
                 className: layer_info.name + "-icon marker-icon ",
                 html: "<div class='icon-inner'' data-project-id = '" + projectId +  "' data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'>"
-                    + layer_info.getValue(feature.properties, layer_info) + 
+                    + "<i class='pin' ><span style='background-color:"+ color + "'></span></i>" + 
                 "</div>",
                 popupAnchor: [5, -10]
             });
@@ -174,7 +177,7 @@ DT.Map = function(element, basemap) {
         map.addLayer(layerGroup);
     }
 
-    function addPointsLayer(name, location, features, layer_info) {
+    function addPointsLayer(name, location, data, layer_info) {
         var layerGroup = L.layerGroup();
 
         var markerPopupMessage = function(summaryInformation) {
@@ -185,7 +188,7 @@ DT.Map = function(element, basemap) {
             return message;
         };
 
-        $.each(features.features, function(index, feature) {
+        $.each(data.features, function(index, feature) {
             var coordinates = feature.geometry.coordinates;
 
             var popup = L.popup({

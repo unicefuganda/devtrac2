@@ -77,7 +77,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 
 }).controller("PartnersCtrl", function($rootScope, $scope, projectService){
     $scope.organisation = "accountable-agency";
-    $scope.partners = projectService.partnersWithColors();
+    $scope.partners = projectService.partners();
     $scope.sectors = projectService.sectors();
     $scope.statuses = projectService.statuses();
     $scope.implementingPartners = projectService.implementingPartners();

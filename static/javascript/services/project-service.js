@@ -3,7 +3,7 @@ angular.module("dashboard")
         var self = this;
         var getUniquePartners = function(features) {
             var features = $.map(features, function(project, index) { return {
-                id: project.properties['PARTNER'].toLowerCase(),
+                id: project.properties['PARTNER'],
                 name: project.properties['PARTNER'],
             }});
             return DT.unique(features).sort(function (partner1, partner2) { return partner1.name < partner2.name; });
@@ -53,7 +53,7 @@ angular.module("dashboard")
 
             if( projectFilter.partners && projectFilter.partners.length > 0){
                 features = $.grep(features,function(project){
-                    return $.inArray(project.properties['PARTNER'].toLowerCase(), projectFilter.partners) != -1
+                    return $.inArray(project.properties['PARTNER'], projectFilter.partners) != -1
                 });
             }
 
@@ -108,23 +108,15 @@ angular.module("dashboard")
             });
         });
 
-        var getPartnersWithColorMap = function(dataFeatures){
-            DT.markerColorLegend = {};
-            var colors = DT.markerColors;
-
-            var partnersWithColors = $.map(getUniquePartners(dataFeatures), function(partner, index){
-                partner.color = colors[index];
-                DT.markerColorLegend[partner.id] = partner.color;
-                return partner;
-            });
-            return partnersWithColors;
-        };
-
-        this.partnersWithColors = function() {
-            return projectsGeojsonPromise.then(function(data) {
-                return getPartnersWithColorMap(data.features);
-            });
-        };
+        this.partnerLegend = function(projectFilter, features) {
+            if (projectFilter.partners != null && projectFilter.partners.length > 0)
+            {
+                return { partners: $.map(getUniquePartners(features), function(partner) { return partner.name; }), type: 'PARTNER' };
+            } else if(projectFilter.financialOrgs != null && projectFilter.financialOrgs.length > 0) {
+                return { partners: getUniqueFinancialOrgs(features), type: 'FINANCIAL' };
+            }
+            return { partners: [], type: 'PARTNER' };
+        }
 
         this.partners = function() {
             return projectsGeojsonPromise.then(function(data) { return getUniquePartners(data.features) });
@@ -155,17 +147,22 @@ angular.module("dashboard")
 
         this.projects_geojson = function (location, projectFilter) {
             return projectsGeojsonPromise.then(function(data) {
+                
                 var results = filterProjects(data, location, projectFilter)
-                return {
-                    type: "FeatureCollection",
-                    features: results
+
+                return { 
+                    geojson: {
+                        type: "FeatureCollection",
+                        features: results,
+                    },
+                    legendPartners: self.partnerLegend(projectFilter, results)
                 };
             });
         };
 
         this.projects = function(location, projectFilter){
             return self.projects_geojson(location, projectFilter).then(function(data){
-                return $.map(data.features, function (projectFeature, index) {
+                return $.map(data.geojson.features, function (projectFeature, index) {
                     return new DT.Project(projectFeature.properties)
                 });
             });

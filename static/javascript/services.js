@@ -98,8 +98,10 @@ angular.module("dashboard")
                         });
                     }
                 } else if (key == "project-point") {
+
+                    $q.all([projectService.projects_geojson(location, filter.project), projectService.partners()])
                     projectService.projects_geojson(location, filter.project).then(function(data) {
-                        allData[locationkey] = data;
+                        allData[locationkey] = ;
                         deffered2.resolve();
                     });
                 } else if (key == "unicef") {
