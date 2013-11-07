@@ -6,13 +6,22 @@ And I click on the project Icon at latitude "2.8193" and logitude "32.3848"
 Then the project details are:
     """
 	Accountable Agency: UNICEF
-    Financial Organizatin: CDC
+    Financial Organizatin: Japan
 	Implementing Partner: World Council of Churches
 	Sector: Development
-	Actual Duration: 23/01/2010 - 23/07/2010
-	Planned Duration: 23/01/2010 - 23/07/2010
+	Actual Duration: 20/01/2008 - 20/07/2008
+	Planned Duration: 20/01/2008 - 20/07/2008
 	Status: Post-completion
 	Description: Preventing and Responding to Violence against Children and support to keep children alive
+    Locations: 
+    Agago District, Paluti Parish
+    Amuru District, Parubanga Parish
+    Gulu District, Angaya Parish
+    Kaabong District, Sangar Parish
+    Kitgum District, Lamit Parish
+    Lamwo District, Ywaya Parish
+    Nwoya District, Alero Kal Parish
+    Pader District, Koyo Parish
     """
 
 
@@ -72,6 +81,8 @@ Then the project details are:
 	Planned Duration: 28/01/2013 - 28/07/2013
 	Status: Post-completion
 	Description: STRENGTHENING PARLIAMENATRY OVERSIGHT
+    Locations:
+    Gulu District, Bar-dege Ward Parish
     """
 
 Scenario: Paginate the project list
