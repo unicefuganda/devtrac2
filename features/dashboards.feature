@@ -34,7 +34,7 @@ Then "Acholi, Gulu" will be selected
 Scenario: Highlight a District
 Given that I am a regular user
 When I open dashboard for "Lango"
-And I hover over "Lango, Lira"
+And I hover over "Lango, Lira"sea
 Then "Lango, Lira" will be highlighted
 
 Scenario: Navigate to District

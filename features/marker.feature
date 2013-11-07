@@ -74,3 +74,23 @@ And I toggle the 'school' checkbox
 Then the "school" layer for "Acholi, Gulu, Odek" is not displayed
 When I toggle the 'school' checkbox
 Then the "school" layer for "Acholi, Gulu, Odek" is displayed
+
+@wip
+Scenario: Highlight Project Locations
+Given that I am a regular user
+When I select a pin for the "Strengthening Partliamenatry Oversight Project" on the map
+Then all the locations relating to the "Strengthening Partliamenatry Oversight Project" will be  highlighted on the map
+When I select  "Enhancement of Integrated Community-Based Social Reintegration of Girls and Young Mothers Formerly Associated with LRA" from the project list 
+Then all the project locations relating to the "Enhancement of Integrated Community-Based Social Reintegration of Girls and Young Mothers Formerly Associated with LRA" will be highlighted on the map
+
+
+@wip
+Scenario: Add Accountable Organisations
+Given that I am a regular user
+When I go to the home page
+And I select the 'Projects/Partners' Tab
+Then 'Accountable Organisations' will be selectedby default
+When I select an 'USAID' from the  'Accountable Organisations' filter
+Then only projects from 'Accountable Organisations' will be displayed on the map
+
+
