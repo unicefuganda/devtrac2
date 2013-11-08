@@ -1,12 +1,70 @@
 <div ng-controller="SummaryCtrl" id='summary' ng-show="summary != null" class='ng-hide'>
 	<h2>Indicators</h2>
-	<div ng-repeat="item in summary" class="info">
-		<label>{[{item[0]}]}</label>
-		<span>{[{item[1]}]}</span>
-	</div>
 
-	<div ng-repeat="item in indicatorSummary" class="info">
-		<label>{[{item[0]}]}</label>
-		<span>{[{item[1]}]}</span>
-	</div>
+    <ul>
+    	<li>
+            <label>Health Centers</label>
+            <span>{[{ summary['health-center'] | number }]}</span>
+        </li>
+        <li>
+            <label>Schools</label>
+            <span>{[{ summary['school'] | number }]}</span>
+        </li>
+        <li>
+            <label>Water Points</label>
+            <span>{[{ summary['water-point'] | number }]}</span>
+        </li>
+
+        <li ng-if='summary.subcounty'>
+            <label>Subcounties</label>
+            <span>{[{ summary.subcounty }]}</span>
+        </li>
+
+        <li ng-if='summary.district'>
+            <label>Districts</label>
+            <span>{[{ summary.district }]}</span>
+        </li>
+
+        <li ng-if='summary.region'>
+            <label>Regions</label>
+            <span>{[{ summary.region }]}</span>
+        </li>
+
+        <li ng-if='summary.parish'>
+            <label>Parishes</label>
+            <span>{[{ summary.parish }]}</span>
+        </li>
+    </ul>
+
+    <ul ng-show='indicatorSummary != null'>
+    	<li >
+    		<label>2011 Population</label>
+    		<span>{[{ indicatorSummary["Pop_2011"] }]}</span>
+    	</li>
+
+        <li>
+            <label>Children vaccinated against Diphtheria</label>
+            <span>{[{ indicatorSummary["DPT3_perc"] | percent }]}</span>
+        </li>
+
+        <li>
+            <label>Children vaccinated against Measles</label>
+            <span>{[{ indicatorSummary["Measles_Perc"] | percent }]}</span>
+        </li>
+
+        <li>
+            <label>Deliveries in Health Facilities</label>
+            <span>{[{ indicatorSummary["HF_Delivery_Perc"] | percent }]}</span>
+        </li>
+
+        <li>
+            <label>Pit latrine coverage percentage</label>
+            <span>{[{ indicatorSummary["Pit_LatCov_Perc"] | percent }]}</span>
+        </li>
+
+        <li>
+            <label>Safe Water coverage percentage</label>
+            <span>{[{ indicatorSummary["Safe_Water_Cov_Perc"] | percent }]}</span>
+        </li>
+    </ul>
 </div>

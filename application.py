@@ -27,6 +27,7 @@ js = Bundle(
 	'javascript/dashboard.js',
 	'javascript/controllers.js',
 	'javascript/directives.js',
+	'javascript/filters.js',
 	'javascript/map.js',
 	'javascript/utilities.js',
 	'javascript/config.js',
@@ -42,6 +43,7 @@ js = Bundle(
 	'javascript/dt/project.js',
 	'javascript/services/services.js',
 	'javascript/services/project-service.js',
+	'javascript/services/ureport-service.js',
 	'javascript/lib/ui-bootstrap-custom-0.6.0.min.js',
 	'javascript/lib/ui-bootstrap-custom-tpls-0.6.0.min.js',
      filters='jsmin', output='gen/packed.js')

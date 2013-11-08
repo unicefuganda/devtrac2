@@ -101,7 +101,7 @@ describe("Indicator Service", function() {
 
 
     it('should get geoJson and applyFilter', inject(function(indicatorService){
-        expect(indicatorService.find("locator")).toEqual([["Children vaccinated against Measles", "20%"]])
+        expect(indicatorService.find("locator")).toEqual(testData[0].properties)
     }));
 
 });
@@ -159,9 +159,11 @@ describe("Ureport Service question results", function(){
     });
 
     it('should fetch and reorder Ureport questions', inject(function(ureportService){
-        var results = ureportService.results(new DT.Location({region: 'north'}), {id: 100});
-        expect(results).toEqual(testResponses);
-        expect(mock.get).toHaveBeenCalledWith('/ureport/questions/100/results/UGANDA, NORTH');
+        ureportService.results(new DT.Location({region: 'north'}), {id: 100}).then(function(data){
+            expect(data).toEqual(testResponses);
+            expect(mock.get).toHaveBeenCalledWith('/ureport/questions/100/results/UGANDA, NORTH');
+        });
+        
     }));
 });
 

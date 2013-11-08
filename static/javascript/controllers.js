@@ -20,28 +20,17 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $scope.ureport_datasets = heatmapService.ureport();
 }).controller("SummaryCtrl", function($scope, $rootScope, summaryService, indicatorService, ureportService) {
 
-    var showSummary = function (location) {
-        summaryService.find(location).then(function(summary) {
-
-            var summaryLabels = [];
-            $.each(DT.AgregationConfig.labels, function(index, label) {
-
-                if (summary.info[label.key] != null)
-                    summaryLabels.push([label.label, label.formatter(summary.info[label.key]) ])
-            });
-
-            $scope.summary = summaryLabels;
-        });
-
-        indicatorService.find(location).then(function(indicatorSummary) {
-            $scope.indicatorSummary = indicatorSummary;
-        });
-    };
-
     $rootScope.$watch("location", function(newLocation, oldLocation) {
         if (newLocation == null)
             return;
-        showSummary($rootScope.location);
+        
+        summaryService.find(newLocation).then(function(summary) {
+            $scope.summary = summary.info;
+        });
+
+        indicatorService.find(newLocation).then(function(indicatorSummary) {
+            $scope.indicatorSummary = indicatorSummary;
+        });
     });
 
 }).controller("UReportCtrl", function($scope, $rootScope, ureportService) {

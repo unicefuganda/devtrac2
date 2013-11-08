@@ -53,7 +53,7 @@ angular.module("dashboard")
                             deffered2.resolve();
                         });
                 } else if (key == "water-point") {
-                    
+
                     summaryService.find(location, true).then(function(data) {
                         allData[locationkey] = data;
                         deffered2.resolve();
@@ -112,7 +112,7 @@ angular.module("dashboard")
                         allData[locationkey] = data;
                         deffered2.resolve();
                     });
-                } 
+                }
                 return deffered2.promise;
             });
 
@@ -297,28 +297,16 @@ angular.module("dashboard")
             });
         }
     })
-    .service("summaryService", function($q, $http) {
+    .service("summaryService", function($q, jsonService) {
         var self = this;
         this.find = function(location) {
-
-            var deffered = $q.defer();
-
-            var locator = location.getName() == "" ? "UGANDA" : "UGANDA, " + location.getName();
-
-            $http({
-                method: 'GET',
-                url: "/aggregation/" + locator + "?include_children=" + true,
-                cache: true
-            })
-                .success(function(data, status, headers, config) {
-                    deffered.resolve(data);
-                });
-            return deffered.promise;
+            var url = "/aggregation/" + location.getName(true) 
+            return jsonService.get(url);
         }
 
         this.childLocations = function (location) {
             return self.find(location).then(function(data) {
-                return $.map(data.children, function(childSummary, index) { 
+                return $.map(data.children, function(childSummary, index) {
                     return DT.Location.fromName(childSummary.locator);
                 });
             });
@@ -377,52 +365,8 @@ angular.module("dashboard")
         };
     })
     .service("indicatorService", function(boundaryService) {
-
         this.find = function(locator) {
-            return boundaryService.districts(locator).then(this.mapFeature);
-        }
-
-        this.mapFeature = function(data) {
-            var config = new DT.IndicatorConfig(DT.IndicatorConfig.district)
-            if (data.length == 0)
-                return [];
-            var formatedValues = $.map(data[0].properties, function(value, key) {
-                return [config.format(key, value)]
-            });
-            return $.grep(formatedValues, function(value) {
-                return value != null;
-            })
+            return boundaryService.districts(locator).then(function(data) { return data[0].properties; });
         }
     })
-    .service("ureportService", function(jsonService, $filter) {
-
-        this.questions = function() {
-            var url = "/ureport/questions"
-
-            return jsonService.get(url);
-        }
-
-        this.top5 = function(location, question) {
-            var url = "/ureport/questions/" + question.id + "/top5/" + location.getName(true).toUpperCase();
-            return jsonService.get(url);
-        }
-
-        this.results = function(location, question) {
-
-
-            var url = "/ureport/questions/" + question.id + "/results/" + location.getName(true).toUpperCase();
-            return jsonService.get(url).then(function(data) {
-                if (data == "null")
-                    return null;
-                return data;
-            });
-        }
-
-        this.child_results = function(location, question) {
-            var url = "/ureport/questions/" + question.id + "/child_results/" + location.getName(true).toUpperCase();
-            return jsonService.get(url);
-        }
-    });
     
-
-
