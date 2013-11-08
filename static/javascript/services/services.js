@@ -1,5 +1,5 @@
 angular.module("dashboard")
-    .service('districtService', function($http, $filter, $rootScope, $q, summaryService, ureportService, projectService) {
+    .service('districtService', function($http, $filter, $rootScope, $q, summaryService, ureportService, projectService, geonodeService) {
         var self = this;
         if (typeof(callbacks) == 'undefined') {
             callbacks = {}
@@ -194,68 +194,25 @@ angular.module("dashboard")
             return deffered.promise;
         };
 
-        this.water_points = function(location) {
-            var deffered = $q.defer();
-
-            water_pointsCallback = function(data) {
-
-                var parish_points = $.grep(data.features, function(feature, index) {
-                    return feature.properties["SNAME_2010"].toLowerCase() == location.subcounty && feature.properties["PNAME_2006"].toLowerCase() == location.parish;
+        this.locationFilter = function (location) {
+            return function (data) {
+                var features = $.grep(data.features, function(feature, index) {
+                    return location.contains(DT.Location.fromFeatureProperties(feature.properties));
                 });
-
-                deffered.resolve({
-                    type: "FeatureCollection",
-                    features: parish_points
-                });
+                return { type: "FeatureCollection", features: features };            
             }
-            var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:water_points_replottted" + "&outputFormat=json&propertyName=the_geom,District,SubcountyN,ParishName,SourceType,SNAME_2010,PNAME_2006,Management,Functional&format_options=callback:water_pointsCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>District</PropertyName><Literal>" + location.district.toUpperCase() + "</Literal></PropertyIsEqualTo>" + "</Filter>";
+        };
 
-            $http.jsonp(url, {
-                cache: true
-            });
-            return deffered.promise;
+        this.water_points = function(location) {
+            return geonodeService.get("water_points_replottted", { 'DNAME_2010': location.district.toUpperCase() }).then(this.locationFilter(location));
         };
 
         this.health_centers = function(location) {
-            var deffered = $q.defer();
-
-            health_centersCallback = function(data) {
-                var parish_points = $.grep(data.features, function(feature, index) {
-                    return feature.properties["SNAME_2010"].toLowerCase() == location.subcounty && feature.properties["PNAME_2006"].toLowerCase() == location.parish;
-                });
-
-                deffered.resolve({
-                    type: "FeatureCollection",
-                    features: parish_points
-                });
-            }
-            var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_health_centers_replotted" + "&outputFormat=json" + "&format_options=callback:health_centersCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + location.district.toUpperCase() + "</Literal></PropertyIsEqualTo>" + "</Filter>";
-
-            $http.jsonp(url, {
-                cache: true
-            });
-            return deffered.promise;
+            return geonodeService.get("uganda_health_centers_replotted", { 'DNAME_2010': location.district.toUpperCase() }).then(this.locationFilter(location));
         };
 
         this.schools = function(location) {
-            var deffered = $q.defer();
-
-            schoolsCallback = function(data) {
-                var parish_points = $.grep(data.features, function(feature, index) {
-                    return feature.properties["SNAME_2010"].toLowerCase() == location.subcounty && feature.properties["PNAME_2006"].toLowerCase() == location.parish;
-                });
-
-                deffered.resolve({
-                    type: "FeatureCollection",
-                    features: parish_points
-                });
-            }
-            var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_schools_with_regions" + "&outputFormat=json" + "&format_options=callback:schoolsCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + location.district.toUpperCase() + "</Literal></PropertyIsEqualTo>" + "</Filter>";
-
-            $http.jsonp(url, {
-                cache: true
-            });
-            return deffered.promise;
+            return geonodeService.get("uganda_schools_with_regions", { 'DNAME_2010': location.district.toUpperCase() }).then(this.locationFilter(location));
         };
     })
     .service("heatmapService", function() {
@@ -328,14 +285,32 @@ angular.module("dashboard")
         }
     })
     .service("geonodeService", function($q, $http) {
-        this.get = function(dataset) {
+        var self = this;
+
+        this.filterQuery = function(filter) {
+            var query = "<Filter xmlns=\"http://www.opengis.net/ogc\">";
+
+            for(key in filter) {
+                query += "<PropertyIsEqualTo><PropertyName>" + key + "</PropertyName><Literal>" + filter[key] + "</Literal></PropertyIsEqualTo>";
+            }
+            query += "</Filter>";
+            return "&filter=" + query;
+
+        }
+
+        this.get = function(dataset, filter) {
             var deffered = $q.defer();
 
             DT.JSONPCallbacks[dataset] = function(data) {
                 deffered.resolve(data);
             };
 
-            var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:" + dataset + "&outputFormat=json" + "&format_options=callback:DT.JSONPCallbacks." + dataset;
+            var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?"
+            url += "service=WFS&version=1.0.0&request=GetFeature&outputFormat=json";
+            url += "&typeName=geonode:" + dataset
+            url += "&format_options=callback:DT.JSONPCallbacks." + dataset;
+            url += filter != undefined ? self.filterQuery(filter) : ""
+            console.log(url)
             $http.jsonp(url, {
                 cache: true
             });
@@ -344,29 +319,25 @@ angular.module("dashboard")
     })
     .service("boundaryService", function(jsonService) {
 
-        this.districts = function(locator) {
-            var self = this;
-            url = "/static/javascript/geojson/uganda_districts_2011_with_indicators.json";
+        this.district = function(locator) {
+            var url = "/static/javascript/geojson/uganda_districts_2011_with_indicators.json";
             return jsonService.get(url).then(function(data) {
-                return $.grep(data.features, self.locatorFilter(locator));
+                return DT.first(data.features, function(feature) {
+                    return DT.Location.fromFeatureProperties(feature.properties).equals(locator);
+                });
             })
         };
 
-        this.locatorFilter = function(locator) {
-            return function(feature) {
-                var featureLocator = new DT.Location({
-                    region: feature.properties["Reg_2011"],
-                    district: feature.properties["DNAME_2010"],
-                    subcounty: feature.properties["SNAME_2010"],
-                    parish: feature.properties["PNAME_2006"]
-                })
-                return featureLocator.equals(locator);
-            };
-        };
     })
-    .service("indicatorService", function(boundaryService) {
+    .service("indicatorService", function(boundaryService, $q) {
         this.find = function(locator) {
-            return boundaryService.districts(locator).then(function(data) { return data[0].properties; });
+            if (locator.level() != "district") {
+                var deffered = $q.defer();
+                deffered.resolve(null);
+                return deffered.promise;
+            }
+                
+            return boundaryService.district(locator).then(function(data) { return data.properties; });
+            
         }
     })
-    
