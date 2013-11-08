@@ -101,9 +101,9 @@ angular.module("dashboard")
         this.partnerLegend = function(projectFilter, features) {
             if (projectFilter.partners != null && projectFilter.partners.length > 0)
             {
-                return { partners: $.map(getUniquePartners(features), function(partner) { return partner.name; }), type: 'PARTNER' };
+                return { partners: projectFilter.partners, type: 'PARTNER'};
             } else if(projectFilter.financialOrgs != null && projectFilter.financialOrgs.length > 0) {
-                return { partners: getUniqueFinancialOrgs(features), type: 'FINANCIAL' };
+                return { partners: projectFilter.financialOrgs, type: 'FINANCIAL'};
             }
             return { partners: [], type: 'PARTNER' };
         }
