@@ -1,200 +1,16 @@
 angular.module("dashboard")
-    .service('districtService', function($http, $filter, $rootScope, $q, summaryService, ureportService, projectService, geonodeService) {
-        var self = this;
-        if (typeof(callbacks) == 'undefined') {
-            callbacks = {}
-            callbackCounter = 0
-        }
+    .service('districtService', function($q, summaryService, projectService, geonodeService, jsonService) {
 
         this.getData = function(locationkeys, filter) {
-
-            var deffered3 = $q.defer();
-            var allData = {};
-
             var promises = $.map(locationkeys, function(locationkey) {
-                var deffered2 = $q.defer();
-                var key = locationkey[0]
+                var key = locationkey[0];
                 var location = locationkey[1];
-
-                if (key == "region") {
-
-                    self.regions_geojson().then(function(data) {
-                        allData[locationkey] = data;
-                        deffered2.resolve();
-                    });
-                } else if (key == "district") {
-                    self.districts(location.region).then(function(data) {
-                        allData[locationkey] = data;
-                        deffered2.resolve();
-                    });
-                } else if (key == "district_outline") {
-                    self.districts().then(function(data) {
-                        allData[locationkey] = data;
-                        deffered2.resolve();
-                    });
-                } else if (key == "subcounty") {
-                    self.subcounties_geojson(location.district)
-                        .then(function(data) {
-                            allData[locationkey] = data;
-                            deffered2.resolve();
-                        });
-
-                } else if (key == "parish") {
-
-                    self.parishes_geojson(location.district)
-                        .then(function(data) {
-                            var parishes = $.grep(data.features, function(feature, index) {
-                                return feature.properties["SNAME_2010"].toLowerCase() == location.subcounty;
-                            });
-                            allData[locationkey] = {
-                                type: "FeatureCollection",
-                                features: parishes
-                            };
-                            deffered2.resolve();
-                        });
-                } else if (key == "water-point") {
-
-                    summaryService.find(location, true).then(function(data) {
-                        allData[locationkey] = data;
-                        deffered2.resolve();
-                    });
-
-
-                } else if (key == "health-center") {
-                    summaryService.find(location, true).then(function(data) {
-                        allData[locationkey] = data;
-                        deffered2.resolve();
-                    })
-                } else if (key == "school") {
-                    summaryService.find(location, true).then(function(data) {
-                        allData[locationkey] = data;
-                        deffered2.resolve();
-                    })
-                } else if (key == "water-point-point") {
-                    self.water_points(location).then(function(data) {
-                        allData[locationkey] = data;
-                        deffered2.resolve();
-                    })
-                } else if (key == "health-center-point") {
-                    self.health_centers(location).then(function(data) {
-                        allData[locationkey] = data;
-                        deffered2.resolve();
-                    })
-                } else if (key == "school-point") {
-                    self.schools(location).then(function(data) {
-                        allData[locationkey] = data;
-                        deffered2.resolve();
-                    })
-                } else if (key == "ureport") {
-                    if ($rootScope.ureportQuestion == undefined || $rootScope.ureportQuestion.selected == null) {
-                        allData[locationkey] = {
-                            children: []
-                        };
-                        deffered2.resolve();
-                    } else {
-                        ureportService.child_results(location, $rootScope.ureportQuestion.selected).then(function(data) {
-                            allData[locationkey] = data;
-                            deffered2.resolve();
-                        });
-                    }
-                } else if (key == "project-point") {
-                    projectService.projects_geojson(location, filter.project).then(function(data) {
-                        allData[locationkey] = data;
-                        deffered2.resolve();
-                    });
-                } else if (key == "unicef") {
-                    projectService.aggregation(location, filter.project).then(function(data) {
-                        allData[locationkey] = data;
-                        deffered2.resolve();
-                    });
-                } else if (key == "usaid") {
-                    projectService.aggregation(location, filter.project).then(function(data) {
-                        allData[locationkey] = data;
-                        deffered2.resolve();
-                    });
-                }
-                return deffered2.promise;
+                return serviceMap[key](location, filter);
             });
-
-            $q.all(promises).then(function() {
-                deffered3.resolve(allData);
-            });
-
-            return deffered3.promise;
+            return $q.all(promises);
         }
 
-        this.districts = function(region_name) {
-            var deffered = $q.defer();
-            var districtsCallback = function(data) {
-                if (region_name == undefined) {
-                    return data;
-                } else {
-                    var districts = $.grep(data.features, function(feature, index) {
-                        return feature.properties["Reg_2011"] != null && feature.properties["Reg_2011"].toLowerCase() == region_name;
-                    });
-                    return {
-                        type: "FeatureCollection",
-                        features: districts
-                    };
-                }
-            }
-
-            var url = "/static/javascript/geojson/uganda_districts_2011_with_indicators.json";
-
-            $http({
-                method: 'GET',
-                url: url,
-                cache: true
-            }).success(function(data) {
-                var fitleredData = districtsCallback(data);
-                deffered.resolve(fitleredData);
-            });
-            return deffered.promise;
-        };
-
-        this.regions_geojson = function() {
-            var deffered = $q.defer();
-
-            regionsCallback = function(data) {
-                deffered.resolve(data);
-            }
-            var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_regions_2011_01" + "&outputFormat=json&format_options=callback:regionsCallback";
-            $http.jsonp(url, {
-                cache: true,
-                callback: ""
-            });
-            return deffered.promise;
-        };
-
-        this.subcounties_geojson = function(district_name) {
-            var deffered = $q.defer();
-
-            subcountiesCallback = function(data) {
-                deffered.resolve(data);
-            }
-            var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:subcounties_2011_0005" + "&outputFormat=json&propertyName=the_geom,DNAME_2010,SNAME_2010,Reg_2011&format_options=callback:subcountiesCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district_name.toUpperCase() + "</Literal></PropertyIsEqualTo></Filter>";
-            $http.jsonp(url, {
-                cache: true
-            });
-            return deffered.promise;
-        };
-
-        this.parishes_geojson = function(district) {
-            var deffered = $q.defer();
-
-            parishesCallback = function(data) {
-                deffered.resolve(data);
-            }
-
-            var url = "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/ows?" + "service=WFS&version=1.0.0&request=GetFeature&typeName=geonode:uganda_parish_2011_50" + "&outputFormat=json&propertyName=the_geom,DNAME_2010,SNAME_2010,PNAME_2006,Reg_2011&format_options=callback:parishesCallback&filter=<Filter xmlns=\"http://www.opengis.net/ogc\">" + "<PropertyIsEqualTo><PropertyName>DNAME_2010</PropertyName><Literal>" + district.toUpperCase() + "</Literal></PropertyIsEqualTo></Filter>";
-
-            $http.jsonp(url, {
-                cache: true
-            });
-            return deffered.promise;
-        };
-
-        this.locationFilter = function (location) {
+        var locationFilter = function (location) {
             return function (data) {
                 var features = $.grep(data.features, function(feature, index) {
                     return location.contains(DT.Location.fromFeatureProperties(feature.properties));
@@ -203,71 +19,67 @@ angular.module("dashboard")
             }
         };
 
+        this.projects_geojson = function(location, filter) {
+            return projectService.projects_geojson(location, filter.project);
+        }
+
+        this.regions_geojson = function(location) {
+            var propertyNames = ["the_geom", "Reg_2011"];
+            return geonodeService.get("uganda_regions_2011_01", null, propertyNames).then(locationFilter(location));
+        };
+
+        this.districts = function(location) {
+            var url = "/static/javascript/geojson/uganda_districts_2011_with_indicators.json";
+            return jsonService.get(url).then(locationFilter(location));
+        };
+
+        this.subcounties_geojson = function(location) {
+            var propertyNames = ["the_geom", "Reg_2011", "DNAME_2010", "SNAME_2010"];
+            var filter = { 'DNAME_2010': location.district.toUpperCase() };
+            return geonodeService.get("subcounties_2011_0005", filter, propertyNames).then(locationFilter(location));
+        };
+
+        this.parishes_geojson = function(location) {
+            var propertyNames = ["the_geom","Reg_2011", "DNAME_2010", "SNAME_2010", "PNAME_2006"];
+            var filter = { 'DNAME_2010': location.district.toUpperCase() };
+            return geonodeService.get("uganda_parish_2011_50", filter, propertyNames).then(locationFilter(location));
+        };
+
         this.water_points = function(location) {
-            return geonodeService.get("water_points_replottted", { 'DNAME_2010': location.district.toUpperCase() }).then(this.locationFilter(location));
+            var filter = { 'DNAME_2010': location.district.toUpperCase() };
+            return geonodeService.get("water_points_replottted", filter).then(locationFilter(location));
         };
 
         this.health_centers = function(location) {
-            return geonodeService.get("uganda_health_centers_replotted", { 'DNAME_2010': location.district.toUpperCase() }).then(this.locationFilter(location));
+            var filter = { 'DNAME_2010': location.district.toUpperCase() };
+            return geonodeService.get("uganda_health_centers_replotted", filter).then(locationFilter(location));
         };
 
         this.schools = function(location) {
-            return geonodeService.get("uganda_schools_with_regions", { 'DNAME_2010': location.district.toUpperCase() }).then(this.locationFilter(location));
+            var filter = { 'DNAME_2010': location.district.toUpperCase() };
+            return geonodeService.get("uganda_schools_with_regions", filter).then(locationFilter(location));
+        };
+
+        var serviceMap = {
+            "region": this.regions_geojson,
+            "district": this.districts,
+            "district_outline": this.districts,
+            "subcounty": this.subcounties_geojson,
+            "parish": this.parishes_geojson,
+            "water-point": summaryService.find,
+            "health-center": summaryService.find,
+            "school": summaryService.find,
+            "water-point-point": this.water_points,
+            "health-center-point": this.health_centers,
+            "school-point": this.schools,
+            "project-point": this.projects_geojson
         };
     })
-    .service("heatmapService", function() {
-        var indicators = [{
-            layer: "uganda_district_indicators_2",
-            key: "CompletePS_Perc",
-            name: "Percentage of children completing Primary School",
-            wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
-            legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:uganda_district_indicators_2&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;"
-        }, {
-            layer: "uganda_districts_2011_with_school_start",
-            key: "School_Start_at6_Perc",
-            name: "Percentage of children starting school at 6",
-            wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
-            legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:uganda_districts_2011_with_school_start&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;"
-        }, {
-            layer: "ureport_poll_165",
-            name: "Barriers to farming",
-            wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
-            legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:ureport_poll_165&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;",
-            ureport_poll: 165
-        }, {
-            layer: "ureport_poll_551",
-            name: "Youth Day",
-            wmsUrl: "http://ec2-54-218-182-219.us-west-2.compute.amazonaws.com/geoserver/geonode/wms",
-            legendUrl: "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=geonode:ureport_poll_551&format=image%2Fpng&legend_options=fontAntiAliasing:true;fontSize:12;",
-            ureport_poll: 551
-        }]
-
-        this.ureport = function() {
-            return $.grep(indicators, function(indicator) {
-                return indicator.ureport_poll != null;
-            });
-        }
-
-        this.datasets = function() {
-            return $.grep(indicators, function(indicator) {
-                return indicator.ureport_poll == null;
-            });
-        }
-    })
     .service("summaryService", function($q, jsonService) {
-        var self = this;
         this.find = function(location) {
             var url = "/aggregation/" + location.getName(true) 
             return jsonService.get(url);
         }
-
-        this.childLocations = function (location) {
-            return self.find(location).then(function(data) {
-                return $.map(data.children, function(childSummary, index) {
-                    return DT.Location.fromName(childSummary.locator);
-                });
-            });
-        };
     })
     .service("jsonService", function($q, $http) {
         this.get = function(url) {
@@ -276,18 +88,16 @@ angular.module("dashboard")
                 method: 'GET',
                 url: url,
                 cache: true
-            })
-                .success(function(data) {
-                    deffered.resolve(data);
-                });
+            }).success(function(data) {
+                deffered.resolve(data);
+            });
 
             return deffered.promise;
         }
     })
     .service("geonodeService", function($q, $http) {
-        var self = this;
 
-        this.filterQuery = function(filter) {
+        var filterQuery = function(filter) {
             var query = "<Filter xmlns=\"http://www.opengis.net/ogc\">";
 
             for(key in filter) {
@@ -295,10 +105,9 @@ angular.module("dashboard")
             }
             query += "</Filter>";
             return "&filter=" + query;
-
         }
 
-        this.get = function(dataset, filter) {
+        this.get = function(dataset, filter, propertyNames) {
             var deffered = $q.defer();
 
             DT.JSONPCallbacks[dataset] = function(data) {
@@ -309,17 +118,17 @@ angular.module("dashboard")
             url += "service=WFS&version=1.0.0&request=GetFeature&outputFormat=json";
             url += "&typeName=geonode:" + dataset
             url += "&format_options=callback:DT.JSONPCallbacks." + dataset;
-            url += filter != undefined ? self.filterQuery(filter) : ""
-            console.log(url)
+            url += filter != undefined ? filterQuery(filter) : ""
+            url += propertyNames != undefined ? "&propertyName=" + propertyNames.join(",") : ""
             $http.jsonp(url, {
                 cache: true
             });
             return deffered.promise;
         };
     })
-    .service("boundaryService", function(jsonService) {
+    .service("indicatorService", function(jsonService, $q) {
 
-        this.district = function(locator) {
+        var district_geojson = function(locator) {
             var url = "/static/javascript/geojson/uganda_districts_2011_with_indicators.json";
             return jsonService.get(url).then(function(data) {
                 return DT.first(data.features, function(feature) {
@@ -328,16 +137,12 @@ angular.module("dashboard")
             })
         };
 
-    })
-    .service("indicatorService", function(boundaryService, $q) {
         this.find = function(locator) {
             if (locator.level() != "district") {
                 var deffered = $q.defer();
                 deffered.resolve(null);
                 return deffered.promise;
             }
-                
-            return boundaryService.district(locator).then(function(data) { return data.properties; });
-            
+            return district_geojson(locator).then(function(data) { return data.properties; });
         }
-    })
+    });

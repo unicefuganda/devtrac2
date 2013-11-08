@@ -44,6 +44,7 @@ js = Bundle(
 	'javascript/services/services.js',
 	'javascript/services/project-service.js',
 	'javascript/services/ureport-service.js',
+	'javascript/services/heatmap-service.js',
 	'javascript/lib/ui-bootstrap-custom-0.6.0.min.js',
 	'javascript/lib/ui-bootstrap-custom-tpls-0.6.0.min.js',
      filters='jsmin', output='gen/packed.js')
