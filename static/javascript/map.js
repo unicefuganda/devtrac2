@@ -150,13 +150,14 @@ DT.Map = function(element, basemap) {
             }).setContent(markerPopupMessage(layer_info.summaryInformation(feature.properties)));
 
             var projectId = feature.properties['PROJECT_ID'];
+            var projectName = feature.properties['PROJ_NAME'];
             var legendIndex = data.legendPartners.partners.indexOf(feature.properties[data.legendPartners.type]);
             var color = DT.markerColors[legendIndex];
             
             var circleIcon = new L.DivIcon({
                 iconSize: new L.Point([10, 10]),
                 className: layer_info.name + "-icon marker-icon ",
-                html: "<div class='icon-inner'' data-project-id = '" + projectId +  "' data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'>"
+                html: "<div class='icon-inner' data-project-name='" + projectName + "'+  data-project-id = '" + projectId +  "' data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'>"
                     + "<i class='pin' ><span style='background-color:"+ color + "'></span></i>" + 
                 "</div>",
                 popupAnchor: [5, -10]
@@ -351,17 +352,6 @@ DT.Map = function(element, basemap) {
                 if (markerlat == lat && markerlng == lng) {
                     layer.openPopup();  
                     return;
-                }
-            }
-        },
-        getMarker: function(layer, lat, lng) {
-            var markerLayer = self.layerMap.findLayerByKey(layer);
-            for(var layerKey in markerLayer._featureGroup._layers) {
-                var layer = markerLayer._featureGroup._layers[layerKey];
-                var markerlat = layer.getLatLng().lat.toFixed(4).toString();
-                var markerlng = layer.getLatLng().lng.toFixed(4).toString();
-                if (markerlat == lat && markerlng == lng) {
-                    // return layer._icon.text();
                 }
             }
         },

@@ -24,7 +24,6 @@ Then the project details are:
     Pader District, Koyo Parish
     """
 
-
 Scenario: Filter by Sector
 Given that I am a regular user
 When I go to the homepage
@@ -101,5 +100,3 @@ Given that I am a regular user
 When I go to the homepage
 And I filter by Partner for "UNICEF"
 Then the color of the pin is 'red'
-
-

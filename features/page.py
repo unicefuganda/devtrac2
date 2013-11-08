@@ -1,6 +1,7 @@
 import time
 import itertools
 from pprint import pprint
+
 class Page:
     base_url = "http://localhost:5000"
     
@@ -199,6 +200,12 @@ class Page:
 
     def find_pin_with_color(self, color):
         return self.browser.find_by_css(str("span[data-colorselected='%s'][class='legend-color']" % color));
+
+    def select_project(self, projectName):
+        self.browser.find_by_css(str(".icon-inner[data-project-name='%s']" % projectName)).click()
+
+    def get_pins_for_project(self, projectName):
+        return self.browser.find_by_css(str(".selected-icon.icon-inner[data-project-name='%s']" % projectName))
 
        
         

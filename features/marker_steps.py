@@ -23,83 +23,11 @@ def then_the_cluster_marker_at_latlng_is_for_num_points(step, layer, locator, nu
 def and_i_uncheck_the_key_checkbox(step, checkboxkey):
     world.page.toggle_checkbox(checkboxkey)
 
-@step(u'Then \'([^\']*)\' water point circle markers will be displayed on the map')
-def then_group1_water_point_circle_markers_will_be_displayed_on_the_map(step, group1):
-    assert True, 'This step must be implemented'
+@step(u'And I select a pin for the "([^"]*)" Project on the map')
+def when_i_select_a_pin_for_the_group1_on_the_map(step, project_name):
+    world.page.select_project(project_name);
 
+@step(u'Then locations relating to the "([^"]*)" will be highlighted on the map')
+def then_locations_relating_to_the_group1_will_be_highlighted_on_the_map(step, project_name):
+    assert_true(len(world.page.get_pins_for_project(project_name)) > 0);
 
-#is this step possible?
-@step(u'And Markers are displayed on top of each other')
-def and_markers_are_displayed_on_top_of_each_other(step):
-    assert True, 'This step must be implemented'
-
-@step(u'Then Then marker clusters of water points will be displayed instead')
-def then_then_marker_clusters_of_water_points_will_be_displayed_instead(step):
-    assert True, 'This step must be implemented'
-
-@step(u'When I  hover over the water point maker at 23.0000, 11.0000')
-def when_i_hover_over_the_water_point_maker_at_23_0000_11_0000(step):
-    assert True, 'This step must be implemented'
-@step(u'Then a summary of information about the marker is displayed')
-def then_a_summary_of_information_about_the_marker_is_displayed(step):
-    assert True, 'This step must be implemented'
-@step(u'And the summary information about the water point marker at ... is displayed')
-def and_the_summary_information_about_the_water_point_marker_at_is_displayed(step):
-    assert True, 'This step must be implemented'
-@step(u'When I hover away from a marker')
-def when_i_hover_away_from_a_marker(step):
-    assert True, 'This step must be implemented'
-@step(u'Then the summary information is removed.')
-def then_the_summary_information_is_removed(step):
-    assert True, 'This step must be implemented'
-@step(u'Then the summary information is removed')
-def then_the_summary_information_is_removed(step):
-    assert True, 'This step must be implemented'
-
-@step(u'When I navigate to \'([^\']*)\' sub county')
-def when_i_navigate_to_group1_sub_county(step, group1):
-    assert True, 'This step must be implemented'
-@step(u'Then health centre marker icons will be displayed on the map')
-def then_health_centre_marker_icons_will_be_displayed_on_the_map(step):
-    assert True, 'This step must be implemented'
-@step(u'Then school marker icons will be displayed on the map')
-def then_school_marker_icons_will_be_displayed_on_the_map(step):
-    assert True, 'This step must be implemented'
-@step(u'When I navigate to the home page')
-def when_i_navigate_to_the_home_page(step):
-    assert True, 'This step must be implemented'
-@step(u'Then the \'([^\']*)\' filter will be displayed on the filter panel')
-def then_the_group1_filter_will_be_displayed_on_the_filter_panel(step, group1):
-    assert True, 'This step must be implemented'
-    
-@step(u'When I hover away from a "([^"]*)" marker at "([^"]*)"')
-def when_i_hover_away_from_a_group1_marker_at_group2(step, group1, group2):
-    assert True, 'This step must be implemented'
-
-# Steps for toggle on/off filters for schools, waterpoints, healthcentres
-
-@step(u'When I check the \'([^\']*)\' checkbox')
-def when_i_check_the_group1_checkbox(step, group1):
-    assert True, 'This step must be implemented'
-@step(u'And I open the dashboard for  "([^"]*)"')
-def and_i_open_the_dashboard_for_group1(step, group1):
-    assert True, 'This step must be implemented'
-@step(u'When I uncheck the \'([^\']*)\' checkbox')
-def when_i_uncheck_the_group1_checkbox(step, group1):
-    assert True, 'This step must be implemented'
-@step(u'Then the "([^"]*)" cluster marker at "([^"]*)" will be removed from the map')
-def then_the_group1_cluster_marker_at_group2_will_be_removed_from_the_map(step, group1, group2):
-    assert True, 'This step must be implemented'    
-
-@step(u'Then the "([^"]*)" layer for region "([^"]*)" is displayed')
-def then_the_group1_layer_for_region_group2_is_displayed(step, group1, group2):
-    assert True, 'This step must be implemented'
-
-# Badges
-@step(u'And the "([^"]*)" badge will be shown for the "([^"]*)" region')
-def and_the_group1_badge_will_be_shown_for_the_group2_region(step, group1, group2):
-    assert True, 'This step must be implemented'  
-
-@step(u'And the "([^"]*)" badge will show the "([^"]*)" for "([^"]*)"')
-def and_the_group1_badge_will_show_the_group2_for_group3(step, group1, group2, group3):
-    assert True, 'This step must be implemented'
