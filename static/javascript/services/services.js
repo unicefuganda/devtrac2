@@ -1,6 +1,5 @@
 angular.module("dashboard")
     .service('districtService', function($q, summaryService, projectService, geonodeService, jsonService) {
-        var self = this;
 
         var locationFilter = function (location) {
             return function (data) {
@@ -11,57 +10,53 @@ angular.module("dashboard")
             }
         };
         
-        this['project-point'] = function(location, filter) {
-            return projectService.projects_geojson(location, filter.project);
-        };
-
-        this['region'] = function(location) {
-            var propertyNames = ["the_geom", "Reg_2011"];
-            return geonodeService.get("uganda_regions_2011_01", null, propertyNames).then(locationFilter(location));
-        };
-
-        this['district'] = function(location) {
+        var districts = function(location) {
             var url = "/static/javascript/geojson/uganda_districts_2011_with_indicators.json";
             return jsonService.get(url).then(locationFilter(location));
         };
-        this['district_outline'] = this.district;
         
-        this['subcounty'] = function(location) {
-            var propertyNames = ["the_geom", "Reg_2011", "DNAME_2010", "SNAME_2010"];
-            var filter = { 'DNAME_2010': location.district.toUpperCase() };
-            return geonodeService.get("subcounties_2011_0005", filter, propertyNames).then(locationFilter(location));
-        };
-        
-        this['parish'] = function(location) {
-            var propertyNames = ["the_geom","Reg_2011", "DNAME_2010", "SNAME_2010", "PNAME_2006"];
-            var filter = { 'DNAME_2010': location.district.toUpperCase() };
-            return geonodeService.get("uganda_parish_2011_50", filter, propertyNames).then(locationFilter(location));
-        };
-        
-        this['water-point'] = summaryService.find;
-        this['health-center'] = summaryService.find;
-        this['school'] = summaryService.find;
-
-        this["water_point-point"] = function(location) {
-            var filter = { 'DNAME_2010': location.district.toUpperCase() };
-            return geonodeService.get("water_points_replottted", filter).then(locationFilter(location));
-        };
-        
-        this["health-center-point"] = function(location) {
-            var filter = { 'DNAME_2010': location.district.toUpperCase() };
-            return geonodeService.get("uganda_health_centers_replotted", filter).then(locationFilter(location));
-        };
-
-        this["school-point"] = function(location) {
-            var filter = { 'DNAME_2010': location.district.toUpperCase() };
-            return geonodeService.get("uganda_schools_with_regions", filter).then(locationFilter(location));
+        var services = {
+            'project-point': function(location, filter) {
+                return projectService.projects_geojson(location, filter.project);
+            },
+            'region': function(location) {
+                var propertyNames = ["the_geom", "Reg_2011"];
+                return geonodeService.get("uganda_regions_2011_01", null, propertyNames).then(locationFilter(location));
+            },
+            'district': districts,
+            'district_outline': districts,
+            'subcounty': function(location) {
+                var propertyNames = ["the_geom", "Reg_2011", "DNAME_2010", "SNAME_2010"];
+                var filter = { 'DNAME_2010': location.district.toUpperCase() };
+                return geonodeService.get("subcounties_2011_0005", filter, propertyNames).then(locationFilter(location));
+            },
+            'parish': function(location) {
+                var propertyNames = ["the_geom","Reg_2011", "DNAME_2010", "SNAME_2010", "PNAME_2006"];
+                var filter = { 'DNAME_2010': location.district.toUpperCase() };
+                return geonodeService.get("uganda_parish_2011_50", filter, propertyNames).then(locationFilter(location));
+            },
+            'water-point': summaryService.find,
+            'health-center': summaryService.find,
+            'school': summaryService.find,
+            'water-point-point': function(location) {
+                var filter = { 'DNAME_2010': location.district.toUpperCase() };
+                return geonodeService.get("water_points_replottted", filter).then(locationFilter(location));
+            },
+            'health-center-point': function(location) {
+                var filter = { 'DNAME_2010': location.district.toUpperCase() };
+                return geonodeService.get("uganda_health_centers_replotted", filter).then(locationFilter(location));
+            },
+            'school-point': function(location) {
+                var filter = { 'DNAME_2010': location.district.toUpperCase() };
+                return geonodeService.get("uganda_schools_with_regions", filter).then(locationFilter(location));
+            }
         };
 
         this.getData = function(locationkeys, filter) {
             var promises = $.map(locationkeys, function(locationkey) {
                 var key = locationkey[0];
                 var location = locationkey[1];
-                return self[key](location, filter);
+                return services[key](location, filter);
             });
             return $q.all(promises);
         };

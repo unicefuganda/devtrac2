@@ -6,53 +6,69 @@ mockGeoJson = function(testData) {
     };
 };
 
-// describe("Boundary Service", function() {
-//     var testGeoJson, kampalaNorthJson, kampalaSouthJson, guluNorthJson;
+describe("Geonode Service", function() {
 
-//     beforeEach(function() {
-//         kampalaNorthJson = {
-//                 type: "Polygon",
-//                 properties: {
-//                     "Reg_2011": "NORTH",
-//                     "DNAME_2010": "KAMPALA",
-//                     "Measles_Perc": "1.05"
-//                 }
-//             };
+    var mock = { jsonp: function() {}};
+    beforeEach(function() {
 
-//         kampalaSouthJson = {
-//                 type: "Polygon",
-//                 properties: {
-//                     "Reg_2011": "SOUTH",
-//                     "DNAME_2010": "KAMPALA",
-//                     "Measles_Perc": "1.05"
-//                 }
-//             };
+        module('dashboard', function($provide) {
+            spyOn(mock, 'jsonp')
+            $provide.value('$http', mock);
+        });
+    });
 
-//         guluNorthJson = {
-//                 type: "Polygon",
-//                 properties: {
-//                     "Reg_2011": "NORTH",
-//                     "DNAME_2010": "GULU",
-//                     "Measles_Perc": "1.05"
-//                 }
-//             };
+    it('should make geonode for dataset', inject(function($rootScope, geonodeService){
+        var promise = geonodeService.get("test")
+        DT.JSONPCallbacks["test"]("test_data")
+        var finished = false;
+        
+        promise.then(function(data) {
+            expect(data).toEqual("test_data");
+            url = mock.jsonp.mostRecentCall.args[0]
+            expect(url).toMatch("&typeName=geonode:test")
+            finished = true;                
+        });
 
-//         testGeoJson = {
-//             features: [kampalaNorthJson, kampalaSouthJson, guluNorthJson]
-//         }
-//         module('dashboard');
-//     });
+        waitsFor(function() {
+            $rootScope.$apply();
+            return finished;
+        });
+    }));
 
-//     it ('should filter by district region and name', inject(function(boundaryService) {
-//         var location = new DT.Location({region: "north", district: "kampala"})
+    it('should make apply filter for dataset', inject(function($rootScope, geonodeService){
+        var promise = geonodeService.get("test", {"key": "something"})
+        DT.JSONPCallbacks["test"]("test_data")
+        var finished = false;
+        
+        promise.then(function(data) {
+            url = mock.jsonp.mostRecentCall.args[0]
+            expect(url).toMatch("&filter=<Filter xmlns=\"http://www.opengis.net/ogc\"><PropertyIsEqualTo><PropertyName>key</PropertyName><Literal>something</Literal></PropertyIsEqualTo></Filter")
+            finished = true;                
+        });
 
-//         expect(boundaryService.locatorFilter(location)(kampalaNorthJson)).toBeTruthy();
-//         expect(boundaryService.locatorFilter(location)(kampalaSouthJson)).toBeFalsy();
-//         expect(boundaryService.locatorFilter(location)(guluNorthJson)).toBeFalsy();
+        waitsFor(function() {
+            $rootScope.$apply();
+            return finished;
+        });
+    }));
 
-//     }));
+    it('should make select propernames for dataset', inject(function($rootScope, geonodeService){
+        var promise = geonodeService.get("test", null, ["test1", "test2"])
+        DT.JSONPCallbacks["test"]("test_data")
+        var finished = false;
+        
+        promise.then(function(data) {
+            url = mock.jsonp.mostRecentCall.args[0]
+            expect(url).toMatch("&propertyName=test1,test2")
+            finished = true;                
+        });
 
-// })
+        waitsFor(function() {
+            $rootScope.$apply();
+            return finished;
+        });
+    }));
+})
 
 describe("Geojson Service", function() {
 
