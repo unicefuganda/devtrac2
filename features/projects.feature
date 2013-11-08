@@ -1,4 +1,5 @@
 Feature: Projects
+
 Scenario: Display extra project information
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu"

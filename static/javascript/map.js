@@ -21,7 +21,7 @@ DT.Map = function(element, basemap) {
             minZoom: 6,
             maxZoom: 18
         });
-    } else {   
+    } else {
         var layer = new L.mapbox.tileLayer(basemap, {
             minZoom: 6,
             maxZoom: 18
@@ -54,7 +54,7 @@ DT.Map = function(element, basemap) {
     var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
     var tileServerUrl = DT.testing ? testingUrl : mapboxUrl;
-    
+
     self.layerMap = new DT.LayerMap();
     window.mapmap = map;
 
@@ -66,33 +66,33 @@ DT.Map = function(element, basemap) {
         DT.timings["unselectend"] = new Date().getTime();
     }
 
-    function addBoundaryLayer(name, location, features, layer_info) {  
+    function addBoundaryLayer(name, location, features, layer_info) {
         var baseLayer = L.geoJson(features, {
-            onEachFeature: function(data, layer) {  
+            onEachFeature: function(data, layer) {
                 var options = $.extend({}, layer_info, {
                     clickLayerHandler: function(layer) {
                         self.clickDistrictHandler(layer.location);
                     },
                     location: layer_info.getLocation(data),
                 });
-                
-                var layer = new DT.Layer(layer, options, data.properties, map);                               
+
+                var layer = new DT.Layer(layer, options, data.properties, map);
                 self.layerMap.addChildLayer(name, location, options.location, layer);
             },
-        });            
+        });
         self.layerMap.addLayer(name, location, baseLayer, layer_info.type);
         map.addLayer(baseLayer, true);
     }
+
     function addAggregateLayer(name, location, data, layer_info) {
         var layerGroup = L.layerGroup();
-
 
         $.each(data.children, function(index, childStats) {
             var childLocation = DT.Location.fromName(childStats.locator);
             var childLayer = self.layerMap.findChildLayer(childLocation);
             if (childLayer != null && layer_info.display(childStats)) {
 
-                var centerPoint = childLayer.getCenter();   
+                var centerPoint = childLayer.getCenter();
                 var circleCluster = new L.DivIcon({
                 iconSize: new L.Point([20, 20]),
                 // className:  "",
@@ -101,7 +101,7 @@ DT.Map = function(element, basemap) {
                  var geojsonMarkerOptions = {
                     zIndexOffset: 10000,
                     icon: circleCluster
-                };        
+                };
                 var marker = new L.Marker(centerPoint, geojsonMarkerOptions);
                 layerGroup.addLayer(marker);
             }
@@ -114,83 +114,30 @@ DT.Map = function(element, basemap) {
     self.selectProject = function(projectId) {
         $(".icon-inner").addClass("disabled-icon")
         $(".icon-inner[data-project-id='" +  projectId + "']").removeClass("disabled-icon");
-        $(".icon-inner[data-project-id='" +  projectId + "']").addClass("selected-icon");    
+        $(".icon-inner[data-project-id='" +  projectId + "']").addClass("selected-icon");
     };
 
     self.unselectProject = function() {
         $(".icon-inner").removeClass("disabled-icon selected-icon");
-    } 
+    }
 
-    function addProjectLayer(name, location, data, layer_info) {
-        var layerGroup = L.layerGroup();
-
-        var markerPopupMessage = function(summaryInformation) {
-            var message = '<h4>' + summaryInformation.title + '</h4>';
-            $.each(summaryInformation.lines, function(index, line) {
-                message += '<label>' + line[0] + ':</label> ' + line[1] + '</br>';    
-            })
-            return message;
-        };
-
+    function addProjectLegend(data){
         var projectLegendLabels = "";
         $(".partner-legend ul").toggle(data.legendPartners.partners.length > 0)
-
         $.each(data.legendPartners.partners, function(index, partner) {
             var color = DT.markerColors[index];
             projectLegendLabels +="<li><span class='legend-color' data-colorselected='"+color+"' style='background-color:"+ color +"'></span><span>" +partner+ "</span></li>";
             $(".partner-legend ul").html(projectLegendLabels);
         });
-        
+    }
+
+    function addProjectLayer(name, location, data, layer_info) {
+        var layerGroup = L.layerGroup();
+
+        addProjectLegend(data);
+
         $.each(data.geojson.features, function(index, feature) {
-            var coordinates = feature.geometry.coordinates;
-
-            var popup = L.popup({
-                className: "marker-popup" ,
-                closeButton: false
-            }).setContent(markerPopupMessage(layer_info.summaryInformation(feature.properties)));
-
-            var projectId = feature.properties['PROJECT_ID'];
-            var projectName = feature.properties['PROJ_NAME'];
-            var legendIndex = data.legendPartners.partners.indexOf(feature.properties[data.legendPartners.type]);
-            var color = DT.markerColors[legendIndex];
-            
-            var circleIcon = new L.DivIcon({
-                iconSize: new L.Point([10, 10]),
-                className: layer_info.name + "-icon marker-icon ",
-                html: "<div class='icon-inner' data-project-name='" + projectName + "'+  data-project-id = '" + projectId +  "' data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'>"
-                    + "<i class='pin' ><span style='background-color:"+ color + "'></span></i>" + 
-                "</div>",
-                popupAnchor: [5, -10]
-            });
-
-            var geojsonMarkerOptions = {
-                zIndexOffset: 1000,
-                icon: circleIcon
-            };
-          
-            var marker = new L.Marker(new L.LatLng(coordinates[1], coordinates[0]), geojsonMarkerOptions);
-
-            marker.bindPopup(popup)
-                .on('mouseover', function() {
-                    marker.openPopup();
-                })
-                .on('mouseout', function() {
-                    marker.closePopup();
-                })
-                .on('click', function() { 
-
-                    
-                    if ($(".icon-inner").hasClass("selected-icon")) {
-                        self.unselectProjectHandler(feature);
-                        self.unselectProject();
-                        
-                    } else {
-                        self.selectProjectHandler(feature);
-                        self.selectProject(feature.properties['PROJECT_ID']);
-                    }
-                    
-                });
-            layerGroup.addLayer(marker);
+            layerGroup.addLayer(DT.projectMarker(self, feature, data, layer_info));
         });
 
         self.layerMap.addLayer(name, location, layerGroup, layer_info.type);
@@ -203,7 +150,7 @@ DT.Map = function(element, basemap) {
         var markerPopupMessage = function(summaryInformation) {
             var message = '<h4>' + summaryInformation.title + '</h4>';
             $.each(summaryInformation.lines, function(index, line) {
-                message += '<label>' + line[0] + ':</label> ' + line[1] + '</br>';    
+                message += '<label>' + line[0] + ':</label> ' + line[1] + '</br>';
             })
             return message;
         };
@@ -215,12 +162,12 @@ DT.Map = function(element, basemap) {
                 className: "marker-popup" ,
                 closeButton: false
             }).setContent(markerPopupMessage(layer_info.summaryInformation(feature.properties)));
-            
+
             var circleIcon = new L.DivIcon({
                 iconSize: new L.Point([10, 10]),
                 className: layer_info.name + "-icon marker-icon ",
                 html: "<div data-lat='"+ coordinates[1].toFixed(4) +"' data-lng='" + coordinates[0].toFixed(4) + "'>"
-                    + layer_info.getValue(feature.properties, layer_info) + 
+                    + layer_info.getValue(feature.properties, layer_info) +
                 "</div>",
                 popupAnchor: [5, -10]
             });
@@ -229,7 +176,7 @@ DT.Map = function(element, basemap) {
                 zIndexOffset: 1000,
                 icon: circleIcon
             };
-          
+
             var marker = new L.Marker(new L.LatLng(coordinates[1], coordinates[0]), geojsonMarkerOptions);
 
             marker.bindPopup(popup)
@@ -245,13 +192,13 @@ DT.Map = function(element, basemap) {
         self.layerMap.addLayer(name, location, layerGroup, layer_info.type);
         map.addLayer(layerGroup);
     }
-  
+
     var removeWMSLayer = function() {
         if (self.wmsLayer != null) {
             map.removeLayer(self.wmsLayer);
             self.wmsLayer = null;
         };
-    }   
+    }
 
     return {
         addLayer: function(name, location, data, layer_info) {
@@ -284,7 +231,7 @@ DT.Map = function(element, basemap) {
         },
         removeWMSLayer: function() {
             removeWMSLayer();
-        },  
+        },
         onClickDistrict: function(handler) {
             self.clickDistrictHandler = handler;
         },
@@ -339,7 +286,7 @@ DT.Map = function(element, basemap) {
                 return locationKey[0] + " - " + locationKey[1].getName();
             });
         },
-        removeLayer: function(key) {            
+        removeLayer: function(key) {
             var layer = self.layerMap.removeLayer(key);
             map.removeLayer(layer);
         },
@@ -350,7 +297,7 @@ DT.Map = function(element, basemap) {
                 var markerlat = layer.getLatLng().lat.toFixed(4).toString();
                 var markerlng = layer.getLatLng().lng.toFixed(4).toString();
                 if (markerlat == lat && markerlng == lng) {
-                    layer.openPopup();  
+                    layer.openPopup();
                     return;
                 }
             }
@@ -413,7 +360,7 @@ DT.Layer = function(leafletLayer, options, featureProperties, map) {
 
         self.selected = true;
         leafletLayer.setStyle(options.selectedStyle);
-        map.fitBounds(leafletLayer.getBounds());    
+        map.fitBounds(leafletLayer.getBounds());
     };
 
     self.highlight = function() {

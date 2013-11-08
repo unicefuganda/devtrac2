@@ -28,6 +28,7 @@ js = Bundle(
 	'javascript/controllers.js',
 	'javascript/directives.js',
 	'javascript/filters.js',
+	'javascript/map-marker.js',
 	'javascript/map.js',
 	'javascript/utilities.js',
 	'javascript/config.js',
