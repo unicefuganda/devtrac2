@@ -110,7 +110,7 @@ angular.module("dashboard")
             return projectAggregation;
         };
 
-        
+
 
         this.partnerLegend = function(projectFilter, features) {
             if (projectFilter.partners != null && projectFilter.partners.length > 0)
@@ -151,10 +151,10 @@ angular.module("dashboard")
 
         this.projects_geojson = function (location, projectFilter) {
             return projectsGeojsonPromise.then(function(data) {
-                
+
                 var results = filterProjects(data, location, projectFilter)
 
-                return { 
+                return {
                     geojson: {
                         type: "FeatureCollection",
                         features: results,
@@ -197,15 +197,17 @@ angular.module("dashboard")
 
         this.syncProjectFilters = function(location, projectFilter){
             return projectsGeojsonPromise.then(function(data) {
-                
+
                 var filteredProjects = filterProjects(data, location, projectFilter)
 
-                return { 
+                return {
+                    partners: getUniquePartners(filteredProjects),
+                    financialOrgs: getUniqueFinancialOrgs(filteredProjects),
                     sectors: getUniqueSectors(filteredProjects),
                     implementingPartners: getUniqueImplementingPartners(filteredProjects),
                     statuses: getUniqueStatuses(filteredProjects)
                 };
-            });    
+            });
         }
 
         var projectsGeojsonPromise = geonodeService.get('projects');

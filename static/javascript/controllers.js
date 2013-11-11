@@ -10,8 +10,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 
     $rootScope.location = new DT.Location($routeParams);
     if ($rootScope.filter == undefined)
-        $rootScope.filter = new DT.Filter({health_center: false, water_point: false, school: true, site_visit_point: true, project: { partner: { unicef: true, usaid: true} }} );
-
+        $rootScope.filter = new DT.Filter({health_center: false, water_point: false, school: true, site_visit_point: true, project:{} } );
 
 
 }).controller("IndicatorsCtrl", function($scope, $rootScope, heatmapService) {
@@ -23,7 +22,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $rootScope.$watch("location", function(newLocation, oldLocation) {
         if (newLocation == null)
             return;
-        
+
         summaryService.find(newLocation).then(function(summary) {
             $scope.summary = summary.info;
         });
@@ -68,26 +67,35 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $scope.organisation = "accountable-agency";
     $scope.partners = projectService.partners();
     $scope.financialOrgs = projectService.financialOrgs();
+    $scope.sectors = projectService.sectors();
+    $scope.statuses = projectService.statuses();
+    $scope.implementingPartners = projectService.implementingPartners();
     $scope.years = projectService.years();
 
+    var isFilterSelected = function(filterLable){
+        if($scope.filter.project[filterLable]){
+            if( ($scope.filter.project[filterLable]).length > 0 )
+                return true;
+        }
+        return false;
+    }
 
     var updateProjectFilters = function() {
-        if ($scope.filter == null){
-            $scope.sectors = projectService.sectors();
-            $scope.statuses = projectService.statuses();
-            $scope.implementingPartners = projectService.implementingPartners();
+        if ($scope.filter == null)
             return;
-        }
 
-        projectService.syncProjectFilters($scope.location, {}).then(function(data){
-            $scope.sectors = data.sectors;
-            $scope.statuses = data.statuses;
-            $scope.implementingPartners = data.implementingPartners;
+        projectService.syncProjectFilters($scope.location, $scope.filter.project).then(function(data){
+            if( !isFilterSelected('partners') ) $scope.partners = data.partners;
+            if( !isFilterSelected('financialOrgs') ) $scope.financialOrgs = data.financialOrgs;
+            if( !isFilterSelected('sectors') ) $scope.sectors = data.sectors;
+            if( !isFilterSelected('statuses') )  $scope.statuses = data.statuses;
+            if( !isFilterSelected('implementingPartners') ) $scope.implementingPartners = data.implementingPartners;
         })
-    };
-    $scope.$watch("location", updateProjectFilters, true);
-    
 
+    }
+
+    $scope.$watch("location", updateProjectFilters, true);
+    $scope.$watch("filter.project", updateProjectFilters, true);
 })
 .controller("ProjectsCtrl", function($scope, projectService){
 
