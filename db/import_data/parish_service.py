@@ -1,5 +1,4 @@
 from shapely.geometry import *
-import fiona
 import sys, os
 from shapely import speedups
 speedups.enable()
