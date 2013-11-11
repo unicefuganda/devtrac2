@@ -6,4 +6,11 @@ DT.SiteVisit = function(properties) {
     this.subject = properties['Subject'];
     this.sitevisit_url = properties['Link'];
     this.placetype = properties['PlaceType'];
+    this.lat = properties['x'];
+    this.lng = properties['y'];
+
+
+
+    
 };
+

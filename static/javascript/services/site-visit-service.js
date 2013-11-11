@@ -9,8 +9,15 @@ angular.module("dashboard")
                 }
             };
             return jsonService.get('/site_visits').then(locationFilter(location)).then(function(siteVisitsJson) {
-                return siteVisitsJson.map(function(siteVisitJson) { return new DT.SiteVisit(siteVisitJson);  })
-                
+                return siteVisitsJson.map(function(siteVisitJson) { return new DT.SiteVisit(siteVisitJson);  })                
+            }).then(function(siteVisits){
+                return siteVisits.sort(function (siteVisit1, siteVisit2) {
+                    if (siteVisit1.title > siteVisit2.title)
+                      return 1;
+                    if (siteVisit1.title < siteVisit2.title)
+                      return -1;
+                    return 0;
+                });
             });
         };
     });

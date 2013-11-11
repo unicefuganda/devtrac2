@@ -6,8 +6,8 @@ from pymongo import MongoClient
 from import_geonode import *
 from import_indicators import *
 from import_ureport import *
+from import_site_visits import *
 import importlib
-
 
 from config.config import *
 config = config_from_env(os.environ['DEVTRAC_ENV'])
@@ -26,11 +26,11 @@ import_dataset(wfs_service, database, "school", "uganda_schools_with_regions")
 print "school done"
 import_dataset(wfs_service, database, "water_point", "water_points_replottted")
 print "water_point done"
-
 import_locationTree(wfs_service,database)
 print "location tree done"
 import_indicators()
 print "indicators done"
-
+import_site_visits(wfs_service, database)
+print "site visits done"
 import_ureport(config.DATA_DIR, database)
 print "ureport done"
