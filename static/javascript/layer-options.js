@@ -46,6 +46,10 @@ DT.Layers = {
             layers.push(["health-center-point", location]);
         }
 
+        // if (location.level() == "district") {
+        //     layers.push(["site-visit-point", location]);
+        // }
+
         layers.push(["project-point", location]);
 
         return $.grep(layers, function(locationKey) {
@@ -315,27 +319,14 @@ DT.LayerOptions = {
         }
     },
 
-    "unicef": {
-        name: "unicef",
-        type: "aggregate",
-        display: function(stats){ return stats.info.unicef > 0; },
-        getValue: function(stats, childLocation) {
-            return  "<img src='/static/images/unicef_small.png'></img>"
-                    + "<div data-locator='" + childLocation.getName() + "'>"
-                    + stats.info.unicef
-                    + '</div>';
-        }
-    },
-
-    "usaid": {
-        name: "usaid",
-        type: "aggregate",
-        display: function(stats){ return stats.info.usaid > 0; },
-        getValue: function(stats, childLocation) {
-            return "<img src='/static/images/usaid_small.png'></img>"
-                    + "<div data-locator='" + childLocation.getName() + "'>"
-                    + stats.info.usaid
-                    + '</div>';
+    "site-visit-point": {
+        name: "site-visit-point",
+        type: "point",
+        getValue: function(properties) {
+            return ""
+        },
+        summaryInformation: function(properties) {
+            return {lines: [] }
         }
     },
 }

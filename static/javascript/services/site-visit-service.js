@@ -1,5 +1,7 @@
 angular.module("dashboard")
     .service("siteVisitService", function(jsonService) {
+
+        var self = this;
         this.siteVisits = function (location) {
             var locationFilter = function (location) {
                 return function (rows) {
@@ -23,6 +25,9 @@ angular.module("dashboard")
 
 
         this.site_visits_geojson = function(location) {
-            
+            return self.siteVisits(location).then(function(site_visits){
+                var features = site_visits.map(function(site_visit) { return site_visit.feature; });
+                return { type: "FeatureCollection", features: features };            
+            })
         }
     });

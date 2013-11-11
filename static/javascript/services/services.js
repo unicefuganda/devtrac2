@@ -1,5 +1,5 @@
 angular.module("dashboard")
-    .service('districtService', function($q, summaryService, projectService, geonodeService, jsonService) {
+    .service('districtService', function($q, summaryService, projectService, geonodeService, jsonService, siteVisitService) {
 
         var locationFilter = function (location) {
             return function (data) {
@@ -16,6 +16,7 @@ angular.module("dashboard")
         };
         
         var services = {
+            'site-visit-point': siteVisitService.site_visits_geojsonim,
             'project-point': function(location, filter) {
                 return projectService.projects_geojson(location, filter.project);
             },
