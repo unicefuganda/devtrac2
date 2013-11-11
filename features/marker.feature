@@ -91,3 +91,8 @@ And I select the 'Projects/Partners' Tab
 Then 'Accountable Organisations' will be selectedby default
 When I select an 'USAID' from the  'Accountable Organisations' filter
 Then only projects from 'Accountable Organisations' will be displayed on the map
+
+Scenario: Add sector site visits
+Given that I am a regular user
+When I open dashboard for "Acholi, Arua"
+Then I a site vist marker is displayed at "30.6620728, -0.6054366"
