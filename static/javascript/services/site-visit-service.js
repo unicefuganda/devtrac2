@@ -20,4 +20,9 @@ angular.module("dashboard")
                 });
             });
         };
+
+
+        this.site_visits_geojson = function(location) {
+            
+        }
     });
