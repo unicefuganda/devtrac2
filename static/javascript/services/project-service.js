@@ -168,7 +168,7 @@ angular.module("dashboard")
                 var values = DT.values(projectHash);
                 return values;
             });
-        }
+        };
 
         this.findById = function(projectId) {
 
@@ -179,7 +179,7 @@ angular.module("dashboard")
 
                 return project;
             });
-        }
+        };
 
         var projectsGeojsonPromise = geonodeService.get('projects');
         var projectsPromise = self.projects(new DT.Location({}), {});
