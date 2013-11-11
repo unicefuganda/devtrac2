@@ -58,6 +58,18 @@ class LocationServiceTestCase(unittest.TestCase):
         self.assertEqual(list((child['_id'] for child in children['children'])), ["UGANDA, ACHOLI, GULU", "UGANDA, ACHOLI, AMURU"])
 
 
+class SiteVistServiceTestCase(unittest.TestCase):
+
+    def setUp(self):
+        self.db = MongoClient().devtrac2_test
+        self.db.site_visits.remove()
+        self.db.site_visits.insert({"_id": 1})
+        self.db.site_visits.insert({"_id": 2})
+
+    def test_should_find_all_questions(self):
+        siteVisitService = SiteVisitService(self.db)
+        self.assertEqual([siteVisit['_id'] for siteVisit in siteVisitService.all()], [1, 2])
+
 class UReportTestCase(unittest.TestCase):
 
     def setUp(self):

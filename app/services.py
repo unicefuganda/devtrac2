@@ -140,3 +140,11 @@ class WFSService(object):
         url_handler = urllib.urlopen(url)
         features = json.load(url_handler)["features"]
         return features
+
+class SiteVisitService(object): 
+
+    def __init__(self, db):
+        self.db = db
+
+    def all(self):
+        return self.db.site_visits.find()

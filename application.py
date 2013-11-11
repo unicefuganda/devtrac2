@@ -96,6 +96,11 @@ def ureport_child_results(question_id, locator):
 	result = services.UReportService(__mongo_connection()).child_results(services.Locator(locator), question_id)
 	return Response(dumps(result), mimetype='application/json')
 
+@app.route("/site_visits")
+def site_visits():
+	result = services.SiteVisitService(__mongo_connection()).all()
+	return Response(dumps(result), mimetype='application/json')
+
 def __mongo_connection():
 	return MongoClient().devtrac2
 
