@@ -54,10 +54,6 @@ Given that I am a regular user
 When I open dashboard for "Acholi"
 And I click on "Acholi, Gulu"
 Then "Acholi, Gulu" will be selected
-#And I hover over "Acholi, Gulu, Patiko"
-#Then "Acholi, Gulu, Patiko" will be highlighted
-#And I click on "Acholi, Gulu, Patiko"
-#Then "Acholi, Gulu, Patiko" will be selected
 
 Scenario: Navigate by breadcrumb
 Given that I am a regular user

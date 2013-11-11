@@ -20,20 +20,17 @@ describe("Site Visit Service", function () {
         {
             'Reg_2011': 'test region', 
             'DNAME_2010': 'test district', 
-            '_id': 1,
             'Title': 'title 1'
         },
         {
             'Reg_2011': 'test region', 
             'DNAME_2010': 'test district', 
-            '_id': 2,
-            'Title': 'title 3'
+            'Title': 'title 2'
         },
         {
             'Reg_2011': 'test region', 
             'DNAME_2010': 'test district 2', 
-            '_id': 3,
-            'Title': 'title 2'
+            'Title': 'title 3'
         }
     ];
 
@@ -55,13 +52,13 @@ describe("Site Visit Service", function () {
         siteVisitService.siteVisits(location).then(function(data) {
             siteVisits = data;
         });
-        expect(siteVisits.map(function(siteVisit) { return siteVisit.id })).toEqual([1, 2]);
+        expect(siteVisits.map(function(siteVisit) { return siteVisit.title })).toEqual(['title 1', 'title 2']);
 
         var location = new DT.Location({region: 'test region'});
         siteVisitService.siteVisits(location).then(function(data) {
             siteVisits = data;
         });
-        expect(siteVisits.map(function(siteVisit) { return siteVisit.id })).toEqual([1, 2, 3]);
+        expect(siteVisits.map(function(siteVisit) { return siteVisit.title })).toEqual(['title 1', 'title 2', 'title 3']);
 
         var location = new DT.Location({region: 'test region', district: 'test district 3'});
         siteVisitService.siteVisits(location).then(function(data) {

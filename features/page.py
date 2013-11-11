@@ -130,6 +130,10 @@ class Page:
         elements = map(lambda element: element.text, self.browser.find_by_css('#project-list tbody'))
         return elements[0];
 
+    def site_visit_list_content(self):
+        elements = map(lambda element: element.text, self.browser.find_by_css('#site-visit-list tbody'))
+        return elements[0];
+
     def select_ureport_question(self, abbreviation):
         toggle_css = str(".ureport-questions .toggle[data-question='%s']" % abbreviation)
         self.wait_for(lambda x: self.browser.find_by_css(toggle_css).visible)

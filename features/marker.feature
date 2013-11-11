@@ -83,6 +83,7 @@ Then locations relating to the "STRENGTHENING PARLIAMENATRY OVERSIGHT" will be h
 And I click on the project link "Building Young Futures"
 Then locations relating to the "Building Young Futures" will be highlighted on the map
 
+
 @wip
 Scenario: Add Accountable Organisations
 Given that I am a regular user

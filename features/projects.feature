@@ -6,7 +6,7 @@ And I click on the project Icon at latitude "2.8193" and logitude "32.3848"
 Then the project details are:
     """
 	Accountable Agency: UNICEF
-    Financial Organizatin: Japan
+    Financial Organization: Japan
 	Implementing Partner: World Council of Churches
 	Sector: Development
 	Actual Duration: 20/01/2008 - 20/07/2008
@@ -73,7 +73,7 @@ And I click on the project link "STRENGTHENING PARLIAMENATRY OVERSIGHT"
 Then the project details are:
     """
 	Accountable Agency: UNICEF
-    Financial Organizatin: AfDB
+    Financial Organization: AfDB
 	Implementing Partner: The Uganda Assciation of Women Lawyers
 	Sector: Basic life skills for youths and Adults
 	Actual Duration: 28/01/2013 - 28/07/2013

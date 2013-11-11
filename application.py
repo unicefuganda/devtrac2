@@ -43,6 +43,8 @@ js = Bundle(
 	'javascript/dt/project.js',
 	'javascript/services/services.js',
 	'javascript/services/project-service.js',
+	'javascript/services/site-visit-service.js',
+	'javascript/dt/site-visit.js',
 	'javascript/services/ureport-service.js',
 	'javascript/services/heatmap-service.js',
 	'javascript/lib/ui-bootstrap-custom-0.6.0.min.js',

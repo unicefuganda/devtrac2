@@ -109,4 +109,40 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 
     $scope.$watch("filter.project", updateProjectList, true);
     $scope.$watch("location", updateProjectList, true);
+})
+.controller("SiteVisitCtrl", function($scope,siteVisitService){
+
+    $scope.maxSize = 5;
+    $scope.currentPage = 1;
+
+    $scope.$watch('currentPage', function() {
+        if ($scope.siteVisits == null)
+            return;
+
+        var listChucks = DT.splitIntoChuncks($scope.siteVisits, 5);
+        $scope.pagedList = listChucks[$scope.currentPage - 1];
+    })
+
+    $scope.$watch('siteVisits', function(newValues, oldValues){
+        if ($scope.siteVisits == null)
+            return;
+
+        $scope.totalItems = $scope.siteVisits.length;
+        $scope.currentPage = 1;
+
+        var listChucks = DT.splitIntoChuncks($scope.siteVisits, 5);
+        $scope.pagedList = listChucks[$scope.currentPage - 1];
+    });
+
+    var updateSiteVisitList = function() {
+        if ($scope.location == null)
+            return;
+
+        siteVisitService.siteVisits($scope.location).then(function(data){
+            $scope.siteVisits = data;
+        });
+    }
+
+    $scope.$watch("location", updateSiteVisitList, true);
+
 });
