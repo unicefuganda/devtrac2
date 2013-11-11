@@ -220,7 +220,7 @@ DT.LayerOptions = {
         type: "aggregate",
         display: function(stats){ return true; },
         getValue: function(stats, childLocation) {
-            return "<div data-locator='" + childLocation.getName() + "'>"
+            return "<div class='water-point-cluster-icon cluster-icon medium' data-locator='" + childLocation.getName() + "'>"
                     + stats.info['water-point']
                     + '</div>';
         }
@@ -230,7 +230,7 @@ DT.LayerOptions = {
         type: "aggregate",
         display: function(stats){ return true; },
         getValue: function(stats, childLocation) {
-            return "<div data-locator='" + childLocation.getName() + "'>"
+            return "<div class='health-center-cluster-icon cluster-icon medium' data-locator=' " + childLocation.getName() + "'>"
                     + stats.info['health-center']
                     + '</div>';
         }
@@ -240,7 +240,7 @@ DT.LayerOptions = {
         type: "aggregate",
         display: function(stats){ return true; },
         getValue: function(stats, childLocation) {
-            return "<div data-locator='" + childLocation.getName() + "'>"
+            return "<div class='school-cluster-icon cluster-icon medium' data-locator='" + childLocation.getName() + "'>"
                     + stats.info.school
                     + '</div>';
         }

@@ -91,9 +91,10 @@
 }
 
 .water-point-cluster-icon {
+  position: absolute;
   padding: 7px 0 0 0;
   background-color: rgba(116, 223, 252, 0.6);
-  left: -33px;
+  left: 33px;
 }
 
 .water-point-point-icon {
@@ -132,9 +133,9 @@
 
 .health-center-cluster-icon
 {
+  position: absolute;
   padding: 7px 0 0 0;
   background-color: rgba(153, 51, 102, 0.65);
-  left: 33px;
 }
 
 .health-center-point-icon
@@ -144,6 +145,8 @@
 
 .school-cluster-icon
 {
+  position: absolute;
+  left: -33px;
   padding: 7px 0 0 0;
   background-color: rgba(211, 242, 53, 0.65);
 }

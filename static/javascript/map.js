@@ -95,7 +95,7 @@ DT.Map = function(element, basemap) {
                 var centerPoint = childLayer.getCenter();   
                 var circleCluster = new L.DivIcon({
                 iconSize: new L.Point([20, 20]),
-                className: layer_info.name +"-cluster-icon cluster-icon medium",
+                // className:  "",
                 html: layer_info.getValue(childStats, childLocation)
                 });
                  var geojsonMarkerOptions = {
