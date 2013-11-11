@@ -67,11 +67,26 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 }).controller("PartnersCtrl", function($rootScope, $scope, projectService){
     $scope.organisation = "accountable-agency";
     $scope.partners = projectService.partners();
-    $scope.sectors = projectService.sectors();
-    $scope.statuses = projectService.statuses();
-    $scope.implementingPartners = projectService.implementingPartners();
-    $scope.years = projectService.years();
     $scope.financialOrgs = projectService.financialOrgs();
+    $scope.years = projectService.years();
+
+
+    var updateProjectFilters = function() {
+        if ($scope.filter == null){
+            $scope.sectors = projectService.sectors();
+            $scope.statuses = projectService.statuses();
+            $scope.implementingPartners = projectService.implementingPartners();
+            return;
+        }
+
+        projectService.syncProjectFilters($scope.location, {}).then(function(data){
+            $scope.sectors = data.sectors;
+            $scope.statuses = data.statuses;
+            $scope.implementingPartners = data.implementingPartners;
+        })
+    };
+    $scope.$watch("location", updateProjectFilters, true);
+    
 
 })
 .controller("ProjectsCtrl", function($scope, projectService){

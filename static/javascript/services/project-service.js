@@ -21,6 +21,20 @@ angular.module("dashboard")
                 return project.properties['IMPLEMENTE']
             });
             return DT.unique(features).sort();
+        };
+
+        var getUniqueSectors = function(features) {
+            var features = $.map(features, function(project, index) {
+                return project.properties['SECTOR']
+            });
+            return DT.unique(features).sort();
+        }
+
+        var getUniqueStatuses = function(features) {
+            var features = $.map(features, function(project, index) {
+                return project.properties['STATUS']
+            });
+            return DT.unique(features).sort();
         }
 
         var filterByLocation = function(features, location) {
@@ -117,11 +131,11 @@ angular.module("dashboard")
         };
 
         this.sectors = function () {
-            return ["Basic Education", "Agriculture", "Basic life skills for youths and Adults", "Social, Small and medium-sized enterprises (SME) development"];
+            return projectsGeojsonPromise.then(function(data) { return getUniqueSectors(data.features) });
         };
 
         this.statuses = function () {
-            return ["Pipeline/identification","Implementation","Completion","Post-completion","Cancelled"];
+            return projectsGeojsonPromise.then(function(data) { return getUniqueStatuses(data.features) });
         };
 
         this.years = function () {
@@ -181,6 +195,19 @@ angular.module("dashboard")
             });
         };
 
+        this.syncProjectFilters = function(location, projectFilter){
+            return projectsGeojsonPromise.then(function(data) {
+                
+                var filteredProjects = filterProjects(data, location, projectFilter)
+
+                return { 
+                    sectors: getUniqueSectors(filteredProjects),
+                    implementingPartners: getUniqueImplementingPartners(filteredProjects),
+                    statuses: getUniqueStatuses(filteredProjects)
+                };
+            });    
+        }
+
         var projectsGeojsonPromise = geonodeService.get('projects');
         var projectsPromise = self.projects(new DT.Location({}), {});
-    });;
+    });
