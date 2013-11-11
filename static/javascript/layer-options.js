@@ -230,7 +230,7 @@ DT.LayerOptions = {
         type: "aggregate",
         display: function(stats){ return true; },
         getValue: function(stats, childLocation) {
-            return "<div class='health-center-cluster-icon cluster-icon medium' data-locator=' " + childLocation.getName() + "'>"
+            return "<div class='health-center-cluster-icon cluster-icon medium' data-locator='" + childLocation.getName() + "'>"
                     + stats.info['health-center']
                     + '</div>';
         }

@@ -87,7 +87,7 @@ class Page:
         self.browser.execute_script("window.map.openPopupForMarkerAt('%s', '%s', '%s');" % (layer, lat, lng))
 
     def marker_count(self, layer, locator):
-        content = self.browser.find_by_css(str( ".%s-cluster-icon div[data-locator='%s']" % (layer, locator.lower())))
+        content = self.browser.find_by_css(str( ".%s-cluster-icon[data-locator='%s']" % (layer, locator.lower())))
         return int(content.text)
 
     def marker_count_pins(self,locator):
@@ -96,7 +96,7 @@ class Page:
         return len(content)
 
     def marker_visible(self, layer, locator):
-        content = self.browser.find_by_css(str( ".%s-cluster-icon div[data-locator='%s']" % (layer, locator.lower())))
+        content = self.browser.find_by_css(str( ".%s-cluster-icon[data-locator='%s']" % (layer, locator.lower())))
         return len(content) > 0
 
     def popup_content(self):

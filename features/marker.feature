@@ -93,6 +93,7 @@ Then 'Accountable Organisations' will be selectedby default
 When I select an 'USAID' from the  'Accountable Organisations' filter
 Then only projects from 'Accountable Organisations' will be displayed on the map
 
+@wip
 Scenario: Add sector site visits
 Given that I am a regular user
 When I open dashboard for "Acholi, Arua"

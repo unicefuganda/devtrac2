@@ -40,8 +40,9 @@
   font-weight: 500;
 }
 
-.filter {
-  margin-left: 12px;
+.leaflet-div-icon {
+  background: none;
+  border: none;
 }
 
 .cluster-icon.medium.ureport-cluster-icon {
