@@ -12,8 +12,10 @@ DT.SiteVisit = function(properties) {
     this.feature = { 
         type: 'Feature',
         properties: this,
-        "geometry":{"type":"Point","coordinates":[ this.lng,this.lat ]},
+        "geometry":{"type":"Point","coordinates":[ parseFloat(this.lat), parseFloat(this.lng) ]},
         "geometry_name":"the_geom"
     }
+
+    console.log(this.feature);
 };
 

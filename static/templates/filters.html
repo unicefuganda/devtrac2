@@ -24,6 +24,13 @@
           <input type="checkbox" ng-model="filter.water_point" class='water-point-checkbox' id="water-point-checkbox"/>
           <label for="water-point-checkbox">Water Points</label>
         </li>
+
+        <li ng-hide="location.level() == 'national'">
+          <span class="site-visit-point-checkbox-icon checkbox-icon"></span>
+          <input type="checkbox" ng-model="filter.site_visit_point" class='site-visit-point-checkbox' id="site-visit-checkbox"/>
+          <label for="site-visit-checkbox">Site Visits</label>
+        </li>
+
       </ul> 
     </div>
     <div class="tab-pane" id="heatmap">

@@ -155,6 +155,6 @@ DT.Filter.prototype.dataToggledOff = function() {
             keysToggledOff.push(key)
     });
     return $.map(keysToggledOff, function(key) {
-        return key.replace("_", "-")
+        return key.replace(/_/g, "-")
     });
 };

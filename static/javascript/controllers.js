@@ -10,7 +10,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 
     $rootScope.location = new DT.Location($routeParams);
     if ($rootScope.filter == undefined)
-        $rootScope.filter = new DT.Filter({health_center: false, water_point: false, school: true, project: { partner: { unicef: true, usaid: true} }} );
+        $rootScope.filter = new DT.Filter({health_center: false, water_point: false, school: true, site_visit_point: true, project: { partner: { unicef: true, usaid: true} }} );
 
 
 

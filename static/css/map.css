@@ -45,6 +45,10 @@
   border: none;
 }
 
+.filter {
+  margin-left: 12px;
+}
+
 .cluster-icon.medium.ureport-cluster-icon {
   background-color: rgba(116, 100, 252, 0.6);
   top: -30px;
@@ -102,7 +106,9 @@
   background-color: rgba(0, 0, 255, 0.6); 
 }
 
-
+.site-visit-point-icon {
+  background-color: rgba(0, 200, 100, 0.6); 
+}
 
 .cluster-icon.small {
   width: 24px;

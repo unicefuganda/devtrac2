@@ -46,9 +46,9 @@ DT.Layers = {
             layers.push(["health-center-point", location]);
         }
 
-        // if (location.level() == "district") {
-        //     layers.push(["site-visit-point", location]);
-        // }
+        if (location.level() == "region" || location.level() == "district" || location.level() == "subcounty" || location.level() == "parish") {
+            layers.push(["site-visit-point", location]);
+        }
 
         layers.push(["project-point", location]);
 
@@ -76,8 +76,10 @@ DT.Layers = {
         }
     },
     getChanges: function (shownLayers, location, filteredKeys) {
+        console.log(shownLayers);
         newLayers = DT.Layers.boundaryLayers(location).concat(DT.Layers.filterLayers(location, filteredKeys));
-
+        console.log(newLayers);
+        console.log(filteredKeys);
         //TODO: refactor to use keys instead of indexes
         var boundaryLayers = $.grep(shownLayers, function(layer) { return layer[2] == 'boundary'; });
         var nonBoundaryLayers = $.grep(shownLayers, function(layer) { return layer[2] != 'boundary'; });
@@ -304,8 +306,6 @@ DT.LayerOptions = {
         name: "project-point",
         type: "project",
         getValue: function(properties) {
-            var long_pins = true;
-            var pin_folder = long_pins ? 'long_pins' : 'pins';
             return "<i class='pin' colour='"+DT.markerColorLegend[properties.PARTNER.toLowerCase()]+"' color ><span style='background-color:"+DT.markerColorLegend[properties.PARTNER.toLowerCase()]+"'></span></i>"
         },
         summaryInformation: function(properties) {
@@ -326,7 +326,12 @@ DT.LayerOptions = {
             return ""
         },
         summaryInformation: function(properties) {
-            return {lines: [] }
+            return {
+                title:  properties.title,
+                lines: [
+                    ["Subject", properties.subject]
+                ] 
+            }
         }
     },
 }

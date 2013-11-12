@@ -285,6 +285,11 @@ h3 {
   background-color: rgba(211, 242, 53, 1); 
 }
 
+#filters-form .site-visit-point-checkbox-icon {
+  background-color: rgba(0, 170, 100, 1); 
+  border-radius: 2px;
+}
+
 #filters-form .icon {
   background-color: white;
   padding: 0px 0px 3px 2px;

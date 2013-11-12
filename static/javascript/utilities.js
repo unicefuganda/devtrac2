@@ -53,11 +53,11 @@ DT.capitalize = function(string) {
 };
 
 DT.encode = function(name) {
-    return name.replace('/','_');
+    return name.replace(/\//g,'_');
 };
 
 DT.decode = function(name) {
-    return name.replace('_','/');
+    return name.replace(/_/g,'/');
 };
 
 DT.timings = {}; 

@@ -16,7 +16,7 @@ angular.module("dashboard")
         };
         
         var services = {
-            'site-visit-point': siteVisitService.site_visits_geojsonim,
+            'site-visit-point': siteVisitService.site_visits_geojson,
             'project-point': function(location, filter) {
                 return projectService.projects_geojson(location, filter.project);
             },
