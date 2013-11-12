@@ -85,6 +85,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
             return;
 
         projectService.syncProjectFilters($scope.location, $scope.filter.project).then(function(data){
+            
             if( !isFilterSelected('partners') ) $scope.partners = data.partners;
             if( !isFilterSelected('financialOrgs') ) $scope.financialOrgs = data.financialOrgs;
             if( !isFilterSelected('sectors') ) $scope.sectors = data.sectors;

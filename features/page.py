@@ -170,6 +170,12 @@ class Page:
         self.__filter_chosen__('project-sector', sector);
         self.browser.choose("organisationsRadio",'accountable-agency');
         self.__filter_chosen__("accounting-selector","UNICEF");
+
+    def __chosen_options__(self, parentId):
+        container = self.browser.find_by_css("#%s .chosen-container" % parentId)
+        container.click()
+        options = list([elem.text for elem in container.find_by_css(".chosen-results li")])
+        return "\n".join(options)
        
 
     def filter_by_status(self, status): 
@@ -194,7 +200,21 @@ class Page:
         self.__filter_chosen__('project-year', year);
         self.browser.choose("organisationsRadio",'accountable-agency');
         self.__filter_chosen__("accounting-selector","UNICEF");
-       
+
+    def status_chosen_options(self):
+        return self.__chosen_options__("project-status")
+
+    def sector_chosen_options(self):
+        return self.__chosen_options__("project-sector")
+
+    def implementing_partners_chosen_options(self):
+        return self.__chosen_options__("project-implementing-partner")
+
+    def funding_partners_chosen_options(self):
+        return self.__chosen_options__("accounting-selector")
+
+    def accounting_partners_chosen_options(self):
+        return self.__chosen_options__("funding-selector")
 
     def scroll_to_bottom(self): 
         self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")

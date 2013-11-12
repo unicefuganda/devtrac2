@@ -64,3 +64,19 @@ def then_the_project_list_contains(step):
 def then_the_color_of_the_pin_is(step, color):
     assert_equals(len(world.page.find_pin_with_color(color)), 1)
 
+@step(u'Then the Status filter displays options:')
+def then_the_status_filter_displays_options(step):
+    assert_multi_line_equal(world.page.status_chosen_options(), step.multiline)
+
+@step(u'Then the Sector filter displays options:')
+def then_the_sector_filter_displays_options(step):
+    assert_multi_line_equal(world.page.sector_chosen_options(), step.multiline)
+
+@step(u'Then the Implementing Partners filter displays options:')
+def then_the_implementing_partners_filter_displays_options(step):
+    assert_multi_line_equal(world.page.implementing_partners_chosen_options(), step.multiline)
+
+@step(u'Then the Funding Partners filter displays options:')
+def then_the_funding_partners_filter_displays_options(step):
+    assert_multi_line_equal(world.page.funding_partners_chosen_options(), step.multiline)
+
