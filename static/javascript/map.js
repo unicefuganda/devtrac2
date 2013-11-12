@@ -185,7 +185,11 @@ DT.Map = function(element, basemap) {
                 })
                 .on('mouseout', function() {
                     marker.closePopup();
-                });
+                })
+                .on('click', function() {
+                    self.unselectIconHandler(feature, layer_info.name);
+                    self.selectIconHandler(feature, layer_info.name);
+                })
             layerGroup.addLayer(marker);
         });
 
@@ -235,11 +239,11 @@ DT.Map = function(element, basemap) {
         onClickDistrict: function(handler) {
             self.clickDistrictHandler = handler;
         },
-        onSelectProject: function(handler) {
-            self.selectProjectHandler = handler;
+        onSelectIcon: function(handler) {
+            self.selectIconHandler = handler;
         },
-        onUnselectProject: function(handler) {
-            self.unselectProjectHandler = handler;
+        onUnselectIcon: function(handler) {
+            self.unselectIconHandler = handler;
         },
         getSelectedLayer: function() {
             var layer = DT.first(self.layerMap.allChildLayers(), function(layer) {

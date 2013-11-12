@@ -609,6 +609,27 @@ h3 {
 }
 
 
+/* SITE VISITS */
+
+#site-visit-details ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+#site-visit-details li label {
+  font-weight: bold;
+  width: 16%;
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#site-visit-details li span {
+  display: inline-block;
+  width: 82%;
+  margin-bottom: 3px;
+}
+
 #poll-results{
   overflow: hidden;
 }

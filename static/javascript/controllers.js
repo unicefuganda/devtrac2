@@ -7,6 +7,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     }
 
     $rootScope.project.selected = null;
+    $rootScope.siteVisit = null;
 
     $rootScope.location = new DT.Location($routeParams);
     if ($rootScope.filter == undefined)
@@ -104,7 +105,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $scope.currentPage = 1;
 
     $scope.$watch('currentPage', function() {
-        if ($scope.project == null)
+        if ($scope.project == null || $scope.project.list == null)
             return;
 
         var listChucks = DT.splitIntoChuncks($scope.project.list, 10);
@@ -168,5 +169,4 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     }
 
     $scope.$watch("location", updateSiteVisitList, true);
-
 });

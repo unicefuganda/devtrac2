@@ -10,6 +10,7 @@ angular.module("dashboard")
                     });
                 }
             };
+
             return jsonService.get('/site_visits').then(locationFilter(location)).then(function(siteVisitsJson) {
                 return siteVisitsJson.map(function(siteVisitJson) { return new DT.SiteVisit(siteVisitJson);  })                
             }).then(function(siteVisits){
@@ -22,6 +23,17 @@ angular.module("dashboard")
                 });
             });
         };
+
+        this.siteVisitDetail = function(siteVisitId){
+            var promise = self.siteVisits(new DT.Location({}));
+            return promise.then(function(siteVisits) {
+                return DT.first(siteVisits, function(siteVisit){
+                    return siteVisit.id == siteVisitId;
+                })
+            });
+
+
+        }
 
 
         this.site_visits_geojson = function(location) {

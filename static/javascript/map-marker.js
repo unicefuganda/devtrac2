@@ -57,11 +57,11 @@ DT.projectMarker = function(map, feature, data, layer_info){
                 })
                 .on('click', function() { 
                     if ($(".icon-inner").hasClass("selected-icon")) {
-                        map.unselectProjectHandler(feature);
+                        map.unselectIconHandler(feature, layer_info.name);
                         map.unselectProject();
                         
                     } else {
-                        map.selectProjectHandler(feature);
+                        map.selectIconHandler(feature, layer_info.name);
                         map.selectProject(feature.properties['PROJECT_ID']);
                     }
                 });

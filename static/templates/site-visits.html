@@ -14,7 +14,7 @@
     </thead>
     <tbody>
       <tr ng-repeat="visit in pagedList" >
-        <td>{[{ visit.title}]}</td>
+        <td><a href="#" ng-click="visit.selected = p">{[{ visit.title}]}</td>
         <td>{[{ visit.date}]}</td>
         <td>{[{ visit.organisation}]}</td>
         <td>{[{ visit.subject}]}</td>

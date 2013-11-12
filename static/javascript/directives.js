@@ -1,14 +1,23 @@
 angular.module("dashboard").directive('map', function() {
     return {
-        controller: function($rootScope, $scope, $location, districtService, projectService) {
+        controller: function($rootScope, $scope, $location, districtService, projectService, siteVisitService) {
             $scope.navigateToLocation = function(location) {
                 $scope.project.selected = null;
                 $location.path(location.toUrl());
             }
 
-            $scope.selectProject = function(projectId) {
-                $scope.project.selected = projectService.findById(projectId);
-                $rootScope.$broadcast('projectClicked');
+            $scope.selectProject = function(feature, layerName) {
+
+                $scope.project.selected = null;
+                $scope.siteVisit = null;
+
+                if (layerName == 'project-point') {
+                    $scope.project.selected = projectService.findById(feature.properties['PROJECT_ID']);
+                } else if (layerName == 'site-visit-point') {
+                    siteVisitService.siteVisitDetail(feature.properties['Id']).then(function(siteVisit) {
+                        $scope.siteVisit = siteVisit;
+                    });
+                }
             }
 
             $scope.getData = function(locationKeys) {
@@ -33,15 +42,16 @@ angular.module("dashboard").directive('map', function() {
                 });
             });
 
-            map.onSelectProject(function(projectFeature) {
+            map.onSelectIcon(function(projectFeature, layerName) {
                 scope.$apply(function (){
-                    scope.selectProject(projectFeature.properties['PROJECT_ID']);
+                    scope.selectProject(projectFeature, layerName);
                 });
             });
 
-            map.onUnselectProject(function() {
+            map.onUnselectIcon(function() {
                 scope.$apply(function (){
                     scope.project.selected = null;
+                    scope.siteVisit = null;
                 });
             });
 
@@ -198,7 +208,8 @@ angular.module("dashboard").directive('map', function() {
             });
         }
     }
-}).directive('project', function() {
+})
+.directive('project', function() {
     return {
         link: function(scope, element, attrs) {
             scope.$on('projectClicked', function(project) {
