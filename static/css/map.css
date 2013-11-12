@@ -28,6 +28,12 @@
    box-shadow: 0 2px 4px rgba(0,0,0,0.65);
  }
 
+ .marker-icon > div {
+   width: 10px;
+   height: 10px;
+   border-radius: 2px;
+ }
+
 .cluster-icon {
   overflow: hidden;/
   width: 32px;
@@ -108,6 +114,7 @@
 
 .site-visit-point-icon {
   background-color: rgba(0, 200, 100, 0.6); 
+  z-index: 999999;
 }
 
 .cluster-icon.small {

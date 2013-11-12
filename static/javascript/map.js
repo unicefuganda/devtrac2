@@ -173,7 +173,7 @@ DT.Map = function(element, basemap) {
             });
 
             var geojsonMarkerOptions = {
-                zIndexOffset: 1000,
+                zIndexOffset: 50000,
                 icon: circleIcon
             };
 

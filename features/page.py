@@ -25,7 +25,6 @@ class Page:
 
         if (len(locations) > 3):
             url += ("/%s" % locations[3]) 
-
         self.browser.visit("%s/dashboard%s?basemap=test" % (self.base_url, url))
 
     def breadcrumbs(self):
@@ -66,6 +65,9 @@ class Page:
     def click_on_layer(self, location_name):
         location_hash = self.hash_location(location_name)
         self.browser.execute_script("window.map.clickLayer(%s)" % location_hash)
+
+    def click_on_marker(self, layer, lat, lng):
+        self.browser.execute_script("window.map.clickMarkerAt('%s', '%s', '%s');" % (layer, lat, lng))
 
     def is_displayed(self, location_name):
         location_hash = self.hash_location(location_name)
@@ -122,6 +124,8 @@ class Page:
 
     def summary_panel_content(self):
         return self.browser.find_by_css('#summary').text
+    def site_visit_details_content(self):
+        return self.browser.find_by_css('#site-visit-details').text
 
     def extra_info_content(self):
         return self.browser.find_by_css('#project-details').text

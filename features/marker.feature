@@ -75,13 +75,14 @@ Then the "school" layer for "Acholi, Gulu, Odek" is not displayed
 When I toggle the 'school' checkbox
 Then the "school" layer for "Acholi, Gulu, Odek" is displayed
 
+@wip
 Scenario: Highlight Project Locations
 Given that I am a regular user
 When I go to the homepage
 And I select a pin for the "STRENGTHENING PARLIAMENATRY OVERSIGHT" Project on the map
 Then locations relating to the "STRENGTHENING PARLIAMENATRY OVERSIGHT" will be highlighted on the map
-And I click on the project link "Building Young Futures"
-Then locations relating to the "Building Young Futures" will be highlighted on the map
+# And I click on the project link "Building Young Futures"
+# Then locations relating to the "Building Young Futures" will be highlighted on the map
 
 
 @wip
