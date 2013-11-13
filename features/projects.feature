@@ -62,38 +62,37 @@ Then the project list contains:
 	"""                                                                                      
     Preventing and Responding to Violence against Children and support to keep children alive
     Planned Dates: 25/01/2011 - 25/07/2011
-    Funding
+    Funding Org:
     UNICEF  
-    Accountable
+    Accountable Agency:
     JICA  
-    Implementing
+    Implementing Partner:
     World Council of Churches
     Quality Education through BRMS and ECD and VSO volunteers
     Planned Dates: 25/01/2011 - 25/07/2011
-    Funding
+    Funding Org:
     UNICEF  
-    Accountable
+    Accountable Agency:
     KFW  
-    Implementing
+    Implementing Partner:
     Vountary Services Overseas
     STRENGTHENING PARLIAMENATRY OVERSIGHT
     Planned Dates: 28/01/2013 - 28/07/2013
-    Funding
+    Funding Org:
     UNICEF  
-    Accountable
+    Accountable Agency:
     AfDB  
-    Implementing
+    Implementing Partner:
     The Uganda Assciation of Women Lawyers
     Strengthening Reintegration of Young Mothers with children Formerly Associated with the LRA
     Planned Dates: 28/01/2013 - 28/07/2013
-    Funding
+    Funding Org:
     UNICEF  
-    Accountable
+    Accountable Agency:
     EU  
-    Implementing
+    Implementing Partner:
     Gulu United to Save the Children Organization                                            
 	"""
-
 
 Scenario: Show project details by clicking project link
 Given that I am a regular user
@@ -121,43 +120,43 @@ Then the project list contains:
 	"""
 	STRENGTHENING PARLIAMENATRY OVERSIGHT
     Planned Dates: 23/01/2010 - 23/07/2010
-    Funding
+    Funding Org:
     UNICEF  
-    Accountable
+    Accountable Agency:
     Canada  
-    Implementing
+    Implementing Partner:
     The Uganda Assciation of Women Lawyers
     STRIDES for Family Health
     Planned Dates: 28/01/2013 - 28/07/2013
-    Funding
+    Funding Org:
     USAID  
-    Accountable
+    Accountable Agency:
     Norway  
-    Implementing
+    Implementing Partner:
     Management Sciences for Health (MSH)
     Scaling up HIV/AIDS comprehensive HIV/AIDS prevention, care and treatment through the Faith Based Network
     Planned Dates: 21/01/2009 - 21/07/2009
-    Funding
+    Funding Org:
     USAID  
-    Accountable
+    Accountable Agency:
     USAID  
-    Implementing
+    Implementing Partner:
     Inter-Religious Council of Uganda (IRCU)
     Securing Ugandan's Rights to Essential Medicines (SURE)
     Planned Dates: 27/01/2012 - 27/07/2012
-    Funding
+    Funding Org:
     USAID  
-    Accountable
+    Accountable Agency:
     JICA  
-    Implementing
+    Implementing Partner:
     Management Sciences for Health (MSH)
     Stop Malaria Project (SMP)
     Planned Dates: 28/01/2013 - 28/07/2013
-    Funding
+    Funding Org:
     USAID  
-    Accountable
+    Accountable Agency:
     Canada  
-    Implementing
+    Implementing Partner:
     Johns Hopkins University (JHU/CCP)
 	"""
 	

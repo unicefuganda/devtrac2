@@ -10,7 +10,6 @@ angular.module("dashboard")
                     });
                 }
             };
-
             return jsonService.get('/site_visits').then(locationFilter(location)).then(function(siteVisitsJson) {
                 return siteVisitsJson.map(function(siteVisitJson) { return new DT.SiteVisit(siteVisitJson);  })                
             }).then(function(siteVisits){
@@ -31,10 +30,7 @@ angular.module("dashboard")
                     return siteVisit.id == siteVisitId;
                 })
             });
-
-
         }
-
 
         this.site_visits_geojson = function(location) {
             return self.siteVisits(location).then(function(site_visits){

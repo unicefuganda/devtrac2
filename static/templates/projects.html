@@ -14,22 +14,26 @@
       </div>
       <ul>
         <li>
-          <label>Funding</label>
+
+          <label>Funding Org:</label>
           <span>{[{p.partner}]}</span>
         </li>
 
         <li>
-          <label>Accountable</label>
+          <label>Accountable Agency:</label>
           <span>{[{p.financialOrganization}]}</span>
         </li>
 
         <li>
-          <label>Implementing</label>
+          <label>Implementing Partner:</label>
           <span>{[{p.implementingPartner}]}</span>
         </li>
       </ul>
   </div>
   <div pagination total-items="totalItems" page="currentPage" max-size="5" items-per-page="5"></div>
+  <div class='pagination-summary'>
+    Showing {[{ startCount }]} - {[{ endCount }]} of {[{totalItems}]}
+  </div>
   <div ng-show='project.selected != null'>
     <a class='back-to-area-link' ng-click=''>Back to {[{location.full_name();}]}</a>
   </div>

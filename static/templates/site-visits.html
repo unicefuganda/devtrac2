@@ -1,36 +1,43 @@
-<div ng-controller="SiteVisitCtrl" class='well tinted-background '>
-  <div class="well-header">
-  <h3>Site Visits </h3>
+<div ng-controller="SiteVisitCtrl" class='well tinted-background' id='site-visit-list'>
+    <ul>
+    <li ng-repeat="visit in pagedList" class='site-visit'>
+      
+      <div>
+        <h4>
+          <a href="#" ng-click="sitevisit = visit">{[{ visit.title}]}</a>
+        </h4>
+        <a ng-href="{[{visit.sitevisit_url}]}" target='_blank'>Open in DevTrac</a>
+      </div>
+      <ul>
+        <li>
+          <label>
+            Date Visited:
+          </label>
+          <span>
+            {[{ visit.date}]}
+          </span>
+        </li>
+        <li>
+          <label>
+            Organisation:
+          </label>
+          <span>
+            {[{ visit.organisation}]}
+          </span>
+        </li>
+        <li>
+          <label>
+            Sectors:
+          </label>
+          <span>
+            {[{ visit.subject}]}
+          </span>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <div pagination total-items="totalItems" page="currentPage" max-size="5" items-per-page="5"></div>
+  <div class='pagination-summary'>
+    Showing {[{ startCount }]} - {[{ endCount }]} of {[{totalItems}]}
   </div>
-  <table class="table table-condensed table-striped" id='site-visit-list'>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Date Visited</th>
-        <th>Organisation</th>
-        <th>Sector</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="visit in pagedList" >
-        <td><a href="#" ng-click="visit.selected = p">{[{ visit.title}]}</td>
-        <td>{[{ visit.date}]}</td>
-        <td>{[{ visit.organisation}]}</td>
-        <td>{[{ visit.subject}]}</td>
-        <td><a target="_blank" href="{[{ visit.sitevisit_url}]}">devtrac</td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <th colspan="5">
-          <div pagination total-items="totalItems" page="currentPage" max-size="5" items-per-page="5"></div>
-        </th>
-      </tr>
-    </tfoot>
-  </table>
-
-  <div ng-show='project.selected != null'>
-    <a class='back-to-area-link' ng-click=''>Back to {[{location.full_name();}]}</a>
-  </div>
-<div>
+</div>

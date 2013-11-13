@@ -102,12 +102,18 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 .controller("ProjectsCtrl", function($scope, projectService){
     $scope.currentPage = 1;
 
+    var pageList = function(currentPage) {
+        var listChucks = DT.splitIntoChuncks($scope.project.list, 5);
+        $scope.project.pagedList = listChucks[$scope.currentPage - 1];
+        $scope.startCount = ((currentPage - 1) * 5) + 1;
+        $scope.endCount = ((currentPage - 1) * 5) + $scope.project.pagedList.length;
+    };
+
     $scope.$watch('currentPage', function() {
         if ($scope.project == null || $scope.project.list == null)
             return;
 
-        var listChucks = DT.splitIntoChuncks($scope.project.list, 5);
-        $scope.project.pagedList = listChucks[$scope.currentPage - 1];
+        pageList($scope.currentPage);
     })
 
     $scope.$watch('project.list', function(newValues, oldValues){
@@ -117,8 +123,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         $scope.totalItems = $scope.project.list.length;
         $scope.currentPage = 1;
 
-        var listChucks = DT.splitIntoChuncks($scope.project.list, 5);
-        $scope.project.pagedList = listChucks[$scope.currentPage - 1];
+        pageList($scope.currentPage);
     });
 
     var updateProjectList = function() {
@@ -135,6 +140,13 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 })
 .controller("SiteVisitCtrl", function($scope,siteVisitService){
 
+    var pageList = function(currentPage) {
+        var listChucks = DT.splitIntoChuncks($scope.siteVisits, 5);
+        $scope.pagedList = listChucks[$scope.currentPage - 1];
+        $scope.startCount = ((currentPage - 1) * 5) + 1;
+        $scope.endCount = ((currentPage - 1) * 5) + $scope.pagedList.length;
+    };
+
     $scope.maxSize = 5;
     $scope.currentPage = 1;
 
@@ -142,8 +154,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         if ($scope.siteVisits == null)
             return;
 
-        var listChucks = DT.splitIntoChuncks($scope.siteVisits, 5);
-        $scope.pagedList = listChucks[$scope.currentPage - 1];
+        pageList($scope.currentPage);
     })
 
     $scope.$watch('siteVisits', function(newValues, oldValues){
@@ -153,8 +164,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         $scope.totalItems = $scope.siteVisits.length;
         $scope.currentPage = 1;
 
-        var listChucks = DT.splitIntoChuncks($scope.siteVisits, 5);
-        $scope.pagedList = listChucks[$scope.currentPage - 1];
+        pageList($scope.currentPage);
     });
 
     var updateSiteVisitList = function() {

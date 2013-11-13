@@ -135,8 +135,8 @@ class Page:
         return "\n".join(elements);
 
     def site_visit_list_content(self):
-        elements = map(lambda element: element.text, self.browser.find_by_css('#site-visit-list tbody'))
-        return elements[0];
+        elements = map(lambda element: element.text, self.browser.find_by_css('#site-visit-list .site-visit'))
+        return "\n".join(elements);
 
     def select_ureport_question(self, abbreviation):
         toggle_css = str(".ureport-questions .toggle[data-question='%s']" % abbreviation)

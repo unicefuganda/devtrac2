@@ -640,6 +640,7 @@ h3 {
 .project  {
   padding-left: 6px;
   border-bottom: 1px solid #EEE;
+<<<<<<< HEAD
 }
 
 #project-list .project > ul span{
@@ -672,6 +673,97 @@ h3 {
 #site-visit-details ul {
   list-style-type: none;
   padding-left: 0;
+=======
+}
+
+#project-list .project > ul span{
+  font-weight: bold;
+}
+
+.project-list-style {
+  list-style: none;
+  padding-left: 0;
+}
+
+.project-list-style li label {
+  display: inline-block;
+  line-height: 1.5em;
+}
+
+.project-list-style li span {
+  font-style: normal;
+  color: #223B52;
+>>>>>>> reapplying the site visit redesign
+}
+#acct-org {
+  padding-left: 40px;
+}
+
+
+/* SITE VISITS */
+
+<<<<<<< HEAD
+#site-visit-details li label {
+  font-weight: bold;
+  width: 16%;
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+=======
+#site-visit-list > ul, .site-visit > ul {
+  padding-left: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+#site-visit-list h4 {
+  display: inline-block;
+}
+
+#site-visit-list .site-visit a {
+  margin-top: 4px;
+  float: right;
+}
+
+#site-visit-list h4 { 
+  font-size: 14px;
+  margin-bottom: 6px;
+  margin-top: 4px;
+}
+
+#site-visit-list .site-visit:nth-child(odd) {
+  background-color: #EEE;
+
+}
+
+#site-visit-list .site-visit {
+  /*border-bottom: 1px solid #CCC;*/
+  padding: 4px 8px;
+}
+
+#site-visit-list .site-visit li { 
+  display: inline-block;
+  margin-right: 20px;
+}
+
+#site-visit-list .site-visit li label { 
+  font-weight: normal;
+}
+
+#site-visit-list .site-visit li span { 
+  font-weight: bold;
+}
+.pagination-summary {
+  padding: 20px 10px;
+  float: right;
+}
+
+
+#site-visit-details ul {
+  list-style-type: none;
+  padding-left: 0;
 }
 
 #site-visit-details li label {
@@ -682,6 +774,7 @@ h3 {
   vertical-align: top;
 }
 
+>>>>>>> reapplying the site visit redesign
 #site-visit-details li span {
   display: inline-block;
   width: 82%;
