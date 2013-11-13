@@ -36,6 +36,12 @@ h3 {
   height: 100%;   
 }
 
+.project-name{
+  font-weight: 400;
+  font-size: 16px;
+  margin-bottom: .25em;
+}
+
 .toggle {
   font-weight: normal;
   padding: 3px 8px;
@@ -588,24 +594,76 @@ h3 {
   text-transform: capitalize;
 }
 
-#project-list .accountable-agency-col {
-  width: 12%;
+#project-list h4 {
+  padding-top: 10px;
+  margin: 0;
+  font-size: 14px;
 }
 
-#project-list .funding-organization-col {
-  width: 12%; 
+#project-list .project-dates {
+  margin-top: 10px;
 }
 
-#project-list .implementing-partner-col {
-  width: 16%; 
+#project-list .project-dates span {
+  font-weight: bold;
 }
 
-#project-list .name-col {
-  width: 48%;
+#project-list .project-dates label {
+  font-weight: normal;
 }
 
-#project-list .dates-col {
-  width: 12%;
+#project-list .project > ul {
+  padding-left: 0px;
+  list-style: none;
+  margin-bottom: 0px;
+  padding-bottom: 6px;
+  
+}
+
+#project-list .project:nth-child(odd) {
+  background-color: #EEE;
+}
+
+#project-list .project > ul > li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+#project-list .project > ul label{
+  font-weight: normal;
+  font-size: 12px;
+  display: block;
+  margin-top: 4px;
+  margin-bottom: 0px;
+}
+
+.project  {
+  padding-left: 6px;
+  border-bottom: 1px solid #EEE;
+}
+
+#project-list .project > ul span{
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.project-list-style {
+  list-style: none;
+  padding-left: 0;
+}
+
+.project-list-style li label {
+  display: inline-block;
+  font-size: 14px;
+  line-height: 1.5em;
+}
+
+.project-list-style li span {
+  font-style: normal;
+  color: #223B52;
+}
+#acct-org {
+  padding-left: 40px;
 }
 
 

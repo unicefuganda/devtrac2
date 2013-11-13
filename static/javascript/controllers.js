@@ -100,15 +100,13 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $scope.$watch("filter.project", updateProjectFilters, true);
 })
 .controller("ProjectsCtrl", function($scope, projectService){
-
-    $scope.maxSize = 10;
     $scope.currentPage = 1;
 
     $scope.$watch('currentPage', function() {
         if ($scope.project == null || $scope.project.list == null)
             return;
 
-        var listChucks = DT.splitIntoChuncks($scope.project.list, 10);
+        var listChucks = DT.splitIntoChuncks($scope.project.list, 5);
         $scope.project.pagedList = listChucks[$scope.currentPage - 1];
     })
 
@@ -119,7 +117,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         $scope.totalItems = $scope.project.list.length;
         $scope.currentPage = 1;
 
-        var listChucks = DT.splitIntoChuncks($scope.project.list, 10);
+        var listChucks = DT.splitIntoChuncks($scope.project.list, 5);
         $scope.project.pagedList = listChucks[$scope.currentPage - 1];
     });
 

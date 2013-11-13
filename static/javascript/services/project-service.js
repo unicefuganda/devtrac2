@@ -91,13 +91,7 @@ angular.module("dashboard")
                 });
             };
 
-            return features.sort(function (project1, project2) {
-                if ((project1.properties['PROJ_NAME'] + project1.properties['START_PLAN']) > (project2.properties['PROJ_NAME'] + project2.properties['START_PLAN']))
-                  return 1;
-                if ((project1.properties['PROJ_NAME'] + project1.properties['START_PLAN']) < (project2.properties['PROJ_NAME'] + project2.properties['START_PLAN']))
-                  return -1;
-                return 0;
-            });
+            return features;
         };
 
         var calculateAggregation = function (partners, location, projects) {
@@ -180,6 +174,15 @@ angular.module("dashboard")
                 }, {})
 
                 var values = DT.values(projectHash);
+
+                values = values.sort(function (project1, project2) {
+                    if (project1.name > project2.name)
+                      return 1;
+                    if (project1.name < project2.name)
+                      return -1;
+                    return 0;
+                });
+
                 return values;
             });
         };

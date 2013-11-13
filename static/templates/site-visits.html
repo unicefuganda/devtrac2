@@ -18,13 +18,13 @@
         <td>{[{ visit.date}]}</td>
         <td>{[{ visit.organisation}]}</td>
         <td>{[{ visit.subject}]}</td>
-        <td><a href="{[{ visit.sitevisit_url}]}">devtrac</td>
+        <td><a target="_blank" href="{[{ visit.sitevisit_url}]}">devtrac</td>
       </tr>
     </tbody>
     <tfoot>
       <tr>
         <th colspan="5">
-          <div pagination total-items="totalItems" page="currentPage" max-size="maxSize"></div>
+          <div pagination total-items="totalItems" page="currentPage" max-size="5" items-per-page="5"></div>
         </th>
       </tr>
     </tfoot>

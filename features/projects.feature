@@ -7,11 +7,11 @@ And I click on the project Icon at latitude "2.8193" and logitude "32.3848"
 Then the project details are:
     """
 	Accountable Agency: UNICEF
-    Financial Organization: Japan
+    Financial Organization: CDC
 	Implementing Partner: World Council of Churches
 	Sector: Development
-	Actual Duration: 20/01/2008 - 20/07/2008
-	Planned Duration: 20/01/2008 - 20/07/2008
+	Actual Duration: 23/01/2010 - 23/07/2010
+	Planned Duration: 23/01/2010 - 23/07/2010
 	Status: Post-completion
 	Description: Preventing and Responding to Violence against Children and support to keep children alive
     Locations: 
@@ -59,11 +59,39 @@ Scenario: Show project list
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu"
 Then the project list contains:
-	"""
-	UNICEF JICA World Council of Churches Preventing and Responding to Violence against Children and support to keep children alive 25/01/2011 - 25/07/2011
-    UNICEF KFW Vountary Services Overseas Quality Education through BRMS and ECD and VSO volunteers 25/01/2011 - 25/07/2011
-    UNICEF AfDB The Uganda Assciation of Women Lawyers STRENGTHENING PARLIAMENATRY OVERSIGHT 28/01/2013 - 28/07/2013
-    UNICEF EU Gulu United to Save the Children Organization Strengthening Reintegration of Young Mothers with children Formerly Associated with the LRA 28/01/2013 - 28/07/2013
+	"""                                                                                      
+    Preventing and Responding to Violence against Children and support to keep children alive
+    Planned Dates: 25/01/2011 - 25/07/2011
+    Funding
+    UNICEF  
+    Accountable
+    JICA  
+    Implementing
+    World Council of Churches
+    Quality Education through BRMS and ECD and VSO volunteers
+    Planned Dates: 25/01/2011 - 25/07/2011
+    Funding
+    UNICEF  
+    Accountable
+    KFW  
+    Implementing
+    Vountary Services Overseas
+    STRENGTHENING PARLIAMENATRY OVERSIGHT
+    Planned Dates: 28/01/2013 - 28/07/2013
+    Funding
+    UNICEF  
+    Accountable
+    AfDB  
+    Implementing
+    The Uganda Assciation of Women Lawyers
+    Strengthening Reintegration of Young Mothers with children Formerly Associated with the LRA
+    Planned Dates: 28/01/2013 - 28/07/2013
+    Funding
+    UNICEF  
+    Accountable
+    EU  
+    Implementing
+    Gulu United to Save the Children Organization                                            
 	"""
 
 
@@ -91,9 +119,46 @@ When I open dashboard for "Teso"
 And I click on the pagination link "3"	
 Then the project list contains:
 	"""
-	USAID ICEIDA Royal Danish Embassy Support to the Development of Strategic Agricultural Commodity Value-Chains 27/01/2012 - 27/07/2012
-    USAID Canada Chemonics Technical Management Agency for the Civil Society Fund (TMA-CSF) 2/3/10 - 2/9/10
-    UNICEF GTZ Mothers to Mothers ptimizing Access to Simplified HIV Treatment to Reduce New HIV Infections Among Children in UGANDA- SIDA funded 21/01/2009 - 21/07/2009
+	STRENGTHENING PARLIAMENATRY OVERSIGHT
+    Planned Dates: 23/01/2010 - 23/07/2010
+    Funding
+    UNICEF  
+    Accountable
+    Canada  
+    Implementing
+    The Uganda Assciation of Women Lawyers
+    STRIDES for Family Health
+    Planned Dates: 28/01/2013 - 28/07/2013
+    Funding
+    USAID  
+    Accountable
+    Norway  
+    Implementing
+    Management Sciences for Health (MSH)
+    Scaling up HIV/AIDS comprehensive HIV/AIDS prevention, care and treatment through the Faith Based Network
+    Planned Dates: 21/01/2009 - 21/07/2009
+    Funding
+    USAID  
+    Accountable
+    USAID  
+    Implementing
+    Inter-Religious Council of Uganda (IRCU)
+    Securing Ugandan's Rights to Essential Medicines (SURE)
+    Planned Dates: 27/01/2012 - 27/07/2012
+    Funding
+    USAID  
+    Accountable
+    JICA  
+    Implementing
+    Management Sciences for Health (MSH)
+    Stop Malaria Project (SMP)
+    Planned Dates: 28/01/2013 - 28/07/2013
+    Funding
+    USAID  
+    Accountable
+    Canada  
+    Implementing
+    Johns Hopkins University (JHU/CCP)
 	"""
 	
 Scenario: Filter by Partner Legend

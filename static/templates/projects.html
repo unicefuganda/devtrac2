@@ -1,37 +1,35 @@
-<div ng-controller="ProjectsCtrl" class='well tinted-background '>
+<div ng-controller="ProjectsCtrl" class='well tinted-background' id='project-list'>
   <div class="well-header">
-  <h3>Projects </h3>
+    <h3>Projects </h3>
   </div>
-  <table class="table table-condensed table-striped" id='project-list'>
-    <thead>
-      <tr>
-        <th class='funding-organization-col'>Funding Organization</th>
-        <th class='accountable-agency-col'>Accountable Agency</th>
-        <th class='implementing-partner-col'>Implementing Partner</th>
-        <th class='name-col'>Name</th>
-        <th class='dates-col'>Planned Dates</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="p in project.pagedList" >
-        <td>{[{ p.partner }]}</td>
-        <td>{[{ p.financialOrganization }]}</td>
-        <td>{[{ p.implementingPartner }]}</td>
-        <td><a href="#" ng-click="project.selected = p">{[{ p.name }]}</a></td>
-        <td>{[{ p.startActual }]} - {[{ p.endActual }]}</td>
-        
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <th colspan="5">
-          <div pagination total-items="totalItems" page="currentPage" max-size="maxSize"></div>
-        </th>
-      </tr>
-    </tfoot>
 
-  </table>
+  
+  <div class="project" ng-repeat="p in project.pagedList">
+      <h4>
+          <a href="#" ng-click="project.selected = p">{[{ p.name }]}</a>
+      </h4>
+      <div class='project-dates'>
+        <label>Planned Dates:</label>
+        <span>{[{ p.startActual }]} - {[{ p.endActual }]}</span>
+      </div>
+      <ul>
+        <li>
+          <label>Funding</label>
+          <span>{[{p.partner}]}</span>
+        </li>
 
+        <li>
+          <label>Accountable</label>
+          <span>{[{p.financialOrganization}]}</span>
+        </li>
+
+        <li>
+          <label>Implementing</label>
+          <span>{[{p.implementingPartner}]}</span>
+        </li>
+      </ul>
+  </div>
+  <div pagination total-items="totalItems" page="currentPage" max-size="5" items-per-page="5"></div>
   <div ng-show='project.selected != null'>
     <a class='back-to-area-link' ng-click=''>Back to {[{location.full_name();}]}</a>
   </div>
