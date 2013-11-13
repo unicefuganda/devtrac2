@@ -1,5 +1,4 @@
 Feature: Projects
-
 Scenario: Display extra project information
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu"
@@ -62,36 +61,16 @@ Then the project list contains:
 	"""                                                                                      
     Preventing and Responding to Violence against Children and support to keep children alive
     Planned Dates: 25/01/2011 - 25/07/2011
-    Funding Org:
-    UNICEF  
-    Accountable Agency:
-    JICA  
-    Implementing Partner:
-    World Council of Churches
+    Funding Org: UNICEF Accountable Agency: JICA Implementing Partner: World Council of Churches
     Quality Education through BRMS and ECD and VSO volunteers
     Planned Dates: 25/01/2011 - 25/07/2011
-    Funding Org:
-    UNICEF  
-    Accountable Agency:
-    KFW  
-    Implementing Partner:
-    Vountary Services Overseas
+    Funding Org: UNICEF Accountable Agency: KFW Implementing Partner: Vountary Services Overseas
     STRENGTHENING PARLIAMENATRY OVERSIGHT
     Planned Dates: 28/01/2013 - 28/07/2013
-    Funding Org:
-    UNICEF  
-    Accountable Agency:
-    AfDB  
-    Implementing Partner:
-    The Uganda Assciation of Women Lawyers
+    Funding Org: UNICEF Accountable Agency: AfDB Implementing Partner: The Uganda Assciation of Women Lawyers
     Strengthening Reintegration of Young Mothers with children Formerly Associated with the LRA
     Planned Dates: 28/01/2013 - 28/07/2013
-    Funding Org:
-    UNICEF  
-    Accountable Agency:
-    EU  
-    Implementing Partner:
-    Gulu United to Save the Children Organization                                            
+    Funding Org: UNICEF Accountable Agency: EU Implementing Partner: Gulu United to Save the Children Organization                                            
 	"""
 
 Scenario: Show project details by clicking project link
@@ -120,44 +99,19 @@ Then the project list contains:
 	"""
 	STRENGTHENING PARLIAMENATRY OVERSIGHT
     Planned Dates: 23/01/2010 - 23/07/2010
-    Funding Org:
-    UNICEF  
-    Accountable Agency:
-    Canada  
-    Implementing Partner:
-    The Uganda Assciation of Women Lawyers
+    Funding Org: UNICEF Accountable Agency: Canada Implementing Partner: The Uganda Assciation of Women Lawyers
     STRIDES for Family Health
     Planned Dates: 28/01/2013 - 28/07/2013
-    Funding Org:
-    USAID  
-    Accountable Agency:
-    Norway  
-    Implementing Partner:
-    Management Sciences for Health (MSH)
+    Funding Org: USAID Accountable Agency: Norway Implementing Partner: Management Sciences for Health (MSH)
     Scaling up HIV/AIDS comprehensive HIV/AIDS prevention, care and treatment through the Faith Based Network
     Planned Dates: 21/01/2009 - 21/07/2009
-    Funding Org:
-    USAID  
-    Accountable Agency:
-    USAID  
-    Implementing Partner:
-    Inter-Religious Council of Uganda (IRCU)
+    Funding Org: USAID Accountable Agency: USAID Implementing Partner: Inter-Religious Council of Uganda (IRCU)
     Securing Ugandan's Rights to Essential Medicines (SURE)
     Planned Dates: 27/01/2012 - 27/07/2012
-    Funding Org:
-    USAID  
-    Accountable Agency:
-    JICA  
-    Implementing Partner:
-    Management Sciences for Health (MSH)
+    Funding Org: USAID Accountable Agency: JICA Implementing Partner: Management Sciences for Health (MSH)
     Stop Malaria Project (SMP)
     Planned Dates: 28/01/2013 - 28/07/2013
-    Funding Org:
-    USAID  
-    Accountable Agency:
-    Canada  
-    Implementing Partner:
-    Johns Hopkins University (JHU/CCP)
+    Funding Org: USAID Accountable Agency: Canada Implementing Partner: Johns Hopkins University (JHU/CCP)
 	"""
 	
 Scenario: Filter by Partner Legend
