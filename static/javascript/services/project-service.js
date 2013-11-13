@@ -44,6 +44,30 @@ angular.module("dashboard")
             });
         };
 
+        var filterOutCheckedOptions = function(optionsHash){
+            return $.map(optionsHash, function(option, index){
+                if(option)
+                    return index;
+            });
+        }
+        var isChoiceSetChecked = function(optionsHash){
+            var checkedOptions = filterOutCheckedOptions(optionsHash);
+            if (checkedOptions.length > 0)
+                return true;
+            return false;
+        }
+
+        var allChoicesUnchecked = function(optionsHash){
+            var unchecked = true;
+            $.each(optionsHash, function(index, option){
+                if(option){
+                    unchecked = false;
+                    return;
+                }
+            });
+            return unchecked;
+        }
+
         var filterProjects = function(data, location, projectFilter) {
             var features = filterByLocation(data.features, location);
             var partners = getUniquePartners(data.features);
@@ -54,9 +78,10 @@ angular.module("dashboard")
                 });
             }
 
-            if(projectFilter.statuses && projectFilter.statuses.length > 0){
+            if(projectFilter.status && Object.keys(projectFilter.status).length > 0){
                 features = $.grep(features,function(project){
-                    return $.inArray(project.properties['STATUS'], projectFilter.statuses) != -1
+                    var checkedStatuses = filterOutCheckedOptions(projectFilter.status);
+                    return $.inArray(project.properties['STATUS'], checkedStatuses) != -1
                 });
             }
 
@@ -201,8 +226,7 @@ angular.module("dashboard")
         this.syncProjectFilters = function(location, projectFilter){
             return projectsGeojsonPromise.then(function(data) {
 
-                var filteredProjects = filterProjects(data, location, projectFilter)
-
+                var filteredProjects = filterProjects(data, location, projectFilter);
                 return {
                     partners: getUniquePartners(filteredProjects),
                     financialOrgs: getUniqueFinancialOrgs(filteredProjects),

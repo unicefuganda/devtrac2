@@ -11,7 +11,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 
     $rootScope.location = new DT.Location($routeParams);
     if ($rootScope.filter == undefined)
-        $rootScope.filter = new DT.Filter({health_center: false, water_point: false, school: true, site_visit_point: true, project:{} } );
+        $rootScope.filter = new DT.Filter({health_center: false, water_point: false, school: true, site_visit_point: true, project:{ status:{} } } );
 
 
 }).controller("IndicatorsCtrl", function($scope, $rootScope, heatmapService) {
@@ -86,11 +86,10 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
             return;
 
         projectService.syncProjectFilters($scope.location, $scope.filter.project).then(function(data){
-            
+            console.log(data.statuses);
             if( !isFilterSelected('partners') ) $scope.partners = data.partners;
             if( !isFilterSelected('financialOrgs') ) $scope.financialOrgs = data.financialOrgs;
             if( !isFilterSelected('sectors') ) $scope.sectors = data.sectors;
-            if( !isFilterSelected('statuses') )  $scope.statuses = data.statuses;
             if( !isFilterSelected('implementingPartners') ) $scope.implementingPartners = data.implementingPartners;
         })
 
@@ -129,7 +128,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     var updateProjectList = function() {
         if ($scope.filter == null)
             return;
-
+        console.log($scope.filter.project);
         projectService.projects($scope.location, $scope.filter.project).then(function(data){
             $scope.project.list = data;
         });
