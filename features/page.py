@@ -224,6 +224,9 @@ class Page:
     def click_link(self, link_name):
         self.browser.find_link_by_text(str(link_name)).click();
 
+    def click_site_visit_link(self, site_visit_link):
+        self.browser.find_link_by_partial_text(str(site_visit_link)).click();
+
     def find_pin_with_color(self, color):
         return self.browser.find_by_css(str("span[data-colorselected='%s'][class='legend-color']" % color));
 

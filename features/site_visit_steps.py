@@ -16,3 +16,7 @@ def and_i_click_on_the_site_visit_icon_at_latitude_and_logitude(step, lat, lng):
 def then_the_site_visit_details_should_have_content(step):
    assert_multi_line_equal.im_class.maxDiff = None
    assert_multi_line_equal(world.page.site_visit_details_content(), step.multiline)
+
+@step(u'And I click on the site visit link "([^"]*)"')
+def and_i_click_on_the_site_visit_link(step, site_visit):
+   world.page.click_site_visit_link(site_visit);
