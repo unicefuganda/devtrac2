@@ -1,49 +1,50 @@
 <div class="well tinted-background">
-	<div class="well-header">
-		<h3>{[{siteVisit.title}]}</h3>                 	 
+	<div class="well-header" id="site-visit">
+		<h3>{[{siteVisit.selected.title}]}</h3>                 	 
 	</div>
 	<div id="site-visit-details" style="clear:both">
 		<ul>
 			<li>
 				<label>Author: </label>
-				<span>{[{siteVisit.author}]}</span>
+				<span>{[{siteVisit.selected.author}]}</span>
 			</li>
 			<li>
 				<label>Date visited: </label>
-				<span>{[{siteVisit.date}]}</span>
+				<span>{[{siteVisit.selected.date}]}</span>
 			</li>
 			<li>
 				<label >Subject: </label>
-				<span>{[{siteVisit.subject}]}</span>
+				<span>{[{siteVisit.selected.subject}]}</span>
 			</li>
 			<li>
 				<label>Organisation: </label>
-				<span>{[{siteVisit.organisation}]}</span>
+				<span>{[{siteVisit.selected.organisation}]}</span>
 			</li>
 			<li>
 				<label>Place Type: </label>
-				<span>{[{siteVisit.placetype}]}</span>
+				<span>{[{siteVisit.selected.placetype}]}</span>
 			</li>
 			<li>
 				<label>Summary: </label>
-				<span>{[{siteVisit.summary}]}</span>
+				<span>{[{siteVisit.selected.summary}]}</span>
 			</li>
 			<li>
 				<label>Location: </label>
-				<span>{[{siteVisit.location}]}</span>
+				<span>{[{siteVisit.selected.location}]}</span>
 			</li>
 			<li>
 				<label>Link: </label>
-				<span><a target="_blank" href="{[{siteVisit.sitevisit_url}]}">devtrac</a></span>
+				<span><a target="_blank" href="{[{siteVisit.selected.sitevisit_url}]}">devtrac</a></span>
 			</li>
 			<li>
 				<label>Image Large: </label>
-				<span><img src="{[{siteVisit.image_large}]}"/></span>
+				<span><img src="{[{siteVisit.selected.image_large}]}"/></span>
 			</li>
 			<li>
 				<label>Image Small: </label>
-				<span><img src="{[{siteVisit.image_small}]}"/></span>
+				<span><img src="{[{siteVisit.selected.image_small}]}"/></span>
 			</li>
 		</ul> 
 	</div>
+	<a class='back-to-area-link' ng-click='siteVisit.selected=null' href=''>Back to {[{location.full_name();}]}</a>
 </div>

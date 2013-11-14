@@ -31,6 +31,7 @@ angular.module("dashboard")
                 })
             });
         }
+        
 
         this.site_visits_geojson = function(location) {
             return self.siteVisits(location).then(function(site_visits){

@@ -124,6 +124,7 @@ class Page:
 
     def summary_panel_content(self):
         return self.browser.find_by_css('#summary').text
+
     def site_visit_details_content(self):
         return self.browser.find_by_css('#site-visit-details').text
 

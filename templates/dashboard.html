@@ -34,7 +34,7 @@
     <div class='detail-panel'>
       <div class='container'>
         
-        <div ng-show='project.selected == null && siteVisit == null' >
+        <div ng-show='project.selected == null && siteVisit.selected == null' >
           <div ng-include="'/static/templates/area.html'"></div> 
         </div>
 
@@ -42,7 +42,7 @@
           <div ng-include="'/static/templates/project.html'"></div> 
         </div>
 
-        <div ng-show='siteVisit != null '>
+        <div ng-show='siteVisit.selected != null '>
           <div ng-include="'/static/templates/site_visit.html'"></div>   
         </div>
         

@@ -1,13 +1,15 @@
 angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $routeParams, $location) {
     DT.timings["urlchange"] = new Date().getTime();
 
-    if ($rootScope.project == undefined) {
+    if ($rootScope.project == undefined || $rootScope.siteVisit == undefined) {
         $rootScope.project = {};
         $rootScope.project.list = null;
+        $rootScope.siteVisit =  {};
+        $rootScope.siteVisit.list = null;
     }
 
     $rootScope.project.selected = null;
-    $rootScope.siteVisit = null;
+    $rootScope.siteVisit.selected = null;
 
     $rootScope.location = new DT.Location($routeParams);
     if ($rootScope.filter == undefined)
@@ -154,27 +156,27 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 .controller("SiteVisitCtrl", function($scope,siteVisitService){
 
     var pageList = function(currentPage) {
-        var listChucks = DT.splitIntoChuncks($scope.siteVisits, 5);
-        $scope.pagedList = listChucks[$scope.currentPage - 1];
+        var listChucks = DT.splitIntoChuncks($scope.siteVisit.list, 5);
+        $scope.siteVisit.pagedList = listChucks[$scope.currentPage - 1];
         $scope.startCount = ((currentPage - 1) * 5) + 1;
-        $scope.endCount = ((currentPage - 1) * 5) + $scope.pagedList.length;
+        $scope.endCount = ((currentPage - 1) * 5) + $scope.siteVisit.pagedList.length;
     };
 
     $scope.maxSize = 5;
     $scope.currentPage = 1;
 
     $scope.$watch('currentPage', function() {
-        if ($scope.siteVisits == null)
+        if ($scope.siteVisits == null || $scope.siteVisit.list == null)
             return;
 
         pageList($scope.currentPage);
     })
 
-    $scope.$watch('siteVisits', function(newValues, oldValues){
-        if ($scope.siteVisits == null)
+    $scope.$watch('siteVisit.list', function(newValues, oldValues){
+        if ($scope.siteVisit == null ||$scope.siteVisit.list == null)
             return;
 
-        $scope.totalItems = $scope.siteVisits.length;
+        $scope.totalItems = $scope.siteVisit.list.length;
         $scope.currentPage = 1;
 
         pageList($scope.currentPage);
@@ -185,7 +187,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
             return;
 
         siteVisitService.siteVisits($scope.location).then(function(data){
-            $scope.siteVisits = data;
+            $scope.siteVisit.list = data;
         });
     }
 

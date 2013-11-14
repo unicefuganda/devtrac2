@@ -3,11 +3,11 @@
     <h3>Site Visits</h3>
   </div>
   <ul>
-    <li ng-repeat="visit in pagedList" class='site-visit'>
+    <li ng-repeat="visit in siteVisit.pagedList" class='site-visit'>
       
       <div>
         <h4>
-          <a href="#" ng-click="sitevisit = visit">{[{ visit.title}]}</a>
+          <a href="#" ng-click="siteVisit.selected = visit">{[{ visit.title}]}</a>
         </h4>
         <a ng-href="{[{visit.sitevisit_url}]}" target='_blank'>Open in DevTrac</a>
       </div>
