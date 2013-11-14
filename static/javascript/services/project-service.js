@@ -45,15 +45,18 @@ angular.module("dashboard")
         };
 
         var filterOutCheckedOptions = function(optionsHash){
+            if (optionsHash == undefined)
+                return [];
             return $.map(optionsHash, function(value, key){
                 if(value)
                     return key;
             });
         }
+
+
         
-        var filterProjects = function(data, location, projectFilter) {
-            var features = filterByLocation(data.features, location);
-            var partners = getUniquePartners(data.features);
+        var filterProjects = function(features, projectFilter) {
+            var partners = getUniquePartners(features);
 
             if (projectFilter.sector && DT.values(projectFilter.sector).some(function(isSelected) { return isSelected; })) {
                 features = $.grep(features, function(project) {
@@ -155,7 +158,8 @@ angular.module("dashboard")
         this.projects_geojson = function (location, projectFilter) {
             return projectsGeojsonPromise.then(function(data) {
 
-                var results = filterProjects(data, location, projectFilter)
+                var features = filterByLocation(data.features, location);
+                var results = filterProjects(features, projectFilter)
 
                 return {
                     geojson: {
@@ -208,15 +212,26 @@ angular.module("dashboard")
         };
 
         this.syncProjectFilters = function(location, projectFilter){
+
             return projectsGeojsonPromise.then(function(data) {
 
-                var filteredProjects = filterProjects(data, location, projectFilter);
+                var locationFeatures = filterByLocation(data.features, location);
+                var filteredProjects = filterProjects(locationFeatures, projectFilter);
+
+                var filterList = function(filterFunc, filterItems) {
+                    var isFilterSet = filterItems != undefined && filterItems.length > 0;
+                    if (isFilterSet)
+                        return DT.unique(filterFunc(locationFeatures).concat(filterItems));
+                    else 
+                        return DT.unique(filterFunc(filteredProjects));
+                };
+                var impPartners = filterList(getUniqueImplementingPartners, projectFilter.implementingPartners);
                 return {
-                    partners: getUniquePartners(filteredProjects),
-                    financialOrgs: getUniqueFinancialOrgs(filteredProjects),
-                    sectors: getUniqueSectors(filteredProjects),
-                    implementingPartners: getUniqueImplementingPartners(filteredProjects),
-                    statuses: getUniqueStatuses(filteredProjects)
+                    partners: filterList(getUniquePartners, projectFilter.partners),
+                    financialOrgs: filterList(getUniqueFinancialOrgs, projectFilter.financialOrgs),
+                    implementingPartners: impPartners,
+                    sectors: filterList(getUniqueSectors, filterOutCheckedOptions(projectFilter.sector)),
+                    statuses: filterList(getUniqueStatuses, filterOutCheckedOptions(projectFilter.status))
                 };
             });
         }

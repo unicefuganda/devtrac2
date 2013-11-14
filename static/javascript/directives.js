@@ -171,11 +171,16 @@ angular.module("dashboard").directive('map', function() {
     return {
         scope: false,
         link: function(scope, element, attrs) {
+
             $(element).chosen({ width: "300px", allow_single_deselect: true }).change(function () {
-                scope.$apply(function () {
-                    var values = $.map($(element).find("option:selected"), function (option) { return $(option).val(); });
-                    scope.filter.project[attrs.filtercollection] = values
-                });
+                setTimeout(function() {
+                    scope.$apply(function () {
+                        var values = $.map($(element).find("option:selected"), function (option) { 
+                            return $(option).val(); 
+                        });
+                        scope.filter.project[attrs.filtercollection] = values
+                    });
+                }, 10)
             });
 
             scope.$watch(attrs.filtercollection, function(sectors) {
@@ -183,6 +188,8 @@ angular.module("dashboard").directive('map', function() {
                     $(element).trigger("chosen:updated");
                 })
             });
+
+            
         }
     };
 }).directive('partnerstoggle', function(){

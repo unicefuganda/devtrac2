@@ -64,7 +64,15 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
         showUReportResults($rootScope.location, $rootScope.ureportQuestion);
     }, true);
 
-}).controller("PartnersCtrl", function($rootScope, $scope, projectService){
+}).controller("PartnersCtrl", function($rootScope, $scope, projectService, $timeout){
+
+    $scope.isSelected = function(id, collection) {
+        if($scope.filter.project == undefined )
+            return false;
+
+        return $scope.filter.project[collection] && $scope.filter.project[collection].indexOf(id) != -1
+    };
+
     $scope.organisation = "accountable-agency";
     $scope.partners = projectService.partners();
     $scope.financialOrgs = projectService.financialOrgs();
@@ -91,18 +99,19 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
             return;
 
         projectService.syncProjectFilters($scope.location, $scope.filter.project).then(function(data){
-            console.log(data.statuses);
-            if( !isFilterSelected('partners') ) $scope.partners = data.partners;
-            if( !isFilterSelected('financialOrgs') ) $scope.financialOrgs = data.financialOrgs;
-            if( !isFilterSelected('sector') ) $scope.sectors = data.sectors;
-            if( !isFilterSelected('implementingPartners') ) $scope.implementingPartners = data.implementingPartners;
-            if( !isFilterSelected('status') ) $scope.statuses = data.statuses;
+            $scope.partners = data.partners;
+            $scope.financialOrgs = data.financialOrgs;
+            $scope.sectors = data.sectors;
+            $scope.implementingPartners = data.implementingPartners;
+            $scope.statuses = data.statuses;
         })
 
     }
 
     $scope.$watch("location", updateProjectFilters, true);
     $scope.$watch("filter.project", updateProjectFilters, true);
+
+    
 })
 .controller("ProjectsCtrl", function($scope, projectService){
     $scope.currentPage = 1;
@@ -134,7 +143,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     var updateProjectList = function() {
         if ($scope.filter == null)
             return;
-        console.log($scope.filter.project);
         projectService.projects($scope.location, $scope.filter.project).then(function(data){
             $scope.project.list = data;
         });

@@ -70,13 +70,13 @@
       </div>
         <div class='filter' id ="accounting-selector" ng-hide="show_financialOrg" > 
           <select id="acc-agency-select" chosen ng-model='filter.project.accountAgencies' data-placeholder="Choose Funding Agency" data-filterCollection='partners' multiple >
-            <option ng-repeat="p in partners" value="{[{p.id}]}">{[{p.name}]}</option>
+            <option ng-repeat="p in partners" value="{[{p.id}]}" ng-selected="isSelected(p.id, 'partners')" >{[{p.name}]}</option>
           </select>  
         </div>
         
         <div class="filter" id="funding-selector" ng-show="show_financialOrg">
           <select id="funding-org-select" chosen ng-model='filter.project.financialOrgs' data-placeholder="Choose Accountable Agency" data-filterCollection='financialOrgs' multiple >
-            <option ng-repeat="financialOrg in financialOrgs" value="{[{financialOrg}]}">{[{financialOrg}]}</option>
+            <option ng-repeat="financialOrg in financialOrgs" value="{[{financialOrg}]}" ng-selected="isSelected(financialOrg,'financialOrgs')" >{[{financialOrg}]}</option>
           </select>  
         </div>
       </div>
@@ -88,7 +88,7 @@
         </select> -->
         <div class="checkbox" ng-repeat="sec in sectors">
           <label>
-            <input ng-model="filter.project.sector[sec]" type="checkbox"> {[{sec}]} 
+            <input ng-model="filter.project.sector[sec]" type="checkbox" ng-value="sec" > {[{sec}]} 
           </label>
         </div>
       </div>
@@ -97,7 +97,7 @@
       <div class='filter' id='project-status'>
         <div class="checkbox" ng-repeat="st in statuses">
           <label>
-            <input ng-model="filter.project.status[st]" type="checkbox"> {[{st}]} 
+            <input ng-model="filter.project.status[st]" type="checkbox" ng-value="st"> {[{st}]} 
           </label>
         </div>
       </div>
@@ -105,7 +105,7 @@
       <h3>Implementing Partner:</h3>
       <div class='filter' id='project-implementing-partner'>
         <select chosen data-placeholder="Choose Partner" data-filterCollection='implementingPartners' multiple class='chosen-select' >
-          <option ng-repeat="implementingPartner in implementingPartners" value="{[{implementingPartner}]}">{[{implementingPartner}]}</option>
+          <option ng-repeat="implementingPartner in implementingPartners" value="{[{implementingPartner}]}" ng-selected="isSelected(implementingPartner, 'implementingPartners')"  >{[{implementingPartner}]}</option>
         </select>
       </div>
 

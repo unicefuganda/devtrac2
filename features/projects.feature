@@ -166,7 +166,7 @@ Then the Implementing Partners filter displays options:
     WATER MISSIONS UGANDA (WMU)
     World Council of Churches
     """
-
+    
 Scenario: Sync Implementing partner with other filters
 Given that I am a regular user
 When I go to the homepage
@@ -190,6 +190,7 @@ When I go to the homepage
 And I filter by Sector for "Basic Education"
 Then the Status filter displays options:
     """
+    Implementation
     Post-completion
     """
 Then the Funding Partners filter displays options:
@@ -199,11 +200,17 @@ Then the Funding Partners filter displays options:
     """
 Then the Implementing Partners filter displays options:
     """
+    African Wildlife Foundation (AWF)
     Africare
+    Alliance for Youth Developemnt (AYA)
     Arbeiter Samariter Bund
+    Associates in Rural Development (ARD)
+    Association of Volunteers in International Service (AVSI) Foundation
     Bangladesh Rural Advancement Committee
     Battery Operated Systems for Community Outreach
     C&D
+    Cardno Emerging Markets
+    Centers for Disease Control
     Italian Development Coorperation
     """
 

@@ -137,9 +137,9 @@ describe("Project Service", function () {
     }));
 
     it('should filter projects by sector', inject(function(projectService){
-        var location =new DT.Location({region: 'test region'});
+        var location = new DT.Location({region: 'test region'});
         var projects;
-        projectService.projects_geojson(location,{ sectors: ['Education'] }).then(function(data) {
+        projectService.projects_geojson(location,{ sector: {'Education': true} }).then(function(data) {
             projects = data;
         });
 
@@ -156,13 +156,13 @@ describe("Project Service", function () {
     it('should filter projects by status', inject(function(projectService){
         var location =new DT.Location({region: 'test region'});
         var projects;
-        projectService.projects_geojson(location,{ statuses: ['Completion'] }).then(function(data) {
+        projectService.projects_geojson(location,{ status: {'Completion': true} }).then(function(data) {
             projects = data;
         });
 
         expect(mapProjectId(projects)).toEqual([1,2]);
 
-        projectService.projects_geojson(location,{ statuses: ['Completion', 'Post-completion'] }).then(function(data) {
+        projectService.projects_geojson(location,{ status: {'Completion': true, 'Post-completion':true } }).then(function(data) {
             projects = data;
         });
         expect(mapProjectId(projects)).toEqual([1, 2, 3]);

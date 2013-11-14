@@ -171,28 +171,27 @@ class Page:
 
     def filter_by_sector(self, sector): 
         self.browser.find_link_by_text("Projects/Partners").click()
-        self.__filter_chosen__('project-sector', sector);
-        self.browser.choose("organisationsRadio",'accountable-agency');
-        self.__filter_chosen__("accounting-selector","UNICEF");
+        values = self.browser.find_by_value(sector).click()
 
     def __chosen_options__(self, parentId):
         container = self.browser.find_by_css("#%s .chosen-container" % parentId)
         container.click()
         options = list([elem.text for elem in container.find_by_css(".chosen-results li")])
         return "\n".join(options)
+
+    def __checkbox_choices__(self, parentId):
+        choiceElements = self.browser.find_by_css("#%s .checkbox label" % parentId)
+        choices = list([elem.text for elem in choiceElements])
+        return "\n".join(choices)
        
 
     def filter_by_status(self, status): 
         self.browser.find_link_by_text("Projects/Partners").click()
-        self.__filter_chosen__('project-status', status)
-        self.browser.choose("organisationsRadio",'accountable-agency');
-        self.__filter_chosen__("accounting-selector","USAID");
+        values = self.browser.find_by_value(status).click()
        
     def filter_by_implementing_partner(self, implementing_partner): 
         self.browser.find_link_by_text("Projects/Partners").click()
         self.__filter_chosen__('project-implementing-partner', implementing_partner)
-        self.browser.choose("organisationsRadio",'accountable-agency');
-        self.__filter_chosen__("accounting-selector","UNICEF");
        
     def filter_by_partner(self, partner): 
         self.browser.find_link_by_text("Projects/Partners").click()
@@ -202,14 +201,12 @@ class Page:
     def filter_by_year(self, year): 
         self.browser.find_link_by_text("Projects/Partners").click()
         self.__filter_chosen__('project-year', year);
-        self.browser.choose("organisationsRadio",'accountable-agency');
-        self.__filter_chosen__("accounting-selector","UNICEF");
 
-    def status_chosen_options(self):
-        return self.__chosen_options__("project-status")
+    def status_choices(self):
+        return self.__checkbox_choices__("project-status")
 
-    def sector_chosen_options(self):
-        return self.__chosen_options__("project-sector")
+    def sector_choices(self):
+        return self.__checkbox_choices__("project-sector")
 
     def implementing_partners_chosen_options(self):
         return self.__chosen_options__("project-implementing-partner")
