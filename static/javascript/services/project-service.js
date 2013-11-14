@@ -45,40 +45,24 @@ angular.module("dashboard")
         };
 
         var filterOutCheckedOptions = function(optionsHash){
-            return $.map(optionsHash, function(option, index){
-                if(option)
-                    return index;
+            return $.map(optionsHash, function(value, key){
+                if(value)
+                    return key;
             });
         }
-        var isChoiceSetChecked = function(optionsHash){
-            var checkedOptions = filterOutCheckedOptions(optionsHash);
-            if (checkedOptions.length > 0)
-                return true;
-            return false;
-        }
-
-        var allChoicesUnchecked = function(optionsHash){
-            var unchecked = true;
-            $.each(optionsHash, function(index, option){
-                if(option){
-                    unchecked = false;
-                    return;
-                }
-            });
-            return unchecked;
-        }
-
+        
         var filterProjects = function(data, location, projectFilter) {
             var features = filterByLocation(data.features, location);
             var partners = getUniquePartners(data.features);
 
-            if (projectFilter.sectors && projectFilter.sectors.length > 0) {
+            if (projectFilter.sector && DT.values(projectFilter.sector).some(function(isSelected) { return isSelected; })) {
                 features = $.grep(features, function(project) {
-                    return $.inArray(project.properties['SECTOR'], projectFilter.sectors) != -1
+                    var checkedSectors = filterOutCheckedOptions(projectFilter.sector);
+                    return $.inArray(project.properties['SECTOR'], checkedSectors) != -1
                 });
             }
 
-            if(projectFilter.status && Object.keys(projectFilter.status).length > 0){
+            if(projectFilter.status && DT.values(projectFilter.status).some(function(isSelected) { return isSelected; })){
                 features = $.grep(features,function(project){
                     var checkedStatuses = filterOutCheckedOptions(projectFilter.status);
                     return $.inArray(project.properties['STATUS'], checkedStatuses) != -1

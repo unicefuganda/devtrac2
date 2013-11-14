@@ -83,17 +83,18 @@
 
       <h3>Sector:</h3>
       <div class='filter' id='project-sector'>
-        <select style="width:350px;" data-placeholder="Choose sectors" chosen class='chosen-select' multiple="" data-filterCollection='sectors' >
+        <!-- <select style="width:350px;" data-placeholder="Choose sectors" chosen class='chosen-select' multiple="" data-filterCollection='sectors' >
           <option ng-repeat="sector in sectors" value="{[{sector}]}">{[{sector}]}</option>
-        </select>
-
+        </select> -->
+        <div class="checkbox" ng-repeat="sec in sectors">
+          <label>
+            <input ng-model="filter.project.sector[sec]" type="checkbox"> {[{sec}]} 
+          </label>
+        </div>
       </div>
 
       <h3>Status:</h3>
       <div class='filter' id='project-status'>
-        <!-- <select chosen ng-model='filter.project.status' data-placeholder="Choose statuses" data-filterCollection='statuses' multiple >
-          <option ng-repeat="status in statuses" value="{[{status}]}">{[{status}]}</option>
-        </select> -->
         <div class="checkbox" ng-repeat="st in statuses">
           <label>
             <input ng-model="filter.project.status[st]" type="checkbox"> {[{st}]} 

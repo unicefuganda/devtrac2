@@ -11,7 +11,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 
     $rootScope.location = new DT.Location($routeParams);
     if ($rootScope.filter == undefined)
-        $rootScope.filter = new DT.Filter({health_center: false, water_point: false, school: true, site_visit_point: true, project:{ status:{} } } );
+        $rootScope.filter = new DT.Filter({health_center: false, water_point: false, school: true, site_visit_point: true, project:{ status:{}, sector:{} } } );
 
 
 }).controller("IndicatorsCtrl", function($scope, $rootScope, heatmapService) {
@@ -73,11 +73,16 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $scope.implementingPartners = projectService.implementingPartners();
     $scope.years = projectService.years();
 
-    var isFilterSelected = function(filterLable){
-        if($scope.filter.project[filterLable]){
-            if( ($scope.filter.project[filterLable]).length > 0 )
-                return true;
+    var isFilterSelected = function(filterLabel){
+
+        var filters = $scope.filter.project[filterLabel];
+        if (angular.isObject(filters)) {
+            var result = DT.values(filters).some( function(isSelected){ return isSelected; } );
+            return result;
+        } else if (angular.isArray(filters)) {
+            return filters.length > 0;
         }
+
         return false;
     }
 
@@ -89,8 +94,9 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
             console.log(data.statuses);
             if( !isFilterSelected('partners') ) $scope.partners = data.partners;
             if( !isFilterSelected('financialOrgs') ) $scope.financialOrgs = data.financialOrgs;
-            if( !isFilterSelected('sectors') ) $scope.sectors = data.sectors;
+            if( !isFilterSelected('sector') ) $scope.sectors = data.sectors;
             if( !isFilterSelected('implementingPartners') ) $scope.implementingPartners = data.implementingPartners;
+            if( !isFilterSelected('status') ) $scope.statuses = data.statuses;
         })
 
     }
