@@ -369,7 +369,7 @@ h3 {
 
 #filters-form h3{
   background-color: rgb(0, 0, 0);
-  padding: 10px 12px;
+  padding: 6px 12px 8px 12px;
 }
 
 /* PARTNERS */
@@ -840,6 +840,10 @@ div.pagination > ul > li > span {
   margin-right: 34px;
   vertical-align: inherit;
 }
+
+.checkbox {
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .partners-header label{
