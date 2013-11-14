@@ -7,7 +7,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
 
         $rootScope.siteVisit =  {};
         $rootScope.siteVisit.list = null;
-        console.log("rootScope", $rootScope.siteVisit)
     }
 
     $rootScope.project.selected = null;

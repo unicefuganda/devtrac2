@@ -6,7 +6,6 @@ angular.module("dashboard").directive('map', function() {
                 $location.path(location.toUrl());
             }
 
-            console.log($scope, $rootScope);
             $scope.selectProject = function(feature, layerName) {
 
                 $scope.project.selected = null;
