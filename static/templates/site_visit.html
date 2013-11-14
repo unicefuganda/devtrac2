@@ -37,10 +37,11 @@
 				<span>{[{siteVisit.selected.location}]}</span>
 			</li>
 		</ul> 
-		<div style="text-align: center">
-			<li class="img-display" ng-repeat="image in siteVisit.selected.images">
-				<div><img src="{[{image}]}"/></div>
-			</li>
+		<div class="image-container">
+			<div class="img-display" ng-repeat="image in siteVisit.selected.images">
+				<div><img src="{[{image.img}]}"/></div>
+				<div class="image-caption">{[{image.caption}]}</div>
+			</div>
 		</div>
 	</div>
 	<a class='back-to-area-link' ng-click='siteVisit.selected=null' href=''>Back to {[{location.full_name();}]}</a>
