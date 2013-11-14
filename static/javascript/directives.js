@@ -141,7 +141,8 @@ angular.module("dashboard").directive('map', function() {
         scope: true,
         link: function(scope, element, attrs) {
             scope.$watch("ureportResults", function(result) {
-                if (result == null){
+                
+                if (result == null || result == "null") {
                     scope.show_pie = false;
                     return;
                 }

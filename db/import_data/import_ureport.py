@@ -102,5 +102,4 @@ def import_ureport(data_dir, db):
     locationMatcher = UReportLocationMatcher(LocationService(db))
     import_ureport_questions(db)
     import_ureport_categories(db, locationMatcher)
-
-    # import_ureport_responses(db)
+    import_ureport_responses(data_dir, db, locationMatcher)
