@@ -84,18 +84,3 @@ Then locations relating to the "STRENGTHENING PARLIAMENATRY OVERSIGHT" will be h
 # And I click on the project link "Building Young Futures"
 # Then locations relating to the "Building Young Futures" will be highlighted on the map
 
-
-@wip
-Scenario: Add Accountable Organisations
-Given that I am a regular user
-When I go to the home page
-And I select the 'Projects/Partners' Tab
-Then 'Accountable Organisations' will be selectedby default
-When I select an 'USAID' from the  'Accountable Organisations' filter
-Then only projects from 'Accountable Organisations' will be displayed on the map
-
-@wip
-Scenario: Add sector site visits
-Given that I am a regular user
-When I open dashboard for "Acholi, Arua"
-Then I a site vist marker is displayed at "30.6620728, -0.6054366"
