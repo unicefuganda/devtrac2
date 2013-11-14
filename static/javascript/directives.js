@@ -6,18 +6,16 @@ angular.module("dashboard").directive('map', function() {
                 $location.path(location.toUrl());
             }
 
+            console.log($scope, $rootScope);
             $scope.selectProject = function(feature, layerName) {
 
                 $scope.project.selected = null;
-                 // $scope.siteVisit = null;
 
                 if (layerName == 'project-point') {
                     $scope.project.selected = projectService.findById(feature.properties['PROJECT_ID']);
                 } else if (layerName == 'site-visit-point') {
                     siteVisitService.siteVisitDetail(feature.properties['Id']).then(function(newSiteVisit) {
-                         $scope.siteVisit = newSiteVisit;
                          $scope.siteVisit.selected = newSiteVisit;
-
                     });
                 }
             }
@@ -53,7 +51,7 @@ angular.module("dashboard").directive('map', function() {
             map.onUnselectIcon(function() {
                 scope.$apply(function (){
                     scope.project.selected = null;
-                    scope.siteVisit = null;
+                    scope.siteVisit.selected = null;
                 });
             });
 

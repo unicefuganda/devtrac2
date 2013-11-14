@@ -4,8 +4,10 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     if ($rootScope.project == undefined || $rootScope.siteVisit == undefined) {
         $rootScope.project = {};
         $rootScope.project.list = null;
+
         $rootScope.siteVisit =  {};
         $rootScope.siteVisit.list = null;
+        console.log("rootScope", $rootScope.siteVisit)
     }
 
     $rootScope.project.selected = null;
@@ -166,14 +168,14 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $scope.currentPage = 1;
 
     $scope.$watch('currentPage', function() {
-        if ($scope.siteVisits == null || $scope.siteVisit.list == null)
-            return;
 
+        if ($scope.siteVisit == null || $scope.siteVisit.list == null)
+            return;
         pageList($scope.currentPage);
     })
 
     $scope.$watch('siteVisit.list', function(newValues, oldValues){
-        if ($scope.siteVisit == null ||$scope.siteVisit.list == null)
+        if ($scope.siteVisit == null || $scope.siteVisit.list == null)
             return;
 
         $scope.totalItems = $scope.siteVisit.list.length;

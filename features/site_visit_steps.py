@@ -20,3 +20,7 @@ def then_the_site_visit_details_should_have_content(step):
 @step(u'And I click on the site visit link "([^"]*)"')
 def and_i_click_on_the_site_visit_link(step, site_visit):
    world.page.click_site_visit_link(site_visit);
+
+@step(u'And I click on site visit pagination link "([^"]*)"')
+def and_i_click_on_the_pagination_link(step, pager_link):
+    world.page.click_site_visit_pagination_link(pager_link);

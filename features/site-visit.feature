@@ -9,27 +9,28 @@ Then the Site Visit list contains:
     Open in DevTrac
     Date Visited: 7/10/13 Organisation: UNICEF Sectors: Basic nutrition
     """
+
 Scenario: Paginate the Site Visit list
 Given that I am a regular user
 When I open dashboard for "Buganda"
-And I click on the pagination link "4"  
+And I click on site visit pagination link "4"  
 Then the Site Visit list contains:
     """
-    Kikandwa Mosque
-    Open in DevTrac
-    Date Visited: 4/10/13 Organisation: UNICEF Sectors: Basic nutrition, Infectious disease control
-    Site Visit at Adilang Chapel
-    Open in DevTrac
-    Date Visited: 6/10/13 Organisation: UNICEF Sectors:
-    Site Visit at Amyel Catholic Church
-    Open in DevTrac
-    Date Visited: 6/10/13 Organisation: UNICEF Sectors:
-    Site Visit at Annina Mosque, Apo Sub County (FHDs Monitoring)
+    Site Visit at Kerila Mosque, Apo Sub County (FHDs Monitoring)
     Open in DevTrac
     Date Visited: 4/10/13 Organisation: UNICEF Sectors: Infectious disease control
-    Site Visit at Arivu Church, Arivu Sub County (FHDs Monitoring)
+    Site Visit at Kigoloba
     Open in DevTrac
-    Date Visited: 6/10/13 Organisation: UNICEF Sectors: Infectious disease control
+    Date Visited: 3/10/13 Organisation: UNICEF Sectors:
+    Site Visit at Kigoloba Catholic church
+    Open in DevTrac
+    Date Visited: 6/10/13 Organisation: UNICEF Sectors: Basic nutrition, Infectious disease control
+    Site Visit at Kikwandwa Mosque 
+    Open in DevTrac
+    Date Visited: 4/10/13 Organisation: UNICEF Sectors: Basic nutrition, Infectious disease control
+    Site Visit at Kirungi combined (COU and Catholic Church)
+    Open in DevTrac
+    Date Visited: 6/10/13 Organisation: UNICEF Sectors: Basic nutrition, Infectious disease control
     """
 
 Scenario: Filter Site visit points
