@@ -126,7 +126,7 @@ class Page:
         return self.browser.find_by_css('#summary').text
 
     def site_visit_details_content(self):
-        return self.browser.find_by_css('#site-visit-details').text
+        return self.browser.find_by_css('#site-visit-details ul').text
 
     def extra_info_content(self):
         return self.browser.find_by_css('#project-details').text

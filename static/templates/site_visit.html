@@ -2,11 +2,15 @@
 	<div class="well-header" id="site-visit">
 		<h3>{[{siteVisit.selected.title}]}</h3>                 	 
 	</div>
+	<div class="devtrac-link">
+		<a target="_blank" href="{[{siteVisit.selected.sitevisit_url}]}">Open In Devtrac</a>
+	</div>
 	<div id="site-visit-details" style="clear:both">
 		<ul>
 			<li>
 				<label>Author: </label>
 				<span>{[{siteVisit.selected.author}]}</span>
+				
 			</li>
 			<li>
 				<label>Date visited: </label>
@@ -32,19 +36,12 @@
 				<label>Location: </label>
 				<span>{[{siteVisit.selected.location}]}</span>
 			</li>
-			<li>
-				<label>Link: </label>
-				<span><a target="_blank" href="{[{siteVisit.selected.sitevisit_url}]}">devtrac</a></span>
-			</li>
-			<li>
-				<label>Image Large: </label>
-				<span><img src="{[{siteVisit.selected.image_large}]}"/></span>
-			</li>
-			<li>
-				<label>Image Small: </label>
-				<span><img src="{[{siteVisit.selected.image_small}]}"/></span>
-			</li>
 		</ul> 
+		<div style="text-align: center">
+			<li class="img-display" ng-repeat="image in siteVisit.selected.images">
+				<div><img src="{[{image}]}"/></div>
+			</li>
+		</div>
 	</div>
 	<a class='back-to-area-link' ng-click='siteVisit.selected=null' href=''>Back to {[{location.full_name();}]}</a>
 </div>

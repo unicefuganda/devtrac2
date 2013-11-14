@@ -13,8 +13,11 @@ DT.SiteVisit = function(properties) {
     this.summary = properties['Summary'];
     this.location = properties['Location'];
     this.district = properties['District'];
-    this.image_large = properties['Image Large'];
-    this.image_small = properties['Image Small'];
+    this.images =  [
+                "static/images/site-visit/site-visit_1.jpeg",
+                "static/images/site-visit/site-visit_2.jpeg",
+                "static/images/site-visit/site-visit_3.jpeg"
+    ]
 
     this.feature = { 
         type: 'Feature',

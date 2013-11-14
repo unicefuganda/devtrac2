@@ -156,6 +156,7 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     $scope.$watch("location", updateProjectList, true);
 })
 .controller("SiteVisitCtrl", function($scope,siteVisitService){
+    $scope.currentPage = 1;
 
     var pageList = function(currentPage) {
         var listChucks = DT.splitIntoChuncks($scope.siteVisit.list, 5);

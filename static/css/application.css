@@ -735,6 +735,10 @@ h3 {
   margin-bottom: 3px;
 }
 
+#site-visit-details li div {
+  display: inline;
+}
+
 #poll-results{
   overflow: hidden;
 }
@@ -926,3 +930,28 @@ div.pagination > ul > li > span {
 #funding-selector, #accounting-selector{
   padding: 9px 0 0 1px;
 }
+
+.img-display {
+  border-radius: 5px 5px 5px 5px ;
+  box-shadow: 1px 1px 5px #454545 ;
+  margin: 0 auto;
+  height: 100px ;
+  width: 70px;
+  display: inline;
+  margin-left: 100
+}
+
+.img-display img {
+  height: 200px;
+  width: 300px;
+  display: inline;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.devtrac-link {
+  margin-left: 85%;
+  font-size: 14px;
+}
+
+

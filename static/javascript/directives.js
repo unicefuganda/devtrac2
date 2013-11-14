@@ -14,8 +14,10 @@ angular.module("dashboard").directive('map', function() {
                 if (layerName == 'project-point') {
                     $scope.project.selected = projectService.findById(feature.properties['PROJECT_ID']);
                 } else if (layerName == 'site-visit-point') {
+
                     siteVisitService.siteVisitDetail(feature.properties['Id']).then(function(newSiteVisit) {
                          $scope.siteVisit.selected = newSiteVisit;
+
                     });
                 }
             }
