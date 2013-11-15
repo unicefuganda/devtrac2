@@ -1,7 +1,7 @@
 <form role='form' id='filters-form'>
   <ul class="nav nav-tabs" id="myTab">
     <li class="active"><a  data-target='#statistics' data-toggle="tab" href="#" >Places</a></li>
-    <li><a data-target='#heatmap' data-toggle="tab" href="#">Heat map</a></li>
+    <li><a data-target='#heatmap' data-toggle="tab" href="#">Indicators</a></li>
     <li><a data-target='#projects' data-toggle="tab" href="#">Projects/Partners</a></li>
   </ul>
 
@@ -33,22 +33,21 @@
 
       </ul> 
     </div>
-    <div class="tab-pane" id="heatmap">
+    <div class="tab-pane" id="heatmap" ng-controller="IndicatorsCtrl">
       <div class='filter'>
         <button type="button" ng-click='indicator.selected = null;' class="btn btn-default btn-sm toggle {[{indicator.selected == null ? 'toggle-selected' : '' }]}" >None</button>  
       </div>
       <h3>By dataset:</h3>
-      <div ng-controller="IndicatorsCtrl" class='filter'>
+      <div  class='filter'>
         <div ng-repeat="ind in datasets">
-          <button type="button"  ng-click="indicator.selected = ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
+          <button type="button"  ng-click="indicator.selected = indicator.selected == ind ? null : ind" class="btn btn-default btn-sm toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
         </div>
       </div>
 
       <h3>Ureport question:</h3>
-
-      <div ng-controller="IndicatorsCtrl"  class='filter'>
+      <div class='filter'>
         <div ng-repeat="ind in ureport_datasets">
-          <button type="button"  ng-click="indicator.selected = ind" class="btn btn-default btn-sm   toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
+          <button type="button"  ng-click="indicator.selected = indicator.selected == ind ? null : ind" class="btn btn-default btn-sm   toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}">{[{ind.name}]}</button>
         </div>
       </div>
     </div>
