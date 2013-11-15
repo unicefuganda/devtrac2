@@ -194,4 +194,8 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     }
 
     $scope.$watch("location", updateSiteVisitList, true);
+}).controller("PrintCtrl", function($scope, projectService) {
+    projectService.projects(new DT.Location({}), {}).then(function(projects) {
+        $scope.projects = projects;
+    });
 });

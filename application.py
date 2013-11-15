@@ -99,10 +99,19 @@ def ureport_child_results(question_id, locator):
 	result = services.UReportService(__mongo_connection()).child_results(services.Locator(locator), question_id)
 	return Response(dumps(result), mimetype='application/json')
 
+@app.route("/print")
+def print_page():
+	return render_template('print.html', env=os.environ.get('DEVTRAC_ENV'))
+
 @app.route("/site_visits")
 def site_visits():
 	result = services.SiteVisitService(__mongo_connection()).all()
 	return Response(dumps(result), mimetype='application/json')
+
+@app.route("/download_pdf")
+def download_pdf():
+	os.system("phantomjs scripts/rasterize.js http://%s/	print %s/test.pdf A4" % (app.config['SERVER'], app.config['PDF_FOLDER']))
+	return send_from_directory(app.config['PDF_FOLDER'], 'test.pdf', as_attachment=True)
 
 def __mongo_connection():
 	return MongoClient().devtrac2

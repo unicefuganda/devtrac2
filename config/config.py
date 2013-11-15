@@ -1,19 +1,25 @@
+import os
+
 class Config(object):
+    PDF_FOLDER = 'tmp/pdf'
     pass
 
 class ProductionConfig(Config):
+    SERVER = os.environ.get('SERVER_NAME')
     ASSETS_DEBUG = False
     SEND_FILE_MAX_AGE_DEFAULT = 100
     DATA_DIR = "db/data/prod"
     USE_LOCAL_GEOJSON = False
 
 class DevelopmentConfig(Config):
+    SERVER = "localhost:5000"
     ASSETS_DEBUG = True
     SEND_FILE_MAX_AGE_DEFAULT = 0
     DATA_DIR = "db/data/test"
     USE_LOCAL_GEOJSON = True
 
 class TestingConfig(Config):
+    SERVER = "localhost:5000"
     ASSETS_DEBUG = True
     SEND_FILE_MAX_AGE_DEFAULT = 100
     DATA_DIR = "db/data/test"
