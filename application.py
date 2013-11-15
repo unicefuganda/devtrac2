@@ -110,8 +110,8 @@ def site_visits():
 
 @app.route("/download_pdf")
 def download_pdf():
-	os.system("phantomjs scripts/rasterize.js http://%s/	print %s/test.pdf A4" % (app.config['SERVER'], app.config['PDF_FOLDER']))
-	return send_from_directory(app.config['PDF_FOLDER'], 'test.pdf', as_attachment=True)
+	os.system("phantomjs scripts/rasterize.js http://%s/print %s/test2.pdf A4" % (app.config['SERVER'], app.config['PDF_FOLDER']))
+	return send_from_directory(app.config['PDF_FOLDER'], 'test2.pdf', as_attachment=True)
 
 def __mongo_connection():
 	return MongoClient().devtrac2

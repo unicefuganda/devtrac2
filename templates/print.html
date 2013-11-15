@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html ng-app="dashboard">
+    <head>
+        <title>Print version</title>
+        <link rel="stylesheet" media="screen" href="static/css/print.css"></link>
+        {% assets "js_all" %}
+            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}
+    </head>
+    <body ng-controller='PrintCtrl'>
+        Env: {{env}}
+        <ul>
+            <li ng-repeat='p in projects'>{[{p.name}]}</li>
+        </ul>
+    </body>
+</html>
