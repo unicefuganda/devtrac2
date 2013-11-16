@@ -101,7 +101,7 @@ def ureport_child_results(question_id, locator):
 
 @app.route("/print")
 def print_page():
-	return render_template('print.html', env=os.environ.get('DEVTRAC_ENV'))
+	return render_template('print.html', env=request.environ.get('DEVTRAC_ENV'))
 
 @app.route("/site_visits")
 def site_visits():
