@@ -9,7 +9,19 @@ from pymongo import MongoClient
 from bson import Binary, Code
 from bson.json_util import dumps
 
+import logging
+from logging.handlers import RotatingFileHandler
+
+
+# if not app.debug:
+    
+
 app = Flask(__name__)
+
+	
+file_handler = RotatingFileHandler('test.log')
+file_handler.setLevel(logging.WARNING)
+app.logger.addHandler(file_handler)
 
 env = os.environ.get('DEVTRAC_ENV')
 env = "Development" if env == None else env

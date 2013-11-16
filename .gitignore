@@ -17,3 +17,4 @@ screen*.png
 /Application Data
 #virtual env python environments
 devtrac2-env
+*.log
