@@ -27,6 +27,8 @@ env = os.environ.get('DEVTRAC_ENV')
 env = "Development" if env == None else env
 app.config.from_object('config.config.%sConfig' % env)
 
+print env
+
 assets = Environment(app)
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
