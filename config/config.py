@@ -3,13 +3,13 @@ class Config(object):
     pass
 
 class ProductionConfig(Config):
-    ASSETS_DEBUG = True
+    ASSETS_DEBUG = False
     SEND_FILE_MAX_AGE_DEFAULT = 100
     DATA_DIR = "db/data/prod"
     USE_LOCAL_GEOJSON = False
 
 class DevelopmentConfig(Config):
-    ASSETS_DEBUG = True
+    ASSETS_DEBUG = False
     SEND_FILE_MAX_AGE_DEFAULT = 0
     DATA_DIR = "db/data/test"
     USE_LOCAL_GEOJSON = True

@@ -2,10 +2,15 @@
 <html ng-app="dashboard">
     <head>
         <title>Print version</title>
-        <link rel="stylesheet" media="screen" href="static/css/print.css"></link>
+        <link rel="stylesheet" media="screen" href="static/css/print.css"></link>        
+        
         {% assets "js_all" %}
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}
+
+        <script type="text/javascript" src="/static/javascript/lib/jquery.flot.min.js"></script>
+        <script type="text/javascript" src="/static/javascript/lib/jquery.flot.pie.min.js"></script>
+
     </head>
     <body ng-controller='PrintCtrl'>
         Env: {{env}}

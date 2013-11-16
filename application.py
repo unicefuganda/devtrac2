@@ -51,8 +51,6 @@ js = Bundle(
 	'javascript/location.js',
 	'javascript/layer-map.js',
 	'javascript/layer-options.js',
-	'javascript/lib/jquery.flot.min.js',
-	'javascript/lib/jquery.flot.pie.min.js',
 	'javascript/lib/chosen.jquery.min.js',
 	'javascript/lib/modernizr.js',
 	'javascript/dt/project.js',
