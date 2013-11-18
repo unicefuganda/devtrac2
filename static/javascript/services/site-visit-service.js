@@ -39,4 +39,5 @@ angular.module("dashboard")
                 return { type: "FeatureCollection", features: features };            
             })
         }
+
     });

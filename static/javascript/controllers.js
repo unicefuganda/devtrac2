@@ -4,7 +4,6 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     if ($rootScope.project == undefined || $rootScope.siteVisit == undefined) {
         $rootScope.project = {};
         $rootScope.project.list = null;
-
         $rootScope.siteVisit =  {};
         $rootScope.siteVisit.list = null;
     }

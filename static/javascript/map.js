@@ -2,7 +2,6 @@ if (typeof DT == "undefined")
     DT = {};
 DT.testing = false;
 DT.Map = function(element, basemap) {
-
     var self = this;
     self.wmsLayer = null;
     self.hasBaseLayer = false;

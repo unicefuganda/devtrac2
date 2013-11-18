@@ -16,8 +16,9 @@ angular.module("dashboard").directive('map', function() {
 
                     siteVisitService.siteVisitDetail(feature.properties['Id']).then(function(newSiteVisit) {
                          $scope.siteVisit.selected = newSiteVisit;
-
                     });
+
+                
                 }
             }
 
@@ -254,3 +255,15 @@ angular.module("dashboard").directive('map', function() {
         }
     }
 })
+.directive('siteVisitModal',  function(){
+    return {
+        link: function(scope, element, attrs) {
+            scope.$watch('siteVisit.selected',function(siteVisit){
+                if(siteVisit ==null)
+                    return;
+                $('#myModal').modal('show')
+            });
+        }
+    }
+});
+

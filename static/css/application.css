@@ -737,6 +737,13 @@ h3 {
 	float: right;
 }
 
+#site-visit-details {
+  height: 650px;
+  width: 750px;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
 
 #site-visit-details ul {
 	list-style-type: none;
@@ -755,10 +762,12 @@ h3 {
 	display: inline-block;
 	width: 82%;
 	margin-bottom: 3px;
+  overflow: hidden;
 }
 
 #site-visit-details li div img {
   display: inline;
+  text-align: center;
 }
 
 #poll-results{
@@ -992,12 +1001,34 @@ div.pagination > ul > li > span {
 .image-container {
   text-align: center;
   margin: auto;
-  height: 320px;
-  width: 1100px;
+  margin-left: 200px;
+  height: 257px;
+  width: 350px;
   background-color: lightgrey;
   overflow: hidden;
   float: left;
   display: -webkit-inline-flex;
+  border-style: groove;
+  border-width: 3px;
+}
+.modal-backdrop {
+  width: 0px;
+}
+
+.modal-body {
+  position: relative;
+  overflow-y: auto;
+  max-height: 550px;
+  width: 800px;
+  padding: 10px;
+}
+
+
+.modal-dialog {
+  opacity: 0.9;
+  margin-top: 25px;
+  max-height: 600px;
+  width: 820px;
 }
 
 
