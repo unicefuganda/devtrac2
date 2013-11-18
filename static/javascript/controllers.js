@@ -194,7 +194,23 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     }
 
     $scope.$watch("location", updateSiteVisitList, true);
-}).controller("PrintCtrl", function($scope, projectService) {
+}).controller("PrintCtrl", function($rootScope, $scope, projectService) {
+
+    if ($rootScope.project == undefined || $rootScope.siteVisit == undefined) {
+        $rootScope.project = {};
+        $rootScope.project.list = null;
+
+        $rootScope.siteVisit =  {};
+        $rootScope.siteVisit.list = null;
+    }
+
+    $rootScope.project.selected = null;
+    $rootScope.siteVisit.selected = null;
+
+    $rootScope.location = new DT.Location({});
+    if ($rootScope.filter == undefined)
+        $rootScope.filter = new DT.Filter({health_center: false, water_point: false, school: true, site_visit_point: true, project:{ status:{}, sector:{} } } );
+
     projectService.projects(new DT.Location({}), {}).then(function(projects) {
         $scope.projects = projects;
     });

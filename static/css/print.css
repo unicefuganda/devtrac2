@@ -13,6 +13,11 @@ ul.projects li {
     font-weight: 300;
 }
 
+#map {
+    width: 600px;
+    height: 600px;
+}
+
 
 
 

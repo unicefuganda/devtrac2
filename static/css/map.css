@@ -44,6 +44,9 @@
   font-size: 12px;
   border-radius: 16px;
   font-weight: 500;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .leaflet-div-icon {

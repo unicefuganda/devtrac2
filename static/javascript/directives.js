@@ -229,4 +229,28 @@ angular.module("dashboard").directive('map', function() {
         }
     }
 
-});
+})
+.directive('printMap', function() {
+
+    return {
+        link: function(scope, element) {
+            var map = L.map(element.attr("id"), {
+                zoomControl: false,
+                scrollWheelZoom: false,
+                touchZoom: false,
+                doubleClickZoom: false,
+                dragging: false,
+                center: [51.505, -0.09],
+                zoom: 13
+            });
+
+            var layer = new L.mapbox.tileLayer('tcochran.map-hxvpvlhi', {
+                minZoom: 6,
+                maxZoom: 18
+            });
+
+            map.addLayer(layer);
+            // map.setView('')
+        }
+    }
+})
