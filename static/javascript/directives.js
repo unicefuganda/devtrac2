@@ -54,7 +54,7 @@ angular.module("dashboard").directive('map', function() {
 
             var applyLocationAndFilter = function(newLocation, newFilter) {
 
-                if (newFilter == null)
+                if (newFilter == null || newLocation == null)
                     return;
 
                 var layerChanges = DT.Layers.getChanges(map.displayedLayers(), newLocation, newFilter.dataToggledOff());

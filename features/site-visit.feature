@@ -72,7 +72,7 @@ Scenario: Show Site Visit details by clicking site visit link
 Given that I am a regular user
 When I open dashboard for "Ankole, Mbarara, Kakoba"
 And I click on the site visit link "Site Visit at Mbaru Catholic Church"
-Then the site Visit details should have content:
+Then the site visit details should have content:
     """
     Author: Juliet Alyek Ochero
     Date visited: 10/10/13

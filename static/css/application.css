@@ -70,6 +70,10 @@ h3 {
 	color: #555;
 }
 
+.modal {
+  position: absolute;
+}
+
 #right-hand-panel {
 	position: relative;
 	float: right;

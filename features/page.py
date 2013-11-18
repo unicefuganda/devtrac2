@@ -126,11 +126,9 @@ class Page:
         return self.browser.find_by_css('#summary').text
 
     def site_visit_details_content(self):
-        time.sleep(5);
         return self.browser.find_by_css('#site-visit-details ul').text
 
     def extra_info_content(self):
-        time.sleep(5);
         return self.browser.find_by_css('#project-details').text
 
     def project_list_content(self):
@@ -138,7 +136,10 @@ class Page:
         return "\n".join(elements);
 
     def site_visit_list_content(self):
+
+        
         elements = map(lambda element: element.text, self.browser.find_by_css('#site-visit-list .site-visit'))
+
         return "\n".join(elements);
 
     def select_ureport_question(self, abbreviation):

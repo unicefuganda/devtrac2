@@ -88,7 +88,7 @@ angular.module("dashboard")
     }
 
     var updateProjectFilters = function() {
-        if ($scope.filter == null)
+        if ($scope.filter == null || $scope.location == null)
             return;
 
         projectService.syncProjectFilters($scope.location, $scope.filter.project).then(function(data){
