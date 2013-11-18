@@ -3,7 +3,7 @@
 @font-face {
   font-family: 'Muli';
   src: url(/static/css/fonts/Muli-Regular.ttf);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 @font-face {
@@ -14,17 +14,17 @@
 
 
 @font-face {
-  font-family: 'DroidSans';
-  src: url(/static/css/fonts/DroidSans-Bold.ttf);
+  font-family: 'DroidSans-Bold';
+  src: url(/static/css/fonts/DroidSans-Bold-fix.ttf);
   font-style: normal;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 @font-face {
   font-family: 'DroidSans';
-  src: url(/static/css/fonts/DroidSans.ttf);
+  src: url(/static/css/fonts/DroidSans-fix.ttf);
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
 }
 
 

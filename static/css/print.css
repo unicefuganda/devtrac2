@@ -11,8 +11,8 @@ body {
 h1 {
     font-size: 36px;
     margin: 26px 0px;
-    font-weight: normal;
     font-style: normal;
+    font-family: 'DroidSans';
 }
 
 h2 {
@@ -21,14 +21,15 @@ h2 {
     border-bottom: 1px solid #CCC;
     padding-bottom: 6px;   
     padding-left: 3px;
-    font-weight: bold;
     font-style: normal;
+    font-family: 'DroidSans-Bold';
 }
 
 h3 {
     color: black;
     font-size: 13px;
-    font-weight: bold;
+    font-style: normal;
+    font-family: 'DroidSans-Bold';
 }
 
 ul.projects {
