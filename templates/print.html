@@ -2,21 +2,24 @@
 <html ng-app="dashboard">
     <head>
         <title>Print version something</title>
-        <link rel="stylesheet" media="screen" href="static/css/print.css"></link>        
+        <link rel="stylesheet" href="static/css/print.css" type="text/css"></link>        
         
-        {% assets "js_all" %}
-            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-        {% endassets %}
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Style-Type" content="text/css">
+        <meta name="author" content="UNICEF" />
 
-        <script type="text/javascript" src="/static/javascript/lib/jquery.flot.min.js"></script>
-        <script type="text/javascript" src="/static/javascript/lib/jquery.flot.pie.min.js"></script>
+        {% assets "js_all" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}        
 
     </head>
     <body ng-controller='PrintCtrl'>
-        Test print 2
+        <div>Projects</div>
+        Test print 5
         {{env}}
-        <ul>
+        <ul class='projects'>
             <li ng-repeat='p in projects'>{[{p.name}]}</li>
         </ul>
+
     </body>
 </html>
