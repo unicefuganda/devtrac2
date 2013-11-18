@@ -1,9 +1,9 @@
 @charset "utf-8";
 
-@import url(/static/css/print-fonts.css);
+/*@import url(/static/css/print-fonts.css);*/
 
 body {
-    font-family: 'DroidSans';
+    font-family: 'Times';
     font-size: 11px;
     font-weight: 400;
 }
@@ -11,29 +11,24 @@ body {
 h1 {
     font-size: 36px;
     margin: 26px 0px;
-    font-style: normal;
-    font-family: 'DroidSans';
+    font-weight: normal;
 }
 
 h2 {
     font-size: 22px;
     margin: 13px 0px;
-    border-bottom: 1px solid #CCC;
     padding-bottom: 6px;   
-    padding-left: 3px;
-    font-style: normal;
-    font-family: 'DroidSans-Bold';
+    font-weight: normal;
 }
 
 h3 {
     color: black;
     font-size: 13px;
-    font-style: normal;
-    font-family: 'DroidSans-Bold';
+    font-weight: bold;
 }
 
 ul.projects {
-    padding-left: 4px;
+    padding-left: 0px;
     list-style-type: none;
 }
 
@@ -44,4 +39,61 @@ ul.siteVisits {
 
 #summary h2 {
     display: none;
+}
+
+.projects > li ul{
+    list-style-type: none;
+
+}
+
+.projects > li > ul{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px;   
+    padding: 0;
+}
+
+.projects > li {
+    background-color: #EEE;
+    padding: 6px 6px;
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+}
+
+.projects label {
+    width: 120px;
+    display: inline-block;;
+}
+
+.projects span {
+    font-weight: bold;
+}
+
+.project-locations {
+    display: block;  
+    vertical-align: top;
+    padding: 10px;   
+    background-color: #EEE;
+}
+
+.project-description ul {
+    list-style-type: circle !important;
+    padding: 0px;
+}
+.project-description li {
+    font-weight: normal;
+    text-transform: capitalize;
+    
+    padding: 0px;
+    display: inline-block;
+}
+
+.project-description li:after
+{ 
+    content:"\00a0\00a0•\00a0\00a0";
+}
+
+.project-description li:last-child:after
+{ 
+    content:"";
 }

@@ -123,10 +123,8 @@ def site_visits():
 
 @app.route("/download_pdf")
 def download_pdf():
-
 	servername =  app.config['SERVER_NAME'] if app.config['SERVER_NAME'] != None else request.environ.get('SERVER_NAME')
-	print servername
-	os.system("phantomjs scripts/rasterize.js http://%s/print %s/test2.pdf A4" % (servername, app.config['PDF_FOLDER']))
+	os.system("phantomjs scripts/rasterize.js http://%s/print %s/test2.pdf letter" % (servername, app.config['PDF_FOLDER']))
 	return send_from_directory(app.config['PDF_FOLDER'], 'test2.pdf', as_attachment=True, attachment_filename='report.pdf')
 
 def __mongo_connection():
