@@ -1002,9 +1002,9 @@ div.pagination > ul > li > span {
   text-align: center;
   margin: auto;
   margin-left: 200px;
-  height: 257px;
+  height: 350px;
   width: 350px;
-  background-color: lightgrey;
+  background: rgba(0, 0, 0, 0.75);
   overflow: hidden;
   float: left;
   display: -webkit-inline-flex;
@@ -1029,6 +1029,16 @@ div.pagination > ul > li > span {
   margin-top: 25px;
   max-height: 600px;
   width: 820px;
+}
+.carousel-caption {
+  margin-bottom: -120px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  line-height: 20px;
+  margin-left: -69px;
+  width: 350px;
+  height: 100px;
+  word-wrap: break-word;
 }
 
 

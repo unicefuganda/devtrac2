@@ -30,7 +30,7 @@ DT.Layers = {
                 subcounty: location.subcounty
             });
             layers.push(["parish", subcountyLocation]);
-        }
+}
         return layers;
 
     },

@@ -17,16 +17,11 @@ angular.module("dashboard").directive('map', function() {
                     siteVisitService.siteVisitDetail(feature.properties['Id']).then(function(newSiteVisit) {
                          $scope.siteVisit.selected = newSiteVisit;
                     });
-
-                
                 }
             }
-
             $scope.getData = function(locationKeys) {
                 return districtService.getData(locationKeys, $scope.filter);
             };
-
-
 
             if ($location.search().basemap == null) {
                 $scope.basemap = 'tcochran.map-hxvpvlhi';
@@ -191,8 +186,6 @@ angular.module("dashboard").directive('map', function() {
                     $(element).trigger("chosen:updated");
                 })
             });
-
-            
         }
     };
 }).directive('partnerstoggle', function(){
