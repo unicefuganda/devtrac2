@@ -1,9 +1,11 @@
 import time
 import itertools
 from pprint import pprint
+import globals
 
 class Page:
     base_url = "http://localhost:5000"
+    wait_count = 0
     
     def __init__(self, browser):
         self.browser = browser
@@ -156,6 +158,7 @@ class Page:
 
     def wait_for(self, function):
         for _ in itertools.repeat(None, 10):
+            globals.wait_count += 1
             result = function(self)
             if (result):    
                 return
