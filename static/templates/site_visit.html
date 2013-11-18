@@ -37,7 +37,7 @@
 		<div class="image-container">
 			<div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 378px;">
 			  <ol class="carousel-indicators">
-			    <li  ng-repeat="image in siteVisit.selected.images" data-target="#myCarousel" data-slide-to="{[{$index}]}" ng-class="{'active': {[{$index}]}==0}"></li>
+			    <li ng-repeat="image in siteVisit.selected.images" data-target="#myCarousel" data-slide-to="{[{$index}]}" ng-class="{'active': {[{$index}]}==0}"></li>
 			  </ol>
 			  <div class="carousel-inner" style="height: 345px;">
 			    <div ng-class="{'item active': {[{$index}]} == 0,'item': {[{$index}]} > 0}" ng-repeat="image in siteVisit.selected.images">
@@ -47,10 +47,12 @@
 			      </div>
 			    </div>
 			  </div>
-			   <a <span class="glyphicon glyphicon-chevron-left"></span>
-			  </a>
-			   <a <span class="glyphicon glyphicon-chevron-right"></span>
-			  </a>
+				<a class="left carousel-control" data-target="#myCarousel" href="" data-slide="prev">
+				    <span class="glyphicon glyphicon-chevron-left"></span>
+				</a>
+			    <a class="right carousel-control" data-target="#myCarousel" href="" data-slide="next">
+				    <span class="glyphicon glyphicon-chevron-right"></span>
+				</a>
 			</div>
 		</div>
 	</div>
