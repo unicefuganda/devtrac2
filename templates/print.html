@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="dashboard">
     <head>
-        <title>Print version</title>
+        <title>Print version something</title>
         <link rel="stylesheet" media="screen" href="static/css/print.css"></link>        
         
         {% assets "js_all" %}
@@ -13,7 +13,8 @@
 
     </head>
     <body ng-controller='PrintCtrl'>
-        Env: {{env}}
+        Test print 2
+        {{env}}
         <ul>
             <li ng-repeat='p in projects'>{[{p.name}]}</li>
         </ul>
