@@ -1,22 +1,13 @@
-angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $routeParams, $location) {
-    DT.timings["urlchange"] = new Date().getTime();
-
-    if ($rootScope.project == undefined || $rootScope.siteVisit == undefined) {
-        $rootScope.project = {};
-        $rootScope.project.list = null;
-        $rootScope.siteVisit =  {};
-        $rootScope.siteVisit.list = null;
-    }
-
-    $rootScope.project.selected = null;
-    $rootScope.siteVisit.selected = null;
-
+angular.module("dashboard")
+.controller("LocationCtrl", function($rootScope, $routeParams) {
     $rootScope.location = new DT.Location($routeParams);
-    if ($rootScope.filter == undefined)
-        $rootScope.filter = new DT.Filter({health_center: false, water_point: false, school: true, site_visit_point: true, project:{ status:{}, sector:{} } } );
-
-
-}).controller("IndicatorsCtrl", function($scope, $rootScope, heatmapService) {
+})
+.controller("DashboardCtrl", function($rootScope) {
+    $rootScope.project = { list: null, selected: null };
+    $rootScope.siteVisit = { list: null, selected: null };
+    $rootScope.filter = new DT.Filter({ health_center: false, water_point: false, school: true, site_visit_point: true, project: { status:{}, sector:{} } } );
+})
+.controller("IndicatorsCtrl", function($scope, $rootScope, heatmapService) {
     $rootScope.indicator = { selected: null }
     $scope.datasets = heatmapService.datasets();
     $scope.ureport_datasets = heatmapService.ureport();
@@ -193,24 +184,20 @@ angular.module("dashboard").controller("DashboardCtrl", function($rootScope, $ro
     }
 
     $scope.$watch("location", updateSiteVisitList, true);
-}).controller("PrintCtrl", function($rootScope, $scope, projectService) {
+})
+.controller("PrintCtrl", function($rootScope, $scope, projectService, summaryService, siteVisitService) {    
+    var location = new DT.Location({});
 
-    if ($rootScope.project == undefined || $rootScope.siteVisit == undefined) {
-        $rootScope.project = {};
-        $rootScope.project.list = null;
-
-        $rootScope.siteVisit =  {};
-        $rootScope.siteVisit.list = null;
-    }
-
-    $rootScope.project.selected = null;
-    $rootScope.siteVisit.selected = null;
-
-    $rootScope.location = new DT.Location({});
-    if ($rootScope.filter == undefined)
-        $rootScope.filter = new DT.Filter({health_center: false, water_point: false, school: true, site_visit_point: true, project:{ status:{}, sector:{} } } );
-
-    projectService.projects(new DT.Location({}), {}).then(function(projects) {
-        $scope.projects = projects;
+    $rootScope.location = location;
+    projectService.projects(location, {}).then(function(projects) {
+        $rootScope.projects = projects;    
     });
+
+    summaryService.find(location).then(function(summary) {
+        $rootScope.summary = summary;
+    })
+
+    siteVisitService.siteVisits(location).then(function(siteVisits) {
+      $rootScope.siteVisits = siteVisits;  
+    })
 });

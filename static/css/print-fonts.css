@@ -1,0 +1,59 @@
+@charset "utf-8";
+
+@font-face {
+  font-family: 'Muli';
+  src: url(/static/css/fonts/Muli-Regular.ttf);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Muli';
+  src: url(/static/css/fonts/Muli-Light.ttf);
+  font-weight: 400;
+}
+
+
+@font-face {
+  font-family: 'DroidSans';
+  src: url(/static/css/fonts/DroidSans-Bold.ttf);
+  font-style: normal;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'DroidSans';
+  src: url(/static/css/fonts/DroidSans.ttf);
+  font-style: normal;
+  font-weight: normal;
+}
+
+
+@font-face {
+  font-family: 'OpenSans';
+  src: url(/static/css/fonts/OpenSans-Light.ttf);
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'OpenSans';
+  src: url(/static/css/fonts/OpenSans-Regular.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'OpenSans';
+  src: url(/static/css/fonts/OpenSans-Semibold.ttf);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'OpenSans';
+  src: url(/static/css/fonts/OpenSans-Bold.ttf);
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'OpenSans';
+  src: url(/static/css/fonts/OpenSans-Extra-Bold.ttf);
+  font-weight: 800;
+}

@@ -1,22 +1,13 @@
 <!DOCTYPE html>
-<html ng-app="dashboard">
+<html ng-app="dashboard" ng-controller='DashboardCtrl'>
     <head>
         <title>Print version something</title>
-        {% assets "css_all" %}
-            <!-- <link rel="stylesheet" href="/static/css/lib/bootstrap.min.css"></link> -->
-        
-            <link rel="stylesheet" href="/static/css/lib/mapbox.css"></link>
-        
-            <link rel="stylesheet" href="/static/css/lib/chosen.min.css"></link>
-        
-            <link rel="stylesheet" href="/static/css/application.css"></link>
-        
-            <link rel="stylesheet" href="/static/css/map.css"></link>
-        {% endassets %}
-
+        <link rel="stylesheet" href="/static/css/lib/mapbox.css"></link>
+        <link rel="stylesheet" href="/static/css/lib/chosen.min.css"></link>
+        <link rel="stylesheet" href="/static/css/application.css"></link>
+        <link rel="stylesheet" href="/static/css/map.css"></link>
         <link rel="stylesheet" href="static/css/print.css" type="text/css"></link>        
 
-        
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="Content-Style-Type" content="text/css">
         <meta name="author" content="UNICEF" />
@@ -24,19 +15,36 @@
         <link rel="stylesheet" href="/static/css/lib/mapbox.css"></link>
 
         {% assets "js_all" %}
-        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}        
 
     </head>
     <body ng-controller='PrintCtrl'>
+        <h1>{[{ location.full_name() }]} Country</h1>
 
-        <div map id='map' ></div>
-        <div>Projects</div>
-        Test print 5
-        {{env}}
+
+        <div ng-include="'/static/templates/summary.html'" class='summary-section'></div>
+
+
+        <h2>PROJECTS</h2>
 
         <ul class='projects'>
-            <li ng-repeat='p in projects'>{[{p.name}]}</li>
+            <li ng-repeat='p in projects'>
+
+                <h3>{[{p.name}]}</h3>
+
+                {[{p.description}]}
+
+            </li>
+        </ul>
+
+        <h2>SITE VISITS</h2>
+
+        <ul class='siteVisits'>
+            <li ng-repeat='s in siteVisits'>
+                <h3>{[{s.title}]}</h3>
+                {[{s.summary}]}
+            </li>
         </ul>
 
     </body>

@@ -2,23 +2,23 @@ var dashboard = angular.module('dashboard', ['ngRoute', 'ui.bootstrap']).config(
     $locationProvider.html5Mode(true);
     $routeProvider
         .when('/', {
-            controller: "DashboardCtrl",
+            controller: "LocationCtrl",
             templateUrl: '/static/templates/show.html'
         })
         .when('/dashboard/:region', {
-            controller: "DashboardCtrl",
+            controller: "LocationCtrl",
             templateUrl: '/static/templates/show.html'
         })
         .when('/dashboard/:region/:district', {
-            controller: "DashboardCtrl",
+            controller: "LocationCtrl",
             templateUrl: '/static/templates/show.html'
         })
         .when('/dashboard/:region/:district/:subcounty', {
-            controller: "DashboardCtrl",
+            controller: "LocationCtrl",
             templateUrl: '/static/templates/show.html'
         })
         .when('/dashboard/:region/:district/:subcounty/:parish', {
-            controller: "DashboardCtrl",
+            controller: "LocationCtrl",
             templateUrl: '/static/templates/show.html'
         })
         
