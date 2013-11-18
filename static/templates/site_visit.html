@@ -34,7 +34,7 @@
 			</li>
 		</ul> 
 		<div class="image-container">
-			<div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 280px;">
+			<div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 270px;">
 			  <ol class="carousel-indicators">
 			    <li  ng-repeat="image in siteVisit.selected.images" data-target="#myCarousel" data-slide-to="{[{$index}]}" ng-class="{'active': {[{$index}]}==0}"></li>
 			  </ol>
@@ -42,7 +42,7 @@
 			    <div ng-class="{'item active': {[{$index}]} == 0,'item': {[{$index}]} > 0}" ng-repeat="image in siteVisit.selected.images">
 			      <img src="{[{image.img}]}">
 			      <div class="carousel-caption">
-			       <p>{[{image.caption}]}</p>
+			       {[{image.caption}]}
 			      </div>
 			    </div>
 			  </div>

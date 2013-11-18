@@ -20,6 +20,10 @@
           <div ng-include="'/static/templates/site_visit_modal.html'"></div>   
         </div>
 
+        <div ng-show='project.selected != null'>
+          <div ng-include="'/static/templates/project_modal.html'"></div> 
+        </div>
+
         <div ng-if="indicator.selected != null" class='heatmap-legend'>
           <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
         </div>
@@ -38,12 +42,8 @@
     <div class='detail-panel'>
       <div class='container'>
         
-        <div ng-show='project.selected == null' >
+        <div >
           <div ng-include="'/static/templates/area.html'"></div> 
-        </div>
-
-        <div ng-show='project.selected != null'>
-          <div ng-include="'/static/templates/project.html'"></div> 
         </div>
         
     </div>

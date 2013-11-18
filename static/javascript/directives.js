@@ -261,7 +261,13 @@ angular.module("dashboard").directive('map', function() {
             scope.$watch('siteVisit.selected',function(siteVisit){
                 if(siteVisit ==null)
                     return;
-                $('#myModal').modal('show')
+                $('#siteVisitModal').modal('show')
+            });
+
+            scope.$watch('project.selected',function(project){
+                if(project ==null)
+                    return;
+                $('#projectModal').modal('show')
             });
         }
     }
