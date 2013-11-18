@@ -82,11 +82,3 @@ Then the site Visit details should have content:
     Summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque varius tellus id mi dapibus vehicula vitae quis elit. Sed porttitor dolor consectetur elit egestas mollis. Curabitur non ante porttitor, pharetra metus eu, blandit neque. Curabitur eget rutrum sapien. Vestibulum blandit massa quis turpis laoreet, et ornare justo ornare. Etiam aliquet faucibus neque at ornare. Quisque vestibulum, erat in scelerisque ornare, ipsum quam elementum felis, sed congue elit urna sit amet mauris. Sed porta volutpat dui vitae accumsan. Nullam id dignissim orci. Duis interdum elit eu massa facilisis nullam.
     Location: Mbaru Catholic Church   
     """
-
-@wip
-Scenario: Show site visit details on Modal popup
-Given that I am a user
-When I select a site visit on the map
-Then details of that site Visit appear on a modal popup
-And When I click outside the Popup
-Then popup is removed.
