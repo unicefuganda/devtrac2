@@ -44,6 +44,8 @@ js = Bundle(
 	'javascript/config.js',
 	'javascript/lib/bootstrap.min.js',
 	'javascript/lib/bootstrap-paginator.js',
+	'javascript/lib/transition.js',
+	'javascript/lib/carousel.js',
 	'javascript/location.js',
 	'javascript/layer-map.js',
 	'javascript/layer-options.js',

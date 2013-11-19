@@ -1018,14 +1018,13 @@ div.pagination > ul > li > span {
   text-align: center;
   margin: auto;
   margin-left: 200px;
-  height: 350px;
+  height: 320px;
   width: 350px;
   background: rgba(0, 0, 0, 0.75);
   overflow: hidden;
   float: left;
-  padding: 10px 0;
   display: -webkit-inline-flex;
-  border-style: groove;
+  border-style: solid;
   border-width: 3px;
 }
 .modal-backdrop {
@@ -1042,20 +1041,30 @@ div.pagination > ul > li > span {
 
 
 .modal-dialog {
-  opacity: 0.9;
+  opacity: 0.97;
   margin-top: 25px;
   max-height: 600px;
   width: 820px;
 }
 .carousel-caption {
-  margin-bottom: -120px;
+  margin-bottom: -144px;
   background: rgba(0, 0, 0, 0.75);
   color: #ffffff;
   line-height: 20px;
-  margin-left: -69px;
-  width: 350px;
+  margin-left: -64px;
+  margin-right: 0px;
+  width: 346px;
   height: 100px;
   word-wrap: break-word;
+  padding-right: 2px;
+  padding-left: 2px;
+  padding-top: 0px;
+  right: 18%;
+  left: 18%;
+}
+
+.carousel-indicators {
+  bottom: 50px;
 }
 
 .filter-panel .close-panel{
@@ -1147,4 +1156,31 @@ div.pagination > ul > li > span {
    background-color: rgba(0, 0, 0, 0.32);
  }
 >>>>>>> Added hide functionality to the filter navigation bar
+
+.carousel-control.right {
+  float: right;
+}
+
+.carousel-control.left {
+  float: left;
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+  display: block;
+  height: 325px;
+  max-width: 100%;
+  line-height: 1;
+}
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 372px;!important;
+  margin-top: -9px;
+}
+
+.carousel-inner>.active {
+  height: 228px;
+}
 

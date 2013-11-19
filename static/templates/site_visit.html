@@ -34,19 +34,19 @@
 				<span>{[{siteVisit.selected.location}]}</span>
 			</li>
 		</ul> 
-		<div class="image-container">
+		<div class="image-container" ng-if="siteVisit.selected">
 			<div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 378px;">
 			  <ol class="carousel-indicators">
 			    <li ng-repeat="image in siteVisit.selected.images" data-target="#myCarousel" data-slide-to="{[{$index}]}" ng-class="{'active': {[{$index}]}==0}"></li>
 			  </ol>
-			  <div class="carousel-inner" style="height: 345px;">
+			 <div class="carousel-inner" style="height: 345px; margin-top: -9px;">
 			    <div ng-class="{'item active': {[{$index}]} == 0,'item': {[{$index}]} > 0}" ng-repeat="image in siteVisit.selected.images">
-			      <img src="{[{image.img}]}">
+			      <img ng-src="{[{image.img}]}" ng-alt="Site Visit Image">
 			      <div class="carousel-caption">
 			       {[{image.caption}]}
 			      </div>
-			    </div>
-			  </div>
+			   </div>
+			 </div>
 				<a class="left carousel-control" data-target="#myCarousel" href="" data-slide="prev">
 				    <span class="glyphicon glyphicon-chevron-left"></span>
 				</a>
@@ -56,5 +56,5 @@
 			</div>
 		</div>
 	</div>
-	<a class='back-to-area-link' ng-click='siteVisit.selected=null' href=''>Back to {[{location.full_name();}]}</a>
+	<!-- <a class='back-to-area-link' ng-click='siteVisit.selected=null' href=''>Back to {[{location.full_name();}]}</a> -->
 

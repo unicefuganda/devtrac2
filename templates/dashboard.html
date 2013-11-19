@@ -17,15 +17,6 @@
     <div id='right-hand-panel'>
       <div id='right-hand-container'>
         <div map id='devtrac-map'></div>
-
-          <div ng-show='siteVisit.selected != null '>
-          <div ng-include="'/static/templates/site_visit_modal.html'"></div>   
-        </div>
-
-        <div ng-show='project.selected != null'>
-          <div ng-include="'/static/templates/project_modal.html'"></div> 
-        </div>
-
         <div ng-if="indicator.selected != null" class='heatmap-legend'>
           <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
         </div>
@@ -40,6 +31,15 @@
       <div class='filters-container'>  
         <div ng-include="'/static/templates/filters.html'" class='filters-section'></div>
       </div>
+    </div>
+    <div>
+       <div ng-show='siteVisit.selected != null '>
+          <div ng-include="'/static/templates/site_visit_modal.html'"></div>   
+        </div>
+
+        <div ng-show='project.selected != null'>
+          <div ng-include="'/static/templates/project_modal.html'"></div> 
+        </div>
     </div>
 
     <div class='detail-panel'>
