@@ -119,3 +119,18 @@ ul.siteVisits {
     float: right;
     margin: 10px 0 26px 0;
 }
+
+#summary ul.indicator-summary li {
+    /*border-bottom: 1px solid #DDD;*/
+    display: block;
+}
+
+#summary ul {
+    margin-bottom: 2px;
+    margin-top: 2px; 
+}
+
+#summary {
+    background-color: #EEE;
+    padding: 10px;
+}

@@ -1,7 +1,7 @@
 <div ng-controller="SummaryCtrl" id='summary' ng-show="summary != null" class='ng-hide'>
 	<h2>Indicators</h2>
 
-    <ul>
+    <ul class='points-summary'>
     	<li>
             <label>Health Centers</label>
             <span>{[{ summary['health-center'] | number }]}</span>
@@ -36,7 +36,7 @@
         </li>
     </ul>
 
-    <ul ng-show='indicatorSummary != null'>
+    <ul ng-show='indicatorSummary != null' class='indicator-summary'>
     	<li >
     		<label>2011 Population</label>
     		<span>{[{ indicatorSummary["Pop_2011"] }]}</span>

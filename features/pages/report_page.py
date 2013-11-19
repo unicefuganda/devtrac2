@@ -20,6 +20,9 @@ class ReportPage:
         project_names = [elem.text for elem in self.browser.find_by_css(".siteVisits h3")]
         return "\n".join(project_names)
 
+    def summary(self): 
+        return self.browser.find_by_id("summary").text
+
     def download_report(self, locator):
         self.report = urllib2.urlopen('%s/devtrac_report/%s' % (globals.base_url, urllib.quote(locator, '')))
 

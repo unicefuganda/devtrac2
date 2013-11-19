@@ -17,6 +17,29 @@ And the listed sites visits should be
         Site Visit At Amyel Catholic Church
         Site Visit At Arivu Church, Arivu Sub County (FHDs Monitoring)
     """
+And the summary should be
+    """
+        Health Centers
+        16
+        Schools
+        26
+        Water Points
+        221
+        Subcounties
+        7
+        2011 Population
+        62,000
+        Children vaccinated against Diphtheria
+        218%
+        Children vaccinated against Measles
+        105%
+        Deliveries in Health Facilities
+        12%
+        Pit latrine coverage percentage
+        56%
+        Safe Water coverage percentage
+        56%
+    """
 
 Scenario: Download Report
 When I download the report for 'Buganda, Kalangala'

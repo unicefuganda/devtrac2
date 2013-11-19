@@ -20,6 +20,10 @@ def and_the_listed_sites_visits_should_be(step):
     assert_multi_line_equal.im_class.maxDiff = None
     assert_multi_line_equal(world.report_page.site_visits(), step.multiline)
 
+@step(u'the summary should be')
+def and_the_summary_visits_should_be(step):
+    assert_multi_line_equal.im_class.maxDiff = None
+    assert_multi_line_equal(world.report_page.summary(), step.multiline)
 
 @step(u'When I download the report for \'([^\']*)\'')
 def download_report(step, locator):
