@@ -1018,7 +1018,7 @@ div.pagination > ul > li > span {
   text-align: center;
   margin: auto;
   margin-left: 200px;
-  height: 320px;
+  height: 336px;
   width: 350px;
   background: rgba(0, 0, 0, 0.75);
   overflow: hidden;
@@ -1081,8 +1081,6 @@ div.pagination > ul > li > span {
 .close-panel:hover {
 	background-color: rgba(0, 0, 0, 0.32);
 }
-=======
-  }*/
 
   .image-caption {
     word-wrap: break-word;
@@ -1155,7 +1153,33 @@ div.pagination > ul > li > span {
  .close-panel:hover {
    background-color: rgba(0, 0, 0, 0.32);
  }
->>>>>>> Added hide functionality to the filter navigation bar
+
+.carousel-control.right {
+  float: right;
+}
+
+.carousel-control.left {
+  float: left;
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+  display: block;
+  height: 325px;
+  max-width: 100%;
+  line-height: 1;
+}
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 336px;!important;
+  margin-top: -9px;
+}
+
+.carousel-inner>.active {
+  height: 245px;
+}
 
 .carousel-control.right {
   float: right;
