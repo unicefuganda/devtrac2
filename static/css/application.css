@@ -261,11 +261,11 @@ h3 {
 
   .filters-container {
   	height: 100%;
-	padding-top: 85px;
+	  padding-top: 80px;
   }
 
   #filter-panel {
-  	margin-top: 57px;
+  	margin-top: 57px;  
   	width: 336px;
   	height: 100%;
   	overflow: hidden;
@@ -767,7 +767,7 @@ h3 {
 	display: inline-block;
 	width: 82%;
 	margin-bottom: 3px;
-    overflow: hidden;
+  overflow: hidden;
 	text-align: justify;
 }
 
@@ -989,6 +989,7 @@ div.pagination > ul > li > span {
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
+<<<<<<< HEAD
 }*/
 
 .image-caption {
@@ -1062,4 +1063,79 @@ div.pagination > ul > li > span {
 .close-panel:hover {
 	background-color: rgba(0, 0, 0, 0.32);
 }
+=======
+  }*/
+
+  .image-caption {
+    word-wrap: break-word;
+    width: 300px;
+    background-color: darkgray;
+    margin-left: 15px;
+    margin-top: -15px;
+  }
+
+  .devtrac-link {
+    margin-left: 85%;
+    font-size: 14px;
+  }
+
+  .image-container {
+    text-align: center;
+    margin: auto;
+    margin-left: 200px;
+    height: 350px;
+    width: 350px;
+    background: rgba(0, 0, 0, 0.75);
+    overflow: hidden;
+    float: left;
+    padding: 10px 0;
+    display: -webkit-inline-flex;
+    border-style: groove;
+    border-width: 3px;
+  }
+  .modal-backdrop {
+    width: 0px;
+  }
+
+  .modal-body {
+    position: relative;
+    overflow-y: auto;
+    max-height: 550px;
+    width: 800px;
+    padding: 10px;
+  }
+
+
+  .modal-dialog {
+    opacity: 0.9;
+    margin-top: 25px;
+    max-height: 600px;
+    width: 820px;
+  }
+  .carousel-caption {
+    margin-bottom: -120px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+    line-height: 20px;
+    margin-left: -69px;
+    width: 350px;
+    height: 100px;
+    word-wrap: break-word;
+  }
+
+  .filter-panel .close-panel{
+   font-size: 14px;
+   color: #fff;
+   /*float: right;*/
+   background-color: black;
+   opacity: 1;
+   padding: 5px 8px;
+   cursor: pointer;
+   text-align: center;
+ }
+
+ .close-panel:hover {
+   background-color: rgba(0, 0, 0, 0.32);
+ }
+>>>>>>> Added hide functionality to the filter navigation bar
 

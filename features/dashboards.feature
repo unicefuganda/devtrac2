@@ -77,4 +77,6 @@ When I go to the homepage
 And I navigate to "../district/hulu" 
 Then a page with an error message is displayed 
 And the page has a link to the homepage
+
+
     

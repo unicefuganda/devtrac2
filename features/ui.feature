@@ -32,14 +32,14 @@ When I go to the homepage
 And I hover over a "gulu" polygon
 Then the text "gulu"  is displayed
 
-Scenario: Show/Hide contextual panel
+Scenario: Show/Hide filter panel 
 Given that I am a regular user
 When I go to the homepage
-Then the contextual panel is displayed
-When I toggle the contextual panel
-Then the contextual panel is collapsed
-When I toggle the contextual panel
-Then the contextual panel is displayed
+Then the filter panel is displayed
+When I toggle the filter panel
+Then the filter panel is collapsed
+When I toggle the filter panel
+Then the filter panel is displayed
 
 
 

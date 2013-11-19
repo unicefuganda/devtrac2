@@ -3,20 +3,19 @@ from page import *
 from nose.tools import *
 from time import *
 
-#Steps to be implemented
+@step(u'Then the filter panel is displayed')
+def then_the_filter_panel_is_displayed(step):
+    assert world.page.is_filter_panel_expanded()
 
-@step(u'Then the "([^"]*)" panel is displayed')
-def then_the_filter_panel_is_displayed(step, panel):
-    assert world.page.is_panel_expanded(panel)
+@step(u'When I toggle the filter panel')
+def when_i_toggle_the_filter_panel(step):
+    world.page.toggle_filter_panel()
 
-@step(u'When I toggle the "([^"]*)" panel')
-def when_i_collapse_the_filter_panel(step, panel):
-    world.page.toggle_panel(panel)
+@step(u'Then the filter panel is collapsed')
+def then_the_filter_panel_is_collapsed(step):
+    assert not world.page.is_filter_panel_expanded()
 
-@step(u'Then the "([^"]*)" panel is collapsed')
-def then_the_filter_panel_is_collapsed(step, panel):
-    assert not world.page.is_panel_expanded(panel)
-
+# Steps to be implemented
 @step(u'Then A white Div html element will be displayed at the top of the page')
 def then_a_white_div_html_element_will_be_displayed_at_the_top_of_the_page(step):
     assert True, 'This step must be implemented'

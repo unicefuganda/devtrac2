@@ -106,14 +106,14 @@ class Page:
     def popup_content(self):
         return self.browser.find_by_css(".marker-popup").text
 
-    def toggle_panel(self, panel):
-        self.browser.find_by_css(str(".%s-panel .toggle-panel" % panel)).click()
+    def toggle_filter_panel(self):
+        self.browser.find_by_css(".filter-panel .close-panel").click()
 
-    def is_panel_expanded(self, panel):
-        return len(self.browser.find_by_css(str(".%s-panel.expanded" % panel))) > 0
+    def is_filter_panel_expanded(self):
+        return len(self.browser.find_by_css(".filter-panel.expanded")) > 0
 
     def toggle_checkbox(self, checkboxkey):
-        self.browser.find_by_css(str("#%s-checkbox" % checkboxkey)).click()
+        return self.browser.find_by_css(str("#%s-checkbox" % checkboxkey)).click()
 
     def is_indicator_layer_hidden(self):
         return self.browser.evaluate_script("window.map.isIndicatorLayerHidden()")
@@ -244,6 +244,7 @@ class Page:
 
     def get_pins_for_project(self, projectName):
         return self.browser.find_by_css(str(".selected-icon.icon-inner[data-project-name='%s']" % projectName))
+
 
        
         
