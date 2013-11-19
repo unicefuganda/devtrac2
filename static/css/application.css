@@ -247,10 +247,11 @@ h3 {
 
   }
   .breadcrumb-section {
-  	padding-top: 20px;
+  	padding-top: 15px;
   	position: absolute;
   	height: 80px;
   	width: 335px;
+  	cursor: pointer;
   }
 
   .filters-section {
@@ -260,7 +261,7 @@ h3 {
 
   .filters-container {
   	height: 100%;
-	padding-top: 88px;
+	padding-top: 85px;
   }
 
   #filter-panel {
@@ -766,7 +767,8 @@ h3 {
 	display: inline-block;
 	width: 82%;
 	margin-bottom: 3px;
-  overflow: hidden;
+    overflow: hidden;
+	text-align: justify;
 }
 
 #site-visit-details li div img {
@@ -1011,6 +1013,7 @@ div.pagination > ul > li > span {
   background: rgba(0, 0, 0, 0.75);
   overflow: hidden;
   float: left;
+  padding: 10px 0;
   display: -webkit-inline-flex;
   border-style: groove;
   border-width: 3px;
@@ -1045,4 +1048,18 @@ div.pagination > ul > li > span {
   word-wrap: break-word;
 }
 
+.filter-panel .close-panel{
+	font-size: 14px;
+	color: #fff;
+	/*float: right;*/
+	background-color: black;
+	opacity: 1;
+	padding: 5px 8px;
+	cursor: pointer;
+	text-align: center;
+}
+
+.close-panel:hover {
+	background-color: rgba(0, 0, 0, 0.32);
+}
 

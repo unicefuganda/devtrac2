@@ -116,27 +116,36 @@ angular.module("dashboard").directive('map', function() {
             var collapseAnimation = JSON.parse(attrs.panelCollapse);
             var panel = $(element);
 
-            scope.togglePanel = function() {
+            var togglePanel = function() {
                 if (scope.expanded)
                 {
                     panel.removeClass("expanded");
-                    panel.animate(collapseAnimation);;
+                    panel.animate(collapseAnimation);
                     scope.expanded = false;
+                   	$('.close-panel span').removeClass("glyphicon-chevron-down");
+                   	$('.close-panel span').addClass("glyphicon-chevron-up");
+                   	$("#filter-panel").css("position", "absolute");
                 } else {
                     panel.addClass("expanded");
                     panel.animate(expandAnimation);
                     scope.expanded = true;
+                    $('.close-panel span').removeClass("glyphicon-chevron-up");
+                   	$('.close-panel span').addClass("glyphicon-chevron-down");
+                   	$("#filter-panel").css("position", "fixed");
                 }
                 return false;
             }
+            $(".close-panel").click(function(){
+            	togglePanel();
+            });
         }
-    };
+    }
 }).directive('piechart', function() {
     return {
         scope: true,
         link: function(scope, element, attrs) {
             scope.$watch("ureportResults", function(result) {
-                
+
                 if (result == null || result == "null") {
                     scope.show_pie = false;
                     return;
@@ -173,8 +182,8 @@ angular.module("dashboard").directive('map', function() {
             $(element).chosen({ width: "300px", allow_single_deselect: true }).change(function () {
                 setTimeout(function() {
                     scope.$apply(function () {
-                        var values = $.map($(element).find("option:selected"), function (option) { 
-                            return $(option).val(); 
+                        var values = $.map($(element).find("option:selected"), function (option) {
+                            return $(option).val();
                         });
                         scope.filter.project[attrs.filtercollection] = values
                     });
@@ -207,7 +216,7 @@ angular.module("dashboard").directive('map', function() {
                     scope.filter.project.partners = [];
                     scope.filter.project.financialOrgs =[];
                 }
-                    
+
             });
         }
     }
