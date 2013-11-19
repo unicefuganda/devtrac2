@@ -1,6 +1,7 @@
 import globals
 import time
 import urllib
+import urllib2
 
 
 class ReportPage:
@@ -18,3 +19,12 @@ class ReportPage:
     def site_visits(self): 
         project_names = [elem.text for elem in self.browser.find_by_css(".siteVisits h3")]
         return "\n".join(project_names)
+
+    def download_report(self, locator):
+        self.report = urllib2.urlopen('%s/devtrac_report/%s' % (globals.base_url, urllib.quote(locator, '')))
+
+    def file_content_type(self):
+        return self.report.info()['Content-Type']
+    
+        
+        

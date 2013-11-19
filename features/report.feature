@@ -1,8 +1,7 @@
 Feature: Report
 
-@report
-Scenario: Export Basic Report
-When I download the report for 'Buganda, Kalangala'
+Scenario: Basic Report Content
+When I open the report for 'Buganda, Kalangala'
 Then the listed projects should be
     """
         Envision
@@ -18,3 +17,7 @@ And the listed sites visits should be
         Site Visit At Amyel Catholic Church
         Site Visit At Arivu Church, Arivu Sub County (FHDs Monitoring)
     """
+
+Scenario: Download Report
+When I download the report for 'Buganda, Kalangala'
+Then the file is a pdf

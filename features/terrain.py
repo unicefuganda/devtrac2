@@ -16,7 +16,6 @@ def setup_all():
 def start_timings(scenario):    
     globals.method_timings[scenario.name] = { 'start': datetime.datetime.now() }
 
-
 @after.each_scenario
 def end_timing(scenario):
     globals.method_timings[scenario.name]['end'] = datetime.datetime.now()
