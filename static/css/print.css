@@ -10,9 +10,12 @@ body {
 
 h1 {
     font-size: 36px;
-    margin: 26px 0px;
+    margin: 10px 0 26px 0;
     font-weight: normal;
     text-transform: capitalize;
+    display: inline-block;
+    /*float: left;*/
+    white-space:nowrap;
 }
 
 h2 {
@@ -60,7 +63,6 @@ ul.siteVisits {
     background-color: #EEE;
     padding: 6px 6px;
     margin-bottom: 20px;
-    page-break-inside: avoid;
 }
 
 .projects label {
@@ -79,6 +81,9 @@ ul.siteVisits {
     background-color: #EEE;
 }
 
+.project-desription {
+    page-break-inside: avoid;
+}
 .project-description ul {
     list-style-type: circle !important;
     padding: 0px;
@@ -99,4 +104,19 @@ ul.siteVisits {
 .project-description li:last-child:after
 { 
     content:"";
+}
+
+.brand {
+    font-family: 'arial';
+    font-size: 18px;
+    font-weight: 500;
+    color: #EEE;
+    -webkit-font-smoothing: antialiased;
+    padding: 12px 12px;
+    letter-spacing: 0.5px;
+    text-transform: capitalize;
+    background-color: #000;
+    display: inline-block;
+    float: right;
+    margin: 10px 0 26px 0;
 }

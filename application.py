@@ -5,17 +5,12 @@ from flask import Flask, jsonify
 from app import services
 from config import *
 from pymongo import MongoClient
-
 from bson import Binary, Code
 from bson.json_util import dumps
 
 import logging
 from logging.handlers import RotatingFileHandler
 import uuid
-
-
-# if not app.debug:
-    
 
 app = Flask(__name__)
 
