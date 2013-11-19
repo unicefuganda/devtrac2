@@ -51,9 +51,7 @@ angular.module("dashboard")
                 if(value)
                     return key;
             });
-        }
-
-
+        };
         
         var filterProjects = function(features, projectFilter) {
             var partners = getUniquePartners(features);

@@ -24,6 +24,9 @@ def end_timing(scenario):
 @after.all
 def teardown_all(self):
     world.browser.quit()
+
+    # Comment this in to get a output of how fast each test in running, and how many times wait for runs (each wait for is 0.5 second)
+
     # print ("Number of Waits = %s" % globals.wait_count)
 
     # for timing in globals.method_timings:
