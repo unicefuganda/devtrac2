@@ -10,7 +10,7 @@ class ProductionConfig(Config):
 
 class DevelopmentConfig(Config):
     SERVER_NAME='localhost:5000'
-    ASSETS_DEBUG = False
+    ASSETS_DEBUG = True
     SEND_FILE_MAX_AGE_DEFAULT = 0
     DATA_DIR = "db/data/test"
     USE_LOCAL_GEOJSON = True

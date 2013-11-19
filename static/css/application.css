@@ -1014,19 +1014,6 @@ div.pagination > ul > li > span {
   font-size: 14px;
 }
 
-.image-container {
-  text-align: center;
-  margin: auto;
-  margin-left: 200px;
-  height: 336px;
-  width: 350px;
-  background: rgba(0, 0, 0, 0.75);
-  overflow: hidden;
-  float: left;
-  display: -webkit-inline-flex;
-  border-style: solid;
-  border-width: 3px;
-}
 .modal-backdrop {
   width: 0px;
 }
@@ -1099,12 +1086,12 @@ div.pagination > ul > li > span {
     text-align: center;
     margin: auto;
     margin-left: 200px;
-    height: 350px;
+    height: 325px;
     width: 350px;
     background: rgba(0, 0, 0, 0.75);
     overflow: hidden;
     float: left;
-    padding: 10px 0;
+    padding: 0 0;
     display: -webkit-inline-flex;
     border-style: groove;
     border-width: 3px;

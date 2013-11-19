@@ -268,18 +268,36 @@ angular.module("dashboard").directive('map', function() {
 })
 .directive('siteVisitModal',  function(){
     return {
+        scope: false,
         link: function(scope, element, attrs) {
-            scope.$watch('siteVisit.selected',function(siteVisit){
-                if(siteVisit ==null)
+
+             $('#siteVisitModal').on('hidden.bs.modal', function () {
+                 scope.$apply(function() {
+                    scope.siteVisit.selected = null;
+                    scope.project.selected = null;
+                 });
+            });
+
+            scope.$watch('siteVisit',function(siteVisit){
+                if(siteVisit.selected == null) 
                     return;
                 $('#siteVisitModal').modal('show');
+                
+            }, true);
+
+            $('#projectModal').on('hidden.bs.modal', function () {
+                 scope.$apply(function() {
+                    scope.siteVisit.selected = null;
+                    scope.project.selected = null;
+                 });
             });
 
             scope.$watch('project.selected',function(project){
-                if(project ==null)
+                if(project == null)
                     return;
                 $('#projectModal').modal('show');
-            });
+            }, true);
+
         }
     }
 });
