@@ -1,5 +1,4 @@
 from lettuce import *
-from page import *
 from nose.tools import *
 from time import *
 

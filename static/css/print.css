@@ -14,7 +14,6 @@ h1 {
     font-weight: normal;
     text-transform: capitalize;
     display: inline-block;
-    /*float: left;*/
     white-space:nowrap;
 }
 
@@ -103,7 +102,7 @@ ul.siteVisits {
 
 .project-description li:last-child:after
 { 
-    content:"";
+    content: "";
 }
 
 .brand {

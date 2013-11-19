@@ -1,6 +1,6 @@
 from lettuce import *
 from splinter import Browser
-from page import Page
+from pages.page import Page
 import datetime
 import globals
 

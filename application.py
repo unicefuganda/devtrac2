@@ -116,7 +116,7 @@ def download_pdf(locator):
 	filename = "%s.pdf" % str(uuid.uuid1())
 	os.system("phantomjs scripts/rasterize.js 'http://%s/print?locator=%s' %s/%s letter" % (servername, locator, app.config['PDF_FOLDER'], filename))
 
-	return send_from_directory(app.config['PDF_FOLDER'], filename, as_attachment=False, attachment_filename='devtrac_report.pdf')
+	return send_from_directory(app.config['PDF_FOLDER'], filename, as_attachment=False)
 
 def __mongo_connection():
 	return MongoClient().devtrac2

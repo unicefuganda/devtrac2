@@ -4,14 +4,12 @@ from pprint import pprint
 import globals
 
 class Page:
-    base_url = "http://localhost:5000"
-    wait_count = 0
     
     def __init__(self, browser):
         self.browser = browser
 
     def visit_national_dashboard(self):
-        self.browser.visit("%s/?basemap=test" % self.base_url)
+        self.browser.visit("%s/?basemap=test" % globals.base_url)
 
     def visit_dashboard(self, location_name):
         locations = location_name.lower().split(", ")
@@ -27,7 +25,7 @@ class Page:
 
         if (len(locations) > 3):
             url += ("/%s" % locations[3]) 
-        self.browser.visit("%s/dashboard%s?basemap=test" % (self.base_url, url))
+        self.browser.visit("%s/dashboard%s?basemap=test" % (globals.base_url, url))
 
     def breadcrumbs(self):
         crumbs = map(lambda crumb:crumb.text, self.browser.find_by_css("#location .breadcrumb li"))

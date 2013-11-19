@@ -25,10 +25,6 @@
             DevTrac Global
         </div>
 
-        
-
-        <!-- <div map id='devtrac-map' style='width:600px;height:600px;'></div> -->
-
         <div ng-include="'/static/templates/summary.html'" class='summary-section'></div>
 
         <div ng-show='projects.length > 0'>
@@ -82,8 +78,6 @@
                         <ul>
                             <li ng-repeat="proj in project.locations | orderBy:['district','parish']" class='project-location'>{[{proj.district + "     District, " + proj.full_name()}]}
                             </li>
-
-
                         </ul>
                     </div>
                 </li>
