@@ -86,3 +86,17 @@ def then_the_funding_partners_filter_displays_options(step):
     world.page.wait_for(lambda page: page.funding_partners_chosen_options() == step.multiline)
     assert_multi_line_equal(world.page.funding_partners_chosen_options(), step.multiline)
 
+@step(u'Then I the projects legend labels are:')
+def then_i_the_projects_legend_labels_are(step):
+	assert_multi_line_equal.im_class.maxDiff = None
+	assert_multi_line_equal(world.page.project_legend_content(), step.multiline)
+
+@step(u'Then the legend color for "([^"]*)" is "([^"]*)"')
+def then_the_legend_color_for_agency_is_colour(step, agency, color):
+    assert world.page.has_legend_with(color, agency)
+
+@step(u'And I choose accountable agency radio')
+def and_i_choose_accountable_agency_radio(step):
+    world.page.choose_accountable_agency()
+
+

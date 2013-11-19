@@ -125,7 +125,9 @@ DT.Map = function(element, basemap) {
         $(".partner-legend ul").toggle(data.legendPartners.partners.length > 0)
         $.each(data.legendPartners.partners, function(index, partner) {
             var color = DT.markerColors[index];
-            projectLegendLabels +="<li><span class='legend-color' data-colorselected='"+color+"' style='background-color:"+ color +"'></span><span>" +partner+ "</span></li>";
+            if(partner == "Others")
+            	color = DT.otherColor
+            projectLegendLabels +="<li><span class='legend-color' data-colorselected='"+color+"' style='background-color:"+ color +"'></span><span class='legend-label' data-colorselected='"+color+"'>" +partner+ "</span></li>";
             $(".partner-legend ul").html(projectLegendLabels);
         });
     }

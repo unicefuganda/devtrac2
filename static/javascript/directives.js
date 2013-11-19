@@ -201,11 +201,11 @@ angular.module("dashboard").directive('map', function() {
     return {
         scope: true,
         link: function(scope, element, attrs){
-            scope.$watch('organisation', function(newOrganisation){
+            scope.$watch('filter.project.organisation', function(newOrganisation){
                 scope.show_financialOrg=false;
                 if(newOrganisation == null)
                     return
-                if(newOrganisation == 'accountable-agency'){
+                if(newOrganisation == 'FUNDING'){
                     $("#funding-org-select").val('').trigger("chosen:updated");
                     scope.show_financialOrg=false;
                 }else{

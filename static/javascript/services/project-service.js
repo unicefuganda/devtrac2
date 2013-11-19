@@ -2,11 +2,10 @@ angular.module("dashboard")
     .service("projectService", function(jsonService, geonodeService, summaryService) {
         var self = this;
         var getUniquePartners = function(features) {
-            var features = $.map(features, function(project, index) { return {
-                id: project.properties['PARTNER'],
-                name: project.properties['PARTNER'],
-            }});
-            return DT.unique(features).sort(function (partner1, partner2) { return partner1.name < partner2.name; });
+            var features = $.map(features, function(project, index) { 
+            	return project.properties['PARTNER']
+            });
+            return DT.unique(features).sort();
         };
 
         var getUniqueFinancialOrgs = function(features) {
@@ -117,13 +116,18 @@ angular.module("dashboard")
 
 
         this.partnerLegend = function(projectFilter, features) {
+        	console.log(projectFilter)
             if (projectFilter.partners != null && projectFilter.partners.length > 0)
             {
                 return { partners: projectFilter.partners, type: 'PARTNER'};
             } else if(projectFilter.financialOrgs != null && projectFilter.financialOrgs.length > 0) {
                 return { partners: projectFilter.financialOrgs, type: 'FINANCIAL'};
             }
-            return { partners: [], type: 'PARTNER' };
+
+            if(projectFilter.organisation == "FUNDING")
+            	return { partners: DT.defaultFundingPartners, type: 'PARTNER' };
+            else
+            	return { partners: DT.defaultFinancialPartners, type: 'FINANCIAL' };
         }
 
         this.partners = function() {

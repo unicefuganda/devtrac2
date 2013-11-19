@@ -10,7 +10,7 @@ DT.markerIcon = function(feature, data, layer_info){
     var circleIcon = new L.DivIcon({
         iconSize: new L.Point([10, 10]),
         className: layer_info.name + "-icon marker-icon ",
-        html: "<div class='icon-inner'' data-project-name='" + projectName + "' data-project-id = '" + projectId +  "' data-lat='"+feature.geometry.coordinates[1].toFixed(4) +"' data-lng='" + feature.geometry.coordinates[0].toFixed(4) + "'>"
+        html: "<div class='icon-inner' data-project-name='" + projectName + "' data-project-id = '" + projectId +  "' data-lat='"+feature.geometry.coordinates[1].toFixed(4) +"' data-lng='" + feature.geometry.coordinates[0].toFixed(4) + "'>"
             + "<i class='pin' ><span style='background-color:"+ DT.markerColors[legendIndex] + "'></span></i>" + 
         "</div>",
         popupAnchor: [5, -10]

@@ -5,7 +5,7 @@ angular.module("dashboard")
 .controller("DashboardCtrl", function($rootScope) {
     $rootScope.project = { list: null, selected: null };
     $rootScope.siteVisit = { list: null, selected: null };
-    $rootScope.filter = new DT.Filter({ health_center: false, water_point: false, school: true, site_visit_point: true, project: { status:{}, sector:{} } } );
+    $rootScope.filter = new DT.Filter({ health_center: false, water_point: false, school: true, site_visit_point: true, project: { organisation:"FUNDING", status:{}, sector:{}, } } );
 })
 .controller("IndicatorsCtrl", function($scope, $rootScope, heatmapService) {
     $rootScope.indicator = { selected: null }
@@ -66,7 +66,6 @@ angular.module("dashboard")
         return $scope.filter.project[collection] && $scope.filter.project[collection].indexOf(id) != -1
     };
 
-    $scope.organisation = "accountable-agency";
     $scope.partners = projectService.partners();
     $scope.financialOrgs = projectService.financialOrgs();
     $scope.sectors = projectService.sectors();

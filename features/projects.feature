@@ -231,6 +231,36 @@ Then the Sector filter displays options:
     Agriculture
     """
 
+Scenario: View Default Funding Partner Legend
+Given Given that I am a regular user
+When I go to the homepage
+Then I the projects legend labels are:
+	"""
+	USAID
+	UNICEF
+	"""
+Then the legend color for "USAID" is "red"
+Then the legend color for "UNICEF" is "blue"
+
+Scenario: View Default Accuntable Agency Legend
+Given Given that I am a regular user
+When I go to the homepage
+And I choose accountable agency radio
+Then I the projects legend labels are:
+	"""
+	DFID
+	Canada
+   	EU
+   	Others
+	"""
+Then the legend color for "DFID" is "red"
+Then the legend color for "Canada" is "blue"
+Then the legend color for "EU" is "green"
+Then the legend color for "Others" is "#D5D5D5"
+
+
+
+
 
 
 
