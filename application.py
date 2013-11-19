@@ -11,6 +11,7 @@ from bson.json_util import dumps
 
 import logging
 from logging.handlers import RotatingFileHandler
+import uuid
 
 
 # if not app.debug:
@@ -66,17 +67,6 @@ js = Bundle(
 
 assets.register('js_all', js)
 
-css = Bundle(
-	'css/lib/bootstrap.min.css', 
-	'css/lib/mapbox.css',
-	'css/lib/chosen.min.css',
-	'css/application.css',
-	'css/map.css',
-	
-     filters='cssmin', output='gen/packed.css')
-
-assets.register('css_all', css)
-
 @app.route("/")
 @app.route("/dashboard/<region>")
 @app.route("/dashboard/<region>/<district>")
@@ -121,11 +111,15 @@ def site_visits():
 	return Response(dumps(result), mimetype='application/json')
 
 
-@app.route("/download_pdf")
-def download_pdf():
+@app.route("/download_pdf/<locator>")
+@app.route("/devtrac_report/<locator>")
+def download_pdf(locator):
+
 	servername =  app.config['SERVER_NAME'] if app.config['SERVER_NAME'] != None else request.environ.get('SERVER_NAME')
-	os.system("phantomjs scripts/rasterize.js http://%s/print %s/test2.pdf letter" % (servername, app.config['PDF_FOLDER']))
-	return send_from_directory(app.config['PDF_FOLDER'], 'test2.pdf', as_attachment=True, attachment_filename='report.pdf')
+	filename = "%s.pdf" % str(uuid.uuid1())
+	os.system("phantomjs scripts/rasterize.js 'http://%s/print?locator=%s' %s/%s letter" % (servername, locator, app.config['PDF_FOLDER'], filename))
+
+	return send_from_directory(app.config['PDF_FOLDER'], filename, as_attachment=False, attachment_filename='devtrac_report.pdf')
 
 def __mongo_connection():
 	return MongoClient().devtrac2

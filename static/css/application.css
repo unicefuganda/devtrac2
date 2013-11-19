@@ -780,6 +780,15 @@ h3 {
 	overflow: hidden;
 }
 
+.area-header .download-pdf-link {
+  float: right;
+  display: inline-block;
+}
+
+.area-header h3 {
+  display: inline-block;
+}
+
 /* Bootstrap version 3 applied to a container div, fix for angular ui */
 
 div.pagination {

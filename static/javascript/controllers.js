@@ -185,8 +185,10 @@ angular.module("dashboard")
 
     $scope.$watch("location", updateSiteVisitList, true);
 })
-.controller("PrintCtrl", function($rootScope, $scope, projectService, summaryService, siteVisitService) {    
-    var location = new DT.Location({});
+.controller("PrintCtrl", function($rootScope, $scope, projectService, summaryService, siteVisitService, $location) {    
+
+    var locator = $location.search()['locator']
+    var location = DT.Location.fromName(locator);
 
     $rootScope.location = location;
     projectService.projects(location, {}).then(function(projects) {

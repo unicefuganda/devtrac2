@@ -22,74 +22,79 @@
     <body ng-controller='PrintCtrl'>
         <h1>{[{ location.full_name() }]}</h1>
 
+        <!-- <div map id='devtrac-map' style='width:600px;height:600px;'></div> -->
 
         <div ng-include="'/static/templates/summary.html'" class='summary-section'></div>
 
-        <h2>PROJECTS</h2>
+        <div ng-show='projects.length > 0'>
+            <h2>PROJECTS</h2>
 
-        <ul class='projects'>
-            <li ng-repeat='project in projects'>
-                <h3>{[{project.name}]}</h3>
+            <ul class='projects'>
+                <li ng-repeat='project in projects'>
+                    <h3>{[{project.name}]}</h3>
 
-                <ul class='project-info'>
-                    <li>
-                        <label>Sector:</label>
-                        <span >{[{project.sector}]}</span>      
-                    </li>
-                    <li>
-                        <label>Accountable Agency:</label>
-                        <span>{[{project.partner}]}</span>      
-                    </li>
-                    <li>
-                        <label>Financial Organization:</label>
-                        <span>{[{project.financialOrganization}]}</span>      
-                    </li>
-                    <li>
-                        <label>Implementing Partner:</label>
-                        <span>{[{project.implementingPartner}]}</span>      
-                    </li>
-                </ul>
-                <ul>
-                    
-                    <li>
-                        <label>Actual Duration:</label>
-                        <span >{[{project.startActual}]} - {[{project.endActual}]}</span>      
-                    </li>
-                    <li>
-                        <label>Planned Duration:</label>
-                        <span >{[{project.startPlanned}]} - {[{project.endPlanned}]}</span>      
-                    </li>
-                    <li>
-                        <label>Status:</label>
-                        <span>{[{project.status}]}</span>      
-                    </li>
-                </ul>
-
-                
-
-                <div class='project-description'>
-                    <p>
-                        {[{project.description}]}
-                    </p>
-                    <h4>Locations</h4>
-                    <ul>
-                        <li ng-repeat="proj in project.locations | orderBy:['district','parish']" class='project-location'>{[{proj.district + "     District, " + proj.full_name()}]}
+                    <ul class='project-info'>
+                        <li>
+                            <label>Sector:</label>
+                            <span >{[{project.sector}]}</span>      
                         </li>
-
-
+                        <li>
+                            <label>Accountable Agency:</label>
+                            <span>{[{project.partner}]}</span>      
+                        </li>
+                        <li>
+                            <label>Financial Organization:</label>
+                            <span>{[{project.financialOrganization}]}</span>      
+                        </li>
+                        <li>
+                            <label>Implementing Partner:</label>
+                            <span>{[{project.implementingPartner}]}</span>      
+                        </li>
                     </ul>
-                </div>
-            </li>
-        </ul>
+                    <ul>
+                        
+                        <li>
+                            <label>Actual Duration:</label>
+                            <span >{[{project.startActual}]} - {[{project.endActual}]}</span>      
+                        </li>
+                        <li>
+                            <label>Planned Duration:</label>
+                            <span >{[{project.startPlanned}]} - {[{project.endPlanned}]}</span>      
+                        </li>
+                        <li>
+                            <label>Status:</label>
+                            <span>{[{project.status}]}</span>      
+                        </li>
+                    </ul>
 
-        <h2>SITE VISITS</h2>
+                    
 
-        <ul class='siteVisits'>
-            <li ng-repeat='s in siteVisits'>
-                <h3>{[{s.title}]}</h3>
-                {[{s.summary}]}
-            </li>
-        </ul>
+                    <div class='project-description'>
+                        <p>
+                            {[{project.description}]}
+                        </p>
+                        <h4>Locations</h4>
+                        <ul>
+                            <li ng-repeat="proj in project.locations | orderBy:['district','parish']" class='project-location'>{[{proj.district + "     District, " + proj.full_name()}]}
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div ng-show='siteVisits.length > 0'>
+            <h2>SITE VISITS</h2>
+
+            <ul class='siteVisits'>
+                <li ng-repeat='s in siteVisits'>
+                    <h3>{[{s.title}]}</h3>
+                    {[{s.summary}]}
+                </li>
+            </ul>
+        </div>
 
     </body>
 </html>

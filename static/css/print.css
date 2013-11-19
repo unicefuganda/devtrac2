@@ -12,6 +12,7 @@ h1 {
     font-size: 36px;
     margin: 26px 0px;
     font-weight: normal;
+    text-transform: capitalize;
 }
 
 h2 {
@@ -19,12 +20,14 @@ h2 {
     margin: 13px 0px;
     padding-bottom: 6px;   
     font-weight: normal;
+    text-transform: uppercase;
 }
 
 h3 {
     color: black;
     font-size: 13px;
     font-weight: bold;
+    text-transform: capitalize;
 }
 
 ul.projects {
@@ -90,7 +93,7 @@ ul.siteVisits {
 
 .project-description li:after
 { 
-    content:"\00a0\00a0•\00a0\00a0";
+    content:"\00a0•\00a0";
 }
 
 .project-description li:last-child:after
