@@ -50,37 +50,33 @@ DT.markerPopup = function(feature,layer_info){
 DT.projectMarker = function(map, feature, data, layer_info){
     var coordinates = feature.geometry.coordinates;
 
-        var  circleIcon = DT.markerIcon(feature, data, layer_info);
+    var circleIcon = DT.markerIcon(feature, data, layer_info);
 
-        var markerOptions = {
-            zIndexOffset: 1000,
-            icon: circleIcon
-        };
+    var markerOptions = {
+        zIndexOffset: 1000,
+        icon: circleIcon
+    };
 
-        var projectSelectTimeout;
+    var projectSelectTimeout;
       
-        var marker = new L.Marker(new L.LatLng(coordinates[1], coordinates[0]), markerOptions);
+    var marker = new L.Marker(new L.LatLng(coordinates[1], coordinates[0]), markerOptions);
 
-        var popup = DT.markerPopup(feature, layer_info);
-        marker.bindPopup(popup);
+    var popup = DT.markerPopup(feature, layer_info);
+    marker.bindPopup(popup);
 
-        marker.on('mouseover', function() {
-                     projectSelectTimeout =  setTimeout(function(){
-                        marker.openPopup();
-                        map.selectProject(feature.properties['PROJECT_ID'])
-                    }, 500);
-        })            
-                .on('mouseout', function() {
-                    marker.closePopup();
-                    clearTimeout(projectSelectTimeout);
-                    map.unselectProject();
-                })
-                .on('click', function() { 
-                    if ($(".icon-inner").hasClass("selected-icon")) {
-                        map.unselectIconHandler(feature, layer_info.name);
-                    } else {
-                        map.selectIconHandler(feature, layer_info.name);
-                    }
-                });
-        return marker;
+    marker.on('mouseover', function() {
+         projectSelectTimeout =  setTimeout(function(){
+            marker.openPopup();
+            map.selectProject(feature.properties['PROJECT_ID'])
+        }, 500);
+    })            
+    .on('mouseout', function() {
+        marker.closePopup();
+        clearTimeout(projectSelectTimeout);
+        map.unselectProject();
+    })
+    .on('click', function() { 
+        map.selectIconHandler(feature, layer_info.name);
+    });
+    return marker;
 }
