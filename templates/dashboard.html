@@ -26,6 +26,7 @@
        </div>
       <div ng-if="indicator.selected != null" class='heatmap-legend'>
         <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
+        <div ng-include="'/static/templates/heatmap_name.html'"></div>
       </div>
     </div>
   
@@ -55,6 +56,8 @@
         </div>
     </div>
   </div>
+
+
 </div>
 
 {% assets "js_all" %}

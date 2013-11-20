@@ -67,7 +67,7 @@ DT.Map = function(element, basemap) {
 
     function addBoundaryLayer(name, location, features, layer_info) {
 
-        var popup = L.popup({ closeButton: false, offset: new L.Point(0, 44 ), className: "marker-popup" , autoPan: false});
+        var popup = L.popup({ closeButton: false, offset: new L.Point(0, 44), className: "marker-popup" , autoPan: false});
 
         var baseLayer = L.geoJson(features, {
             onEachFeature: function(data, layer) {
