@@ -28,6 +28,16 @@ class ReportPage:
 
     def file_content_type(self):
         return self.report.info()['Content-Type']
+
+    def funding_legend(self):
+        return self.browser.find_by_css(".partner-legend ul").text
+
+    def places_legend(self):
+        return self.browser.find_by_css(".places-legend ul").text
+
+    def header(self):
+        return self.browser.find_by_css("#print-title").text
+
     
         
         

@@ -1,5 +1,6 @@
 from lettuce import *
 from pages.report_page import *
+from pages.page import *
 from nose.tools import *
 import os
 import urllib2
@@ -8,6 +9,7 @@ import urllib2
 @step(u'When I open the report for \'([^\']*)\'')
 def when_i_download_the_report_for_group1(step, locator):
     world.report_page = ReportPage(world.browser)
+    world.page = Page(world.browser)
     world.report_page.open_report(locator)
 
 @step(u'Then the listed projects should be')
@@ -33,5 +35,19 @@ def download_report(step, locator):
 @step(u'Then the file is a pdf')
 def then_the_file_is_a_pdf(step):
     assert_equals(world.report_page.file_content_type(), 'application/pdf')
+
+@step(u'the funding partner legend contains')
+def then_the_funding_partner_legend_contains(step):
+    assert_multi_line_equal(world.report_page.funding_legend(), step.multiline)
+
+@step(u'the places legend contains')
+def then_the_places_legend_contains(step):
+    assert_multi_line_equal(world.report_page.places_legend(), step.multiline)
+
+@step('Then the header contains')
+def then_the_header_contains(step):
+    assert_multi_line_equal(world.report_page.header(), step.multiline)    
+
+
 
     

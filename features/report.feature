@@ -2,43 +2,48 @@ Feature: Report
 
 Scenario: Basic Report Content
 When I open the report for 'Buganda, Kalangala'
+Then the header contains 
+    """
+    Kalangala District
+    Buganda Region
+    """
 Then the listed projects should be
     """
-        Envision
-        Kalangala Infrastructure Services (KIS)
-        Quality Education Through BRMS And ECD And VSO Volunteers
-        STRIDES For Family Health
-        Strengthening Decentralization For Sustainability (SDS)
-        Strengthening Local Government Responses To OVC (SUNRISE OVC)
-        Technical Management Agency For The Civil Society Fund (TMA-CSF)
+    Envision
+    Kalangala Infrastructure Services (KIS)
+    Quality Education Through BRMS And ECD And VSO Volunteers
+    STRIDES For Family Health
+    Strengthening Decentralization For Sustainability (SDS)
+    Strengthening Local Government Responses To OVC (SUNRISE OVC)
+    Technical Management Agency For The Civil Society Fund (TMA-CSF)
     """
 And the listed sites visits should be
     """
-        Site Visit At Amyel Catholic Church
-        Site Visit At Arivu Church, Arivu Sub County (FHDs Monitoring)
+    Site Visit At Amyel Catholic Church
+    Site Visit At Arivu Church, Arivu Sub County (FHDs Monitoring)
     """
 And the summary should be
     """
-        Health Centers
-        16
-        Schools
-        26
-        Water Points
-        221
-        Subcounties
-        7
-        2011 Population
-        62,000
-        Children vaccinated against Diphtheria
-        218%
-        Children vaccinated against Measles
-        105%
-        Deliveries in Health Facilities
-        12%
-        Pit latrine coverage percentage
-        56%
-        Safe Water coverage percentage
-        56%
+    Health Centers
+    16
+    Schools
+    26
+    Water Points
+    221
+    Subcounties
+    7
+    2011 Population
+    62,000
+    Children vaccinated against Diphtheria
+    218%
+    Children vaccinated against Measles
+    105%
+    Deliveries in Health Facilities
+    12%
+    Pit latrine coverage percentage
+    56%
+    Safe Water coverage percentage
+    56%
     """
 
 # This test basically makes sure that the client is able to download a pdf 
@@ -49,11 +54,19 @@ Scenario: Download Report
 When I download the report for 'Buganda, Kalangala'
 Then the file is a pdf
 
-@wip
 Scenario: Add Map to report
-Given that I have opened the dashboard for "Acholi, Gulu, Paicho"
-When I download the report for "Acholi, Gulu, Paicho"
-Then the report should contain a map displaying "Acholi, Gulu, Paicho"
-And legend of "Implementing Partners" and "Places"
-
+When I open the report for 'Acholi, Gulu, Paicho'
+Then the "parish" layer for "Acholi, Gulu, Paicho" is displayed
+And the funding partner legend contains
+    """
+    USAID
+    UNICEF
+    """
+And the places legend contains
+    """
+    Schools
+    Health Centers
+    Water Points
+    Site Visits
+    """
 
