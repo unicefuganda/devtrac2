@@ -48,3 +48,12 @@ And the summary should be
 Scenario: Download Report
 When I download the report for 'Buganda, Kalangala'
 Then the file is a pdf
+
+@wip
+Scenario: Add Map to report
+Given that I have opened the dashboard for "Acholi, Gulu, Paicho"
+When I download the report for "Acholi, Gulu, Paicho"
+Then the report should contain a map displaying "Acholi, Gulu, Paicho"
+And legend of "Implementing Partners" and "Places"
+
+

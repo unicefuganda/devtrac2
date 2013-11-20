@@ -82,3 +82,4 @@ Then the site visit details should have content:
     Summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque varius tellus id mi dapibus vehicula vitae quis elit. Sed porttitor dolor consectetur elit egestas mollis. Curabitur non ante porttitor, pharetra metus eu, blandit neque. Curabitur eget rutrum sapien. Vestibulum blandit massa quis turpis laoreet, et ornare justo ornare. Etiam aliquet faucibus neque at ornare. Quisque vestibulum, erat in scelerisque ornare, ipsum quam elementum felis, sed congue elit urna sit amet mauris. Sed porta volutpat dui vitae accumsan. Nullam id dignissim orci. Duis interdum elit eu massa facilisis nullam.
     Location: Mbaru Catholic Church   
     """
+
