@@ -21,6 +21,12 @@
   margin: 6px 10px;
 }
 
+.location-popup { 
+  text-transform: capitalize;
+  font-size: 13px;
+}
+
+
 .marker-icon {
  width: 10px;
  height: 10px;

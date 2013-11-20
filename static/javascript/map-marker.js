@@ -65,8 +65,9 @@ DT.projectMarker = function(map, feature, data, layer_info){
     marker.bindPopup(popup);
 
     marker.on('mouseover', function() {
+         marker.openPopup();
+
          projectSelectTimeout =  setTimeout(function(){
-            marker.openPopup();
             map.selectProject(feature.properties['PROJECT_ID'])
         }, 500);
     })            

@@ -66,13 +66,32 @@ DT.Map = function(element, basemap) {
     }
 
     function addBoundaryLayer(name, location, features, layer_info) {
+
+        var popup = L.popup({ closeButton: false, offset: new L.Point(0, 44 ), className: "marker-popup" , autoPan: false});
+
         var baseLayer = L.geoJson(features, {
             onEachFeature: function(data, layer) {
+                var layerLocation = layer_info.getLocation(data)
                 var options = $.extend({}, layer_info, {
                     clickLayerHandler: function(layer) {
                         self.clickDistrictHandler(layer.location);
                     },
-                    location: layer_info.getLocation(data),
+                    location: layerLocation
+                });
+
+                layer.on("mousemove", function(e) {
+                    if (!popup._isOpen) {
+                        popup
+                            .setLatLng(e.latlng)
+                            .setContent("<span class='location-popup'>" + layerLocation.full_name() + "</span>")
+                            .openOn(map)
+
+                    } else {
+                        popup.setLatLng(e.latlng);
+                    }
+                })
+                .on("mouseout", function(e){ 
+                    map.closePopup();
                 });
 
                 var layer = new DT.Layer(layer, options, data.properties, map);
@@ -102,6 +121,7 @@ DT.Map = function(element, basemap) {
                     icon: circleCluster
                 };
                 var marker = new L.Marker(centerPoint, geojsonMarkerOptions);
+
                 layerGroup.addLayer(marker);
             }
         });
