@@ -973,24 +973,11 @@ div.pagination > ul > li > span {
   margin: 15px;
   height: 250px;
   list-style-type: none;
-  /*margin-left: 5px;
-  max-height: 5px;
-  margin-bottom: 20px;*/
 }
 
 .img-display {
  margin: auto;
 }
-
-/*.img-display img {
-  height: 200px;
-  width: 300px;
-  display: inline;
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-<<<<<<< HEAD
-}*/
 
 .image-caption {
   word-wrap: break-word;
@@ -1078,44 +1065,45 @@ div.pagination > ul > li > span {
   margin: auto;
   margin-left: 200px;
   height: 325px;
-  width: 350px;
+  width: 365px;
   background: rgba(0, 0, 0, 0.75);
   overflow: hidden;
   float: left;
   padding: 0 0;
   display: -webkit-inline-flex;
-  border-style: groove;
+  border-style: solid;
   border-width: 3px;
-}
-.modal-backdrop {
-  width: 0px;
-}
+  }
 
-.modal-body {
-  position: relative;
-  overflow-y: auto;
-  max-height: 550px;
-  width: 800px;
-  padding: 10px;
-}
+  .modal-backdrop {
+    width: 0px;
+  }
+
+  .modal-body {
+    position: relative;
+    overflow-y: scroll;
+    max-height: 550px;
+    width: 800px;
+    padding: 10px;
+  }
 
 
-.modal-dialog {
-  opacity: 0.9;
-  margin-top: 25px;
-  max-height: 600px;
-  width: 820px;
-}
-.carousel-caption {
-  margin-bottom: -120px;
-  background: rgba(0, 0, 0, 0.75);
-  color: #ffffff;
-  line-height: 20px;
-  margin-left: -69px;
-  width: 350px;
-  height: 100px;
-  word-wrap: break-word;
-}
+  .modal-dialog {
+    opacity: 0.9;
+    margin-top: 25px;
+    max-height: 600px;
+    width: 820px;
+  }
+  .carousel-caption {
+    margin-bottom: -120px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+    line-height: 20px;
+    margin-left: -69px;
+    width: 365px;
+    height: 100px;
+    word-wrap: break-word;
+  }
 
 .filter-panel .close-panel{
  font-size: 14px;

@@ -43,6 +43,8 @@ DT.projectMarker = function(map, feature, data, layer_info){
             zIndexOffset: 1000,
             icon: circleIcon
         };
+
+        var projectSelectTimeout;
       
         var marker = new L.Marker(new L.LatLng(coordinates[1], coordinates[0]), markerOptions);
 
@@ -50,19 +52,21 @@ DT.projectMarker = function(map, feature, data, layer_info){
         marker.bindPopup(popup);
 
         marker.on('mouseover', function() {
-                    marker.openPopup();
-                })
+                     projectSelectTimeout =  setTimeout(function(){
+                        marker.openPopup();
+                        map.selectProject(feature.properties['PROJECT_ID'])
+                    }, 500);
+        })            
                 .on('mouseout', function() {
                     marker.closePopup();
+                    clearTimeout(projectSelectTimeout);
+                    map.unselectProject();
                 })
                 .on('click', function() { 
                     if ($(".icon-inner").hasClass("selected-icon")) {
                         map.unselectIconHandler(feature, layer_info.name);
-                        map.unselectProject();
-                        
                     } else {
                         map.selectIconHandler(feature, layer_info.name);
-                        map.selectProject(feature.properties['PROJECT_ID']);
                     }
                 });
         return marker;
