@@ -65,8 +65,6 @@ And the funding partner legend contains
 And the places legend contains
     """
     Schools
-    Health Centers
-    Water Points
     Site Visits
     """
 

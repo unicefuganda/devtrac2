@@ -267,9 +267,38 @@ Then the places legend header is "Places"
 Then the places legend labels are:
     """
     Schools
-    Health Centers
+    """
+
+Scenario: Synchronise Places legend with water-point filter
+Given that I am a regular user
+When I go to the homepage  
+And I toggle the 'water-point' checkbox
+Then the places legend labels are:
+    """
+    Schools
     Water Points
     """
+
+Scenario: Synchronise Places legend with water-point filter
+Given that I am a regular user
+When I go to the homepage  
+And I toggle the 'health-center' checkbox
+Then the places legend labels are:
+    """
+    Schools
+    Health Centers
+    """
+
+Scenario: Synchronise Places legend with site-visits filter
+Given that I am a regular user
+When I open dashboard for "Acholi,"
+Then the places legend labels are:
+    """
+    Schools
+    Site Visits
+    """
+
+
 
 
 
