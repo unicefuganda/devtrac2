@@ -15,8 +15,10 @@ angular.module("dashboard").directive('map', function() {
                 } else if (layerName == 'site-visit-point') {
 
                     siteVisitService.siteVisitDetail(feature.properties['Id']).then(function(newSiteVisit) {
+                         console.log(newSiteVisit);
                          $scope.siteVisit.selected = newSiteVisit;
                     });
+
                 }
             }
             $scope.getData = function(locationKeys) {
@@ -241,7 +243,6 @@ angular.module("dashboard").directive('map', function() {
             });
 
             map.addLayer(layer);
-            // map.setView('')
         }
     }
 })

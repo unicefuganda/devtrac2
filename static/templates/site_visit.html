@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 	<div class="devtrac-link">
 		<a target="_blank" href="{[{siteVisit.selected.sitevisit_url}]}">Open In Devtrac</a>
 	</div>
@@ -58,3 +59,76 @@
 	</div>
 	<!-- <a class='back-to-area-link' ng-click='siteVisit.selected=null' href=''>Back to {[{location.full_name();}]}</a> -->
 
+=======
+<!-- <div class="well tinted-background" id="site-visit-popup"> -->
+	 <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" ng-click="open()">
+        Launch demo modal
+        </button>  
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+          <div class="modal-dialog">
+            <div class="modal-content" >
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">{[{siteVisit.selected.title}]}</h4>
+              </div>
+              <div class="modal-body">
+              <!--  <div ng-include="'/static/templates/site_visit.html'"></div> -->
+              <div>
+                  <a class='back-to-area-link' ng-click='siteVisit.selected=null' href=''>Back to {[{location.full_name();}]}</a>
+                </div>
+                <div class="well-header" id="site-visit" style="color: black;">
+                  <!-- <h3>{[{siteVisit.selected.title}]}</h3>                     -->
+                </div>
+                <div class="devtrac-link">
+                  <a target="_blank" href="{[{siteVisit.selected.sitevisit_url}]}">Open In Devtrac</a>
+                </div>
+                <div id="site-visit-details" style="clear:both">
+                  <ul>
+                    <li>
+                      <label>Author: </label>
+                      <span>{[{siteVisit.selected.author}]}</span>
+                      
+                    </li>
+                    <li>
+                      <label>Date visited: </label>
+                      <span>{[{siteVisit.selected.date}]}</span>
+                    </li>
+                    <li>
+                      <label >Subject: </label>
+                      <span>{[{siteVisit.selected.subject}]}</span>
+                    </li>
+                    <li>
+                      <label>Organisation: </label>
+                      <span>{[{siteVisit.selected.organisation}]}</span>
+                    </li>
+                    <li>
+                      <label>Place Type: </label>
+                      <span>{[{siteVisit.selected.placetype}]}</span>
+                    </li>
+                    <li>
+                      <label>Summary: </label>
+                      <span>{[{siteVisit.selected.summary}]}</span>
+                    </li>
+                    <li>
+                      <label>Location: </label>
+                      <span>{[{siteVisit.selected.location}]}</span>
+                    </li>
+                  </ul> 
+                  <div class="image-container">
+                    <div class="img-display" ng-repeat="image in siteVisit.selected.images">
+                      <div><img src="{[{image.img}]}"/></div>
+                      <div class="image-caption">{[{image.caption}]}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+             <!--    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+       
+<!-- </div> -->
+>>>>>>> Stashed changes

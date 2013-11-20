@@ -17,12 +17,21 @@
       <div id='right-hand-container'>
         <div map id='devtrac-map'></div>
         <div ng-include="'/static/templates/legend.html'"></div>
+        <div ng-if="indicator.selected != null" class='heatmap-legend'>
+          <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
+        </div>
+        <div ng-show='siteVisit.selected != null '>
+            <div ng-include="'/static/templates/site_visit.html'"></div> 
+       </div>   
+       </div>
+      <div ng-if="indicator.selected != null" class='heatmap-legend'>
+        <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
       </div>
     </div>
-
+  
     <div panel panel-expand='{"bottom":"-58px"}' panel-collapse='{"bottom":"-96%"}' class='filter-panel expanded dt-panel ng-cloak' id="filter-panel">
      <div class="close-panel" ><span class="glyphicon glyphicon-chevron-down"></span></div>
-     <div ng-include="'/static/templates/breadcrumb.html'" class='breadcrumb-section'></div>
+     
 
      <div class='filters-container'>  
       <div ng-include="'/static/templates/filters.html'" class='filters-section'></div>
@@ -39,12 +48,11 @@
       <div ng-include="'/static/templates/project_modal.html'"></div>
     </div>
   </div>
-  
-  <div class='detail-panel'>
-    <div class='container'>
-      <div >
-        <div ng-include="'/static/templates/area.html'"></div> 
-      </div>
+    <div class='detail-panel'>
+      <div class='container'>
+        <div >
+          <div ng-include="'/static/templates/area.html'"></div> 
+        </div>
     </div>
   </div>
 </div>

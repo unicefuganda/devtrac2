@@ -17,7 +17,7 @@ DT.SiteVisit = function(properties) {
                 {img: '/static/images/site-visit/site-visit_1.jpeg', caption: 'Mr. Isale Richard of Naweet P.S sending text to eduTrac to join.'},
                 {img: '/static/images/site-visit/site-visit_2.jpeg', caption: 'Some of the solar charged lanterns with phone charging capability that were given by UNICEF in Nakapiripirit and Amudat.'},
                 {img: '/static/images/site-visit/site-visit_3.jpeg', caption: 'Mr. Isale Richard of Naweet P.S stands at a vantage point in the school compound to continue receiving messages'}
-    ]
+        ]
 
     this.feature = { 
         type: 'Feature',

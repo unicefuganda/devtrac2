@@ -136,6 +136,7 @@ DT.Map = function(element, basemap) {
         $(".icon-inner[data-project-id='" +  projectId + "']").addClass("selected-icon");
     };
 
+
     self.unselectProject = function() {
         $(".icon-inner").removeClass("disabled-icon selected-icon");
     }

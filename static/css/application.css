@@ -195,7 +195,7 @@ h3 {
   	margin-bottom: 0px;
   	padding: 5px 6px;
   	text-transform: capitalize;
-  	background-color: rgb(36, 36, 36);
+  	background-color: rgb(0, 0, 0);
   }
 
   #location h2 {
@@ -248,11 +248,13 @@ h3 {
 
   }
   .breadcrumb-section {
-  	padding-top: 15px;
+  	padding-top: 5px;
   	position: absolute;
   	height: 80px;
-  	width: 335px;
+  	width: 600px;
   	cursor: pointer;
+    margin-left: -800px;
+    text-align: center;
   }
 
   .filters-section {
@@ -711,6 +713,10 @@ h3 {
 	background-color: #EEE;
 
 }
+#site-visit {
+ font-style: normal;
+ color: black;!important
+}
 
 #site-visit-list .site-visit {
 	/*border-bottom: 1px solid #CCC;*/
@@ -1143,22 +1149,54 @@ div.pagination > ul > li > span {
   float: left;
 }
 
-.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+.rollover_img {
+  width: 280px;
+  height: 150px;
+  background-image: url(land.jpg); 
+  background-position: top;
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border:10px solid #ccc;
+  font:13px normal Arial, Helvetica, sans-serif;
+  line-height:18px;
+  float:left;
+  margin:0 10px 10px 0;
+}
+
+.rollover_img img {
+  color: #fff;
+  width: 280px;
+  height: 150px;
   display: block;
-  height: 325px;
-  max-width: 100%;
-  line-height: 1;
+  text-decoration: none;
 }
 
-.carousel-inner {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  height: 372px;!important;
-  margin-top: -9px;
+.rollover_img img:hover {
+  background:#000;
+  opacity:.60;
+  filter:alpha(opacity=60);
 }
 
-.carousel-inner>.active {
-  height: 228px;
+.rollover_img img span {
+  display: none;
+  width: 280px;
+  padding:5px;
+}
+
+.rollover_img img:hover span {
+  display: block;
+}
+
+#site-visit-popup{
+  color: black;
+  position:fixed;
+  width:800px;
+  height:550px;
+  margin:-300px auto auto -250px;
+  top:50%;
+  left:50%;
+  opacity: 0.9;
+  text-align: -webkit-auto;!important
+  text-align:center;
 }
 

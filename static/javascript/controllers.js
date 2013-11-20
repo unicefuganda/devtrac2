@@ -205,4 +205,5 @@ angular.module("dashboard")
     siteVisitService.siteVisits(location).then(function(siteVisits) {
       $rootScope.siteVisits = siteVisits;  
     })
+
 });
