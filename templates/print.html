@@ -30,10 +30,7 @@
         </header>
 
         <div map id='devtrac-map'></div>
-        <div class="partner-legend">
-            <h4>Projects</h4>
-            <ul></ul>
-        </div>
+        <div ng-include="'/static/templates/legend.html'"></div>
 
         <section id='summary-section'>
             <h2>SUMMARY</h2>
@@ -80,8 +77,6 @@
                             <span>{[{project.status}]}</span>      
                         </li>
                     </ul>
-
-                    
 
                     <div class='project-description'>
                         <p>

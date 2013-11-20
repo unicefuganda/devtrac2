@@ -1,0 +1,37 @@
+<div class="legends">
+  <div ng-if="indicator.selected != null" class='heatmap-legend'>
+
+    <div class="legend-header">Indicators</div>
+    <div class="legend-content">
+      <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />            
+    </div>
+  </div>
+
+  <div class="partner-legend">
+    <div class="legend-header">
+      {[{ filter.project.organisation == "FUNDING" ? "Funding Agencies" : "Accountable Agencies" }]}
+    </div>
+    <ul></ul>
+  </div>
+  <div class="places-legend">
+    <div class="legend-header">Places</div>
+    <ul>
+      <li>
+        <span class="school-legend places-legend-icon"></span>
+        <span >Schools</span>
+      </li>   
+      <li>
+        <span class="health-center-legend places-legend-icon"></span>
+        <span class="legend-label">Health Centers</span>
+      </li> 
+      <li>
+        <span class="water-point-legend places-legend-icon"></span>
+        <span class="legend-label">Water Points</span>
+      </li>
+      <li ng-hide="location.level() == 'national'">
+        <span class="site-visit-legend places-legend-icon"></span>
+        <span class="legend-label">Site Visits</span>
+      </li>
+    </ul> 
+  </div>
+</div>

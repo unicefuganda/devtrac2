@@ -217,7 +217,7 @@
 
 .partner-legend, .heatmap-legend, .places-legend {
   margin-top: 10px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.9);
   min-width: 125px;
   border-radius: 2px;
   -moz-border-radius: 2px;
@@ -225,7 +225,7 @@
   box-shadow: rgba(0, 0, 0, 0.2) 0 1px 3px 0px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 3px 0px;
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 3px 0px;
-  opacity: 0.9;
+  
 }
 
 .legend-color{

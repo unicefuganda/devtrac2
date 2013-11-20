@@ -156,19 +156,9 @@ ul.siteVisits {
 }
 
 .partner-legend {
-    clear: both;
     position: static;
     display: inline-block;
-    border: 1px solid #BBB;
     margin-top: 20px;
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none; 
-    border-radius: 0;
-
-    box-shadow: rgba(0, 0, 0, 0) 0 0 0 0 ;
-    -webkit-box-shadow: rgba(0, 0, 0, 0) 0 0 0 0;
-    -moz-box-shadow: rgba(0, 0, 0, 0) 0 0 0 0;
 }
 
 .partner-legend ul {
@@ -181,3 +171,23 @@ ul.siteVisits {
     margin-bottom: 0px;
     margin-top: 10px;
 }
+
+.legends {
+    position: static;
+    margin: 10px 0;
+}
+
+.legends .partner-legend {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+    margin-right: 10px;
+}
+
+.legends .places-legend {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+}
+
+
