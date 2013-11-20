@@ -234,7 +234,8 @@ Then the Sector filter displays options:
 Scenario: View Default Funding Partner Legend
 Given Given that I am a regular user
 When I go to the homepage
-Then I the projects legend labels are:
+Then the accountable agency legend header is "Funding Agencies"
+Then the projects legend labels are:
 	"""
 	USAID
 	UNICEF
@@ -246,7 +247,8 @@ Scenario: View Default Accuntable Agency Legend
 Given Given that I am a regular user
 When I go to the homepage
 And I choose accountable agency radio
-Then I the projects legend labels are:
+Then the accountable agency legend header is "Accountable Agencies"
+Then the projects legend labels are:
 	"""
 	DFID
 	Canada
@@ -257,6 +259,18 @@ Then the legend color for "DFID" is "red"
 Then the legend color for "Canada" is "blue"
 Then the legend color for "EU" is "green"
 Then the legend color for "Others" is "#D5D5D5"
+
+Scenario: View Default Places Legend
+Given Given that I am a regular user
+When I go to the homepage
+Then the places legend header is "Places"
+Then the places legend labels are:
+    """
+    Schools
+    Health Centers
+    Water Points
+    """
+
 
 
 

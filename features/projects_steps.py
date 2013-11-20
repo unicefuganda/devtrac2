@@ -86,8 +86,8 @@ def then_the_funding_partners_filter_displays_options(step):
     world.page.wait_for(lambda page: page.funding_partners_chosen_options() == step.multiline)
     assert_multi_line_equal(world.page.funding_partners_chosen_options(), step.multiline)
 
-@step(u'Then I the projects legend labels are:')
-def then_i_the_projects_legend_labels_are(step):
+@step(u'Then the projects legend labels are:')
+def then_the_projects_legend_labels_are(step):
 	assert_multi_line_equal.im_class.maxDiff = None
 	assert_multi_line_equal(world.page.project_legend_content(), step.multiline)
 
@@ -98,5 +98,18 @@ def then_the_legend_color_for_agency_is_colour(step, agency, color):
 @step(u'And I choose accountable agency radio')
 def and_i_choose_accountable_agency_radio(step):
     world.page.choose_accountable_agency()
+
+@step(u'Then the accountable agency legend header is "([^"]*)"')
+def then_the_accountable_agency_legend_header_is(step, header):
+    assert_equals(world.page.partner_legend_title(), header)
+
+@step(u'Then the places legend header is "([^"]*)"')
+def then_the_places_legend_header_is(step, header):
+    assert_equals(world.page.places_legend_title(), header)
+
+@step(u'Then the places legend labels are:')
+def then_the_places_legend_labels_are(step):
+    assert_multi_line_equal.im_class.maxDiff = None
+    assert_multi_line_equal(world.page.places_legend_content(), step.multiline)
 
 

@@ -255,6 +255,20 @@ class Page:
         self.browser.find_link_by_text("Projects/Partners").click()
         self.browser.choose("organisationsRadio",'FINANCIAL');
 
+    def legend_header_for(self, selector):
+        return self.browser.find_by_css("%s .legend-header" % selector).text
+
+    def partner_legend_title(self):
+        return self.legend_header_for(".partner-legend")
+
+    def places_legend_title(self):
+        return self.legend_header_for(".places-legend")
+
+    def places_legend_content(self):
+        elements = map(lambda element: element.text, self.browser.find_by_css('.places-legend li'))
+        valid_elements = filter(lambda element: element != '', elements)
+        return "\n".join(valid_elements);
+
 
        
         
