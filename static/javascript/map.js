@@ -120,22 +120,10 @@ DT.Map = function(element, basemap) {
         $(".icon-inner").removeClass("disabled-icon selected-icon");
     }
 
-    function addProjectLegend(data){
-        var projectLegendLabels = "";
-        $(".partner-legend ul").toggle(data.legendPartners.partners.length > 0)
-        $.each(data.legendPartners.partners, function(index, partner) {
-            var color = DT.markerColors[index];
-            if(partner == "Others")
-            	color = DT.otherColor
-            projectLegendLabels +="<li><span class='legend-color' data-colorselected='"+color+"' style='background-color:"+ color +"'></span><span class='legend-label' data-colorselected='"+color+"'>" +partner+ "</span></li>";
-            $(".partner-legend ul").html(projectLegendLabels);
-        });
-    }
-
     function addProjectLayer(name, location, data, layer_info) {
         var layerGroup = L.layerGroup();
 
-        addProjectLegend(data);
+        DT.Map.GeneratePartnerLegend($(".partner-legend ul"), data.legendPartners);
 
         $.each(data.geojson.features, function(index, feature) {
             layerGroup.addLayer(DT.projectMarker(self, feature, data, layer_info));
@@ -183,8 +171,6 @@ DT.Map = function(element, basemap) {
             marker.bindPopup(popup)
                 .on('mouseover', function() {
                     marker.openPopup();
-                    console.log("hello");
-
                 })
                 .on('mouseout', function() {
                     marker.closePopup();

@@ -257,15 +257,6 @@ angular.module("dashboard").directive('map', function() {
         }
     }
 })
-.directive('pdf', function() {
-    return {
-        link: function(scope, element) {
-
-            
-        }
-    }
-
-})
 .directive('siteVisitModal',  function(){
     return {
         scope: false,

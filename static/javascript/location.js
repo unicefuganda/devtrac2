@@ -35,7 +35,7 @@ DT.Location.prototype.layerOrder = function() {
         return ["region", "district", "subcounty", "parish"];
     }
 };
-DT.Location.prototype.getName = function(includeNational) {
+DT.Location.prototype.getName = function(includeNational, includeSelf) {
 
     if (typeof(includeNational) == 'undefined')
         includeNational = false;
@@ -56,6 +56,17 @@ DT.Location.prototype.getName = function(includeNational) {
 
     return name;
 };
+
+DT.Location.prototype.getParentsName = function() {
+
+    if (this.level() == "parish")
+        return this.region + " region, " + this.district + " district, " + this.subcounty + " subcounty";
+    if (this.level() == "subcounty")
+        return this.region + " region, " + this.district + " district";
+    if (this.level() == "district")
+        return this.region + " region";
+    return "";
+}
 
 DT.Location.fromName = function(name) {
     var name = name.toUpperCase();

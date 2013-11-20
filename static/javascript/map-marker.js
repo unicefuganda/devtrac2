@@ -1,6 +1,19 @@
 if (typeof DT == "undefined")
     DT = {};
 
+
+DT.Map.GeneratePartnerLegend = function(legendElem, legendPartners) {
+    var projectLegendLabels = "";
+    legendElem.toggle(legendPartners.partners.length > 0)
+    $.each(legendPartners.partners, function(index, partner) {
+        var color = DT.markerColors[index];
+        if(partner == "Others")
+            color = DT.otherColor
+        projectLegendLabels +="<li><span class='legend-color' data-colorselected='"+color+"' style='background-color:"+ color +"'></span><span class='legend-label' data-colorselected='"+color+"'>" +partner+ "</span></li>";
+        legendElem.html(projectLegendLabels);
+    });
+};
+
 DT.markerIcon = function(feature, data, layer_info){
 
     var projectId = feature.properties['PROJECT_ID'];

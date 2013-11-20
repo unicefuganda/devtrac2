@@ -194,6 +194,10 @@ angular.module("dashboard")
         $rootScope.projects = projects;    
     });
 
+    projectService.projects(location, {}).then(function(projects) {
+        $rootScope.projects = projects;    
+    });
+
     summaryService.find(location).then(function(summary) {
         $rootScope.summary = summary;
     })

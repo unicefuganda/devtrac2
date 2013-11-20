@@ -115,8 +115,7 @@ angular.module("dashboard")
 
 
 
-        this.partnerLegend = function(projectFilter, features) {
-        	console.log(projectFilter)
+        var partnerLegend = function(projectFilter, features) {
             if (projectFilter.partners != null && projectFilter.partners.length > 0)
             {
                 return { partners: projectFilter.partners, type: 'PARTNER'};
@@ -168,7 +167,7 @@ angular.module("dashboard")
                         type: "FeatureCollection",
                         features: results,
                     },
-                    legendPartners: self.partnerLegend(projectFilter, results)
+                    legendPartners: partnerLegend(projectFilter, results)
                 };
             });
         };
@@ -237,7 +236,6 @@ angular.module("dashboard")
                 };
             });
         }
-
         var projectsGeojsonPromise = geonodeService.get('projects');
         var projectsPromise = self.projects(new DT.Location({}), {});
     });

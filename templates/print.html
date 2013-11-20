@@ -12,23 +12,35 @@
         <meta http-equiv="Content-Style-Type" content="text/css">
         <meta name="author" content="UNICEF" />
 
-        <link rel="stylesheet" href="/static/css/lib/mapbox.css"></link>
-
         {% assets "js_all" %}
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}        
 
     </head>
     <body ng-controller='PrintCtrl'>
-        <h1>{[{ location.full_name() }]}</h1>
-        <div class='brand'>
-            DevTrac Global
+        <header>
+            <div id='print-title'>
+                <h1>{[{ location.full_name() }]}</h1>
+                <div id='location-parent' ng-show="location.getParentsName() != ''">{[{location.getParentsName()}]}</div>
+            </div>
+
+            <div class='brand'>
+                DevTrac Global
+            </div>
+        </header>
+
+        <div map id='devtrac-map'></div>
+        <div class="partner-legend">
+            <h4>Projects</h4>
+            <ul></ul>
         </div>
 
-        <h2>SUMMARY</h2>
-        <div ng-include="'/static/templates/summary.html'" class='summary-section'></div>
+        <section id='summary-section'>
+            <h2>SUMMARY</h2>
+            <div ng-include="'/static/templates/summary.html'" class='summary-section'></div>
+        </section>    
 
-        <div ng-show='projects.length > 0'>
+        <section ng-show='projects.length > 0'>
             <h2>PROJECTS</h2>
 
             <ul class='projects'>
@@ -83,18 +95,17 @@
                     </div>
                 </li>
             </ul>
-        </div>
+        </section>
 
-        <div ng-show='siteVisits.length > 0'>
+        <section ng-show='siteVisits.length > 0'>
             <h2>SITE VISITS</h2>
 
             <ul class='siteVisits'>
                 <li ng-repeat='s in siteVisits'>
                     <h3>{[{s.title}]}</h3>
-                    {[{s.summary}]}
                 </li>
             </ul>
-        </div>
+        </section>
 
     </body>
 </html>

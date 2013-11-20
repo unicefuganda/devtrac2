@@ -41,6 +41,10 @@ And the summary should be
         56%
     """
 
+# This test basically makes sure that the client is able to download a pdf 
+# esentially just checks it's not a 500, very hard to test the content of a pdf
+# best we can do probably
+
 Scenario: Download Report
 When I download the report for 'Buganda, Kalangala'
 Then the file is a pdf
