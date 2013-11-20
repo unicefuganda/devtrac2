@@ -16,49 +16,83 @@
     <div id='right-hand-panel'>
       <div id='right-hand-container'>
         <div map id='devtrac-map'></div>
-        <div ng-if="indicator.selected != null" class='heatmap-legend'>
-          <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />
+        <div class="legends">
+          <div ng-if="indicator.selected != null" class='heatmap-legend'>
+            <div class="legend-header">Indicators</div>
+            <div class="legend-content">
+              <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />            
+            </div>
+          </div>
+          <div class="partner-legend">
+            <div class="legend-header">
+              {[{ filter.project.organisation == "FUNDING" ? "Funding Agencies" : "Accountable Agencies" }]}
+            </div>
+            <ul></ul>
+          </div>
+          <div class="places-legend">
+            <div class="legend-header">Places</div>
+            <ul>
+              <li>
+                <span class="school-legend places-legend-icon"></span>
+                <span >Schools</span>
+              </li>   
+              <li>
+                <span class="health-center-legend places-legend-icon"></span>
+                <span class="legend-label">Health Centers</span>
+              </li> 
+              <li>
+                <span class="water-point-legend places-legend-icon"></span>
+                <span class="legend-label">Water Points</span>
+              </li>
+              <li ng-hide="location.level() == 'national'">
+                <span class="site-visit-legend places-legend-icon"></span>
+                <span class="legend-label">Site Visits</span>
+              </li>
+            </ul> 
+          </div>
         </div>
-        <div class="partner-legend"><ul></ul></div>
       </div>
     </div>
 
     <div panel panel-expand='{"bottom":"-58px"}' panel-collapse='{"bottom":"-96%"}' class='filter-panel expanded dt-panel ng-cloak' id="filter-panel">
-    	<div class="close-panel" ><span class="glyphicon glyphicon-chevron-down"></span></div>
-      <div ng-include="'/static/templates/breadcrumb.html'" class='breadcrumb-section'></div>
-      
-      <div class='filters-container'>  
-        <div ng-include="'/static/templates/filters.html'" class='filters-section'></div>
-      </div>
-    </div>
-    <div>
-       <div site-visit-modal ng-show='siteVisit.selected != null '>
-          <div ng-include="'/static/templates/site_visit_modal.html'"></div>   
-        </div>
+     <div class="close-panel" ><span class="glyphicon glyphicon-chevron-down"></span></div>
+     <div ng-include="'/static/templates/breadcrumb.html'" class='breadcrumb-section'></div>
 
-        <div ng-show='project.selected != null'>
-          <div ng-include="'/static/templates/project_modal.html'"></div> 
-        </div>
+     <div class='filters-container'>  
+      <div ng-include="'/static/templates/filters.html'" class='filters-section'></div>
+    </div>
+  </div>
+  <div>
+
+  <div>
+    <div site-visit-modal ng-show='siteVisit.selected != null '>
+      <div ng-include="'/static/templates/site_visit_modal.html'"></div>  
     </div>
 
-    <div class='detail-panel'>
-      <div class='container'>
-        <div >
-          <div ng-include="'/static/templates/area.html'"></div> 
-        </div>
+    <div ng-show='project.selected != null'>
+      <div ng-include="'/static/templates/project_modal.html'"></div>
     </div>
   </div>
 
-  {% assets "js_all" %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-  {% endassets %}
+  <div class='detail-panel'>
+    <div class='container'>
+      <div >
+        <div ng-include="'/static/templates/area.html'"></div> 
+      </div>
+    </div>
+  </div>
+</div>
 
-  <script type="text/javascript" src="/static/javascript/lib/jquery.flot.min.js"></script>
-  <script type="text/javascript" src="/static/javascript/lib/jquery.flot.pie.min.js"></script>
+{% assets "js_all" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
 
-  {% if test %}
-  <script type="text/javascript"> DT.testing = true;</script>
-  {% endif %}
+<script type="text/javascript" src="/static/javascript/lib/jquery.flot.min.js"></script>
+<script type="text/javascript" src="/static/javascript/lib/jquery.flot.pie.min.js"></script>
+
+{% if test %}
+<script type="text/javascript"> DT.testing = true;</script>
+{% endif %}
 </body>
 </html>
 

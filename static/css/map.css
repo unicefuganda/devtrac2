@@ -22,17 +22,17 @@
 }
 
 .marker-icon {
-   width: 10px;
-   height: 10px;
-   border-radius: 2px;
-   box-shadow: 0 2px 4px rgba(0,0,0,0.65);
- }
+ width: 10px;
+ height: 10px;
+ border-radius: 2px;
+ box-shadow: 0 2px 4px rgba(0,0,0,0.65);
+}
 
- .marker-icon > div {
-   width: 10px;
-   height: 10px;
-   border-radius: 2px;
- }
+.marker-icon > div {
+ width: 10px;
+ height: 10px;
+ border-radius: 2px;
+}
 
 .cluster-icon {
   overflow: hidden;/
@@ -215,10 +215,8 @@
   position: absolute;
 }
 
-.partner-legend {
-  position: absolute;
-  right: 15px;
-  top: 60px;
+.partner-legend, .heatmap-legend, .places-legend {
+  margin-top: 10px;
   background-color: white;
   min-width: 125px;
   border-radius: 2px;
@@ -227,6 +225,7 @@
   box-shadow: rgba(0, 0, 0, 0.2) 0 1px 3px 0px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 3px 0px;
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 3px 0px;
+  opacity: 0.9;
 }
 
 .legend-color{
@@ -237,8 +236,54 @@
 	margin-right: 4px;
 }
 
-.partner-legend ul{
-	list-style: none;
-	padding: 0 12px;
-	margin-top: 11px;
+.partner-legend ul, .places-legend ul{
+  list-style: none;
+  padding: 4px 10px;
+  margin-top: 5px;
+}
+
+.legend-header{
+  padding: 2px 12px;
+  background-color: rgba(0, 0, 0, 0.79);
+  color: white;
+  border-radius: 2px 2px 0 0;
+  -moz-border-radius: 2px 2px 0 0;
+  -web-kit-border-radius: 2px 2px 0 0;
+  font-weight: bold;
+}
+
+.heatmap-legend .legend-content{
+  margin: 2px;
+}
+
+.legends{
+  position: absolute;
+  bottom: 23px;
+  right: 15px;
+}
+
+.places-legend-icon{
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 8px;
+  margin-right: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.65);
+}
+
+.school-legend{
+  background-color: rgba(211, 242, 53, 1);
+}
+
+.health-center-legend{
+  background-color: rgba(153, 51, 102, 1);
+}
+
+.water-point-legend{
+  background-color: rgba(116, 223, 252, 1);
+}
+
+.site-visit-legend{
+  background-color: rgba(0, 170, 100, 1);
+  border-radius: 2px;
 }

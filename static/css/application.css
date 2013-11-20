@@ -457,24 +457,7 @@ h3 {
    margin-right: 30px; 
    display:  inline-block;
  }
-
- /* LEGEND */
-
- .heatmap-legend {
-   position: absolute;
-   bottom: 23px;
-   right: 15px;
-   background-color: white;
-   padding: 3px;
-   border-radius: 2px;
-   -moz-border-radius: 2px;
-   -web-kit-border-radius: 2px;
-   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 3px 0px;
-   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 3px 0px;
-   box-shadow: rgba(0, 0, 0, 0.2) 0 1px 3px 0px;
-
- } 
-
+ 
  .map-container {
    background-color: #DDD;
  }
