@@ -191,6 +191,8 @@ DT.Map = function(element, basemap) {
             marker.bindPopup(popup)
                 .on('mouseover', function() {
                     marker.openPopup();
+                    console.log("hello");
+
                 })
                 .on('mouseout', function() {
                     marker.closePopup();

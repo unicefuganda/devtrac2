@@ -52,10 +52,10 @@ DT.projectMarker = function(map, feature, data, layer_info){
 
     var circleIcon = DT.markerIcon(feature, data, layer_info);
 
-    var markerOptions = {
-        zIndexOffset: 1000,
-        icon: circleIcon
-    };
+        var markerOptions = {
+            zIndexOffset: 1000,
+            icon: circleIcon
+        };
 
     var projectSelectTimeout;
       
