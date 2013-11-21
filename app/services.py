@@ -129,9 +129,13 @@ class WFSService(object):
         self.maxFeatures = maxFeatures 
         self.test = test
 
-    def get_features(self, typeName):
-        parameters = "service=WFS&version=1.0.0&request=GetFeature&typeName=%s&maxFeatures=%s&outputFormat=json&propertyName=Reg_2011,DNAME_2010,SNAME_2010,PNAME_2006" % (typeName, self.maxFeatures)
+    def get_features(self, typeName, include_properties=False):
+        parameters = "service=WFS&version=1.0.0&request=GetFeature&typeName=%s&maxFeatures=%s&outputFormat=json" % (typeName, self.maxFeatures)
+        if (not include_properties):
+            parameters += "&propertyName=Reg_2011,DNAME_2010,SNAME_2010,PNAME_2006"
         
+        print parameters
+
         if (self.test):
             url = "http://localhost:5000/static/test_geojson/" + typeName + ".json"
         else:

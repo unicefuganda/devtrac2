@@ -8,7 +8,7 @@ class ParishService:
     
     def __init__(self, wfs_service):
         self.parish_polygons = []
-        features = wfs_service.get_features("uganda_parish_2011_50")
+        features = wfs_service.get_features("uganda_parish_2011_50", include_properties=True)
 
         for f in features:
             self.parish_polygons.append({ 'shape': shape(f['geometry']), 'properties': f['properties'] })
