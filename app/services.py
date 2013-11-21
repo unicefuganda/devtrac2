@@ -130,7 +130,7 @@ class WFSService(object):
         self.test = test
 
     def get_features(self, typeName):
-        parameters = "service=WFS&version=1.0.0&request=GetFeature&typeName=%s&maxFeatures=%s&outputFormat=json" % (typeName, self.maxFeatures)
+        parameters = "service=WFS&version=1.0.0&request=GetFeature&typeName=%s&maxFeatures=%s&outputFormat=json&propertyName=Reg_2011,DNAME_2010,SNAME_2010,PNAME_2006" % (typeName, self.maxFeatures)
         
         if (self.test):
             url = "http://localhost:5000/static/test_geojson/" + typeName + ".json"
