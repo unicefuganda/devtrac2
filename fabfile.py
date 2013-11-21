@@ -17,7 +17,6 @@ environments = {
             "user": 'root'
             }
         }
-        
 
 def e(name):
     env.update(environments[name])
@@ -49,4 +48,4 @@ def bootstrap_chef():
 
 def provision():
     run("cd ~/devtrac2-provisioning/; git pull -r")
-    run("cd ~/devtrac2-provisioning; chef-solo -c solo.rb")
+    run("cd ~/devtrac2-provisioning; chef-solo -c solo.rb -e %s" % env.environment.lower())

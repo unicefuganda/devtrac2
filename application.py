@@ -15,7 +15,7 @@ import uuid
 app = Flask(__name__)
 
 	
-file_handler = RotatingFileHandler('test.log')
+file_handler = RotatingFileHandler('logs/stack_traces.log')
 file_handler.setLevel(logging.WARNING)
 app.logger.addHandler(file_handler)
 
