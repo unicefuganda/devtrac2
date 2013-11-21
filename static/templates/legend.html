@@ -13,22 +13,22 @@
     </div>
     <ul></ul>
   </div>
-  <div class="places-legend" ng-hide="!filter.school && !filter.health_center && !filter.water_point && ( location.level() == 'national' || !filter.site_visit_point )">
+  <div class="places-legend">
     <div class="legend-header">Places</div>
     <ul>
-      <li ng-show="filter.school">
+      <li>
         <span class="school-legend places-legend-icon"></span>
         <span >Schools</span>
       </li>   
-      <li ng-show="filter.health_center">
+      <li>
         <span class="health-center-legend places-legend-icon"></span>
         <span class="legend-label">Health Centers</span>
       </li> 
-      <li ng-show="filter.water_point">
+      <li>
         <span class="water-point-legend places-legend-icon"></span>
         <span class="legend-label">Water Points</span>
       </li>
-      <li ng-hide="location.level() == 'national' || !filter.site_visit_point">
+      <li ng-hide="location.level() == 'national'">
         <span class="site-visit-legend places-legend-icon"></span>
         <span class="legend-label">Site Visits</span>
       </li>
