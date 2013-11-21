@@ -1,7 +1,7 @@
 import pymongo
 from pymongo import MongoClient
 import urllib
-import json
+import simplejson as json
 
 # eg "UGANDA, ACHOLI, GULU" 
 class Locator(object):

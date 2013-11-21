@@ -17,26 +17,32 @@ environments = {
             "user": 'root'
             }
         }
+code_dir = '/var/www/devtrac2'
 
 def e(name):
     env.update(environments[name])
     env.environment = name
+    env.timeout = 300
 
 def deploy(sha):
     print "deploying %s to %s" % (sha, env.environment)
-    code_dir = '/var/www/devtrac2'
 
     with cd(code_dir):
         run("git fetch origin")
         run("git reset --hard %s" % sha)
             
         run("pip install -r requirements.txt --use-mirrors")
-        # with shell_env(DEVTRAC_ENV='Production'):
-            # run("python db/import_data/import_job.py")
         
     with cd(code_dir):
         upload_template("version.template", "static/javascript/version.json", { "environment": env.environment, "sha": sha[:6], "time": strftime("%d %b %Y %X", localtime()) })
         run("touch .wsgi")
+
+def import_job():
+    print "importing data from geonode to %s " % env.environment
+
+    with cd(code_dir):
+        with shell_env(DEVTRAC_ENV='Production'):
+                run("python db/import_data/import_job.py")
 
 def bootstrap_chef():
     run("curl -L https://get.rvm.io | bash")
