@@ -116,8 +116,13 @@ class Page:
     def is_indicator_layer_hidden(self):
         return self.browser.evaluate_script("window.map.isIndicatorLayerHidden()")
 
+    def indicator_name_label(self):
+        return self.browser.find_by_css(".heatmap-name").text
+
     def change_indicator(self, indicator_name):
-        self.browser.find_by_css("#indicator-form .toggle[data-indicator='%s']" % indicator_name).first.click()
+        self.browser.find_link_by_text("Indicators").click()
+        self.take_screenshot()
+        self.browser.find_by_css(str("#filters-form .toggle[data-indicator='%s']" % indicator_name)).click()
 
     def is_indicator_layer_displayed(self, indicator_name): 
         return self.browser.evaluate_script("window.map.isIndicatorLayerDisplayed('%s')" % indicator_name)
