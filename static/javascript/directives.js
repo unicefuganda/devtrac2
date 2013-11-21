@@ -280,7 +280,7 @@ angular.module("dashboard").directive('map', function() {
         }
     }
 })
-.directive('preventRedirection',function(){
+.directive('preventredirection', function(){
     return {
         link: function(scope, element, attrs){
             $(element).click(function(event){
