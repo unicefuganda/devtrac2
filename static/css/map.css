@@ -268,6 +268,7 @@
   position: absolute;
   bottom: 23px;
   right: 15px;
+  z-index: 1000;
 }
 
 .heatmap-name-container {
