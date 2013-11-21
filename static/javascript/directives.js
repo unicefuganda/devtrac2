@@ -279,5 +279,14 @@ angular.module("dashboard").directive('map', function() {
 
         }
     }
+})
+.directive('preventRedirection',function(){
+    return {
+        link: function(scope, element, attrs){
+            $(element).click(function(event){
+                event.preventDefault();
+            });
+        }
+    }
 });
 
