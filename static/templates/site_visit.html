@@ -37,11 +37,11 @@
 		<div class="image-container" ng-if="siteVisit.selected">
 			<div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 378px;">
 			  <ol class="carousel-indicators">
-			    <li ng-repeat="image in siteVisit.selected.images" data-target="#myCarousel" data-slide-to="{[{$index}]}" ng-class="{'active': {[{$index}]}==0}"></li>
+			    <li ng-repeat="image in siteVisit.selected.images" data-target="#myCarousel" data-slide-to="{[{$index}]}" ng-class="{'active': {[{$index}]} == 0}"></li>
 			  </ol>
 			 <div class="carousel-inner" style="height: 345px; margin-top: -9px;">
-			    <div ng-class="{'item active': {[{$index}]} == 0,'item': {[{$index}]} > 0}" ng-repeat="image in siteVisit.selected.images">
-			      <img ng-src="{[{image.img}]}" ng-alt="Site Visit Image">
+			    <div ng-class="{'item active': {[{$index}]} == 0,'item': {[{$index}]} > 0 }" ng-repeat="image in siteVisit.selected.images">
+			      <img ng-src="{[{image.img}]}">
 			      <div class="carousel-caption">
 			       {[{image.caption}]}
 			      </div>

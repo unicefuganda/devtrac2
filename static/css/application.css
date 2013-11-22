@@ -193,9 +193,10 @@ h3 {
   .breadcrumb {
   	border-radius: 0;
   	margin-bottom: 0px;
-  	padding: 5px 6px;
+  	padding: 0px 6px;
   	text-transform: capitalize;
   	background-color: rgb(0, 0, 0);
+    text-align: center;
   }
 
   #location h2 {
@@ -251,9 +252,9 @@ h3 {
   	padding-top: 5px;
   	position: absolute;
   	height: 80px;
-  	width: 600px;
+  	width: 100%;
   	cursor: pointer;
-    margin-left: -800px;
+    z-index: -1;
     text-align: center;
   }
 

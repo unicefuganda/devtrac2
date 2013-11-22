@@ -247,7 +247,7 @@ angular.module("dashboard").directive('map', function() {
 })
 .directive('siteVisitModal',  function(){
     return {
-        scope: false,
+        scope: true,
         link: function(scope, element, attrs) {
 
              $('#siteVisitModal').on('hidden.bs.modal', function () {
