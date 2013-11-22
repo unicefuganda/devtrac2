@@ -22,7 +22,6 @@ code_dir = '/var/www/devtrac2'
 def e(name):
     env.update(environments[name])
     env.environment = name
-    env.timeout = 300
 
 def deploy(sha):
     print "deploying %s to %s" % (sha, env.environment)

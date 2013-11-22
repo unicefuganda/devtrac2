@@ -1,7 +1,7 @@
 import pymongo
 from pymongo import MongoClient
 import urllib
-import simplejson as json
+import json
 
 # eg "UGANDA, ACHOLI, GULU" 
 class Locator(object):
@@ -134,8 +134,6 @@ class WFSService(object):
         if (not include_properties):
             parameters += "&propertyName=Reg_2011,DNAME_2010,SNAME_2010,PNAME_2006"
         
-        print parameters
-
         if (self.test):
             url = "http://localhost:5000/static/test_geojson/" + typeName + ".json"
         else:
