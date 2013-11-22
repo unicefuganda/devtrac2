@@ -6,14 +6,14 @@ from time import localtime, strftime
 import os
 
 environments = {
-        "QA": {
+        "PROD": {
             "hosts": ['192.237.187.62'],
-            "password": os.environ['DEVTRAC2_QA_PASSWORD'],
+            "password": os.environ['DEVTRAC2_PROD_PASSWORD'],
             "user": 'root'
             },
-        "UAT": {
+        "QA": {
             "hosts": ['192.237.180.109'],
-            "password": os.environ['DEVTRAC2_UAT_PASSWORD'],
+            "password": os.environ['DEVTRAC2_QA_PASSWORD'],
             "user": 'root'
             }
         }
