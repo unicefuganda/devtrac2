@@ -23,9 +23,14 @@ angular.module("dashboard")
             return self.questions().then(function(questions) {
 
                 var promises = questions.map(function(question) {
-                    return self.top5(location, question).then(function(top5) {
+                    var top5Promise = self.top5(location, question).then(function(top5) {
                         question.top5 = top5;
-                    })
+                    });
+                    var resultsPromise = self.results(location, question).then(function(results) {
+                        question.results = results;
+                    });
+
+                    return [top5Promise, resultsPromise];
                 });
 
                 return $q.all(promises).then(function() {

@@ -34,15 +34,18 @@ angular.module("dashboard")
 }).controller("UReportResponsesCtrl", function($rootScope, $scope, ureportService){
 
     var showUReportResults = function (location, ureportQuestion) {
+        $scope.question = {}
+
         if (ureportQuestion == null || ureportQuestion.selected == null) {
             $scope.ureportTop5 = []
         } else {
+            
             ureportService.top5(location, ureportQuestion.selected).then(function (data) {
-                $scope.ureportTop5 = data
+                $scope.question.top5 = data
             });
 
             ureportService.results(location, ureportQuestion.selected).then(function (data) {
-                $scope.ureportResults = data
+                $scope.question.results = data
             });
         }
     }

@@ -9,22 +9,11 @@
 <div ng-controller="UReportResponsesCtrl"  id='ureport-panel' ng-show="ureportQuestion.selected" >
   <div id="poll-results">
 
-    <ul ng-show="ureportTop5.length > 0" class='ureport-top5'>
+    <ul ng-show="question.top5.length > 0" class='ureport-top5'>
       <span class="ureport-question" >{[{ureportQuestion.selected.question}]}</span>
-      <li ng-repeat="item in ureportTop5" class="response">"{[{item.text }]}"</li>  
+      <li ng-repeat="item in question.top5" class="response">"{[{item.text }]}"</li>  
     </ul>
 
-    <div piechart class='ureport-results' ng-show='show_pie'>
-    
-      <div class="flot-piechart" style="width:100px;height:100px"></div>
-      <ul class="legend">
-        <li ng-repeat="legend in data | orderBy:'-data'">
-          <span class='legend-color' style='background-color:{[{legend.color}]}'></span>
-          <label>{[{legend.label}]} -</label>
-          <span>{[{legend.data}]}%</span>
-        </li>
-      </ul>
-
-    </div>
+    <div ng-include="'/static/templates/ureport_results_pie.html'">
   </div>
 </div>

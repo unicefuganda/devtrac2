@@ -198,6 +198,8 @@ ul.siteVisits {
 .ureport-questions > li {
     background-color: #EEE;
     padding: 6px 6px;
+    margin-top: 20px;
+    page-break-inside: avoid;
 }
 
 .ureport-print-top5  {
@@ -207,3 +209,10 @@ ul.siteVisits {
 .ureport-print-top5 > li {
     list-style-type: disc;
 }
+
+.ureport-print-pie {
+    display: block;
+    margin-top: 20px;
+    overflow: hidden;
+}
+

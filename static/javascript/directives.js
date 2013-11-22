@@ -141,11 +141,12 @@ angular.module("dashboard").directive('map', function() {
             });
         }
     }
-}).directive('piechart', function() {
+})
+.directive('piechart', function() {
     return {
         scope: true,
         link: function(scope, element, attrs) {
-            scope.$watch("ureportResults", function(result) {
+            scope.$watch("question.results", function(result) {
 
                 if (result == null || result == "null") {
                     scope.show_pie = false;
@@ -175,7 +176,52 @@ angular.module("dashboard").directive('map', function() {
             });
         }
     };
-}).directive('chosen', function() {
+})
+.directive('highchartPiechart', function() {
+   return {
+        scope: true,
+        link: function(scope, element, attrs) {
+            console.log("here")
+            scope.$watch("question.results", function(result) {
+                console.log(result)
+                if (result == null || result == "null")
+                    return;
+                var data = result.results.map(function(entry) { return [entry.category, entry.percent]})
+                console.log(data);
+                console.log(element);
+                $(element).highcharts({
+                    chart: {
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        backgroundColor: '#EEE'
+                    },
+                    title: {
+                        text: ''
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: false,
+                        //     cursor: 'pointer',
+                            dataLabels: {
+                        //         enabled: true,
+                                // color: '#000000',
+                        //         connectorColor: '#000000',
+                                crop: false,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                            }
+                        }
+                    },
+                    series: [{
+                        type: 'pie',
+                        name: 'Browser share',
+                        data: data
+                    }]
+                });
+            });
+        }
+    };
+})
+.directive('chosen', function() {
     return {
         scope: false,
         link: function(scope, element, attrs) {

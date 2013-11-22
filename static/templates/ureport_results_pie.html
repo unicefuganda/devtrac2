@@ -1,0 +1,11 @@
+<div piechart class='ureport-results' ng-show='show_pie'>
+    
+  <div class="flot-piechart" style="width:100px;height:100px"></div>
+  <ul class="legend">
+    <li ng-repeat="legend in data | orderBy:'-data'">
+      <span class='legend-color' style='background-color:{[{legend.color}]}'></span>
+      <label>{[{legend.label}]} -</label>
+      <span>{[{legend.data}]}%</span>
+    </li>
+  </ul>
+</div>

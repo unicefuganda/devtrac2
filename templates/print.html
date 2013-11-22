@@ -14,7 +14,14 @@
 
         {% assets "js_all" %}
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-        {% endassets %}        
+        {% endassets %}    
+
+
+
+        <script type="text/javascript" src="/static/javascript/lib/jquery.flot.min.js"></script>
+        <script type="text/javascript" src="/static/javascript/lib/jquery.flot.pie.min.js"></script>    
+
+        <script src="http://code.highcharts.com/highcharts.js"></script>
 
     </head>
     <body ng-controller='PrintCtrl'>
@@ -23,6 +30,8 @@
                 <h1>{[{ location.full_name() }]}</h1>
                 <div id='location-parent' ng-show="location.getParentsName() != ''">{[{location.getParentsName()}]}</div>
             </div>
+
+            
 
             <div class='brand'>
                 DevTrac Global
@@ -37,7 +46,7 @@
             <div ng-include="'/static/templates/summary.html'" class='summary-section'></div>
         </section>    
 
-        <section id='summary-section'>
+        <section id='ureport-section'>
             <h2>Community Feedback</h2>
             
             <ul class='ureport-questions'>
@@ -47,10 +56,11 @@
                     <ul class='ureport-print-top5'>
                         <li ng-repeat='answer in question.top5'>
                             {[{answer.text}]}
-
                         </li>
-
                     </ul>
+                    <div ng-if='question.results.results' highchart-piechart style="width: 700px; height: 250px; margin: 0 auto"></div>
+
+                    <!-- <div class='ureport-print-pie' ng-include="'/static/templates/ureport_results_pie.html'"> -->
                 </li>
             </ul>                        
         </section>    
