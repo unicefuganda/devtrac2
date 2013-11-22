@@ -8,16 +8,18 @@ env:
   - secure: fOQSOWbja1z+15e7Tu6bjds2Bh8Qd54/iWrGnRtq7Jy28TmTLf8q0rknhewt9HhwL3iwWk3MssKJkAvWSOaXCQsC8M11OJXcdqyLQxYv4UoVUgPCGdlVvTpRIOnX2Q9KJSPN0QI5oGasC5PkctJQ459bogQBnQfh9U8pKzz6IxQ=
   - secure: Zb7WtgO1yyOaTFPTiPpA5q02WprV4U+D7SRlk6GjDf5SuX0+6pCY/LKrVOwimDE3ovkCDAkoY4laftzsvFhCk0xCJlPQ1JQHPzrXTxtpECcg1qzckUw6fPTvei698IqMjnI1qLHfW9uql4YQFNi38qQ/X8F/DreDIYDsVDJi2Z4=
 before_script:
+- mkdir "logs"
+- mkdir ".webassets-cache"
+- mkdir "tmp"
+- mkdir "tmp/screenshots"
 - gem install travis-artifacts
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 - sleep 3
 - twistd web --port 5000 --wsgi application.app
 - sleep 3
-- mkdir ".webassets-cache"
-- mkdir "tmp"
-- mkdir "tmp/screenshots"
-- mkdir "logs"
+
+
 before_install: sudo apt-get install libgeos-dev
 install: pip install -r requirements.txt --use-mirrors
 script:
