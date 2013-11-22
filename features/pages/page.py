@@ -155,8 +155,12 @@ class Page:
     def ureport_results(self):
         return self.browser.find_by_css(".ureport-results .legend").text
 
-    def wait_for_element_visible(self, selector):
+    def wait_for_element_exists(self, selector):
         self.wait_for(lambda page: len(self.browser.find_by_css(selector)) > 0)
+        return self.browser.find_by_css(selector)
+
+    def wait_for_element_visible(self, selector):
+        self.wait_for(lambda page: self.browser.find_by_css(selector).visible)
         return self.browser.find_by_css(selector)
 
     def wait_for(self, function):
@@ -169,7 +173,7 @@ class Page:
         raise Exception('wait for timed out after 5 seconds')
 
     def click_marker_at(self, lat, lng):
-        marker = self.wait_for_element_visible(str("div[data-lat='%s'][data-lng='%s']" % (lat, lng)))
+        marker = self.wait_for_element_exists(str("div[data-lat='%s'][data-lng='%s']" % (lat, lng)))
         marker.click()
 
     def __filter_chosen__(self, parentId, value):
@@ -273,6 +277,14 @@ class Page:
         elements = map(lambda element: element.text, self.browser.find_by_css('.places-legend li'))
         valid_elements = filter(lambda element: element != '', elements)
         return "\n".join(valid_elements);
+
+    def click_next_link(self):
+        next = self.wait_for_element_visible(".right")
+        self.browser.find_by_css(".right").click();
+
+    def carousel_image_src(self):
+        element = self.browser.find_by_css('.carousel-inner div img');
+        return len(element);
 
 
        

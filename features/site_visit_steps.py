@@ -24,3 +24,11 @@ def and_i_click_on_the_site_visit_link(step, site_visit):
 @step(u'And I click on site visit pagination link "([^"]*)"')
 def and_i_click_on_the_pagination_link(step, pager_link):
     world.page.click_site_visit_pagination_link(pager_link);
+
+@step(u'And I click on next on carousel')
+def and_i_click_on_next_on_carousel(step):
+    world.page.click_next_link();
+
+@step(u'Then the image src is "([^"]*)"')
+def then_the_image_src_is_group1(step, image_src):
+    assert_true(world.page.carousel_image_src(),len(image_src))

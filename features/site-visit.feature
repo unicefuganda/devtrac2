@@ -83,3 +83,10 @@ Then the site visit details should have content:
     Location: Mbaru Catholic Church   
     """
 
+Scenario: Display Site Visit images in carousel
+Given that I am a regular user
+When I open dashboard for "Ankole, Mbarara, Kakoba"
+And I click on the site visit link "Site Visit at Mbaru Catholic Church"
+And I click on next on carousel
+Then the image src is "/static/images/site-visit/site-visit_2.jpeg"
+
