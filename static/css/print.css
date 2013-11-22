@@ -190,4 +190,20 @@ ul.siteVisits {
     margin: 0;
 }
 
+.ureport-questions {
+    padding-left: 0;
+    list-style-type: none;
+}
 
+.ureport-questions > li {
+    background-color: #EEE;
+    padding: 6px 6px;
+}
+
+.ureport-print-top5  {
+    padding-left: 18px;
+}
+
+.ureport-print-top5 > li {
+    list-style-type: disc;
+}

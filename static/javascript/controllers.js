@@ -184,7 +184,7 @@ angular.module("dashboard")
 
     $scope.$watch("location", updateSiteVisitList, true);
 })
-.controller("PrintCtrl", function($rootScope, $scope, projectService, summaryService, siteVisitService, $location) {    
+.controller("PrintCtrl", function($rootScope, $scope, projectService, summaryService, siteVisitService, $location, ureportService) {    
 
     var locator = $location.search()['locator']
     var location = DT.Location.fromName(locator);
@@ -203,7 +203,11 @@ angular.module("dashboard")
     })
 
     siteVisitService.siteVisits(location).then(function(siteVisits) {
-      $rootScope.siteVisits = siteVisits;  
+        $rootScope.siteVisits = siteVisits;  
+    })
+
+    ureportService.all(location).then(function(ureportQuestions) {
+        $rootScope.ureportQuestions = ureportQuestions;  
     })
 
 });

@@ -37,6 +37,26 @@
             <div ng-include="'/static/templates/summary.html'" class='summary-section'></div>
         </section>    
 
+        <section id='summary-section'>
+            <h2>Community Feedback</h2>
+            
+            <ul class='ureport-questions'>
+                <li ng-repeat='question in ureportQuestions'>
+                    <h3>{[{question.question}]}</h3>
+
+                    <ul class='ureport-print-top5'>
+                        <li ng-repeat='answer in question.top5'>
+                            {[{answer.text}]}
+
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>                        
+        </section>    
+
+
+
         <section ng-show='projects.length > 0'>
             <h2>PROJECTS</h2>
 
