@@ -11,7 +11,6 @@ Then the listed projects should be
     """
     Envision
     Kalangala Infrastructure Services (KIS)
-    Quality Education Through BRMS And ECD And VSO Volunteers
     STRIDES For Family Health
     Strengthening Decentralization For Sustainability (SDS)
     Strengthening Local Government Responses To OVC (SUNRISE OVC)

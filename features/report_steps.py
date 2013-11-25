@@ -51,7 +51,7 @@ def then_the_header_contains(step):
 # Tim - We can only check there are answers there, because the data doesn't load the same way on local and CI, 
 # might be a an ordering problem, need to investigate
 
-@step("And it includes ureport question \'([^\']*)\' with the answers")
-def it_contains_ureport_question_and_answer(step, question, answer):
+@step("And it includes ureport question \'([^\']*)\' with answers")
+def it_contains_ureport_question_and_answer(step, question):
     assert_in(question, world.report_page.ureport_questions())
     assert(len(world.report_page.ureport_answers()) > 0)
