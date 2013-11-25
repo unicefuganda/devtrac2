@@ -31,7 +31,7 @@ h3 {
     text-transform: capitalize;
 }
 
-#print-title {
+.print-title {
     display: inline-block;
     white-space:nowrap;
     margin-bottom: 16px;
@@ -196,7 +196,7 @@ ul.siteVisits {
 }
 
 .ureport-questions > li {
-    background-color: #EEE;
+    background-color: #EEE; 
     padding: 6px 6px;
     margin-top: 20px;
     page-break-inside: avoid;
@@ -216,3 +216,12 @@ ul.siteVisits {
     overflow: hidden;
 }
 
+.print-title h2 {
+    display: inline-block;
+}
+
+.ureport-logo {
+    float: right;
+    margin-top: 6px;
+
+}

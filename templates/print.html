@@ -26,12 +26,10 @@
     </head>
     <body ng-controller='PrintCtrl'>
         <header>
-            <div id='print-title'>
+            <div class='print-title'>
                 <h1>{[{ location.full_name() }]}</h1>
                 <div id='location-parent' ng-show="location.getParentsName() != ''">{[{location.getParentsName()}]}</div>
-            </div>
-
-            
+            </div>     
 
             <div class='brand'>
                 DevTrac Global
@@ -47,7 +45,10 @@
         </section>    
 
         <section id='ureport-section'>
-            <h2>Community Feedback</h2>
+            <div>
+                <h2 class='print-title'>Community Feedback</h2> 
+                <img src='static/images/logo.png' class='ureport-logo'/>
+            </div>
             
             <ul class='ureport-questions'>
                 <li ng-repeat='question in ureportQuestions'>
