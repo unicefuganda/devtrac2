@@ -1,5 +1,5 @@
 class FileAccessor
-    def read_file file_name, get_header
+    def read_file file_name, get_header=false
         lines = CSV.read(file_name)
 
         puts "Read main file #{file_name} (#{lines.size} lines)"
@@ -21,7 +21,6 @@ class FileAccessor
                 clean_lines << clean_line(line)
             end
         end
-
         clean_lines
     end
 
@@ -31,17 +30,28 @@ class FileAccessor
         ic.iconv(line + ' ')[0..-2]
     end
 
-    def write_new_file file_name, lines
+    def write_new_file file_name, lines, temp = false
         counter = 0
-        file_name = add_new_to_file_name(file_name)
-
-        File.open(file_name, "w") do |file|
-            file.puts @header.join(',') if @header
-            counter += 1
-            lines.each do |line|
-                if line.size > 1
-                    counter += 1
-                    file.puts "\"" + line.join("\",\"") + "\""
+        
+        if temp
+            file_name = add_temp_to_file_name(file_name)
+            File.open(file_name, "w") do |file|
+                lines.each do |line|
+                    if line.size > 1
+                        file.puts line
+                    end
+                end
+            end
+        else
+            file_name = add_new_to_file_name(file_name)
+            File.open(file_name, "w") do |file|
+                file.puts @header.join(',') if @header
+                counter += 1
+                lines.each do |line|
+                    if line.size > 1
+                        counter += 1
+                        file.puts "\"" + line.join("\",\"") + "\""
+                    end
                 end
             end
         end
@@ -58,7 +68,16 @@ class FileAccessor
         end
     end
 
-  private
+    def add_temp_to_file_name file_name
+        file_pieces = file_name.split('.')
+        if file_pieces.size !=2
+            raise 'File name should have only single extension'
+        else
+            file_pieces[0] + "_temp." + file_pieces[1]
+        end
+    end 
+
+    private
     def remove_header lines
       lines.shift
     end
