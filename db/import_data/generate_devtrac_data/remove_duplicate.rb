@@ -16,7 +16,7 @@ end
 
 fa = FileAccessor.new
 
-list_of_activities = fa.read_file("../../projects_activities.csv", false)
+list_of_activities = fa.read_file("../../project_activities_latest.csv", false)
 
 unique_activities = list_of_activities.uniq { |e| e[12] && e[13] }
 

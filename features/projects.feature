@@ -1,98 +1,84 @@
 
 Feature: Projects
 
-#commented out because phantomjs can't get dialog contents
-@wip
 Scenario: Display extra project information
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu"
-And I click on the project Icon at latitude "2.8193" and logitude "32.3848"
+And I click on the project Icon at latitude "2.7164" and logitude "32.3418"
 Then the project details are:
     """
-	Accountable Agency: UNICEF
-    Financial Organization: CDC
-	Implementing Partner: World Council of Churches
-	Sector: Development
-	Actual Duration: 23/01/2010 - 23/07/2010
-	Planned Duration: 23/01/2010 - 23/07/2010
-	Status: Post-completion
-	Description: Preventing and Responding to Violence against Children and support to keep children alive
+    Accountable Agency: UNICEF
+    Financial Organization: CUAMM
+    Implementing Partner: Doctors with Africa
+    Sector: STD control including HIV/AIDS
+    Actual Duration: -
+    Planned Duration: 1/1/13 - 31/12/2014
+    Status: Implementation
+    Description: Responding to Chronic Emergency in Karamoja Phase IV
     Locations: 
-    Agago District, Paluti Parish
-    Amuru District, Parubanga Parish
-    Gulu District, Angaya Parish
-    Kaabong District, Sangar Parish
-    Kitgum District, Lamit Parish
-    Lamwo District, Ywaya Parish
-    Nwoya District, Alero Kal Parish
-    Pader District, Koyo Parish
+    Agago District, Kiteny Parish
+    Agago District, Kiteny Parish
+    Amuru District, Palwong Parish
+    Amuru District, Palwong Parish
+    Gulu District, Lapainat West Parish
+    Gulu District, Lapainat West Parish
+    Kitgum District, Koch Parish
+    Kitgum District, Koch Parish
+    Lamwo District, Paluga Parish
+    Lamwo District, Paluga Parish
+    Nwoya District, Agonga Parish
+    Nwoya District, Agonga Parish
+    Pader District, Ngoto Parish
+    Pader District, Ngoto Parish
     """
 
 Scenario: Filter by Sector
 Given that I am a regular user
 When I go to the homepage
-And I filter by Sector for "Basic Education"
-Then there are "8" unicef projects in "Acholi"
+And I filter by Sector for "STD control including HIV/AIDS"
+Then there are "13" unicef project locations in "Acholi"
 
 Scenario: Filter by Status
 Given that I am a regular user
 When I go to the homepage
 And I filter by Status for "Completion"
-Then there are "1" usaid projects in "Teso"
+Then there are "2" usaid projects in "Teso"
 
 Scenario: Filter by Implementing Partner
 Given that I am a regular user
 When I open dashboard for "Teso"
-And I filter by Implementing Partner for "Africare"
-Then there are "1" unicef projects in "Teso, Amuria"
+And I filter by Implementing Partner for "Chemonics"
+Then there is "1" unicef project in "Teso, Kumi"
 
 Scenario: Filter by Partner
 Given that I am a regular user
 When I go to the homepage
 And I filter by Partner for "UNICEF"
-Then there are "34" unicef projects in "Acholi"
+Then there are "27" unicef project locations in "Acholi"
 And there are no usaid projects in "Acholi"
 
 Scenario: Filter by Year
 Given that I am a regular user
 When I go to the homepage
-And I filter by Year for "2011"
+And I filter by Year for "2011"1
 
-Scenario: Show project list
-Given that I am a regular user
-When I open dashboard for "Acholi, Gulu"
-Then the project list contains:
-	"""                                                                                      
-    Preventing and Responding to Violence against Children and support to keep children alive
-    Planned Dates: 25/01/2011 - 25/07/2011
-    Funding Org: UNICEF Accountable Agency: JICA Implementing Partner: World Council of Churches
-    Quality Education through BRMS and ECD and VSO volunteers
-    Planned Dates: 25/01/2011 - 25/07/2011
-    Funding Org: UNICEF Accountable Agency: KFW Implementing Partner: Vountary Services Overseas
-    STRENGTHENING PARLIAMENATRY OVERSIGHT
-    Planned Dates: 28/01/2013 - 28/07/2013
-    Funding Org: UNICEF Accountable Agency: AfDB Implementing Partner: The Uganda Assciation of Women Lawyers
-    Strengthening Reintegration of Young Mothers with children Formerly Associated with the LRA
-    Planned Dates: 28/01/2013 - 28/07/2013
-    Funding Org: UNICEF Accountable Agency: EU Implementing Partner: Gulu United to Save the Children Organization                                            
-	"""
-
-#commented out because phantomjs can't get dialog contents
 @wip
-Scenario: Show project details by clicking project link
+#commented out because phantomjs can't get dialog contents
+Scenario: Show project list
+Given that I am a regular urio: Show project details by clicking project link
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu"
 And I click on the project link "STRENGTHENING PARLIAMENATRY OVERSIGHT"
 Then the project details are:
     """
-	Accountable Agency: UNICEF
+    Accountable Agency: UNICEF
     Financial Organization: AfDB
-	Implementing Partner: The Uganda Assciation of Women Lawyers
-	Sector: Basic life skills for youths and Adults
-	Actual Duration: 28/01/2013 - 28/07/2013
-	Planned Duration: 28/01/2013 - 28/07/2013
-	Status: Post-completion
-	Description: STRENGTHENING PARLIAMENATRY OVERSIGHT
+    Implementing Partner: The Uganda Assciation of Women Lawyers
+    Sector: Basic life skills for youths and Adults
+    Actual Duration: 28/01/2013 - 28/07/2013
+    Planned Duration: 28/01/2013 - 28/07/2013
+    Status: Post-completion
+    Description: STRENGTHENING PARLIAMENATRY OVERSIGHT
     Locations:
     Gulu District, Bar-dege Ward Parish
     """
@@ -100,26 +86,23 @@ Then the project details are:
 Scenario: Paginate the project list
 Given that I am a regular user
 When I open dashboard for "Teso"
-And I click on the pagination link "3"	
+And I click on the pagination link "2"	
 Then the project list contains:
-	"""
-	STRENGTHENING PARLIAMENATRY OVERSIGHT
-    Planned Dates: 23/01/2010 - 23/07/2010
-    Funding Org: UNICEF Accountable Agency: Canada Implementing Partner: The Uganda Assciation of Women Lawyers
-    STRIDES for Family Health
-    Planned Dates: 28/01/2013 - 28/07/2013
-    Funding Org: USAID Accountable Agency: Norway Implementing Partner: Management Sciences for Health (MSH)
-    Scaling up HIV/AIDS comprehensive HIV/AIDS prevention, care and treatment through the Faith Based Network
-    Planned Dates: 21/01/2009 - 21/07/2009
-    Funding Org: USAID Accountable Agency: USAID Implementing Partner: Inter-Religious Council of Uganda (IRCU)
-    Securing Ugandan's Rights to Essential Medicines (SURE)
-    Planned Dates: 27/01/2012 - 27/07/2012
-    Funding Org: USAID Accountable Agency: JICA Implementing Partner: Management Sciences for Health (MSH)
-    Stop Malaria Project (SMP)
-    Planned Dates: 28/01/2013 - 28/07/2013
-    Funding Org: USAID Accountable Agency: Canada Implementing Partner: Johns Hopkins University (JHU/CCP)
-	"""
-	
+    """
+    Strengthening Decentralization for Sustainability (SDS)
+    Planned Dates: 4/19/10 -
+    Funding Org: USAID Accountable Agency: USAID Implementing Partner: Cardno Emerging Markets
+    Strengthening Local Government Responses to OVC (SUNRISE OVC)
+    Planned Dates: 6/15/10 -
+    Funding Org: USAID Accountable Agency: USAID Implementing Partner: International HIV/AIDS Alliance
+    Support to keeping the children and women Alive, Safe and Learning
+    Planned Dates: -
+    Funding Org: UNICEF Accountable Agency: UCS-UEC Implementing Partner: Uganda Catholic Secretariat/Uganda Episcopal Conference
+    Technical Management Agency for the Civil Society Fund (TMA-CSF)
+    Planned Dates: 2/3/10 - 2/2/13
+    Funding Org: USAID Accountable Agency: USAID Implementing Partner: Chemonics
+    """
+
 Scenario: Filter by Partner Legend
 Given that I am a regular user
 When I go to the homepage
@@ -132,120 +115,117 @@ When I go to the homepage
 And I filter by Partner for "UNICEF"
 Then the Status filter displays options:
     """
+    Implementation
+    Pipeline/identification
     Post-completion
     """
 Then the Sector filter displays options:
     """
-    Agriculture
-    Basic Education
-    Basic life skills for youths and Adults
-    Development
-    Social, Small and medium-sized enterprises
+    Medical services
+    Multisector aid
+    Multisector aid for basic social services
+    Personnel development for population and reproductive health
+    Primary education
+    Public sector financial management
+    Reproductive health care
+    Research/scientific institutions
+    Road transport
+    STD control including HIV/AIDS
+    Social/ welfare services
+    Strengthening civil society
+    Support to national NGOs
+    Tourism policy and administrative management
+    Waste management/disposal
     """
 Then the Implementing Partners filter displays options:
-    """
-    Africare
+"""
+    Action for Community Development
+    Advocates Coalition for Dwevelopment and Environment
     Arbeiter Samariter Bund
+    Association of Volunteers in International Service (AVSI) Foundation
     Bangladesh Rural Advancement Committee
     Battery Operated Systems for Community Outreach
-    C&D
+    Baylor College of Medicine Childrens Foundation-Uganda
     Christian Couseling Fellowship
-    Community Support for Capacity Development
-    Doctors with Africa CUAMM
+    Church Of Uganda
+    Doctors with Africa
     Elizabeth Glaser Pediatric AIDS Foundation
-    Forum of Education NGOs in Uganda (FENU)
-    GOAL
-    Gulu United to Save the Children Organization
-    Healthy Child
-    Italian Development Coorperation
-    Kaihura Primary School
-    Kitgum Concerned Women Association
+    Forum for Education NGOs in Uganda
+    GOAL UGANDA
+    Girl Education Movement - Uganda
+    Institute for International Cooperation and Development
     Malaria Consortium
     Mothers to Mothers
-    Netherlands Development Organization
-    REACH
-    Save the Children in Uganda (SCiU)
-    Straight Talk Foundation (STF)
-    TPO - Uganda
+    Northern Uganda Health Integration To Enhance Services
     The Uganda Assciation of Women Lawyers
-    Vountary Services Overseas
-    WATER MISSIONS UGANDA (WMU)
-    World Council of Churches
-    """
-    
+    Uganda Catholic Secretariat/Uganda Episcopal Conference
+    Uganda Muslim Supreme Council
+    Voluntary Services Oversees
+"""
+
 Scenario: Sync Implementing partner with other filters
 Given that I am a regular user
 When I go to the homepage
-And I filter by Implementing Partner for "Africare"
+And I filter by Implementing Partner for "Chemonics"
 Then the Status filter displays options:
-    """
-    Post-completion
-    """
+"""
+Completion
+"""
 Then the Sector filter displays options:
-    """
-    Basic Education
-    """
+"""
+Basic nutrition
+"""
 Then the Funding Partners filter displays options:
-    """
-    UNICEF
-    """
+"""
+USAID
+"""
 
 Scenario: Sync Sector with other filters
 Given that I am a regular user
 When I go to the homepage
-And I filter by Sector for "Basic Education"
+And I filter by Sector for "Basic nutrition"
 Then the Status filter displays options:
     """
+    Completion
     Implementation
-    Post-completion
     """
 Then the Funding Partners filter displays options:
     """
-    UNICEF
     USAID
     """
 Then the Implementing Partners filter displays options:
     """
-    African Wildlife Foundation (AWF)
-    Africare
-    Alliance for Youth Developemnt (AYA)
-    Arbeiter Samariter Bund
-    Associates in Rural Development (ARD)
-    Association of Volunteers in International Service (AVSI) Foundation
-    Bangladesh Rural Advancement Committee
-    Battery Operated Systems for Community Outreach
-    C&D
     Cardno Emerging Markets
-    Centers for Disease Control
-    Italian Development Coorperation
+    Chemonics
+    Elizabeth Glaser Pediatric AIDS Foundation
     """
 
 Scenario: Sync Status with other filters
 Given that I am a regular user
 When I go to the homepage
-And I filter by Status for "Cancelled"
+And I filter by Status for "Completion"
 Then the Funding Partners filter displays options:
-    """
-    USAID
-    """
+"""
+USAID
+"""
 Then the Implementing Partners filter displays options:
-    """
-    Chemonics
-    """
+"""
+Chemonics
+"""
 Then the Sector filter displays options:
-    """
-    Agriculture
-    """
+"""
+Basic nutrition
+"""
 
 Scenario: View Default Funding Partner Legend
 Given Given that I am a regular user
 When I go to the homepage
 Then the accountable agency legend header is "Funding Agencies"
 Then the projects legend labels are:
-	"""
-	USAID
-	UNICEF
-	"""
+"""
+USAID
+UNICEF
+"""
 Then the legend color for "USAID" is "red"
 Then the legend color for "UNICEF" is "blue"
 
@@ -255,15 +235,17 @@ When I go to the homepage
 And I choose accountable agency radio
 Then the accountable agency legend header is "Accountable Agencies"
 Then the projects legend labels are:
-	"""
-	DFID
-	Canada
-   	EU
-   	Others
-	"""
-Then the legend color for "DFID" is "red"
-Then the legend color for "Canada" is "blue"
-Then the legend color for "EU" is "green"
+"""
+USAID
+ACODE
+FIDA
+BOSCO
+Others
+"""
+Then the legend color for "USAID" is "red"
+Then the legend color for "ACODE" is "blue"
+Then the legend color for "FIDA" is "green"
+Then the legend color for "BOSCO" is "darkslateblue"
 Then the legend color for "Others" is "#D5D5D5"
 
 Scenario: View Default Places Legend
@@ -271,38 +253,38 @@ Given Given that I am a regular user
 When I go to the homepage
 Then the places legend header is "Places"
 Then the places legend labels are:
-    """
-    Schools
-    """
+"""
+Schools
+"""
 
 Scenario: Synchronise Places legend with water-point filter
 Given that I am a regular user
 When I go to the homepage  
 And I toggle the 'water-point' checkbox
 Then the places legend labels are:
-    """
-    Schools
-    Water Points
-    """
+"""
+Schools
+Water Points
+"""
 
 Scenario: Synchronise Places legend with water-point filter
 Given that I am a regular user
 When I go to the homepage  
 And I toggle the 'health-center' checkbox
 Then the places legend labels are:
-    """
-    Schools
-    Health Centers
-    """
+"""
+Schools
+Health Centers
+"""
 
 Scenario: Synchronise Places legend with site-visits filter
 Given that I am a regular user
 When I open dashboard for "Acholi,"
 Then the places legend labels are:
-    """
-    Schools
-    Site Visits
-    """
+"""
+Schools
+Site Visits
+"""
 
 
 

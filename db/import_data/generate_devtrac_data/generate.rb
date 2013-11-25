@@ -9,7 +9,7 @@ require_relative 'file_accessor'
 @output = (ARGV[1] == 'clean' ? true : false )
 
 @header = ''
-@file_name = 'USAID_dataset.csv'
+@file_name = 'UNICEF_dataset.csv'
 @districts_file_name = 'UNICEF_districts.csv'
 @sectors_file_name = 'USAID_sectors.csv'
 @status_file_name = 'USAID_statuses.csv'
@@ -29,6 +29,10 @@ def replace_districts lines, districts_hash
         districts = split_districts original_line[8].clone
 
         temp_districts = lookup_district_names districts, districts_hash
+
+        if temp_districts.first == nil
+            puts 'failed to find districts from the list'
+        end
 
         old_lines << original_line
 
@@ -71,6 +75,10 @@ def replace_sectors lines, sectors_hash
 
         old_lines << original_line
 
+        if temp_sectors.first == nil
+            puts 'failed to find sectors in the list'
+        end
+
         temp_sectors.each do |t_s|
             unless t_s.nil?
                 original_line[11] = t_s
@@ -85,7 +93,6 @@ def replace_sectors lines, sectors_hash
     old_lines.each do |line|
         lines.delete line
     end
-
     lines.concat temp_lines
 end
 
@@ -99,9 +106,14 @@ def replace_statuses lines, status_hash
             next
         end
 
+
         statuses = split_status original_line[10].clone
 
         temp_statuses = lookup_status_names statuses, status_hash
+
+        if temp_statuses.first == nil
+            puts 'failed to find statuses from the list'
+        end
 
         old_lines << original_line
 
@@ -157,7 +169,6 @@ end
 
 def lookup_sector_names sectors, sectors_hash
     temp_sectors = []
-
     sectors.each do |sect|
         temp_sectors << sectors_hash[sect]
     end
@@ -239,9 +250,9 @@ end
 file_accessor = FileAccessor.new
 
 if @output 
-    # # clean project files bad bytes
-    # clean_lines = file_accessor.clean_bad_bytes @file_name
-    # file_accessor.write_new_file @file_name, clean_lines, true
+    # clean project files bad bytes
+    clean_lines = file_accessor.clean_bad_bytes @file_name
+    file_accessor.write_new_file @file_name, clean_lines, true
 
     # #clean district file bad bytes
     # clean_district_lines = file_accessor.clean_bad_bytes @districts_file_name
@@ -251,11 +262,22 @@ if @output
     # clean_sector_lines = file_accessor.clean_bad_bytes @sectors_file_name
     # file_accessor.write_new_file @sectors_file_name, clean_sector_lines, true
 
-    #clean status file bad bytes
-    clean_status_lines = file_accessor.clean_bad_bytes @status_file_name
-    file_accessor.write_new_file @status_file_name, clean_status_lines, true
+    # # clean status file bad bytes
+    # clean_status_lines = file_accessor.clean_bad_bytes @status_file_name
+    # file_accessor.write_new_file @status_file_name, clean_status_lines, true
 
 else
+    
+    # # replace statuses
+    # new_file = file_accessor.add_temp_to_file_name @file_name
+    # status_temp_file = file_accessor.add_temp_to_file_name @status_file_name
+
+    # lines = file_accessor.read_file new_file
+    # statuses = file_accessor.read_file status_temp_file
+
+    # new_lines = replace_statuses(lines, array_to_hash(statuses))
+    # file_accessor.write_new_file @file_name, new_lines, false  
+
     # replace sectors
     temp_file = file_accessor.add_temp_to_file_name @file_name
     sectors_temp_file = file_accessor.add_temp_to_file_name @sectors_file_name
@@ -266,28 +288,15 @@ else
     new_lines = replace_sectors(lines, array_to_hash(sectors))
     file_accessor.write_new_file @file_name, new_lines, false
 
-    # replace statuses
-    new_file = file_accessor.add_new_to_file_name @file_name
-    status_temp_file = file_accessor.add_temp_to_file_name @status_file_name
-
-    lines = file_accessor.read_file new_file
-    statuses = file_accessor.read_file status_temp_file
-
-    new_lines = replace_statuses(lines, array_to_hash(statuses))
-    file_accessor.write_new_file @file_name, new_lines, false  
-
     # replace districts and create latitudes and longitudes
-    temp_file = file_accessor.add_new_to_file_name @file_name
-    districts_temp_file = file_accessor.add_temp_to_file_name @districts_file_name
+    # temp_file = file_accessor.add_temp_to_file_name @file_name
+    # districts_temp_file = file_accessor.add_temp_to_file_name @districts_file_name
 
-    lines = file_accessor.read_file temp_file
-    districts = file_accessor.read_file districts_temp_file
+    # lines = file_accessor.read_file temp_file
+    # districts = file_accessor.read_file districts_temp_file
 
-    puts "File read, now adding data"
-    new_lines = replace_districts(lines, array_to_hash(districts))
-    file_accessor.write_new_file @file_name, new_lines, false
+    # puts "File read, now adding data"
+    # new_lines = replace_districts(lines, array_to_hash(districts))
+    # file_accessor.write_new_file @file_name, new_lines, false
 
 end
-
-
-

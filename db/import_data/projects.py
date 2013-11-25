@@ -12,7 +12,7 @@ local_path = os.path.dirname(os.path.abspath(__file__))
 
 parish_ploygons = []
 
-data_folder = "/Users/tunjisunmonu/work/devtrac2/Application Data"
+data_folder = "/Users/Timmy/Downloads/Application Data"
 
 with fiona.open('%s/uganda_parish_10.shp' % data_folder, 'r') as source:
 
@@ -20,7 +20,7 @@ with fiona.open('%s/uganda_parish_10.shp' % data_folder, 'r') as source:
         parish_ploygons.append({ 'shape': shape(f['geometry']), 'properties': f['properties'] })
 
 
-with open("%s/../projects_activities.csv" % local_path, 'rUb') as csvfile:
+with open("%s/../project_activities_latest.csv" % local_path, 'rUb') as csvfile:
     reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
     projects = list(reader)
 

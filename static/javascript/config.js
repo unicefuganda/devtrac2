@@ -7,6 +7,6 @@ DT.markerColors = [ 'red', 'blue', 'green', 'darkslateblue', 'darkslategray', 'd
 
 DT.defaultFundingPartners = ['USAID', 'UNICEF'];
 
-DT.defaultFinancialPartners = ["DFID", "Canada", "EU", "Others"];
+DT.defaultFinancialPartners = ["USAID", "ACODE", "FIDA", "BOSCO", "Others"];
 
 DT.otherColor = "#D5D5D5"

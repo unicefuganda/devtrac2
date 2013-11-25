@@ -32,8 +32,9 @@ def and_i_filter_by_partner(step, partner):
 def and_i_filter_by_end_date(step, year):
     world.page.filter_by_year(year)
 
-@step(u'And there are "([^"]*)" unicef projects in "([^"]*)"')
-@step(u'Then there are "([^"]*)" unicef projects in "([^"]*)"')
+@step(u'And there are "([^"]*)" unicef project locations in "([^"]*)"')
+@step(u'Then there is "([^"]*)" unicef project in "([^"]*)"')
+@step(u'Then there are "([^"]*)" unicef project locations in "([^"]*)"')
 def there_are_unicef_projects(step, num_projects, locator): 
     world.page.wait_for(lambda page: page.marker_count_pins(locator) == int(num_projects))
     assert_equals(world.page.marker_count_pins(locator), int(num_projects))
@@ -74,9 +75,7 @@ def then_the_sector_filter_displays_options(step):
 
 @step(u'Then the Implementing Partners filter displays options:')
 def then_the_implementing_partners_filter_displays_options(step):
-    
-
-    world.page.wait_for(lambda page: page.implementing_partners_chosen_options() == step.multiline)
+    # world.page.wait_for(lambda page: page.implementing_partners_chosen_options() == step.multiline)
     assert_multi_line_equal.im_class.maxDiff = None
     assert_multi_line_equal(world.page.implementing_partners_chosen_options(), step.multiline)
 

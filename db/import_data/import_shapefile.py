@@ -6,7 +6,7 @@ from shapely import speedups
 speedups.enable()
 local_path = os.path.dirname(os.path.abspath(__file__))
 
-data_folder = "/Users/Thoughtworker/Google Drive/Thoughtworks Drive/Application Data"
+data_folder = "~/Downloads/Application Data"
 
 def find_closest_ploygon(polygons, point):
     distances = [(x['shape'].distance(point), x) for x in polygons]
