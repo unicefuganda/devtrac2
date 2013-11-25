@@ -195,12 +195,18 @@ ul.siteVisits {
     list-style-type: none;
 }
 
+.ureport-questions h3 {
+    text-transform: none;
+}
+
 .ureport-questions > li {
     background-color: #EEE; 
     padding: 6px 6px;
     margin-top: 20px;
     page-break-inside: avoid;
 }
+
+
 
 .ureport-print-top5  {
     padding-left: 18px;
@@ -221,7 +227,10 @@ ul.siteVisits {
 }
 
 .ureport-logo {
+    background-image: url(/static/images/ureport_logo.png);
+    background-repeat: no-repeat;
     float: right;
     margin-top: 6px;
-
+    width: 183px;
+    height: 70px;
 }

@@ -47,7 +47,7 @@
       <h3>Ureport question:</h3>
       <div class='filter'>
         <div ng-repeat="ind in ureport_datasets">
-          <button type="button"  ng-click="indicator.selected = indicator.selected == ind ? null : ind" class="btn btn-default btn-sm   toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}" data-indicator='{[{ind.name}]}'>{[{'ind.name'}]}</button>
+          <button type="button"  ng-click="indicator.selected = indicator.selected == ind ? null : ind" class="btn btn-default btn-sm   toggle {[{indicator.selected == ind ? 'toggle-selected' : '' }]}" data-indicator='{[{ind.name}]}'>{[{ind.name}]}</button>
         </div>
       </div>
     </div>

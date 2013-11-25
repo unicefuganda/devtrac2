@@ -286,6 +286,8 @@ class Page:
         element = self.browser.find_by_css('.carousel-inner div img');
         return len(element);
 
+        
+
 
        
         

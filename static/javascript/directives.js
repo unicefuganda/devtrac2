@@ -181,14 +181,10 @@ angular.module("dashboard").directive('map', function() {
    return {
         scope: true,
         link: function(scope, element, attrs) {
-            console.log("here")
             scope.$watch("question.results", function(result) {
-                console.log(result)
                 if (result == null || result == "null")
                     return;
                 var data = result.results.map(function(entry) { return [entry.category, entry.percent]})
-                console.log(data);
-                console.log(element);
                 $(element).highcharts({
                     chart: {
                         plotBorderWidth: null,
@@ -201,11 +197,7 @@ angular.module("dashboard").directive('map', function() {
                     plotOptions: {
                         pie: {
                             allowPointSelect: false,
-                        //     cursor: 'pointer',
                             dataLabels: {
-                        //         enabled: true,
-                                // color: '#000000',
-                        //         connectorColor: '#000000',
                                 crop: false,
                                 format: '<b>{point.name}</b>: {point.percentage:.1f} %'
                             }

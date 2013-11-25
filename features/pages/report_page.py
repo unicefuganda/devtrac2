@@ -36,7 +36,13 @@ class ReportPage:
         return self.browser.find_by_css(".places-legend ul").text
 
     def header(self):
-        return self.browser.find_by_css("#print-title").text
+        return self.browser.find_by_css(".print-title").text
+
+    def ureport_questions(self):
+        return [elem.text for elem in self.browser.find_by_css(".ureport-questions h3")]
+
+    def ureport_answers(self):
+        return [elem.text for elem in self.browser.find_by_css(".ureport-print-top5 li")]
 
     
         

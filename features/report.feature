@@ -46,6 +46,10 @@ And the summary should be
     56%
     """
 
+Scenario: Ureport data on report
+When I open the report for 'Buganda, Gulu'
+And it includes ureport question 'Do you know of any children in your community that are of school going age but are not in school? If yes, how many do you know?' with the answer 'Yes but only 1 because of long distance.'
+
 # This test basically makes sure that the client is able to download a pdf 
 # esentially just checks it's not a 500, very hard to test the content of a pdf
 # best we can do probably
