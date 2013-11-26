@@ -75,6 +75,18 @@ Then the "school" layer for "Acholi, Gulu, Odek" is not displayed
 When I toggle the 'school' checkbox
 Then the "school" layer for "Acholi, Gulu, Odek" is displayed
 
+Scenario: Highlight a District When I hover a Cluster
+Given that I am a regular user
+When I open dashboard for "Acholi"
+And I hover over a "school" cluster at "Acholi, Lamwo"
+Then "Acholi, Lamwo" will be highlighted
+
+Scenario: Highlight a District When I hover a Cluster
+Given that I am a regular user
+When I open dashboard for "Acholi"
+And I click a "school" cluster at "Acholi, Lamwo"
+Then "Acholi, Lamwo" will be selected
+
 @wip
 Scenario: Highlight Project Locations
 Given that I am a regular user

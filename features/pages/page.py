@@ -280,11 +280,18 @@ class Page:
 
     def click_next_link(self):
         next = self.wait_for_element_visible(".right")
-        self.browser.find_by_css(".right").click();
+        self.browser.find_by_css(".right").click()
 
     def carousel_image_src(self):
         element = self.browser.find_by_css('.carousel-inner div img');
-        return len(element);
+        return len(element)
+
+    def hover_over_cluster(self, layer, locator):
+        self.browser.find_by_css(str( ".%s-cluster-icon[data-locator='%s']" % (layer, locator.lower()))).mouse_over()
+
+    def click_a_cluster(self, layer, locator):
+        self.browser.find_by_css(str( ".%s-cluster-icon[data-locator='%s']" % (layer, locator.lower()))).click()
+
 
         
 

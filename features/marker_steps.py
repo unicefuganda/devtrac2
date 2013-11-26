@@ -30,3 +30,12 @@ def when_i_select_a_pin_for_the_group1_on_the_map(step, project_name):
 def then_locations_relating_to_the_group1_will_be_highlighted_on_the_map(step, project_name):
     assert_true(len(world.page.get_pins_for_project(project_name)) > 0);
 
+
+@step(u'And I hover over a "([^"]*)" cluster at "([^"]*)"')
+def and_i_hover_over_a_cluster_at(step, layer, location_name):
+    world.page.hover_over_cluster(layer, location_name)
+
+@step(u'And I click a "([^"]*)" cluster at "([^"]*)"')
+def and_i_click_a_cluster_at(step, layer, location_name):
+	world.page.click_a_cluster(layer, location_name)
+

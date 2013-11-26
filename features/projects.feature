@@ -109,7 +109,6 @@ When I go to the homepage
 And I filter by Partner for "UNICEF"
 Then the color of the pin is 'red'
 
-@wipp
 Scenario: Sync funding partner with other filters
 Given that I am a regular user
 When I go to the homepage

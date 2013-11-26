@@ -70,5 +70,4 @@ And I hover over "Acholi, Gulu, Patiko, Pawel"
 Then "Acholi, Gulu, Patiko, Pawel" will be highlighted
 And I click on "Acholi, Gulu, Patiko, Pawel" 
 Then "Acholi, Gulu, Patiko, Pawel" will be selected
-
     
