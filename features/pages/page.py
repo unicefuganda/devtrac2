@@ -185,8 +185,8 @@ class Page:
 
     def filter_by_sector(self, sector): 
         self.browser.find_link_by_text("Projects/Partners").click()
-        values = self.browser.find_by_value(sector).click()
-
+        self.__filter_chosen__('project-sector', sector)
+    
     def __chosen_options__(self, parentId):
         container = self.browser.find_by_css("#%s .chosen-container" % parentId)
         container.click()
@@ -219,8 +219,8 @@ class Page:
     def status_choices(self):
         return self.__checkbox_choices__("project-status")
 
-    def sector_choices(self):
-        return self.__checkbox_choices__("project-sector")
+    def sector_chosen_options(self):
+        return self.__chosen_options__("project-sector")
 
     def implementing_partners_chosen_options(self):
         return self.__chosen_options__("project-implementing-partner")

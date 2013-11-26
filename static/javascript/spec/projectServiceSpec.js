@@ -139,7 +139,7 @@ describe("Project Service", function () {
     it('should filter projects by sector', inject(function(projectService){
         var location = new DT.Location({region: 'test region'});
         var projects;
-        projectService.projects_geojson(location,{ sector: {'Education': true} }).then(function(data) {
+        projectService.projects_geojson(location,{ sectors: ['Education'] }).then(function(data) {
             projects = data;
         });
 

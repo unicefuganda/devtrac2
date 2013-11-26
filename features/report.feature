@@ -48,7 +48,7 @@ And the summary should be
 
 
 Scenario: Ureport data on report
-When I open the report for 'Buganda, Gulu'
+When I open the report for 'Acholi, Gulu'
 And it includes ureport question 'Do you know of any children in your community that are of school going age but are not in school? If yes, how many do you know?' with answers
 
 # Tim - This test basically makes sure that the client is able to download a pdf 

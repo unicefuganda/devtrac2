@@ -5,7 +5,7 @@ angular.module("dashboard")
 .controller("DashboardCtrl", function($rootScope) {
     $rootScope.project = { list: null, selected: null };
     $rootScope.siteVisit = { list: null, selected: null };
-    $rootScope.filter = new DT.Filter({ health_center: false, water_point: false, school: true, site_visit_point: true, project: { organisation:"FUNDING", status:{}, sector:{}, } } );
+    $rootScope.filter = new DT.Filter({ health_center: false, water_point: false, school: true, site_visit_point: true, project: { organisation:"FUNDING", status:{} } } );
 })
 .controller("IndicatorsCtrl", function($scope, $rootScope, heatmapService) {
     $rootScope.indicator = { selected: null }

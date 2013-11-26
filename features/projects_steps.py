@@ -71,7 +71,7 @@ def then_the_status_filter_displays_options(step):
 
 @step(u'Then the Sector filter displays options:')
 def then_the_sector_filter_displays_options(step):
-    assert_multi_line_equal(world.page.sector_choices(), step.multiline)
+    assert_multi_line_equal(world.page.sector_chosen_options(), step.multiline)
 
 @step(u'Then the Implementing Partners filter displays options:')
 def then_the_implementing_partners_filter_displays_options(step):

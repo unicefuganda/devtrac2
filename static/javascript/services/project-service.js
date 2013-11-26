@@ -55,10 +55,9 @@ angular.module("dashboard")
         var filterProjects = function(features, projectFilter) {
             var partners = getUniquePartners(features);
 
-            if (projectFilter.sector && DT.values(projectFilter.sector).some(function(isSelected) { return isSelected; })) {
+            if (projectFilter.sectors && projectFilter.sectors.length > 0 ) {
                 features = $.grep(features, function(project) {
-                    var checkedSectors = filterOutCheckedOptions(projectFilter.sector);
-                    return $.inArray(project.properties['SECTOR'], checkedSectors) != -1
+                    return $.inArray(project.properties['SECTOR'], projectFilter.sectors) != -1
                 });
             }
 
@@ -231,7 +230,7 @@ angular.module("dashboard")
                     partners: filterList(getUniquePartners, projectFilter.partners),
                     financialOrgs: filterList(getUniqueFinancialOrgs, projectFilter.financialOrgs),
                     implementingPartners: impPartners,
-                    sectors: filterList(getUniqueSectors, filterOutCheckedOptions(projectFilter.sector)),
+                    sectors: filterList(getUniqueSectors, projectFilter.sectors),
                     statuses: filterList(getUniqueStatuses, filterOutCheckedOptions(projectFilter.status))
                 };
             });
