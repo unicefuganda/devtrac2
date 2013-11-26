@@ -33,3 +33,7 @@ def and_i_click_on_next_on_carousel(step):
 @step(u'Then the image src is "([^"]*)"')
 def then_the_image_src_is_group1(step, image_src):
     assert_true(world.page.carousel_image_src(),len(image_src))
+
+@step(u'Then the Site Visit panel should not be displayed')
+def then_the_site_visit_panel_should_not_be_displayed(step):
+    assert_false(world.page.site_visit_panel_display())

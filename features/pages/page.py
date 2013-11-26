@@ -293,6 +293,12 @@ class Page:
     def click_a_cluster(self, layer, locator):
         self.browser.find_by_css(str( ".%s-cluster-icon[data-locator='%s']" % (layer, locator.lower()))).click()
 
+    def project_panel_display(self):
+        return self.browser.find_by_css("#project-list").visible
+
+    def site_visit_panel_display(self):
+        return self.browser.find_by_css("#site-visit-list").visible
+
 
         
 

@@ -1,33 +1,34 @@
-<div ng-controller="ProjectsCtrl" class='well tinted-background' id='project-list'>
+<div ng-controller="ProjectsCtrl">
+<div class='well tinted-background' ng-show="project.pagedList" id='project-list'>
   <div class="well-header">
     <h3>Projects </h3>
   </div>
   
   <div class="project" ng-repeat="p in project.pagedList">
-      <h4>
-          <a href="#" ng-click="project.selected = p">{[{ p.name }]}</a>
-      </h4>
-      <div class='project-dates'>
-        <label>Planned Dates:</label>
-        <span>{[{ p.startActual }]} - {[{ p.endActual }]}</span>
-      </div>
-      <ul>
-        <li>
+    <h4>
+      <a href="#" ng-click="project.selected = p">{[{ p.name }]}</a>
+    </h4>
+    <div class='project-dates'>
+      <label>Planned Dates:</label>
+      <span>{[{ p.startActual }]} - {[{ p.endActual }]}</span>
+    </div>
+    <ul>
+      <li>
 
-          <label>Funding Org:</label>
-          <span>{[{p.partner}]}</span>
-        </li>
+        <label>Funding Org:</label>
+        <span>{[{p.partner}]}</span>
+      </li>
 
-        <li>
-          <label>Accountable Agency:</label>
-          <span>{[{p.financialOrganization}]}</span>
-        </li>
+      <li>
+        <label>Accountable Agency:</label>
+        <span>{[{p.financialOrganization}]}</span>
+      </li>
 
-        <li>
-          <label>Implementing Partner:</label>
-          <span>{[{p.implementingPartner}]}</span>
-        </li>
-      </ul>
+      <li>
+        <label>Implementing Partner:</label>
+        <span>{[{p.implementingPartner}]}</span>
+      </li>
+    </ul>
   </div>
   <div pagination total-items="totalItems" page="currentPage" max-size="5" items-per-page="5"></div>
   <div class='pagination-summary'>
@@ -36,4 +37,5 @@
   <div ng-show='project.selected != null'>
     <a class='back-to-area-link' ng-click=''>Back to {[{location.full_name();}]}</a>
   </div>
-<div>
+</div>
+</div>

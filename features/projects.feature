@@ -285,6 +285,11 @@ Schools
 Site Visits
 """
 
+Scenario: Do not Display Project Panel When There is no project
+Given that I am a regular user
+When I open dashboard for "Bunyoro, Hoima"
+Then the project panel should not be displayed
+
 
 
 

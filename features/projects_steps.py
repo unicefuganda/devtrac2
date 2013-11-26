@@ -111,4 +111,8 @@ def then_the_places_legend_labels_are(step):
     assert_multi_line_equal.im_class.maxDiff = None
     assert_multi_line_equal(world.page.places_legend_content(), step.multiline)
 
+@step(u'Then the project panel should not be displayed')
+def then_the_project_panel_should_not_be_displayed(step):
+    assert_false(world.page.project_panel_display())
+
 

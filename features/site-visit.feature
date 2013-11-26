@@ -76,3 +76,9 @@ And I click on next on carousel
 Then the image src is "/static/images/site-visit/site-visit_2.jpeg"
 
 
+Scenario: Do not Display Site Visit Panel When There is no Site visit
+Given that I am a regular user
+When I open dashboard for "Bunyoro, Hoima"
+Then the Site Visit panel should not be displayed
+
+

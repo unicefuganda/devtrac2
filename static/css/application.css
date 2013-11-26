@@ -600,15 +600,20 @@ h3 {
 	padding-left: 0;
 }
 
+#project-details li {
+  line-height: 26px;
+}
+
 #project-details .detail-value{
 	display: inline-block;
-	width: 82%;
 	margin-bottom: 3px;
+  max-width: 590px;
+  text-align: justify;
 }
 
 #project-details .detail-key{
 	font-weight: bold;
-	width: 16%;
+	width: 20%;
 	margin-right: 10px;
 	display: inline-block;
 	vertical-align: top;
