@@ -8,7 +8,7 @@ When I go to the homepage
 Then the indicator layer is not displayed
 When I change indicator to "Percentage of children completing Primary School"
 Then the "uganda_district_indicators_2" indicator layer is displayed
-And the indicator map label is "Percentage of children completing Primary School"
+And the indicator legend label is "Percentage of children completing Primary School"
 
 Scenario: Show Percentage of children starting school at 6 heat map
 Given that I am a regular user
@@ -16,4 +16,4 @@ When I go to the homepage
 Then the indicator layer is not displayed
 When I change indicator to "Percentage of children starting school at 6"
 Then the "uganda_districts_2011_with_school_start" indicator layer is displayed
-And the indicator map label is "Percentage of children starting school at 6"
+And the indicator legend label is "Percentage of children starting school at 6"

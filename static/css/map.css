@@ -269,6 +269,7 @@
   bottom: 23px;
   right: 15px;
   z-index: 1000;
+  max-width: 250px;
 }
 
 .heatmap-name-container {

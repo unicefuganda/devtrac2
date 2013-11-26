@@ -116,8 +116,8 @@ class Page:
     def is_indicator_layer_hidden(self):
         return self.browser.evaluate_script("window.map.isIndicatorLayerHidden()")
 
-    def indicator_name_label(self):
-        return self.browser.find_by_css(".heatmap-name").text
+    def indicator_legend_label(self):
+        return self.browser.find_by_css(".heatmap-legend .legend-header").text
 
     def change_indicator(self, indicator_name):
         self.browser.find_link_by_text("Indicators").click()

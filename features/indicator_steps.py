@@ -15,9 +15,8 @@ def then_the_indicator_layer_is_displayed(step, indicator_name):
     IsDisplayed = world.page.is_indicator_layer_displayed(indicator_name)
     assert_true(IsDisplayed)
 
-@step(u'And the indicator map label is "([^"]*)"')
-def then_the_indicator_layer_is_displayed(step, indicator_name):
-    indicator_label = world.page.indicator_name_label()
-    assert_equals(indicator_label, indicator_name)
+@step(u'And the indicator legend label is "([^"]*)"')
+def and_the_indicator_legend_label(step, indicator_name):
+    assert_equals(world.page.indicator_legend_label(), indicator_name)
 
 

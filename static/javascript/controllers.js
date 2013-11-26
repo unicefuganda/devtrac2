@@ -27,9 +27,9 @@ angular.module("dashboard")
     });
 
 }).controller("UReportCtrl", function($scope, $rootScope, ureportService) {
-    $rootScope.ureportQuestion = { selected: null }
     ureportService.questions().then(function(data) {
         $scope.questions = data;
+        $rootScope.ureportQuestion = { selected: data[0] }
     });
 }).controller("UReportResponsesCtrl", function($rootScope, $scope, ureportService){
 

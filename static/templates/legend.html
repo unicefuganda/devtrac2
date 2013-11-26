@@ -1,7 +1,7 @@
 <div class="legends">
   <div ng-if="indicator.selected != null" class='heatmap-legend'>
 
-    <div class="legend-header">Indicators</div>
+    <div class="legend-header">{[{ indicator.selected.name }]}</div>
     <div class="legend-content">
       <img ng-src="{[{indicator.selected.wmsUrl + '?' + indicator.selected.legendUrl }]}" />            
     </div>
