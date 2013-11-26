@@ -25,7 +25,7 @@
           <label for="water-point-checkbox">Water Points</label>
         </li>
 
-        <li ng-hide="location.level() == 'national'">
+        <li ng-hide="location.level() == 'national' || location.level() == 'region'">
           <span class="site-visit-point-checkbox-icon checkbox-icon"></span>
           <input type="checkbox" ng-model="filter.site_visit_point" class='site-visit-point-checkbox' id="site-visit-point-checkbox"/>
           <label for="site-visit-checkbox">Site Visits</label>

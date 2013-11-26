@@ -46,7 +46,7 @@ DT.Layers = {
             layers.push(["health-center-point", location]);
         }
 
-        if (location.level() == "region" || location.level() == "district" || location.level() == "subcounty" || location.level() == "parish") {
+        if (location.level() == "district" || location.level() == "subcounty" || location.level() == "parish") {
             layers.push(["site-visit-point", location]);
         }
 

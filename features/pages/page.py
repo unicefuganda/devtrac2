@@ -201,6 +201,7 @@ class Page:
 
     def filter_by_status(self, status): 
         self.browser.find_link_by_text("Projects/Partners").click()
+        
         values = self.browser.find_by_value(status).click()
        
     def filter_by_implementing_partner(self, implementing_partner): 

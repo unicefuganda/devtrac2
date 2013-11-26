@@ -65,7 +65,6 @@ And I filter by Year for "2011"1
 @wip
 #commented out because phantomjs can't get dialog contents
 Scenario: Show project list
-Given that I am a regular urio: Show project details by clicking project link
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu"
 And I click on the project link "STRENGTHENING PARLIAMENATRY OVERSIGHT"

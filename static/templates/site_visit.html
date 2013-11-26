@@ -1,59 +1,46 @@
-	<div class="devtrac-link">
-		<a target="_blank" href="{[{siteVisit.selected.sitevisit_url}]}">Open In Devtrac</a>
-	</div>
-
-	<div id="site-visit-details" style="clear:both">
-		<ul>
-			<li>
-				<label>Author: </label>
-				<span>{[{siteVisit.selected.author}]}</span>
-				
-			</li>
-			<li>
-				<label>Date visited: </label>
-				<span>{[{siteVisit.selected.date}]}</span>
-			</li>
-			<li>
-				<label >Subject: </label>
-				<span>{[{siteVisit.selected.subject}]}</span>
-			</li>
-			<li>
-				<label>Organisation: </label>
-				<span>{[{siteVisit.selected.organisation}]}</span>
-			</li>
-			<li>
-				<label>Place Type: </label>
-				<span>{[{siteVisit.selected.placetype}]}</span>
-			</li>
-			<li>
-				<label>Summary: </label>
-				<span>{[{siteVisit.selected.summary}]}</span>
-			</li>
-			<li>
-				<label>Location: </label>
-				<span>{[{siteVisit.selected.location}]}</span>
-			</li>
-		</ul> 
-		<div class="image-container" ng-if="siteVisit.selected">
-			<div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 378px;">
-			  <ol class="carousel-indicators">
-			    <li ng-repeat="image in siteVisit.selected.images" data-target="#myCarousel" data-slide-to="{[{$index}]}" ng-class="{'active': {[{$index}]} == 0}"></li>
-			  </ol>
-			 <div class="carousel-inner" style="height: 345px; margin-top: -9px;">
-			    <div ng-class="{'item active': {[{$index}]} == 0,'item': {[{$index}]} > 0 }" ng-repeat="image in siteVisit.selected.images">
-			      <img ng-src="{[{image.img}]}">
-			      <div class="carousel-caption">
-			       {[{image.caption}]}
-			      </div>
-			   </div>
-			 </div>
-				<a class="left carousel-control" data-target="#myCarousel" href="" data-slide="prev">
-				    <span class="glyphicon glyphicon-chevron-left"></span>
-				</a>
-			    <a class="right carousel-control" data-target="#myCarousel" href="" data-slide="next">
-				    <span class="glyphicon glyphicon-chevron-right"></span>
-				</a>
-			</div>
+<div id="site-visit-details" style="clear:both">
+	<ul>
+		<li>
+			<label>Author: </label>
+			<span>{[{siteVisit.selected.author}]}</span>
+		</li>
+		<li>
+			<label>Date visited: </label>
+			<span>{[{siteVisit.selected.date}]}</span>
+		</li>
+		<li>
+			<label >Subject: </label>
+			<span>{[{siteVisit.selected.subject}]}</span>
+		</li>
+		<li>
+			<label>Place Type: </label>
+			<span>{[{siteVisit.selected.placetype}]}</span>
+		</li>
+		<li>
+			<label>Summary: </label>
+			<span>{[{siteVisit.selected.summary}]}</span>
+		</li>
+	</ul> 
+	<div class="image-container" ng-if="siteVisit.selected">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 378px;">
+		  <ol class="carousel-indicators">
+		    <li ng-repeat="image in siteVisit.selected.images" data-target="#myCarousel" data-slide-to="{[{$index}]}" ng-class="{'active': {[{$index}]} == 0}"></li>
+		  </ol>
+		 <div class="carousel-inner" style="height: 345px; margin-top: -9px;">
+		    <div ng-class="{'item active': {[{$index}]} == 0,'item': {[{$index}]} > 0 }" ng-repeat="image in siteVisit.selected.images">
+		      <img ng-src="{[{image.img}]}">
+		      <div class="carousel-caption">
+		       {[{image.caption}]}
+		      </div>
+		   </div>
+		 </div>
+			<a class="left carousel-control" data-target="#myCarousel" href="" data-slide="prev">
+			    <span class="glyphicon glyphicon-chevron-left"></span>
+			</a>
+		    <a class="right carousel-control" data-target="#myCarousel" href="" data-slide="next">
+			    <span class="glyphicon glyphicon-chevron-right"></span>
+			</a>
 		</div>
 	</div>
+</div>
 

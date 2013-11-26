@@ -30,7 +30,7 @@ import_locationTree(wfs_service,database)
 print "location tree done"
 import_indicators()
 print "indicators done"
-import_site_visits(wfs_service, database)
+import_site_visits(wfs_service, database, config.DATA_DIR)
 print "site visits done"
 import_ureport(config.DATA_DIR, database)
 print "ureport done"

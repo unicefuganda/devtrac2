@@ -1,17 +1,13 @@
 DT.SiteVisit = function(properties) {
-    this.id = properties['Id'];
     this.title = properties['Title'];
     this.author = properties['Author'];
     this.date = properties['Date Visited'];
-    this.organisation = "UNICEF";
     this.subject = properties['Subject'];
-    this.sitevisit_url = properties['Link'];
-    this.placetype = properties['Placetype'];
+    this.placetype = properties['Place Types'];
     this.siteReportType = properties['Site Report Type'];
-    this.lat = properties['x'];
-    this.lng = properties['y'];
-    this.summary = properties['Summary'];
-    this.location = properties['Location'];
+    this.lat = properties['Latitude'];
+    this.lng = properties['Longitude'];
+    this.summary = properties['Public Summary'];
     this.district = properties['District'];
     this.images =  [
                 {img: '/static/images/site-visit/site-visit_1.jpeg', caption: 'Mr. Isale Richard of Naweet P.S sending text to eduTrac to join.'},
@@ -22,7 +18,7 @@ DT.SiteVisit = function(properties) {
     this.feature = { 
         type: 'Feature',
         properties: properties,
-        "geometry":{"type":"Point","coordinates":[ parseFloat(this.lat), parseFloat(this.lng) ]},
+        "geometry":{"type":"Point","coordinates":[ parseFloat(this.lng), parseFloat(this.lat) ]},
         "geometry_name":"the_geom"
     }
 };

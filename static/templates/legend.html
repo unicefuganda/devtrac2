@@ -28,7 +28,7 @@
         <span class="water-point-legend places-legend-icon"></span>
         <span class="legend-label">Water Points</span>
       </li>
-      <li ng-hide="location.level() == 'national' || !filter.site_visit_point">
+      <li ng-hide="location.level() == 'national' || location.level() == 'region' || !filter.site_visit_point">
         <span class="site-visit-legend places-legend-icon"></span>
         <span class="legend-label">Site Visits</span>
       </li>
