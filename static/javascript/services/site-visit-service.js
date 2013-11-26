@@ -23,11 +23,11 @@ angular.module("dashboard")
             });
         };
 
-        this.siteVisitDetail = function(siteVisitId){
+        this.siteVisitDetail = function(siteVisitTitle){
             var promise = self.siteVisits(new DT.Location({}));
             return promise.then(function(siteVisits) {
                 return DT.first(siteVisits, function(siteVisit){
-                    return siteVisit.id == siteVisitId;
+                    return siteVisit.title == siteVisitTitle;
                 })
             });
         }

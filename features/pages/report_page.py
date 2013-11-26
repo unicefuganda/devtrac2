@@ -17,7 +17,7 @@ class ReportPage:
         return "\n".join(project_names)
 
     def site_visits(self): 
-        project_names = [elem.text for elem in self.browser.find_by_css(".siteVisits h3")]
+        project_names = [elem.text for elem in self.browser.find_by_css(".siteVisits > li")]
         return "\n".join(project_names)
 
     def summary(self): 

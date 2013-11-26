@@ -17,6 +17,7 @@ def then_the_listed_projects_should_be(step):
     assert_multi_line_equal.im_class.maxDiff = None
     assert_multi_line_equal(world.report_page.project_names(), step.multiline)
 
+@step(u'Then the listed sites visits should be')
 @step(u'And the listed sites visits should be')
 def and_the_listed_sites_visits_should_be(step):
     assert_multi_line_equal.im_class.maxDiff = None

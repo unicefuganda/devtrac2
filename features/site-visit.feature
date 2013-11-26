@@ -2,29 +2,29 @@ Feature: Site Visits
 
 Scenario: Show Site Visit list
 Given that I am a regular user
-When I open dashboard for "Buganda, Rakai"
+When I open dashboard for "Acholi, Gulu"
 Then the Site Visit list contains:
     """
-    Site Visit at Kotido DLG (DWO, DPO, DHO & CAO's Offices)
-    Date Visited: 7/10/13 Sectors: Basic nutrition
+    Site Visit at Bardege ICT Youth Centre
+    Date Visited: 29/01/2013 Sectors: Basic life skills for youth and adults
+    Site Visit at OHCHR Gulu Office
+    Date Visited: 12/12/2012 Sectors: Human rights
+    Site Visit at Ongako, War Child site
+    Date Visited: 28/01/2013 Sectors: Basic life skills for youth and adults
     """
 
 Scenario: Paginate the Site Visit list
 Given that I am a regular user
-When I open dashboard for "Buganda"
-And I click on site visit pagination link "4"  
+When I open dashboard for "Acholi"
+And I click on site visit pagination link "3"  
 Then the Site Visit list contains:
     """
-    Site Visit at Kerila Mosque, Apo Sub County (FHDs Monitoring)
-    Date Visited: 4/10/13 Sectors: Infectious disease control
-    Site Visit at Kigoloba
-    Date Visited: 3/10/13 Sectors:
-    Site Visit at Kigoloba Catholic church
-    Date Visited: 6/10/13 Sectors: Basic nutrition, Infectious disease control
-    Site Visit at Kikwandwa Mosque 
-    Date Visited: 4/10/13 Sectors: Basic nutrition, Infectious disease control
-    Site Visit at Kirungi combined (COU and Catholic Church)
-    Date Visited: 6/10/13 Sectors: Basic nutrition, Infectious disease control
+    Site Visit at Ongako, War Child site
+    Date Visited: 28/01/2013 Sectors: Basic life skills for youth and adults
+    Site Visit at Pagak P.7 School
+    Date Visited: 28/02/2013 Sectors: Primary education
+    Site Visit at Palabek Kal Ps
+    Date Visited: 13/11/2012 Sectors: Primary education
     """
 
 Scenario: Filter Site visit points
@@ -37,46 +37,42 @@ Then the "site-visit-point" layer for "Bunyoro, Hoima" is displayed
 
 Scenario: Show Site Visit Marker Summary Info
 Given that I am a regular user
-When I open dashboard for "Bunyoro, Hoima"
-Then the "site-visit-point" layer for "Bunyoro, Hoima" is displayed
-And I hover over a "site-visit-point" marker at "1.4312, 31.3519" 
+When I open dashboard for "Acholi, Gulu"
+Then the "site-visit-point" layer for "Acholi, Gulu" is displayed
+And I hover over a "site-visit-point" marker at "2.8295, 32.3971"
 Then the popup should have content: 
     """
-    Site Visit At Lokpe HC II
-    Subject:
+    Site Visit At OHCHR Gulu Office
+    Subject: Human rights
     """
 
 Scenario: Display Site Visit details
 Given that I am a regular user
-When I open dashboard for "Ankole, Mbarara, Kakoba"
-And I click on the site visit Icon at "-0.6054, 30.6621"
+When I open dashboard for "Acholi, Gulu, Paicho, Angaya"
+And I click on the site visit Icon at "2.8295, 32.3971"
 Then the site visit details should have content:
     """
-    Author: Juliet Alyek Ochero
-    Date visited: 10/10/13
-    Subject:  
-    Place Type: Place of Worship
-    Summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque varius tellus id mi dapibus vehicula vitae quis elit. Sed porttitor dolor consectetur elit egestas mollis. Curabitur non ante porttitor, pharetra metus eu, blandit neque. Curabitur eget rutrum sapien. Vestibulum blandit massa quis turpis laoreet, et ornare justo ornare. Etiam aliquet faucibus neque at ornare. Quisque vestibulum, erat in scelerisque ornare, ipsum quam elementum felis, sed congue elit urna sit amet mauris. Sed porta volutpat dui vitae accumsan. Nullam id dignissim orci. Duis interdum elit eu massa facilisis nullam.
+    Author: Jacob Opiyo
+    Date visited: 12/12/2012
+    Subject: Human rights
+    Place Type: Office
+    Summary: The resource center contains academic publications and resources on human rights, transitional justice and peace building, as well as reading space and computers with internet access. The purpose of the center is to provide access to information on the aforementioned topics, thereby enhancing the knoweldge of relevant stakeholders in Acholi and contribute to the on going peace and recovery process
     """
 
 
 Scenario: Show Site Visit details by clicking site visit link
 Given that I am a regular user
-When I open dashboard for "Ankole, Mbarara, Kakoba"
-And I click on the site visit link "Site Visit at Mbaru Catholic Church"
+When I open dashboard for "Acholi, Gulu, Paicho, Angaya"
+And I click on the site visit link "Site Visit at OHCHR Gulu Office"
 Then the site visit details should have content:
     """
-    Author: Juliet Alyek Ochero
-    Date visited: 10/10/13
-    Subject:  
-    Place Type: Place of Worship
-    Summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque varius tellus id mi dapibus vehicula vitae quis elit. Sed porttitor dolor consectetur elit egestas mollis. Curabitur non ante porttitor, pharetra metus eu, blandit neque. Curabitur eget rutrum sapien. Vestibulum blandit massa quis turpis laoreet, et ornare justo ornare. Etiam aliquet faucibus neque at ornare. Quisque vestibulum, erat in scelerisque ornare, ipsum quam elementum felis, sed congue elit urna sit amet mauris. Sed porta volutpat dui vitae accumsan. Nullam id dignissim orci. Duis interdum elit eu massa facilisis nullam.
+    Author: Jacob Opiyo
+    Date visited: 12/12/2012
+    Subject: Human rights
+    Place Type: Office
+    Summary: The resource center contains academic publications and resources on human rights, transitional justice and peace building, as well as reading space and computers with internet access. The purpose of the center is to provide access to information on the aforementioned topics, thereby enhancing the knoweldge of relevant stakeholders in Acholi and contribute to the on going peace and recovery process
     """
-
-Scenario: Display Site Visit images in carousel
-Given that I am a regular user
-When I open dashboard for "Ankole, Mbarara, Kakoba"
-And I click on the site visit link "Site Visit at Mbaru Catholic Church"
 And I click on next on carousel
 Then the image src is "/static/images/site-visit/site-visit_2.jpeg"
+
 

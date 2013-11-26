@@ -16,11 +16,6 @@ Then the listed projects should be
     Strengthening Local Government Responses To OVC (SUNRISE OVC)
     Technical Management Agency For The Civil Society Fund (TMA-CSF)
     """
-And the listed sites visits should be
-    """
-    Site Visit At Amyel Catholic Church
-    Site Visit At Arivu Church, Arivu Sub County (FHDs Monitoring)
-    """
 And the summary should be
     """
     Health Centers
@@ -45,6 +40,18 @@ And the summary should be
     56%
     """
 
+
+Scenario: Site Visits Report Content
+When I open the report for 'Acholi, Gulu'
+Then the listed sites visits should be
+    """
+    Site Visit at Bardege ICT Youth Centre
+    Date Visited: 29/01/2013 Sectors: Basic life skills for youth and adults
+    Site Visit at OHCHR Gulu Office
+    Date Visited: 12/12/2012 Sectors: Human rights
+    Site Visit at Ongako, War Child site
+    Date Visited: 28/01/2013 Sectors: Basic life skills for youth and adults
+    """
 
 
 Scenario: Ureport data on report

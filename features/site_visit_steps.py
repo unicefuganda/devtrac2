@@ -13,7 +13,8 @@ def and_i_click_on_the_site_visit_icon_at_latitude_and_logitude(step, lat, lng):
 
 @step(u'Then the site visit details should have content:')
 def then_the_site_visit_details_should_have_content(step):
-    world.page.wait_for(lambda page: page.site_visit_details_content() == step.multiline)
+    # world.page.wait_for(lambda page: page.site_visit_details_content() == step.multiline)
+    sleep(2)
     assert_multi_line_equal.im_class.maxDiff = None
     assert_multi_line_equal(world.page.site_visit_details_content(), step.multiline)
 

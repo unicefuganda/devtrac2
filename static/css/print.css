@@ -48,8 +48,32 @@ ul.projects {
 }
 
 ul.siteVisits {
-    padding-left: 4px;
+    padding-left: 0px;
     list-style-type: none;
+}
+
+.siteVisits ul {
+    padding-left: 0;
+}
+
+.siteVisits > li {
+    background-color: #EEE;
+    padding: 4px;
+    margin-bottom: 6px;
+}
+
+.siteVisits h3 {
+    margin-bottom: 4px;
+    text-transform: none;
+}
+
+.siteVisits ul li {
+    display: inline-block;  
+    margin-right: 10px;
+}
+
+.siteVisits ul li span {
+    font-weight: bold;
 }
 
 #summary h2 {
@@ -205,8 +229,6 @@ ul.siteVisits {
     margin-top: 20px;
     page-break-inside: avoid;
 }
-
-
 
 .ureport-print-top5  {
     padding-left: 18px;

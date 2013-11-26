@@ -127,6 +127,24 @@
             <ul class='siteVisits'>
                 <li ng-repeat='s in siteVisits'>
                     <h3>{[{s.title}]}</h3>
+                    <ul>
+                        <li>
+                          <label>
+                            Date Visited:
+                          </label>
+                          <span>
+                            {[{ s.date}]}
+                          </span>
+                        </li>
+                        <li>
+                          <label>
+                            Sectors:
+                          </label>
+                          <span>
+                            {[{ s.subject}]}
+                          </span>
+                        </li>
+                      </ul>
                 </li>
             </ul>
         </section>

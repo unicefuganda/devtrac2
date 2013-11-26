@@ -278,7 +278,7 @@ Health Centers
 
 Scenario: Synchronise Places legend with site-visits filter
 Given that I am a regular user
-When I open dashboard for "Acholi,"
+When I open dashboard for "Acholi, Gulu"
 Then the places legend labels are:
 """
 Schools
