@@ -111,83 +111,59 @@ angular.module("dashboard")
     
 })
 .controller("ProjectsCtrl", function($scope, projectService){
+    var maxSize = 5;
+    $scope.maxSize = maxSize;
     $scope.currentPage = 1;
 
-    var pageList = function(currentPage) {
-        var listChucks = DT.splitIntoChuncks($scope.project.list, 5);
-        $scope.project.pagedList = listChucks[$scope.currentPage - 1];
-        $scope.startCount = ((currentPage - 1) * 5) + 1;
-        $scope.endCount = ((currentPage - 1) * 5) + $scope.project.pagedList.length;
-    };
-
-    $scope.$watch('currentPage', function() {
-        if ($scope.project == null || $scope.project.list == null)
+    $scope.$watch('currentPage', function(newCurrentPage, oldCurrentPage) {
+        if (newCurrentPage == null || newCurrentPage == oldCurrentPage)
             return;
 
-        pageList($scope.currentPage);
-    })
-
-    $scope.$watch('project.list', function(newValues, oldValues){
-        if ($scope.project == null || $scope.project.list == null)
-            return;
-
-        $scope.totalItems = $scope.project.list.length;
-        $scope.currentPage = 1;
-
-        pageList($scope.currentPage);
+        updateProjectList($scope.currentPage);
     });
 
-    var updateProjectList = function() {
-        if ($scope.filter == null)
+    var updateProjectList = function(page) {
+        if ($scope.location == null || $scope.filter == null)
             return;
-        projectService.projects($scope.location, $scope.filter.project).then(function(data){
-            $scope.project.list = data;
+
+        projectService.projects($scope.location, $scope.filter.project, (page - 1) * maxSize, maxSize).then(function(projects){
+            $scope.totalItems = projects.total;
+            $scope.projects = projects.list;
+            $scope.currentPage = page;
+            $scope.startCount = ((page - 1) * maxSize) + 1;
+            $scope.endCount = ((page - 1) * maxSize) + projects.total;
         });
     };
 
-    $scope.$watch("filter.project", updateProjectList, true);
-    $scope.$watch("location", updateProjectList, true);
+    $scope.$watch("filter.project",function() { updateProjectList(1); }, true);
+    $scope.$watch("location", function() { updateProjectList(1); }, true);
 })
-.controller("SiteVisitCtrl", function($scope,siteVisitService){
+.controller("SiteVisitCtrl", function($scope,siteVisitService, $timeout){
+
+    var maxSize = 5;
+    $scope.maxSize = maxSize;
     $scope.currentPage = 1;
 
-    var pageList = function(currentPage) {
-        var listChucks = DT.splitIntoChuncks($scope.siteVisit.list, 5);
-        $scope.siteVisit.pagedList = listChucks[$scope.currentPage - 1];
-        $scope.startCount = ((currentPage - 1) * 5) + 1;
-        $scope.endCount = ((currentPage - 1) * 5) + $scope.siteVisit.pagedList.length;
-    };
-
-    $scope.maxSize = 5;
-    $scope.currentPage = 1;
-
-    $scope.$watch('currentPage', function() {
-
-        if ($scope.siteVisit == null || $scope.siteVisit.list == null)
+    $scope.$watch('currentPage', function(newCurrentPage, oldCurrentPage) {
+        if (newCurrentPage == null || newCurrentPage == oldCurrentPage)
             return;
-        pageList($scope.currentPage);
+        updateSiteVisitList($scope.currentPage);
     })
 
-    $scope.$watch('siteVisit.list', function(newValues, oldValues){
-        if ($scope.siteVisit == null || $scope.siteVisit.list == null)
-            return;
-
-        $scope.totalItems = $scope.siteVisit.list.length;
-        $scope.currentPage = 1;
-
-        pageList($scope.currentPage);
-    });
-
-    var updateSiteVisitList = function() {
+    var updateSiteVisitList = function(page) {
         if ($scope.location == null)
             return;
 
-        siteVisitService.siteVisits($scope.location).then(function(data){
-            $scope.siteVisit.list = data;
+        siteVisitService.siteVisits($scope.location, (page - 1) * maxSize, maxSize).then(function(siteVisits){
+            $scope.totalItems = siteVisits.total;
+            $scope.siteVisits = siteVisits.list;
+            $scope.currentPage = page;
+            $scope.startCount = ((page - 1) * maxSize) + 1;
+            $scope.endCount = ((page - 1) * maxSize) + siteVisits.total;
         });
     }
 
-    $scope.$watch("location", updateSiteVisitList, true);
+    $scope.$watch("location", function() { updateSiteVisitList(1); }, true);
 })
 .controller("PrintCtrl", function($rootScope, $scope, projectService, summaryService, siteVisitService, $location, ureportService) {    
 
@@ -199,20 +175,20 @@ angular.module("dashboard")
         $rootScope.projects = projects;    
     });
 
-    projectService.projects(location, {}).then(function(projects) {
-        $rootScope.projects = projects;    
+    projectService.projects(location, {}, 0, 10000).then(function(projects) {
+        $rootScope.projects = projects.list;    
     });
 
     summaryService.find(location).then(function(summary) {
         $rootScope.summary = summary;
-    })
+    });
 
-    siteVisitService.siteVisits(location).then(function(siteVisits) {
-        $rootScope.siteVisits = siteVisits;  
-    })
+    siteVisitService.siteVisits(location, 0, 10000).then(function(siteVisits) {
+        $rootScope.siteVisits = siteVisits.list;  
+    });
 
     ureportService.all(location).then(function(ureportQuestions) {
         $rootScope.ureportQuestions = ureportQuestions;  
-    })
+    });
 
 });

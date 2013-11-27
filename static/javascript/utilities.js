@@ -75,11 +75,13 @@ DT.timings.print = function() {
         ["Got Data:", "getdata"],
         ["Rendered Data:", "rendereddata"],
         ["Zoom end:", "zoomend"],
+        ["Site Visit finished:", "finishedsitevisit"],
+        ["Site Visit start:", "sitevisitlocation"],
+        ["Det site visit data:", "getsitevisitdata"],
 
     ];
     var output = "";
     $.each(labels, function(index, element) {
-
         output += element[0] + DT.timings.printPeriod(DT.timings["urlchange"], DT.timings[element[1]]) + " ";
     });
     console.log(output);

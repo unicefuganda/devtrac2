@@ -2,7 +2,8 @@ angular.module("dashboard")
     .service("siteVisitService", function(jsonService) {
 
         var self = this;
-        this.siteVisits = function (location) {
+        this.siteVisits = function (location, startingIndex, number) {
+
             var locationFilter = function (location) {
                 return function (rows) {
                     return $.grep(rows, function(feature, index) {
@@ -20,13 +21,19 @@ angular.module("dashboard")
                       return -1;
                     return 0;
                 });
-            });
+            }).then(function(siteVisits) {
+                return {   
+                    list: siteVisits.slice(startingIndex, startingIndex + number),
+                    total: siteVisits.length
+                }
+
+            })
         };
 
         this.siteVisitDetail = function(siteVisitTitle){
-            var promise = self.siteVisits(new DT.Location({}));
+            var promise = self.siteVisits(new DT.Location({}), 0, 100000);
             return promise.then(function(siteVisits) {
-                return DT.first(siteVisits, function(siteVisit){
+                return DT.first(siteVisits.list, function(siteVisit){
                     return siteVisit.title == siteVisitTitle;
                 })
             });
@@ -34,8 +41,8 @@ angular.module("dashboard")
         
 
         this.site_visits_geojson = function(location) {
-            return self.siteVisits(location).then(function(site_visits){
-                var features = site_visits.map(function(site_visit) { return site_visit.feature; });
+            return self.siteVisits(location, 0, 100000).then(function(site_visits){
+                var features = site_visits.list.map(function(site_visit) { return site_visit.feature; });
                 return { type: "FeatureCollection", features: features };            
             })
         }

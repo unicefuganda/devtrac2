@@ -171,7 +171,7 @@ angular.module("dashboard")
             });
         };
 
-        this.projects = function(location, projectFilter){
+        this.allProjects = function(location, projectFilter) {
             return self.projects_geojson(location, projectFilter).then(function(data){
 
                 var projectHash = data.geojson.features.reduce(function(projects, projectFeature) {
@@ -197,6 +197,15 @@ angular.module("dashboard")
                 });
 
                 return values;
+            });
+        }
+
+        this.projects = function(location, projectFilter, startingIndex, number){
+            return self.allProjects(location, projectFilter).then(function(projects) {
+                return {
+                    list: projects.slice(startingIndex, startingIndex + number),
+                    total: projects.length 
+                };
             });
         };
 
@@ -236,5 +245,5 @@ angular.module("dashboard")
             });
         }
         var projectsGeojsonPromise = geonodeService.get('projects');
-        var projectsPromise = self.projects(new DT.Location({}), {});
+        var projectsPromise = self.allProjects(new DT.Location({}), {});
     });

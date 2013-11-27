@@ -1,10 +1,10 @@
 <div ng-controller="ProjectsCtrl">
-<div class='well tinted-background' ng-show="project.pagedList" id='project-list'>
+<div class='well tinted-background' ng-show="projects" id='project-list'>
   <div class="well-header">
     <h3>Projects </h3>
   </div>
   
-  <div class="project" ng-repeat="p in project.pagedList">
+  <div class="project" ng-repeat="p in projects">
     <h4>
       <a href="#" ng-click="project.selected = p">{[{ p.name }]}</a>
     </h4>

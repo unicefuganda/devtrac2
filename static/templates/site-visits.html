@@ -1,10 +1,10 @@
 <div ng-controller="SiteVisitCtrl">
-  <div class='well tinted-background' ng-show="siteVisit.pagedList"  id='site-visit-list'>
+  <div class='well tinted-background' ng-show="siteVisits"  id='site-visit-list'>
     <div class="well-header">
       <h3>Site Visits</h3>
     </div>
     <ul>
-      <li ng-repeat="visit in siteVisit.pagedList" class='site-visit'>
+      <li ng-repeat="visit in siteVisits" class='site-visit'>
 
         <div>
           <h4>

@@ -69,17 +69,12 @@ describe("Project Service", function () {
         };
     };
 
-    // var mockSummaryService = mockSummaryServiceFactory(testSummaryChildrenLocations);
 
     beforeEach(function($q){
         module('dashboard',function($provide){
             spyOn(mock,'get').andCallThrough();
             $provide.value('geonodeService',mock);
-            // spyOn(mockSummaryService,'get').andCallThrough();
-            // $provide.value('summaryService',mockSummaryService);
         });
-
-
 
     });
     function mapProjectId(data) {
@@ -251,18 +246,38 @@ describe("Project Service", function () {
         var filter = { partner: { unicef: true, usaid: true}};
         var projects;
 
-        projectService.projects(new DT.Location({region: 'test region'}), filter).then(function(data) {
+        projectService.projects(new DT.Location({region: 'test region'}), filter, 0, 5).then(function(data) {
             projects = data;
         });
 
-        expect(projects.length).toEqual(2)
+        expect(projects.total).toEqual(2)
 
-        expect(projects[0].id).toEqual('UNICEF-1');
-        expect(projects[0].locations[0]).toEqual(new DT.Location({'district': 'test district', 'region': 'test region'}))
-        expect(projects[0].locations[1]).toEqual(new DT.Location({'district': 'test district', 'region': 'test region', 'subcounty': 'test subcounty'}))
+        expect(projects.list[0].id).toEqual('UNICEF-1');
+        expect(projects.list[0].locations[0]).toEqual(new DT.Location({'district': 'test district', 'region': 'test region'}))
+        expect(projects.list[0].locations[1]).toEqual(new DT.Location({'district': 'test district', 'region': 'test region', 'subcounty': 'test subcounty'}))
 
-        expect(projects[1].id).toEqual('USAID-1');
-        expect(projects[1].locations[0]).toEqual(new DT.Location({'district': 'test district 2', 'region': 'test region'}))
+        expect(projects.list[1].id).toEqual('USAID-1');
+        expect(projects.list[1].locations[0]).toEqual(new DT.Location({'district': 'test district 2', 'region': 'test region'}))
+    }));
+
+    it('pages projects', inject(function(projectService) {
+        var filter = { partner: { unicef: true, usaid: true}};
+        var projects;
+
+        projectService.projects(new DT.Location({region: 'test region'}), filter, 0, 2).then(function(data) {
+            projects = data;
+        });
+
+        expect(projects.total).toEqual(2)
+        expect(projects.list[0].id).toEqual('UNICEF-1');
+        expect(projects.list[1].id).toEqual('USAID-1');
+
+         projectService.projects(new DT.Location({region: 'test region'}), filter, 1, 2).then(function(data) {
+            projects = data;
+        });
+
+        expect(projects.total).toEqual(2)
+        expect(projects.list[0].id).toEqual('USAID-1');
     }));
 
 
