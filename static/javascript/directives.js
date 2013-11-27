@@ -65,6 +65,9 @@ angular.module("dashboard").directive('map', function() {
                 });
 
                 scope.getData(layerChanges.toAdd).then(function(allData) {
+
+                    DT.timings["getdata"] = new Date().getTime();
+
                     if (newLocation.equals(scope.location))
                     {
                         $.each(layerChanges.toAdd, function(index, locationKey) {
@@ -73,6 +76,8 @@ angular.module("dashboard").directive('map', function() {
                         map.selectLayer(newLocation);
                         map.orderLayers(scope.location.layerOrder());
                     }
+
+                    DT.timings["rendereddata"] = new Date().getTime();
                 });
             }
 
@@ -99,11 +104,17 @@ angular.module("dashboard").directive('map', function() {
             }, true);
 
             scope.$watch("location", function(newLocation, oldLocation) {
+                DT.timings["maplocationchange"] = new Date().getTime();
+
                 map.unselect();
+
+
 
                 if (newLocation == undefined)
                     return true;
                 applyLocationAndFilter(newLocation, scope.filter);
+
+
             });
         }
     };

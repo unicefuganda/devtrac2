@@ -70,18 +70,19 @@ DT.timings.printPeriod = function(date1_ms, date2_ms){
 
 DT.timings.print = function() {
     var labels = [
-        ["Zoom Start:", "zoomstart"],
-        ["Zoom End:", "zoomend"],
-        ["Move Start:", "movestart"],
-        ["Move End:", "moveend"],
         ["Url:", "urlchange"],
-        ["Unselect:", "unselectend"],
+        ["Map Location Change:", "maplocationchange"],
+        ["Got Data:", "getdata"],
+        ["Rendered Data:", "rendereddata"],
+        ["Zoom end:", "zoomend"],
 
     ];
     var output = "";
     $.each(labels, function(index, element) {
-        output += element[0] + DT.timings.printPeriod(DT.timings["click"], DT.timings[element[1]]) + " ";
+
+        output += element[0] + DT.timings.printPeriod(DT.timings["urlchange"], DT.timings[element[1]]) + " ";
     });
+    console.log(output);
 };
 
 DT.feature_toggles = function(queryString) {

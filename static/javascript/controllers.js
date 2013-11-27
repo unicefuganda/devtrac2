@@ -1,5 +1,6 @@
 angular.module("dashboard")
 .controller("LocationCtrl", function($rootScope, $routeParams) {
+    DT.timings["urlchange"] = new Date().getTime();
     $rootScope.location = new DT.Location($routeParams);
 })
 .controller("DashboardCtrl", function($rootScope) {
@@ -53,6 +54,7 @@ angular.module("dashboard")
     $rootScope.$watch("location", function(newLocation, oldLocation) {
         if (newLocation == null)
             return;
+
         showUReportResults($rootScope.location, $rootScope.ureportQuestion);
     });
 
