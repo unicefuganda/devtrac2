@@ -5,12 +5,12 @@ Given that I am a regular user
 When I open dashboard for "Acholi, Gulu"
 Then the Site Visit list contains:
     """
-    Site Visit at Bardege ICT Youth Centre
-    Date Visited: 29/01/2013 Sectors: Basic life skills for youth and adults
-    Site Visit at OHCHR Gulu Office
-    Date Visited: 12/12/2012 Sectors: Human rights
-    Site Visit at Ongako, War Child site
-    Date Visited: 28/01/2013 Sectors: Basic life skills for youth and adults
+    Koch Kalang
+    Open in DevTrac
+    Date Visited: 12/03/2013 Sectors: Education and training in water supply and sanitation
+    Site Visit at Monitoring ECD orientation training for DIS, DHI, FBOs, DPOs EO on Licensing and Registration of ECD centres
+    Open in DevTrac
+    Date Visited: 27/02/2013 Sectors: Early childhood education
     """
 
 Scenario: Paginate the Site Visit list
@@ -19,12 +19,21 @@ When I open dashboard for "Acholi"
 And I click on site visit pagination link "3"  
 Then the Site Visit list contains:
     """
-    Site Visit at Ongako, War Child site
-    Date Visited: 28/01/2013 Sectors: Basic life skills for youth and adults
+    Site Visit at Ogom Telela
+    Open in DevTrac
+    Date Visited: 05/03/2013 Sectors: Primary education
+    Site Visit at PATIRA
+    Open in DevTrac
+    Date Visited: 12/03/2013 Sectors: Education facilities and training, Primary education
+    Site Visit at Pader District HQs
+    Open in DevTrac
+    Date Visited: 05/03/2013 Sectors:
     Site Visit at Pagak P.7 School
+    Open in DevTrac
     Date Visited: 28/02/2013 Sectors: Primary education
-    Site Visit at Palabek Kal Ps
-    Date Visited: 13/11/2012 Sectors: Primary education
+    Site Visit at Refugee Camp
+    Open in DevTrac
+    Date Visited: 28/10/2013 Sectors:
     """
 
 Scenario: Filter Site visit points
@@ -39,38 +48,40 @@ Scenario: Show Site Visit Marker Summary Info
 Given that I am a regular user
 When I open dashboard for "Acholi, Gulu"
 Then the "site-visit-point" layer for "Acholi, Gulu" is displayed
-And I hover over a "site-visit-point" marker at "2.8295, 32.3971"
+And I hover over a "site-visit-point" marker at "2.7193, 32.2186"
 Then the popup should have content: 
     """
-    Site Visit At OHCHR Gulu Office
-    Subject: Human rights
+    Koch Kalang
+    Subject: Education and training in water supply and sanitation
     """
 
 Scenario: Display Site Visit details
 Given that I am a regular user
-When I open dashboard for "Acholi, Gulu, Paicho, Angaya"
-And I click on the site visit Icon at "2.8295, 32.3971"
+When I open dashboard for "Acholi, Gulu"
+And I click on the site visit Icon at "2.7193, 32.2186"
 Then the site visit details should have content:
     """
-    Author: Jacob Opiyo
-    Date visited: 12/12/2012
-    Subject: Human rights
-    Place Type: Office
-    Summary: The resource center contains academic publications and resources on human rights, transitional justice and peace building, as well as reading space and computers with internet access. The purpose of the center is to provide access to information on the aforementioned topics, thereby enhancing the knoweldge of relevant stakeholders in Acholi and contribute to the on going peace and recovery process
+    Author: Rabbin Mike Drabe
+    Date visited: 12/03/2013
+    Subject: Education and training in water supply and sanitation
+    Place Type: Primary School
+    Location: Koch Ongako Open Location In Devtrac
+    Summary: Before UNICEF intervention, water and sanitation provision in Nwoya schools was non-existent or in an appalling state. UNICEF/District programmes have since put in hardware that has significantly improved the coverage of latrines, drinking and washing water. More investment has been made in hygiene education. Another major effort to monitor and re-plan district wide, and without more investment in water and sanitation for the surrounding communities, the sustainability of the hardware and the consolidation of behaviour change may be lost.
     """
 
 
 Scenario: Show Site Visit details by clicking site visit link
 Given that I am a regular user
-When I open dashboard for "Acholi, Gulu, Paicho, Angaya"
-And I click on the site visit link "Site Visit at OHCHR Gulu Office"
+When I open dashboard for "Acholi, Gulu"
+And I click on the site visit link "Koch Kalang"
 Then the site visit details should have content:
     """
-    Author: Jacob Opiyo
-    Date visited: 12/12/2012
-    Subject: Human rights
-    Place Type: Office
-    Summary: The resource center contains academic publications and resources on human rights, transitional justice and peace building, as well as reading space and computers with internet access. The purpose of the center is to provide access to information on the aforementioned topics, thereby enhancing the knoweldge of relevant stakeholders in Acholi and contribute to the on going peace and recovery process
+    Author: Rabbin Mike Drabe
+    Date visited: 12/03/2013
+    Subject: Education and training in water supply and sanitation
+    Place Type: Primary School
+    Location: Koch Ongako Open Location In Devtrac
+    Summary: Before UNICEF intervention, water and sanitation provision in Nwoya schools was non-existent or in an appalling state. UNICEF/District programmes have since put in hardware that has significantly improved the coverage of latrines, drinking and washing water. More investment has been made in hygiene education. Another major effort to monitor and re-plan district wide, and without more investment in water and sanitation for the surrounding communities, the sustainability of the hardware and the consolidation of behaviour change may be lost.
     """
 And I click on next on carousel
 Then the image src is "/static/images/site-visit/site-visit_2.jpeg"

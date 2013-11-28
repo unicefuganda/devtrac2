@@ -11,7 +11,7 @@ def import_site_visits(wfs_service, database, data_dir):
     parish_service = ParishService(wfs_service)
 
     with open("%s/%s/devtrac_solr_view_sitevisits.csv" % (base_dir, data_dir), 'rUb') as csvfile: 
-        reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
+        reader = csv.DictReader(csvfile, delimiter='\t', quotechar='"')
         updated_rows = []
         for csv_row in reader: 
             if (csv_row['Latitude'] == '' or csv_row['Longitude'] == ''):

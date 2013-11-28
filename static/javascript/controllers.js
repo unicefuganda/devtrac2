@@ -171,9 +171,6 @@ angular.module("dashboard")
     var location = DT.Location.fromName(locator);
 
     $rootScope.location = location;
-    projectService.projects(location, {}).then(function(projects) {
-        $rootScope.projects = projects;    
-    });
 
     projectService.projects(location, {}, 0, 10000).then(function(projects) {
         $rootScope.projects = projects.list;    

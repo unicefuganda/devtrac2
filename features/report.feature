@@ -1,4 +1,4 @@
-Feature: Report
+Feature: Reports
 
 Scenario: Basic Report Content
 When I open the report for 'Buganda, Kalangala'
@@ -45,12 +45,10 @@ Scenario: Site Visits Report Content
 When I open the report for 'Acholi, Gulu'
 Then the listed sites visits should be
     """
-    Site Visit at Bardege ICT Youth Centre
-    Date Visited: 29/01/2013 Sectors: Basic life skills for youth and adults
-    Site Visit at OHCHR Gulu Office
-    Date Visited: 12/12/2012 Sectors: Human rights
-    Site Visit at Ongako, War Child site
-    Date Visited: 28/01/2013 Sectors: Basic life skills for youth and adults
+    Koch Kalang
+    Date Visited: 12/03/2013 Sectors: Education and training in water supply and sanitation
+    Site Visit at Monitoring ECD orientation training for DIS, DHI, FBOs, DPOs EO on Licensing and Registration of ECD centres
+    Date Visited: 27/02/2013 Sectors: Early childhood education
     """
 
 
