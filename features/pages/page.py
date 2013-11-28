@@ -299,6 +299,12 @@ class Page:
     def site_visit_panel_display(self):
         return self.browser.find_by_css("#site-visit-list").visible
 
+    def click_on_the_about_devtracglobal_link(self):
+        self.browser.find_by_css('.footer-container').click()
+
+    def display_about_popup(self):
+        return self.browser.find_by_css('#aboutModal')
+
 
         
 

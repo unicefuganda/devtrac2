@@ -41,6 +41,12 @@ Then the filter panel is collapsed
 When I toggle the filter panel
 Then the filter panel is displayed
 
+Scenario: Display About Popup
+Given that I am a regular user
+When I go to the homepage
+And I click on the about DevtracGlobal link
+Then about DevtracGlobal Popup will be displayed
+
 
 
 

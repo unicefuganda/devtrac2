@@ -12,46 +12,57 @@
 <body ng-controller="DashboardCtrl">
   <div ng-include="'/static/templates/nav_bar.html'"></div>
   <div ng-view></div>
+  
   <div id='map-container'>
     <div id='right-hand-panel'>
       <div id='right-hand-container'>
         <div map id='devtrac-map'></div>
         <div ng-include="'/static/templates/legend.html'"></div>
-        <!-- <div ng-include="'/static/templates/heatmap_name.html'"></div> -->
-<!--         <div ng-show='siteVisit.selected != null '>
-            <div ng-include="'/static/templates/site_visit.html'"></div> 
-       </div>  -->  
        </div>
     </div>
-  
     <div panel panel-expand='{"bottom":"-58px"}' panel-collapse='{"bottom":"-96%"}' class='filter-panel expanded dt-panel ng-cloak' id="filter-panel">
      <div class="close-panel" ><span class="glyphicon glyphicon-chevron-down"></span></div>
-     
-
      <div class='filters-container'>  
-      <div ng-include="'/static/templates/filters.html'" class='filters-section'></div>
+        <div ng-include="'/static/templates/filters.html'" class='filters-section'></div>
+      </div>
     </div>
-  </div>
-  <div>
-
-  <div>
-    <div site-visit-modal ng-show='siteVisit.selected != null '>
-      <div ng-include="'/static/templates/site_visit_modal.html'"></div>  
+    <div>
+      <div site-visit-modal ng-show='siteVisit.selected != null '>
+        <div ng-include="'/static/templates/site_visit_modal.html'"></div>  
+      </div>
+      <div ng-show='project.selected != null'>
+        <div ng-include="'/static/templates/project_modal.html'"></div>
+      </div>
     </div>
-
-    <div ng-show='project.selected != null'>
-      <div ng-include="'/static/templates/project_modal.html'"></div>
-    </div>
-  </div>
     <div class='detail-panel'>
       <div class='container'>
         <div >
           <div ng-include="'/static/templates/area.html'"></div> 
+         </div>
+      </div>
+      <footer>
+         <div about-modal class="footer-container">
+            <a href='#' ng-click="show_modal()"><b>About DevtracGlobal</b></a>
+          <!-- <button  type="button" id="modalButton" ng-click="show_modal()">About DevtracGlobal</button> -->
         </div>
+      </footer>
+    </div>
+ 
+  </div>
+</div>
+
+<div about-modal class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="position: fixed;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">About Devtrac</h4>
+      </div>
+      <div class="modal-body">
+        <div ng-include="'/static/templates/about.html'"></div>
+      </div>
     </div>
   </div>
-
-
 </div>
 
 {% assets "js_all" %}

@@ -51,6 +51,7 @@ def when_i_click_on_the_partner_option_in_the_accordion(step):
 def then_the_partner_categories_and_elements_are_displayed(step):
     assert True, 'This step must be implemented'
 
+
 @step(u'And I hover over a "([^"]*)" polygon')
 def and_i_hover_over_a_group1_polygon(step, group1):
     assert True, 'This step must be implemented'
@@ -68,4 +69,12 @@ def when_i_toggle_the_contextual_panel(step):
     assert True, 'This step must be implemented'
 @step(u'Then the contextual panel is collapsed')
 def then_the_contextual_panel_is_collapsed(step):
-    assert True, 'This step must be implemented'    
+    assert True, 'This step must be implemented'   
+
+@step(u'And I click on the about DevtracGlobal link')
+def and_i_click_on_the_about_devtracglobal_link(step):
+    world.page.click_on_the_about_devtracglobal_link()
+
+@step(u'Then about DevtracGlobal Popup will be displayed')
+def then_about_devtracglobal_popup_will_be_displayed(step):
+    assert_true(world.page.display_about_popup())

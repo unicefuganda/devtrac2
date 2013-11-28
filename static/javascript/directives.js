@@ -337,5 +337,15 @@ angular.module("dashboard").directive('map', function() {
             });
         }
     }
+})
+.directive('aboutModal', function(){
+    return {
+        scope: true,
+        link: function(scope, element, attrs) {
+            scope.show_modal = function(){
+                $('#aboutModal').modal('show');
+            }
+        }
+    }
 });
 

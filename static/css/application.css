@@ -1206,3 +1206,29 @@ div.pagination > ul > li > span {
   text-align:center;
 }
 
+.footer-container{
+  background-color: black;
+  text-align: center;
+  height: 40px;
+  margin-right: 25px;
+  padding-top: 10px;
+}
+
+.footer-container a {
+  color: #fff;
+}
+
+#aboutModal {
+  overflow-y: auto; 
+
+}
+
+#aboutModal .modal-content {
+  opacity: 1;
+}
+
+#aboutModal .modal-body{
+  overflow-y: auto; 
+}
+
+
