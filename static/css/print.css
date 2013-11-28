@@ -173,6 +173,7 @@ ul.siteVisits {
 #summary-section {
     page-break-before:always
 }
+
 #devtrac-map {
     width: 100%;
     height: 700px;
@@ -199,6 +200,7 @@ ul.siteVisits {
 .legends {
     position: static;
     margin: 10px 0;
+    max-width: none;
 }
 
 .legends .partner-legend {
