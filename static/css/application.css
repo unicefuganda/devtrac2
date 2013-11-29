@@ -1231,4 +1231,12 @@ div.pagination > ul > li > span {
   overflow-y: auto; 
 }
 
+#aboutModal .modal-dialog {
+  opacity: 1;
+}
+
+.about-content {
+  padding: 20px 6px;
+}
+
 
